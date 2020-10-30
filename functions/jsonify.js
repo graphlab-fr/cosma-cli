@@ -13,8 +13,8 @@ exports.node = node;
 function edge(id, from, to) {
     return json = `{
         "id": ${id},
-        "from": ${from},
-        "to": ${to}
+        "source": ${from},
+        "target": ${to}
     }`;
 }
 
