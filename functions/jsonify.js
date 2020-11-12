@@ -1,7 +1,8 @@
-function node(id, title, size, x, y) {
+function node(id, title, type, size, x, y) {
     return json = `{
         "id": ${id},
         "label": "${title}",
+        "type": "${type}",
         "size": ${size},
         "x": ${x},
         "y": ${y}

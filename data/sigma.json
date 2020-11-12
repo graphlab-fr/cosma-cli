@@ -1,1917 +1,3970 @@
 {"nodes":[{
-        "id": 20200704100343,
-        "label": "AJAX protocole de requêtes asynchrones",
-        "size": 10,
-        "x": 48.06902855825959,
-        "y": 42.91523831284507
+        "id": 202006151503,
+        "label": "Actualisation",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 44.346271376047596,
+        "y": 45.52097190218956
     },{
-        "id": 20200519215026,
-        "label": "notions d'algorithmique",
-        "size": 10,
-        "x": 45.65305480980895,
-        "y": 46.374917594445684
-    },{
-        "id": 20200701221037,
-        "label": "API, interface de programmation",
+        "id": 202002180000,
+        "label": "All papers are data papers: from open principles to digital methods",
+        "type": "publication",
         "size": 20,
-        "x": 47.818653563394875,
-        "y": 41.06301121494215
+        "x": 49.99736442222113,
+        "y": 43.903628668457245
     },{
-        "id": 20200909183033,
-        "label": "application",
-        "size": 10,
-        "x": 41.83356522551132,
-        "y": 48.948840875272765
+        "id": 202005131034,
+        "label": "Annotation",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 49.45405057642737,
+        "y": 45.630922325915016
     },{
-        "id": 20200704172042,
-        "label": "architecture logiciel MVC",
-        "size": 10,
-        "x": 45.844687663351856,
-        "y": 49.573203947409915
+        "id": 202006201939,
+        "label": "Appareil critique",
+        "type": "lexique",
+        "size": 33.33333333333333,
+        "x": 44.99911441399973,
+        "y": 40.384478448161346
     },{
-        "id": 20200701214359,
-        "label": "artefacts numériques",
+        "id": 201903211200,
+        "label": "Architecture de l’information et éditorialisation",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 40.651835680516804,
+        "y": 49.90611898190482
+    },{
+        "id": 202002111156,
+        "label": "Architecture de l’information",
+        "type": "lecture",
         "size": 30,
-        "x": 44.8583234698708,
-        "y": 41.78481894075567
+        "x": 41.71602103322642,
+        "y": 47.783743223212795
     },{
-        "id": 20200623180525,
-        "label": "base de données",
-        "size": 30,
-        "x": 46.70712706801199,
-        "y": 40.47610347252635
+        "id": 201904301202,
+        "label": "Architexte Genette",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 49.09792186819274,
+        "y": 45.2595945124448
     },{
-        "id": 20200715212459,
-        "label": "BEM, Bloc Element Modifier",
+        "id": 201904301201,
+        "label": "Architexte et architecture Mitchell",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 47.99566225609021,
+        "y": 47.67395443459876
+    },{
+        "id": 202002111200,
+        "label": "Architexte",
+        "type": "lexique",
+        "size": 63.33333333333333,
+        "x": 42.817211453125076,
+        "y": 46.3274540638892
+    },{
+        "id": 201810061200,
+        "label": "Architextualité Treharne",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 40.815538154087946,
+        "y": 46.510185095
+    },{
+        "id": 202002041033,
+        "label": "Architexture Caws",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 41.5001661525224,
+        "y": 42.98634028406673
+    },{
+        "id": 202004111509,
+        "label": "Atlas",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 46.26238440289214,
+        "y": 44.38373876785343
+    },{
+        "id": 201906121200,
+        "label": "Auto-hermeneutics",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 41.85916542978229,
+        "y": 40.273359238020674
+    },{
+        "id": 202005181158,
+        "label": "Balisage",
+        "type": "lexique",
+        "size": 53.33333333333334,
+        "x": 44.929292608718285,
+        "y": 45.69411982336814
+    },{
+        "id": 202006241612,
+        "label": "Bibliographie annotée",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 47.82714981389424,
+        "y": 41.55013143103402
+    },{
+        "id": 202006241602,
+        "label": "Bibliographie",
+        "type": "lexique",
+        "size": 26.666666666666664,
+        "x": 46.64813312701326,
+        "y": 40.748955750384084
+    },{
+        "id": 201809291200,
+        "label": "Bibliologie Estivals",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 48.17189265126926,
+        "y": 47.403984663936434
+    },{
+        "id": 201811131200,
+        "label": "Bibliologie Meyriat",
+        "type": "lecture",
         "size": 10,
-        "x": 49.82565445845194,
-        "y": 49.649213555898406
+        "x": 48.41155020484231,
+        "y": 47.53749807442814
     },{
-        "id": 20200724150507,
-        "label": "bibliothéconomie",
+        "id": 202006241707,
+        "label": "Bibliologie Otlet",
+        "type": "lexique",
         "size": 10,
-        "x": 43.3393530265437,
-        "y": 44.84355670180236
+        "x": 47.75188424542452,
+        "y": 45.64799974704731
     },{
-        "id": 20200710094139,
-        "label": "brutalist web design",
-        "size": 10,
-        "x": 45.734586400436335,
-        "y": 46.577611273749596
-    },{
-        "id": 20200705083336,
-        "label": "callback et promesses JavaScript",
-        "size": 10,
-        "x": 41.86116585988974,
-        "y": 45.15616180479707
-    },{
-        "id": 20200501120411,
-        "label": "cart sorting, outil UX Design",
-        "size": 10,
-        "x": 46.10131763118179,
-        "y": 42.05355187581203
-    },{
-        "id": 20200909184744,
-        "label": "centralisation",
-        "size": 10,
-        "x": 44.64864000508384,
-        "y": 41.301892263714905
-    },{
-        "id": 20200714155845,
-        "label": "cloud",
-        "size": 10,
-        "x": 42.73194202988423,
-        "y": 42.508946827702715
-    },{
-        "id": 20200906135907,
-        "label": "code machine",
+        "id": 202006241705,
+        "label": "Bibliologie",
+        "type": "lexique",
         "size": 20,
-        "x": 46.36516291284507,
-        "y": 44.59464858910148
+        "x": 47.289408354553345,
+        "y": 42.10265770493677
     },{
-        "id": 20200918100545,
-        "label": "coloration syntaxique",
+        "id": 202006241605,
+        "label": "Bibliométrie",
+        "type": "lexique",
         "size": 10,
-        "x": 42.10185990965458,
-        "y": 42.64809490929885
+        "x": 48.53217641422993,
+        "y": 41.65450784328746
     },{
-        "id": 20200907090751,
-        "label": "transpiler ou compiler du code",
+        "id": 202011121208,
+        "label": "Biblion Robert",
+        "type": "lecture",
+        "size": 10,
+        "x": 42.03433128137096,
+        "y": 44.08298666953726
+    },{
+        "id": 202005191327,
+        "label": "Biblion",
+        "type": "lexique",
+        "size": 36.666666666666664,
+        "x": 44.23791550536005,
+        "y": 41.62465831927922
+    },{
+        "id": 201803261410,
+        "label": "Bibliothèque Melot",
+        "type": "lecture",
+        "size": 10,
+        "x": 44.52548052273106,
+        "y": 46.684662035801864
+    },{
+        "id": 202006201918,
+        "label": "Bibliothèque de Warburg",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 42.94500538902233,
+        "y": 49.3686354885495
+    },{
+        "id": 202010231624,
+        "label": "Bibliothèque",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 40.93941538010697,
+        "y": 42.60074103859636
+    },{
+        "id": 201901191200,
+        "label": "Biographie Otlet Levie",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 44.07794022462718,
+        "y": 41.333701651703784
+    },{
+        "id": 202002021341,
+        "label": "Briet sur Pagès",
+        "type": "note",
         "size": 20,
-        "x": 44.27419556041662,
-        "y": 48.018611538700675
+        "x": 49.24711782005831,
+        "y": 46.52127552975506
     },{
-        "id": 20200830162929,
-        "label": "complexité",
-        "size": 10,
-        "x": 43.105049055610905,
-        "y": 46.33008971911035
-    },{
-        "id": 20200501120436,
-        "label": "construction d'un système d'information",
-        "size": 10,
-        "x": 49.517759228297045,
-        "y": 42.2911279417983
-    },{
-        "id": 20200724153738,
-        "label": "contrat de lecture",
-        "size": 10,
-        "x": 41.27496828156734,
-        "y": 49.87350213702413
-    },{
-        "id": 20200704152459,
-        "label": "CSS, Cascading Style Sheets",
+        "id": 202002241016,
+        "label": "Cadre",
+        "type": "lexique",
         "size": 20,
-        "x": 46.18574411717082,
-        "y": 42.47689290875759
+        "x": 47.82240808957736,
+        "y": 43.62469696665108
     },{
-        "id": 20200701083222,
-        "label": "dépendances logicielles",
-        "size": 10,
-        "x": 42.019575324399746,
-        "y": 47.06227507472652
+        "id": 202004081042,
+        "label": "Carnet",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 40.680851367732345,
+        "y": 43.27426805377057
     },{
-        "id": 20200515185607,
-        "label": "le design",
-        "size": 10,
-        "x": 47.16172717597982,
-        "y": 49.70338342690164
-    },{
-        "id": 20200502122311,
-        "label": "design d‘information",
-        "size": 10,
-        "x": 43.60729226565867,
-        "y": 49.2713645538667
-    },{
-        "id": 20200705114827,
-        "label": "digital labor",
+        "id": 202002170000,
+        "label": "Cartographie de Paul Otlet sur le Web",
+        "type": "publication",
         "size": 20,
-        "x": 41.09792909168699,
-        "y": 43.737762788878605
+        "x": 41.027404484069265,
+        "y": 45.213197231825994
     },{
-        "id": 20200708172120,
-        "label": "document",
-        "size": 20,
-        "x": 44.07244106735857,
-        "y": 49.898804177177944
+        "id": 202008111125,
+        "label": "Cinquante degrés de liberté",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 43.012382770643505,
+        "y": 42.19249002766573
     },{
-        "id": 20200704160828,
-        "label": "DOM, document objet model",
-        "size": 20,
-        "x": 42.59868245424691,
-        "y": 43.01149481423707
+        "id": 202002121527,
+        "label": "Classification typographique",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 46.51473165177717,
+        "y": 41.5794315353978
     },{
-        "id": 20200509195652,
-        "label": "la donnée",
+        "id": 202005131127,
+        "label": "Classification",
+        "type": "lexique",
+        "size": 53.33333333333334,
+        "x": 43.99687279469879,
+        "y": 46.90109371477259
+    },{
+        "id": 202005201000,
+        "label": "Code et typographie",
+        "type": "note",
+        "size": 23.33333333333333,
+        "x": 49.482678343686295,
+        "y": 46.93753236881558
+    },{
+        "id": 202002021317,
+        "label": "Cohérence théorie méthodes",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 45.28776140893794,
+        "y": 42.57727320885138
+    },{
+        "id": 202007081152,
+        "label": "Comment écrire sa thèse numérique",
+        "type": "note",
+        "size": 46.66666666666666,
+        "x": 40.78909137556748,
+        "y": 41.35452206897508
+    },{
+        "id": 202010231606,
+        "label": "Comment écrire sa thèse",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 48.00975678290767,
+        "y": 46.437981479971334
+    },{
+        "id": 202008172256,
+        "label": "Communication",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 49.4310171561006,
+        "y": 48.08347535929203
+    },{
+        "id": 201908081200,
+        "label": "Comptabilité Otlet",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 40.24324920834202,
+        "y": 40.63174825615822
+    },{
+        "id": 202006012005,
+        "label": "Conditions d’écriture",
+        "type": "note",
+        "size": 33.33333333333333,
+        "x": 42.1796788361579,
+        "y": 48.259890026321834
+    },{
+        "id": 202010281041,
+        "label": "Conditions de lecture",
+        "type": "note",
+        "size": 26.66666666666667,
+        "x": 41.70345522061413,
+        "y": 47.01184427102694
+    },{
+        "id": 201906061122,
+        "label": "Confiance",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 46.21675494704484,
+        "y": 48.911823967980816
+    },{
+        "id": 202002040852,
+        "label": "Constructio et sententia",
+        "type": "lexique",
+        "size": 23.33333333333333,
+        "x": 42.327586713154844,
+        "y": 44.349850047908006
+    },{
+        "id": 202005131558,
+        "label": "Cosmographe",
+        "type": "lexique",
         "size": 40,
-        "x": 45.74194146962303,
-        "y": 48.229614558144306
+        "x": 45.97366785688921,
+        "y": 46.78599995588084
     },{
-        "id": 20200625095558,
-        "label": "économie documentaire des réseaux sociaux",
+        "id": 202005201759,
+        "label": "Cosmographie réticulaire",
+        "type": "note",
+        "size": 160,
+        "x": 48.0608260401421,
+        "y": 48.973391681718375
+    },{
+        "id": 202002131520,
+        "label": "Cosmographie",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 46.51734775506001,
+        "y": 41.67096425617099
+    },{
+        "id": 202004111457,
+        "label": "Cosmoscope",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 48.918942698759,
+        "y": 43.52491805638198
+    },{
+        "id": 202002011409,
+        "label": "Critiques de PowerPoint",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 49.51292193451909,
+        "y": 47.4035979257935
+    },{
+        "id": 202004061539,
+        "label": "Curseur",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 40.946091814979795,
+        "y": 49.01286037192299
+    },{
+        "id": 202005191346,
+        "label": "Design de connaissance",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 49.74138740398696,
+        "y": 43.57399495618679
+    },{
+        "id": 202005191351,
+        "label": "Design de l’appropriation",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 47.15606580106507,
+        "y": 46.346981889593344
+    },{
+        "id": 202005191350,
+        "label": "Design de la visibilité",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 40.7167864175409,
+        "y": 44.22396166250813
+    },{
+        "id": 202006251036,
+        "label": "Design et information",
+        "type": "lexique",
+        "size": 23.33333333333333,
+        "x": 42.04383169377054,
+        "y": 48.09303234967957
+    },{
+        "id": 202004031755,
+        "label": "Design web minimaliste et brutaliste",
+        "type": "note",
         "size": 10,
-        "x": 48.844128410477786,
-        "y": 44.14222640362124
+        "x": 40.323848664814506,
+        "y": 45.401068092909604
     },{
-        "id": 20200903113405,
-        "label": "écrit et oral",
-        "size": 10,
-        "x": 47.92076618715011,
-        "y": 42.30816794489168
-    },{
-        "id": 20200707085937,
-        "label": "édition numérique",
-        "size": 10,
-        "x": 49.768298919129386,
-        "y": 41.33291350256118
-    },{
-        "id": 20200621084631,
-        "label": "éditorialisation",
+        "id": 202005081257,
+        "label": "Design éditorial",
+        "type": "lexique",
         "size": 20,
-        "x": 45.35971560158752,
-        "y": 42.4993331209768
+        "x": 44.36586609943886,
+        "y": 45.150443792114416
     },{
-        "id": 20200629182645,
-        "label": "encodage des fichiers numériques",
+        "id": 202008241304,
+        "label": "Design",
+        "type": "lexique",
+        "size": 26.66666666666667,
+        "x": 49.61967838168002,
+        "y": 47.81528561157865
+    },{
+        "id": 201910311200,
+        "label": "Dewey sur Otlet",
+        "type": "lecture",
         "size": 10,
-        "x": 44.25448704996663,
-        "y": 41.289381344986545
+        "x": 44.56404005423316,
+        "y": 41.79923960377924
     },{
-        "id": 20200717141735,
-        "label": "encodage du texte",
+        "id": 202005011455,
+        "label": "Découpage Traité",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 48.79373280228134,
+        "y": 46.89495980541872
+    },{
+        "id": 202006251054,
+        "label": "Définitions document",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 48.87044036079119,
+        "y": 42.38447717677208
+    },{
+        "id": 202007051857,
+        "label": "Dépendance rhétorique",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 46.34599266768067,
+        "y": 40.24207067351773
+    },{
+        "id": 202008241305,
+        "label": "Désigner",
+        "type": "lexique",
+        "size": 23.33333333333333,
+        "x": 41.620828570910845,
+        "y": 45.65687864838429
+    },{
+        "id": 202004191633,
+        "label": "Déterminisme technique",
+        "type": "lexique",
+        "size": 10,
+        "x": 43.79512172441999,
+        "y": 40.48408864800223
+    },{
+        "id": 202005131201,
+        "label": "Dictionnaire",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 47.9577263023526,
+        "y": 40.39301848905842
+    },{
+        "id": 202001041200,
+        "label": "Die Brücke Hapke",
+        "type": "lecture",
         "size": 20,
-        "x": 41.79820226448486,
-        "y": 49.90221494091234
+        "x": 47.36198492013164,
+        "y": 47.362583842390045
     },{
-        "id": 20200725133539,
-        "label": "enjeux politiques de l'écriture numérique",
-        "size": 10,
-        "x": 48.03566708581348,
-        "y": 43.87786546511571
+        "id": 201901221200,
+        "label": "Die Brücke Satoh",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 40.561944313488915,
+        "y": 49.40038354484702
     },{
-        "id": 20200916105659,
-        "label": "énonciation éditoriale",
-        "size": 10,
-        "x": 47.34200845020893,
-        "y": 42.147692359469396
-    },{
-        "id": 20200719212204,
-        "label": "espace",
+        "id": 202006251136,
+        "label": "Die Brücke Vossoughian",
+        "type": "lecture",
         "size": 20,
-        "x": 49.29021165174344,
-        "y": 43.51933062643053
+        "x": 49.56048016660986,
+        "y": 44.02473853466847
     },{
-        "id": 20200801210302,
-        "label": "espace numérique",
+        "id": 202010281641,
+        "label": "Diplomatique",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 43.51665352329084,
+        "y": 40.57817483209914
+    },{
+        "id": 201812131200,
+        "label": "Dispositif Larroche",
+        "type": "lecture",
+        "size": 10,
+        "x": 47.26934424986954,
+        "y": 44.00622585020915
+    },{
+        "id": 202006251203,
+        "label": "Dispositif",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 44.98876528409464,
+        "y": 45.74531023472611
+    },{
+        "id": 202010281654,
+        "label": "Document Theory",
+        "type": "lecture",
         "size": 20,
-        "x": 47.134432799220896,
-        "y": 45.880394551018625
+        "x": 46.096094179320275,
+        "y": 41.477209528859916
     },{
-        "id": 20200624194717,
-        "label": "fiche comme modèle de données",
+        "id": 202007041635,
+        "label": "Document preuve Chabin",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 48.922703702517,
+        "y": 42.889471688591755
+    },{
+        "id": 202006251144,
+        "label": "Documentalité Ferraris",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 40.64117400896153,
+        "y": 43.845858852830226
+    },{
+        "id": 201905151200,
+        "label": "Documentalité Frohmann",
+        "type": "lecture",
         "size": 10,
-        "x": 47.94366350147351,
-        "y": 43.578416138370514
+        "x": 42.42674266923308,
+        "y": 41.25834761357084
     },{
-        "id": 20200618141829,
-        "label": "formats de fichier numériques",
+        "id": 202006161211,
+        "label": "Documentarité Crozat",
+        "type": "lexique",
         "size": 10,
-        "x": 43.897904097267464,
-        "y": 43.41276697376509
+        "x": 48.58200522886099,
+        "y": 47.395304771272336
     },{
-        "id": 20200701222949,
-        "label": "framework ou cadriciel",
+        "id": 201907311200,
+        "label": "Documentarité Day",
+        "type": "lecture",
         "size": 20,
-        "x": 47.42061559756623,
-        "y": 48.06225555393999
+        "x": 41.69414675671142,
+        "y": 47.61974255146765
     },{
-        "id": 20200707101657,
-        "label": "git flow, programmation agile",
+        "id": 201901071200,
+        "label": "Documentarité Gaudreault et Marion",
+        "type": "lecture",
         "size": 10,
-        "x": 44.315277477359174,
-        "y": 40.953482056297275
+        "x": 45.954757259443184,
+        "y": 49.515367341052944
     },{
-        "id": 20200905210104,
-        "label": "grammatisation",
+        "id": 201910090000,
+        "label": "Documentarité et données, instrumentation d’un concept",
+        "type": "publication",
         "size": 10,
-        "x": 40.003127409225,
-        "y": 42.83687510010063
+        "x": 47.75693616577194,
+        "y": 49.960565324757276
     },{
-        "id": 20200705101927,
-        "label": "histoire de OpenSSL, les bénévoles qui sécurisent le web",
+        "id": 202005181143,
+        "label": "Documentarité",
+        "type": "lexique",
+        "size": 60,
+        "x": 49.61925483394164,
+        "y": 40.42776466489744
+    },{
+        "id": 202004191601,
+        "label": "Documentation et scientificité",
+        "type": "note",
+        "size": 20,
+        "x": 44.456034370827446,
+        "y": 47.71310775345826
+    },{
+        "id": 202002051657,
+        "label": "Documentation et écriture",
+        "type": "note",
+        "size": 20,
+        "x": 46.28998886040392,
+        "y": 42.202711534065415
+    },{
+        "id": 202006251337,
+        "label": "Documentation",
+        "type": "lexique",
+        "size": 26.666666666666664,
+        "x": 44.85524522691292,
+        "y": 44.20094035397704
+    },{
+        "id": 201903291200,
+        "label": "Documenter, l’écriture à soi",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 48.50385642819289,
+        "y": 45.66019432094269
+    },{
+        "id": 201909101200,
+        "label": "Documentologie Meyriat",
+        "type": "lecture",
         "size": 10,
-        "x": 48.508725843151765,
-        "y": 40.182562572323235
+        "x": 41.2845914518209,
+        "y": 42.44891471559596
     },{
-        "id": 20200801205256,
-        "label": "l'humain est un document",
+        "id": 202005101602,
+        "label": "Documentologie",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 48.30330704693589,
+        "y": 48.67367053480919
+    },{
+        "id": 202008071441,
+        "label": "Données",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 43.02647981736486,
+        "y": 48.73433983376386
+    },{
+        "id": 202005181031,
+        "label": "Ducheyne sur Otlet",
+        "type": "lecture",
+        "size": 33.333333333333336,
+        "x": 48.400754062103026,
+        "y": 46.852063722905875
+    },{
+        "id": 202002040857,
+        "label": "Définition du document par intention",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 44.17839297357615,
+        "y": 42.410542928481796
+    },{
+        "id": 202010280947,
+        "label": "D’un réseau l’autre",
+        "type": "lecture",
+        "size": 36.66666666666667,
+        "x": 45.502353737214065,
+        "y": 44.60525127384496
+    },{
+        "id": 202006081954,
+        "label": "Emails en texte brut",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 44.56166095100241,
+        "y": 45.03860891736076
+    },{
+        "id": 202006201238,
+        "label": "Enchevêtrement de la documentation et du design",
+        "type": "undefined",
         "size": 10,
-        "x": 40.71092225287082,
-        "y": 48.290320349116364
+        "x": 45.26074701263305,
+        "y": 47.94573402601552
     },{
-        "id": 20200725085518,
-        "label": "domaine des humanités numériques",
-        "size": 10,
-        "x": 43.493498113947894,
-        "y": 44.290389867978064
-    },{
-        "id": 20200622183005,
-        "label": "HyperCard",
-        "size": 10,
-        "x": 47.019894751975755,
-        "y": 47.878067604273284
-    },{
-        "id": 20200625163043,
-        "label": "hypermédia",
-        "size": 10,
-        "x": 40.578631706448704,
-        "y": 46.02480454955881
-    },{
-        "id": 20200622164608,
-        "label": "hypertexte",
+        "id": 201909241543,
+        "label": "Encyclopédie",
+        "type": "lexique",
         "size": 30,
-        "x": 40.668080476865015,
-        "y": 45.426137455770295
+        "x": 48.29422426207861,
+        "y": 47.00720509685726
     },{
-        "id": 20200619130655,
-        "label": "la vérité que nous enseigne le big data",
+        "id": 202002021255,
+        "label": "Enjeux théoriques en architecture de l’information",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 41.3600138104746,
+        "y": 49.20690950938889
+    },{
+        "id": 202002021214,
+        "label": "Espace Beaude",
+        "type": "lexique",
         "size": 10,
-        "x": 42.180922833035886,
-        "y": 42.47995556449759
+        "x": 49.04100081915918,
+        "y": 47.13534799599627
     },{
-        "id": 20200502111554,
-        "label": "principes du transcanal",
-        "size": 10,
-        "x": 46.20113204276998,
-        "y": 47.62841628185641
+        "id": 201906291201,
+        "label": "Espace Pickles",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 46.21728874249316,
+        "y": 41.694729341564326
     },{
-        "id": 20200530195417,
-        "label": "inscription typographique du code comme corps des artefacts numériques",
+        "id": 202002030000,
+        "label": "Écosystème textuel et production des humanités contemporaines",
+        "type": "publication",
         "size": 20,
-        "x": 46.16475552392008,
-        "y": 43.67962479900854
+        "x": 41.04256830636152,
+        "y": 47.38804167573751
     },{
-        "id": 20200707113753,
-        "label": "instance informatique",
+        "id": 202010281435,
+        "label": "Écriture et calcul",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 42.59702194254561,
+        "y": 43.14530377493443
+    },{
+        "id": 202006251345,
+        "label": "Écriture",
+        "type": "lexique",
+        "size": 60,
+        "x": 47.48852572072819,
+        "y": 43.25731841997394
+    },{
+        "id": 202006241626,
+        "label": "Éditorialisation",
+        "type": "lexique",
+        "size": 10,
+        "x": 41.41566250899345,
+        "y": 40.4418819959636
+    },{
+        "id": 201904131200,
+        "label": "Épistémologie et humanités numériques",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 44.590796655764706,
+        "y": 45.46944969707503
+    },{
+        "id": 202007041806,
+        "label": "Évidence",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 45.268548128026644,
+        "y": 46.43541178848815
+    },{
+        "id": 201905091200,
+        "label": "Faire compter les machines",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 40.536709054678745,
+        "y": 43.54717964213495
+    },{
+        "id": 201903220926,
+        "label": "Fatras sémiotique",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 46.623102421848,
+        "y": 47.310618499273374
+    },{
+        "id": 202006241554,
+        "label": "Fiche",
+        "type": "lexique",
+        "size": 26.666666666666664,
+        "x": 46.45977225135065,
+        "y": 48.048252837926775
+    },{
+        "id": 202003150000,
+        "label": "Fonction documentaire de preuve et données numériques",
+        "type": "publication",
+        "size": 20,
+        "x": 46.76019880149986,
+        "y": 42.274175105824064
+    },{
+        "id": 202005191338,
+        "label": "Format",
+        "type": "lexique",
+        "size": 40,
+        "x": 41.61152570724283,
+        "y": 40.17982732453322
+    },{
+        "id": 202002011154,
+        "label": "Formation de l’esprit scientifique",
+        "type": "lecture",
+        "size": 23.333333333333336,
+        "x": 44.24752027449962,
+        "y": 40.033503067637376
+    },{
+        "id": 202002021401,
+        "label": "Forme et configuration",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 40.27377536238622,
+        "y": 43.536972242041216
+    },{
+        "id": 202008261614,
+        "label": "Forme et information",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 47.35217914797909,
+        "y": 48.445588641510135
+    },{
+        "id": 202008261613,
+        "label": "Forme",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 48.111291730968226,
+        "y": 43.5726264719904
+    },{
+        "id": 201809041200,
+        "label": "Fragment",
+        "type": "lecture",
+        "size": 10,
+        "x": 48.52782643683931,
+        "y": 40.12993396452086
+    },{
+        "id": 202006241615,
+        "label": "Glossaire",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 45.29567881745277,
+        "y": 45.871580925558526
+    },{
+        "id": 202006161218,
+        "label": "Grammatologie",
+        "type": "lecture",
+        "size": 20,
+        "x": 43.16237837619631,
+        "y": 49.03769747307021
+    },{
+        "id": 202005201715,
+        "label": "Herméneutique",
+        "type": "lexique",
+        "size": 20,
+        "x": 46.850994940822886,
+        "y": 49.987772365859875
+    },{
+        "id": 202005201716,
+        "label": "Heuristique",
+        "type": "lexique",
+        "size": 10,
+        "x": 40.075031896829046,
+        "y": 44.02299475261329
+    },{
+        "id": 202006251457,
+        "label": "Humanités numériques",
+        "type": "lexique",
+        "size": 10,
+        "x": 40.629404145480294,
+        "y": 49.01512928380638
+    },{
+        "id": 201904291201,
+        "label": "Humanities Approaches to Interface Theory",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 45.781410200655046,
+        "y": 44.44677950404771
+    },{
+        "id": 201909260000,
+        "label": "Hyperdocumentation: origin and evolution of a concept",
+        "type": "publication",
+        "size": 10,
+        "x": 43.12106092550006,
+        "y": 48.42135418974903
+    },{
+        "id": 202005131553,
+        "label": "Hyperdocumentation",
+        "type": "lexique",
         "size": 30,
-        "x": 41.07799869254862,
-        "y": 49.74880186949251
+        "x": 49.10101585345091,
+        "y": 44.6726063310824
     },{
-        "id": 20200707112034,
-        "label": "instance de mise en page",
-        "size": 10,
-        "x": 46.50270732325561,
-        "y": 49.2168864053836
+        "id": 201811261200,
+        "label": "Hypertexte Schraefel",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 44.887951474009654,
+        "y": 46.17723534169137
     },{
-        "id": 20200708132301,
-        "label": "interface",
+        "id": 202009291842,
+        "label": "Hypertexte",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 43.09067091027772,
+        "y": 40.68276018033013
+    },{
+        "id": 202006201942,
+        "label": "Index",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 46.32220983382639,
+        "y": 45.782107285457734
+    },{
+        "id": 202006170823,
+        "label": "Indexation",
+        "type": "lexique",
         "size": 30,
-        "x": 43.22817340114647,
-        "y": 42.4849433023143
+        "x": 40.5327894934282,
+        "y": 45.87480194756557
     },{
-        "id": 20200815162225,
-        "label": "interfaces d'écriture",
+        "id": 202008241313,
+        "label": "Indexicalité",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 47.549986068651236,
+        "y": 48.594141654324844
+    },{
+        "id": 202010281329,
+        "label": "Information",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 41.84522533079583,
+        "y": 49.268871687641884
+    },{
+        "id": 202002011430,
+        "label": "Interface graphique obstacle épistémologique",
+        "type": "note",
         "size": 20,
-        "x": 46.18550175509885,
-        "y": 40.20195799384534
+        "x": 47.98851496986213,
+        "y": 41.825466227937994
     },{
-        "id": 20200704153246,
-        "label": "javascript langage de programmation",
-        "size": 20,
-        "x": 43.383935456267345,
-        "y": 48.1909912928525
+        "id": 202006181554,
+        "label": "Interprétation visuelle réseau",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 48.86290550627402,
+        "y": 46.45407606559451
     },{
-        "id": 20200619133835,
-        "label": "langages de balisage léger",
-        "size": 20,
-        "x": 44.72173213930737,
-        "y": 48.08900761542466
+        "id": 202004301231,
+        "label": "Jenny's Law",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 47.965037283667456,
+        "y": 49.72044180163845
     },{
-        "id": 20200718182015,
-        "label": "langages compilés ou interprétés",
+        "id": 202006251446,
+        "label": "Journal de Zettelkasten",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 46.57427848264325,
+        "y": 41.31872851754268
+    },{
+        "id": 201904250000,
+        "label": "L'architexte à l'épreuve du réseau",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 43.2217298260175,
+        "y": 46.8355296425384
+    },{
+        "id": 201910111200,
+        "label": "L’écriture de l’histoire",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 43.64771083880236,
+        "y": 43.96869014027716
+    },{
+        "id": 201904081145,
+        "label": "L'image écrite",
+        "type": "lecture",
         "size": 10,
-        "x": 47.35543971751318,
-        "y": 48.710189674232126
+        "x": 42.75497376217493,
+        "y": 46.319590224153124
     },{
-        "id": 20200704135046,
-        "label": "langages de programmation",
-        "size": 20,
-        "x": 44.78194963589489,
-        "y": 45.28396742339661
-    },{
-        "id": 20200707175829,
-        "label": "littératie numérique",
-        "size": 20,
-        "x": 49.23616536597613,
-        "y": 42.168574764890344
-    },{
-        "id": 20200701110951,
-        "label": "livre numérique",
+        "id": 202005201454,
+        "label": "L’information à partir d’Otlet",
+        "type": "note",
         "size": 10,
-        "x": 40.82043863340721,
-        "y": 40.24482624967761
+        "x": 42.47275572277317,
+        "y": 48.86525569699154
     },{
-        "id": 20200704135838,
-        "label": "logiciel",
+        "id": 201910151200,
+        "label": "La logique de l'écriture",
+        "type": "lecture",
         "size": 10,
-        "x": 47.05281812599402,
-        "y": 45.98166486204819
+        "x": 40.35092453133261,
+        "y": 42.355377479775726
     },{
-        "id": 20200710204125,
-        "label": "logiciel libre et logiciel open source",
-        "size": 20,
-        "x": 46.81271972039957,
-        "y": 46.274390927745074
-    },{
-        "id": 20200716211301,
-        "label": "médiation numérique",
-        "size": 10,
-        "x": 47.57914331214004,
-        "y": 43.23257092543879
-    },{
-        "id": 20200622110109,
-        "label": "memex de Vannevar Bush",
-        "size": 10,
-        "x": 42.3692150990426,
-        "y": 40.29145885754052
-    },{
-        "id": 20200923152146,
-        "label": "métadonnées",
-        "size": 10,
-        "x": 48.53999719633731,
-        "y": 45.804429396487585
-    },{
-        "id": 20200505212332,
-        "label": "méthode des projets agiles",
-        "size": 20,
-        "x": 42.53747947044462,
-        "y": 41.936417696718095
-    },{
-        "id": 20200607195524,
-        "label": "métier d'éditeur",
-        "size": 10,
-        "x": 45.15059107328744,
-        "y": 48.870693824115655
-    },{
-        "id": 20200815163702,
-        "label": "paradigme de l’imprimé",
-        "size": 20,
-        "x": 40.23522305669175,
-        "y": 43.19826567987787
-    },{
-        "id": 20200526222401,
-        "label": "ingénierie, le concept de modèle",
-        "size": 20,
-        "x": 45.81021638282152,
-        "y": 49.844328432197514
-    },{
-        "id": 20200508111132,
-        "label": "modélisation de l'architecture d'un logiciel",
-        "size": 20,
-        "x": 45.6064163484574,
-        "y": 44.9391723328991
-    },{
-        "id": 20200705123311,
-        "label": "motivation à la création de contenus pour le web",
-        "size": 10,
-        "x": 44.65141120782249,
-        "y": 45.27501887831879
-    },{
-        "id": 20200622101202,
-        "label": "namespace, espace de nom",
-        "size": 20,
-        "x": 41.09524240747532,
-        "y": 42.72302135225351
-    },{
-        "id": 20200718172257,
-        "label": "niveaux langages de programmation",
+        "id": 201911080000,
+        "label": "La logique hyperdocumentaire dans la structuration de l’information et sa visualisation",
+        "type": "publication",
         "size": 30,
-        "x": 43.482429984033544,
-        "y": 41.07911828534169
+        "x": 43.90876688367874,
+        "y": 40.81884896691986
     },{
-        "id": 20200905201903,
-        "label": "numérique",
+        "id": 202005071240,
+        "label": "Le réseau comme modèle épistémologique",
+        "type": "note",
+        "size": 46.66666666666667,
+        "x": 43.139410171286144,
+        "y": 42.46452985214435
+    },{
+        "id": 202010152014,
+        "label": "Le vacillement des formats",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 42.31286684277333,
+        "y": 45.4583889973227
+    },{
+        "id": 202008041426,
+        "label": "Les mots et les choses",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 43.90716532500195,
+        "y": 46.357242227664116
+    },{
+        "id": 201904151200,
+        "label": "Les trois écritures",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 41.53365002002174,
+        "y": 46.044294979794365
+    },{
+        "id": 201911290801,
+        "label": "Lieu de savoir",
+        "type": "lecture",
         "size": 10,
-        "x": 42.17089588327153,
-        "y": 44.820349623141766
+        "x": 44.07071570772137,
+        "y": 45.22721584594124
     },{
-        "id": 20200613160247,
-        "label": "opposition numérique/analogique",
+        "id": 202006041138,
+        "label": "Lisibilité du code",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 41.09834902909983,
+        "y": 41.50520532988542
+    },{
+        "id": 202008031401,
+        "label": "Liste et tableau chez Otlet",
+        "type": "note",
         "size": 10,
-        "x": 40.95819035752731,
-        "y": 45.289798847119584
+        "x": 45.04852024684216,
+        "y": 44.56700900277514
     },{
-        "id": 20200809102622,
-        "label": "ontologie",
+        "id": 202010280951,
+        "label": "L’organisation en réseau comme forme",
+        "type": "lecture",
         "size": 10,
-        "x": 41.68596947925422,
-        "y": 41.34925670354688
+        "x": 40.206891226630006,
+        "y": 48.120516232504386
     },{
-        "id": 20200829163448,
-        "label": "organisation, structure et système",
+        "id": 202004091512,
+        "label": "Machines",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 43.08832111605673,
+        "y": 42.56822676082064
+    },{
+        "id": 202002131040,
+        "label": "Masterclass DNHD 2",
+        "type": "note",
         "size": 10,
-        "x": 49.07947883846811,
-        "y": 40.864058569930826
+        "x": 46.16898009258413,
+        "y": 49.090852983856124
     },{
-        "id": 20200501120506,
-        "label": "outils de classement",
-        "size": 10,
-        "x": 48.87294306107288,
-        "y": 44.10314394250564
-    },{
-        "id": 20200623110109,
-        "label": "notion de paradigme",
-        "size": 10,
-        "x": 48.943974295845784,
-        "y": 44.70923776482472
-    },{
-        "id": 20200530191442,
-        "label": "paradigmes de programmation",
+        "id": 202008261622,
+        "label": "Matérialisation",
+        "type": "lexique",
         "size": 20,
-        "x": 41.07529345896255,
-        "y": 40.0992815267075
+        "x": 45.33962844822128,
+        "y": 41.97922625875714
     },{
-        "id": 20200522093949,
-        "label": "la portée des variables",
+        "id": 201806140000,
+        "label": "Matière à pensées : outils d’édition et médiation de la créativité",
+        "type": "publication",
         "size": 10,
-        "x": 47.438094203387934,
-        "y": 45.64132830382176
+        "x": 49.07396354861211,
+        "y": 41.04948490970209
     },{
-        "id": 20200830153041,
-        "label": "principes de développement",
+        "id": 202006161214,
+        "label": "Médiation",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 43.75824519725423,
+        "y": 42.0686701597685
+    },{
+        "id": 202006161217,
+        "label": "Médiologie",
+        "type": "lecture",
         "size": 10,
-        "x": 43.44324524581629,
-        "y": 41.58097490769844
+        "x": 41.345192746607964,
+        "y": 43.94855433870958
     },{
-        "id": 20200707161136,
-        "label": "problème des logiciels de traitement de texte",
+        "id": 201901281200,
+        "label": "Métadonnées Pomerantz",
+        "type": "lecture",
+        "size": 10,
+        "x": 41.55007526664728,
+        "y": 42.28554424002196
+    },{
+        "id": 202006251159,
+        "label": "Métadonnées",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 43.67831261374065,
+        "y": 49.639270987452534
+    },{
+        "id": 202002011327,
+        "label": "Métalogue",
+        "type": "lexique",
+        "size": 10,
+        "x": 45.22167346100642,
+        "y": 45.203908636890674
+    },{
+        "id": 202006241805,
+        "label": "Méthodologie",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 46.813267092220116,
+        "y": 41.831356313538706
+    },{
+        "id": 202005101520,
+        "label": "Modèle écriture Guichard",
+        "type": "lexique",
         "size": 20,
-        "x": 49.14219451294713,
-        "y": 40.51663852898716
+        "x": 45.99087488763154,
+        "y": 44.08182605989696
     },{
-        "id": 20200722215106,
-        "label": "processualité éditoriale",
-        "size": 20,
-        "x": 48.60404757521916,
-        "y": 45.63290030362665
+        "id": 202003091730,
+        "label": "Modélisation éthique d’un écosystème de données",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 47.06349882268652,
+        "y": 40.988144604024725
     },{
-        "id": 20200724173541,
-        "label": "processus documentaire",
-        "size": 10,
-        "x": 48.94714672810732,
-        "y": 45.49899575289251
-    },{
-        "id": 20200505210147,
-        "label": "processus de l'UX Design",
-        "size": 10,
-        "x": 47.40707496335801,
-        "y": 40.93654531346265
-    },{
-        "id": 20200705112816,
-        "label": "production de contenu web",
+        "id": 202005201336,
+        "label": "Modèle documentologique",
+        "type": "note",
         "size": 30,
-        "x": 40.24310192267618,
-        "y": 40.905585321277144
+        "x": 42.08653759652839,
+        "y": 41.52763491136558
     },{
-        "id": 20200914211839,
-        "label": "programmation lettrée",
-        "size": 10,
-        "x": 48.06511386938655,
-        "y": 45.996398035655204
-    },{
-        "id": 20200522122316,
-        "label": "programmation orientée objet",
+        "id": 202004111515,
+        "label": "Modèle hybride arbre rhizome",
+        "type": "note",
         "size": 20,
-        "x": 45.542174401187154,
-        "y": 48.16601487538823
+        "x": 41.6528311010575,
+        "y": 48.37310654601476
     },{
-        "id": 20200808143420,
-        "label": "programme et programmation",
+        "id": 202006170919,
+        "label": "Modélisation",
+        "type": "lexique",
         "size": 10,
-        "x": 42.99609191888325,
-        "y": 44.01686666262966
+        "x": 46.634343069757264,
+        "y": 46.89164258485159
     },{
-        "id": 20200606201922,
-        "label": "qualités de l'écriture numérique",
+        "id": 202010221427,
+        "label": "Monstration",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 46.70676910337893,
+        "y": 48.31230021589552
+    },{
+        "id": 202010201706,
+        "label": "Nativement numérique",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 47.40004391429159,
+        "y": 40.9584825541633
+    },{
+        "id": 202006251411,
+        "label": "Négociation co-écriture",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 45.77931956786546,
+        "y": 48.409996049811056
+    },{
+        "id": 202006201933,
+        "label": "Note de bas de page",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 45.802199617936644,
+        "y": 49.776761203726295
+    },{
+        "id": 202008241432,
+        "label": "Objectum et problêma",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 45.86339351189638,
+        "y": 49.34192480267752
+    },{
+        "id": 202006170903,
+        "label": "Ontologie (documentation)",
+        "type": "lexique",
         "size": 30,
-        "x": 46.645560861935834,
-        "y": 45.58127672450866
+        "x": 48.658351472587015,
+        "y": 48.86527992994194
     },{
-        "id": 20200522111759,
-        "label": "qualité logicielle",
-        "size": 10,
-        "x": 44.38123265706788,
-        "y": 42.337733232730194
-    },{
-        "id": 20200709104849,
-        "label": "rapport aux objets techniques",
-        "size": 20,
-        "x": 46.53768649639554,
-        "y": 46.03906395896289
-    },{
-        "id": 20200621094836,
-        "label": "règles typographiques",
-        "size": 10,
-        "x": 42.47950793588353,
-        "y": 42.28890135638622
-    },{
-        "id": 20200715204714,
-        "label": "responsive",
-        "size": 10,
-        "x": 48.133714342599255,
-        "y": 46.37090409243499
-    },{
-        "id": 20200619121419,
-        "label": "principes de sécurité informatique",
-        "size": 10,
-        "x": 47.26077531815984,
-        "y": 40.541598904620585
-    },{
-        "id": 20200915084904,
-        "label": "semantic web stack",
-        "size": 10,
-        "x": 49.95282088857146,
-        "y": 48.59070558559036
-    },{
-        "id": 20200709214912,
-        "label": "site web lowtech",
-        "size": 10,
-        "x": 42.16573604541839,
-        "y": 47.28822032937733
-    },{
-        "id": 20200708113814,
-        "label": "skeuomorphisme",
-        "size": 10,
-        "x": 49.42183195074723,
-        "y": 45.681525295743356
-    },{
-        "id": 20200724170202,
-        "label": "strates services",
-        "size": 10,
-        "x": 44.371368957956705,
-        "y": 40.57464234617805
-    },{
-        "id": 20200625115033,
-        "label": "structures de la connaissance",
-        "size": 20,
-        "x": 48.45085468627929,
-        "y": 47.49041010224013
-    },{
-        "id": 20200830163431,
-        "label": "temps en développement",
+        "id": 202006251022,
+        "label": "Ordre",
+        "type": "lexique",
         "size": 30,
-        "x": 47.74263576431076,
-        "y": 43.86042011502691
+        "x": 42.167595662935,
+        "y": 48.31215739839687
     },{
-        "id": 20200629161610,
-        "label": "texte brut",
-        "size": 20,
-        "x": 44.67598417456092,
-        "y": 41.580536649873885
+        "id": 202010071021,
+        "label": "Organisation des connaissances",
+        "type": "lexique",
+        "size": 26.66666666666667,
+        "x": 46.18422805287119,
+        "y": 44.251934468104956
     },{
-        "id": 20200606213253,
-        "label": "corps de texte balisé, sémantisé, interactif",
-        "size": 20,
-        "x": 49.03466668232877,
-        "y": 46.839298457666864
+        "id": 202002011322,
+        "label": "Organisation du travail intellectuel",
+        "type": "note",
+        "size": 70,
+        "x": 42.45835161023893,
+        "y": 47.79977748917658
     },{
-        "id": 20200625172823,
-        "label": "théorie des graphes",
-        "size": 20,
-        "x": 41.26531530280626,
-        "y": 49.394547342999815
+        "id": 202009171006,
+        "label": "Organisation et représentation réticulaire de la documentation – retour d'expérience",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 42.943192357696454,
+        "y": 47.518558858682276
     },{
-        "id": 20200802100201,
-        "label": "théorie du nudge",
+        "id": 202010201701,
+        "label": "Otlet et HG Wells",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 40.03030722917142,
+        "y": 49.15931006320845
+    },{
+        "id": 202005241306,
+        "label": "Outillage du travail intellectuel",
+        "type": "note",
+        "size": 50,
+        "x": 49.11854149693398,
+        "y": 49.886836996582545
+    },{
+        "id": 201912190000,
+        "label": "Paul Otlet and the ultimate prospect of documentation",
+        "type": "publication",
         "size": 10,
-        "x": 45.255712673242314,
-        "y": 43.86549005748914
+        "x": 41.47176527346002,
+        "y": 44.68564711170449
     },{
-        "id": 20200503195405,
-        "label": "l'outil thesaurus",
-        "size": 10,
-        "x": 48.50968508818077,
-        "y": 40.15682190274793
-    },{
-        "id": 20200805104653,
-        "label": "traces numériques",
-        "size": 20,
-        "x": 42.27177131896526,
-        "y": 44.79589375168367
-    },{
-        "id": 20200705100544,
-        "label": "travail gratuit, économie du web de plateforme",
-        "size": 10,
-        "x": 46.83853857217761,
-        "y": 43.964385616923266
-    },{
-        "id": 20200508093223,
-        "label": "travailler la complexité",
+        "id": 202005241243,
+        "label": "Pensée d’Otlet",
+        "type": "note",
         "size": 30,
-        "x": 41.89519402996257,
-        "y": 41.785178744682604
+        "x": 44.57559723167012,
+        "y": 41.759377940820315
     },{
-        "id": 20200915101659,
-        "label": "triplet RDF",
+        "id": 201803261405,
+        "label": "Pensée retenue pensée distribuée",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 44.14409541638537,
+        "y": 43.54604973391785
+    },{
+        "id": 202002011301,
+        "label": "Pensée commune et travail scientifique",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 43.10781538192962,
+        "y": 42.33732722055536
+    },{
+        "id": 202008241220,
+        "label": "Petite philosophie du design",
+        "type": "lecture",
+        "size": 70,
+        "x": 41.74566548744835,
+        "y": 47.259007313717106
+    },{
+        "id": 202008261405,
+        "label": "Philosophie de la technique",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 48.30379039964497,
+        "y": 43.5566451693736
+    },{
+        "id": 202004031752,
+        "label": "Plateformes de publication minimalistes",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 41.10431620782181,
+        "y": 46.29386293859604
+    },{
+        "id": 202002040845,
+        "label": "Ponctuation",
+        "type": "lexique",
+        "size": 20,
+        "x": 44.018254110198136,
+        "y": 46.88221987304596
+    },{
+        "id": 201811271100,
+        "label": "Positivisme Otlet Van Acker",
+        "type": "lecture",
         "size": 10,
-        "x": 44.595048914581916,
-        "y": 40.445889623284096
+        "x": 49.22062424472559,
+        "y": 49.94551257568445
     },{
-        "id": 20200712214549,
-        "label": "typographie",
+        "id": 202006151419,
+        "label": "Pouvoir, puissance",
+        "type": "lexique",
+        "size": 20,
+        "x": 40.53668990345445,
+        "y": 48.38035243415409
+    },{
+        "id": 202006141751,
+        "label": "Pouvoir savoir faire",
+        "type": "note",
+        "size": 36.666666666666664,
+        "x": 43.11706731547622,
+        "y": 49.51167156094962
+    },{
+        "id": 202006141952,
+        "label": "Pouvoir-faire",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 44.46535326023523,
+        "y": 43.79228815543571
+    },{
+        "id": 202006142012,
+        "label": "Pouvoir-savoir",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 48.17999214947892,
+        "y": 47.53163509395198
+    },{
+        "id": 202006301454,
+        "label": "Preuve",
+        "type": "lexique",
         "size": 10,
-        "x": 42.15707336524402,
-        "y": 48.911688143581074
+        "x": 46.59829822044492,
+        "y": 46.25700209304554
     },{
-        "id": 20200621083005,
-        "label": "la typographie comme interface",
-        "size": 10,
-        "x": 46.49705106989588,
-        "y": 41.989348459136735
+        "id": 201901051136,
+        "label": "Principe monographique",
+        "type": "lexique",
+        "size": 33.333333333333336,
+        "x": 47.69544578054842,
+        "y": 41.46302014751215
     },{
-        "id": 20200915103106,
-        "label": "URI, uniform resource locator",
-        "size": 10,
-        "x": 44.87201560301413,
-        "y": 43.92992158797571
+        "id": 202005191233,
+        "label": "Principes de Tufte",
+        "type": "note",
+        "size": 23.33333333333333,
+        "x": 48.33794022457635,
+        "y": 41.757029131935
     },{
-        "id": 20200702145334,
-        "label": "valorisation de contenu numérique",
-        "size": 10,
-        "x": 42.52140444089186,
-        "y": 45.51990945518253
+        "id": 202011121307,
+        "label": "Privat sur Goody",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 48.31825158317496,
+        "y": 43.080881493333614
     },{
-        "id": 20200617210141,
-        "label": "les versions historiques du web",
-        "size": 10,
-        "x": 46.307437926207896,
-        "y": 49.67756969639298
+        "id": 202009291832,
+        "label": "Produit de la thèse",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 41.02873623591243,
+        "y": 44.90797181235339
     },{
-        "id": 20200707101208,
-        "label": "versionnement Git",
-        "size": 10,
-        "x": 49.60673288980639,
-        "y": 48.5805056708607
-    },{
-        "id": 20200912130028,
-        "label": "visualisation",
-        "size": 10,
-        "x": 45.161923963508215,
-        "y": 47.49722227632397
-    },{
-        "id": 20200708121357,
-        "label": "vue",
+        "id": 202006170935,
+        "label": "Quoi, quand et où",
+        "type": "note",
         "size": 30,
-        "x": 40.09723928621931,
-        "y": 42.30006042608667
+        "x": 49.5337254734663,
+        "y": 46.21693502449158
     },{
-        "id": 20200813132904,
-        "label": "wiki",
+        "id": 201906281200,
+        "label": "Raison cartographique Franco Farinelli",
+        "type": "lecture",
         "size": 10,
-        "x": 45.744858586939785,
-        "y": 46.9510544464372
+        "x": 49.59729983718032,
+        "y": 46.35828349888497
     },{
-        "id": 20200622140512,
-        "label": "wikilinks",
+        "id": 201906291202,
+        "label": "Raison cartographique Olsson",
+        "type": "lecture",
         "size": 10,
-        "x": 40.026292960677544,
-        "y": 41.76634622929753
+        "x": 47.227208532593245,
+        "y": 43.285074605819545
     },{
-        "id": 20200630153054,
-        "label": "zettelkasten, méthode documentaire",
+        "id": 202002021402,
+        "label": "Raison cartographique Teresa Castro",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 40.34682142544058,
+        "y": 41.30111276039628
+    },{
+        "id": 202006251012,
+        "label": "Raison cartographique",
+        "type": "lexique",
+        "size": 20,
+        "x": 47.328180872136954,
+        "y": 44.97028294956358
+    },{
+        "id": 202005181320,
+        "label": "Raison et graphie",
+        "type": "lexique",
+        "size": 20,
+        "x": 43.60662173918065,
+        "y": 40.15800017576211
+    },{
+        "id": 202005181316,
+        "label": "Raison graphique",
+        "type": "lexique",
+        "size": 20,
+        "x": 48.565945043642984,
+        "y": 40.291760974701376
+    },{
+        "id": 202005181321,
+        "label": "Raison typographique",
+        "type": "lexique",
         "size": 10,
-        "x": 43.41244873940877,
-        "y": 42.694624953864825
+        "x": 42.803587447636716,
+        "y": 48.591081627294116
+    },{
+        "id": 202006251556,
+        "label": "Redocumentarisation",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 41.79928266509915,
+        "y": 43.320483718419055
+    },{
+        "id": 202006251524,
+        "label": "Regard",
+        "type": "lexique",
+        "size": 20,
+        "x": 40.80098680947667,
+        "y": 47.198454112652726
+    },{
+        "id": 201904291202,
+        "label": "Relire Bachelard",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 47.46886858697035,
+        "y": 46.43726544337278
+    },{
+        "id": 202002201405,
+        "label": "Reticulum 2",
+        "type": "note",
+        "size": 10,
+        "x": 40.413198552182955,
+        "y": 48.08306739064994
+    },{
+        "id": 202006171048,
+        "label": "Reticulum 3",
+        "type": "note",
+        "size": 36.66666666666667,
+        "x": 47.333508132765175,
+        "y": 45.82435712355471
+    },{
+        "id": 202008241240,
+        "label": "Reticulum",
+        "type": "note",
+        "size": 23.33333333333333,
+        "x": 44.3642917327751,
+        "y": 49.58726294244515
+    },{
+        "id": 202007041546,
+        "label": "Régime documentaire",
+        "type": "lexique",
+        "size": 10,
+        "x": 49.062468396318984,
+        "y": 45.612982051132505
+    },{
+        "id": 202010091443,
+        "label": "Réseau",
+        "type": "lexique",
+        "size": 20,
+        "x": 48.975134555033925,
+        "y": 40.66780743849364
+    },{
+        "id": 202003121641,
+        "label": "Rhizome Deleuze Guattari",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 44.560279251995695,
+        "y": 43.06160708783945
+    },{
+        "id": 202003310000,
+        "label": "Rhizome blues : Introduction à la tératologie documentaire",
+        "type": "publication",
+        "size": 20,
+        "x": 45.57934725675988,
+        "y": 46.428384055128454
+    },{
+        "id": 202009181643,
+        "label": "Rieusset-Lemarié sur Otlet",
+        "type": "lecture",
+        "size": 33.333333333333336,
+        "x": 44.05980861592128,
+        "y": 43.78085093436515
+    },{
+        "id": 202002021351,
+        "label": "Réflexivité de la cartographie",
+        "type": "note",
+        "size": 10,
+        "x": 47.493092682976446,
+        "y": 41.63029785567533
+    },{
+        "id": 202005201711,
+        "label": "Réflexivité",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 41.439579365338446,
+        "y": 42.38366268756468
+    },{
+        "id": 202002021215,
+        "label": "Rôles des représentations",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 47.67819626868234,
+        "y": 44.72618759361851
+    },{
+        "id": 202005201451,
+        "label": "Savoir et pouvoir",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 44.53232381705783,
+        "y": 48.34406834738129
+    },{
+        "id": 202006151535,
+        "label": "Savoir-faire",
+        "type": "lexique",
+        "size": 10,
+        "x": 48.403148010878006,
+        "y": 47.08559837136573
+    },{
+        "id": 202004111453,
+        "label": "Schématisation Estivals",
+        "type": "lecture",
+        "size": 30,
+        "x": 49.825759650863944,
+        "y": 44.88370681144824
+    },{
+        "id": 202005131135,
+        "label": "Schémas d’Otlet",
+        "type": "note",
+        "size": 30,
+        "x": 43.50103720644054,
+        "y": 45.901281478418866
+    },{
+        "id": 202005131118,
+        "label": "Schématisation",
+        "type": "lexique",
+        "size": 20,
+        "x": 48.553614710878726,
+        "y": 48.657817320374946
+    },{
+        "id": 202005201330,
+        "label": "Science de l’information",
+        "type": "lexique",
+        "size": 10,
+        "x": 45.75840899810682,
+        "y": 44.2620720147236
+    },{
+        "id": 202005181205,
+        "label": "Scripturation",
+        "type": "lexique",
+        "size": 30,
+        "x": 42.94636572297514,
+        "y": 45.22466258944274
+    },{
+        "id": 202006251017,
+        "label": "Scripturologie",
+        "type": "lecture",
+        "size": 23.333333333333336,
+        "x": 44.63590350003245,
+        "y": 43.50645860042441
+    },{
+        "id": 202010281017,
+        "label": "Second degré documentaire",
+        "type": "lexique",
+        "size": 20,
+        "x": 41.81442976516662,
+        "y": 41.27276341965541
+    },{
+        "id": 202006201946,
+        "label": "Sens et référence",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 48.1661437448115,
+        "y": 47.939037357677115
+    },{
+        "id": 202005131319,
+        "label": "Sexual Personae",
+        "type": "lecture",
+        "size": 10,
+        "x": 40.767022415860396,
+        "y": 40.881908899396365
+    },{
+        "id": 201803161200,
+        "label": "Sémiotique du signe",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 43.16528121108728,
+        "y": 43.599841723691874
+    },{
+        "id": 202009291942,
+        "label": "Sémiotique",
+        "type": "lexique",
+        "size": 26.66666666666667,
+        "x": 45.657985946022215,
+        "y": 42.73164574554773
+    },{
+        "id": 202002040836,
+        "label": "Surcodage",
+        "type": "lexique",
+        "size": 10,
+        "x": 44.61845354666635,
+        "y": 42.776363439740486
+    },{
+        "id": 202001011145,
+        "label": "Sémiotique des fluides",
+        "type": "publication",
+        "size": 30,
+        "x": 40.02513588218791,
+        "y": 44.37967361620834
+    },{
+        "id": 202002021224,
+        "label": "Sémiotique et documentarité via interface",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 48.22221116525208,
+        "y": 41.01540772065093
+    },{
+        "id": 201903221451,
+        "label": "Sémiotique et mouvement",
+        "type": "lecture",
+        "size": 10,
+        "x": 48.47847112715285,
+        "y": 48.41571699601098
+    },{
+        "id": 202002021313,
+        "label": "Tant de choses à savoir",
+        "type": "undefined",
+        "size": 20,
+        "x": 48.674047963932495,
+        "y": 45.210308488990464
+    },{
+        "id": 201805240000,
+        "label": "Technologies intellectuelles",
+        "type": "publication",
+        "size": 30,
+        "x": 49.68641123073285,
+        "y": 48.63234601169682
+    },{
+        "id": 202004092014,
+        "label": "Terminologie critique données",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 40.765550400194996,
+        "y": 40.36712142639752
+    },{
+        "id": 202002251108,
+        "label": "Terminologie internationale fiche et fichier",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 45.45691438627796,
+        "y": 47.91737947832298
+    },{
+        "id": 201906291203,
+        "label": "Territoire Giraut",
+        "type": "lecture",
+        "size": 10,
+        "x": 49.22595581596627,
+        "y": 46.80867616460401
+    },{
+        "id": 201902061200,
+        "label": "Territoire Guichard",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 46.58370365812024,
+        "y": 43.44700023055133
+    },{
+        "id": 202005191604,
+        "label": "Territoire",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 49.78330140364215,
+        "y": 41.06619325012936
+    },{
+        "id": 202004081049,
+        "label": "Texte brut et stratégie",
+        "type": "note",
+        "size": 10,
+        "x": 48.42474486017918,
+        "y": 45.037340280030094
+    },{
+        "id": 202004081047,
+        "label": "Texte brut",
+        "type": "lexique",
+        "size": 36.66666666666667,
+        "x": 43.90385294640049,
+        "y": 40.05290136843972
+    },{
+        "id": 202006170932,
+        "label": "Texte et document",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 41.51907833427034,
+        "y": 41.333284404101725
+    },{
+        "id": 201904301203,
+        "label": "Texte, hypertexte, hypermédia",
+        "type": "lecture",
+        "size": 10,
+        "x": 46.83117588113358,
+        "y": 42.881186925869244
+    },{
+        "id": 202002041043,
+        "label": "Texture du balisage",
+        "type": "note",
+        "size": 26.66666666666667,
+        "x": 48.069237664750744,
+        "y": 42.413452540497836
+    },{
+        "id": 201810040000,
+        "label": "The Architext of Biblion",
+        "type": "publication",
+        "size": 10,
+        "x": 41.14196530721084,
+        "y": 47.68997656265364
+    },{
+        "id": 201904081200,
+        "label": "The alphabetic labyrinth",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 48.19502476683702,
+        "y": 49.824480929352184
+    },{
+        "id": 202003121731,
+        "label": "Topologie",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 41.42588503098345,
+        "y": 49.013791353240634
+    },{
+        "id": 201905170923,
+        "label": "Tracés Faire revue",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 45.7344178136023,
+        "y": 42.942024764438194
+    },{
+        "id": 202004061546,
+        "label": "Traitement de texte",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 42.78890206931429,
+        "y": 40.38409474248862
+    },{
+        "id": 202004021340,
+        "label": "Traité 2 Transcription",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 44.17006628792877,
+        "y": 45.65877670321556
+    },{
+        "id": 202005201252,
+        "label": "Traité 2",
+        "type": "note",
+        "size": 36.666666666666664,
+        "x": 43.56132820813073,
+        "y": 41.842753760757944
+    },{
+        "id": 201902111200,
+        "label": "Traité de documentation",
+        "type": "lecture",
+        "size": 23.333333333333336,
+        "x": 47.24150634092405,
+        "y": 46.04312902769944
+    },{
+        "id": 202006081915,
+        "label": "Transformative tools for thought",
+        "type": "note",
+        "size": 26.66666666666667,
+        "x": 41.319025764566994,
+        "y": 43.49113688891069
+    },{
+        "id": 202005111559,
+        "label": "Transtextualité Borel",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 40.118041614159196,
+        "y": 44.36663890990547
+    },{
+        "id": 202010231614,
+        "label": "Travail intellectuel",
+        "type": "lexique",
+        "size": 23.33333333333333,
+        "x": 40.10420850664403,
+        "y": 44.40041198288725
+    },{
+        "id": 202005191405,
+        "label": "Tutoriel Zettlr",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 44.02136812448958,
+        "y": 46.50424205157396
+    },{
+        "id": 202002011052,
+        "label": "Typologie images et données scientifiques",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 43.001640497962974,
+        "y": 43.6451014458227
+    },{
+        "id": 202006241854,
+        "label": "Un lieu de savoir à soi",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 44.51432631391259,
+        "y": 41.76052572118813
+    },{
+        "id": 202010221420,
+        "label": "Une histoire de la fiche érudite",
+        "type": "lecture",
+        "size": 43.33333333333334,
+        "x": 47.17525471553574,
+        "y": 44.40126766483667
+    },{
+        "id": 202002271017,
+        "label": "Une parenté accidentée",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 43.39248963564362,
+        "y": 45.401273575571025
+    },{
+        "id": 201909241200,
+        "label": "Universalisme et utopie",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 43.61302793438804,
+        "y": 42.99433422559321
+    },{
+        "id": 201901031200,
+        "label": "Van den Heuvel sur Otlet",
+        "type": "lecture",
+        "size": 10,
+        "x": 44.211204156594036,
+        "y": 40.27836505068673
+    },{
+        "id": 202006251509,
+        "label": "Virtuel",
+        "type": "lexique",
+        "size": 13.333333333333332,
+        "x": 47.24571327481391,
+        "y": 49.386158353094416
+    },{
+        "id": 202002061412,
+        "label": "When is a document?",
+        "type": "note",
+        "size": 10,
+        "x": 46.28090848211361,
+        "y": 46.55444141143853
+    },{
+        "id": 202010281237,
+        "label": "Working Methods",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 41.21334921594877,
+        "y": 46.9594765218265
+    },{
+        "id": 202003061632,
+        "label": "World-making tools",
+        "type": "note",
+        "size": 20,
+        "x": 43.04757462411867,
+        "y": 40.197346178467235
+    },{
+        "id": 201912180000,
+        "label": "Writing Documentarity",
+        "type": "publication",
+        "size": 10,
+        "x": 47.75361961437714,
+        "y": 41.93410748121897
+    },{
+        "id": 202006241728,
+        "label": "Zettelkasten",
+        "type": "lexique",
+        "size": 20,
+        "x": 48.99403699561696,
+        "y": 49.211055321829235
+    },{
+        "id": 202002011343,
+        "label": "Écriture et pouvoir",
+        "type": "note",
+        "size": 23.33333333333333,
+        "x": 41.37695334245613,
+        "y": 41.384289171508435
+    },{
+        "id": 202004111418,
+        "label": "Éditeurs de texte scientifiques",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 48.9835141868804,
+        "y": 48.61234319840047
+    },{
+        "id": 202005181322,
+        "label": "Énonciation typographique",
+        "type": "lecture",
+        "size": 16.666666666666664,
+        "x": 44.09691967714136,
+        "y": 42.64219399185003
+    },{
+        "id": 202005181359,
+        "label": "Énonciation éditoriale",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 42.68010549185761,
+        "y": 47.08463513471386
+    },{
+        "id": 202005181358,
+        "label": "Énonciation",
+        "type": "lexique",
+        "size": 16.666666666666664,
+        "x": 43.54393204427539,
+        "y": 49.91988786537745
+    },{
+        "id": 202001311700,
+        "label": "Épigraphes",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 44.951650917210586,
+        "y": 40.50028629599561
+    },{
+        "id": 202004251356,
+        "label": "Épistémologie comparative",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 46.17183439408196,
+        "y": 47.14160937761549
+    },{
+        "id": 202004111441,
+        "label": "Épistémologie de la documentation",
+        "type": "lecture",
+        "size": 40,
+        "x": 45.20154080361403,
+        "y": 49.14692860945758
+    },{
+        "id": 202002011304,
+        "label": "Épistémologie et histoire des sciences",
+        "type": "note",
+        "size": 13.333333333333332,
+        "x": 43.95120744664464,
+        "y": 43.85680428568505
+    },{
+        "id": 202002042228,
+        "label": "Épistémologie visuelle chez Paul Otlet",
+        "type": "note",
+        "size": 20,
+        "x": 46.377481989878035,
+        "y": 48.82238879862685
+    },{
+        "id": 202005201353,
+        "label": "Épistémologie visuelle",
+        "type": "lexique",
+        "size": 23.333333333333336,
+        "x": 40.67856470017808,
+        "y": 46.49847309500716
+    },{
+        "id": 202002011240,
+        "label": "Épistémologie",
+        "type": "lexique",
+        "size": 40,
+        "x": 48.81699840865858,
+        "y": 41.62594965871003
     }],"edges": [{
         "id": 1,
-        "from": 20200704100343,
-        "to": 20200704153246
+        "source": 202006151503,
+        "target": 202006151419
     },{
         "id": 2,
-        "from": 20200704100343,
-        "to": 20200830163431
+        "source": 202005131034,
+        "target": 202006241554
     },{
         "id": 3,
-        "from": 20200704100343,
-        "to": 20200705083336
+        "source": 202006201939,
+        "target": 202006201933
     },{
         "id": 4,
-        "from": 20200519215026,
-        "to": 20200808143420
+        "source": 202006201939,
+        "target": 202006241602
     },{
         "id": 5,
-        "from": 20200519215026,
-        "to": 20200707113753
+        "source": 202006201939,
+        "target": 202006201942
     },{
         "id": 6,
-        "from": 20200519215026,
-        "to": 20200701214359
+        "source": 202006201939,
+        "target": 202006241615
     },{
         "id": 7,
-        "from": 20200701221037,
-        "to": 20200701214359
+        "source": 201903211200,
+        "target": 202002111156
     },{
         "id": 8,
-        "from": 20200701221037,
-        "to": 20200509195652
+        "source": 201903211200,
+        "target": 202006241626
     },{
         "id": 9,
-        "from": 20200701221037,
-        "to": 20200708132301
+        "source": 201904301202,
+        "target": 202002111200
     },{
         "id": 10,
-        "from": 20200701221037,
-        "to": 20200718172257
+        "source": 201904301201,
+        "target": 202002111200
     },{
         "id": 11,
-        "from": 20200909183033,
-        "to": 20200707161136
+        "source": 202002111200,
+        "target": 202005181359
     },{
         "id": 12,
-        "from": 20200909183033,
-        "to": 20200709104849
+        "source": 201810061200,
+        "target": 202005191327
     },{
         "id": 13,
-        "from": 20200704172042,
-        "to": 20200704100343
+        "source": 202002041033,
+        "target": 201904301202
     },{
         "id": 14,
-        "from": 20200704172042,
-        "to": 20200701222949
+        "source": 202004111509,
+        "target": 201909241543
     },{
         "id": 15,
-        "from": 20200701214359,
-        "to": 20200718172257
+        "source": 201906121200,
+        "target": 202005201715
     },{
         "id": 16,
-        "from": 20200701214359,
-        "to": 20200622101202
+        "source": 202005181158,
+        "target": 202005131034
     },{
         "id": 17,
-        "from": 20200701214359,
-        "to": 20200522093949
+        "source": 202005181158,
+        "target": 202002040836
     },{
         "id": 18,
-        "from": 20200701214359,
-        "to": 20200522122316
+        "source": 202005181158,
+        "target": 202002040845
     },{
         "id": 19,
-        "from": 20200623180525,
-        "to": 20200526222401
+        "source": 202005181158,
+        "target": 202005181205
     },{
         "id": 20,
-        "from": 20200623180525,
-        "to": 20200501120436
+        "source": 202005181158,
+        "target": 202002041043
     },{
         "id": 21,
-        "from": 20200623180525,
-        "to": 20200625172823
+        "source": 202005181158,
+        "target": 202002040845
     },{
         "id": 22,
-        "from": 20200623180525,
-        "to": 20200509195652
+        "source": 202005181158,
+        "target": 202005181205
     },{
         "id": 23,
-        "from": 20200623180525,
-        "to": 20200508111132
+        "source": 202006241612,
+        "target": 202006241602
     },{
         "id": 24,
-        "from": 20200623180525,
-        "to": 20200622101202
+        "source": 202006241612,
+        "target": 202005131034
     },{
         "id": 25,
-        "from": 20200715212459,
-        "to": 20200704160828
+        "source": 202006241602,
+        "target": 202006241605
     },{
         "id": 26,
-        "from": 20200715212459,
-        "to": 20200704152459
+        "source": 202006241602,
+        "target": 202006241707
     },{
         "id": 27,
-        "from": 20200715212459,
-        "to": 20200704153246
+        "source": 201809291200,
+        "target": 201805240000
     },{
         "id": 28,
-        "from": 20200715212459,
-        "to": 20200707113753
+        "source": 201809291200,
+        "target": 202006161218
     },{
         "id": 29,
-        "from": 20200724150507,
-        "to": 20200708172120
+        "source": 202006241705,
+        "target": 202006241707
     },{
         "id": 30,
-        "from": 20200724150507,
-        "to": 20200719212204
+        "source": 202006241705,
+        "target": 201809291200
     },{
         "id": 31,
-        "from": 20200724150507,
-        "to": 20200724170202
+        "source": 202006241705,
+        "target": 201811131200
     },{
         "id": 32,
-        "from": 20200710094139,
-        "to": 20200515185607
+        "source": 202005191327,
+        "target": 201810040000
     },{
         "id": 33,
-        "from": 20200705083336,
-        "to": 20200830163431
+        "source": 202005191327,
+        "target": 201901051136
     },{
         "id": 34,
-        "from": 20200705083336,
-        "to": 20200704153246
+        "source": 202006201918,
+        "target": 202010231624
     },{
         "id": 35,
-        "from": 20200909184744,
-        "to": 20200705112816
+        "source": 202006201918,
+        "target": 202004111509
     },{
         "id": 36,
-        "from": 20200909184744,
-        "to": 20200710204125
+        "source": 202010231624,
+        "target": 202006201918
     },{
         "id": 37,
-        "from": 20200909184744,
-        "to": 20200909183033
+        "source": 202010231624,
+        "target": 201803261410
     },{
         "id": 38,
-        "from": 20200909184744,
-        "to": 20200714155845
+        "source": 201901191200,
+        "target": 201901051136
     },{
         "id": 39,
-        "from": 20200909184744,
-        "to": 20200707175829
+        "source": 202002021341,
+        "target": 202002011322
     },{
         "id": 40,
-        "from": 20200714155845,
-        "to": 20200509195652
+        "source": 202002021341,
+        "target": 201805240000
     },{
         "id": 41,
-        "from": 20200906135907,
-        "to": 20200718172257
+        "source": 202002021341,
+        "target": 202005241306
     },{
         "id": 42,
-        "from": 20200906135907,
-        "to": 20200704135046
+        "source": 202002241016,
+        "target": 202002011322
     },{
         "id": 43,
-        "from": 20200918100545,
-        "to": 20200606201922
+        "source": 202002241016,
+        "target": 202002111200
     },{
         "id": 44,
-        "from": 20200918100545,
-        "to": 20200629161610
+        "source": 202002241016,
+        "target": 202005191338
     },{
         "id": 45,
-        "from": 20200918100545,
-        "to": 20200707161136
+        "source": 202004081042,
+        "target": 202002030000
     },{
         "id": 46,
-        "from": 20200907090751,
-        "to": 20200718172257
+        "source": 202002170000,
+        "target": 202005131553
     },{
         "id": 47,
-        "from": 20200830162929,
-        "to": 20200830163431
+        "source": 202002170000,
+        "target": 202005131558
     },{
         "id": 48,
-        "from": 20200830162929,
-        "to": 20200829163448
+        "source": 202002170000,
+        "target": 202005191604
     },{
         "id": 49,
-        "from": 20200501120436,
-        "to": 20200509195652
+        "source": 202008111125,
+        "target": 202002111200
     },{
         "id": 50,
-        "from": 20200501120436,
-        "to": 20200501120506
+        "source": 202008111125,
+        "target": 202002011322
     },{
         "id": 51,
-        "from": 20200724153738,
-        "to": 20200724153738
+        "source": 202002121527,
+        "target": 202005131127
     },{
         "id": 52,
-        "from": 20200704152459,
-        "to": 20200719212204
+        "source": 202002121527,
+        "target": 202001011145
     },{
         "id": 53,
-        "from": 20200704152459,
-        "to": 20200704160828
+        "source": 202005131127,
+        "target": 202005131118
     },{
         "id": 54,
-        "from": 20200704152459,
-        "to": 20200907090751
+        "source": 202005131127,
+        "target": 202006170823
     },{
         "id": 55,
-        "from": 20200701083222,
-        "to": 20200508093223
+        "source": 202005131127,
+        "target": 202004111441
     },{
         "id": 56,
-        "from": 20200701083222,
-        "to": 20200701222949
+        "source": 202005131127,
+        "target": 201809041200
     },{
         "id": 57,
-        "from": 20200701083222,
-        "to": 20200709214912
+        "source": 202005131127,
+        "target": 202006241728
     },{
         "id": 58,
-        "from": 20200701083222,
-        "to": 20200701221037
+        "source": 202005131127,
+        "target": 202006170903
     },{
         "id": 59,
-        "from": 20200701083222,
-        "to": 20200710204125
+        "source": 202005131127,
+        "target": 201911080000
     },{
         "id": 60,
-        "from": 20200701083222,
-        "to": 20200830163431
+        "source": 202005201000,
+        "target": 202002040845
     },{
         "id": 61,
-        "from": 20200502122311,
-        "to": 20200505210147
+        "source": 202005201000,
+        "target": 202005181205
     },{
         "id": 62,
-        "from": 20200705114827,
-        "to": 20200509195652
+        "source": 202005201000,
+        "target": 202005181158
     },{
         "id": 63,
-        "from": 20200705114827,
-        "to": 20200705112816
+        "source": 202005201000,
+        "target": 202001011145
     },{
         "id": 64,
-        "from": 20200705114827,
-        "to": 20200625095558
+        "source": 202002021317,
+        "target": 202002011240
     },{
         "id": 65,
-        "from": 20200708172120,
-        "to": 20200724153738
+        "source": 202007081152,
+        "target": 202010231606
     },{
         "id": 66,
-        "from": 20200708172120,
-        "to": 20200606201922
+        "source": 202007081152,
+        "target": 202006251345
     },{
         "id": 67,
-        "from": 20200708172120,
-        "to": 20200722215106
+        "source": 202007081152,
+        "target": 202005191338
     },{
         "id": 68,
-        "from": 20200704160828,
-        "to": 20200701221037
+        "source": 202007081152,
+        "target": 202004081047
     },{
         "id": 69,
-        "from": 20200704160828,
-        "to": 20200625115033
+        "source": 202007081152,
+        "target": 202004111418
     },{
         "id": 70,
-        "from": 20200704160828,
-        "to": 20200704152459
+        "source": 202007081152,
+        "target": 202004061546
     },{
         "id": 71,
-        "from": 20200704160828,
-        "to": 20200704153246
+        "source": 202007081152,
+        "target": 202006201939
     },{
         "id": 72,
-        "from": 20200704160828,
-        "to": 20200522122316
+        "source": 202007081152,
+        "target": 202006241554
     },{
         "id": 73,
-        "from": 20200704160828,
-        "to": 20200715212459
+        "source": 202010231606,
+        "target": 202010221420
     },{
         "id": 74,
-        "from": 20200509195652,
-        "to": 20200606201922
+        "source": 202008172256,
+        "target": 201809291200
     },{
         "id": 75,
-        "from": 20200509195652,
-        "to": 20200623180525
+        "source": 201908081200,
+        "target": 202005181316
     },{
         "id": 76,
-        "from": 20200509195652,
-        "to": 20200805104653
+        "source": 201908081200,
+        "target": 202005181320
     },{
         "id": 77,
-        "from": 20200625095558,
-        "to": 20200801205256
+        "source": 202006012005,
+        "target": 202005241306
     },{
         "id": 78,
-        "from": 20200625095558,
-        "to": 20200624194717
+        "source": 202006012005,
+        "target": 202005241306
     },{
         "id": 79,
-        "from": 20200625095558,
-        "to": 20200805104653
+        "source": 202006012005,
+        "target": 202002111200
     },{
         "id": 80,
-        "from": 20200625095558,
-        "to": 20200802100201
+        "source": 202006012005,
+        "target": 202002011322
     },{
         "id": 81,
-        "from": 20200625095558,
-        "to": 20200619130655
+        "source": 202010281041,
+        "target": 202006012005
     },{
         "id": 82,
-        "from": 20200903113405,
-        "to": 20200905210104
+        "source": 202010281041,
+        "target": 202002241016
     },{
         "id": 83,
-        "from": 20200903113405,
-        "to": 20200708172120
+        "source": 202010281041,
+        "target": 202005191338
     },{
         "id": 84,
-        "from": 20200707085937,
-        "to": 20200708172120
+        "source": 202010281041,
+        "target": 202008241304
     },{
         "id": 85,
-        "from": 20200707085937,
-        "to": 20200607195524
+        "source": 202010281041,
+        "target": 202010280947
     },{
         "id": 86,
-        "from": 20200707085937,
-        "to": 20200707101208
+        "source": 201906061122,
+        "target": 201805240000
     },{
         "id": 87,
-        "from": 20200707085937,
-        "to": 20200705112816
+        "source": 202002040852,
+        "target": 202002040845
     },{
         "id": 88,
-        "from": 20200707085937,
-        "to": 20200621084631
+        "source": 202002040852,
+        "target": 202006251017
     },{
         "id": 89,
-        "from": 20200707085937,
-        "to": 20200707112034
+        "source": 202002040852,
+        "target": 202005181358
     },{
         "id": 90,
-        "from": 20200707085937,
-        "to": 20200618141829
+        "source": 202002040852,
+        "target": 202002040857
     },{
         "id": 91,
-        "from": 20200707085937,
-        "to": 20200701083222
+        "source": 202005131558,
+        "target": 202004111457
     },{
         "id": 92,
-        "from": 20200621084631,
-        "to": 20200708132301
+        "source": 202005131558,
+        "target": 202005181031
     },{
         "id": 93,
-        "from": 20200621084631,
-        "to": 20200801210302
+        "source": 202005131558,
+        "target": 202002111200
     },{
         "id": 94,
-        "from": 20200621084631,
-        "to": 20200722215106
+        "source": 202005201759,
+        "target": 202005131135
     },{
         "id": 95,
-        "from": 20200621084631,
-        "to": 20200702145334
+        "source": 202005201759,
+        "target": 202005071240
     },{
         "id": 96,
-        "from": 20200621084631,
-        "to": 20200522111759
+        "source": 202005201759,
+        "target": 202005201252
     },{
         "id": 97,
-        "from": 20200717141735,
-        "to": 20200629161610
+        "source": 202005201759,
+        "target": 202005131558
     },{
         "id": 98,
-        "from": 20200725133539,
-        "to": 20200707161136
+        "source": 202005201759,
+        "target": 202005201330
     },{
         "id": 99,
-        "from": 20200801210302,
-        "to": 20200709104849
+        "source": 202005201759,
+        "target": 202005101602
     },{
         "id": 100,
-        "from": 20200801210302,
-        "to": 20200719212204
+        "source": 202005201759,
+        "target": 202004111441
     },{
         "id": 101,
-        "from": 20200801210302,
-        "to": 20200621084631
+        "source": 202005201759,
+        "target": 202010071021
     },{
         "id": 102,
-        "from": 20200801210302,
-        "to": 20200701221037
+        "source": 202005201759,
+        "target": 202005241306
     },{
         "id": 103,
-        "from": 20200801210302,
-        "to": 20200708121357
+        "source": 202005201759,
+        "target": 202005131135
     },{
         "id": 104,
-        "from": 20200624194717,
-        "to": 20200508093223
+        "source": 202005201759,
+        "target": 202005131201
     },{
         "id": 105,
-        "from": 20200624194717,
-        "to": 20200622164608
+        "source": 202005201759,
+        "target": 201909241543
     },{
         "id": 106,
-        "from": 20200624194717,
-        "to": 20200630153054
+        "source": 202005201759,
+        "target": 202005131118
     },{
         "id": 107,
-        "from": 20200624194717,
-        "to": 20200625095558
+        "source": 202005201759,
+        "target": 202002042228
     },{
         "id": 108,
-        "from": 20200624194717,
-        "to": 20200622164608
+        "source": 202005201759,
+        "target": 202005071240
     },{
         "id": 109,
-        "from": 20200624194717,
-        "to": 20200707113753
+        "source": 202005201759,
+        "target": 202005191327
     },{
         "id": 110,
-        "from": 20200618141829,
-        "to": 20200629161610
+        "source": 202005201759,
+        "target": 201901051136
     },{
         "id": 111,
-        "from": 20200618141829,
-        "to": 20200619133835
+        "source": 202005201759,
+        "target": 202005131127
     },{
         "id": 112,
-        "from": 20200707101657,
-        "to": 20200505212332
+        "source": 202005201759,
+        "target": 202005201252
     },{
         "id": 113,
-        "from": 20200905210104,
-        "to": 20200907090751
+        "source": 202005201759,
+        "target": 201902111200
     },{
         "id": 114,
-        "from": 20200725085518,
-        "to": 20200509195652
+        "source": 202005201759,
+        "target": 202005201252
     },{
         "id": 115,
-        "from": 20200725085518,
-        "to": 20200623180525
+        "source": 202005201759,
+        "target": 202005201454
     },{
         "id": 116,
-        "from": 20200725085518,
-        "to": 20200801210302
+        "source": 202005201759,
+        "target": 202002131520
     },{
         "id": 117,
-        "from": 20200622183005,
-        "to": 20200707113753
+        "source": 202005201759,
+        "target": 202005131558
     },{
         "id": 118,
-        "from": 20200622183005,
-        "to": 20200624194717
+        "source": 202005201759,
+        "target": 202004111457
     },{
         "id": 119,
-        "from": 20200622183005,
-        "to": 20200623180525
+        "source": 202005201759,
+        "target": 202006251345
     },{
         "id": 120,
-        "from": 20200622183005,
-        "to": 20200622164608
+        "source": 202005201759,
+        "target": 202005201451
     },{
         "id": 121,
-        "from": 20200625163043,
-        "to": 20200622164608
+        "source": 202005201759,
+        "target": 202005131553
     },{
         "id": 122,
-        "from": 20200622164608,
-        "to": 20200625163043
+        "source": 202005201759,
+        "target": 202005201330
     },{
         "id": 123,
-        "from": 20200622164608,
-        "to": 20200622110109
+        "source": 202005201759,
+        "target": 202005101602
     },{
         "id": 124,
-        "from": 20200622164608,
-        "to": 20200622164608
+        "source": 202005201759,
+        "target": 202005241243
     },{
         "id": 125,
-        "from": 20200622164608,
-        "to": 20200829163448
+        "source": 202005201759,
+        "target": 202004111441
     },{
         "id": 126,
-        "from": 20200622164608,
-        "to": 20200622101202
+        "source": 202005201759,
+        "target": 202004191601
     },{
         "id": 127,
-        "from": 20200622164608,
-        "to": 20200625115033
+        "source": 202005201759,
+        "target": 202005201336
     },{
         "id": 128,
-        "from": 20200622164608,
-        "to": 20200625172823
+        "source": 202005201759,
+        "target": 202010071021
     },{
         "id": 129,
-        "from": 20200622164608,
-        "to": 20200622140512
+        "source": 202005201759,
+        "target": 202005241306
     },{
         "id": 130,
-        "from": 20200619130655,
-        "to": 20200621084631
+        "source": 202005201759,
+        "target": 202002011322
     },{
         "id": 131,
-        "from": 20200619130655,
-        "to": 20200509195652
+        "source": 202005201759,
+        "target": 202005181158
     },{
         "id": 132,
-        "from": 20200502111554,
-        "to": 20200715204714
+        "source": 202005201759,
+        "target": 202002111156
     },{
         "id": 133,
-        "from": 20200502111554,
-        "to": 20200501120506
+        "source": 202005201759,
+        "target": 202002111200
     },{
         "id": 134,
-        "from": 20200530195417,
-        "to": 20200530191442
+        "source": 202005201759,
+        "target": 202005081257
     },{
         "id": 135,
-        "from": 20200707113753,
-        "to": 20200526222401
+        "source": 202005201759,
+        "target": 202005201353
     },{
         "id": 136,
-        "from": 20200707113753,
-        "to": 20200701214359
+        "source": 202005201759,
+        "target": 202005201711
     },{
         "id": 137,
-        "from": 20200707112034,
-        "to": 20200907090751
+        "source": 202005201759,
+        "target": 202005201715
     },{
         "id": 138,
-        "from": 20200708132301,
-        "to": 20200708121357
+        "source": 202005201759,
+        "target": 202005201716
     },{
         "id": 139,
-        "from": 20200708132301,
-        "to": 20200715204714
+        "source": 202002131520,
+        "target": 202002111200
     },{
         "id": 140,
-        "from": 20200708132301,
-        "to": 20200709104849
+        "source": 202004111457,
+        "target": 202005131553
     },{
         "id": 141,
-        "from": 20200708132301,
-        "to": 20200701221037
+        "source": 202002011409,
+        "target": 202006251036
     },{
         "id": 142,
-        "from": 20200708132301,
-        "to": 20200709104849
+        "source": 202002011409,
+        "target": 202002111200
     },{
         "id": 143,
-        "from": 20200815162225,
-        "to": 20200708132301
+        "source": 202004061539,
+        "target": 202005181205
     },{
         "id": 144,
-        "from": 20200815162225,
-        "to": 20200707161136
+        "source": 202004061539,
+        "target": 202001011145
     },{
         "id": 145,
-        "from": 20200815162225,
-        "to": 20200606213253
+        "source": 202005191346,
+        "target": 202002011240
     },{
         "id": 146,
-        "from": 20200815162225,
-        "to": 20200530195417
+        "source": 202005191346,
+        "target": 202005081257
     },{
         "id": 147,
-        "from": 20200704153246,
-        "to": 20200704160828
+        "source": 202005191351,
+        "target": 202002030000
     },{
         "id": 148,
-        "from": 20200704153246,
-        "to": 20200830163431
+        "source": 202005191350,
+        "target": 202002030000
     },{
         "id": 149,
-        "from": 20200704153246,
-        "to": 20200705083336
+        "source": 202006251036,
+        "target": 202005191346
     },{
         "id": 150,
-        "from": 20200704153246,
-        "to": 20200704100343
+        "source": 202006251036,
+        "target": 202002111156
     },{
         "id": 151,
-        "from": 20200704153246,
-        "to": 20200522122316
+        "source": 202006251036,
+        "target": 202005081257
     },{
         "id": 152,
-        "from": 20200619133835,
-        "to": 20200629161610
+        "source": 202006251036,
+        "target": 202004031755
     },{
         "id": 153,
-        "from": 20200619133835,
-        "to": 20200606213253
+        "source": 202008241304,
+        "target": 202008241220
     },{
         "id": 154,
-        "from": 20200619133835,
-        "to": 20200622140512
+        "source": 202008241304,
+        "target": 202005191346
     },{
         "id": 155,
-        "from": 20200704135046,
-        "to": 20200906135907
+        "source": 202008241304,
+        "target": 202005081257
     },{
         "id": 156,
-        "from": 20200704135046,
-        "to": 20200519215026
+        "source": 202008241304,
+        "target": 202005191351
     },{
         "id": 157,
-        "from": 20200704135046,
-        "to": 20200718182015
+        "source": 202008241304,
+        "target": 202005191350
     },{
         "id": 158,
-        "from": 20200704135046,
-        "to": 20200704153246
+        "source": 202005011455,
+        "target": 201902111200
     },{
         "id": 159,
-        "from": 20200704135046,
-        "to": 20200530191442
+        "source": 202005011455,
+        "target": 201810040000
     },{
         "id": 160,
-        "from": 20200704135046,
-        "to": 20200701222949
+        "source": 202006251054,
+        "target": 202002040857
     },{
         "id": 161,
-        "from": 20200704135046,
-        "to": 20200718172257
+        "source": 202007051857,
+        "target": 202003150000
     },{
         "id": 162,
-        "from": 20200707175829,
-        "to": 20200725133539
+        "source": 202008241305,
+        "target": 202006170823
     },{
         "id": 163,
-        "from": 20200701110951,
-        "to": 20200622164608
+        "source": 202008241305,
+        "target": 202008241304
     },{
         "id": 164,
-        "from": 20200701110951,
-        "to": 20200606213253
+        "source": 202008241305,
+        "target": 202003310000
     },{
         "id": 165,
-        "from": 20200701110951,
-        "to": 20200707085937
+        "source": 202008241305,
+        "target": 202003150000
     },{
         "id": 166,
-        "from": 20200701110951,
-        "to": 20200815163702
+        "source": 202005131201,
+        "target": 201911080000
     },{
         "id": 167,
-        "from": 20200704135838,
-        "to": 20200808143420
+        "source": 202001041200,
+        "target": 202002011322
     },{
         "id": 168,
-        "from": 20200704135838,
-        "to": 20200909183033
+        "source": 202001041200,
+        "target": 201901051136
     },{
         "id": 169,
-        "from": 20200710204125,
-        "to": 20200705100544
+        "source": 202001041200,
+        "target": 202005191338
     },{
         "id": 170,
-        "from": 20200622110109,
-        "to": 20200613160247
+        "source": 201901221200,
+        "target": 202002011322
     },{
         "id": 171,
-        "from": 20200622110109,
-        "to": 20200623110109
+        "source": 202006251136,
+        "target": 202002011322
     },{
         "id": 172,
-        "from": 20200505212332,
-        "to": 20200707101657
+        "source": 202006251136,
+        "target": 202005191338
     },{
         "id": 173,
-        "from": 20200815163702,
-        "to": 20200708113814
+        "source": 202006251136,
+        "target": 202006251144
     },{
         "id": 174,
-        "from": 20200526222401,
-        "to": 20200707113753
+        "source": 202010281641,
+        "target": 202005181143
     },{
         "id": 175,
-        "from": 20200526222401,
-        "to": 20200508093223
+        "source": 202006251203,
+        "target": 201812131200
     },{
         "id": 176,
-        "from": 20200508111132,
-        "to": 20200708121357
+        "source": 202010281654,
+        "target": 202008241313
     },{
         "id": 177,
-        "from": 20200508111132,
-        "to": 20200522122316
+        "source": 202010281654,
+        "target": 202005101602
     },{
         "id": 178,
-        "from": 20200622101202,
-        "to": 20200701214359
+        "source": 202010281654,
+        "target": 202005181143
     },{
         "id": 179,
-        "from": 20200622101202,
-        "to": 20200519215026
+        "source": 202007041635,
+        "target": 202003150000
     },{
         "id": 180,
-        "from": 20200718172257,
-        "to": 20200906135907
+        "source": 202006251144,
+        "target": 201909260000
     },{
         "id": 181,
-        "from": 20200718172257,
-        "to": 20200508093223
+        "source": 202006251144,
+        "target": 202006251159
     },{
         "id": 182,
-        "from": 20200718172257,
-        "to": 20200718182015
+        "source": 202005181143,
+        "target": 201901071200
     },{
         "id": 183,
-        "from": 20200718172257,
-        "to": 20200914211839
+        "source": 202005181143,
+        "target": 202006161211
     },{
         "id": 184,
-        "from": 20200905201903,
-        "to": 20200801210302
+        "source": 202005181143,
+        "target": 201907311200
     },{
         "id": 185,
-        "from": 20200613160247,
-        "to": 20200906135907
+        "source": 202005181143,
+        "target": 201910090000
     },{
         "id": 186,
-        "from": 20200809102622,
-        "to": 20200625172823
+        "source": 202005181143,
+        "target": 201912180000
     },{
         "id": 187,
-        "from": 20200829163448,
-        "to": 20200508093223
+        "source": 202005181143,
+        "target": 202002180000
     },{
         "id": 188,
-        "from": 20200501120506,
-        "to": 20200503195405
+        "source": 202005181143,
+        "target": 201905151200
     },{
         "id": 189,
-        "from": 20200501120506,
-        "to": 20200809102622
+        "source": 202005181143,
+        "target": 202005201715
     },{
         "id": 190,
-        "from": 20200623110109,
-        "to": 20200530191442
+        "source": 202005181143,
+        "target": 201805240000
     },{
         "id": 191,
-        "from": 20200530191442,
-        "to": 20200623110109
+        "source": 202005181143,
+        "target": 202006161211
     },{
         "id": 192,
-        "from": 20200530191442,
-        "to": 20200704135046
+        "source": 202005181143,
+        "target": 202005191327
     },{
         "id": 193,
-        "from": 20200530191442,
-        "to": 20200530195417
+        "source": 202005181143,
+        "target": 202005181359
     },{
         "id": 194,
-        "from": 20200530191442,
-        "to": 20200701214359
+        "source": 202004191601,
+        "target": 202006251337
     },{
         "id": 195,
-        "from": 20200530191442,
-        "to": 20200522122316
+        "source": 202004191601,
+        "target": 202006241705
     },{
         "id": 196,
-        "from": 20200530191442,
-        "to": 20200718172257
+        "source": 202004191601,
+        "target": 202005101602
     },{
         "id": 197,
-        "from": 20200522093949,
-        "to": 20200622101202
+        "source": 202002051657,
+        "target": 202006251337
     },{
         "id": 198,
-        "from": 20200830153041,
-        "to": 20200508093223
+        "source": 202002051657,
+        "target": 202006251345
     },{
         "id": 199,
-        "from": 20200707161136,
-        "to": 20200815162225
+        "source": 202002051657,
+        "target": 202006251144
     },{
         "id": 200,
-        "from": 20200707161136,
-        "to": 20200725133539
+        "source": 202006251337,
+        "target": 202005101602
     },{
         "id": 201,
-        "from": 20200707161136,
-        "to": 20200815163702
+        "source": 202006251337,
+        "target": 202007041546
     },{
         "id": 202,
-        "from": 20200707161136,
-        "to": 20200709104849
+        "source": 201903291200,
+        "target": 202002051657
     },{
         "id": 203,
-        "from": 20200707161136,
-        "to": 20200815162225
+        "source": 201903291200,
+        "target": 202006241854
     },{
         "id": 204,
-        "from": 20200707161136,
-        "to": 20200707175829
+        "source": 202005101602,
+        "target": 201909101200
     },{
         "id": 205,
-        "from": 20200722215106,
-        "to": 20200719212204
+        "source": 202008071441,
+        "target": 201910090000
     },{
         "id": 206,
-        "from": 20200724173541,
-        "to": 20200708172120
+        "source": 202008071441,
+        "target": 202003150000
     },{
         "id": 207,
-        "from": 20200724173541,
-        "to": 20200813132904
+        "source": 202005181031,
+        "target": 201909241543
     },{
         "id": 208,
-        "from": 20200505210147,
-        "to": 20200515185607
+        "source": 202005181031,
+        "target": 202005181143
     },{
         "id": 209,
-        "from": 20200505210147,
-        "to": 20200805104653
+        "source": 202005181031,
+        "target": 202005191327
     },{
         "id": 210,
-        "from": 20200505210147,
-        "to": 20200505212332
+        "source": 202005181031,
+        "target": 202004111457
     },{
         "id": 211,
-        "from": 20200705112816,
-        "to": 20200707175829
+        "source": 202005181031,
+        "target": 202005131558
     },{
         "id": 212,
-        "from": 20200705112816,
-        "to": 20200702145334
+        "source": 202005181031,
+        "target": 202005131558
     },{
         "id": 213,
-        "from": 20200705112816,
-        "to": 20200705114827
+        "source": 202005181031,
+        "target": 202005191604
     },{
         "id": 214,
-        "from": 20200705112816,
-        "to": 20200805104653
+        "source": 202002040857,
+        "target": 202006251054
     },{
         "id": 215,
-        "from": 20200914211839,
-        "to": 20200530191442
+        "source": 202010280947,
+        "target": 201909241543
     },{
         "id": 216,
-        "from": 20200914211839,
-        "to": 20200718172257
+        "source": 202010280947,
+        "target": 202010091443
     },{
         "id": 217,
-        "from": 20200914211839,
-        "to": 20200710204125
+        "source": 202010280947,
+        "target": 202005131127
     },{
         "id": 218,
-        "from": 20200522122316,
-        "to": 20200530191442
+        "source": 202010280947,
+        "target": 202010201706
     },{
         "id": 219,
-        "from": 20200522122316,
-        "to": 20200508111132
+        "source": 202010280947,
+        "target": 202005201353
     },{
         "id": 220,
-        "from": 20200522122316,
-        "to": 20200701214359
+        "source": 202006081954,
+        "target": 202004081047
     },{
         "id": 221,
-        "from": 20200522122316,
-        "to": 20200707113753
+        "source": 202002021255,
+        "target": 202002111156
     },{
         "id": 222,
-        "from": 20200522122316,
-        "to": 20200526222401
+        "source": 201906291201,
+        "target": 202006170823
     },{
         "id": 223,
-        "from": 20200522122316,
-        "to": 20200508093223
+        "source": 202010281435,
+        "target": 202006251345
     },{
         "id": 224,
-        "from": 20200522122316,
-        "to": 20200623180525
+        "source": 202006251345,
+        "target": 201910151200
     },{
         "id": 225,
-        "from": 20200808143420,
-        "to": 20200830163431
+        "source": 202006251345,
+        "target": 201805240000
     },{
         "id": 226,
-        "from": 20200808143420,
-        "to": 20200704135046
+        "source": 202006251345,
+        "target": 201904081145
     },{
         "id": 227,
-        "from": 20200606201922,
-        "to": 20200606213253
+        "source": 202006251345,
+        "target": 202005101520
     },{
         "id": 228,
-        "from": 20200606201922,
-        "to": 20200717141735
+        "source": 202006251345,
+        "target": 202006161218
     },{
         "id": 229,
-        "from": 20200606201922,
-        "to": 20200629161610
+        "source": 202006251345,
+        "target": 202006251017
     },{
         "id": 230,
-        "from": 20200606201922,
-        "to": 20200708121357
+        "source": 201904131200,
+        "target": 202002011240
     },{
         "id": 231,
-        "from": 20200522111759,
-        "to": 20200522111759
+        "source": 201904131200,
+        "target": 202006251457
     },{
         "id": 232,
-        "from": 20200522111759,
-        "to": 20200505212332
+        "source": 202007041806,
+        "target": 201907311200
     },{
         "id": 233,
-        "from": 20200522111759,
-        "to": 20200701083222
+        "source": 202007041806,
+        "target": 202006301454
     },{
         "id": 234,
-        "from": 20200621094836,
-        "to": 20200712214549
+        "source": 201905091200,
+        "target": 202002111200
     },{
         "id": 235,
-        "from": 20200715204714,
-        "to": 20200704152459
+        "source": 201905091200,
+        "target": 201904301201
     },{
         "id": 236,
-        "from": 20200915084904,
-        "to": 20200509195652
+        "source": 201903220926,
+        "target": 202001011145
     },{
         "id": 237,
-        "from": 20200915084904,
-        "to": 20200915103106
+        "source": 201903220926,
+        "target": 202004061539
     },{
         "id": 238,
-        "from": 20200915084904,
-        "to": 20200915101659
+        "source": 202006241554,
+        "target": 202010221420
     },{
         "id": 239,
-        "from": 20200915084904,
-        "to": 20200809102622
+        "source": 202006241554,
+        "target": 202010231606
     },{
         "id": 240,
-        "from": 20200915084904,
-        "to": 20200623180525
+        "source": 202002011154,
+        "target": 202002011240
     },{
         "id": 241,
-        "from": 20200915084904,
-        "to": 20200708132301
+        "source": 202002021401,
+        "target": 202005081257
     },{
         "id": 242,
-        "from": 20200709214912,
-        "to": 20200710094139
+        "source": 202008261614,
+        "target": 202008241220
     },{
         "id": 243,
-        "from": 20200708113814,
-        "to": 20200708132301
+        "source": 202008261613,
+        "target": 202002021401
     },{
         "id": 244,
-        "from": 20200625115033,
-        "to": 20200526222401
+        "source": 202008261613,
+        "target": 202008261614
     },{
         "id": 245,
-        "from": 20200625115033,
-        "to": 20200719212204
+        "source": 202006241615,
+        "target": 202005131201
     },{
         "id": 246,
-        "from": 20200629161610,
-        "to": 20200619133835
+        "source": 202006241615,
+        "target": 202006170823
     },{
         "id": 247,
-        "from": 20200629161610,
-        "to": 20200717141735
+        "source": 201904291201,
+        "target": 202002030000
     },{
         "id": 248,
-        "from": 20200629161610,
-        "to": 20200707085937
+        "source": 201904291201,
+        "target": 202004092014
     },{
         "id": 249,
-        "from": 20200629161610,
-        "to": 20200815162225
+        "source": 202005131553,
+        "target": 201912190000
     },{
         "id": 250,
-        "from": 20200629161610,
-        "to": 20200606201922
+        "source": 202005131553,
+        "target": 202005071240
     },{
         "id": 251,
-        "from": 20200606213253,
-        "to": 20200621083005
+        "source": 202005131553,
+        "target": 201911080000
     },{
         "id": 252,
-        "from": 20200606213253,
-        "to": 20200815163702
+        "source": 201811261200,
+        "target": 202005131553
     },{
         "id": 253,
-        "from": 20200606213253,
-        "to": 20200606201922
+        "source": 202009291842,
+        "target": 201811261200
     },{
         "id": 254,
-        "from": 20200606213253,
-        "to": 20200815162225
+        "source": 202009291842,
+        "target": 201904301203
     },{
         "id": 255,
-        "from": 20200606213253,
-        "to": 20200623180525
+        "source": 202006201942,
+        "target": 202006201939
     },{
         "id": 256,
-        "from": 20200625172823,
-        "to": 20200912130028
+        "source": 202006201942,
+        "target": 202006170823
     },{
         "id": 257,
-        "from": 20200625172823,
-        "to": 20200625115033
+        "source": 202008241313,
+        "target": 202006170823
     },{
         "id": 258,
-        "from": 20200805104653,
-        "to": 20200509195652
+        "source": 202010281329,
+        "target": 202008172256
     },{
         "id": 259,
-        "from": 20200805104653,
-        "to": 20200802100201
+        "source": 202002011430,
+        "target": 202002111200
     },{
         "id": 260,
-        "from": 20200805104653,
-        "to": 20200705114827
+        "source": 202002011430,
+        "target": 201904250000
     },{
         "id": 261,
-        "from": 20200705100544,
-        "to": 20200705114827
+        "source": 202002011430,
+        "target": 202002011154
     },{
         "id": 262,
-        "from": 20200705100544,
-        "to": 20200705112816
+        "source": 202006181554,
+        "target": 202005201353
     },{
         "id": 263,
-        "from": 20200705100544,
-        "to": 20200617210141
+        "source": 202006181554,
+        "target": 202005201716
     },{
         "id": 264,
-        "from": 20200705100544,
-        "to": 20200710204125
+        "source": 202004301231,
+        "target": 202007081152
     },{
         "id": 265,
-        "from": 20200705100544,
-        "to": 20200705101927
+        "source": 202006251446,
+        "target": 202006241728
     },{
         "id": 266,
-        "from": 20200508093223,
-        "to": 20200830162929
+        "source": 201904250000,
+        "target": 202002111200
     },{
         "id": 267,
-        "from": 20200508093223,
-        "to": 20200708121357
+        "source": 201910111200,
+        "target": 202006251345
     },{
         "id": 268,
-        "from": 20200508093223,
-        "to": 20200508111132
+        "source": 202005071240,
+        "target": 202005131127
     },{
         "id": 269,
-        "from": 20200915101659,
-        "to": 20200915103106
+        "source": 202005071240,
+        "target": 201901051136
     },{
         "id": 270,
-        "from": 20200712214549,
-        "to": 20200621094836
+        "source": 202005071240,
+        "target": 202005131201
     },{
         "id": 271,
-        "from": 20200712214549,
-        "to": 20200621083005
+        "source": 202005071240,
+        "target": 201909241543
     },{
         "id": 272,
-        "from": 20200621083005,
-        "to": 20200712214549
+        "source": 202005071240,
+        "target": 202005201252
     },{
         "id": 273,
-        "from": 20200621083005,
-        "to": 20200530195417
+        "source": 202010152014,
+        "target": 202005191338
     },{
         "id": 274,
-        "from": 20200621083005,
-        "to": 20200621094836
+        "source": 202010152014,
+        "target": 202002180000
     },{
         "id": 275,
-        "from": 20200915103106,
-        "to": 20200622101202
+        "source": 202008041426,
+        "target": 202006251022
     },{
         "id": 276,
-        "from": 20200915103106,
-        "to": 20200717141735
+        "source": 202008041426,
+        "target": 201907311200
     },{
         "id": 277,
-        "from": 20200702145334,
-        "to": 20200708121357
+        "source": 201904151200,
+        "target": 202006251345
     },{
         "id": 278,
-        "from": 20200617210141,
-        "to": 20200801210302
+        "source": 202006041138,
+        "target": 202005201000
     },{
         "id": 279,
-        "from": 20200707101208,
-        "to": 20200707101657
+        "source": 202004091512,
+        "target": 202008261405
     },{
         "id": 280,
-        "from": 20200912130028,
-        "to": 20200708132301
+        "source": 202008261622,
+        "target": 201806140000
     },{
         "id": 281,
-        "from": 20200708121357,
-        "to": 20200830162929
+        "source": 202008261622,
+        "target": 202008241220
     },{
         "id": 282,
-        "from": 20200708121357,
-        "to": 20200708132301
+        "source": 202008261622,
+        "target": 202008261613
     },{
         "id": 283,
-        "from": 20200708121357,
-        "to": 20200701221037
+        "source": 202006161214,
+        "target": 202004191633
     },{
         "id": 284,
-        "from": 20200813132904,
-        "to": 20200705112816
+        "source": 202006251159,
+        "target": 201901281200
     },{
         "id": 285,
-        "from": 20200813132904,
-        "to": 20200710204125
+        "source": 202006241805,
+        "target": 202006241602
     },{
         "id": 286,
-        "from": 20200813132904,
-        "to": 20200722215106
+        "source": 202006241805,
+        "target": 202004081047
     },{
         "id": 287,
-        "from": 20200813132904,
-        "to": 20200705112816
+        "source": 202003091730,
+        "target": 202004111515
     },{
         "id": 288,
-        "from": 20200813132904,
-        "to": 20200606201922
+        "source": 202005201336,
+        "target": 202008241313
     },{
         "id": 289,
-        "from": 20200622140512,
-        "to": 20200813132904
+        "source": 202005201336,
+        "target": 202005181143
     },{
         "id": 290,
-        "from": 20200622140512,
-        "to": 20200622164608
+        "source": 202005201336,
+        "target": 202003150000
     },{
         "id": 291,
-        "from": 20200630153054,
-        "to": 20200623180525
+        "source": 202010221427,
+        "target": 202003310000
     },{
         "id": 292,
-        "from": 20200630153054,
-        "to": 20200619133835
+        "source": 202010201706,
+        "target": 202006251345
     },{
         "id": 293,
-        "from": 20200630153054,
-        "to": 20200625172823
+        "source": 202010201706,
+        "target": 202002111200
+    },{
+        "id": 294,
+        "source": 202006251411,
+        "target": 201903291200
+    },{
+        "id": 295,
+        "source": 202006201933,
+        "target": 202006201939
+    },{
+        "id": 296,
+        "source": 202006201933,
+        "target": 202006201946
+    },{
+        "id": 297,
+        "source": 202008241432,
+        "target": 202002011240
+    },{
+        "id": 298,
+        "source": 202008241432,
+        "target": 202008241220
+    },{
+        "id": 299,
+        "source": 202006170903,
+        "target": 202005131127
+    },{
+        "id": 300,
+        "source": 202006170903,
+        "target": 201911080000
+    },{
+        "id": 301,
+        "source": 202006170903,
+        "target": 202004111515
+    },{
+        "id": 302,
+        "source": 202006251022,
+        "target": 202002241016
+    },{
+        "id": 303,
+        "source": 202006251022,
+        "target": 202005191338
+    },{
+        "id": 304,
+        "source": 202006251022,
+        "target": 202002011322
+    },{
+        "id": 305,
+        "source": 202010071021,
+        "target": 202006251337
+    },{
+        "id": 306,
+        "source": 202010071021,
+        "target": 202006170823
+    },{
+        "id": 307,
+        "source": 202010071021,
+        "target": 202005131127
+    },{
+        "id": 308,
+        "source": 202010071021,
+        "target": 202002011322
+    },{
+        "id": 309,
+        "source": 202010071021,
+        "target": 202006251345
+    },{
+        "id": 310,
+        "source": 202002011322,
+        "target": 202001041200
+    },{
+        "id": 311,
+        "source": 202002011322,
+        "target": 201901221200
+    },{
+        "id": 312,
+        "source": 202002011322,
+        "target": 202006251136
+    },{
+        "id": 313,
+        "source": 202002011322,
+        "target": 202002111200
+    },{
+        "id": 314,
+        "source": 202002011322,
+        "target": 202005181358
+    },{
+        "id": 315,
+        "source": 202002011322,
+        "target": 202002111156
+    },{
+        "id": 316,
+        "source": 202009171006,
+        "target": 201911080000
+    },{
+        "id": 317,
+        "source": 202010201701,
+        "target": 202005241243
+    },{
+        "id": 318,
+        "source": 202005241306,
+        "target": 201805240000
+    },{
+        "id": 319,
+        "source": 202005241306,
+        "target": 202002111200
+    },{
+        "id": 320,
+        "source": 202005241306,
+        "target": 202005181158
+    },{
+        "id": 321,
+        "source": 202005241243,
+        "target": 202005181031
+    },{
+        "id": 322,
+        "source": 202005241243,
+        "target": 201901031200
+    },{
+        "id": 323,
+        "source": 202005241243,
+        "target": 201811271100
+    },{
+        "id": 324,
+        "source": 202005241243,
+        "target": 202009181643
+    },{
+        "id": 325,
+        "source": 202005241243,
+        "target": 201910311200
+    },{
+        "id": 326,
+        "source": 202005241243,
+        "target": 201901191200
+    },{
+        "id": 327,
+        "source": 201803261405,
+        "target": 202005071240
+    },{
+        "id": 328,
+        "source": 202002011301,
+        "target": 202002011240
+    },{
+        "id": 329,
+        "source": 202008241220,
+        "target": 202008241305
+    },{
+        "id": 330,
+        "source": 202008241220,
+        "target": 202008241240
+    },{
+        "id": 331,
+        "source": 202008241220,
+        "target": 202006251524
+    },{
+        "id": 332,
+        "source": 202008241220,
+        "target": 202006170919
+    },{
+        "id": 333,
+        "source": 202008241220,
+        "target": 202005201336
+    },{
+        "id": 334,
+        "source": 202008241220,
+        "target": 202006251345
+    },{
+        "id": 335,
+        "source": 202008241220,
+        "target": 201908081200
+    },{
+        "id": 336,
+        "source": 202008241220,
+        "target": 202005191351
+    },{
+        "id": 337,
+        "source": 202008241220,
+        "target": 202006251203
+    },{
+        "id": 338,
+        "source": 202008241220,
+        "target": 202006251054
+    },{
+        "id": 339,
+        "source": 202008241220,
+        "target": 202005201336
+    },{
+        "id": 340,
+        "source": 202008241220,
+        "target": 202008261405
+    },{
+        "id": 341,
+        "source": 202008261405,
+        "target": 202002131040
+    },{
+        "id": 342,
+        "source": 202004031752,
+        "target": 202004031755
+    },{
+        "id": 343,
+        "source": 202006141751,
+        "target": 202006171048
+    },{
+        "id": 344,
+        "source": 202006141751,
+        "target": 202006141952
+    },{
+        "id": 345,
+        "source": 202006141751,
+        "target": 202006142012
+    },{
+        "id": 346,
+        "source": 202006141751,
+        "target": 202006142012
+    },{
+        "id": 347,
+        "source": 202006141751,
+        "target": 202006151503
+    },{
+        "id": 348,
+        "source": 202006141751,
+        "target": 202006142012
+    },{
+        "id": 349,
+        "source": 202006141751,
+        "target": 202005191338
+    },{
+        "id": 350,
+        "source": 202006141751,
+        "target": 202006012005
+    },{
+        "id": 351,
+        "source": 202006141952,
+        "target": 202006151419
+    },{
+        "id": 352,
+        "source": 202006142012,
+        "target": 202006151419
+    },{
+        "id": 353,
+        "source": 201901051136,
+        "target": 202005191327
+    },{
+        "id": 354,
+        "source": 202005191233,
+        "target": 202006251036
+    },{
+        "id": 355,
+        "source": 202005191233,
+        "target": 202005191327
+    },{
+        "id": 356,
+        "source": 202005191233,
+        "target": 202002111156
+    },{
+        "id": 357,
+        "source": 202005191233,
+        "target": 202002180000
+    },{
+        "id": 358,
+        "source": 202011121307,
+        "target": 202005181316
+    },{
+        "id": 359,
+        "source": 202009291832,
+        "target": 202002011154
+    },{
+        "id": 360,
+        "source": 202009291832,
+        "target": 202007081152
+    },{
+        "id": 361,
+        "source": 202006170935,
+        "target": 202002061412
+    },{
+        "id": 362,
+        "source": 202006170935,
+        "target": 201906291201
+    },{
+        "id": 363,
+        "source": 202006170935,
+        "target": 202006170823
+    },{
+        "id": 364,
+        "source": 202006170935,
+        "target": 201911290801
+    },{
+        "id": 365,
+        "source": 202006170935,
+        "target": 202010231624
+    },{
+        "id": 366,
+        "source": 202006170935,
+        "target": 202005131127
+    },{
+        "id": 367,
+        "source": 202002021402,
+        "target": 202002021351
+    },{
+        "id": 368,
+        "source": 202002021402,
+        "target": 202002021214
+    },{
+        "id": 369,
+        "source": 202006251012,
+        "target": 201906281200
+    },{
+        "id": 370,
+        "source": 202006251012,
+        "target": 201906291202
+    },{
+        "id": 371,
+        "source": 202006251012,
+        "target": 202002021402
+    },{
+        "id": 372,
+        "source": 202005181320,
+        "target": 202005181316
+    },{
+        "id": 373,
+        "source": 202005181320,
+        "target": 202005181321
+    },{
+        "id": 374,
+        "source": 202005181320,
+        "target": 202006251012
+    },{
+        "id": 375,
+        "source": 202006251556,
+        "target": 202006251337
+    },{
+        "id": 376,
+        "source": 202006251556,
+        "target": 202007041546
+    },{
+        "id": 377,
+        "source": 202006251524,
+        "target": 202002011154
+    },{
+        "id": 378,
+        "source": 202006251524,
+        "target": 202002041033
+    },{
+        "id": 379,
+        "source": 202006251524,
+        "target": 202005131319
+    },{
+        "id": 380,
+        "source": 201904291202,
+        "target": 202002011154
+    },{
+        "id": 381,
+        "source": 202006171048,
+        "target": 202006151535
+    },{
+        "id": 382,
+        "source": 202006171048,
+        "target": 202006141952
+    },{
+        "id": 383,
+        "source": 202006171048,
+        "target": 202006142012
+    },{
+        "id": 384,
+        "source": 202006171048,
+        "target": 202006141751
+    },{
+        "id": 385,
+        "source": 202006171048,
+        "target": 202006161217
+    },{
+        "id": 386,
+        "source": 202008241240,
+        "target": 202002201405
+    },{
+        "id": 387,
+        "source": 202008241240,
+        "target": 202006171048
+    },{
+        "id": 388,
+        "source": 202008241240,
+        "target": 202006201238
+    },{
+        "id": 389,
+        "source": 202008241240,
+        "target": 202010091443
+    },{
+        "id": 390,
+        "source": 202010091443,
+        "target": 202008241220
+    },{
+        "id": 391,
+        "source": 202010091443,
+        "target": 202010280947
+    },{
+        "id": 392,
+        "source": 202010091443,
+        "target": 202010280951
+    },{
+        "id": 393,
+        "source": 202003121641,
+        "target": 202002011327
+    },{
+        "id": 394,
+        "source": 202003121641,
+        "target": 202005131118
+    },{
+        "id": 395,
+        "source": 202009181643,
+        "target": 202005071240
+    },{
+        "id": 396,
+        "source": 202009181643,
+        "target": 201811271100
+    },{
+        "id": 397,
+        "source": 202009181643,
+        "target": 202005131558
+    },{
+        "id": 398,
+        "source": 202009181643,
+        "target": 202003310000
+    },{
+        "id": 399,
+        "source": 202009181643,
+        "target": 202002111156
+    },{
+        "id": 400,
+        "source": 202009181643,
+        "target": 202002011322
+    },{
+        "id": 401,
+        "source": 202009181643,
+        "target": 202008261622
+    },{
+        "id": 402,
+        "source": 202005201711,
+        "target": 202002021351
+    },{
+        "id": 403,
+        "source": 202005201711,
+        "target": 202002011327
+    },{
+        "id": 404,
+        "source": 202002021215,
+        "target": 202002021214
+    },{
+        "id": 405,
+        "source": 202005201451,
+        "target": 202005131558
+    },{
+        "id": 406,
+        "source": 202004111453,
+        "target": 202008241220
+    },{
+        "id": 407,
+        "source": 202004111453,
+        "target": 201901071200
+    },{
+        "id": 408,
+        "source": 202004111453,
+        "target": 201901051136
+    },{
+        "id": 409,
+        "source": 202004111453,
+        "target": 202005191327
+    },{
+        "id": 410,
+        "source": 202004111453,
+        "target": 202008241305
+    },{
+        "id": 411,
+        "source": 202004111453,
+        "target": 202005131201
+    },{
+        "id": 412,
+        "source": 202005131135,
+        "target": 202005201353
+    },{
+        "id": 413,
+        "source": 202005131135,
+        "target": 201911080000
+    },{
+        "id": 414,
+        "source": 202005131135,
+        "target": 202005131118
+    },{
+        "id": 415,
+        "source": 202006251017,
+        "target": 202006161218
+    },{
+        "id": 416,
+        "source": 202010281017,
+        "target": 202010280947
+    },{
+        "id": 417,
+        "source": 202010281017,
+        "target": 201902111200
+    },{
+        "id": 418,
+        "source": 202010281017,
+        "target": 202005201252
+    },{
+        "id": 419,
+        "source": 202006201946,
+        "target": 201907311200
+    },{
+        "id": 420,
+        "source": 201803161200,
+        "target": 202001011145
+    },{
+        "id": 421,
+        "source": 202009291942,
+        "target": 201903221451
+    },{
+        "id": 422,
+        "source": 202009291942,
+        "target": 202002021224
+    },{
+        "id": 423,
+        "source": 202009291942,
+        "target": 201803161200
+    },{
+        "id": 424,
+        "source": 202009291942,
+        "target": 202001011145
+    },{
+        "id": 425,
+        "source": 202009291942,
+        "target": 202006251017
+    },{
+        "id": 426,
+        "source": 202002021224,
+        "target": 202005181143
+    },{
+        "id": 427,
+        "source": 202002021313,
+        "target": 201911290801
+    },{
+        "id": 428,
+        "source": 202002021313,
+        "target": 201805240000
+    },{
+        "id": 429,
+        "source": 202002021313,
+        "target": 202006241612
+    },{
+        "id": 430,
+        "source": 202004092014,
+        "target": 202008071441
+    },{
+        "id": 431,
+        "source": 202002251108,
+        "target": 202006241554
+    },{
+        "id": 432,
+        "source": 201902061200,
+        "target": 202004191633
+    },{
+        "id": 433,
+        "source": 202005191604,
+        "target": 201906291203
+    },{
+        "id": 434,
+        "source": 202005191604,
+        "target": 201902061200
+    },{
+        "id": 435,
+        "source": 202004081047,
+        "target": 202005191338
+    },{
+        "id": 436,
+        "source": 202004081047,
+        "target": 202002030000
+    },{
+        "id": 437,
+        "source": 202004081047,
+        "target": 202006241728
+    },{
+        "id": 438,
+        "source": 202004081047,
+        "target": 202004081042
+    },{
+        "id": 439,
+        "source": 202004081047,
+        "target": 202004081049
+    },{
+        "id": 440,
+        "source": 202006170932,
+        "target": 202006170903
+    },{
+        "id": 441,
+        "source": 202002041043,
+        "target": 202002041033
+    },{
+        "id": 442,
+        "source": 202002041043,
+        "target": 202005181158
+    },{
+        "id": 443,
+        "source": 202002041043,
+        "target": 202002111200
+    },{
+        "id": 444,
+        "source": 202002041043,
+        "target": 202002040845
+    },{
+        "id": 445,
+        "source": 202002041043,
+        "target": 202005181205
+    },{
+        "id": 446,
+        "source": 201904081200,
+        "target": 202005181205
+    },{
+        "id": 447,
+        "source": 202003121731,
+        "target": 202004111515
+    },{
+        "id": 448,
+        "source": 201905170923,
+        "target": 202006171048
+    },{
+        "id": 449,
+        "source": 202004061546,
+        "target": 202006251345
+    },{
+        "id": 450,
+        "source": 202004021340,
+        "target": 202005201252
+    },{
+        "id": 451,
+        "source": 202005201252,
+        "target": 202005131201
+    },{
+        "id": 452,
+        "source": 202005201252,
+        "target": 201909241543
+    },{
+        "id": 453,
+        "source": 201902111200,
+        "target": 202005181158
+    },{
+        "id": 454,
+        "source": 202006081915,
+        "target": 202005241306
+    },{
+        "id": 455,
+        "source": 202006081915,
+        "target": 201805240000
+    },{
+        "id": 456,
+        "source": 202006081915,
+        "target": 202005181316
+    },{
+        "id": 457,
+        "source": 202006081915,
+        "target": 202004081042
+    },{
+        "id": 458,
+        "source": 202006081915,
+        "target": 202002180000
+    },{
+        "id": 459,
+        "source": 202005111559,
+        "target": 202006170903
+    },{
+        "id": 460,
+        "source": 202005111559,
+        "target": 201904301202
+    },{
+        "id": 461,
+        "source": 202010231614,
+        "target": 202007081152
+    },{
+        "id": 462,
+        "source": 202010231614,
+        "target": 202005241306
+    },{
+        "id": 463,
+        "source": 202010231614,
+        "target": 202002011322
+    },{
+        "id": 464,
+        "source": 202010231614,
+        "target": 202006012005
+    },{
+        "id": 465,
+        "source": 202005191405,
+        "target": 202008241240
+    },{
+        "id": 466,
+        "source": 202002011052,
+        "target": 202008071441
+    },{
+        "id": 467,
+        "source": 202006241854,
+        "target": 202006251446
+    },{
+        "id": 468,
+        "source": 202006241854,
+        "target": 201909241543
+    },{
+        "id": 469,
+        "source": 202010221420,
+        "target": 202005241306
+    },{
+        "id": 470,
+        "source": 202010221420,
+        "target": 202006251022
+    },{
+        "id": 471,
+        "source": 202010221420,
+        "target": 202002011322
+    },{
+        "id": 472,
+        "source": 202010221420,
+        "target": 201901051136
+    },{
+        "id": 473,
+        "source": 202010221420,
+        "target": 202006251136
+    },{
+        "id": 474,
+        "source": 202010221420,
+        "target": 202007081152
+    },{
+        "id": 475,
+        "source": 202010221420,
+        "target": 202006251022
+    },{
+        "id": 476,
+        "source": 202010221420,
+        "target": 202010221427
+    },{
+        "id": 477,
+        "source": 202010221420,
+        "target": 202005241306
+    },{
+        "id": 478,
+        "source": 202010221420,
+        "target": 202005191338
+    },{
+        "id": 479,
+        "source": 202002271017,
+        "target": 202005201759
+    },{
+        "id": 480,
+        "source": 202002271017,
+        "target": 202008261405
+    },{
+        "id": 481,
+        "source": 201909241200,
+        "target": 202005131118
+    },{
+        "id": 482,
+        "source": 201909241200,
+        "target": 202005071240
+    },{
+        "id": 483,
+        "source": 202006251509,
+        "target": 202006151503
+    },{
+        "id": 484,
+        "source": 202010281237,
+        "target": 202002011322
+    },{
+        "id": 485,
+        "source": 202010281237,
+        "target": 202005241306
+    },{
+        "id": 486,
+        "source": 202003061632,
+        "target": 202002131520
+    },{
+        "id": 487,
+        "source": 202003061632,
+        "target": 202005131558
+    },{
+        "id": 488,
+        "source": 202003061632,
+        "target": 202006170919
+    },{
+        "id": 489,
+        "source": 202002011343,
+        "target": 202002111200
+    },{
+        "id": 490,
+        "source": 202002011343,
+        "target": 202006151419
+    },{
+        "id": 491,
+        "source": 202002011343,
+        "target": 202002011409
+    },{
+        "id": 492,
+        "source": 202002011343,
+        "target": 202006251203
+    },{
+        "id": 493,
+        "source": 202004111418,
+        "target": 202005241306
+    },{
+        "id": 494,
+        "source": 202005181322,
+        "target": 202005181158
+    },{
+        "id": 495,
+        "source": 202005181322,
+        "target": 202005181205
+    },{
+        "id": 496,
+        "source": 202005181359,
+        "target": 202005101520
+    },{
+        "id": 497,
+        "source": 202005181358,
+        "target": 202005181359
+    },{
+        "id": 498,
+        "source": 202005181358,
+        "target": 202005181322
+    },{
+        "id": 499,
+        "source": 202001311700,
+        "target": 202005201759
+    },{
+        "id": 500,
+        "source": 202004251356,
+        "target": 202002011240
+    },{
+        "id": 501,
+        "source": 202004111441,
+        "target": 202002011240
+    },{
+        "id": 502,
+        "source": 202004111441,
+        "target": 202006251337
+    },{
+        "id": 503,
+        "source": 202004111441,
+        "target": 202005071240
+    },{
+        "id": 504,
+        "source": 202004111441,
+        "target": 201806140000
+    },{
+        "id": 505,
+        "source": 202004111441,
+        "target": 202004111457
+    },{
+        "id": 506,
+        "source": 202004111441,
+        "target": 202005101520
+    },{
+        "id": 507,
+        "source": 202002011304,
+        "target": 202002011240
+    },{
+        "id": 508,
+        "source": 202002042228,
+        "target": 202005201353
+    },{
+        "id": 509,
+        "source": 202002042228,
+        "target": 202005131135
+    },{
+        "id": 510,
+        "source": 202002042228,
+        "target": 202008031401
+    },{
+        "id": 511,
+        "source": 202005201353,
+        "target": 202002011240
     }]}

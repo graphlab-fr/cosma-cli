@@ -27,7 +27,7 @@ let id = 1
 
 for (let file of files) {
     let size = edges.getRank(files.map(file => file.links).flat(), file.metas.id, file.links.length);
-    entities.nodes.push(jsonify.node(file.metas.id, file.metas.title, size * 10, rand.randFloat(40, 50), rand.randFloat(40, 50)));
+    entities.nodes.push(jsonify.node(file.metas.id, file.metas.title, file.metas.type, size * 10, rand.randFloat(40, 50), rand.randFloat(40, 50)));
 
     if (file.links.length !== 0) {
         for (let link of file.links) {
