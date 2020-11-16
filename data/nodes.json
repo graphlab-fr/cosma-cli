@@ -1,1926 +1,435 @@
 [{
-        "id": 202006151503,
-        "label": "Actualisation",
-        "type": "lexique",
+        "id": 202011150001,
+        "label": "Algorithme",
+        "type": "concept",
         "size": 13.333333333333332,
-        "x": 44.346271376047596,
-        "y": 45.52097190218956
+        "x": 44.0785473626873,
+        "y": 48.56478382299432
     },{
-        "id": 202002180000,
-        "label": "All papers are data papers: from open principles to digital methods",
-        "type": "publication",
-        "size": 20,
-        "x": 49.99736442222113,
-        "y": 43.903628668457245
+        "id": 202011150002,
+        "label": "Appellation",
+        "type": "note",
+        "size": 23.33333333333333,
+        "x": 42.34187309093467,
+        "y": 48.357256898961495
     },{
-        "id": 202005131034,
-        "label": "Annotation",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 49.45405057642737,
-        "y": 45.630922325915016
-    },{
-        "id": 202006201939,
-        "label": "Appareil critique",
-        "type": "lexique",
-        "size": 33.33333333333333,
-        "x": 44.99911441399973,
-        "y": 40.384478448161346
-    },{
-        "id": 201903211200,
-        "label": "Architecture de l’information et éditorialisation",
-        "type": "lecture",
+        "id": 202011150003,
+        "label": "Autonomous literacy",
+        "type": "concept",
         "size": 16.666666666666664,
-        "x": 40.651835680516804,
-        "y": 49.90611898190482
+        "x": 43.28466025223882,
+        "y": 43.618742065879026
     },{
-        "id": 202002111156,
-        "label": "Architecture de l’information",
-        "type": "lecture",
-        "size": 30,
-        "x": 41.71602103322642,
-        "y": 47.783743223212795
+        "id": 202011150004,
+        "label": "Besoin d'information",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 48.99144164570056,
+        "y": 47.436302922784904
     },{
-        "id": 201904301202,
-        "label": "Architexte Genette",
+        "id": 202011150005,
+        "label": "Bibliothéconomie",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 49.40857727395046,
+        "y": 41.083692709156786
+    },{
+        "id": 202011150006,
+        "label": "Big data",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 48.37396769431138,
+        "y": 49.52271609643051
+    },{
+        "id": 202011150007,
+        "label": "Building a Conceptual Framework for Data Literacy",
         "type": "lecture",
         "size": 13.333333333333332,
-        "x": 49.09792186819274,
-        "y": 45.2595945124448
+        "x": 45.79809152510263,
+        "y": 47.817457539604476
     },{
-        "id": 201904301201,
-        "label": "Architexte et architecture Mitchell",
-        "type": "lecture",
+        "id": 202011150008,
+        "label": "Cadre de référence de la compétence numérique",
+        "type": "référentiel",
+        "size": 16.666666666666664,
+        "x": 43.17431932804909,
+        "y": 48.217152707382475
+    },{
+        "id": 202011151644,
+        "label": "Compétence",
+        "type": "concept",
         "size": 13.333333333333332,
-        "x": 47.99566225609021,
-        "y": 47.67395443459876
+        "x": 41.4190645855601,
+        "y": 49.64250564955925
     },{
-        "id": 202002111200,
-        "label": "Architexte",
-        "type": "lexique",
+        "id": 202011150009,
+        "label": "Connaissance",
+        "type": "concept",
+        "size": 26.666666666666664,
+        "x": 45.204958132044666,
+        "y": 49.49406803080793
+    },{
+        "id": 202011150010,
+        "label": "Connaissances tacites",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 49.19105603115665,
+        "y": 43.11693828345516
+    },{
+        "id": 202011150011,
+        "label": "Culture des données",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 43.11031927875207,
+        "y": 45.233574536071224
+    },{
+        "id": 202011150012,
+        "label": "Culture technique",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 41.44819013526488,
+        "y": 46.20607404984944
+    },{
+        "id": 202011150013,
+        "label": "Culture",
+        "type": "concept",
+        "size": 33.333333333333336,
+        "x": 45.113743809557164,
+        "y": 41.44142773438563
+    },{
+        "id": 202011150014,
+        "label": "Data analyst",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 49.22613655333178,
+        "y": 46.553342859651416
+    },{
+        "id": 202011150015,
+        "label": "Data jobs",
+        "type": "note",
+        "size": 16.666666666666664,
+        "x": 41.166268988325996,
+        "y": 43.011982399106095
+    },{
+        "id": 202011150016,
+        "label": "Data librarian",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 49.04652800104333,
+        "y": 40.44576005029743
+    },{
+        "id": 202011150017,
+        "label": "Data literacy",
+        "type": "concept",
         "size": 63.33333333333333,
-        "x": 42.817211453125076,
-        "y": 46.3274540638892
+        "x": 40.695826994167106,
+        "y": 40.85450775618325
     },{
-        "id": 201810061200,
-        "label": "Architextualité Treharne",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 40.815538154087946,
-        "y": 46.510185095
-    },{
-        "id": 202002041033,
-        "label": "Architexture Caws",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 41.5001661525224,
-        "y": 42.98634028406673
-    },{
-        "id": 202004111509,
-        "label": "Atlas",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 46.26238440289214,
-        "y": 44.38373876785343
-    },{
-        "id": 201906121200,
-        "label": "Auto-hermeneutics",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 41.85916542978229,
-        "y": 40.273359238020674
-    },{
-        "id": 202005181158,
-        "label": "Balisage",
-        "type": "lexique",
-        "size": 53.33333333333334,
-        "x": 44.929292608718285,
-        "y": 45.69411982336814
-    },{
-        "id": 202006241612,
-        "label": "Bibliographie annotée",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 47.82714981389424,
-        "y": 41.55013143103402
-    },{
-        "id": 202006241602,
-        "label": "Bibliographie",
-        "type": "lexique",
+        "id": 202011150018,
+        "label": "Data literate",
+        "type": "concept",
         "size": 26.666666666666664,
-        "x": 46.64813312701326,
-        "y": 40.748955750384084
+        "x": 46.346008359778395,
+        "y": 46.161898570934234
     },{
-        "id": 201809291200,
-        "label": "Bibliologie Estivals",
-        "type": "lecture",
+        "id": 202011150019,
+        "label": "Data littératie",
+        "type": "concept",
         "size": 16.666666666666664,
-        "x": 48.17189265126926,
-        "y": 47.403984663936434
+        "x": 41.972305838535746,
+        "y": 45.568889534683585
     },{
-        "id": 201811131200,
-        "label": "Bibliologie Meyriat",
+        "id": 202011150039,
+        "label": "Datalphabétisation en entreprise",
         "type": "lecture",
-        "size": 10,
-        "x": 48.41155020484231,
-        "y": 47.53749807442814
+        "size": 13.333333333333332,
+        "x": 42.23756137139796,
+        "y": 43.37889537986295
     },{
-        "id": 202006241707,
-        "label": "Bibliologie Otlet",
-        "type": "lexique",
-        "size": 10,
-        "x": 47.75188424542452,
-        "y": 45.64799974704731
+        "id": 202011150020,
+        "label": "Datalphabétisation",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 40.3176026376377,
+        "y": 48.302574804210046
     },{
-        "id": 202006241705,
-        "label": "Bibliologie",
-        "type": "lexique",
-        "size": 20,
-        "x": 47.289408354553345,
-        "y": 42.10265770493677
-    },{
-        "id": 202006241605,
-        "label": "Bibliométrie",
-        "type": "lexique",
-        "size": 10,
-        "x": 48.53217641422993,
-        "y": 41.65450784328746
-    },{
-        "id": 202011121208,
-        "label": "Biblion Robert",
-        "type": "lecture",
-        "size": 10,
-        "x": 42.03433128137096,
-        "y": 44.08298666953726
-    },{
-        "id": 202005191327,
-        "label": "Biblion",
-        "type": "lexique",
-        "size": 36.666666666666664,
-        "x": 44.23791550536005,
-        "y": 41.62465831927922
-    },{
-        "id": 201803261410,
-        "label": "Bibliothèque Melot",
-        "type": "lecture",
-        "size": 10,
-        "x": 44.52548052273106,
-        "y": 46.684662035801864
-    },{
-        "id": 202006201918,
-        "label": "Bibliothèque de Warburg",
-        "type": "note",
+        "id": 202011150021,
+        "label": "Digcomp",
+        "type": "référentiel",
         "size": 16.666666666666664,
-        "x": 42.94500538902233,
-        "y": 49.3686354885495
+        "x": 48.423467926019555,
+        "y": 44.13399388539349
     },{
-        "id": 202010231624,
-        "label": "Bibliothèque",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 40.93941538010697,
-        "y": 42.60074103859636
-    },{
-        "id": 201901191200,
-        "label": "Biographie Otlet Levie",
-        "type": "lecture",
+        "id": 202011150022,
+        "label": "Digital breadcrumb",
+        "type": "concept",
         "size": 13.333333333333332,
-        "x": 44.07794022462718,
-        "y": 41.333701651703784
+        "x": 48.1700020252574,
+        "y": 48.21713139612148
     },{
-        "id": 202002021341,
-        "label": "Briet sur Pagès",
-        "type": "note",
-        "size": 20,
-        "x": 49.24711782005831,
-        "y": 46.52127552975506
+        "id": 202011150023,
+        "label": "Document",
+        "type": "concept",
+        "size": 26.666666666666664,
+        "x": 44.042999022587246,
+        "y": 49.5195702016797
     },{
-        "id": 202002241016,
-        "label": "Cadre",
-        "type": "lexique",
-        "size": 20,
-        "x": 47.82240808957736,
-        "y": 43.62469696665108
-    },{
-        "id": 202004081042,
-        "label": "Carnet",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 40.680851367732345,
-        "y": 43.27426805377057
-    },{
-        "id": 202002170000,
-        "label": "Cartographie de Paul Otlet sur le Web",
-        "type": "publication",
-        "size": 20,
-        "x": 41.027404484069265,
-        "y": 45.213197231825994
-    },{
-        "id": 202008111125,
-        "label": "Cinquante degrés de liberté",
-        "type": "note",
-        "size": 16.666666666666664,
-        "x": 43.012382770643505,
-        "y": 42.19249002766573
-    },{
-        "id": 202002121527,
-        "label": "Classification typographique",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 46.51473165177717,
-        "y": 41.5794315353978
-    },{
-        "id": 202005131127,
-        "label": "Classification",
-        "type": "lexique",
-        "size": 53.33333333333334,
-        "x": 43.99687279469879,
-        "y": 46.90109371477259
-    },{
-        "id": 202005201000,
-        "label": "Code et typographie",
-        "type": "note",
-        "size": 23.33333333333333,
-        "x": 49.482678343686295,
-        "y": 46.93753236881558
-    },{
-        "id": 202002021317,
-        "label": "Cohérence théorie méthodes",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 45.28776140893794,
-        "y": 42.57727320885138
-    },{
-        "id": 202007081152,
-        "label": "Comment écrire sa thèse numérique",
-        "type": "note",
-        "size": 46.66666666666666,
-        "x": 40.78909137556748,
-        "y": 41.35452206897508
-    },{
-        "id": 202010231606,
-        "label": "Comment écrire sa thèse",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 48.00975678290767,
-        "y": 46.437981479971334
-    },{
-        "id": 202008172256,
-        "label": "Communication",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 49.4310171561006,
-        "y": 48.08347535929203
-    },{
-        "id": 201908081200,
-        "label": "Comptabilité Otlet",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 40.24324920834202,
-        "y": 40.63174825615822
-    },{
-        "id": 202006012005,
-        "label": "Conditions d’écriture",
-        "type": "note",
-        "size": 33.33333333333333,
-        "x": 42.1796788361579,
-        "y": 48.259890026321834
-    },{
-        "id": 202010281041,
-        "label": "Conditions de lecture",
-        "type": "note",
-        "size": 26.66666666666667,
-        "x": 41.70345522061413,
-        "y": 47.01184427102694
-    },{
-        "id": 201906061122,
-        "label": "Confiance",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 46.21675494704484,
-        "y": 48.911823967980816
-    },{
-        "id": 202002040852,
-        "label": "Constructio et sententia",
-        "type": "lexique",
-        "size": 23.33333333333333,
-        "x": 42.327586713154844,
-        "y": 44.349850047908006
-    },{
-        "id": 202005131558,
-        "label": "Cosmographe",
-        "type": "lexique",
-        "size": 40,
-        "x": 45.97366785688921,
-        "y": 46.78599995588084
-    },{
-        "id": 202005201759,
-        "label": "Cosmographie réticulaire",
-        "type": "note",
-        "size": 160,
-        "x": 48.0608260401421,
-        "y": 48.973391681718375
-    },{
-        "id": 202002131520,
-        "label": "Cosmographie",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 46.51734775506001,
-        "y": 41.67096425617099
-    },{
-        "id": 202004111457,
-        "label": "Cosmoscope",
-        "type": "lexique",
-        "size": 23.333333333333336,
-        "x": 48.918942698759,
-        "y": 43.52491805638198
-    },{
-        "id": 202002011409,
-        "label": "Critiques de PowerPoint",
-        "type": "note",
-        "size": 16.666666666666664,
-        "x": 49.51292193451909,
-        "y": 47.4035979257935
-    },{
-        "id": 202004061539,
-        "label": "Curseur",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 40.946091814979795,
-        "y": 49.01286037192299
-    },{
-        "id": 202005191346,
-        "label": "Design de connaissance",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 49.74138740398696,
-        "y": 43.57399495618679
-    },{
-        "id": 202005191351,
-        "label": "Design de l’appropriation",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 47.15606580106507,
-        "y": 46.346981889593344
-    },{
-        "id": 202005191350,
-        "label": "Design de la visibilité",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 40.7167864175409,
-        "y": 44.22396166250813
-    },{
-        "id": 202006251036,
-        "label": "Design et information",
-        "type": "lexique",
-        "size": 23.33333333333333,
-        "x": 42.04383169377054,
-        "y": 48.09303234967957
-    },{
-        "id": 202004031755,
-        "label": "Design web minimaliste et brutaliste",
-        "type": "note",
-        "size": 10,
-        "x": 40.323848664814506,
-        "y": 45.401068092909604
-    },{
-        "id": 202005081257,
-        "label": "Design éditorial",
-        "type": "lexique",
-        "size": 20,
-        "x": 44.36586609943886,
-        "y": 45.150443792114416
-    },{
-        "id": 202008241304,
-        "label": "Design",
-        "type": "lexique",
-        "size": 26.66666666666667,
-        "x": 49.61967838168002,
-        "y": 47.81528561157865
-    },{
-        "id": 201910311200,
-        "label": "Dewey sur Otlet",
-        "type": "lecture",
-        "size": 10,
-        "x": 44.56404005423316,
-        "y": 41.79923960377924
-    },{
-        "id": 202005011455,
-        "label": "Découpage Traité",
-        "type": "note",
-        "size": 16.666666666666664,
-        "x": 48.79373280228134,
-        "y": 46.89495980541872
-    },{
-        "id": 202006251054,
-        "label": "Définitions document",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 48.87044036079119,
-        "y": 42.38447717677208
-    },{
-        "id": 202007051857,
-        "label": "Dépendance rhétorique",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 46.34599266768067,
-        "y": 40.24207067351773
-    },{
-        "id": 202008241305,
-        "label": "Désigner",
-        "type": "lexique",
-        "size": 23.33333333333333,
-        "x": 41.620828570910845,
-        "y": 45.65687864838429
-    },{
-        "id": 202004191633,
-        "label": "Déterminisme technique",
-        "type": "lexique",
-        "size": 10,
-        "x": 43.79512172441999,
-        "y": 40.48408864800223
-    },{
-        "id": 202005131201,
-        "label": "Dictionnaire",
-        "type": "lexique",
-        "size": 23.333333333333336,
-        "x": 47.9577263023526,
-        "y": 40.39301848905842
-    },{
-        "id": 202001041200,
-        "label": "Die Brücke Hapke",
-        "type": "lecture",
-        "size": 20,
-        "x": 47.36198492013164,
-        "y": 47.362583842390045
-    },{
-        "id": 201901221200,
-        "label": "Die Brücke Satoh",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 40.561944313488915,
-        "y": 49.40038354484702
-    },{
-        "id": 202006251136,
-        "label": "Die Brücke Vossoughian",
-        "type": "lecture",
-        "size": 20,
-        "x": 49.56048016660986,
-        "y": 44.02473853466847
-    },{
-        "id": 202010281641,
-        "label": "Diplomatique",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 43.51665352329084,
-        "y": 40.57817483209914
-    },{
-        "id": 201812131200,
-        "label": "Dispositif Larroche",
-        "type": "lecture",
-        "size": 10,
-        "x": 47.26934424986954,
-        "y": 44.00622585020915
-    },{
-        "id": 202006251203,
-        "label": "Dispositif",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 44.98876528409464,
-        "y": 45.74531023472611
-    },{
-        "id": 202010281654,
-        "label": "Document Theory",
-        "type": "lecture",
-        "size": 20,
-        "x": 46.096094179320275,
-        "y": 41.477209528859916
-    },{
-        "id": 202007041635,
-        "label": "Document preuve Chabin",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 48.922703702517,
-        "y": 42.889471688591755
-    },{
-        "id": 202006251144,
-        "label": "Documentalité Ferraris",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 40.64117400896153,
-        "y": 43.845858852830226
-    },{
-        "id": 201905151200,
-        "label": "Documentalité Frohmann",
-        "type": "lecture",
-        "size": 10,
-        "x": 42.42674266923308,
-        "y": 41.25834761357084
-    },{
-        "id": 202006161211,
-        "label": "Documentarité Crozat",
-        "type": "lexique",
-        "size": 10,
-        "x": 48.58200522886099,
-        "y": 47.395304771272336
-    },{
-        "id": 201907311200,
-        "label": "Documentarité Day",
-        "type": "lecture",
-        "size": 20,
-        "x": 41.69414675671142,
-        "y": 47.61974255146765
-    },{
-        "id": 201901071200,
-        "label": "Documentarité Gaudreault et Marion",
-        "type": "lecture",
-        "size": 10,
-        "x": 45.954757259443184,
-        "y": 49.515367341052944
-    },{
-        "id": 201910090000,
-        "label": "Documentarité et données, instrumentation d’un concept",
-        "type": "publication",
-        "size": 10,
-        "x": 47.75693616577194,
-        "y": 49.960565324757276
-    },{
-        "id": 202005181143,
+        "id": 202011150024,
         "label": "Documentarité",
-        "type": "lexique",
-        "size": 60,
-        "x": 49.61925483394164,
-        "y": 40.42776466489744
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 45.73562029239798,
+        "y": 41.2572541892627
     },{
-        "id": 202004191601,
-        "label": "Documentation et scientificité",
-        "type": "note",
-        "size": 20,
-        "x": 44.456034370827446,
-        "y": 47.71310775345826
-    },{
-        "id": 202002051657,
-        "label": "Documentation et écriture",
-        "type": "note",
-        "size": 20,
-        "x": 46.28998886040392,
-        "y": 42.202711534065415
-    },{
-        "id": 202006251337,
-        "label": "Documentation",
-        "type": "lexique",
-        "size": 26.666666666666664,
-        "x": 44.85524522691292,
-        "y": 44.20094035397704
-    },{
-        "id": 201903291200,
-        "label": "Documenter, l’écriture à soi",
+        "id": 202011150025,
+        "label": "Données ouvertes culture information Lehmans‪",
         "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 48.50385642819289,
-        "y": 45.66019432094269
+        "size": 13.333333333333332,
+        "x": 41.400093516213225,
+        "y": 40.96240533215823
     },{
-        "id": 201909101200,
-        "label": "Documentologie Meyriat",
-        "type": "lecture",
-        "size": 10,
-        "x": 41.2845914518209,
-        "y": 42.44891471559596
+        "id": 202011150026,
+        "label": "Données symboliques élémentaires",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 42.55982813884802,
+        "y": 42.4737732414926
     },{
-        "id": 202005101602,
-        "label": "Documentologie",
-        "type": "lexique",
-        "size": 23.333333333333336,
-        "x": 48.30330704693589,
-        "y": 48.67367053480919
-    },{
-        "id": 202008071441,
+        "id": 202011150027,
         "label": "Données",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 43.02647981736486,
-        "y": 48.73433983376386
+        "type": "concept",
+        "size": 76.66666666666667,
+        "x": 46.751311803406196,
+        "y": 42.313193868441054
     },{
-        "id": 202005181031,
-        "label": "Ducheyne sur Otlet",
-        "type": "lecture",
-        "size": 33.333333333333336,
-        "x": 48.400754062103026,
-        "y": 46.852063722905875
-    },{
-        "id": 202002040857,
-        "label": "Définition du document par intention",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 44.17839297357615,
-        "y": 42.410542928481796
-    },{
-        "id": 202010280947,
-        "label": "D’un réseau l’autre",
-        "type": "lecture",
-        "size": 36.66666666666667,
-        "x": 45.502353737214065,
-        "y": 44.60525127384496
-    },{
-        "id": 202006081954,
-        "label": "Emails en texte brut",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 44.56166095100241,
-        "y": 45.03860891736076
-    },{
-        "id": 202006201238,
-        "label": "Enchevêtrement de la documentation et du design",
-        "type": "undefined",
-        "size": 10,
-        "x": 45.26074701263305,
-        "y": 47.94573402601552
-    },{
-        "id": 201909241543,
-        "label": "Encyclopédie",
-        "type": "lexique",
-        "size": 30,
-        "x": 48.29422426207861,
-        "y": 47.00720509685726
-    },{
-        "id": 202002021255,
-        "label": "Enjeux théoriques en architecture de l’information",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 41.3600138104746,
-        "y": 49.20690950938889
-    },{
-        "id": 202002021214,
-        "label": "Espace Beaude",
-        "type": "lexique",
-        "size": 10,
-        "x": 49.04100081915918,
-        "y": 47.13534799599627
-    },{
-        "id": 201906291201,
-        "label": "Espace Pickles",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 46.21728874249316,
-        "y": 41.694729341564326
-    },{
-        "id": 202002030000,
-        "label": "Écosystème textuel et production des humanités contemporaines",
-        "type": "publication",
-        "size": 20,
-        "x": 41.04256830636152,
-        "y": 47.38804167573751
-    },{
-        "id": 202010281435,
-        "label": "Écriture et calcul",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 42.59702194254561,
-        "y": 43.14530377493443
-    },{
-        "id": 202006251345,
+        "id": 202011150028,
         "label": "Écriture",
-        "type": "lexique",
-        "size": 60,
-        "x": 47.48852572072819,
-        "y": 43.25731841997394
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 48.11206143483371,
+        "y": 41.563772990278245
     },{
-        "id": 202006241626,
-        "label": "Éditorialisation",
-        "type": "lexique",
-        "size": 10,
-        "x": 41.41566250899345,
-        "y": 40.4418819959636
+        "id": 202011150030,
+        "label": "Gouvernance des données",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 46.121122218036284,
+        "y": 43.2770286843739
     },{
-        "id": 201904131200,
-        "label": "Épistémologie et humanités numériques",
+        "id": 202011150031,
+        "label": "Hétérogénéité des compétences",
+        "type": "note",
+        "size": 30,
+        "x": 46.49390984983572,
+        "y": 44.795371960365244
+    },{
+        "id": 202011150038,
+        "label": "IT literacy",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 42.845347445900245,
+        "y": 43.32886481118956
+    },{
+        "id": 202011150032,
+        "label": "Ideological literacy",
+        "type": "Concept",
+        "size": 16.666666666666664,
+        "x": 48.43120788328676,
+        "y": 40.57619875381786
+    },{
+        "id": 202011150033,
+        "label": "Info-data",
+        "type": "Concept",
+        "size": 16.666666666666664,
+        "x": 42.59238196209346,
+        "y": 42.13898954155303
+    },{
+        "id": 202011150035,
+        "label": "Information literacy, statistical literacy, data literacy",
         "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 44.590796655764706,
-        "y": 45.46944969707503
+        "size": 20,
+        "x": 47.80898177748333,
+        "y": 44.44614470457709
     },{
-        "id": 202007041806,
-        "label": "Évidence",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 45.268548128026644,
-        "y": 46.43541178848815
-    },{
-        "id": 201905091200,
-        "label": "Faire compter les machines",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 40.536709054678745,
-        "y": 43.54717964213495
-    },{
-        "id": 201903220926,
-        "label": "Fatras sémiotique",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 46.623102421848,
-        "y": 47.310618499273374
-    },{
-        "id": 202006241554,
-        "label": "Fiche",
-        "type": "lexique",
+        "id": 202011150036,
+        "label": "Information literacy",
+        "type": "concept",
         "size": 26.666666666666664,
-        "x": 46.45977225135065,
-        "y": 48.048252837926775
+        "x": 43.68039716059134,
+        "y": 41.09521413185742
     },{
-        "id": 202003150000,
-        "label": "Fonction documentaire de preuve et données numériques",
-        "type": "publication",
-        "size": 20,
-        "x": 46.76019880149986,
-        "y": 42.274175105824064
-    },{
-        "id": 202005191338,
-        "label": "Format",
-        "type": "lexique",
-        "size": 40,
-        "x": 41.61152570724283,
-        "y": 40.17982732453322
-    },{
-        "id": 202002011154,
-        "label": "Formation de l’esprit scientifique",
-        "type": "lecture",
-        "size": 23.333333333333336,
-        "x": 44.24752027449962,
-        "y": 40.033503067637376
-    },{
-        "id": 202002021401,
-        "label": "Forme et configuration",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 40.27377536238622,
-        "y": 43.536972242041216
-    },{
-        "id": 202008261614,
-        "label": "Forme et information",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 47.35217914797909,
-        "y": 48.445588641510135
-    },{
-        "id": 202008261613,
-        "label": "Forme",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 48.111291730968226,
-        "y": 43.5726264719904
-    },{
-        "id": 201809041200,
-        "label": "Fragment",
-        "type": "lecture",
-        "size": 10,
-        "x": 48.52782643683931,
-        "y": 40.12993396452086
-    },{
-        "id": 202006241615,
-        "label": "Glossaire",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 45.29567881745277,
-        "y": 45.871580925558526
-    },{
-        "id": 202006161218,
-        "label": "Grammatologie",
-        "type": "lecture",
-        "size": 20,
-        "x": 43.16237837619631,
-        "y": 49.03769747307021
-    },{
-        "id": 202005201715,
-        "label": "Herméneutique",
-        "type": "lexique",
-        "size": 20,
-        "x": 46.850994940822886,
-        "y": 49.987772365859875
-    },{
-        "id": 202005201716,
-        "label": "Heuristique",
-        "type": "lexique",
-        "size": 10,
-        "x": 40.075031896829046,
-        "y": 44.02299475261329
-    },{
-        "id": 202006251457,
-        "label": "Humanités numériques",
-        "type": "lexique",
-        "size": 10,
-        "x": 40.629404145480294,
-        "y": 49.01512928380638
-    },{
-        "id": 201904291201,
-        "label": "Humanities Approaches to Interface Theory",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 45.781410200655046,
-        "y": 44.44677950404771
-    },{
-        "id": 201909260000,
-        "label": "Hyperdocumentation: origin and evolution of a concept",
-        "type": "publication",
-        "size": 10,
-        "x": 43.12106092550006,
-        "y": 48.42135418974903
-    },{
-        "id": 202005131553,
-        "label": "Hyperdocumentation",
-        "type": "lexique",
-        "size": 30,
-        "x": 49.10101585345091,
-        "y": 44.6726063310824
-    },{
-        "id": 201811261200,
-        "label": "Hypertexte Schraefel",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 44.887951474009654,
-        "y": 46.17723534169137
-    },{
-        "id": 202009291842,
-        "label": "Hypertexte",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 43.09067091027772,
-        "y": 40.68276018033013
-    },{
-        "id": 202006201942,
-        "label": "Index",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 46.32220983382639,
-        "y": 45.782107285457734
-    },{
-        "id": 202006170823,
-        "label": "Indexation",
-        "type": "lexique",
-        "size": 30,
-        "x": 40.5327894934282,
-        "y": 45.87480194756557
-    },{
-        "id": 202008241313,
-        "label": "Indexicalité",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 47.549986068651236,
-        "y": 48.594141654324844
-    },{
-        "id": 202010281329,
+        "id": 202011150037,
         "label": "Information",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 41.84522533079583,
-        "y": 49.268871687641884
-    },{
-        "id": 202002011430,
-        "label": "Interface graphique obstacle épistémologique",
-        "type": "note",
-        "size": 20,
-        "x": 47.98851496986213,
-        "y": 41.825466227937994
-    },{
-        "id": 202006181554,
-        "label": "Interprétation visuelle réseau",
-        "type": "note",
-        "size": 16.666666666666664,
-        "x": 48.86290550627402,
-        "y": 46.45407606559451
-    },{
-        "id": 202004301231,
-        "label": "Jenny's Law",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 47.965037283667456,
-        "y": 49.72044180163845
-    },{
-        "id": 202006251446,
-        "label": "Journal de Zettelkasten",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 46.57427848264325,
-        "y": 41.31872851754268
-    },{
-        "id": 201904250000,
-        "label": "L'architexte à l'épreuve du réseau",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 43.2217298260175,
-        "y": 46.8355296425384
-    },{
-        "id": 201910111200,
-        "label": "L’écriture de l’histoire",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 43.64771083880236,
-        "y": 43.96869014027716
-    },{
-        "id": 201904081145,
-        "label": "L'image écrite",
-        "type": "lecture",
-        "size": 10,
-        "x": 42.75497376217493,
-        "y": 46.319590224153124
-    },{
-        "id": 202005201454,
-        "label": "L’information à partir d’Otlet",
-        "type": "note",
-        "size": 10,
-        "x": 42.47275572277317,
-        "y": 48.86525569699154
-    },{
-        "id": 201910151200,
-        "label": "La logique de l'écriture",
-        "type": "lecture",
-        "size": 10,
-        "x": 40.35092453133261,
-        "y": 42.355377479775726
-    },{
-        "id": 201911080000,
-        "label": "La logique hyperdocumentaire dans la structuration de l’information et sa visualisation",
-        "type": "publication",
-        "size": 30,
-        "x": 43.90876688367874,
-        "y": 40.81884896691986
-    },{
-        "id": 202005071240,
-        "label": "Le réseau comme modèle épistémologique",
-        "type": "note",
-        "size": 46.66666666666667,
-        "x": 43.139410171286144,
-        "y": 42.46452985214435
-    },{
-        "id": 202010152014,
-        "label": "Le vacillement des formats",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 42.31286684277333,
-        "y": 45.4583889973227
-    },{
-        "id": 202008041426,
-        "label": "Les mots et les choses",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 43.90716532500195,
-        "y": 46.357242227664116
-    },{
-        "id": 201904151200,
-        "label": "Les trois écritures",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 41.53365002002174,
-        "y": 46.044294979794365
-    },{
-        "id": 201911290801,
-        "label": "Lieu de savoir",
-        "type": "lecture",
-        "size": 10,
-        "x": 44.07071570772137,
-        "y": 45.22721584594124
-    },{
-        "id": 202006041138,
-        "label": "Lisibilité du code",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 41.09834902909983,
-        "y": 41.50520532988542
-    },{
-        "id": 202008031401,
-        "label": "Liste et tableau chez Otlet",
-        "type": "note",
-        "size": 10,
-        "x": 45.04852024684216,
-        "y": 44.56700900277514
-    },{
-        "id": 202010280951,
-        "label": "L’organisation en réseau comme forme",
-        "type": "lecture",
-        "size": 10,
-        "x": 40.206891226630006,
-        "y": 48.120516232504386
-    },{
-        "id": 202004091512,
-        "label": "Machines",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 43.08832111605673,
-        "y": 42.56822676082064
-    },{
-        "id": 202002131040,
-        "label": "Masterclass DNHD 2",
-        "type": "note",
-        "size": 10,
-        "x": 46.16898009258413,
-        "y": 49.090852983856124
-    },{
-        "id": 202008261622,
-        "label": "Matérialisation",
-        "type": "lexique",
-        "size": 20,
-        "x": 45.33962844822128,
-        "y": 41.97922625875714
-    },{
-        "id": 201806140000,
-        "label": "Matière à pensées : outils d’édition et médiation de la créativité",
-        "type": "publication",
-        "size": 10,
-        "x": 49.07396354861211,
-        "y": 41.04948490970209
-    },{
-        "id": 202006161214,
-        "label": "Médiation",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 43.75824519725423,
-        "y": 42.0686701597685
-    },{
-        "id": 202006161217,
-        "label": "Médiologie",
-        "type": "lecture",
-        "size": 10,
-        "x": 41.345192746607964,
-        "y": 43.94855433870958
-    },{
-        "id": 201901281200,
-        "label": "Métadonnées Pomerantz",
-        "type": "lecture",
-        "size": 10,
-        "x": 41.55007526664728,
-        "y": 42.28554424002196
-    },{
-        "id": 202006251159,
-        "label": "Métadonnées",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 43.67831261374065,
-        "y": 49.639270987452534
-    },{
-        "id": 202002011327,
-        "label": "Métalogue",
-        "type": "lexique",
-        "size": 10,
-        "x": 45.22167346100642,
-        "y": 45.203908636890674
-    },{
-        "id": 202006241805,
-        "label": "Méthodologie",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 46.813267092220116,
-        "y": 41.831356313538706
-    },{
-        "id": 202005101520,
-        "label": "Modèle écriture Guichard",
-        "type": "lexique",
-        "size": 20,
-        "x": 45.99087488763154,
-        "y": 44.08182605989696
-    },{
-        "id": 202003091730,
-        "label": "Modélisation éthique d’un écosystème de données",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 47.06349882268652,
-        "y": 40.988144604024725
-    },{
-        "id": 202005201336,
-        "label": "Modèle documentologique",
-        "type": "note",
-        "size": 30,
-        "x": 42.08653759652839,
-        "y": 41.52763491136558
-    },{
-        "id": 202004111515,
-        "label": "Modèle hybride arbre rhizome",
-        "type": "note",
-        "size": 20,
-        "x": 41.6528311010575,
-        "y": 48.37310654601476
-    },{
-        "id": 202006170919,
-        "label": "Modélisation",
-        "type": "lexique",
-        "size": 10,
-        "x": 46.634343069757264,
-        "y": 46.89164258485159
-    },{
-        "id": 202010221427,
-        "label": "Monstration",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 46.70676910337893,
-        "y": 48.31230021589552
-    },{
-        "id": 202010201706,
-        "label": "Nativement numérique",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 47.40004391429159,
-        "y": 40.9584825541633
-    },{
-        "id": 202006251411,
-        "label": "Négociation co-écriture",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 45.77931956786546,
-        "y": 48.409996049811056
-    },{
-        "id": 202006201933,
-        "label": "Note de bas de page",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 45.802199617936644,
-        "y": 49.776761203726295
-    },{
-        "id": 202008241432,
-        "label": "Objectum et problêma",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 45.86339351189638,
-        "y": 49.34192480267752
-    },{
-        "id": 202006170903,
-        "label": "Ontologie (documentation)",
-        "type": "lexique",
-        "size": 30,
-        "x": 48.658351472587015,
-        "y": 48.86527992994194
-    },{
-        "id": 202006251022,
-        "label": "Ordre",
-        "type": "lexique",
-        "size": 30,
-        "x": 42.167595662935,
-        "y": 48.31215739839687
-    },{
-        "id": 202010071021,
-        "label": "Organisation des connaissances",
-        "type": "lexique",
-        "size": 26.66666666666667,
-        "x": 46.18422805287119,
-        "y": 44.251934468104956
-    },{
-        "id": 202002011322,
-        "label": "Organisation du travail intellectuel",
-        "type": "note",
-        "size": 70,
-        "x": 42.45835161023893,
-        "y": 47.79977748917658
-    },{
-        "id": 202009171006,
-        "label": "Organisation et représentation réticulaire de la documentation – retour d'expérience",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 42.943192357696454,
-        "y": 47.518558858682276
-    },{
-        "id": 202010201701,
-        "label": "Otlet et HG Wells",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 40.03030722917142,
-        "y": 49.15931006320845
-    },{
-        "id": 202005241306,
-        "label": "Outillage du travail intellectuel",
-        "type": "note",
+        "type": "concept",
         "size": 50,
-        "x": 49.11854149693398,
-        "y": 49.886836996582545
+        "x": 44.96235995188179,
+        "y": 49.05900659465038
     },{
-        "id": 201912190000,
-        "label": "Paul Otlet and the ultimate prospect of documentation",
-        "type": "publication",
-        "size": 10,
-        "x": 41.47176527346002,
-        "y": 44.68564711170449
+        "id": 202011150041,
+        "label": "Langage documentaire",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 41.98512395002925,
+        "y": 48.472460572918045
     },{
-        "id": 202005241243,
-        "label": "Pensée d’Otlet",
-        "type": "note",
-        "size": 30,
-        "x": 44.57559723167012,
-        "y": 41.759377940820315
+        "id": 202011150042,
+        "label": "Lettré du numérique",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 49.68292250223146,
+        "y": 45.38038569844367
     },{
-        "id": 201803261405,
-        "label": "Pensée retenue pensée distribuée",
+        "id": 202011150043,
+        "label": "Linked open data",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 47.888968846164005,
+        "y": 46.037343567144674
+    },{
+        "id": 202011150040,
+        "label": "Littératie des données Bodin",
         "type": "lecture",
         "size": 13.333333333333332,
-        "x": 44.14409541638537,
-        "y": 43.54604973391785
+        "x": 42.22309520268252,
+        "y": 49.27297152120637
     },{
-        "id": 202002011301,
-        "label": "Pensée commune et travail scientifique",
-        "type": "note",
+        "id": 202011150044,
+        "label": "Littératie des données",
+        "type": "concept",
         "size": 13.333333333333332,
-        "x": 43.10781538192962,
-        "y": 42.33732722055536
+        "x": 46.483684109717586,
+        "y": 40.73413175682053
     },{
-        "id": 202008241220,
-        "label": "Petite philosophie du design",
-        "type": "lecture",
-        "size": 70,
-        "x": 41.74566548744835,
-        "y": 47.259007313717106
+        "id": 202011150045,
+        "label": "Littératie",
+        "type": "concept",
+        "size": 50,
+        "x": 46.08935377013322,
+        "y": 41.54081902629807
     },{
-        "id": 202008261405,
-        "label": "Philosophie de la technique",
-        "type": "lexique",
+        "id": 202011150047,
+        "label": "Mégadonnées",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 45.776354294747335,
+        "y": 44.83794428160158
+    },{
+        "id": 202011150046,
+        "label": "Médiation homme-machine",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 45.76487360323434,
+        "y": 49.040222238457666
+    },{
+        "id": 202011150048,
+        "label": "Métadonnées",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 43.210845174181635,
+        "y": 42.838021507405074
+    },{
+        "id": 202011150050,
+        "label": "Nature de la donnée",
+        "type": "note",
+        "size": 26.66666666666667,
+        "x": 47.48951273589353,
+        "y": 46.24798704372907
+    },{
+        "id": 202011150051,
+        "label": "Numerical literacy",
+        "type": "concept",
         "size": 23.333333333333336,
-        "x": 48.30379039964497,
-        "y": 43.5566451693736
+        "x": 47.71591889582058,
+        "y": 49.91472441537179
     },{
-        "id": 202004031752,
-        "label": "Plateformes de publication minimalistes",
-        "type": "note",
+        "id": 202011150052,
+        "label": "Obtenue",
+        "type": "concept",
         "size": 13.333333333333332,
-        "x": 41.10431620782181,
-        "y": 46.29386293859604
+        "x": 42.087841095141464,
+        "y": 44.612527781701935
     },{
-        "id": 202002040845,
-        "label": "Ponctuation",
-        "type": "lexique",
-        "size": 20,
-        "x": 44.018254110198136,
-        "y": 46.88221987304596
+        "id": 202011150053,
+        "label": "Open Data",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 41.15941687851221,
+        "y": 44.51980125184932
     },{
-        "id": 201811271100,
-        "label": "Positivisme Otlet Van Acker",
-        "type": "lecture",
-        "size": 10,
-        "x": 49.22062424472559,
-        "y": 49.94551257568445
+        "id": 202011150054,
+        "label": "Pix",
+        "type": "référentiel",
+        "size": 16.666666666666664,
+        "x": 44.102543625576494,
+        "y": 48.65471098217489
     },{
-        "id": 202006151419,
-        "label": "Pouvoir, puissance",
-        "type": "lexique",
-        "size": 20,
-        "x": 40.53668990345445,
-        "y": 48.38035243415409
-    },{
-        "id": 202006141751,
-        "label": "Pouvoir savoir faire",
-        "type": "note",
-        "size": 36.666666666666664,
-        "x": 43.11706731547622,
-        "y": 49.51167156094962
-    },{
-        "id": 202006141952,
-        "label": "Pouvoir-faire",
-        "type": "lexique",
+        "id": 202011150055,
+        "label": "Qlik",
+        "type": "référentiel",
         "size": 13.333333333333332,
-        "x": 44.46535326023523,
-        "y": 43.79228815543571
+        "x": 43.527083316632805,
+        "y": 42.80367583041852
     },{
-        "id": 202006142012,
-        "label": "Pouvoir-savoir",
-        "type": "lexique",
-        "size": 23.333333333333336,
-        "x": 48.17999214947892,
-        "y": 47.53163509395198
+        "id": 202011150057,
+        "label": "Sciences des données",
+        "type": "concept",
+        "size": 26.66666666666667,
+        "x": 43.48797234138972,
+        "y": 46.16221131430005
     },{
-        "id": 202006301454,
-        "label": "Preuve",
-        "type": "lexique",
-        "size": 10,
-        "x": 46.59829822044492,
-        "y": 46.25700209304554
+        "id": 202011150058,
+        "label": "Search engine literacy",
+        "type": "concept",
+        "size": 20,
+        "x": 43.76702504650187,
+        "y": 45.387124364611424
     },{
-        "id": 201901051136,
-        "label": "Principe monographique",
-        "type": "lexique",
+        "id": 202011150059,
+        "label": "Statistical literacy",
+        "type": "concept",
+        "size": 16.666666666666664,
+        "x": 41.578066059754164,
+        "y": 41.2684398981131
+    },{
+        "id": 202011150060,
+        "label": "Technique",
+        "type": "concept",
         "size": 33.333333333333336,
-        "x": 47.69544578054842,
-        "y": 41.46302014751215
+        "x": 48.87569775413989,
+        "y": 44.709400812880205
     },{
-        "id": 202005191233,
-        "label": "Principes de Tufte",
-        "type": "note",
-        "size": 23.33333333333333,
-        "x": 48.33794022457635,
-        "y": 41.757029131935
-    },{
-        "id": 202011121307,
-        "label": "Privat sur Goody",
+        "id": 202011150061,
+        "label": "The Role of IT Literacy",
         "type": "lecture",
         "size": 13.333333333333332,
-        "x": 48.31825158317496,
-        "y": 43.080881493333614
+        "x": 44.60621467942975,
+        "y": 47.05258575237361
     },{
-        "id": 202009291832,
-        "label": "Produit de la thèse",
-        "type": "note",
+        "id": 202011150062,
+        "label": "Traces numériques",
+        "type": "concept",
+        "size": 13.333333333333332,
+        "x": 46.874522485816556,
+        "y": 40.88827378019034
+    },{
+        "id": 202011150063,
+        "label": "Traces, calcul et interprétation",
+        "type": "lecture",
+        "size": 13.333333333333332,
+        "x": 41.9566900066044,
+        "y": 45.09880381719414
+    },{
+        "id": 202011150064,
+        "label": "Web sémantique",
+        "type": "concept",
         "size": 16.666666666666664,
-        "x": 41.02873623591243,
-        "y": 44.90797181235339
+        "x": 49.11878985295337,
+        "y": 44.96013770370298
     },{
-        "id": 202006170935,
-        "label": "Quoi, quand et où",
-        "type": "note",
-        "size": 30,
-        "x": 49.5337254734663,
-        "y": 46.21693502449158
-    },{
-        "id": 201906281200,
-        "label": "Raison cartographique Franco Farinelli",
-        "type": "lecture",
-        "size": 10,
-        "x": 49.59729983718032,
-        "y": 46.35828349888497
-    },{
-        "id": 201906291202,
-        "label": "Raison cartographique Olsson",
-        "type": "lecture",
-        "size": 10,
-        "x": 47.227208532593245,
-        "y": 43.285074605819545
-    },{
-        "id": 202002021402,
-        "label": "Raison cartographique Teresa Castro",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 40.34682142544058,
-        "y": 41.30111276039628
-    },{
-        "id": 202006251012,
-        "label": "Raison cartographique",
-        "type": "lexique",
-        "size": 20,
-        "x": 47.328180872136954,
-        "y": 44.97028294956358
-    },{
-        "id": 202005181320,
-        "label": "Raison et graphie",
-        "type": "lexique",
-        "size": 20,
-        "x": 43.60662173918065,
-        "y": 40.15800017576211
-    },{
-        "id": 202005181316,
-        "label": "Raison graphique",
-        "type": "lexique",
-        "size": 20,
-        "x": 48.565945043642984,
-        "y": 40.291760974701376
-    },{
-        "id": 202005181321,
-        "label": "Raison typographique",
-        "type": "lexique",
-        "size": 10,
-        "x": 42.803587447636716,
-        "y": 48.591081627294116
-    },{
-        "id": 202006251556,
-        "label": "Redocumentarisation",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 41.79928266509915,
-        "y": 43.320483718419055
-    },{
-        "id": 202006251524,
-        "label": "Regard",
-        "type": "lexique",
-        "size": 20,
-        "x": 40.80098680947667,
-        "y": 47.198454112652726
-    },{
-        "id": 201904291202,
-        "label": "Relire Bachelard",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 47.46886858697035,
-        "y": 46.43726544337278
-    },{
-        "id": 202002201405,
-        "label": "Reticulum 2",
-        "type": "note",
-        "size": 10,
-        "x": 40.413198552182955,
-        "y": 48.08306739064994
-    },{
-        "id": 202006171048,
-        "label": "Reticulum 3",
-        "type": "note",
-        "size": 36.66666666666667,
-        "x": 47.333508132765175,
-        "y": 45.82435712355471
-    },{
-        "id": 202008241240,
-        "label": "Reticulum",
-        "type": "note",
-        "size": 23.33333333333333,
-        "x": 44.3642917327751,
-        "y": 49.58726294244515
-    },{
-        "id": 202007041546,
-        "label": "Régime documentaire",
-        "type": "lexique",
-        "size": 10,
-        "x": 49.062468396318984,
-        "y": 45.612982051132505
-    },{
-        "id": 202010091443,
-        "label": "Réseau",
-        "type": "lexique",
-        "size": 20,
-        "x": 48.975134555033925,
-        "y": 40.66780743849364
-    },{
-        "id": 202003121641,
-        "label": "Rhizome Deleuze Guattari",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 44.560279251995695,
-        "y": 43.06160708783945
-    },{
-        "id": 202003310000,
-        "label": "Rhizome blues : Introduction à la tératologie documentaire",
-        "type": "publication",
-        "size": 20,
-        "x": 45.57934725675988,
-        "y": 46.428384055128454
-    },{
-        "id": 202009181643,
-        "label": "Rieusset-Lemarié sur Otlet",
-        "type": "lecture",
-        "size": 33.333333333333336,
-        "x": 44.05980861592128,
-        "y": 43.78085093436515
-    },{
-        "id": 202002021351,
-        "label": "Réflexivité de la cartographie",
-        "type": "note",
-        "size": 10,
-        "x": 47.493092682976446,
-        "y": 41.63029785567533
-    },{
-        "id": 202005201711,
-        "label": "Réflexivité",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 41.439579365338446,
-        "y": 42.38366268756468
-    },{
-        "id": 202002021215,
-        "label": "Rôles des représentations",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 47.67819626868234,
-        "y": 44.72618759361851
-    },{
-        "id": 202005201451,
-        "label": "Savoir et pouvoir",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 44.53232381705783,
-        "y": 48.34406834738129
-    },{
-        "id": 202006151535,
-        "label": "Savoir-faire",
-        "type": "lexique",
-        "size": 10,
-        "x": 48.403148010878006,
-        "y": 47.08559837136573
-    },{
-        "id": 202004111453,
-        "label": "Schématisation Estivals",
-        "type": "lecture",
-        "size": 30,
-        "x": 49.825759650863944,
-        "y": 44.88370681144824
-    },{
-        "id": 202005131135,
-        "label": "Schémas d’Otlet",
-        "type": "note",
-        "size": 30,
-        "x": 43.50103720644054,
-        "y": 45.901281478418866
-    },{
-        "id": 202005131118,
-        "label": "Schématisation",
-        "type": "lexique",
-        "size": 20,
-        "x": 48.553614710878726,
-        "y": 48.657817320374946
-    },{
-        "id": 202005201330,
-        "label": "Science de l’information",
-        "type": "lexique",
-        "size": 10,
-        "x": 45.75840899810682,
-        "y": 44.2620720147236
-    },{
-        "id": 202005181205,
-        "label": "Scripturation",
-        "type": "lexique",
-        "size": 30,
-        "x": 42.94636572297514,
-        "y": 45.22466258944274
-    },{
-        "id": 202006251017,
-        "label": "Scripturologie",
-        "type": "lecture",
-        "size": 23.333333333333336,
-        "x": 44.63590350003245,
-        "y": 43.50645860042441
-    },{
-        "id": 202010281017,
-        "label": "Second degré documentaire",
-        "type": "lexique",
-        "size": 20,
-        "x": 41.81442976516662,
-        "y": 41.27276341965541
-    },{
-        "id": 202006201946,
-        "label": "Sens et référence",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 48.1661437448115,
-        "y": 47.939037357677115
-    },{
-        "id": 202005131319,
-        "label": "Sexual Personae",
-        "type": "lecture",
-        "size": 10,
-        "x": 40.767022415860396,
-        "y": 40.881908899396365
-    },{
-        "id": 201803161200,
-        "label": "Sémiotique du signe",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 43.16528121108728,
-        "y": 43.599841723691874
-    },{
-        "id": 202009291942,
-        "label": "Sémiotique",
-        "type": "lexique",
-        "size": 26.66666666666667,
-        "x": 45.657985946022215,
-        "y": 42.73164574554773
-    },{
-        "id": 202002040836,
-        "label": "Surcodage",
-        "type": "lexique",
-        "size": 10,
-        "x": 44.61845354666635,
-        "y": 42.776363439740486
-    },{
-        "id": 202001011145,
-        "label": "Sémiotique des fluides",
-        "type": "publication",
-        "size": 30,
-        "x": 40.02513588218791,
-        "y": 44.37967361620834
-    },{
-        "id": 202002021224,
-        "label": "Sémiotique et documentarité via interface",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 48.22221116525208,
-        "y": 41.01540772065093
-    },{
-        "id": 201903221451,
-        "label": "Sémiotique et mouvement",
-        "type": "lecture",
-        "size": 10,
-        "x": 48.47847112715285,
-        "y": 48.41571699601098
-    },{
-        "id": 202002021313,
-        "label": "Tant de choses à savoir",
-        "type": "undefined",
-        "size": 20,
-        "x": 48.674047963932495,
-        "y": 45.210308488990464
-    },{
-        "id": 201805240000,
-        "label": "Technologies intellectuelles",
-        "type": "publication",
-        "size": 30,
-        "x": 49.68641123073285,
-        "y": 48.63234601169682
-    },{
-        "id": 202004092014,
-        "label": "Terminologie critique données",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 40.765550400194996,
-        "y": 40.36712142639752
-    },{
-        "id": 202002251108,
-        "label": "Terminologie internationale fiche et fichier",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 45.45691438627796,
-        "y": 47.91737947832298
-    },{
-        "id": 201906291203,
-        "label": "Territoire Giraut",
-        "type": "lecture",
-        "size": 10,
-        "x": 49.22595581596627,
-        "y": 46.80867616460401
-    },{
-        "id": 201902061200,
-        "label": "Territoire Guichard",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 46.58370365812024,
-        "y": 43.44700023055133
-    },{
-        "id": 202005191604,
-        "label": "Territoire",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 49.78330140364215,
-        "y": 41.06619325012936
-    },{
-        "id": 202004081049,
-        "label": "Texte brut et stratégie",
-        "type": "note",
-        "size": 10,
-        "x": 48.42474486017918,
-        "y": 45.037340280030094
-    },{
-        "id": 202004081047,
-        "label": "Texte brut",
-        "type": "lexique",
-        "size": 36.66666666666667,
-        "x": 43.90385294640049,
-        "y": 40.05290136843972
-    },{
-        "id": 202006170932,
-        "label": "Texte et document",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 41.51907833427034,
-        "y": 41.333284404101725
-    },{
-        "id": 201904301203,
-        "label": "Texte, hypertexte, hypermédia",
-        "type": "lecture",
-        "size": 10,
-        "x": 46.83117588113358,
-        "y": 42.881186925869244
-    },{
-        "id": 202002041043,
-        "label": "Texture du balisage",
-        "type": "note",
-        "size": 26.66666666666667,
-        "x": 48.069237664750744,
-        "y": 42.413452540497836
-    },{
-        "id": 201810040000,
-        "label": "The Architext of Biblion",
-        "type": "publication",
-        "size": 10,
-        "x": 41.14196530721084,
-        "y": 47.68997656265364
-    },{
-        "id": 201904081200,
-        "label": "The alphabetic labyrinth",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 48.19502476683702,
-        "y": 49.824480929352184
-    },{
-        "id": 202003121731,
-        "label": "Topologie",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 41.42588503098345,
-        "y": 49.013791353240634
-    },{
-        "id": 201905170923,
-        "label": "Tracés Faire revue",
-        "type": "lecture",
-        "size": 13.333333333333332,
-        "x": 45.7344178136023,
-        "y": 42.942024764438194
-    },{
-        "id": 202004061546,
-        "label": "Traitement de texte",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 42.78890206931429,
-        "y": 40.38409474248862
-    },{
-        "id": 202004021340,
-        "label": "Traité 2 Transcription",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 44.17006628792877,
-        "y": 45.65877670321556
-    },{
-        "id": 202005201252,
-        "label": "Traité 2",
-        "type": "note",
-        "size": 36.666666666666664,
-        "x": 43.56132820813073,
-        "y": 41.842753760757944
-    },{
-        "id": 201902111200,
-        "label": "Traité de documentation",
-        "type": "lecture",
-        "size": 23.333333333333336,
-        "x": 47.24150634092405,
-        "y": 46.04312902769944
-    },{
-        "id": 202006081915,
-        "label": "Transformative tools for thought",
-        "type": "note",
-        "size": 26.66666666666667,
-        "x": 41.319025764566994,
-        "y": 43.49113688891069
-    },{
-        "id": 202005111559,
-        "label": "Transtextualité Borel",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 40.118041614159196,
-        "y": 44.36663890990547
-    },{
-        "id": 202010231614,
-        "label": "Travail intellectuel",
-        "type": "lexique",
-        "size": 23.33333333333333,
-        "x": 40.10420850664403,
-        "y": 44.40041198288725
-    },{
-        "id": 202005191405,
-        "label": "Tutoriel Zettlr",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 44.02136812448958,
-        "y": 46.50424205157396
-    },{
-        "id": 202002011052,
-        "label": "Typologie images et données scientifiques",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 43.001640497962974,
-        "y": 43.6451014458227
-    },{
-        "id": 202006241854,
-        "label": "Un lieu de savoir à soi",
-        "type": "note",
-        "size": 16.666666666666664,
-        "x": 44.51432631391259,
-        "y": 41.76052572118813
-    },{
-        "id": 202010221420,
-        "label": "Une histoire de la fiche érudite",
-        "type": "lecture",
-        "size": 43.33333333333334,
-        "x": 47.17525471553574,
-        "y": 44.40126766483667
-    },{
-        "id": 202002271017,
-        "label": "Une parenté accidentée",
-        "type": "note",
-        "size": 16.666666666666664,
-        "x": 43.39248963564362,
-        "y": 45.401273575571025
-    },{
-        "id": 201909241200,
-        "label": "Universalisme et utopie",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 43.61302793438804,
-        "y": 42.99433422559321
-    },{
-        "id": 201901031200,
-        "label": "Van den Heuvel sur Otlet",
-        "type": "lecture",
-        "size": 10,
-        "x": 44.211204156594036,
-        "y": 40.27836505068673
-    },{
-        "id": 202006251509,
-        "label": "Virtuel",
-        "type": "lexique",
-        "size": 13.333333333333332,
-        "x": 47.24571327481391,
-        "y": 49.386158353094416
-    },{
-        "id": 202002061412,
-        "label": "When is a document?",
-        "type": "note",
-        "size": 10,
-        "x": 46.28090848211361,
-        "y": 46.55444141143853
-    },{
-        "id": 202010281237,
-        "label": "Working Methods",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 41.21334921594877,
-        "y": 46.9594765218265
-    },{
-        "id": 202003061632,
-        "label": "World-making tools",
-        "type": "note",
-        "size": 20,
-        "x": 43.04757462411867,
-        "y": 40.197346178467235
-    },{
-        "id": 201912180000,
-        "label": "Writing Documentarity",
-        "type": "publication",
-        "size": 10,
-        "x": 47.75361961437714,
-        "y": 41.93410748121897
-    },{
-        "id": 202006241728,
-        "label": "Zettelkasten",
-        "type": "lexique",
-        "size": 20,
-        "x": 48.99403699561696,
-        "y": 49.211055321829235
-    },{
-        "id": 202002011343,
-        "label": "Écriture et pouvoir",
-        "type": "note",
-        "size": 23.33333333333333,
-        "x": 41.37695334245613,
-        "y": 41.384289171508435
-    },{
-        "id": 202004111418,
-        "label": "Éditeurs de texte scientifiques",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 48.9835141868804,
-        "y": 48.61234319840047
-    },{
-        "id": 202005181322,
-        "label": "Énonciation typographique",
-        "type": "lecture",
-        "size": 16.666666666666664,
-        "x": 44.09691967714136,
-        "y": 42.64219399185003
-    },{
-        "id": 202005181359,
-        "label": "Énonciation éditoriale",
-        "type": "lexique",
-        "size": 23.333333333333336,
-        "x": 42.68010549185761,
-        "y": 47.08463513471386
-    },{
-        "id": 202005181358,
-        "label": "Énonciation",
-        "type": "lexique",
-        "size": 16.666666666666664,
-        "x": 43.54393204427539,
-        "y": 49.91988786537745
-    },{
-        "id": 202001311700,
-        "label": "Épigraphes",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 44.951650917210586,
-        "y": 40.50028629599561
-    },{
-        "id": 202004251356,
-        "label": "Épistémologie comparative",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 46.17183439408196,
-        "y": 47.14160937761549
-    },{
-        "id": 202004111441,
-        "label": "Épistémologie de la documentation",
-        "type": "lecture",
-        "size": 40,
-        "x": 45.20154080361403,
-        "y": 49.14692860945758
-    },{
-        "id": 202002011304,
-        "label": "Épistémologie et histoire des sciences",
-        "type": "note",
-        "size": 13.333333333333332,
-        "x": 43.95120744664464,
-        "y": 43.85680428568505
-    },{
-        "id": 202002042228,
-        "label": "Épistémologie visuelle chez Paul Otlet",
-        "type": "note",
-        "size": 20,
-        "x": 46.377481989878035,
-        "y": 48.82238879862685
-    },{
-        "id": 202005201353,
-        "label": "Épistémologie visuelle",
-        "type": "lexique",
-        "size": 23.333333333333336,
-        "x": 40.67856470017808,
-        "y": 46.49847309500716
-    },{
-        "id": 202002011240,
+        "id": 202011150029,
         "label": "Épistémologie",
-        "type": "lexique",
-        "size": 40,
-        "x": 48.81699840865858,
-        "y": 41.62594965871003
+        "type": "concept",
+        "size": 10,
+        "x": 48.28363092394213,
+        "y": 46.616425530890375
     }]
