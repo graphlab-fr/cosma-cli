@@ -12,9 +12,9 @@ function getNbLink(linkList, fileId) {
     return i;
 }
 
-function getRank(linkList, fileId, linkNb) {
+function getRank(allIds, fileId, linkNb) {
     let rank = 1;
-    rank += ~~(getNbLink(linkList, fileId) / 3);
+    rank += ~~(getNbLink(allIds, fileId) / 3);
     rank += linkNb / 3;
     return rank;
 }

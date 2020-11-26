@@ -18,15 +18,34 @@ let id = 1
             delete file.__content;
             let metas = file;
 
-            return file = {
+            return {
                 content: content,
                 metas: metas,
                 links: edges.extractAll(content)
             }
         })
+        .filter(function(file) {
+            if (file.metas.id === undefined || isNaN(file.metas.id) === true) {
+                console.log('File ' + file.metas.title + ' throw out : no valid id');
+                return false; }
+
+            if (file.metas.title === undefined) {
+                console.log('File ' + file.metas.title + ' throw out : no title');
+                return false; }
+
+            for (let link of file.links) {
+                if (isNaN(link) === true) {
+                    console.log('File "' + file.metas.title + '" throw out : no valid link');
+                    return false; }
+            }
+
+            return file;
+        })
+
+const ids = files.map(file => file.links).flat();
 
 for (let file of files) {
-    let size = edges.getRank(files.map(file => file.links).flat(), file.metas.id, file.links.length);
+    let size = edges.getRank(ids, file.metas.id, file.links.length);
     entities.nodes.push(jsonify.node(file.metas.id, file.metas.title, file.metas.type, size * 10, rand.randFloat(40, 50), rand.randFloat(40, 50)));
 
     if (file.links.length !== 0) {
