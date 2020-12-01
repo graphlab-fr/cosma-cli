@@ -1,1 +1,3 @@
-files_origin: ../data-literacy/
+files_origin: ../data-literacy/categories:
+  - programmation
+  - litterature
