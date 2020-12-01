@@ -18,7 +18,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
                     resolve('undefined'); }
 
                 if (config.categories.indexOf(answer) === -1) {
-                    reject('Unknow category, add it in config'); }
+                    reject('Unknown category. Add it to config.yml beforehand. No record was created.'); }
 
                 resolve(answer);
             })
