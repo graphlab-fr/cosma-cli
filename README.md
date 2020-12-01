@@ -21,7 +21,15 @@ Dans le fichier `config.yml`, remplacer la valeur de `files_origin` par le chemi
 
 ## Utilisation
 
+### Générer le graphe
+
 ```bash
-$ node app
+$ node app modelize
 ```
 Les fichiers JSON sont générés dans le répertoire `/data`.
+
+### Générer une nouvelle fiche
+
+```bash
+$ node app record
+```
