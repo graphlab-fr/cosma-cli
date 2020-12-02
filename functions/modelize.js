@@ -72,16 +72,16 @@ if (fs.existsSync('./data') === false) {
     fs.mkdirSync('./data') }
 
 fs.writeFile('./data/nodes.json', '[' + entities.nodes.join(',') + ']', (err) => {
-    if (err) { return console.error( 'Err. write html file : ' + err) }
+    if (err) { return console.error( 'Err. write nodes.json file : ' + err) }
     console.log('create nodes.json file');
 });
 
 fs.writeFile('./data/edges.json', '[' + entities.edges.join(',') + ']', (err) => {
-    if (err) { return console.error( 'Err. write html file : ' + err) }
+    if (err) { return console.error( 'Err. write edges.json file : ' + err) }
     console.log('create edges.json file');
 });
 
 fs.writeFile('./data/sigma.json', jsonify.sigma(entities.nodes,entities.edges), (err) => {
-    if (err) { return console.error( 'Err. write html file : ' + err) }
+    if (err) { return console.error( 'Err. write sigma.json file : ' + err) }
     console.log('create sigma.json file');
 });

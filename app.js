@@ -1,16 +1,20 @@
 const fs = require('fs')
     , yamlReader = require('js-yaml');
 
+require('./functions/dirspace');
+
 const args = process.argv.slice(2)
     , config = yamlReader.safeLoad(fs.readFileSync('config.yml', 'utf8'));
 
 exports.config = config;
 
+require('./functions/verifconfig');
+
 switch (args[0]) {
     case 'modelize':
         require('./functions/modelize');
     break;
-        
+
     case 'record':
         require('./functions/record');
     break;
@@ -20,6 +24,6 @@ switch (args[0]) {
     break;
 
     default:
-        console.log('Unknow command "' + args + '"');
+        console.log('Unknow command "' + args.join(' ') + '"');
     break;
 }
