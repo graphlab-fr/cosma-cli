@@ -32,17 +32,4 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
     rl.close()
 })()
 
-function createRecord(title, category) {
-    const content =
-`---
-title: ${title}
-category: ${category}
----
-
-`;
-
-    fs.writeFile(config.files_origin + title + '.md', content, (err) => {
-        if (err) { return console.error( 'Err. write html file : ' + err) }
-        console.log('create ' + title + '.md file');
-    });
-}
+require('./autorecord').genMdFile(title, category);

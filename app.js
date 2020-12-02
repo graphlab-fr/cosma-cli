@@ -19,6 +19,10 @@ switch (args[0]) {
         require('./functions/record');
     break;
 
+    case 'autorecord':
+        require('./functions/autorecord').genMdFile(args[1], args[2]);
+    break;
+
     case undefined:
         console.log('Please, choose an action');
     break;
