@@ -23,6 +23,7 @@
   "homepage": "https://github.com/hyperotlet/graph-data-generator#readme",
   "dependencies": {
     "js-yaml": "^3.14.0",
+    "moment": "^2.29.1",
     "yaml-front-matter": "^4.1.0"
   }
 }
