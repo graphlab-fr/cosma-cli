@@ -20,7 +20,7 @@ switch (args[0]) {
     break;
 
     case 'autorecord':
-        require('./functions/autorecord').genMdFile(args[1], args[2]);
+        require('./functions/autorecord').genMdFile(args[1], args[2], args[3]);
     break;
 
     case undefined:

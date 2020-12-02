@@ -2,21 +2,24 @@ const fs = require('fs')
     , moment = require('moment')
     , config = require('../app').config;
 
-function genMdFile(title, category) {
+function genMdFile(title, category, tags) {
 
-    if (category === '') {
-        category = 'undefined'; }
-
-    if (category !== 'undefined' && config.categories.indexOf(category) === -1) {
+    if (category !== '' && config.categories.indexOf(category) === -1) {
         console.log('Unknown category. Add it to config.yml beforehand. No record was created.');
         return;
+    }
+
+    if (tags !== '') {
+        tags = tags.split(",").join('\n  - ');
+        tags = '\n  - ' + tags;
     }
 
     const content =
 `---
 title: ${title}
 id: ${moment().format('YYYYMMDDhmmss')}
-category: ${category}
+category: ${category || 'undefined'}
+tags: ${tags || ''}
 ---
 
 `;
