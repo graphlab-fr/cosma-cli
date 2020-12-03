@@ -3,6 +3,7 @@ const fs = require('fs')
     , path = require('path')
     , edges = require('./edges')
     , jsonify = require('./jsonify')
+    , dataGenerator = require('./data')
     , rand = require('./rand')
     , config = require('../app').config;
 
@@ -68,46 +69,9 @@ for (let file of files) {
     }
 }
 
-if (fs.existsSync('./data') === false) {
-    fs.mkdirSync('./data') }
+require('./template').consmographe(jsonify.d3(entities.nodes,entities.edges));
 
-fs.writeFile('./data/nodes.json', '[' + entities.nodes.join(',') + ']', (err) => {
-    if (err) { return console.error( 'Err. write nodes.json file : ' + err) }
-    console.log('create nodes.json file');
-});
-
-fs.writeFile('./data/edges.json', '[' + entities.edges.join(',') + ']', (err) => {
-    if (err) { return console.error( 'Err. write edges.json file : ' + err) }
-    console.log('create edges.json file');
-});
-
-fs.writeFile('./data/sigma.json', jsonify.sigma(entities.nodes,entities.edges), (err) => {
-    if (err) { return console.error( 'Err. write sigma.json file : ' + err) }
-    console.log('create sigma.json file');
-});
-
-fs.writeFile('./data/d3.json', jsonify.d3(entities.nodes,entities.edges), (err) => {
-    if (err) { return console.error( 'Err. write d3.json file : ' + err) }
-    console.log('create d3.json file');
-});
-
-const graphScript =
-`var svg = d3.select("#my_canvas"),
-width = +svg.node().getBoundingClientRect().width,
-height = +svg.node().getBoundingClientRect().height;
-
-// svg objects
-var link, node;
-// the data - an object with nodes and links
-var graph;
-
-// load the data
-graph = ${jsonify.d3(entities.nodes,entities.edges)};
-initializeDisplay();
-initializeSimulation();`;
-
-fs.writeFile('./template/graph-data.js', graphScript, (err) => {
-    if (err) { return console.error( 'Err. write graph-data.js file : ' + err) }
-    console.log('create graph-data.js file');
-    require('./template');
-});
+dataGenerator.nodes(entities.nodes);
+dataGenerator.edges(entities.edges);
+dataGenerator.forSigma(entities.nodes, entities.edges);
+dataGenerator.forD3(entities.nodes, entities.edges);
