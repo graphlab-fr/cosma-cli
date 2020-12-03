@@ -9,8 +9,8 @@ if (!fs.existsSync('config.yml')){
 `# Path to your Mardown files base
 files_origin:
 
-# List of your valid categories
-categories:
+# List of your valid types
+types:
   - undefined`;
 
     fs.writeFileSync('config.yml', config, (err) => {

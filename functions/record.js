@@ -16,15 +16,15 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
             })
         })
     
-        metas.category = await new Promise((resolve, reject) => {
-            rl.question('category (default = undefined) ? ', (answer) => { resolve(answer); })
+        metas.type = await new Promise((resolve, reject) => {
+            rl.question('type (default = undefined) ? ', (answer) => { resolve(answer); })
         })
     
         metas.tags = await new Promise((resolve, reject) => {
             rl.question('tags (facultative, between comas, no space) ? ', (answer) => { resolve(answer); })
         })
     
-        require('./autorecord').genMdFile(metas.title, metas.category, metas.tags);
+        require('./autorecord').genMdFile(metas.title, metas.type, metas.tags);
     } catch(error) {
         console.log(error);
     }

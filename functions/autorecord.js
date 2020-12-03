@@ -2,10 +2,10 @@ const fs = require('fs')
     , moment = require('moment')
     , config = require('../app').config;
 
-function genMdFile(title, category, tags) {
+function genMdFile(title, type, tags) {
 
-    if (category !== '' && config.categories.indexOf(category) === -1) {
-        console.log('Unknown category. Add it to config.yml beforehand. No record was created.');
+    if (type !== '' && config.types.indexOf(type) === -1) {
+        console.log('Unknown type. Add it to config.yml beforehand. No record was created.');
         return;
     }
 
@@ -18,7 +18,7 @@ function genMdFile(title, category, tags) {
 `---
 title: ${title}
 id: ${moment().format('YYYYMMDDhmmss')}
-category: ${category || 'undefined'}
+type: ${type || 'undefined'}
 tags: ${tags || ''}
 ---
 
