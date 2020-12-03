@@ -17,7 +17,7 @@ function genMdFile(title, type, tags) {
     const content =
 `---
 title: ${title}
-id: ${moment().format('YYYYMMDDhmmss')}
+id: ${moment().format('YYYYMMDDHHmmss')}
 type: ${type || 'undefined'}
 tags: ${tags || ''}
 ---
