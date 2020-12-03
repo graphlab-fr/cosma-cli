@@ -26,10 +26,16 @@ Dans le fichier `config.yml`, remplacer la valeur de `files_origin` par le chemi
 ```bash
 $ node app modelize
 ```
-Les fichiers JSON sont générés dans le répertoire `/data`.
+
+Le fichier `cosmographe.html` contient la visualisation.
+Des fichiers JSON contenant les données sont générés dans le répertoire `/data`.
 
 ### Générer une nouvelle fiche
 
 ```bash
 $ node app record
+```
+
+```bash
+$ node app autorecord <titre> <categorie> <tags>
 ```
