@@ -2,3 +2,5 @@
 node_modules
 *.json
 config.yml
+graph-data.js
+cosmographe.html

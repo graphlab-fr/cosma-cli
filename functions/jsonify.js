@@ -26,3 +26,9 @@ function sigma(nodes, edges) {
 }
 
 exports.sigma = sigma;
+
+function d3(nodes, edges) {
+    return json = `{"nodes":[${nodes.join(',')}],"links": [${edges.join(',')}]}`;
+}
+
+exports.d3 = d3;

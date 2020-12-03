@@ -1,6 +1,5 @@
 const fs = require('fs')
-    , readline = require('readline')
-    , config = require('../app').config;
+    , readline = require('readline');
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 

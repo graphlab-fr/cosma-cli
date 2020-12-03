@@ -24,6 +24,7 @@
   "dependencies": {
     "js-yaml": "^3.14.0",
     "moment": "^2.29.1",
+    "pug": "^3.0.0",
     "yaml-front-matter": "^4.1.0"
   }
 }

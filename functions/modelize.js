@@ -85,3 +85,29 @@ fs.writeFile('./data/sigma.json', jsonify.sigma(entities.nodes,entities.edges), 
     if (err) { return console.error( 'Err. write sigma.json file : ' + err) }
     console.log('create sigma.json file');
 });
+
+fs.writeFile('./data/d3.json', jsonify.d3(entities.nodes,entities.edges), (err) => {
+    if (err) { return console.error( 'Err. write d3.json file : ' + err) }
+    console.log('create d3.json file');
+});
+
+const graphScript =
+`var svg = d3.select("#my_canvas"),
+width = +svg.node().getBoundingClientRect().width,
+height = +svg.node().getBoundingClientRect().height;
+
+// svg objects
+var link, node;
+// the data - an object with nodes and links
+var graph;
+
+// load the data
+graph = ${jsonify.d3(entities.nodes,entities.edges)};
+initializeDisplay();
+initializeSimulation();`;
+
+fs.writeFile('./template/graph-data.js', graphScript, (err) => {
+    if (err) { return console.error( 'Err. write graph-data.js file : ' + err) }
+    console.log('create graph-data.js file');
+    require('./template');
+});
