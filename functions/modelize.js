@@ -10,6 +10,7 @@ const fs = require('fs')
 
 let id = 1
     , fileIds = []
+    , errors = []
     , entities = { nodes: [], edges: [] }
     , files = fs.readdirSync(config.files_origin, 'utf8')
         .filter(file_name => path.extname(file_name) === '.md')
@@ -28,11 +29,13 @@ let id = 1
         })
         .filter(function(file) {
             if (file.metas.id === undefined || isNaN(file.metas.id) === true) {
-                console.log('File ' + file.metas.title + ' throw out : no valid id');
+                let err = 'File ' + file.metas.title + ' throw out : no valid id';
+                errors.push(err); console.log(err);
                 return false; }
 
             if (file.metas.title === undefined) {
-                console.log('File ' + file.metas.title + ' throw out : no title');
+                let err = 'File ' + file.metas.title + ' throw out : no title';
+                errors.push(err); console.log(err);
                 return false; }
 
             fileIds.push(file.metas.id);
@@ -46,7 +49,8 @@ let id = 1
                 if (fileIds.indexOf(Number(link)) !== -1 && isNaN(link) === false) {
                     validLinks.push(link);
                 } else {
-                    console.log('Link "' + link + '" removed from file "' + file.metas.title + '" : no valid target');
+                    let err = 'Link "' + link + '" removed from file "' + file.metas.title + '" : no valid target';
+                    errors.push(err); console.log(err);
                 }
             }
 
@@ -76,3 +80,5 @@ dataGenerator.nodes(entities.nodes, savePath);
 dataGenerator.edges(entities.edges, savePath);
 dataGenerator.forSigma(entities.nodes, entities.edges, savePath);
 dataGenerator.forD3(entities.nodes, entities.edges, savePath);
+
+require('./log').register(errors, savePath);
