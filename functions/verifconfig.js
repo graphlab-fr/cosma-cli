@@ -6,6 +6,7 @@ const fs = require('fs')
 if (!fs.existsSync('config.yml')){
     let baseConfig = yamlEditor.safeDump({
         files_origin: '',
+        export_target: '',
         types: ['undefined']
     });
 
@@ -31,7 +32,7 @@ if (!fs.existsSync(config.files_origin)) {
 
 // Function for modify config
 
-function modifyPath(path) {
+function modifyImportPath(path) {
     if (!fs.existsSync(path)) {
         console.log('You must specify a valid file path to your Markdown database file.');
         return;
@@ -45,7 +46,23 @@ function modifyPath(path) {
     });
 }
 
-exports.modifyPath = modifyPath;
+exports.modifyImportPath = modifyImportPath;
+
+function modifyExportPath(path) {
+    if (!fs.existsSync(path)) {
+        console.log('You must specify a valid target to export in the configuration.');
+        return;
+    }
+
+    config.export_target = path;
+
+    fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
+        if (err) { return console.error( 'Err. update config.yml file : ' + err) }
+        console.log('update file path from config.yml file');
+    });
+}
+
+exports.modifyExportPath = modifyExportPath;
 
 function addType(types) {
     let newList = [];

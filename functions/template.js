@@ -1,5 +1,6 @@
 const fs = require('fs')
-    , pug = require('pug');
+    , pug = require('pug')
+    , config = require('./verifconfig').config;
 
 function consmographe(d3Data, path) {
 
@@ -25,9 +26,18 @@ initializeSimulation();`;
         const htmlRender = pug.compileFile('template/scope.pug')({})
 
         fs.writeFile(path + 'cosmographe.html', htmlRender, (err) => {
-            if (err) { console.error( 'Err. write home index file: ' + err) }
-            console.log('create cosmographe.html file');
+            if (err) { console.error( 'Err. write cosmographe file: ' + err) }
         });
+
+        if (fs.existsSync(config.export_target)) {
+            fs.writeFile(config.export_target + 'cosmographe.html', htmlRender, (err) => {
+                if (err) { console.error( 'Err. write cosmographe file: ' + err) }
+                console.log('create cosmographe.html file');
+            });
+        } else {
+            console.error('You must specify a valid target to export in the configuration.');
+        }
+
     });
 }
 

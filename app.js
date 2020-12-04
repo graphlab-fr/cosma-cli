@@ -15,8 +15,16 @@ switch (args[0]) {
         require('./functions/autorecord').genMdFile(args[1], args[2], args[3]);
     break;
 
-    case 'path':
-        require('./functions/verifconfig').modifyPath(args[1]);
+    case 'import':
+        require('./functions/verifconfig').modifyImportPath(args[1]);
+    break;
+
+    case 'export':
+        require('./functions/verifconfig').modifyExportPath(args[1]);
+    break;
+
+    case 'import':
+        require('./functions/verifconfig').modifyImportPath(args[1]);
     break;
 
     case 'atype':

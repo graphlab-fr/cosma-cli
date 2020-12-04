@@ -22,12 +22,19 @@ Dans le fichier `config.yml`, remplacer la valeur de `files_origin` par le chemi
 ### Modifier le chemin vers les fichiers
 
 ```bash
-$ node app path <path>
+$ node app import <path>
 ```
-### Modifier les types valides
+
+### Modifier le chemin d'export
 
 ```bash
-$ node app path <type type type…>
+$ node app export <path>
+```
+
+### Ajouter des types valides
+
+```bash
+$ node app atype <type type type…>
 ```
 
 ## Utilisation
@@ -38,8 +45,9 @@ $ node app path <type type type…>
 $ node app modelize
 ```
 
-Le fichier `cosmographe.html` contient la visualisation. Il faut l'ouvrir dans un navigateur web.
-Il est placé dans le répertoire `/history` (dans un sous-répertoire portant la date du jour).
+Le fichier `cosmographe.html` contient la visualisation. Il faut l'ouvrir dans un navigateur web. Il se trouve selon ce qui a été indiqué dans la configuration (`export_target`).
+
+Il est également placé dans le répertoire `/history` (dans un sous-répertoire portant la date du jour).
 Sont joints dans ce sous-répertoire des fichiers JSON contenant les données générés.
 
 ### Générer une nouvelle fiche
