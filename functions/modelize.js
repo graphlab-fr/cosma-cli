@@ -74,7 +74,7 @@ for (let file of files) {
     }
 }
 
-require('./template').cosmoscope(jsonify.d3(entities.nodes,entities.edges), savePath);
+require('./template').consmographe(jsonify.d3(entities.nodes,entities.edges), savePath);
 
 dataGenerator.nodes(entities.nodes, savePath);
 dataGenerator.edges(entities.edges, savePath);
