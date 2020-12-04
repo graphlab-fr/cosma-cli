@@ -1,7 +1,7 @@
 const fs = require('fs')
     , pug = require('pug');
 
-function consmographe(d3Data) {
+function consmographe(d3Data, path) {
 
     const graphScript =
 `var svg = d3.select("#my_canvas"),
@@ -24,7 +24,7 @@ initializeSimulation();`;
 
         const htmlRender = pug.compileFile('template/scope.pug')({})
 
-        fs.writeFile('cosmographe.html', htmlRender, (err) => {
+        fs.writeFile(path + 'cosmographe.html', htmlRender, (err) => {
             if (err) { console.error( 'Err. write home index file: ' + err) }
             console.log('create cosmographe.html file');
         });

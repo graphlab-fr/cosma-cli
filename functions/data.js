@@ -1,11 +1,12 @@
 const fs = require('fs')
-    , jsonify = require('./jsonify');
+    , jsonify = require('./jsonify')
+    , path = require('./modelize').historyPath;
 
 if (fs.existsSync('./data') === false) {
     fs.mkdirSync('./data') }
 
-function nodes(nodeList) {
-    fs.writeFile('./data/nodes.json', '[' + nodeList.join(',') + ']', (err) => {
+function nodes(nodeList, path) {
+    fs.writeFile(path + 'data/nodes.json', '[' + nodeList.join(',') + ']', (err) => {
         if (err) { return console.error( 'Err. write nodes.json file : ' + err) }
         console.log('create nodes.json file');
     });
@@ -13,8 +14,8 @@ function nodes(nodeList) {
 
 exports.nodes = nodes;
 
-function edges(edgeList) {
-    fs.writeFile('./data/edges.json', '[' + edgeList.join(',') + ']', (err) => {
+function edges(edgeList, path) {
+    fs.writeFile(path + 'data/edges.json', '[' + edgeList.join(',') + ']', (err) => {
         if (err) { return console.error( 'Err. write edges.json file : ' + err) }
         console.log('create edges.json file');
     });
@@ -22,8 +23,8 @@ function edges(edgeList) {
 
 exports.edges = edges;
 
-function forSigma(nodeList, edgeList) {
-    fs.writeFile('./data/sigma.json', jsonify.sigma(nodeList, edgeList), (err) => {
+function forSigma(nodeList, edgeList, path) {
+    fs.writeFile(path + 'data/sigma.json', jsonify.sigma(nodeList, edgeList), (err) => {
         if (err) { return console.error( 'Err. write sigma.json file : ' + err) }
         console.log('create sigma.json file');
     });
@@ -31,8 +32,8 @@ function forSigma(nodeList, edgeList) {
 
 exports.forSigma = forSigma;
 
-function forD3(nodeList, edgeList) {
-    fs.writeFile('./data/d3.json', jsonify.d3(nodeList, edgeList), (err) => {
+function forD3(nodeList, edgeList, path) {
+    fs.writeFile(path + 'data/d3.json', jsonify.d3(nodeList, edgeList), (err) => {
         if (err) { return console.error( 'Err. write d3.json file : ' + err) }
         console.log('create d3.json file');
     });

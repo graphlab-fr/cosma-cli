@@ -4,6 +4,7 @@ const fs = require('fs')
     , edges = require('./edges')
     , jsonify = require('./jsonify')
     , dataGenerator = require('./data')
+    , savePath = require('./history').historyPath
     , rand = require('./rand')
     , config = require('./verifconfig').config;
 
@@ -69,9 +70,9 @@ for (let file of files) {
     }
 }
 
-require('./template').consmographe(jsonify.d3(entities.nodes,entities.edges));
+require('./template').consmographe(jsonify.d3(entities.nodes,entities.edges), savePath);
 
-dataGenerator.nodes(entities.nodes);
-dataGenerator.edges(entities.edges);
-dataGenerator.forSigma(entities.nodes, entities.edges);
-dataGenerator.forD3(entities.nodes, entities.edges);
+dataGenerator.nodes(entities.nodes, savePath);
+dataGenerator.edges(entities.edges, savePath);
+dataGenerator.forSigma(entities.nodes, entities.edges, savePath);
+dataGenerator.forD3(entities.nodes, entities.edges, savePath);

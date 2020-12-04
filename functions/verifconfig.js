@@ -18,7 +18,7 @@ types:
 
 const config = yamlReader.safeLoad(fs.readFileSync('config.yml', 'utf8'));
 
-if (!fs.existsSync(config.files_origin)){
+if (!fs.existsSync(config.files_origin)) {
     console.error('You must specify a valid file path to your Markdown database file.');
     process.exit();
 }
