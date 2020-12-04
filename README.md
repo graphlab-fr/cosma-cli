@@ -19,6 +19,17 @@ $ npm i
 
 Dans le fichier `config.yml`, remplacer la valeur de `files_origin` par le chemin du répertoire de fiches à traiter.
 
+### Modifier le chemin vers les fichiers
+
+```bash
+$ node app path <path>
+```
+### Modifier les types valides
+
+```bash
+$ node app path <type type type…>
+```
+
 ## Utilisation
 
 ### Générer le graphe
