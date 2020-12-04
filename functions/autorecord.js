@@ -1,6 +1,6 @@
 const fs = require('fs')
     , moment = require('moment')
-    , config = require('../app').config;
+    , config = require('./verifconfig').config;
 
 function genMdFile(title, type, tags) {
 
