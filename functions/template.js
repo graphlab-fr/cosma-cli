@@ -2,7 +2,7 @@ const fs = require('fs')
     , pug = require('pug')
     , config = require('./verifconfig').config;
 
-function consmographe(d3Data, path) {
+function cosmoscope(d3Data, path) {
 
     const graphScript =
 `var svg = d3.select("#my_canvas"),
