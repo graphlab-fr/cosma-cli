@@ -1,14 +1,6 @@
-const fs = require('fs')
-    , yamlReader = require('js-yaml');
-
-require('./functions/dirspace');
-
-const args = process.argv.slice(2)
-    , config = yamlReader.safeLoad(fs.readFileSync('config.yml', 'utf8'));
-
-exports.config = config;
-
 require('./functions/verifconfig');
+
+const args = process.argv.slice(2);
 
 switch (args[0]) {
     case 'modelize':

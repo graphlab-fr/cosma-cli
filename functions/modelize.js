@@ -5,7 +5,7 @@ const fs = require('fs')
     , jsonify = require('./jsonify')
     , dataGenerator = require('./data')
     , rand = require('./rand')
-    , config = require('../app').config;
+    , config = require('./verifconfig').config;
 
 let id = 1
     , fileIds = []
