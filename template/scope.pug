@@ -15,7 +15,7 @@ html(lang='fr')
         div.index
             ul
                 each link in index
-                    li(data-id=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
+                    li(class='id-link',title=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
         
         include graph-d3.html
 
@@ -27,8 +27,13 @@ html(lang='fr')
             
             each content in index
                 aside(class='fiche', id=content.id)
-                    h2 #{content.title}
+                    h1 #{content.title}
                     div !{content.content}
+                    if content.links.length !== 0
+                        h5 Liens
+                        ul
+                            each link in content.links
+                                li(class='id-link',onclick='openRecord(' + link + ')') #{link}
 
         script
             include graph-script.js

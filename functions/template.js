@@ -28,7 +28,8 @@ initializeSimulation();`;
             index: files.map(file => ({
                 id: file.metas.id,
                 title: file.metas.title,
-                content: mdIt.render(file.content)
+                content: mdIt.render(file.content),
+                links: file.links
             }))
         })
 

@@ -14,3 +14,8 @@
 .fiche {
     display: none;
 }
+
+.id-link {
+    text-decoration: underline;
+    cursor: pointer;
+}
