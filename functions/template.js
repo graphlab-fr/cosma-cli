@@ -33,14 +33,14 @@ initializeSimulation();`;
             }))
         })
 
-        fs.writeFile(path + 'cosmographe.html', htmlRender, (err) => {
+        fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
             if (err) { console.error( 'Err. write cosmographe file: ' + err) }
         });
 
         if (fs.existsSync(config.export_target)) {
-            fs.writeFile(config.export_target + 'cosmographe.html', htmlRender, (err) => {
+            fs.writeFile(config.export_target + 'cosmoscope.html', htmlRender, (err) => {
                 if (err) { console.error( 'Err. write cosmographe file: ' + err) }
-                console.log('create cosmographe.html file');
+                console.log('create cosmoscope.html file');
             });
         } else {
             console.error('You must specify a valid target to export in the configuration.');

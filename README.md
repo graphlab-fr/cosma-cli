@@ -45,7 +45,7 @@ $ node app atype <type type type…>
 $ node app modelize
 ```
 
-Le fichier `cosmographe.html` contient la visualisation. Il faut l'ouvrir dans un navigateur web. Il se trouve selon ce qui a été indiqué dans la configuration (`export_target`).
+Le fichier `cosmoscope.html` contient la visualisation. Il faut l'ouvrir dans un navigateur web. Il se trouve selon ce qui a été indiqué dans la configuration (`export_target`).
 
 Il est également placé dans le répertoire `/history` (dans un sous-répertoire portant la date du jour).
 Sont joints dans ce sous-répertoire des fichiers JSON contenant les données générés.
