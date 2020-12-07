@@ -1,4 +1,4 @@
-# graph-data-generator
+![](CosmaLogo.png)
 
 Pré-requis : installer [NodeJS](https://nodejs.org/fr/) version 12 ou supérieure.
 
