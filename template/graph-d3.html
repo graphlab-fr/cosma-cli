@@ -9,27 +9,9 @@
         <p><label>size</label> Radius multiplier</p>
         <label>
             coeff
-            <output id="size_coeffSliderOutput">1</output>
-            <input id="size_coeffSliderInput" type="range" min="0.1" max="1" value="1" step="0.01"
+            <output id="size_coeffSliderOutput">0.25</output>
+            <input id="size_coeffSliderInput" type="range" min="0.1" max="1" value="0.25" step="0.01"
                 oninput="d3.select('#size_coeffSliderOutput').text(value); updateAll();">
-        </label>
-    </div>
-
-    <div class="force">
-        <p><label><input type="checkbox" checked onchange="forceProperties.link.enabled = this.checked; updateAll();">
-                link</label> Sets link length</p>
-        <label title="The force will push/pull nodes to make links this long">
-            distance
-            <output id="link_DistanceSliderOutput">30</output>
-            <input type="range" min="0" max="100" value="30" step="1"
-                oninput="d3.select('#link_DistanceSliderOutput').text(value); forceProperties.link.distance=value; updateAll();">
-        </label>
-        <label
-            title="Higher values increase rigidity of the links (WARNING: high values are computationally expensive)">
-            iterations
-            <output id="link_IterationsSliderOutput">1</output>
-            <input type="range" min="1" max="10" value="1" step="1"
-                oninput="d3.select('#link_IterationsSliderOutput').text(value); forceProperties.link.iterations=value; updateAll();">
         </label>
     </div>
 
@@ -38,8 +20,8 @@
                 charge</label> Attracts (+) or repels (-) nodes to/from each other.</p>
         <label title="Negative strength repels nodes. Positive strength attracts nodes.">
             strength
-            <output id="charge_StrengthSliderOutput">-30</output>
-            <input type="range" min="-200" max="50" value="-30" step=".1"
+            <output id="charge_StrengthSliderOutput">-50</output>
+            <input type="range" min="-200" max="50" value="-50" step=".1"
                 oninput="d3.select('#charge_StrengthSliderOutput').text(value); forceProperties.charge.strength=value; updateAll();">
         </label>
         <label title="Minimum distance where force is applied">
@@ -53,6 +35,24 @@
             <output id="charge_distanceMaxSliderOutput">2000</output>
             <input type="range" min="0" max="2000" value="2000" step=".1"
                 oninput="d3.select('#charge_distanceMaxSliderOutput').text(value); forceProperties.charge.distanceMax=value; updateAll();">
+        </label>
+    </div>
+
+    <div class="force">
+        <p><label><input type="checkbox" checked onchange="forceProperties.link.enabled = this.checked; updateAll();">
+                link</label> Sets link length</p>
+        <label title="The force will push/pull nodes to make links this long">
+            distance
+            <output id="link_DistanceSliderOutput">1</output>
+            <input type="range" min="0" max="100" value="1" step="1"
+                oninput="d3.select('#link_DistanceSliderOutput').text(value); forceProperties.link.distance=value; updateAll();">
+        </label>
+        <label
+            title="Higher values increase rigidity of the links (WARNING: high values are computationally expensive)">
+            iterations
+            <output id="link_IterationsSliderOutput">1</output>
+            <input type="range" min="1" max="10" value="1" step="1"
+                oninput="d3.select('#link_IterationsSliderOutput').text(value); forceProperties.link.iterations=value; updateAll();">
         </label>
     </div>
 
@@ -134,9 +134,9 @@
     </div>
 
 </section>
-<aside>
+<aside class="legend">
     <title>Légende :</title>
-    <p class="t_lexique">Lexique</p>
+    <p class="t_concept">Concept</p>
     <p class="t_publication">Publication</p>
     <p class="t_lecture">Lecture</p>
     <p class="t_note">Note</p>

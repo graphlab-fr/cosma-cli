@@ -18,7 +18,7 @@
         },
         charge: {
             enabled: true,
-            strength: -30,
+            strength: -50,
             distanceMin: 1,
             distanceMax: 2000
         },
@@ -40,7 +40,7 @@
         },
         link: {
             enabled: true,
-            distance: 30,
+            distance: 1,
             iterations: 1
         }
     }

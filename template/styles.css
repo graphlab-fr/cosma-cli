@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+html {
+	 width: 100%;
+	 height: 100%;
+}
+body {
+	 width: 100%;
+	 height: 100%;
+	 margin: 0;
+	 padding: 0;
+	 display: flex;
+	 font-family: sans-serif;
+	 font-size: 80%;
+}
+
+/* INDEX */
+
+.index {
+    overflow: auto;
+    height: 100%;
+    width: 300px;
+    margin: 0;
+    padding: 0;
+}
+.index h1:first-child {
+	font-size: 1em;
+	padding-left: 5px;	
+}
+.index ul {
+	padding-left: 5px;
+}
+.index ul li {
+	list-style-type: none;
+	margin: 0;
+	padding-left: 1rem;
+	text-indent: -1rem;
+}
+
+/* CONTRÔLES */
+
+.controls {
+	 flex-basis: 300px;
+	 padding: 0 5px;
+	 overflow: auto;
+}
+.controls .force {
+	 background-color: #eee;
+	 border-radius: 3px;
+	 padding: 5px;
+	 margin: 5px 0;
+}
+.controls .force p label {
+	 margin-right: .5em;
+	 font-size: 120%;
+	 font-weight: bold;
+}
+.controls .force p {
+	 margin-top: 0;
+}
+.controls .force label {
+	 display: inline-block;
+}
+.controls input[type="checkbox"] {
+	 transform: scale(1.2, 1.2);
+}
+.controls input[type="range"] {
+	 margin: 0 5% 0.5em 5%;
+	 width: 90%;
+}
+/* Alpha */
+.controls .alpha p {
+	 margin-bottom: .25em;
+}
+.controls .alpha .alpha_bar {
+	 height: .5em;
+	 border: 1px #777 solid;
+	 border-radius: 2px;
+	 padding: 1px;
+	 display: flex;
+}
+.controls .alpha .alpha_bar #alpha_value {
+	 background-color: #555;
+	 border-radius: 1px;
+	 flex-basis: 100%
+}
+.controls .alpha .alpha_bar:hover {
+	 border-width: 2px;
+	 margin: -1px;
+}
+.controls .alpha .alpha_bar:active #alpha_value {
+	 background-color: #222
+}
+
+/* SVG (GRAPHE D3) */
+
+#my_canvas {
+	 flex-basis: 100%;
+	 min-width: 200px;
+	 height: 100%;
+
+}
+.links line {
+	 stroke: #aaa;
+}
+.nodes circle {
+	 pointer-events: all;
+}
+
+/* COULEURS */
+
+:root {
+	--concept: rgba(255,127,80, 0.8);
+	--publication: rgba(255,20,147, 0.8);
+	--lecture: rgba(0,191,255, 0.8);
+	--note: rgba(0,128,128, 0.8);
+}
+/* Couleur des noeuds selon le type de fiche */
+circle {
+	 fill: grey;
+	 /* valeur par défaut (restera si type=undefined) */
+	 stroke: grey;
+}
+circle:hover {
+	 stroke: yellow;
+}
+.t_concept {
+	 fill: var(--concept);
+	 stroke: var(--concept);
+}
+.t_publication {
+	 fill: var(--publication);
+	 stroke: var(--publication);
+}
+.t_lecture {
+	 fill: var(--lecture);
+	 stroke: var(--lecture);
+}
+.t_note {
+	 fill: var(--note);
+	 stroke: var(--note);
+}
+/* Légende */
+.legend { margin-top: 5px; }
+.legend p { margin: 0 ;}
+p.t_concept { color: var(--concept); }
+p.t_publication { color: var(--publication); }
+p.t_lecture { color: var(--lecture); }
+p.t_note { color: var(--note); }
+
+/* Infobulles */
+.tip_type {
+	 font-weight: bold;
+	 text-transform: uppercase;
+	 font-size: 8pt;
+}
+.tip_title {
+	 font-weight: thin;
+	 font-size: 14pt;
+}
+
+/* FICHES */
+
+.fiche { display: none; }
+.fiche-content {
+    width: 700px;
+    overflow: auto;
+    height: 100vh;
+}
+.fiche h1:first-child {
+	text-align: center;
+} 
+
+/* LIENS */
+
+.id-link {
+    text-decoration: underline;
+    cursor: pointer;
+}

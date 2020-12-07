@@ -1,6 +1,6 @@
 # graph-data-generator
 
-Pré-requis : installer [NodeJS](https://nodejs.org/fr/) version 12 ou supérieure.
+Pré-requis : installer [NodeJS](https://nodejs.org/fr/) version 12 ou supérieure.
 
 ## Téléchargement
 

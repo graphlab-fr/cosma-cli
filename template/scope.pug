@@ -5,14 +5,13 @@ html(lang='fr')
         meta(charset='utf-8')
         title Cosma - Cosmoscope
         style
-            include graph-style.css
-        style
-            include record-style.css
+            include styles.css
         script
             include d3.js
 
     body
         div.index
+            h1 Index
             ul
                 each link in index
                     li(class='id-link',title=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
