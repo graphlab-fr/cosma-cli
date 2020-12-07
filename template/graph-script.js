@@ -116,6 +116,10 @@
                 .on("drag", dragged)
                 .on("end", dragended));
 
+        node.on('click', function(nodeMetas) {
+            openRecord(nodeMetas.id);
+        })
+
         // node tooltip
         node.append("title")
             .text(function (d) {

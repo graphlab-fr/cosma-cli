@@ -7,7 +7,6 @@ function openRecord(id) {
 
     const elt = document.getElementById(id)
     elt.style.display = 'unset';
-    console.log(elt);
 
     openedRecord = elt
 }
