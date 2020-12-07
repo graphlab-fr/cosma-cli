@@ -1,8 +1,9 @@
 const fs = require('fs')
     , pug = require('pug')
+    , mdIt = require('markdown-it')()
     , config = require('./verifconfig').config;
 
-function consmographe(d3Data, path) {
+function cosmoscope(d3Data, files, path) {
 
     const graphScript =
 `var svg = d3.select("#my_canvas"),
@@ -23,7 +24,13 @@ initializeSimulation();`;
         if (err) { return console.error( 'Err. write graph-data.js file : ' + err) }
         console.log('create graph-data.js file');
 
-        const htmlRender = pug.compileFile('template/scope.pug')({})
+        const htmlRender = pug.compileFile('template/scope.pug')({
+            index: files.map(file => ({
+                id: file.metas.id,
+                title: file.metas.title,
+                content: mdIt.render(file.content)
+            }))
+        })
 
         fs.writeFile(path + 'cosmographe.html', htmlRender, (err) => {
             if (err) { console.error( 'Err. write cosmographe file: ' + err) }
@@ -41,4 +48,4 @@ initializeSimulation();`;
     });
 }
 
-exports.consmographe = consmographe;
+exports.cosmoscope = cosmoscope;

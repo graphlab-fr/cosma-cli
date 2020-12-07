@@ -6,12 +6,33 @@ html(lang='fr')
         title Cosma - Cosmoscope
         style
             include graph-style.css
+        style
+            include record-style.css
         script
             include d3.js
 
     body
+        div.index
+            ul
+                each link in index
+                    li(data-id=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
+        
         include graph-d3.html
+
+        section.fiche-content
+            button(
+                class='fiche__btn-close',
+                onclick='closeRecord()'
+            ) Fermer
+            
+            each content in index
+                aside(class='fiche', id=content.id)
+                    h2 #{content.title}
+                    div !{content.content}
+
         script
             include graph-script.js
         script
             include graph-data.js
+        script
+            include record-script.js

@@ -1,0 +1,16 @@
+.index, .fiche-content {
+    overflow: auto;
+    height: 100vh;
+}
+
+.index {
+    width: 300px;
+}
+
+.fiche-content {
+    width: 700px;
+}
+
+.fiche {
+    display: none;
+}
