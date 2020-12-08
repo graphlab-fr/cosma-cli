@@ -3,10 +3,20 @@ const fs = require('fs')
     , mdIt = require('markdown-it')()
     , config = require('./verifconfig').config;
 
-function cosmoscope(d3Data, files, path) {
+function cosmoscope(nodes, edges, files, path) {
+
+    const d3Data = JSON.stringify({nodes: nodes, links: edges});
+
+    let index = nodes.map(node => ({ id: node.id, title: node.title }));
+    index = JSON.stringify(index);
 
     const graphScript =
-`var svg = d3.select("#my_canvas"),
+`const fuse = new Fuse(${index}, {
+    includeScore: false,
+    keys: ['title']
+});
+
+var svg = d3.select("#my_canvas"),
 width = +svg.node().getBoundingClientRect().width,
 height = +svg.node().getBoundingClientRect().height;
 

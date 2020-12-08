@@ -7,10 +7,14 @@ html(lang='fr')
         style
             include styles.css
         script
-            include d3.js
+            include libs/d3.js
+            include libs/fuse.js
 
     body
         div.index
+            input(id='search',placeholder='Rechercher')
+            ul(id='search-result-list')
+
             h1 Index
             ul
                 each link in index
@@ -35,8 +39,7 @@ html(lang='fr')
                                 li(class='id-link',onclick='openRecord(' + link + ')') #{link}
 
         script
-            include graph-script.js
-        script
+            include scripts/graph.js
+            include scripts/record.js
+            include scripts/search.js
             include graph-data.js
-        script
-            include record-script.js

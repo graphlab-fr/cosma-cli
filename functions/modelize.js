@@ -2,7 +2,6 @@ const fs = require('fs')
     , yamlFrontmatter = require('yaml-front-matter')
     , path = require('path')
     , edges = require('./edges')
-    , jsonify = require('./jsonify')
     , dataGenerator = require('./data')
     , savePath = require('./history').historyPath
     , rand = require('./rand')
@@ -11,7 +10,7 @@ const fs = require('fs')
 let id = 1
     , fileIds = []
     , errors = []
-    , entities = { nodes: [], edges: [] }
+    , entities = { nodes: [], edges: [], indexEntry: [] }
     , files = fs.readdirSync(config.files_origin, 'utf8')
         .filter(file_name => path.extname(file_name) === '.md')
         .map(function(file) {
@@ -65,20 +64,33 @@ const ids = files.map(file => file.links).flat();
 
 for (let file of files) {
     let size = edges.getRank(ids, file.metas.id, file.links.length);
-    entities.nodes.push(jsonify.node(file.metas.id, file.metas.title, file.metas.type, size * 10, rand.randFloat(40, 50), rand.randFloat(40, 50)));
+    entities.nodes.push({
+        id: Number(file.metas.id),
+        title: file.metas.title,
+        type: file.metas.type,
+        size: Number(size * 10),
+        x: Number(rand.randFloat(40, 50)),
+        y: Number(rand.randFloat(40, 50))
+    });
+    // entities.indexEntry.push(jsonify.record(file.metas.id, file.metas.title))
 
     if (file.links.length !== 0) {
         for (let link of file.links) {
-            entities.edges.push(jsonify.edge(id++, file.metas.id, link));
+            entities.edges.push({
+                id: Number(id++),
+                source: Number(file.metas.id),
+                target: Number(link)
+            });
         }
     }
 }
 
-require('./template').cosmoscope(jsonify.d3(entities.nodes,entities.edges), files, savePath);
+require('./template').cosmoscope(entities.nodes, entities.edges, files, savePath);
 
-dataGenerator.nodes(entities.nodes, savePath);
-dataGenerator.edges(entities.edges, savePath);
-dataGenerator.forSigma(entities.nodes, entities.edges, savePath);
-dataGenerator.forD3(entities.nodes, entities.edges, savePath);
+dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
+dataGenerator.edges(JSON.stringify(entities.edges), savePath);
+// dataGenerator.index(entities.indexEntry, savePath);
+// dataGenerator.forSigma(entities.nodes, entities.edges, savePath);
+// dataGenerator.forD3(entities.nodes, entities.edges, savePath);
 
 require('./log').register(errors, savePath);
