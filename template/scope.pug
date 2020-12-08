@@ -36,7 +36,7 @@ html(lang='fr')
                         h5 Liens
                         ul
                             each link in content.links
-                                li(class='id-link',onclick='openRecord(' + link + ')') #{link}
+                                li(class='id-link',title=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
 
         script
             include scripts/graph.js

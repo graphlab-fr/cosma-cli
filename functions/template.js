@@ -7,11 +7,10 @@ function cosmoscope(nodes, edges, files, path) {
 
     const d3Data = JSON.stringify({nodes: nodes, links: edges});
 
-    let index = nodes.map(node => ({ id: node.id, title: node.title }));
-    index = JSON.stringify(index);
+    let recordIndex = nodes.map(node => ({ id: node.id, title: node.title }));
 
     const graphScript =
-`const fuse = new Fuse(${index}, {
+`const fuse = new Fuse(${JSON.stringify(recordIndex)}, {
     includeScore: false,
     keys: ['title']
 });
@@ -35,12 +34,27 @@ initializeSimulation();`;
         console.log('create graph-data.js file');
 
         const htmlRender = pug.compileFile('template/scope.pug')({
-            index: files.map(file => ({
-                id: file.metas.id,
-                title: file.metas.title,
-                content: mdIt.render(file.content),
-                links: file.links
-            }))
+            index: files.map(function (file) {
+                let links = [];
+
+                if (file.links.length !== 0) {
+                    
+                    for (let linkId of file.links) {
+                        
+                        for (var i = 0; i < recordIndex.length; i++) {
+                            if (recordIndex[i].id !== Number(linkId)) { continue; }
+                            links.push({id: linkId, title: recordIndex[i].title})
+                        }
+                    }
+                }
+
+                return {
+                    id: file.metas.id,
+                    title: file.metas.title,
+                    content: mdIt.render(file.content),
+                    links: links
+                }
+            })
         })
 
         fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
