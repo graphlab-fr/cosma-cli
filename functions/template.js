@@ -15,7 +15,7 @@ function cosmoscope(nodes, edges, files, path) {
     keys: ['title']
 });
 
-var svg = d3.select("#my_canvas"),
+var svg = d3.select("#graph_canvas"),
 width = +svg.node().getBoundingClientRect().width,
 height = +svg.node().getBoundingClientRect().height;
 

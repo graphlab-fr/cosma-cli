@@ -1,9 +1,15 @@
 @charset "UTF-8";
-
+:root {
+	--concept: rgba(255,127,80, 0.8);
+	--publication: rgba(255,20,147, 0.8);
+	--lecture: rgba(0,191,255, 0.8);
+	--note: rgba(0,128,128, 0.8);
+}
 html {
 	 width: 100%;
 	 height: 100%;
 }
+html * { box-sizing: border-box }
 body {
 	 width: 100%;
 	 height: 100%;
@@ -23,7 +29,7 @@ body {
     margin: 0;
     padding: 0;
 }
-.index h1:first-child {
+.index h1 {
 	font-size: 1em;
 	padding-left: 5px;	
 }
@@ -92,13 +98,35 @@ body {
 	 background-color: #222
 }
 
-/* SVG (GRAPHE D3) */
+/* GRAPHE */
 
-#my_canvas {
+#graph {
 	 flex-basis: 100%;
 	 min-width: 200px;
 	 height: 100%;
+	 position: relative
+}
 
+/* Légende */
+#graph_key {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: 5px;
+}
+#graph_key p { margin: 0 ;}
+p.t_concept { color: var(--concept); }
+p.t_publication { color: var(--publication); }
+p.t_lecture { color: var(--lecture); }
+p.t_note { color: var(--note); }
+
+/* SVG */
+#graph_canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
 }
 .links line {
 	 stroke: #aaa;
@@ -107,14 +135,6 @@ body {
 	 pointer-events: all;
 }
 
-/* COULEURS */
-
-:root {
-	--concept: rgba(255,127,80, 0.8);
-	--publication: rgba(255,20,147, 0.8);
-	--lecture: rgba(0,191,255, 0.8);
-	--note: rgba(0,128,128, 0.8);
-}
 /* Couleur des noeuds selon le type de fiche */
 circle {
 	 fill: grey;
@@ -140,13 +160,6 @@ circle:hover {
 	 fill: var(--note);
 	 stroke: var(--note);
 }
-/* Légende */
-.legend { margin-top: 5px; }
-.legend p { margin: 0 ;}
-p.t_concept { color: var(--concept); }
-p.t_publication { color: var(--publication); }
-p.t_lecture { color: var(--lecture); }
-p.t_note { color: var(--note); }
 
 /* Infobulles */
 .tip_type {
@@ -166,10 +179,26 @@ p.t_note { color: var(--note); }
     width: 700px;
     overflow: auto;
     height: 100vh;
+    font: 16px/1.5 "Georgia", serif;
+    padding: 1rem;
 }
 .fiche h1:first-child {
 	text-align: center;
-} 
+}
+/* Adapté de Typesafe.css: */
+.fiche-content h1,h2,h3,h4,h5,h6 {margin:2.5rem 0 1rem;}
+.fiche-content ul li, .fiche ol li {margin-top:0.5rem;}
+.fiche-content img{height:auto;max-width:100%;}
+.fiche-content pre{border: 1px solid lightgrey;overflow:auto;}
+.fiche-content code{color:orangered;display:inline-block;}
+.fiche-content pre code{padding:1rem;}
+.fiche-content blockquote{border-left:5px solid lightgrey;margin:0;padding-left:1rem;}
+.fiche-content table{border-collapse:collapse;margin:2rem 0;text-align:left;width:100%;}
+.fiche-content tr{border-bottom:1px solid lightgrey;}
+.fiche-content th, .fiche-content td{padding:0.5rem;}
+.fiche-content hr{background:lightgrey;border:0;height:1px;margin:2rem 0;}
+.fiche-content a {word-wrap: break-word;}
+/* fin */
 
 /* LIENS */
 
