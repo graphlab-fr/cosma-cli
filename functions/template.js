@@ -7,7 +7,7 @@ function cosmoscope(nodes, edges, files, path) {
 
     const d3Data = JSON.stringify({nodes: nodes, links: edges});
 
-    let recordIndex = nodes.map(node => ({ id: node.id, title: node.title }));
+    let recordIndex = nodes.map(node => ({ id: node.id, title: node.label }));
 
     const graphScript =
 `const fuse = new Fuse(${JSON.stringify(recordIndex)}, {

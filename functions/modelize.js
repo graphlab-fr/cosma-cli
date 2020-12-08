@@ -66,7 +66,7 @@ for (let file of files) {
     let size = edges.getRank(ids, file.metas.id, file.links.length);
     entities.nodes.push({
         id: Number(file.metas.id),
-        title: file.metas.title,
+        label: file.metas.title,
         type: file.metas.type,
         size: Number(size * 10),
         x: Number(rand.randFloat(40, 50)),
