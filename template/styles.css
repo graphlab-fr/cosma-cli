@@ -113,12 +113,14 @@ body {
 	top: 0;
 	left: 0;
 	margin-top: 5px;
+	z-index: 100;
 }
 #graph_key p { margin: 0 ;}
-p.t_concept { color: var(--concept); }
-p.t_publication { color: var(--publication); }
-p.t_lecture { color: var(--lecture); }
-p.t_note { color: var(--note); }
+.filter {cursor: pointer;}
+[data-filter="concept"] { color: var(--concept); }
+[data-filter="publication"] { color: var(--publication); }
+[data-filter="lecture"] { color: var(--lecture); }
+[data-filter="note"] { color: var(--note); }
 
 /* SVG */
 #graph_canvas {

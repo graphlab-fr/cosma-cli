@@ -47,7 +47,8 @@ initializeSimulation();`;
                     content: mdIt.render(file.content),
                     links: links
                 }
-            })
+            }),
+            types: config.types
         })
 
         fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {

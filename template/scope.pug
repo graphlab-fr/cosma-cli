@@ -22,6 +22,14 @@ html(lang='fr')
         
         include graph-d3.html
 
+        div(id='graph')
+            aside(id='graph_key')
+                span Légende :
+                ul
+                    each typ in types
+                        li(data-filter=typ,class='filter') #{typ}
+            svg(id='graph_canvas')
+
         section.fiche-content
             button(
                 class='fiche__btn-close',
@@ -40,6 +48,7 @@ html(lang='fr')
 
         script
             include scripts/graph.js
+            include scripts/filter.js
             include scripts/record.js
             include scripts/search.js
             include graph-data.js

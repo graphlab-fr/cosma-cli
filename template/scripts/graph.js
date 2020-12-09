@@ -67,20 +67,53 @@
     //////////// DISPLAY ////////////
 
     // generate the svg objects and force simulation
-    function initializeDisplay() {
+    function initializeDisplay(filter = undefined) {
+
+        svg.selectAll('g').remove();
+
+        let filteredData;
+
+        if (filter !== undefined) {
+            filteredData = {nodes: [], links: []};
+            let contextNode = [];
+            
+            for (const elt of graph.nodes) {
+    
+                if (elt.type === filter) {
+                    filteredData.nodes.push(elt);
+                    contextNode.push(elt.id);
+                }
+            }
+            
+            for (const elt of graph.links) {
+
+                if (elt.source.type === filter && elt.target.type === filter) {
+                    filteredData.links.push(elt);
+                }
+            }
+        } else {
+            filteredData = graph;
+        }
+
         // set the data and properties of link lines
         link = svg.append("g")
             .attr("class", "links")
             .selectAll("line")
-            .data(graph.links)
+            .data(filteredData.links)
             .enter().append("line");
 
         // set the data and properties of node circles
         node = svg.append("g")
             .attr("class", "nodes")
             .selectAll("circle")
-            .data(graph.nodes)
+            .data(filteredData.nodes)
             .enter().append("circle")
+            // .filter(function(nodeMetas) {
+            //     if (nodeMetas.type !== 'référentiel') {
+            //         return false; }
+
+            //     return nodeMetas
+            // })
             .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
