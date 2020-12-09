@@ -68,7 +68,7 @@ for (let file of files) {
         id: Number(file.metas.id),
         label: file.metas.title,
         type: file.metas.type,
-        size: Number(size * 10),
+        size: Number(size),
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });

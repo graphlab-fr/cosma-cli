@@ -15,17 +15,10 @@ function cosmoscope(nodes, edges, files, path) {
     keys: ['title']
 });
 
-var svg = d3.select("#graph_canvas"),
-width = +svg.node().getBoundingClientRect().width,
-height = +svg.node().getBoundingClientRect().height;
-
-// svg objects
-var link, node;
-// the data - an object with nodes and links
-var graph;
+const forceProperties = ${JSON.stringify(config.graph_params)}
 
 // load the data
-graph = ${d3Data};
+let graph = ${d3Data};
 initializeDisplay();
 initializeSimulation();`;
     

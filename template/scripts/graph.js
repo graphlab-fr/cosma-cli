@@ -1,6 +1,11 @@
     //////////// FORCE SIMULATION //////////// 
 
     // force simulator
+    var svg = d3.select("#graph_canvas"),
+    width = +svg.node().getBoundingClientRect().width,
+    height = +svg.node().getBoundingClientRect().height;
+
+    var link, node;
     var simulation = d3.forceSimulation();
 
     // set up the simulation and event to update locations after each tick
@@ -8,41 +13,6 @@
         simulation.nodes(graph.nodes);
         initializeForces();
         simulation.on("tick", ticked);
-    }
-
-    // values for all forces
-    forceProperties = {
-        center: {
-            x: 0.5,
-            y: 0.5
-        },
-        charge: {
-            enabled: true,
-            strength: -50,
-            distanceMin: 1,
-            distanceMax: 2000
-        },
-        collide: {
-            enabled: true,
-            strength: .7,
-            iterations: 1,
-            radius: 5
-        },
-        forceX: {
-            enabled: true,
-            strength: .1,
-            x: .5
-        },
-        forceY: {
-            enabled: true,
-            strength: .1,
-            y: .5
-        },
-        link: {
-            enabled: true,
-            distance: 1,
-            iterations: 1
-        }
     }
 
     // add forces to the simulation
@@ -202,7 +172,7 @@
 
     // update the display positions after each simulation tick
     function ticked() {
-    		var coeff = document.getElementById("size_coeffSliderOutput").value;
+
         link
             .attr("x1", function (d) {
                 return d.source.x;
@@ -225,7 +195,7 @@
                 return d.y;
             })
             .attr("r", function (d) {
-            		return d.size * coeff;
+            		return d.size * forceProperties.node.sizeCoeff;
         		});
         d3.select('#alpha_value').style('flex-basis', (simulation.alpha() * 100) + '%');
     }

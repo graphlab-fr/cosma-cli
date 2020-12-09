@@ -7,7 +7,16 @@ if (!fs.existsSync('config.yml')){
     let baseConfig = yamlEditor.safeDump({
         files_origin: '',
         export_target: '',
-        types: ['undefined']
+        types: ['undefined'],
+        graph_params: {
+            center: { x: 0.5, y: 0.5 },
+            charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
+            collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
+            link: { enabled: true, distance: 1, iterations: 1 },
+            node: { sizeCoeff: 1 },
+            forceX: { enabled: true, strength: 0.1, x: 0.5 },
+            forceY: { enabled: true, strength: 0.1, y: 0.5 }
+        }
     });
 
     console.log('create config.yml file');
@@ -17,18 +26,27 @@ if (!fs.existsSync('config.yml')){
     });
 }
 
-// Read and export config
+// Read config
 
 const config = yamlEditor.safeLoad(fs.readFileSync('config.yml', 'utf8'));
 
-exports.config = config;
+// Valid & export config values
 
-// Valid config values
+if (config.files_origin === undefined
+    || config.export_target === undefined
+    || config.types === undefined
+    || config.graph_params === undefined) {
+
+    console.error('The config is not complete. Check it, or reboot.');
+    process.exit();
+}
 
 if (!fs.existsSync(config.files_origin)) {
     console.error('You must specify a valid file path to your Markdown database file.');
     process.exit();
 }
+
+exports.config = config;
 
 // Function for modify config
 
