@@ -8,6 +8,8 @@ function openRecord(id) {
     const elt = document.getElementById(id)
     elt.style.display = 'unset';
 
+    historique.actualiser(id);
+
     openedRecord = elt
 }
 
