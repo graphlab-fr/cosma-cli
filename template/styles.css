@@ -29,6 +29,9 @@ body {
     margin: 0;
     padding: 0;
 }
+#logo {
+  width: 100%;
+}
 .index h1 {
 	font-size: 1em;
 	padding-left: 5px;	
