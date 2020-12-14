@@ -18,6 +18,12 @@ body {
 	 display: flex;
 	 font-family: sans-serif;
 	 font-size: 80%;
+	 overflow: hidden;
+}
+ul { padding: 0; }
+li {
+	padding: 0;
+	margin: 5px 0;
 }
 
 /* INDEX */
@@ -36,15 +42,32 @@ body {
 	font-size: 1em;
 	padding-left: 5px;	
 }
-.index ul {
+.index #record-list {
+	overflow: hidden;
+	height: 0px;
 	padding-left: 5px;
+}
+.index #record-list.active {
+	height: 800px;
 }
 .index ul li {
 	list-style-type: none;
-	margin: 0;
+	margin: 5px 0;
 	padding-left: 1rem;
 	text-indent: -1rem;
 }
+#index-stick {
+	position: relative;
+	width: 150px;
+}
+#index-stick::after {
+	content: '↑';
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#index-stick.active::after { content: '↓'; }
 
 /* CONTRÔLES */
 
@@ -181,12 +204,23 @@ circle:hover {
 
 .fiche { display: none; }
 .fiche-content {
+	position: absolute;
+	top: 0;
+	right: 0;
     width: 700px;
     overflow: auto;
     height: 100vh;
     font: 16px/1.5 "Georgia", serif;
-    padding: 1rem;
+	padding: 1rem;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transform: translate(100%);
+	transition: transform .2s;
+    transition-timing-function: cubic-bezier(.64,-0.01,.87,.66);
 }
+
+.fiche-content.active {	transform: translate(0%); }
+
 .fiche h1:first-child {
 	text-align: center;
 }

@@ -21,6 +21,8 @@
             resultElement.classList.add('search-result', 'id-link');
             resultElement.textContent = result.item.title;
             searchResult.appendChild(resultElement);
+
+            console.log(resultElement);
         
             resultElement.addEventListener('click', () => {
                 openRecord(result.item.id);
