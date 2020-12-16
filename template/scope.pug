@@ -21,19 +21,22 @@ html(lang='fr')
 
             include cosmalogo.svg
 
-            input(id='search',placeholder='Rechercher')
+            input(class='search-bar',id='search',placeholder='Rechercher')
             ul(id='search-result-list')
 
-            h1(class='arrow-switch',id='index-stick') Index
-            ul(id='record-list')
-                each link in index
-                    li(
-                        class='id-link',
-                        title=link.id,
-                        onclick='openRecord(' + link.id + ')') #{link.title}
+            section
+                h1(class='arrow-switch',id='index-stick') Index
+                ul(id='record-list')
+                    each link in index
+                        li(
+                            class='id-link',
+                            title=link.id,
+                            onclick='openRecord(' + link.id + ')') #{link.title}
 
-            h1(class='arrow-switch',id='control-stick') Controls
-            include graph-d3.html
+            section
+                h1(class='arrow-switch',id='control-stick') Controls
+                div(class='controls',id='control-list')
+                    include graph-d3.html
 
         div(id='graph')
 

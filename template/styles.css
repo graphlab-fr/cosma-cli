@@ -20,7 +20,10 @@ body {
 	 font-size: 80%;
 	 overflow: hidden;
 }
-ul { padding: 0; }
+ul {
+	padding: 0;
+	margin: 0;
+}
 li {
 	padding: 0;
 	margin: 5px 0;
@@ -28,15 +31,21 @@ li {
 
 /* INDEX */
 
+.search-bar { width: 100%; }
+#search-result-list { margin-bottom: 20px; }
+
 .index {
     overflow: auto;
     height: 100%;
     width: 300px;
     margin: 0;
-    padding: 0;
+    padding: 0 20px;
 }
 #logo {
   width: 100%;
+}
+.index section {
+	border-top: 1px solid gray;
 }
 .index h1 {
 	font-size: 1em;
@@ -74,8 +83,6 @@ li {
 /* CONTRÔLES */
 
 .controls {
-	 flex-basis: 300px;
-	 padding: 0 5px;
 	 height: 0px;
 	 overflow: hidden;
 }
