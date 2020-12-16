@@ -21,11 +21,11 @@ html(lang='fr')
 
             include cosmalogo.svg
 
-            input(class='search-bar',id='search',placeholder='Rechercher')
+            input(class='search-bar',id='search',placeholder='Rechercher...')
             ul(id='search-result-list')
 
             section
-                h1 Types
+                h1 Filtres
                 ul
                     each typ in types
                         li(data-filter=typ,class='filter') #{typ}
@@ -40,7 +40,7 @@ html(lang='fr')
                             onclick='openRecord(' + link.id + ')') #{link.title}
 
             section
-                h1(class='arrow-switch',id='control-stick') Controls
+                h1(class='arrow-switch',id='control-stick') Paramètres du graphe
                 div(class='controls',id='control-list')
                     include graph-d3.html
 
