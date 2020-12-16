@@ -17,52 +17,53 @@ html(lang='fr')
             include libs/fuse.js
 
     body
-        div(class='index')
+        div(class='interface')
+        
+            div(class='index')
 
-            include cosmalogo.svg
+                include cosmalogo.svg
 
-            input(class='search-bar',id='search',placeholder='Rechercher...')
-            ul(id='search-result-list')
+                input(class='search-bar',id='search',placeholder='Rechercher...')
+                ul(id='search-result-list')
 
-            section
-                h1 Filtres
-                ul
-                    each typ in types
-                        li(data-filter=typ,class='filter') #{typ}
+                section
+                    h1 Filtres
+                    ul
+                        each typ in types
+                            li(data-filter=typ,class='filter') #{typ}
 
-            section
-                h1(class='arrow-switch',id='index-stick') Index
-                ul(id='record-list')
-                    each link in index
-                        li(
-                            class='id-link',
-                            title=link.id,
-                            onclick='openRecord(' + link.id + ')') #{link.title}
+                section
+                    h1(class='arrow-switch',id='index-stick') Index
+                    ul(id='record-list')
+                        each link in index
+                            li(
+                                class='id-link',
+                                title=link.id,
+                                onclick='openRecord(' + link.id + ')') #{link.title}
 
-            section
-                h1(class='arrow-switch',id='control-stick') Paramètres du graphe
-                div(class='controls',id='control-list')
-                    include graph-d3.html
+                section
+                    h1(class='arrow-switch',id='control-stick') Paramètres du graphe
+                    div(class='controls',id='control-list')
+                        include graph-d3.html
 
-        div(id='graph')
-            svg(id='graph_canvas')
+            section(class='fiche-content',id='record-container')
 
-        section(class='fiche-content',id='record-container')
-
-            button(
-                class='fiche__btn-close',
-                onclick='closeRecord()') Fermer
+                button(
+                    class='fiche__btn-close',
+                    onclick='closeRecord()') Fermer
             
-            each content in index
-                aside(class='fiche', id=content.id)
-                    h1 #{content.title}
-                    div !{content.content}
+                each content in index
+                    aside(class='fiche', id=content.id)
+                        h1 #{content.title}
+                        div !{content.content}
 
-                    if content.links.length !== 0
-                        h5 Liens
-                        ul
-                            each link in content.links
-                                li(class='id-link',title=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
+                        if content.links.length !== 0
+                            h5 Liens
+                            ul
+                                each link in content.links
+                                    li(class='id-link',title=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
+
+        svg(id='graph_canvas')
 
         script
             include scripts/graph.js
