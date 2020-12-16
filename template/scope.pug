@@ -25,6 +25,12 @@ html(lang='fr')
             ul(id='search-result-list')
 
             section
+                h1 Types
+                ul
+                    each typ in types
+                        li(data-filter=typ,class='filter') #{typ}
+
+            section
                 h1(class='arrow-switch',id='index-stick') Index
                 ul(id='record-list')
                     each link in index
@@ -39,13 +45,6 @@ html(lang='fr')
                     include graph-d3.html
 
         div(id='graph')
-
-            aside(id='graph_key')
-                span Légende :
-                ul
-                    each typ in types
-                        li(data-filter=typ,class='filter') #{typ}
-
             svg(id='graph_canvas')
 
         section(class='fiche-content',id='record-container')
