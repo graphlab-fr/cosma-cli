@@ -24,7 +24,7 @@ html(lang='fr')
             input(id='search',placeholder='Rechercher')
             ul(id='search-result-list')
 
-            h1(id='index-stick') Index
+            h1(class='arrow-switch',id='index-stick') Index
             ul(id='record-list')
                 each link in index
                     li(
@@ -32,7 +32,8 @@ html(lang='fr')
                         title=link.id,
                         onclick='openRecord(' + link.id + ')') #{link.title}
 
-        include graph-d3.html
+            h1(class='arrow-switch',id='control-stick') Controls
+            include graph-d3.html
 
         div(id='graph')
 
@@ -67,4 +68,5 @@ html(lang='fr')
             include scripts/record.js
             include scripts/search.js
             include scripts/controler.js
+            include scripts/controls.js
             include graph-data.js

@@ -56,25 +56,31 @@ li {
 	padding-left: 1rem;
 	text-indent: -1rem;
 }
-#index-stick {
+
+.arrow-switch {
 	position: relative;
 	width: 150px;
+	left: 50px;
 }
-#index-stick::after {
-	content: '↑';
+.arrow-switch::after {
+	content: '▲';
 	position: absolute;
 	top: 0;
-	right: 0;
+	left: -50px;
+	color: gray;
 }
-
-#index-stick.active::after { content: '↓'; }
+.arrow-switch.active::after { content: '▼'; }
 
 /* CONTRÔLES */
 
 .controls {
 	 flex-basis: 300px;
 	 padding: 0 5px;
-	 overflow: auto;
+	 height: 0px;
+	 overflow: hidden;
+}
+.controls.active {
+	height: auto;
 }
 .controls .force {
 	 background-color: #eee;
