@@ -1,7 +1,10 @@
     //////////// FORCE SIMULATION //////////// 
 
     // force simulator
-    var svg = d3.select("#graph_canvas"),
+    var svg = d3.select("#graph_canvas")
+            .call(d3.zoom().on("zoom", function () {
+                svg.attr("transform", d3.event.transform)
+            })),
     width = +svg.node().getBoundingClientRect().width,
     height = +svg.node().getBoundingClientRect().height;
 
