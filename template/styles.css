@@ -86,7 +86,7 @@ li {
 	margin-top: 0.5rem;
 }
 .index #record-list.active {
-	height: 800px;
+	height: auto;
 }
 .index ul li {
 	list-style-type: none;
