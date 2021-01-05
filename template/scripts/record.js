@@ -1,4 +1,5 @@
 let openedRecord = undefined;
+let highlightedNode = undefined;
 
 function openRecord(id) {
     if (openedRecord !== undefined) {
@@ -11,6 +12,8 @@ function openRecord(id) {
     elt.style.display = 'unset';
 
     recordContainer.scrollTo({ top: 0 });
+
+    highlightNode(id);
 
     historique.actualiser(id);
 
@@ -29,3 +32,8 @@ function closeRecord() {
         document.querySelector('#index-stick').classList.toggle('active')
     })
 })();
+
+function highlightNode(nodeId) {
+    document.querySelector('[data-node="' + nodeId + '"]')
+        .style.fill = 'red';
+}

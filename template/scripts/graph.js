@@ -127,14 +127,17 @@
         })
 
         // node tooltip
-        node.append("title")
-            .text(function (d) {
-                return d.id;
-            });
+        // node.append("title")
+        //     .text(function (d) {
+        //         return d.id;
+        //     });
         
         // node class
         node.attr("class", function (d) {
             return "t_" + d.type;
+        });
+        node.attr("data-node", function (d) {
+            return d.id;
         });
 
 
