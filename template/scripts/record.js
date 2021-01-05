@@ -6,10 +6,11 @@ function openRecord(id) {
 
     const recordContainer = document.querySelector('#record-container');
     recordContainer.classList.add('active');
-    recordContainer.scrollTo({ top: 0 });
 
     const elt = document.getElementById(id)
     elt.style.display = 'unset';
+
+    recordContainer.scrollTo({ top: 0 });
 
     historique.actualiser(id);
 
