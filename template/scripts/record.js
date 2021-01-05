@@ -4,7 +4,9 @@ function openRecord(id) {
     if (openedRecord !== undefined) {
         openedRecord.style.display = 'none'; }
 
-    document.querySelector('#record-container').classList.add('active')
+    const recordContainer = document.querySelector('#record-container');
+    recordContainer.classList.add('active');
+    recordContainer.scrollTo({ top: 0 });
 
     const elt = document.getElementById(id)
     elt.style.display = 'unset';

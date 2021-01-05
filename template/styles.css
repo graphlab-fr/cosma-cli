@@ -265,5 +265,6 @@ circle:hover {
 
 .id-link {
     text-decoration: underline;
-    cursor: pointer;
+	cursor: pointer;
+	color: inherit;
 }

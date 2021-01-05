@@ -1,7 +1,14 @@
 const fs = require('fs')
     , pug = require('pug')
     , mdIt = require('markdown-it')()
+    , mdItAttr = require('markdown-it-attrs')
     , config = require('./verifconfig').config;
+
+mdIt.use(mdItAttr, {
+    leftDelimiter: '{',
+    rightDelimiter: '}',
+    allowedAttributes: []
+})
 
 function cosmoscope(nodes, edges, files, path) {
 
@@ -40,6 +47,11 @@ initializeSimulation();`;
                         }
                     }
                 }
+
+                file.content = file.content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
+                    let id = extract.slice(0, -2); id = id.slice(2);
+                    return '[' + extract + '](#){onclick=openRecord(' + id + ') .id-link}';
+                });
 
                 return {
                     id: file.metas.id,
