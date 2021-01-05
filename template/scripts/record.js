@@ -24,6 +24,9 @@ function closeRecord() {
     openedRecord.style.display = 'none';
     openedRecord = undefined;
     document.querySelector('#record-container').classList.remove('active')
+
+    highlightedNode.style.fill = null;
+    highlightedNode = undefined;
 }
 
 (function () {
@@ -34,6 +37,9 @@ function closeRecord() {
 })();
 
 function highlightNode(nodeId) {
-    document.querySelector('[data-node="' + nodeId + '"]')
-        .style.fill = 'red';
+    if (highlightedNode !== undefined) {
+        highlightedNode.style.fill = null; }
+
+    highlightedNode = document.querySelector('[data-node="' + nodeId + '"]');
+    highlightedNode.style.fill = 'red';
 }
