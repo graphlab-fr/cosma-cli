@@ -39,8 +39,11 @@ function closeRecord() {
 
 function highlightNode(nodeId) {
     if (highlightedNode !== undefined) {
-        highlightedNode.style.fill = null; }
+        highlightedNode.style.fill = null;
+        highlightedNode.style.stroke = null;
+    }
 
     highlightedNode = document.querySelector('[data-node="' + nodeId + '"]');
     highlightedNode.style.fill = 'red';
+    highlightedNode.style.stroke = 'red';
 }
