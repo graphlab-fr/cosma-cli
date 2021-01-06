@@ -26,6 +26,7 @@ function closeRecord() {
     document.querySelector('#record-container').classList.remove('active')
 
     highlightedNode.style.fill = null;
+    highlightedNode.style.stroke = null;
     highlightedNode = undefined;
 }
 
