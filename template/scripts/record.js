@@ -33,6 +33,7 @@ function closeRecord() {
     document.querySelector('#index-stick').addEventListener('click', () => {
         document.querySelector('#record-list').classList.toggle('active')
         document.querySelector('#index-stick').classList.toggle('active')
+        document.querySelector('#sort-box').classList.toggle('active')
     })
 })();
 

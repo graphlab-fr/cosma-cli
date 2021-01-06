@@ -34,12 +34,52 @@ html(lang='fr')
 
                 section
                     h1(class='arrow-switch',id='index-stick') Index
+
+                    div(id='sort-box')
+                        button(data-sort='record-list-alphabetic') A-Z
+                        button(data-sort='record-list-alphabetic-reverse') Z-A
+                        button(data-sort='record-list-bytime') time
+                        button(data-sort='record-list-bytime-reverse') rtime
+
                     ul(id='record-list')
-                        each link in index
-                            li(
-                                class='id-link',
-                                title=link.id,
-                                onclick='openRecord(' + link.id + ')') #{link.title}
+
+                        li(id='record-list-alphabetic', class='record-sorting active')
+                            ul
+                                each link in index
+                                    li(
+                                        class='id-link',
+                                        title=link.id,
+                                        onclick='openRecord(' + link.id + ')') #{link.title}
+
+                        - var index = index.reverse();
+
+                        li(id='record-list-alphabetic-reverse', class='record-sorting')
+                            ul
+                                each link in index
+                                    li(
+                                        class='id-link',
+                                        title=link.id,
+                                        onclick='openRecord(' + link.id + ')') #{link.title}
+
+                        - var index = index.sort(function(a, b) { if (a.mtime < b.mtime) {return -1; } if (a.mtime > b.mtime) { return 1; } });
+
+                        li(id='record-list-bytime', class='record-sorting')
+                            ul
+                                each link in index
+                                    li(
+                                        class='id-link',
+                                        title=link.id,
+                                        onclick='openRecord(' + link.id + ')') #{link.title}
+
+                        - var index = index.reverse();
+
+                        li(id='record-list-bytime-reverse', class='record-sorting')
+                            ul
+                                each link in index
+                                    li(
+                                        class='id-link',
+                                        title=link.id,
+                                        onclick='openRecord(' + link.id + ')') #{link.title}
 
                 section
                     h1(class='arrow-switch',id='control-stick') Paramètres du graphe
@@ -68,6 +108,7 @@ html(lang='fr')
         script
             include scripts/graph.js
             include scripts/filter.js
+            include scripts/sort.js
             include scripts/record.js
             include scripts/search.js
             include scripts/controler.js

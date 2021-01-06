@@ -1,5 +1,6 @@
 const fs = require('fs')
     , yamlFrontmatter = require('yaml-front-matter')
+    , moment = require('moment')
     , path = require('path')
     , edges = require('./edges')
     , dataGenerator = require('./data')
@@ -14,11 +15,15 @@ let id = 1
     , files = fs.readdirSync(config.files_origin, 'utf8')
         .filter(file_name => path.extname(file_name) === '.md')
         .map(function(file) {
+            const mTime = fs.statSync(config.files_origin + file).mtime;
+
             file = fs.readFileSync(config.files_origin + file, 'utf8')
             file = yamlFrontmatter.loadFront(file);
             let content = file.__content;
             delete file.__content;
             let metas = file;
+
+            metas.mtime = moment(mTime).format('YYYY-MM-DD');
 
             return {
                 content: content,

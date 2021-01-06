@@ -56,11 +56,10 @@ initializeSimulation();`;
                 return {
                     id: file.metas.id,
                     title: file.metas.title,
+                    mtime: file.metas.mtime,
                     content: mdIt.render(file.content),
                     links: links
                 }
-            }).sort(function(a, b){
-                Intl.Collator().compare;
             }),
             types: config.types
         })
