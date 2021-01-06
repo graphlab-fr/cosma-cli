@@ -11,7 +11,7 @@ const fs = require('fs')
 let id = 1
     , fileIds = []
     , errors = []
-    , entities = { nodes: [], edges: [], indexEntry: [] }
+    , entities = { nodes: [], edges: [] }
     , files = fs.readdirSync(config.files_origin, 'utf8')
         .filter(file_name => path.extname(file_name) === '.md')
         .map(function(file) {
@@ -28,7 +28,7 @@ let id = 1
             return {
                 content: content,
                 metas: metas,
-                links: edges.extractAll(content)
+                links: edges.getOutLinks(content)
             }
         })
         .filter(function(file) {
@@ -68,16 +68,18 @@ let id = 1
 const ids = files.map(file => file.links).flat();
 
 for (let file of files) {
-    let size = edges.getRank(ids, file.metas.id, file.links.length);
+    const outLink = edges.getInLinks(ids, file.metas.id)
+    let size = edges.getRank(file.links.length, outLink);
     entities.nodes.push({
         id: Number(file.metas.id),
         label: file.metas.title,
         type: file.metas.type,
         size: Number(size),
+        outLink: Number(file.links.length),
+        inLink: Number(outLink),
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });
-    // entities.indexEntry.push(jsonify.record(file.metas.id, file.metas.title))
 
     if (file.links.length !== 0) {
         for (let link of file.links) {

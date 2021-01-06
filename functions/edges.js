@@ -1,10 +1,10 @@
-function extractAll(fileContent) {
+function getOutLinks(fileContent) {
     return (fileContent.match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs) || []);
 }
 
-exports.extractAll = extractAll;
+exports.getOutLinks = getOutLinks;
 
-function getNbLink(linkList, fileId) {
+function getInLinks(linkList, fileId) {
     let i = linkList.reduce(function(n, val) {
         return n + (val === String(fileId));
     }, 0);
@@ -12,10 +12,12 @@ function getNbLink(linkList, fileId) {
     return i;
 }
 
-function getRank(allIds, fileId, linkNb) {
+exports.getInLinks = getInLinks;
+
+function getRank(outLink, inLink) {
     let rank = 1;
-    rank += ~~(getNbLink(allIds, fileId) / 3);
-    rank += linkNb / 3;
+    rank += ~~(inLink / 3);
+    rank += outLink / 3;
     return rank;
 }
 
