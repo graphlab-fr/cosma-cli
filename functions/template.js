@@ -16,6 +16,13 @@ function cosmoscope(nodes, edges, files, path) {
 
     let recordIndex = nodes.map(node => ({ id: node.id, title: node.label }));
 
+    let typeColors = Object.keys(config.types).map(key => '--' + key + ': ' + config.types[key].color + ';');
+    typeColors = ':root {\n' + typeColors.join('\n') + '\n}';
+    
+    fs.writeFileSync('./template/colors.css', typeColors, (err) => {
+        if (err) { console.error( 'Err. write color style file: ' + err) }
+    });
+
     const graphScript =
 `const fuse = new Fuse(${JSON.stringify(recordIndex)}, {
     includeScore: false,
@@ -62,7 +69,7 @@ initializeSimulation();`;
                     links: links
                 }
             }),
-            types: config.types
+            types: Object.keys(config.types).map(key => key)
         })
 
         fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
