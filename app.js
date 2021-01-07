@@ -28,7 +28,7 @@ switch (args[0]) {
     break;
 
     case 'atype':
-        require('./functions/verifconfig').addType(args.slice(1));
+        require('./functions/verifconfig').addType(args[1], args[2]);
     break;
 
     case undefined:

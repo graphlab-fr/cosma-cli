@@ -34,7 +34,7 @@ $ node app export <path>
 ### Ajouter des types valides
 
 ```bash
-$ node app atype <type type type…>
+$ node app atype <name> <color>
 ```
 
 ## Utilisation

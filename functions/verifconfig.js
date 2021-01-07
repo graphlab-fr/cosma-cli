@@ -7,7 +7,7 @@ if (!fs.existsSync('config.yml')){
     let baseConfig = yamlEditor.safeDump({
         files_origin: '',
         export_target: '',
-        types: ['undefined'],
+        types: {'undefined': {'color': 'grey'}},
         graph_params: {
             center: { x: 0.5, y: 0.5 },
             charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
@@ -82,18 +82,16 @@ function modifyExportPath(path) {
 
 exports.modifyExportPath = modifyExportPath;
 
-function addType(types) {
-    let newList = [];
+function addType(name, color) {
 
-    for (let type of types) {
-        if (config.types.indexOf(type) !== -1) {
-            console.log('Type "' + type + '" already registred');
-            continue;
+    for (const yetType in config.types) {
+        if (name === yetType) {
+            console.log('Type "' + yetType + '" already registred');
+            return;
         }
-        newList.push(type);
     }
 
-    config.types = config.types.concat(newList);
+    config.types[name] = {color: color};
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
         if (err) { return console.error( 'Err. update config.yml file : ' + err) }
