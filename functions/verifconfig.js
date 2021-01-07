@@ -95,7 +95,7 @@ function addType(name, color) {
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
         if (err) { return console.error( 'Err. update config.yml file : ' + err) }
-        console.log('add ' + (newList.join(', ') || 'anything') + ' config.yml file');
+        console.log('add "' + name + '" type into config.yml file');
     });
 }
 
