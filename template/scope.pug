@@ -94,6 +94,9 @@ html(lang='fr')
             
                 each content in index
                     aside(class='fiche', id=content.id)
+                        div(class='metas')
+                            time(class='fiche-date', datetime=content.mtime) #{content.mtime}
+                            span(class='fiche-type') #{content.type}
                         h1 #{content.title}
                         div !{content.content}
 

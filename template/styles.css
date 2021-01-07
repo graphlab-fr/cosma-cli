@@ -226,6 +226,11 @@ circle:hover {
 /* FICHES */
 
 .fiche { display: none; }
+.fiche .metas {
+	font-size: 8pt;
+	margin: 0;
+	text-align: right;
+}
 .fiche-content {
 	position: absolute;
 	z-index: 100;

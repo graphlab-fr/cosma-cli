@@ -56,6 +56,7 @@ initializeSimulation();`;
                 return {
                     id: file.metas.id,
                     title: file.metas.title,
+                    type: file.metas.type,
                     mtime: file.metas.mtime,
                     content: mdIt.render(file.content),
                     links: links
