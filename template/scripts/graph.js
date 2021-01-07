@@ -132,6 +132,12 @@
         //         return d.id;
         //     });
         
+        link.attr("data-source", function (d) {
+            return d.source;
+        });
+        link.attr("data-target", function (d) {
+            return d.target;
+        });
         // node class
         node.attr("class", function (d) {
             return "t_" + d.type;

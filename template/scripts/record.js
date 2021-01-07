@@ -1,5 +1,6 @@
-let openedRecord = undefined;
-let highlightedNode = undefined;
+let openedRecord = undefined
+    , highlightedNode = undefined
+    , highlightedEdges = [];
 
 function openRecord(id) {
     if (openedRecord !== undefined) {
@@ -25,9 +26,7 @@ function closeRecord() {
     openedRecord = undefined;
     document.querySelector('#record-container').classList.remove('active')
 
-    highlightedNode.style.fill = null;
-    highlightedNode.style.stroke = null;
-    highlightedNode = undefined;
+    unlightNode();
 }
 
 (function () {
@@ -39,12 +38,27 @@ function closeRecord() {
 })();
 
 function highlightNode(nodeId) {
-    if (highlightedNode !== undefined) {
-        highlightedNode.style.fill = null;
-        highlightedNode.style.stroke = null;
+    unlightNode();
+
+    highlightedEdges = document.querySelectorAll('[data-source="' + nodeId + '"]');
+    for (const edge of highlightedEdges) {
+        edge.style.stroke = 'red';
     }
 
     highlightedNode = document.querySelector('[data-node="' + nodeId + '"]');
     highlightedNode.style.fill = 'red';
     highlightedNode.style.stroke = 'red';
+}
+
+function unlightNode() {
+    if (highlightedNode !== undefined) {
+        highlightedNode.style.fill = null;
+        highlightedNode.style.stroke = null;
+    }
+
+    if (highlightedEdges !== []) {
+        for (const edge of highlightedEdges) {
+            edge.style.stroke = null;
+        }
+    }
 }
