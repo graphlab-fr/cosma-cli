@@ -65,10 +65,8 @@ let id = 1
             };
         })
 
-const ids = files.map(file => file.links).flat();
-
 for (let file of files) {
-    const outLink = edges.getInLinks(ids, file.metas.id)
+    const outLink = edges.getInLinks(files.map(file => file.links).flat(), file.metas.id)
     let size = edges.getRank(file.links.length, outLink);
     entities.nodes.push({
         id: Number(file.metas.id),
@@ -96,8 +94,5 @@ require('./template').cosmoscope(entities.nodes, entities.edges, files, savePath
 
 dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
 dataGenerator.edges(JSON.stringify(entities.edges), savePath);
-// dataGenerator.index(entities.indexEntry, savePath);
-// dataGenerator.forSigma(entities.nodes, entities.edges, savePath);
-// dataGenerator.forD3(entities.nodes, entities.edges, savePath);
 
 require('./log').register(errors, savePath);

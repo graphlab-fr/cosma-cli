@@ -1,5 +1,4 @@
-const fs = require('fs')
-    , path = require('./modelize').historyPath;
+const fs = require('fs');
 
 if (fs.existsSync('./data') === false) {
     fs.mkdirSync('./data') }
