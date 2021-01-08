@@ -38,6 +38,7 @@ li {
 .index ul li.filter {
 	cursor: pointer;
 	padding-left: 1rem;
+	text-transform: capitalize;
 }
 [data-filter="concept"] { color: var(--concept); }
 [data-filter="publication"] { color: var(--publication); }
@@ -221,10 +222,11 @@ circle:hover {
 
 .fiche { display: none; }
 .fiche .metas {
-	font-size: 8pt;
 	margin: 0;
-	text-align: right;
+	font-family: sans-serif;
 }
+.fiche .metas * { display: block; }
+.fiche .metas .fiche-type { text-transform: capitalize; }
 .fiche-content {
 	position: absolute;
 	z-index: 100;
@@ -244,16 +246,16 @@ circle:hover {
 
 .fiche-content.active {	transform: translate(0%); }
 
-.fiche h1:first-child {
-	text-align: center;
-}
 /* Adapté de Typesafe.css: */
-.fiche-content h1,h2,h3,h4,h5,h6 {margin:2.5rem 0 1rem;}
+.fiche-content h1,h2,h3,h4,h5,h6 {font-family:sans-serif;margin:2.5rem 0 0.5rem;}
+.fiche-content h1{font-size:1.2em}
+.fiche-content h2{font-size:1.1em}
+.fiche-content h3{font-size:1em}
 .fiche-content ul li, .fiche ol li {margin:0.5rem 0 0 1rem;}
 .fiche-content img{height:auto;max-width:100%;}
-.fiche-content pre{border: 1px solid lightgrey;overflow:auto;}
-.fiche-content code{color:orangered;display:inline-block;}
-.fiche-content pre code{padding:1rem;}
+.fiche-content pre{overflow:auto;font-size: 90%;white-space: pre-wrap;}
+.fiche-content code{display:inline-block;}
+.fiche-content pre code{padding-left:1rem;}
 .fiche-content blockquote{border-left:5px solid lightgrey;margin:0;padding-left:1rem;}
 .fiche-content table{border-collapse:collapse;margin:2rem 0;text-align:left;width:100%;}
 .fiche-content tr{border-bottom:1px solid lightgrey;}

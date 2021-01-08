@@ -96,19 +96,20 @@ html(lang='fr')
                 each record in index
                     aside(class='fiche', id=record.id)
                         div(class='metas')
+                            h1 #{record.title}
                             time(class='fiche-date', datetime=record.mtime) #{record.mtime}
                             span(class='fiche-type') #{record.type}
-                        h1 #{record.title}
+                        hr
                         div !{record.content}
 
                         if record.links.length !== 0
-                            h5 Liens
+                            h2 Liens
                             ul
                                 each link in record.links
                                     li(class='id-link',title=link.title,onclick='openRecord(' + link.id + ')') #{link.title}
 
                         if record.backlinks.length !== 0
-                            h5 Rétroliens
+                            h2 Rétroliens
                             ul
                                 each backlink in record.backlinks
                                     li(class='id-link',title=backlink.title,onclick='openRecord(' + backlink.id + ')') #{backlink.title}
