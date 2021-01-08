@@ -100,7 +100,9 @@ for (let file of files) {
     });
 }
 
-require('./template').cosmoscope(entities.nodes, entities.edges, files, savePath);
+require('./template').jsonData(entities.nodes, entities.edges);
+require('./template').colors();
+require('./template').cosmoscope(files, savePath);
 
 dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
 dataGenerator.edges(JSON.stringify(entities.edges), savePath);
