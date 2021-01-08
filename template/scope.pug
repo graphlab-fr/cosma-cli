@@ -93,19 +93,25 @@ html(lang='fr')
                     class='fiche__btn-close',
                     onclick='closeRecord()') Fermer
             
-                each content in index
-                    aside(class='fiche', id=content.id)
+                each record in index
+                    aside(class='fiche', id=record.id)
                         div(class='metas')
-                            time(class='fiche-date', datetime=content.mtime) #{content.mtime}
-                            span(class='fiche-type') #{content.type}
-                        h1 #{content.title}
-                        div !{content.content}
+                            time(class='fiche-date', datetime=record.mtime) #{record.mtime}
+                            span(class='fiche-type') #{record.type}
+                        h1 #{record.title}
+                        div !{record.content}
 
-                        if content.links.length !== 0
+                        if record.links.length !== 0
                             h5 Liens
                             ul
-                                each link in content.links
-                                    li(class='id-link',title=link.id,onclick='openRecord(' + link.id + ')') #{link.title}
+                                each link in record.links
+                                    li(class='id-link',title=link,onclick='openRecord(' + link + ')') #{link}
+
+                        if record.backlinks.length !== 0
+                            h5 Rétroliens
+                            ul
+                                each backlink in record.backlinks
+                                    li(class='id-link',title=backlink,onclick='openRecord(' + backlink + ')') #{backlink}
 
         svg(id='graph_canvas')
 

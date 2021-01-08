@@ -42,19 +42,6 @@ initializeSimulation();`;
 
         const htmlRender = pug.compileFile('template/scope.pug')({
             index: files.map(function (file) {
-                let links = [];
-
-                if (file.links.length !== 0) {
-                    
-                    for (let linkId of file.links) {
-                        
-                        for (var i = 0; i < recordIndex.length; i++) {
-                            if (recordIndex[i].id !== Number(linkId)) { continue; }
-                            links.push({id: linkId, title: recordIndex[i].title})
-                        }
-                    }
-                }
-
                 file.content = file.content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
                     let id = extract.slice(0, -2); id = id.slice(2);
                     return '[' + extract + '](#){onclick=openRecord(' + id + ') .id-link}';
@@ -66,7 +53,8 @@ initializeSimulation();`;
                     type: file.metas.type,
                     mtime: file.metas.mtime,
                     content: mdIt.render(file.content),
-                    links: links
+                    links: file.links,
+                    backlinks: file.backlinks
                 }
             }),
             types: Object.keys(config.types).map(key => key)

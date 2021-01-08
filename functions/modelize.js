@@ -28,7 +28,7 @@ let id = 1
             return {
                 content: content,
                 metas: metas,
-                links: edges.getOutLinks(content)
+                links: edges.getOutLinks(content).map(edge => Number(edge))
             }
         })
         .filter(function(file) {
@@ -66,28 +66,38 @@ let id = 1
         })
 
 for (let file of files) {
-    const outLink = edges.getInLinks(files.map(file => file.links).flat(), file.metas.id)
-    let size = edges.getRank(file.links.length, outLink);
+    if (file.links.length === 0) { continue; }
+
+    for (let link of file.links) {
+        entities.edges.push({
+            id: Number(id++),
+            source: Number(file.metas.id),
+            target: Number(link)
+        });
+    }
+}
+
+files.map(function(file) {
+    return file.backlinks = entities.edges.filter(function(edge) {
+        if (edge.target === file.metas.id) {
+            return true;
+        }
+    }).map(edge => edge.source);
+})
+
+for (let file of files) {
+    const size = edges.getRank(file.links.length, file.backlinks.length);
+
     entities.nodes.push({
         id: Number(file.metas.id),
         label: file.metas.title,
         type: file.metas.type,
         size: Number(size),
         outLink: Number(file.links.length),
-        inLink: Number(outLink),
+        inLink: Number(file.backlinks.length),
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });
-
-    if (file.links.length !== 0) {
-        for (let link of file.links) {
-            entities.edges.push({
-                id: Number(id++),
-                source: Number(file.metas.id),
-                target: Number(link)
-            });
-        }
-    }
 }
 
 require('./template').cosmoscope(entities.nodes, entities.edges, files, savePath);
