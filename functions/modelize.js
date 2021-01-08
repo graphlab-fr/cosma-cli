@@ -8,8 +8,7 @@ const fs = require('fs')
     , rand = require('./rand')
     , config = require('./verifconfig').config;
 
-let id = 1
-    , fileIds = []
+let fileIds = []
     , errors = []
     , entities = { nodes: [], edges: [] }
     , files = fs.readdirSync(config.files_origin, 'utf8')
@@ -62,17 +61,25 @@ let id = 1
             };
         })
 
-for (let file of files) {
-    if (file.links.length === 0) { continue; }
+delete fileIds;
+require('./log').register(errors, savePath);
+delete errors;
 
-    for (let link of file.links) {
-        entities.edges.push({
-            id: Number(id++),
-            source: Number(file.metas.id),
-            target: Number(link)
-        });
+(function() {
+    let id = 0;
+    
+    for (let file of files) {
+        if (file.links.length === 0) { continue; }
+    
+        for (let link of file.links) {
+            entities.edges.push({
+                id: Number(id++),
+                source: Number(file.metas.id),
+                target: Number(link)
+            });
+        }
     }
-}
+})()
 
 files.map(function(file) {
     return file.backlinks = entities.edges.filter(function(edge) {
@@ -103,5 +110,3 @@ require('./template').cosmoscope(files, savePath);
 
 dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
 dataGenerator.edges(JSON.stringify(entities.edges), savePath);
-
-require('./log').register(errors, savePath);
