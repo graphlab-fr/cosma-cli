@@ -89,6 +89,8 @@ files.map(function(file) {
     }).map(edge => edge.source);
 })
 
+let index = [];
+
 for (let file of files) {
     const size = edges.getRank(file.links.length, file.backlinks.length);
 
@@ -102,7 +104,14 @@ for (let file of files) {
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });
+
+    index.push({
+        id: Number(file.metas.id),
+        title: file.metas.title
+    });
 }
+
+exports.index = index;
 
 require('./template').jsonData(entities.nodes, entities.edges);
 require('./template').colors();

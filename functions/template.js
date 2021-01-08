@@ -2,7 +2,8 @@ const fs = require('fs')
     , pug = require('pug')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
-    , config = require('./verifconfig').config;
+    , config = require('./verifconfig').config
+    , index = require('./modelize').index;
 
 mdIt.use(mdItAttr, {
     leftDelimiter: '{',
@@ -11,10 +12,9 @@ mdIt.use(mdItAttr, {
 })
 
 function jsonData(nodes, edges) {
-    const recordIndex = nodes.map(node => ({ id: node.id, title: node.label }));
 
     const graphScript =
-`const fuse = new Fuse(${JSON.stringify(recordIndex)}, {
+`const fuse = new Fuse(${JSON.stringify(index)}, {
     includeScore: false,
     keys: ['title']
 });
@@ -60,8 +60,8 @@ function cosmoscope(files, path) {
                 type: file.metas.type,
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content),
-                links: file.links,
-                backlinks: file.backlinks
+                links: file.links.map(link => findLinkName(link)),
+                backlinks: file.backlinks.map(link => findLinkName(link))
             }
         }),
         types: Object.keys(config.types).map(key => key)
@@ -84,7 +84,7 @@ function cosmoscope(files, path) {
 exports.cosmoscope = cosmoscope;
 
 function findLinkName(linkId) {
-    // console.log(linkId);
-
-    return linkId;
+    return index.find(function(node) {
+        return node.id === linkId;
+    });
 }

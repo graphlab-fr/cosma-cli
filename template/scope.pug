@@ -105,13 +105,13 @@ html(lang='fr')
                             h5 Liens
                             ul
                                 each link in record.links
-                                    li(class='id-link',title=link,onclick='openRecord(' + link + ')') #{link}
+                                    li(class='id-link',title=link.title,onclick='openRecord(' + link.id + ')') #{link.title}
 
                         if record.backlinks.length !== 0
                             h5 Rétroliens
                             ul
                                 each backlink in record.backlinks
-                                    li(class='id-link',title=backlink,onclick='openRecord(' + backlink + ')') #{backlink}
+                                    li(class='id-link',title=backlink.title,onclick='openRecord(' + backlink.id + ')') #{backlink.title}
 
         svg(id='graph_canvas')
 
