@@ -47,21 +47,18 @@ let id = 1
             return file;
         })
         .map(function(file) {
-            let validLinks = [];
-
-            for (let link of file.links) {
-                if (fileIds.indexOf(Number(link)) !== -1 && isNaN(link) === false) {
-                    validLinks.push(link);
-                } else {
-                    let err = 'Link "' + link + '" removed from file "' + file.metas.title + '" : no valid target';
-                    errors.push(err); console.log(err);
-                }
-            }
 
             return {
                 content: file.content,
                 metas: file.metas,
-                links: validLinks
+                links: file.links.filter(function(link) {
+                    if (fileIds.indexOf(Number(link)) === -1 || isNaN(link) !== false) {
+                        let err = 'Link "' + link + '" removed from file "' + file.metas.title + '" : no valid target';
+                        errors.push(err); console.log(err);
+                        return false;
+                    }
+                    return true;
+                })
             };
         })
 

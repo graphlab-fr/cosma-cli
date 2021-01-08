@@ -82,3 +82,9 @@ function cosmoscope(files, path) {
 }
 
 exports.cosmoscope = cosmoscope;
+
+function findLinkName(linkId) {
+    // console.log(linkId);
+
+    return linkId;
+}
