@@ -5,7 +5,9 @@ const fs = require('fs')
 
 function genMdFile(title, type, tags) {
 
-    if (type !== '' && config.types.indexOf(type) === -1) {
+    const validTypes = Object.keys(config.types).map(key => key);
+
+    if (type !== '' && validTypes.indexOf(type) === -1) {
         console.log('Unknown type. Add it to config.yml beforehand. No record was created.');
         return;
     }
