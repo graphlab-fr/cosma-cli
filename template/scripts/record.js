@@ -40,14 +40,14 @@ function closeRecord() {
 function highlightNode(nodeId) {
     unlightNode();
 
-    highlightedEdges = document.querySelectorAll('[data-source="' + nodeId + '"]');
+    highlightedEdges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
     for (const edge of highlightedEdges) {
-        edge.style.stroke = 'red';
+        edge.style.stroke = 'var(--underline)';
     }
 
     highlightedNode = document.querySelector('[data-node="' + nodeId + '"]');
-    highlightedNode.style.fill = 'red';
-    highlightedNode.style.stroke = 'red';
+    highlightedNode.style.fill = 'var(--underline)';
+    highlightedNode.style.stroke = 'var(--underline)';
 }
 
 function unlightNode() {

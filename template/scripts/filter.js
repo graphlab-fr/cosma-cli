@@ -9,9 +9,10 @@
             elts = elts.map(id => document.querySelector('[data-node="' + id + '"]'))
 
             elts.forEach(node => {
-                let links = Array.from(document.querySelectorAll('[data-source="' + node.dataset.node + '"]'));
-                let backLinks = Array.from(document.querySelectorAll('[data-target="' + node.dataset.node + '"]'));
-                elts = elts.concat(links, backLinks);
+                elts = elts.concat(
+                Array.from(
+                    document.querySelectorAll('[data-source="' + node.dataset.node + '"], [data-target="' + node.dataset.node + '"]')
+                ) );
             });
 
             if (btn.dataset.active === 'true') {
