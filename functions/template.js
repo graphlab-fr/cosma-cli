@@ -35,10 +35,17 @@ initializeSimulation();`;
 exports.jsonData = jsonData;
 
 function colors() {
-    let typeColors = Object.keys(config.types).map(key => '--' + key + ': ' + config.types[key].color + ';');
-    typeColors = ':root {\n' + typeColors.join('\n') + '\n}';
+    let typeColorsGlobal = Object.keys(config.types).map(key => '--' + key + ': ' + config.types[key].color + ';');
+    typeColorsGlobal = ':root {\n' + typeColorsGlobal.join('\n') + '\n}';
 
-    fs.writeFileSync('./template/colors.css', typeColors, (err) => {
+    let typeColors = Object.keys(config.types).map(function(key) {
+        const v = 'var(--' + key + ')';
+        return `.t_${key} {color:${v}; fill:${v}; stroke:${v};}`;
+    }).join('\n');
+
+    const content = typeColorsGlobal + '\n\n' + typeColors;
+
+    fs.writeFileSync('./template/colors.css', content, (err) => {
         if (err) { console.error( 'Err. write color style file: ' + err) }
     });
 }

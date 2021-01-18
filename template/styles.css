@@ -190,27 +190,6 @@ circle {
 circle:hover {
 	stroke: yellow;
 }
-.t_concept {
-	color: var(--concept);
-	fill: var(--concept);
-	stroke: var(--concept);
-}
-.t_publication {
-	color: var(--publication);
-	fill: var(--publication);
-	stroke: var(--publication);
-}
-.t_lecture {
-	color: var(--lecture);
-	fill: var(--lecture);
-	stroke: var(--lecture);
-}
-.t_note {
-	color: var(--note);
-	fill: var(--note);
-	stroke: var(--note);
-}
-
 /* Infobulles */
 .tip_type {
 	font-weight: bold;
