@@ -31,7 +31,7 @@ html(lang='fr')
                     h1 Filtres
                     ul
                         each typ in types
-                            li(data-filter=typ,class='filter') #{typ}
+                            li(class='filter t_' + typ.name,data-filter=typ.nodes) #{typ.name}
 
                 section
                     h1(class='arrow-switch',id='index-stick') Index

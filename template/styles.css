@@ -41,10 +41,9 @@ li {
 	padding-left: 1rem;
 	text-transform: capitalize;
 }
-[data-filter="concept"] { color: var(--concept); }
-[data-filter="publication"] { color: var(--publication); }
-[data-filter="lecture"] { color: var(--lecture); }
-[data-filter="note"] { color: var(--note); }
+li.filter[data-active="false"] {
+	text-decoration: line-through;
+}
 
 /* INDEX */
 
@@ -192,18 +191,22 @@ circle:hover {
 	stroke: yellow;
 }
 .t_concept {
+	color: var(--concept);
 	fill: var(--concept);
 	stroke: var(--concept);
 }
 .t_publication {
+	color: var(--publication);
 	fill: var(--publication);
 	stroke: var(--publication);
 }
 .t_lecture {
+	color: var(--lecture);
 	fill: var(--lecture);
 	stroke: var(--lecture);
 }
 .t_note {
+	color: var(--note);
 	fill: var(--note);
 	stroke: var(--note);
 }

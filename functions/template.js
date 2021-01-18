@@ -64,7 +64,12 @@ function cosmoscope(files, path) {
                 backlinks: file.backlinks.map(link => findLinkName(link))
             }
         }),
-        types: Object.keys(config.types).map(key => key)
+        types: Object.keys(config.types).map(function(key) {
+            return {
+                name: key,
+                nodes: files.filter(file => file.metas.type === key).map(file => file.metas.id).join(',') || null
+            }
+        })
     })
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {

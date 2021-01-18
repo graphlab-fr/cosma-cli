@@ -97,7 +97,7 @@ for (let file of files) {
     entities.nodes.push({
         id: Number(file.metas.id),
         label: file.metas.title,
-        type: file.metas.type,
+        type: String(file.metas.type),
         size: Number(size),
         outLink: Number(file.links.length),
         inLink: Number(file.backlinks.length),
