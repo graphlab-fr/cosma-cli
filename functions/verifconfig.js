@@ -16,7 +16,7 @@ if (!fs.existsSync('config.yml')){
             node: { sizeCoeff: 1 },
             forceX: { enabled: true, strength: 0.1, x: 0.5 },
             forceY: { enabled: true, strength: 0.1, y: 0.5 },
-            underlineColor: 'red'
+            highlightColor: 'red'
         }
     });
 

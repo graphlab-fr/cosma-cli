@@ -36,7 +36,7 @@ exports.jsonData = jsonData;
 
 function colors() {
     let typeColorsGlobal = Object.keys(config.types).map(key => '--' + key + ': ' + config.types[key].color + ';');
-    typeColorsGlobal.push(`--underline: ${config.graph_params.underlineColor};`)
+    typeColorsGlobal.push(`--highlight: ${config.graph_params.highlightColor};`)
     typeColorsGlobal = ':root {\n' + typeColorsGlobal.join('\n') + '\n}';
 
     let typeColors = Object.keys(config.types).map(function(key) {

@@ -42,12 +42,12 @@ function highlightNode(nodeId) {
 
     highlightedEdges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
     for (const edge of highlightedEdges) {
-        edge.style.stroke = 'var(--underline)';
+        edge.style.stroke = 'var(--highlight)';
     }
 
     highlightedNode = document.querySelector('[data-node="' + nodeId + '"]');
-    highlightedNode.style.fill = 'var(--underline)';
-    highlightedNode.style.stroke = 'var(--underline)';
+    highlightedNode.style.fill = 'var(--highlight)';
+    highlightedNode.style.stroke = 'var(--highlight)';
 }
 
 function unlightNode() {
