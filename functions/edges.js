@@ -3,13 +3,7 @@ function getOutLinks(fileContent) {
 
     if (links === null) { return []; }
 
-    return links.map(function(link) {
-        link = link.split(':', 2);
-        if (link.length === 2) {
-            return {type: link[0], aim: Number(link[1])};
-        }
-        return {type: 'undefined', aim: Number(link[0])};
-    })
+    return links.map(analyseLink)
 }
 
 exports.getOutLinks = getOutLinks;
@@ -22,3 +16,13 @@ function getRank(outLink, inLink) {
 }
 
 exports.getRank = getRank;
+
+function analyseLink(link) {
+    link = link.split(':', 2);
+    if (link.length === 2) {
+        return {type: link[0], aim: Number(link[1])};
+    }
+    return {type: 'undefined', aim: Number(link[0])};
+}
+
+exports.analyseLink = analyseLink;

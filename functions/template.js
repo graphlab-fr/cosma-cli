@@ -2,6 +2,7 @@ const fs = require('fs')
     , pug = require('pug')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
+    , edges = require('./edges')
     , config = require('./verifconfig').config
     , index = require('./modelize').index;
 
@@ -58,11 +59,13 @@ function cosmoscope(files, path) {
     const htmlRender = pug.compileFile('template/scope.pug')({
         index: files.map(function (file) {
             file.content = file.content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
-                const id = Number(extract.slice(0, -2).slice(2));
+                let link = extract.slice(0, -2).slice(2);
+                link = edges.analyseLink(link);
+
                 const validLinks = file.links.map(link => link.aim);
 
-                if (validLinks.indexOf(id) !== -1) {
-                    return '[' + extract + '](#){onclick=openRecord(' + id + ') .id-link}';
+                if (validLinks.indexOf(Number(link.aim)) !== -1) {
+                    return `[${extract}](#){onclick=openRecord(${link.aim} .id-link .l_${link.type}}`;
                 }
                 return extract;
             });
