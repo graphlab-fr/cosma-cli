@@ -114,6 +114,9 @@
         link.attr("data-target", function (d) {
             return d.target;
         });
+        link.attr("class", function (d) {
+            return 'l_' + d.type;
+        });
         // node class
         node.attr("class", function (d) {
             return "t_" + d.type;

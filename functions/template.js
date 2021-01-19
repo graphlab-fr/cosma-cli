@@ -62,6 +62,8 @@ function cosmoscope(files, path) {
                 return '[' + extract + '](#){onclick=openRecord(' + id + ') .id-link}';
             });
 
+            console.log(file.backlinks.map(link => findLinkName(link)));
+
             return {
                 id: file.metas.id,
                 title: file.metas.title,
@@ -96,8 +98,10 @@ function cosmoscope(files, path) {
 
 exports.cosmoscope = cosmoscope;
 
-function findLinkName(linkId) {
-    return index.find(function(node) {
-        return node.id === linkId;
-    });
+function findLinkName(link) {
+    let title = index.find(function(node) {
+        return node.id === link.aim;
+    }).title;
+
+    return {id: link.aim, title: title, type: link.type};
 }

@@ -27,7 +27,7 @@ let fileIds = []
             return {
                 content: content,
                 metas: metas,
-                links: edges.getOutLinks(content).map(edge => Number(edge))
+                links: edges.getOutLinks(content)
             }
         })
         .filter(function(file) {
@@ -51,8 +51,8 @@ let fileIds = []
                 content: file.content,
                 metas: file.metas,
                 links: file.links.filter(function(link) {
-                    if (fileIds.indexOf(Number(link)) === -1 || isNaN(link) !== false) {
-                        let err = 'Link "' + link + '" removed from file "' + file.metas.title + '" : no valid target';
+                    if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
+                        let err = 'Link "' + link.aim + '" removed from file "' + file.metas.title + '" : no valid target';
                         errors.push(err); console.log(err);
                         return false;
                     }
@@ -74,8 +74,9 @@ delete errors;
         for (let link of file.links) {
             entities.edges.push({
                 id: Number(id++),
+                type: link.type,
                 source: Number(file.metas.id),
-                target: Number(link)
+                target: Number(link.aim)
             });
         }
     }
@@ -86,7 +87,9 @@ files.map(function(file) {
         if (edge.target === file.metas.id) {
             return true;
         }
-    }).map(edge => edge.source);
+    }).map(function(edge) {
+        return {type: edge.type, aim: edge.source};
+    });
 })
 
 let index = [];
