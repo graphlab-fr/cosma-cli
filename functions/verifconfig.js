@@ -8,6 +8,7 @@ if (!fs.existsSync('config.yml')){
         files_origin: '',
         export_target: '',
         types: {'undefined': {'color': 'grey'}},
+        linkType: {'undefined': {'color': 'grey'}},
         graph_params: {
             center: { x: 0.5, y: 0.5 },
             charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },

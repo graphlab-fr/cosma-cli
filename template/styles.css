@@ -174,9 +174,6 @@ li.filter[data-active="false"] {
 	height: 100%;
 	width: 100%;
 }
-.links line {
-	stroke: #aaa;
-}
 .nodes circle {
 	pointer-events: all;
 }
@@ -252,5 +249,8 @@ circle:hover {
 .id-link {
     text-decoration: underline;
 	cursor: pointer;
+}
+
+a {
 	color: inherit;
 }

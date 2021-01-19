@@ -36,16 +36,25 @@ initializeSimulation();`;
 exports.jsonData = jsonData;
 
 function colors() {
-    let typeColorsGlobal = Object.keys(config.types).map(key => '--' + key + ': ' + config.types[key].color + ';');
-    typeColorsGlobal.push(`--highlight: ${config.graph_params.highlightColor};`)
-    typeColorsGlobal = ':root {\n' + typeColorsGlobal.join('\n') + '\n}';
+    const nodesTypes = Object.keys(config.types).map(function(key) {
+        return {prefix: 't_', name: key, color: config.types[key].color}; });
 
-    let typeColors = Object.keys(config.types).map(function(key) {
-        const v = 'var(--' + key + ')';
-        return `.t_${key} {color:${v}; fill:${v}; stroke:${v};}`;
-    }).join('\n');
+    const linksTypes = Object.keys(config.linkType).map(function(key) {
+        return {prefix: 'l_', name: key, color: config.linkType[key].color}; });
 
-    const content = typeColorsGlobal + '\n\n' + typeColors;
+    const types = nodesTypes.concat(linksTypes);
+
+    let globals = types.map(type => `--${type.name}: ${type.color};`)
+    let colors = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.name}); fill:var(--${type.name}); stroke:var(--${type.name});}`)
+
+    globals.push(`--highlight: ${config.graph_params.highlightColor};`);
+
+    globals = globals.join('\n');
+    colors = colors.join('\n');
+
+    globals = ':root {\n' + globals + '\n}';
+
+    const content = '\n' + globals + '\n\n' + colors;
 
     fs.writeFileSync('./template/colors.css', content, (err) => {
         if (err) { console.error( 'Err. write color style file: ' + err) }
@@ -65,7 +74,7 @@ function cosmoscope(files, path) {
                 const validLinks = file.links.map(link => link.aim);
 
                 if (validLinks.indexOf(Number(link.aim)) !== -1) {
-                    return `[${extract}](#){onclick=openRecord(${link.aim} .id-link .l_${link.type}}`;
+                    return `[${extract}](#){onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;
                 }
                 return extract;
             });
