@@ -58,11 +58,14 @@ function cosmoscope(files, path) {
     const htmlRender = pug.compileFile('template/scope.pug')({
         index: files.map(function (file) {
             file.content = file.content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
-                let id = extract.slice(0, -2); id = id.slice(2);
-                return '[' + extract + '](#){onclick=openRecord(' + id + ') .id-link}';
-            });
+                const id = Number(extract.slice(0, -2).slice(2));
+                const validLinks = file.links.map(link => link.aim);
 
-            console.log(file.backlinks.map(link => findLinkName(link)));
+                if (validLinks.indexOf(id) !== -1) {
+                    return '[' + extract + '](#){onclick=openRecord(' + id + ') .id-link}';
+                }
+                return extract;
+            });
 
             return {
                 id: file.metas.id,
