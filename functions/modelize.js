@@ -12,9 +12,10 @@ let fileIds = []
     , errors = []
     , entities = { nodes: [], edges: [] }
     , files = fs.readdirSync(config.files_origin, 'utf8')
-        .filter(file_name => path.extname(file_name) === '.md')
+        .filter(fileName => path.extname(fileName) === '.md')
         .map(function(file) {
             const mTime = fs.statSync(config.files_origin + file).mtime;
+            const fileName = file;
 
             file = fs.readFileSync(config.files_origin + file, 'utf8')
             file = yamlFrontmatter.loadFront(file);
@@ -23,6 +24,7 @@ let fileIds = []
             let metas = file;
 
             metas.mtime = moment(mTime).format('YYYY-MM-DD');
+            metas.fileName = fileName;
 
             return {
                 content: content,
@@ -36,8 +38,8 @@ let fileIds = []
                 errors.push(err); console.log(err);
                 return false; }
 
-            if (file.metas.title === undefined) {
-                let err = 'File ' + file.metas.title + ' throw out : no title';
+            if (file.metas.title === null) {
+                let err = 'File ' + file.metas.fileName + ' throw out : no title';
                 errors.push(err); console.log(err);
                 return false; }
 
@@ -47,18 +49,20 @@ let fileIds = []
         })
         .map(function(file) {
 
-            return {
-                content: file.content,
-                metas: file.metas,
-                links: file.links.filter(function(link) {
-                    if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
-                        let err = 'Link "' + link.aim + '" removed from file "' + file.metas.title + '" : no valid target';
-                        errors.push(err); console.log(err);
-                        return false;
-                    }
-                    return true;
-                })
-            };
+            file.metas.type = file.metas.type || 'undefined';
+
+            file.metas.tags = file.metas.tags || [];
+
+            file.links = file.links.filter(function(link) {
+                if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
+                    let err = 'A link has been removed from file "' + file.metas.title + '" : no valid target';
+                    errors.push(err); console.log(err);
+                    return false;
+                }
+                return true;
+            })
+
+            return file;
         })
 
 delete fileIds;
