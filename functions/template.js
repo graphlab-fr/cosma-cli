@@ -83,6 +83,7 @@ function cosmoscope(files, path) {
                 id: file.metas.id,
                 title: file.metas.title,
                 type: file.metas.type,
+                tags: file.metas.tags.join(', '),
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content),
                 links: file.links.map(link => findLinkName(link)),

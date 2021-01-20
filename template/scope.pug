@@ -98,6 +98,7 @@ html(lang='fr')
                             h1 #{record.title}
                             time(class='fiche-date', datetime=record.mtime) #{record.mtime}
                             span(class='fiche-type') #{record.type}
+                            span(class='fiche-tags') #{record.tags}
                         hr
                         div !{record.content}
 
