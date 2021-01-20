@@ -3,6 +3,11 @@ function getOutLinks(fileContent) {
 
     if (links === null) { return []; }
 
+    // delete duplicated links
+    links = links.filter((item, index) => {
+        return links.indexOf(item) === index;
+    });
+
     return links.map(analyseLink)
 }
 
