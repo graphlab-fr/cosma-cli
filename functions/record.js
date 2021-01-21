@@ -1,7 +1,9 @@
 const fs = require('fs')
+    , config = require('./verifconfig').config
     , readline = require('readline');
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+    , validTypes = Object.keys(config.types).map(key => key);
 
 (async () => {
     let metas = {};
@@ -17,7 +19,12 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         })
     
         metas.type = await new Promise((resolve, reject) => {
-            rl.question('type (default = undefined) ? ', (answer) => { resolve(answer); })
+            rl.question('type (default = undefined) ? ', (answer) => {
+                if (answer !== '' && validTypes.indexOf(answer) === -1) {
+                    reject('Unknown type. Add it to config.yml beforehand.'); }
+
+                resolve(answer);
+            })
         })
     
         metas.tags = await new Promise((resolve, reject) => {
@@ -25,8 +32,8 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         })
     
         require('./autorecord').genMdFile(metas.title, metas.type, metas.tags);
-    } catch(error) {
-        console.log(error);
+    } catch(err) {
+        console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
     }
     
     rl.close()

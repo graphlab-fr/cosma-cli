@@ -24,7 +24,7 @@ if (!fs.existsSync('config.yml')){
     console.log('create config.yml file');
 
     fs.writeFileSync('config.yml', baseConfig, (err) => {
-        if (err) { return console.error( 'Err. write config.yml file : ' + err) }
+        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write config.yml file : ' + err) }
     });
 }
 
@@ -39,12 +39,12 @@ if (config.files_origin === undefined
     || config.types === undefined
     || config.graph_params === undefined) {
 
-    console.error('The config is not complete. Check it, or reboot.');
+    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'The config is not complete. Check it, or reboot.')
     process.exit();
 }
 
 if (!fs.existsSync(config.files_origin)) {
-    console.error('You must specify a valid file path to your Markdown database file.');
+    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid file path to your Markdown database file.');
     process.exit();
 }
 
@@ -54,15 +54,15 @@ exports.config = config;
 
 function modifyImportPath(path) {
     if (!fs.existsSync(path)) {
-        console.log('You must specify a valid file path to your Markdown database file.');
+        console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid file path to your Markdown database file.');
         return;
     }
 
     config.files_origin = path;
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
-        if (err) { return console.error( 'Err. update config.yml file : ' + err) }
-        console.log('update file path from config.yml file');
+        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
+        console.log('\x1b[32m', 'config updated', '\x1b[0m', ': import path')
     });
 }
 
@@ -70,15 +70,15 @@ exports.modifyImportPath = modifyImportPath;
 
 function modifyExportPath(path) {
     if (!fs.existsSync(path)) {
-        console.log('You must specify a valid target to export in the configuration.');
+        console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid target to export in the configuration.');
         return;
     }
 
     config.export_target = path;
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
-        if (err) { return console.error( 'Err. update config.yml file : ' + err) }
-        console.log('update file path from config.yml file');
+        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
+        console.log('\x1b[32m', 'config updated', '\x1b[0m', ': export path')
     });
 }
 
@@ -88,7 +88,7 @@ function addType(name, color) {
 
     for (const yetType in config.types) {
         if (name === yetType) {
-            console.log('Type "' + yetType + '" already registred');
+            console.error('\x1b[31m', 'Err.', '\x1b[0m', `Type "${yetType}" already registred`);
             return;
         }
     }
@@ -96,8 +96,9 @@ function addType(name, color) {
     config.types[name] = {color: color};
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
-        if (err) { return console.error( 'Err. update config.yml file : ' + err) }
+        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
         console.log('add "' + name + '" type into config.yml file');
+        console.log('\x1b[32m', 'config updated', '\x1b[0m', ': type ' + name)
     });
 }
 

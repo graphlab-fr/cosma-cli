@@ -98,13 +98,13 @@ function cosmoscope(files, path) {
     });
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
-        if (err) { console.error( 'Err. write cosmographe file: ' + err) }
+        if (err) {console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
     });
 
     if (fs.existsSync(config.export_target)) {
         fs.writeFile(config.export_target + 'cosmoscope.html', htmlRender, (err) => {
-            if (err) { console.error( 'Err. write cosmographe file: ' + err) }
-            console.log('create cosmoscope.html file');
+            if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
+            console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${files.length} records)`)
         });
     } else {
         console.error('You must specify a valid target to export in the configuration.');

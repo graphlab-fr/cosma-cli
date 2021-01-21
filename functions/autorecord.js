@@ -8,7 +8,7 @@ function genMdFile(title, type, tags) {
     const validTypes = Object.keys(config.types).map(key => key);
 
     if (type !== '' && validTypes.indexOf(type) === -1) {
-        console.log('Unknown type. Add it to config.yml beforehand. No record was created.');
+        console.log('Unknown type. Add it to config.yml beforehand.');
         return;
     }
 
@@ -28,8 +28,8 @@ function genMdFile(title, type, tags) {
     content = '---\n' + content + '---\n\n';
 
     fs.writeFile(config.files_origin + title + '.md', content, (err) => {
-        if (err) { return console.error( 'Err. write html file : ' + err) }
-        console.log('create ' + title + '.md file');
+        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'register record file : ' + err) }
+        console.log('\x1b[32m', 'record saved', '\x1b[0m', `: ${title}.md`)
     });
 }
 

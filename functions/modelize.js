@@ -9,7 +9,7 @@ const fs = require('fs')
     , config = require('./verifconfig').config;
 
 let fileIds = []
-    , errors = []
+    , logs = { warn: [], err: [] }
     , entities = { nodes: [], edges: [] }
     , id = 0
     , files = fs.readdirSync(config.files_origin, 'utf8')
@@ -35,12 +35,12 @@ let fileIds = []
         .filter(function(file) {
             if (file.metas.id === undefined || isNaN(file.metas.id) === true) {
                 let err = 'File ' + file.metas.title + ' throw out : no valid id';
-                errors.push(err); console.log(err);
+                logs.err.push(err);
                 return false; }
 
             if (file.metas.title === null) {
                 let err = 'File ' + file.metas.fileName + ' throw out : no title';
-                errors.push(err); console.log(err);
+                logs.err.push(err);
                 return false; }
 
             fileIds.push(file.metas.id);
@@ -53,7 +53,7 @@ let fileIds = []
                 file.metas.type = 'undefined';
 
                 let err = 'Type of ' + file.metas.title + ' changed to undefined';
-                errors.push(err); console.log(err);
+                logs.warn.push(err);
             }
 
             file.metas.tags = file.metas.tags || [];
@@ -62,7 +62,7 @@ let fileIds = []
                 .filter(function(link) {
                     if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
                         let err = 'A link has been removed from file "' + file.metas.title + '" : no valid target';
-                        errors.push(err); console.log(err);
+                        logs.warn.push(err);
                         return false;
                     }
                 return true;
@@ -74,8 +74,8 @@ let fileIds = []
         });
 
 delete fileIds;
-require('./log').register(errors, savePath);
-delete errors;
+require('./log').register(logs, savePath);
+delete logs;
 
 files = files.map(function(file) {
 
