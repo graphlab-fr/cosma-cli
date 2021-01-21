@@ -11,7 +11,7 @@ function show(logs) {
             console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
         }
     } else {
-        console.error('\x1b[31m', 'Err.', '\x1b[0m', `${errors.length} are recorded`);
+        console.error('\x1b[31m', 'Err.', '\x1b[0m', `${errors.length} errors are recorded`);
     }
 
     if (warnings.length <= 3) {
@@ -19,7 +19,7 @@ function show(logs) {
             console.error('\x1b[33m', 'Warn.', '\x1b[0m', warn);
         }
     } else {
-        console.error('\x1b[33m', 'Warn.', '\x1b[0m', `${errors.length} are recorded`);
+        console.error('\x1b[33m', 'Warn.', '\x1b[0m', `${warnings.length} warnings are recorded`);
     }
 
 }
