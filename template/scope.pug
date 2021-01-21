@@ -33,6 +33,13 @@ html(lang='fr')
                             li(class='filter t_' + typ.name,data-filter=typ.nodes) #{typ.name}
 
                 section
+                    h1(class='arrow-switch',id='tag-stick') Tags
+
+                    ul(id='tag-list',class='tags')
+                        each tag in tags
+                            li(class='tag',data-tag=tag.nodes) #{tag.name}
+
+                section
                     h1(class='arrow-switch',id='index-stick') Index
 
                     div(id='sort-box')
@@ -119,6 +126,7 @@ html(lang='fr')
         script
             include scripts/graph.js
             include scripts/filter.js
+            include scripts/tag.js
             include scripts/sort.js
             include scripts/record.js
             include scripts/search.js

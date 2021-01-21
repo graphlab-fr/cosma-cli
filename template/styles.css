@@ -34,15 +34,28 @@ li {
 	margin: 5px 0;
 }
 
-/* FILTRES */
+.index section>h1 { cursor: pointer; }
 
-.index ul li.filter {
+.index ul li.filter, .index ul li.tag {
 	cursor: pointer;
 	padding-left: 1rem;
 	text-transform: capitalize;
 }
+
+/* FILTRES */
+
 li.filter[data-active="false"] {
 	text-decoration: line-through;
+}
+
+/* TAGS */
+
+.tags {
+	height: 0px;
+	overflow: hidden;
+}
+.tags.active {
+	height: auto;
 }
 
 /* INDEX */
