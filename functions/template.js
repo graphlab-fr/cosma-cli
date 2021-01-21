@@ -3,8 +3,10 @@ const fs = require('fs')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
     , edges = require('./edges')
-    , config = require('./verifconfig').config
-    , index = require('./modelize').index;
+    , config = require('./verifconfig').config;
+
+let types = {}
+    , tags = {};
 
 mdIt.use(mdItAttr, {
     leftDelimiter: '{',
@@ -13,6 +15,10 @@ mdIt.use(mdItAttr, {
 })
 
 function jsonData(nodes, edges) {
+
+    const index = nodes.map(function(node) {
+        return {id: node.id, title: node.label};
+    })
 
     const graphScript =
 `const fuse = new Fuse(${JSON.stringify(index)}, {
@@ -67,17 +73,10 @@ function cosmoscope(files, path) {
 
     const htmlRender = pug.compileFile('template/scope.pug')({
         index: files.map(function (file) {
-            file.content = file.content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
-                let link = extract.slice(0, -2).slice(2);
-                link = edges.analyseLink(link);
 
-                const validLinks = file.links.map(link => link.aim);
-
-                if (validLinks.indexOf(Number(link.aim)) !== -1) {
-                    return `[${extract}](#){onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;
-                }
-                return extract;
-            });
+            file.content = convertLinks(file.content, file);
+            registerType(file.metas.type, file.metas.id);
+            registerTags(file.metas.tags, file.metas.id);
 
             return {
                 id: file.metas.id,
@@ -86,17 +85,17 @@ function cosmoscope(files, path) {
                 tags: file.metas.tags.join(', '),
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content),
-                links: file.links.map(link => findLinkName(link)),
-                backlinks: file.backlinks.map(link => findLinkName(link))
+                links: file.links,
+                backlinks: file.backlinks
             }
         }),
-        types: Object.keys(config.types).map(function(key) {
-            return {
-                name: key,
-                nodes: files.filter(file => file.metas.type === key).map(file => file.metas.id).join(',') || null
-            }
+        types: Object.keys(types).map(function(type) {
+            return {name: type, nodes: types[type].join(',')};
+        }),
+        tags: Object.keys(tags).map(function(tag) {
+            return {name: tag, nodes: tags[tag].join(',')};
         })
-    })
+    });
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
         if (err) { console.error( 'Err. write cosmographe file: ' + err) }
@@ -114,10 +113,32 @@ function cosmoscope(files, path) {
 
 exports.cosmoscope = cosmoscope;
 
-function findLinkName(link) {
-    let title = index.find(function(node) {
-        return node.id === link.aim;
-    }).title;
+function registerType(type, id) {
+    if (types[type] === undefined) {
+        types[type] = []; }
 
-    return {id: link.aim, title: title, type: link.type};
+    types[type].push(id);
+}
+
+function registerTags(tagList, id) {
+    for (const tag of tagList) {
+        if (tags[tag] === undefined) {
+            tags[tag] = []; }
+    
+        tags[tag].push(id);
+    }
+}
+
+function convertLinks(content, file) {
+    return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
+        let link = extract.slice(0, -2).slice(2);
+        link = edges.analyseLink(link);
+
+        const validLinks = file.links.map(link => link.aim);
+
+        if (validLinks.indexOf(Number(link.aim)) !== -1) {
+            return `[${extract}](#){onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;
+        }
+        return extract;
+    });
 }

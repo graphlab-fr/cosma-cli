@@ -11,8 +11,6 @@ const fs = require('fs')
 let fileIds = []
     , errors = []
     , entities = { nodes: [], edges: [] }
-    , types = {}
-    , tags = {}
     , id = 0
     , files = fs.readdirSync(config.files_origin, 'utf8')
         .filter(fileName => path.extname(fileName) === '.md')
@@ -68,45 +66,35 @@ let fileIds = []
                         return false;
                     }
                 return true;
-            })
+                });
 
-            registerType(file.metas.type, file.metas.id);
-            registerTags(file.metas.tags, file.metas.id);
             registerLinks(file);
 
             return file;
-        })
-        .map(function(file) {
-            file.backlinks = entities.edges.filter(function(edge) {
-                if (edge.target === file.metas.id) {
-                    return true;
-                }
-            }).map(function(edge) {
-                return {type: edge.type, aim: edge.source};
-            });
-
-            return file;
-        })
+        });
 
 delete fileIds;
 require('./log').register(errors, savePath);
 delete errors;
 
-function registerType(type, id) {
-    if (types[type] === undefined) {
-        types[type] = []; }
+files = files.map(function(file) {
 
-    types[type].push(id);
-}
+    file.links.map(function(link) {
+        return link.aimName = findLinkName(link.aim)
+    });
 
-function registerTags(tagList, id) {
-    for (const tag of tagList) {
-        if (tags[tag] === undefined) {
-            tags[tag] = []; }
-    
-        tags[tag].push(id);
-    }
-}
+    file.backlinks = entities.edges.filter(function(edge) {
+        if (edge.target === file.metas.id) {
+            return true;
+        }
+    }).map(function(edge) {
+        return {type: edge.type, aim: edge.source, aimName: findLinkName(edge.source)};
+    });
+
+    registerNodes(file);
+
+    return file;
+});
 
 function registerLinks(file) {
     if (file.links.length === 0) { return; }
@@ -121,9 +109,7 @@ function registerLinks(file) {
     }
 }
 
-let index = [];
-
-for (let file of files) {
+function registerNodes(file) {
     const size = edges.getRank(file.links.length, file.backlinks.length);
 
     entities.nodes.push({
@@ -136,14 +122,13 @@ for (let file of files) {
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });
-
-    index.push({
-        id: Number(file.metas.id),
-        title: file.metas.title
-    });
 }
 
-exports.index = index;
+function findLinkName(linkAim) {
+    return title = files.find(function(file) {
+        return file.metas.id === linkAim;
+    }).metas.title;
+}
 
 require('./template').jsonData(entities.nodes, entities.edges);
 require('./template').colors();
