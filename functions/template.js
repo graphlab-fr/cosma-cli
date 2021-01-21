@@ -2,7 +2,6 @@ const fs = require('fs')
     , pug = require('pug')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
-    , edges = require('./edges')
     , config = require('./verifconfig').config;
 
 let types = {}
@@ -132,13 +131,16 @@ function registerTags(tagList, id) {
 function convertLinks(content, file) {
     return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
         let link = extract.slice(0, -2).slice(2);
-        link = edges.analyseLink(link);
+        link = Number(link);
 
-        const validLinks = file.links.map(link => link.aim);
+        const associatedLink = file.links.find(function(i) {
+            return i.aim === link;
+        });
 
-        if (validLinks.indexOf(Number(link.aim)) !== -1) {
-            return `[${extract}](#){onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;
-        }
-        return extract;
+        if (associatedLink === undefined) { return extract; }
+
+        link = associatedLink;
+
+        return `[${extract}](#){title="${link.aimName}" onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;        
     });
 }

@@ -29,5 +29,3 @@ function analyseLink(link) {
     }
     return {type: 'undefined', aim: Number(link[0])};
 }
-
-exports.analyseLink = analyseLink;
