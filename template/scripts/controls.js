@@ -8,11 +8,7 @@
 (function () {
     const zoomInterval = 0.3
         , zoomMax = 3
-        , zoomMin = 0.4
-        , xMax = 200
-        , xMin = -200
-        , yMax = 200
-        , yMin = -200
+        , zoomMin = 0.6;
 
     let zoom = 1,
         x = 0,
@@ -32,14 +28,7 @@
         if (d3.event.sourceEvent.type === 'mousemove') {
             
             x += d3.event.sourceEvent.movementX;
-    
-            if (x >= xMax) { x = xMax; }
-            if (x <= xMin) { x = xMin; }
-
             y += d3.event.sourceEvent.movementY;
-    
-            if (y >= yMax) { y = yMax; }
-            if (y <= yMin) { y = yMin; }
     
             translate(zoom, x, y);
         }
