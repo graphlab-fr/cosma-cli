@@ -33,6 +33,7 @@ li {
 	padding: 0;
 	margin: 5px 0;
 }
+button { cursor: pointer; }
 
 .index section>h1 { cursor: pointer; }
 
@@ -72,6 +73,7 @@ li.filter[data-active="false"] {
     margin: 0;
     padding: 0 20px;
 	background-color: white;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 #logo {
   width: 100%;
@@ -176,6 +178,25 @@ li.filter[data-active="false"] {
 }
 .controls .alpha .alpha_bar:active #alpha_value {
 	background-color: #222
+}
+
+.zoom-controls {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+.zoom-controls button {
+	width: 30px;
+	height: 30px;
+	background-color: rgb(223, 223, 223);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border: unset;
+}
+
+.zoom-controls button+button {
+	margin-top: 10px;
 }
 
 /* GRAPHE */

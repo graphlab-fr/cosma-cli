@@ -17,7 +17,7 @@ html(lang='fr')
             include libs/fuse.js
 
     body
-        div(class='interface')
+        main(class='interface')
         
             div(class='index')
 
@@ -92,6 +92,11 @@ html(lang='fr')
                     h1(class='arrow-switch',id='control-stick') Paramètres du graphe
                     div(class='controls',id='control-list')
                         include graph-d3.html
+
+                div(class='zoom-controls')
+                    button(id='zoom-more') +
+                    button(id='zoom-less') -
+                    button(id='zoom-reset') O
 
             section(class='fiche-content',id='record-container')
 
