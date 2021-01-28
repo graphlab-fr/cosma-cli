@@ -1,3 +1,5 @@
+let nodeNetwork = undefined;
+
 (function() {
     const btns = document.querySelectorAll('[data-filter]');
 
@@ -31,3 +33,30 @@
         });
     }
 })();
+
+function isolate(nodeId) {
+    nodeNetwork = nodeId;
+
+    const links = document.querySelectorAll('[data-source="' + nodeId + '"]')
+    const backlinks = document.querySelectorAll('[data-target="' + nodeId + '"]')
+    
+    let connectedElements = [document.querySelector('[data-node="' + nodeId + '"]')];
+    connectedElements = connectedElements.concat(Array.from(links), Array.from(backlinks));
+
+    for (const link of links) {
+        connectedElements = connectedElements.concat(Array.from(document.querySelectorAll('[data-node="' + link.dataset.target + '"]')));
+    }
+
+    for (const link of backlinks) {
+        connectedElements = connectedElements.concat(Array.from(document.querySelectorAll('[data-node="' + link.dataset.source + '"]')));
+    }
+
+    document.querySelectorAll('#graph_canvas line, #graph_canvas circle').forEach(elt => {
+        elt.style.display = 'none';
+    });
+
+    connectedElements.forEach(elt => {
+        elt.style.display = null;
+    });
+    
+}

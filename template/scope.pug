@@ -111,8 +111,12 @@ html(lang='fr')
                             time(class='fiche-date', datetime=record.mtime) #{record.mtime}
                             span(class='fiche-type') #{record.type}
                             span(class='fiche-tags') #{record.tags}
+                            span(class='fiche-id') #{record.id}
                         hr
+
                         div !{record.content}
+
+                        button(onclick='isolate(' + record.id + ')') Isoler le nœud
 
                         if record.links.length !== 0
                             h2 Liens
