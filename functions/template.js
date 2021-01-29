@@ -85,7 +85,8 @@ function cosmoscope(files, path) {
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content),
                 links: file.links,
-                backlinks: file.backlinks
+                backlinks: file.backlinks,
+                radius: radiusToLevel(file.radius)
             }
         }),
         types: Object.keys(types).map(function(type) {
@@ -143,4 +144,12 @@ function convertLinks(content, file) {
 
         return `[${extract}](#){title="${link.aimName}" onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;        
     });
+}
+
+function radiusToLevel(radius) {
+    let level = radius;
+    for (let i = 1; i < level.length; i++) {
+        level[i] = level[i].concat(level[i - 1]);
+    }
+    return level;
 }

@@ -93,6 +93,8 @@ files = files.map(function(file) {
 
     registerNodes(file);
 
+    file.radius = getNodeRadius(file.metas.id);
+
     return file;
 });
 
@@ -111,6 +113,7 @@ function registerLinks(file) {
 
 function registerNodes(file) {
     const size = edges.getRank(file.links.length, file.backlinks.length);
+    const radius = 8;
 
     entities.nodes.push({
         id: Number(file.metas.id),
@@ -119,6 +122,7 @@ function registerNodes(file) {
         size: Number(size),
         outLink: Number(file.links.length),
         inLink: Number(file.backlinks.length),
+        radius: Number(radius),
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });
@@ -128,6 +132,49 @@ function findLinkName(linkAim) {
     return title = files.find(function(file) {
         return file.metas.id === linkAim;
     }).metas.title;
+}
+
+function getNodeRadius(nodeId) {
+
+    let result = getTargets(nodeId);
+
+    if (result === false) { return []; }
+
+    let index = [result];
+    let flatIndex = [];
+
+    for (let i = 0; ; i++) {
+
+        let niv = [];
+        
+        for (const target of index[index.length - 1]) {
+
+            result = getTargets(target);
+
+            if (result === false) { continue; }
+            result = result.filter(target => flatIndex.indexOf(target) === -1)
+
+            niv = niv.concat(result);
+        }
+
+        if (niv.length === 0 ) { break; }
+
+        index.push(niv);
+        flatIndex = index.flat();
+    }
+
+    return index;
+}
+
+function getTargets(nodeId) {
+    const edges = entities.edges;
+
+    let targets = edges.filter(edge => edge.source === nodeId).map(edge => edge.target);
+
+    if (targets.length === 0) {
+        return false; }
+
+    return targets;
 }
 
 require('./template').jsonData(entities.nodes, entities.edges);

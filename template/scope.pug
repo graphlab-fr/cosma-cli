@@ -117,6 +117,9 @@ html(lang='fr')
                         div !{record.content}
 
                         button(onclick='isolate(' + record.id + ')') Isoler le nœud
+                        select
+                            each niv, i in record.radius
+                                option(onclick='isolate(' + niv + ')') #{i}
 
                         if record.links.length !== 0
                             h2 Liens
