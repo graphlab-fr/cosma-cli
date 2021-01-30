@@ -91,9 +91,9 @@ files = files.map(function(file) {
         return {type: edge.type, aim: edge.source, aimName: findLinkName(edge.source)};
     });
 
-    registerNodes(file);
-
     file.radius = getNodeRadius(file.metas.id);
+
+    registerNodes(file);
 
     return file;
 });
@@ -113,7 +113,7 @@ function registerLinks(file) {
 
 function registerNodes(file) {
     const size = edges.getRank(file.links.length, file.backlinks.length);
-    const radius = 8;
+    const radius = file.radius.length;
 
     entities.nodes.push({
         id: Number(file.metas.id),

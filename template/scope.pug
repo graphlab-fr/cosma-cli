@@ -118,12 +118,12 @@ html(lang='fr')
 
                         h2 Graphe
 
-                        button(onclick='isolate(' + record.id + ')') Isoler le nœud
+                        button(onclick='isolate(' + record.id + ')') 1
 
                         if record.radius.length !== 0
-                            select
-                                each niv, i in record.radius
-                                    option(onclick='isolate(' + niv + ')') #{i + 1}
+
+                            each niv, i in record.radius
+                                button(onclick='isolate(' + niv + ')') #{i + 2}
 
                         if record.links.length !== 0
                             h2 Liens
