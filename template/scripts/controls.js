@@ -69,6 +69,6 @@
 
     function translate(zoom, x, y) {
         document.querySelector('#graph_canvas')
-            .setAttribute('transform', `translate(${x}, ${y}) scale(${zoom})`);
+            .setAttribute('style', `transform:translate(${x}px, ${y}px) scale(${zoom});`);
     }
 })();
