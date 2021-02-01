@@ -1,31 +1,44 @@
-let openedRecord = undefined
-    , highlightedNode = undefined
+let highlightedNode = undefined
     , highlightedEdges = [];
 
 function openRecord(id, history = true) {
-    if (openedRecord !== undefined) {
-        openedRecord.style.display = 'none'; }
+    if (id === undefined) {
+        return; }
 
+    if (view.openedRecord !== undefined) {
+        // hide last record
+        document.getElementById(view.openedRecord)
+            .style.display = 'none';
+    }
+
+    // open records container
     const recordContainer = document.querySelector('#record-container');
     recordContainer.classList.add('active');
 
-    const elt = document.getElementById(id)
+    // show record
+    const elt = document.getElementById(id);
     elt.style.display = 'unset';
 
+    // page's <title> become record's name
+    const recordTitle = elt.querySelector('h1').textContent;
+    document.title = recordTitle + ' - Cosma';
+
+    // adjust record view
     recordContainer.scrollTo({ top: 0 });
 
     highlightNode(id);
 
-    openedRecord = elt
+    view.openedRecord = id;
+    view.register();
 
     if (history) {
-        historique.actualiser(id); }
+        historique.actualiser(id);}
 
 }
 
 function closeRecord() {
-    openedRecord.style.display = 'none';
-    openedRecord = undefined;
+    document.getElementById(view.openedRecord).style.display = 'none';
+    view.openedRecord = undefined;
     document.querySelector('#record-container').classList.remove('active')
 
     unlightNode();

@@ -10,10 +10,6 @@
         , zoomMax = 3
         , zoomMin = 0.6;
 
-    let zoom = 1,
-        x = 0,
-        y = 0;
-
     svg.call(d3.zoom().on('zoom', function () {
 
         if (d3.event.sourceEvent.type === 'wheel') {
@@ -27,10 +23,10 @@
 
         if (d3.event.sourceEvent.type === 'mousemove') {
             
-            x += d3.event.sourceEvent.movementX;
-            y += d3.event.sourceEvent.movementY;
+            view.position.x += d3.event.sourceEvent.movementX;
+            view.position.y += d3.event.sourceEvent.movementY;
     
-            translate(zoom, x, y);
+            translate();
         }
     }));
 
@@ -42,33 +38,40 @@
 
     document.querySelector('#zoom-reset')
         .addEventListener('click', () => {
-            zoom = 1;
-            x = 0;
-            y = 0;
+            view.position.zoom = 1;
+            view.position.x = 0;
+            view.position.y = 0;
 
-            translate(zoom, x, y);
+            translate();
         });
 
     function zoomMore() {
-        zoom += zoomInterval;
+        view.position.zoom += zoomInterval;
 
-        if (zoom >= zoomMax) {
-            zoom = zoomMax; }
+        if (view.position.zoom >= zoomMax) {
+            view.position.zoom = zoomMax; }
 
-        translate(zoom, x, y);
+        translate();
     }
 
     function zoomLess() {
-        zoom -= zoomInterval;
+        view.position.zoom -= zoomInterval;
 
-        if (zoom <= zoomMin) {
-            zoom = zoomMin; }
+        if (view.position.zoom <= zoomMin) {
+            view.position.zoom = zoomMin; }
 
-        translate(zoom, x, y);
+        translate();
     }
 
-    function translate(zoom, x, y) {
-        document.querySelector('#graph_canvas')
-            .setAttribute('style', `transform:translate(${x}px, ${y}px) scale(${zoom});`);
-    }
 })();
+
+function translate() {
+    if (view.position.x === undefined ||
+        view.position.y === undefined ||
+        view.position.zoom === undefined) { return; }
+
+    document.querySelector('#graph_canvas')
+        .setAttribute('style', `transform:translate(${view.position.x}px, ${view.position.y}px) scale(${view.position.zoom});`);
+
+    view.register();
+}

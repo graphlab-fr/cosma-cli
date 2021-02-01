@@ -1,4 +1,4 @@
-let historique = {
+const historique = {
     actualiser: function(recordId) {
         if (history.state == null) { this.init(recordId); }
         else {
@@ -21,3 +21,44 @@ window.onpopstate = function(e) {
 
     openRecord(recordId, false);
 };
+
+const view = {
+    openedRecord: undefined,
+    position: {x: 0, y: 0, zoom: 1},
+    register: function() {
+        const viewObj = {
+            recordId: this.openedRecord,
+            pos : this.position
+        }
+
+        return window.btoa(JSON.stringify(viewObj));
+    }
+};
+
+(function() {
+    const btn = document.querySelector('#save-view');
+    btn.addEventListener('click', () => {
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = view.register();
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+    })
+})();
+
+(function() {
+    const btns = document.querySelectorAll('[data-view]');
+
+    for (let btn of btns) {
+        btn.addEventListener('click', () => {
+            let viewSet = btn.dataset.view;
+            viewSet = window.atob(viewSet);
+            viewSet = JSON.parse(viewSet);
+
+            openRecord(viewSet.recordId, false);
+            view.position = viewSet.pos;
+            translate();
+        });
+    }
+})();

@@ -94,7 +94,8 @@ function cosmoscope(files, path) {
         }),
         tags: Object.keys(tags).map(function(tag) {
             return {name: tag, nodes: tags[tag].join(',')};
-        })
+        }),
+        views: config.views || []
     });
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
