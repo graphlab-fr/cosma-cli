@@ -18,5 +18,6 @@ window.onpopstate = function(e) {
     var timeline = e.state.hist;
 
     var recordId = timeline[timeline.length - 1];
-    openRecord(recordId);
+
+    openRecord(recordId, false);
 };

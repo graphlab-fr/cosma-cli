@@ -2,7 +2,7 @@ let openedRecord = undefined
     , highlightedNode = undefined
     , highlightedEdges = [];
 
-function openRecord(id) {
+function openRecord(id, history = true) {
     if (openedRecord !== undefined) {
         openedRecord.style.display = 'none'; }
 
@@ -16,9 +16,11 @@ function openRecord(id) {
 
     highlightNode(id);
 
-    historique.actualiser(id);
-
     openedRecord = elt
+
+    if (history) {
+        historique.actualiser(id); }
+
 }
 
 function closeRecord() {
