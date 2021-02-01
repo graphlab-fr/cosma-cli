@@ -2,13 +2,15 @@ let highlightedNode = undefined
     , highlightedEdges = [];
 
 function openRecord(id, history = true) {
-    if (id === undefined) {
-        return; }
-
     if (view.openedRecord !== undefined) {
         // hide last record
         document.getElementById(view.openedRecord)
             .style.display = 'none';
+    }
+
+    if (id === undefined) {
+        document.querySelector('#record-container').classList.remove('active');
+        return;
     }
 
     // open records container
@@ -39,7 +41,7 @@ function openRecord(id, history = true) {
 function closeRecord() {
     document.getElementById(view.openedRecord).style.display = 'none';
     view.openedRecord = undefined;
-    document.querySelector('#record-container').classList.remove('active')
+    document.querySelector('#record-container').classList.remove('active');
 
     unlightNode();
 }
