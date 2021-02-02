@@ -35,30 +35,21 @@ const view = {
     }
 };
 
-(function() {
-    const btn = document.querySelector('#save-view');
-    btn.addEventListener('click', () => {
-        const tempInput = document.createElement('input');
-        document.body.appendChild(tempInput);
-        tempInput.value = view.register();
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-    })
-})();
+function saveView() {
+    const tempInput = document.createElement('input');
+    document.body.appendChild(tempInput);
+    tempInput.value = view.register();
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+}
 
-(function() {
-    const btns = document.querySelectorAll('[data-view]');
+function changeView(viewString) {
+    let viewSet = viewString;
+    viewSet = window.atob(viewSet);
+    viewSet = JSON.parse(viewSet);
 
-    for (let btn of btns) {
-        btn.addEventListener('click', () => {
-            let viewSet = btn.dataset.view;
-            viewSet = window.atob(viewSet);
-            viewSet = JSON.parse(viewSet);
-
-            openRecord(viewSet.recordId, false);
-            view.position = viewSet.pos;
-            translate();
-        });
-    }
-})();
+    openRecord(viewSet.recordId, false);
+    view.position = viewSet.pos;
+    translate();
+}

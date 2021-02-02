@@ -94,11 +94,11 @@ html(lang='fr')
                         include graph-d3.html
 
                 section
-                    button(id='save-view') Sauvegarder la vue
+                    button(onclick='saveView()') Sauvegarder la vue
 
                     if views.length !== 0
-                        each view, name in views
-                            button(data-view=view) #{name}
+                        each viewString, viewName in views
+                            button(onclick='changeView("' + viewString + '")') #{viewName}
 
                 div(class='zoom-controls')
                     button(id='zoom-more') +
