@@ -6,13 +6,11 @@ let nodeNetwork = undefined;
     for (const btn of btns) {
         btn.dataset.active = 'true';
 
+        const nodesIds = btn.dataset.filter.split(',');
+        
         btn.addEventListener('click', () => {
-            let elts = btn.dataset.filter.split(',');
-            elts = elts.map(id => document.querySelector('[data-node="' + id + '"]'))
-
-            elts.forEach(elt => {
-                elts = elts.concat(getLinksFromNode(elt.dataset.node));
-            });
+            
+            const elts = getNodeNetwork(nodesIds);
 
             if (btn.dataset.active === 'true') {
                 elts.forEach(elt => {
@@ -53,8 +51,6 @@ function isolate() {
             elts = elts.concat(Array.from(document.querySelectorAll('[data-node="' + link.dataset.source + '"]')));
         }
     }
-
-    console.log(elts);
 
     document.querySelectorAll('#graph_canvas line, #graph_canvas circle').forEach(elt => {
         elt.style.display = 'none';

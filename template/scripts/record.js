@@ -54,13 +54,11 @@ function closeRecord() {
 
 function highlightNodes(nodeIds) {
 
-    for (const nodeId of nodeIds) {
-        const elts = getNodeNetwork(nodeId);
+    const elts = getNodeNetwork(nodeIds);
 
-        for (const elt of elts) {
-            elt.style.stroke = 'var(--highlight)';
-            elt.style.fill = 'var(--highlight)';
-        }
+    for (const elt of elts) {
+        elt.style.stroke = 'var(--highlight)';
+        elt.style.fill = 'var(--highlight)';
     }
 
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
@@ -70,19 +68,30 @@ function unlightNodes() {
     if (view.highlightedNodes.length === 0) { return; }
 
 
-    for (const nodeId of view.highlightedNodes) {
-        const elts = getNodeNetwork(nodeId);
+    const elts = getNodeNetwork(view.highlightedNodes);
 
-        for (const elt of elts) {
-            elt.style.stroke = null;
-            elt.style.fill = null;
-        }
+    for (const elt of elts) {
+        elt.style.stroke = null;
+        elt.style.fill = null;
     }
 }
 
-function getNodeNetwork(nodeId) {
-    const node = document.querySelector('[data-node="' + nodeId + '"]');
-    const edges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
+function getNodeNetwork(nodeIds) {
 
-    return [node].concat(Array.from(edges));
+    let nodes = [], edges = [];
+
+    for (const nodeId of nodeIds) {
+        nodes.push(document.querySelector('[data-node="' + nodeId + '"]'));
+
+        let tempEdges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
+        tempEdges = Array.from(tempEdges);
+        edges = edges.concat(tempEdges);
+    }
+
+    // delete duplicated elts
+    edges = edges.filter((item, index) => {
+        return edges.indexOf(item) === index
+    });
+
+    return nodes.concat(edges);
 }
