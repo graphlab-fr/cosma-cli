@@ -1,6 +1,3 @@
-let highlightedNode = undefined
-    , highlightedEdges = [];
-
 function openRecord(id, history = true) {
     if (view.openedRecord !== undefined) {
         // hide last record
@@ -28,7 +25,8 @@ function openRecord(id, history = true) {
     // adjust record view
     recordContainer.scrollTo({ top: 0 });
 
-    highlightNode(id);
+    unlightNodes();
+    highlightNodes([id]);
 
     view.openedRecord = id;
     view.register();
@@ -43,7 +41,7 @@ function closeRecord() {
     view.openedRecord = undefined;
     document.querySelector('#record-container').classList.remove('active');
 
-    unlightNode();
+    unlightNodes();
 }
 
 (function () {
@@ -54,28 +52,37 @@ function closeRecord() {
     })
 })();
 
-function highlightNode(nodeId) {
-    unlightNode();
+function highlightNodes(nodeIds) {
 
-    highlightedEdges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
-    for (const edge of highlightedEdges) {
-        edge.style.stroke = 'var(--highlight)';
-    }
+    for (const nodeId of nodeIds) {
+        const elts = getNodeNetwork(nodeId);
 
-    highlightedNode = document.querySelector('[data-node="' + nodeId + '"]');
-    highlightedNode.style.fill = 'var(--highlight)';
-    highlightedNode.style.stroke = 'var(--highlight)';
-}
-
-function unlightNode() {
-    if (highlightedNode !== undefined) {
-        highlightedNode.style.fill = null;
-        highlightedNode.style.stroke = null;
-    }
-
-    if (highlightedEdges !== []) {
-        for (const edge of highlightedEdges) {
-            edge.style.stroke = null;
+        for (const elt of elts) {
+            elt.style.stroke = 'var(--highlight)';
+            elt.style.fill = 'var(--highlight)';
         }
     }
+
+    view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
+}
+
+function unlightNodes() {
+    if (view.highlightedNodes.length === 0) { return; }
+
+
+    for (const nodeId of view.highlightedNodes) {
+        const elts = getNodeNetwork(nodeId);
+
+        for (const elt of elts) {
+            elt.style.stroke = null;
+            elt.style.fill = null;
+        }
+    }
+}
+
+function getNodeNetwork(nodeId) {
+    const node = document.querySelector('[data-node="' + nodeId + '"]');
+    const edges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
+
+    return [node].concat(Array.from(edges));
 }

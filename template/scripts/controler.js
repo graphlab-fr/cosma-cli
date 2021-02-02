@@ -23,6 +23,8 @@ window.onpopstate = function(e) {
 };
 
 const view = {
+    highlightedNodes: [], // = none
+    displayedNodes: [], // = all
     openedRecord: undefined,
     position: {x: 0, y: 0, zoom: 1},
     register: function() {
