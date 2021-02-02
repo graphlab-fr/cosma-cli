@@ -44,16 +44,20 @@ function isolate() {
         elts = elts.concat(Array.from(links), Array.from(backlinks));
 
         for (const link of links) {
-            elts = elts.concat(Array.from(document.querySelectorAll('[data-node="' + link.dataset.target + '"]')));
+            elts.push(document.querySelector('[data-node="' + link.dataset.target + '"]'));
         }
 
         for (const link of backlinks) {
-            elts = elts.concat(Array.from(document.querySelectorAll('[data-node="' + link.dataset.source + '"]')));
+            elts.push(document.querySelector('[data-node="' + link.dataset.source + '"]'));
         }
     }
 
     document.querySelectorAll('#graph_canvas line, #graph_canvas circle').forEach(elt => {
         elt.style.display = 'none';
+    });
+
+    elts = elts.filter((item, index) => {
+        return elts.indexOf(item) === index
     });
 
     elts.forEach(elt => {

@@ -113,7 +113,6 @@ function registerLinks(file) {
 
 function registerNodes(file) {
     const size = edges.getRank(file.links.length, file.backlinks.length);
-    const radius = file.radius.length;
 
     entities.nodes.push({
         id: Number(file.metas.id),
@@ -122,7 +121,6 @@ function registerNodes(file) {
         size: Number(size),
         outLink: Number(file.links.length),
         inLink: Number(file.backlinks.length),
-        radius: Number(radius),
         x: Number(rand.randFloat(40, 50)),
         y: Number(rand.randFloat(40, 50))
     });
@@ -134,16 +132,12 @@ function findLinkName(linkAim) {
     }).metas.title;
 }
 
-function getNodeRadius(nodeId) {
+function getNodeRadius(nodeId) {    
 
-    let result = getTargets(nodeId);
-
-    if (result === false) { return []; }
-
-    let index = [result];
+    let index = [[nodeId]];
     let flatIndex = [];
 
-    for (let i = 0; ; i++) {
+    for (let i = 0 ; i < config.radius.max ; i++) {
 
         let niv = [];
         
@@ -157,7 +151,7 @@ function getNodeRadius(nodeId) {
             niv = niv.concat(result);
         }
 
-        if (niv.length === 0 ) { break; }
+        if (niv.length === 0) { break; }
 
         index.push(niv);
         flatIndex = index.flat();
@@ -169,7 +163,10 @@ function getNodeRadius(nodeId) {
 function getTargets(nodeId) {
     const edges = entities.edges;
 
-    let targets = edges.filter(edge => edge.source === nodeId).map(edge => edge.target);
+    let sources = edges.filter(edge => edge.source === nodeId).map(edge => edge.target);
+    let targets = edges.filter(edge => edge.target === nodeId).map(edge => edge.source);
+
+    targets = targets.concat(sources);
 
     if (targets.length === 0) {
         return false; }

@@ -7,6 +7,7 @@ if (!fs.existsSync('config.yml')){
     let baseConfig = yamlEditor.safeDump({
         files_origin: '',
         export_target: '',
+        radius: {max: 3},
         types: {'undefined': {'color': 'grey'}},
         linkType: {'undefined': {'color': 'grey'}},
         graph_params: {
