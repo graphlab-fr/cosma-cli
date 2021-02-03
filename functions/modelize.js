@@ -132,12 +132,14 @@ function findLinkName(linkAim) {
     }).metas.title;
 }
 
-function getNodeRadius(nodeId) {    
+function getNodeRadius(nodeId) {
+
+    if (config.radius.max === 0) { return []; }
 
     let index = [[nodeId]];
     let flatIndex = [];
 
-    for (let i = 0 ; i < config.radius.max ; i++) {
+    for (let i = 1 ; i < config.radius.max ; i++) {
 
         let niv = [];
         
