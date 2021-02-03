@@ -6,23 +6,15 @@ let nodeNetwork = undefined;
     for (const btn of btns) {
         btn.dataset.active = 'true';
 
-        const nodesIds = btn.dataset.filter.split(',');
+        const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
         
         btn.addEventListener('click', () => {
-            
-            const elts = getNodeNetwork(nodesIds);
 
             if (btn.dataset.active === 'true') {
-                elts.forEach(elt => {
-                    elt.style.display = 'none';
-                });
-
+                hideNodes(nodeIds);
                 btn.dataset.active = 'false';
             } else {
-                elts.forEach(elt => {
-                    elt.style.display = null;
-                });
-
+                displayNodes(nodeIds);
                 btn.dataset.active = 'true';
             }
         });
@@ -30,42 +22,38 @@ let nodeNetwork = undefined;
 })();
 
 function isolate() {
-    const ids = Array.from(arguments);
-    const nodes = ids.map(function(nodeId) {
-        return document.querySelector('[data-node="' + nodeId + '"]');
-    });
+    let nodeIds = Array.from(arguments); // nodes to keep displayed
 
-    let elts = nodes;
+    // get nodes to hide
+    let hiddenNodes = allNodeIds.filter(id => nodeIds.indexOf(id) === -1);
 
-    for (const node of nodes) {
-        const links = document.querySelectorAll('[data-source="' + node.dataset.node + '"]')
-        const backlinks = document.querySelectorAll('[data-target="' + node.dataset.node + '"]')
-        
-        elts = elts.concat(Array.from(links), Array.from(backlinks));
-
-        for (const link of links) {
-            elts.push(document.querySelector('[data-node="' + link.dataset.target + '"]'));
-        }
-
-        for (const link of backlinks) {
-            elts.push(document.querySelector('[data-node="' + link.dataset.source + '"]'));
-        }
-    }
-
-    document.querySelectorAll('#graph_canvas line, #graph_canvas circle').forEach(elt => {
-        elt.style.display = 'none';
-    });
-
-    elts = elts.filter((item, index) => {
-        return elts.indexOf(item) === index
-    });
-
-    elts.forEach(elt => {
-        elt.style.display = null;
-    });
+    hideNodes(hiddenNodes);
 }
 
 function getLinksFromNode(nodeId) {
     let links = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
     return Array.from(links);
+}
+
+function hideNodes(nodeIds) {
+    // compare already hidden nodes
+    nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
+    
+    const elts = getNodeNetwork(nodeIds);
+
+    for (const elt of elts) {
+        elt.style.display = 'none';
+    }
+
+    view.hidenNodes = view.hidenNodes.concat(nodeIds);
+}
+
+function displayNodes(nodeIds) {
+    const elts = getNodeNetwork(nodeIds);
+
+    for (const elt of elts) {
+        elt.style.display = null;
+    }
+
+    view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
 }
