@@ -30,7 +30,7 @@ html(lang='fr')
                     h1 Filtres
                     ul
                         each typ in types
-                            li(class='filter t_' + typ.name,data-filter=typ.nodes) #{typ.name}
+                            li(class='filter t_' + typ.name,data-filter=typ.nodes,data-name=typ.name) #{typ.name}
 
                 section
                     h1(class='arrow-switch',id='tag-stick') Tags

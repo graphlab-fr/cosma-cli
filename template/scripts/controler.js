@@ -24,16 +24,21 @@ window.onpopstate = function(e) {
 
 const view = {
     highlightedNodes: [],
+    activeFilters: [],
     hidenNodes: [],
     openedRecord: undefined,
     position: {x: 0, y: 0, zoom: 1},
     register: function() {
         const viewObj = {
             recordId: this.openedRecord,
-            pos : this.position
+            pos : this.position,
+            filters : this.activeFilters
         }
 
-        return window.btoa(JSON.stringify(viewObj));
+        let key = JSON.stringify(viewObj);
+        key = window.btoa(key);
+        key = encodeURIComponent(key);
+        return key;
     }
 };
 
@@ -46,12 +51,13 @@ function saveView() {
     document.body.removeChild(tempInput);
 }
 
-function changeView(viewString) {
-    let viewSet = viewString;
-    viewSet = window.atob(viewSet);
-    viewSet = JSON.parse(viewSet);
+function changeView(key) {
+    key = decodeURIComponent(key);
+    key = window.atob(key);
+    key = JSON.parse(key);
 
-    openRecord(viewSet.recordId, false);
-    view.position = viewSet.pos;
+    openRecord(key.recordId, false);
+    view.position = key.pos;
     translate();
+    activeFilter(key.filters);
 }

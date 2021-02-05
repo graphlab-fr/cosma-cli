@@ -13,21 +13,40 @@ let nodeNetwork = undefined;
             if (btn.dataset.active === 'true') {
                 hideNodes(nodeIds);
                 btn.dataset.active = 'false';
+                view.activeFilters.push(btn.dataset.name);
             } else {
                 displayNodes(nodeIds);
                 btn.dataset.active = 'true';
+                view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
             }
         });
     }
 })();
 
+function activeFilter() {
+    if (arguments[0].length === 0) { return; }
+    let activeFilters = Array.from(arguments);
+
+    activeFilters = activeFilters.map(filterName => document.querySelector('[data-filter][data-name="' + filterName + '"]'));
+
+    for (const btn of activeFilters) {
+        btn.dataset.active = 'false';
+
+        const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
+
+        hideNodes(nodeIds);
+        btn.dataset.active = 'false';
+        view.activeFilters.push(btn.dataset.name);
+    }
+}
+
 function isolate() {
-    let nodeIds = Array.from(arguments); // nodes to keep displayed
+    let toDisplayIds = Array.from(arguments); // nodes to keep displayed
 
     // get nodes to hide
-    let hiddenNodes = allNodeIds.filter(id => nodeIds.indexOf(id) === -1);
+    let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
 
-    hideNodes(hiddenNodes);
+    hideNodes(toHideIds);
 }
 
 function getLinksFromNode(nodeId) {
