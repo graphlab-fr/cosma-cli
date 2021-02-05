@@ -126,7 +126,8 @@ html(lang='fr')
                         if record.radius.length !== 0
                             h2 Graphe
                             each niv, i in record.radius
-                                button(onclick='isolate(' + niv + ')') #{i + 1}
+                                - var nivId = record.id + '-' + (i + 1)
+                                button(id=nivId,class='radius-btn',onclick='isolate(' + niv + ');view.isolateId="' + nivId + '"') #{i + 1}
 
                         if record.links.length !== 0
                             h2 Liens

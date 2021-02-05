@@ -41,7 +41,13 @@ function activeFilter() {
 }
 
 function isolate() {
-    let toDisplayIds = Array.from(arguments); // nodes to keep displayed
+    let toDisplayIds = [];
+
+    if (Array.isArray(arguments[0])) {
+        toDisplayIds = arguments[0];
+    } else {
+        toDisplayIds = Array.from(arguments); // nodes to keep displayed
+    }
 
     // get nodes to hide
     let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);

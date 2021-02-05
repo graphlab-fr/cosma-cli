@@ -72,6 +72,4 @@ function translate() {
 
     document.querySelector('#graph_canvas')
         .setAttribute('style', `transform:translate(${view.position.x}px, ${view.position.y}px) scale(${view.position.zoom});`);
-
-    view.register();
 }

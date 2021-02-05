@@ -29,7 +29,6 @@ function openRecord(id, history = true) {
     highlightNodes([id]);
 
     view.openedRecord = id;
-    view.register();
 
     if (history) {
         historique.actualiser(id);}
