@@ -45,7 +45,7 @@ button { cursor: pointer; }
 
 /* FILTRES */
 
-li.filter[data-active="false"] {
+li.filter[data-active="true"] {
 	text-decoration: line-through;
 }
 

@@ -139,7 +139,7 @@ function getNodeRadius(nodeId) {
     let index = [[nodeId]];
     let flatIndex = [];
 
-    for (let i = 1 ; i < config.radius.max ; i++) {
+    for (let i = 0 ; i < config.radius.max ; i++) {
 
         let niv = [];
         
@@ -154,6 +154,10 @@ function getNodeRadius(nodeId) {
         }
 
         if (niv.length === 0) { break; }
+
+        niv = niv.filter((item, index) => {
+            return niv.indexOf(item) === index
+        });
 
         index.push(niv);
         flatIndex = index.flat();

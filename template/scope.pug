@@ -30,7 +30,7 @@ html(lang='fr')
                     h1 Filtres
                     ul
                         each typ in types
-                            li(class='filter t_' + typ.name,data-filter=typ.nodes) #{typ.name}
+                            li(class='filter t_' + typ.name,data-filter=typ.nodes,data-name=typ.name) #{typ.name}
 
                 section
                     h1(class='arrow-switch',id='tag-stick') Tags
@@ -94,16 +94,20 @@ html(lang='fr')
                         include graph-d3.html
 
                 section
-                    button(onclick='saveView()') Sauvegarder la vue
+                    div
+                        button(onclick='resetNodes()') Reset
+                    div
+                        button(onclick='saveView()') Sauvegarder la vue
 
                     if views.length !== 0
-                        each viewString, viewName in views
-                            button(onclick='changeView("' + viewString + '")') #{viewName}
+                        div
+                            each viewString, viewName in views
+                                button(onclick='changeView("' + viewString + '")') #{viewName}
 
                 div(class='zoom-controls')
-                    button(id='zoom-more') +
-                    button(id='zoom-less') -
-                    button(id='zoom-reset') O
+                    button(id='zoom-more',onclick='zoomMore()') +
+                    button(id='zoom-less',onclick='zoomLess()') -
+                    button(id='zoom-reset',onclick='zoomReset()') O
 
             section(class='fiche-content',id='record-container')
 
@@ -126,7 +130,8 @@ html(lang='fr')
                         if record.radius.length !== 0
                             h2 Graphe
                             each niv, i in record.radius
-                                button(onclick='isolate(' + niv + ')') #{i + 1}
+                                - var nivId = record.id + '-' + (i + 1)
+                                button(id=nivId,class='radius-btn',onclick='isolate(' + niv + ');view.isolateId="' + nivId + '"') #{i + 1}
 
                         if record.links.length !== 0
                             h2 Liens

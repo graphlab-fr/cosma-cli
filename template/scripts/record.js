@@ -29,7 +29,6 @@ function openRecord(id, history = true) {
     highlightNodes([id]);
 
     view.openedRecord = id;
-    view.register();
 
     if (history) {
         historique.actualiser(id);}
@@ -83,9 +82,23 @@ function getNodeNetwork(nodeIds) {
     for (const nodeId of nodeIds) {
         nodes.push(document.querySelector('[data-node="' + nodeId + '"]'));
 
-        let tempEdges = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
-        tempEdges = Array.from(tempEdges);
-        edges = edges.concat(tempEdges);
+        let tempSources = document.querySelectorAll('[data-source="' + nodeId + '"]');
+        tempSources = Array.from(tempSources);
+        tempSources = tempSources.filter(function(source) {
+            if (view.hidenNodes.indexOf(Number(source.dataset.target)) === -1) {
+                return true;
+            }
+        })
+
+        let tempTargets = document.querySelectorAll('[data-target="' + nodeId + '"]');
+        tempTargets = Array.from(tempTargets);
+        tempTargets = tempTargets.filter(function(source) {
+            if (view.hidenNodes.indexOf(Number(source.dataset.source)) === -1) {
+                return true;
+            }
+        })
+
+        edges = edges.concat(tempSources, tempTargets);
     }
 
     // delete duplicated elts

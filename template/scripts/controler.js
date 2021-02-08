@@ -23,35 +23,67 @@ window.onpopstate = function(e) {
 };
 
 const view = {
-    highlightedNodes: [], // = none
-    displayedNodes: [], // = all
+    highlightedNodes: [],
+    activeFilters: [],
+    hidenNodes: [],
+    isolateId: undefined,
     openedRecord: undefined,
-    position: {x: 0, y: 0, zoom: 1},
-    register: function() {
-        const viewObj = {
-            recordId: this.openedRecord,
-            pos : this.position
-        }
-
-        return window.btoa(JSON.stringify(viewObj));
-    }
+    position: {x: 0, y: 0, zoom: 1}
 };
+
+function registerView() {
+    const viewObj = {
+        recordId: view.openedRecord,
+        pos : view.position,
+        filters : ((view.activeFilters.length === 0) ? undefined : view.activeFilters),
+        isolateId : view.isolateId
+    }
+
+    let key = JSON.stringify(viewObj);
+    key = window.btoa(key);
+    key = encodeURIComponent(key);
+    return key;
+}
 
 function saveView() {
     const tempInput = document.createElement('input');
     document.body.appendChild(tempInput);
-    tempInput.value = view.register();
+    tempInput.value = registerView();
     tempInput.select();
     document.execCommand('copy');
     document.body.removeChild(tempInput);
 }
 
-function changeView(viewString) {
-    let viewSet = viewString;
-    viewSet = window.atob(viewSet);
-    viewSet = JSON.parse(viewSet);
+function changeView(key) {
+    key = decodeURIComponent(key);
+    key = window.atob(key);
+    key = JSON.parse(key);
 
-    openRecord(viewSet.recordId, false);
-    view.position = viewSet.pos;
+    view.position = key.pos;
     translate();
+
+    if (key.recordId) {
+        openRecord(key.recordId, false);
+    }
+
+    if (key.filters) {
+        setFilters(key.filters);
+    }
+    
+    if (key.isolateId) {
+        isolateByElement(key.isolateId);
+    }
+}
+
+function isolateByElement(eltId) {
+    if (eltId === undefined) { return; }
+
+    let nodeIds = document.getElementById(eltId);
+    nodeIds = nodeIds.getAttribute('onclick');
+    nodeIds = nodeIds.split('(', 2)[1].split(')', 1)[0];
+    nodeIds = nodeIds.split(',');
+    nodeIds = nodeIds.map(id => Number(id));
+    isolate(nodeIds);
+
+    view.isolateId = eltId;
 }

@@ -15,12 +15,17 @@ mdIt.use(mdItAttr, {
 
 function jsonData(nodes, edges) {
 
+    let allNodeIds = [];
+
     const index = nodes.map(function(node) {
+        allNodeIds.push(node.id);
         return {id: node.id, title: node.label};
     })
 
     const graphScript =
-`const fuse = new Fuse(${JSON.stringify(index)}, {
+`const allNodeIds = [${allNodeIds.join(',')}];
+
+const fuse = new Fuse(${JSON.stringify(index)}, {
     includeScore: false,
     keys: ['title']
 });
@@ -152,5 +157,5 @@ function radiusToLevel(radius) {
     for (let i = 1; i < level.length; i++) {
         level[i] = level[i].concat(level[i - 1]);
     }
-    return level;
+    return level = level.slice(1);
 }
