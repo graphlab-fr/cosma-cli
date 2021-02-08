@@ -40,8 +40,6 @@ function registerView() {
     }
 
     let key = JSON.stringify(viewObj);
-    console.log(key);
-    console.log('REGISTER');
     key = window.btoa(key);
     key = encodeURIComponent(key);
     return key;
@@ -69,15 +67,23 @@ function changeView(key) {
     }
 
     if (key.filters) {
-        activeFilter(key.filters);
+        setFilters(key.filters);
     }
     
     if (key.isolateId) {
-        let nodeIds = document.getElementById(key.isolateId);
-        nodeIds = nodeIds.getAttribute('onclick');
-        nodeIds = nodeIds.split('(', 2)[1].split(')', 1)[0];
-        nodeIds = nodeIds.split(',');
-        nodeIds = nodeIds.map(id => Number(id));
-        isolate(nodeIds);
+        isolateByElement(key.isolateId);
     }
+}
+
+function isolateByElement(eltId) {
+    if (eltId === undefined) { return; }
+
+    let nodeIds = document.getElementById(eltId);
+    nodeIds = nodeIds.getAttribute('onclick');
+    nodeIds = nodeIds.split('(', 2)[1].split(')', 1)[0];
+    nodeIds = nodeIds.split(',');
+    nodeIds = nodeIds.map(id => Number(id));
+    isolate(nodeIds);
+
+    view.isolateId = eltId;
 }

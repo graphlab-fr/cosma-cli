@@ -19,24 +19,29 @@ let nodeNetwork = undefined;
                 view.activeFilters.push(btn.dataset.name);
                 btn.dataset.active = 'true';
             }
+
+            isolateByElement(view.isolateId);
         });
     }
 })();
 
-function activeFilter() {
-    if (arguments[0].length === 0) { return; }
-    let activeFilters = Array.from(arguments);
+function setFilters(filtersToActivate) {
+    const btns = document.querySelectorAll('[data-filter]');
 
-    activeFilters = activeFilters.map(filterName => document.querySelector('[data-filter][data-name="' + filterName + '"]'));
-
-    for (const btn of activeFilters) {
-        btn.dataset.active = 'false';
+    for (const btn of btns) {
 
         const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
 
-        hideNodes(nodeIds);
-        btn.dataset.active = 'false';
-        view.activeFilters.push(btn.dataset.name);
+        if (filtersToActivate.indexOf(btn.dataset.name) !== -1) {
+            // if filter is "ToActivate"
+            hideNodes(nodeIds);
+            view.activeFilters.push(btn.dataset.name);
+            btn.dataset.active = 'true';
+        } else {
+            displayNodes(nodeIds);
+            view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
+            btn.dataset.active = 'false';
+        }
     }
 }
 
@@ -48,6 +53,8 @@ function isolate() {
     } else {
         toDisplayIds = Array.from(arguments); // nodes to keep displayed
     }
+
+    toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
 
     // get nodes to hide
     let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
@@ -68,7 +75,6 @@ function hideNodes(nodeIds) {
     nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
 
     view.hidenNodes = view.hidenNodes.concat(nodeIds);
-    
 
     for (const elt of elts) {
         elt.style.display = 'none';
@@ -85,13 +91,14 @@ function displayNodes(nodeIds) {
     }
 }
 
-function resetNodes() {
+function getFiltedNodes() {
     let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
-    nodeIds = Array.from(nodeIds)
+    return nodeIds = Array.from(nodeIds)
         .map(filter => filter.dataset.filter.split(',')).flat()
         .map(nodeId => Number(nodeId));
+}
 
-    // const toDisplayIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
-    const toDisplayIds = allNodeIds.filter(id => nodeIds.indexOf(id) === -1);
+function resetNodes() {
+    const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
     displayNodes(toDisplayIds);
 }
