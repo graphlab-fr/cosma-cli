@@ -100,5 +100,6 @@ function getFiltedNodes() {
 
 function resetNodes() {
     const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+    view.isolateId = undefined;
     displayNodes(toDisplayIds);
 }
