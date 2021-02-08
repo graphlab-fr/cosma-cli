@@ -4,20 +4,20 @@ let nodeNetwork = undefined;
     const btns = document.querySelectorAll('[data-filter]');
 
     for (const btn of btns) {
-        btn.dataset.active = 'true';
+        btn.dataset.active = 'false';
 
         const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
         
         btn.addEventListener('click', () => {
 
             if (btn.dataset.active === 'true') {
-                hideNodes(nodeIds);
-                btn.dataset.active = 'false';
-                view.activeFilters.push(btn.dataset.name);
-            } else {
                 displayNodes(nodeIds);
-                btn.dataset.active = 'true';
                 view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
+                btn.dataset.active = 'false';
+            } else {
+                hideNodes(nodeIds);
+                view.activeFilters.push(btn.dataset.name);
+                btn.dataset.active = 'true';
             }
         });
     }
@@ -53,6 +53,7 @@ function isolate() {
     let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
 
     hideNodes(toHideIds);
+    displayNodes(toDisplayIds);
 }
 
 function getLinksFromNode(nodeId) {
@@ -61,24 +62,36 @@ function getLinksFromNode(nodeId) {
 }
 
 function hideNodes(nodeIds) {
+    const elts = getNodeNetwork(nodeIds);
+
     // compare already hidden nodes
     nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
+
+    view.hidenNodes = view.hidenNodes.concat(nodeIds);
     
-    const elts = getNodeNetwork(nodeIds);
 
     for (const elt of elts) {
         elt.style.display = 'none';
     }
-
-    view.hidenNodes = view.hidenNodes.concat(nodeIds);
 }
 
 function displayNodes(nodeIds) {
+    view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
+    
     const elts = getNodeNetwork(nodeIds);
 
     for (const elt of elts) {
         elt.style.display = null;
     }
+}
 
-    view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
+function resetNodes() {
+    let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
+    nodeIds = Array.from(nodeIds)
+        .map(filter => filter.dataset.filter.split(',')).flat()
+        .map(nodeId => Number(nodeId));
+
+    // const toDisplayIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
+    const toDisplayIds = allNodeIds.filter(id => nodeIds.indexOf(id) === -1);
+    displayNodes(toDisplayIds);
 }
