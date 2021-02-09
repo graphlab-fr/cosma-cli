@@ -3,26 +3,39 @@ const fs = require('fs')
     , config = require('./verifconfig').config
     , yamlEditor = require('js-yaml');
 
+/**
+ * Generate Mardown record
+ * @param {string} title - Record title.
+ * @param {string} type - Record type.
+ * @param {string} tags - Record tags, seperated by comas witout spaces.
+ */
+
 function genMdFile(title, type, tags) {
+
+    if (!title) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a record title.'); }
 
     const validTypes = Object.keys(config.types).map(key => key);
 
-    if (type !== '' && validTypes.indexOf(type) === -1) {
-        console.log('Unknown type. Add it to config.yml beforehand.');
-        return;
+    if (!type) {
+        type = ''
+    } else if (validTypes.indexOf(type) === -1) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown type. Add it to config.yml beforehand.');
     }
 
-    if (tags !== '') {
-        tags = tags.split(",");
+    if (!tags) {
+        tags = '';
     } else {
-        tags =  undefined;
+        tags = tags.split(",");
     }
+
+    // write yamlfrontmatter
 
     let content = yamlEditor.safeDump({
         title: title,
         id: Number(moment().format('YYYYMMDDHHmmss')),
-        type: type || 'undefined',
-        tags: tags || ''
+        type: type,
+        tags: tags
     });
 
     content = '---\n' + content + '---\n\n';

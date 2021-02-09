@@ -21,11 +21,9 @@ const baseConfig = {
     }
 };
 
-// console.log(Object.keys(baseConfig));
-
 if (!fs.existsSync('config.yml')){
 
-    const configYml = yamlEditor.safeDump(baseConfig);
+    const configYml = yamlEditor.safeDump(baseConfig); // JSON -> YAML
 
     console.log('\x1b[32m', 'Create config.yml file', '\x1b[0m');
 
@@ -40,7 +38,7 @@ if (!fs.existsSync('config.yml')){
 
 const config = yamlEditor.safeLoad(fs.readFileSync('config.yml', 'utf8'));
 
-// Valid & export config values
+// Valid config values
 
 let errors = [];
 
@@ -51,6 +49,7 @@ for (const prop in baseConfig) {
 }
 
 if (errors.length !== 0) {
+    // error listing
     console.error('\x1b[31m', 'Err.', '\x1b[0m', 'The config is not complete. Check or delete.');
     console.error('\x1b[37m', 'About props : ' + errors.join(', '), '\x1b[0m');
     process.exit();
@@ -68,13 +67,16 @@ if (!fs.existsSync(config.export_target)) {
 
 exports.config = config;
 
-// Function for modify config
+// Functions for modify config
+
+/**
+ * Change import folder path
+ * @param {string} path - Path to import folder.
+ */
 
 function modifyImportPath(path) {
-    if (!fs.existsSync(path)) {
-        console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid file path to your Markdown database file.');
-        return;
-    }
+    if (!path || !fs.existsSync(path)) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid file path to your Markdown database file.'); }
 
     config.files_origin = path;
 
@@ -86,11 +88,15 @@ function modifyImportPath(path) {
 
 exports.modifyImportPath = modifyImportPath;
 
+/**
+ * Change Cosmoscope export folder path
+ * @param {string} path - Path to export folder.
+ */
+
 function modifyExportPath(path) {
-    if (!fs.existsSync(path)) {
-        console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid target to export in the configuration.');
-        return;
-    }
+
+    if (!path || !fs.existsSync(path)) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid target to export in the configuration.'); }
 
     config.export_target = path;
 
@@ -102,7 +108,18 @@ function modifyExportPath(path) {
 
 exports.modifyExportPath = modifyExportPath;
 
+/**
+ * Add a record type to config
+ * @param {string} name - Type name.
+ * @param {string} color - Type color : hexa, rgb or color name.
+ */
+
 function addType(name, color) {
+
+    if (!name) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type name.'); }
+    if (!color) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type color.'); }
 
     for (const yetType in config.types) {
         if (name === yetType) {
@@ -122,7 +139,18 @@ function addType(name, color) {
 
 exports.addType = addType;
 
+/**
+ * Add a view key to config
+ * @param {string} name - View name.
+ * @param {string} key - Base64 encoded string.
+ */
+
 function addView(name, key) {
+
+    if (!name) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a view name.'); }
+    if (!color) {
+        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a view key.'); }
 
     if (config.views === undefined) {
         config.views = {}; }

@@ -2,11 +2,13 @@ const fs = require('fs')
     , config = require('./verifconfig').config
     , readline = require('readline');
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout }) // activate terminal questionnaire
     , validTypes = Object.keys(config.types).map(key => key);
 
 (async () => {
     let metas = {};
+
+    // questions :
     
     try {
         metas.title = await new Promise((resolve, reject) => {
@@ -30,6 +32,8 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         metas.tags = await new Promise((resolve, reject) => {
             rl.question('tags (facultative, between comas, no space) ? ', (answer) => { resolve(answer); })
         })
+
+        console.log(metas.title, metas.type, metas.tags);
     
         require('./autorecord').genMdFile(metas.title, metas.type, metas.tags);
     } catch(err) {
