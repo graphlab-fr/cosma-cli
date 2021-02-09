@@ -31,6 +31,10 @@ switch (args[0]) {
         require('./functions/verifconfig').addType(args[1], args[2]);
     break;
 
+    case 'aview':
+        require('./functions/verifconfig').addView(args[1], args[2]);
+    break;
+
     case undefined:
         console.log('Please, choose an action');
     break;

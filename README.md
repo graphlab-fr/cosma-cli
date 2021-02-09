@@ -37,6 +37,12 @@ $ node app export <path>
 $ node app atype <name> <color>
 ```
 
+### Ajouter des vues
+
+```bash
+$ node app aview <name> <key>
+```
+
 ## Utilisation
 
 ### Générer le graphe

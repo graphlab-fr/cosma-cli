@@ -121,3 +121,19 @@ function addType(name, color) {
 }
 
 exports.addType = addType;
+
+function addView(name, key) {
+
+    if (config.views === undefined) {
+        config.views = {}; }
+
+    config.views[name] = String(key);
+
+    fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
+        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
+        console.log('add "' + name + '" view into config.yml file');
+        console.log('\x1b[32m', 'config updated', '\x1b[0m', ': type ' + name)
+    });
+}
+
+exports.addView = addView;
