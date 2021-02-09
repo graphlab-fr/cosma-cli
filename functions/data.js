@@ -1,8 +1,5 @@
 const fs = require('fs');
 
-if (fs.existsSync('./data') === false) {
-    fs.mkdirSync('./data') }
-
 function nodes(nodeList, path) {
     fs.writeFile(path + 'data/nodes.json', nodeList, (err) => {
         if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write nodes.json file : ' + err)}
