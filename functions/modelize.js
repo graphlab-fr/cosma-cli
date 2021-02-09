@@ -5,7 +5,6 @@ const fs = require('fs')
     , edges = require('./edges')
     , dataGenerator = require('./data')
     , savePath = require('./history').historyPath
-    , rand = require('./rand')
     , config = require('./verifconfig').config;
 
 let fileIds = []
@@ -98,6 +97,13 @@ files = files.map(function(file) {
     return file;
 });
 
+require('./template').jsonData(entities.nodes, entities.edges);
+require('./template').colors();
+require('./template').cosmoscope(files, savePath);
+
+dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
+dataGenerator.edges(JSON.stringify(entities.edges), savePath);
+
 function registerLinks(file) {
     if (file.links.length === 0) { return; }
 
@@ -121,8 +127,8 @@ function registerNodes(file) {
         size: Number(size),
         outLink: Number(file.links.length),
         inLink: Number(file.backlinks.length),
-        x: Number(rand.randFloat(40, 50)),
-        y: Number(rand.randFloat(40, 50))
+        x: Number(randFloat(40, 50)),
+        y: Number(randFloat(40, 50))
     });
 }
 
@@ -180,9 +186,6 @@ function getTargets(nodeId) {
     return targets;
 }
 
-require('./template').jsonData(entities.nodes, entities.edges);
-require('./template').colors();
-require('./template').cosmoscope(files, savePath);
-
-dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
-dataGenerator.edges(JSON.stringify(entities.edges), savePath);
+function randFloat(max, min = 0) {
+    return Math.random() * (max - min) + min;
+}
