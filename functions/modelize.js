@@ -9,16 +9,18 @@ const fs = require('fs')
 
 let fileIds = []
     , logs = { warn: [], err: [] }
-    , entities = { nodes: [], edges: [] }
+    , entities = { nodes: [], links: [] }
     , id = 0
-    , files = fs.readdirSync(config.files_origin, 'utf8')
-        .filter(fileName => path.extname(fileName) === '.md')
-        .map(function(file) {
-            const mTime = fs.statSync(config.files_origin + file).mtime;
+    , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
+        .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
+        .map(function(file) { // file analysis
+            const mTime = fs.statSync(config.files_origin + file).mtime; // last modif date
             const fileName = file;
 
             file = fs.readFileSync(config.files_origin + file, 'utf8')
+            // yamlfontmater extract = file metas
             file = yamlFrontmatter.loadFront(file);
+            // file content extract
             let content = file.__content;
             delete file.__content;
             let metas = file;
@@ -31,7 +33,7 @@ let fileIds = []
                 metas: metas
             }
         })
-        .filter(function(file) {
+        .filter(function(file) { // throw files with bad metas
             if (file.metas.id === undefined || isNaN(file.metas.id) === true) {
                 let err = 'File ' + file.metas.title + ' throw out : no valid id';
                 logs.err.push(err);
@@ -46,22 +48,22 @@ let fileIds = []
 
             return file;
         })
-        .map(function(file) {
-
+        .map(function(file) { // normalize metas
+            // null or wrong type change to "undefined"
             if (file.metas.type === null || Object.keys(config.types).indexOf(file.metas.type) === -1) {
                 file.metas.type = 'undefined';
-
-                let err = 'Type of ' + file.metas.title + ' changed to undefined';
-                logs.warn.push(err);
+                logs.warn.push('Type of ' + file.metas.title + ' changed to undefined');
             }
 
             file.metas.tags = file.metas.tags || [];
 
+            // analysis file content by regex : get links
             file.links = edges.getOutLinks(file.content)
+            // throw links from/to unknown file id
                 .filter(function(link) {
                     if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
-                        let err = 'A link has been removed from file "' + file.metas.title + '" : no valid target';
-                        logs.warn.push(err);
+                        let warn = 'A link has been removed from file "' + file.metas.title + '" : no valid target';
+                        logs.warn.push(warn);
                         return false;
                     }
                 return true;
@@ -73,21 +75,21 @@ let fileIds = []
         });
 
 delete fileIds;
-require('./log').register(logs, savePath);
+require('./log').register(logs, savePath); // save errors & warnings
 delete logs;
 
 files = files.map(function(file) {
 
     file.links.map(function(link) {
-        return link.aimName = findLinkName(link.aim)
+        return link.aimName = findFileName(link.aim)
     });
 
-    file.backlinks = entities.edges.filter(function(edge) {
+    file.backlinks = entities.links.filter(function(edge) {
         if (edge.target === file.metas.id) {
             return true;
         }
     }).map(function(edge) {
-        return {type: edge.type, aim: edge.source, aimName: findLinkName(edge.source)};
+        return {type: edge.type, aim: edge.source, aimName: findFileName(edge.source)};
     });
 
     file.radius = getNodeRadius(file.metas.id);
@@ -97,18 +99,24 @@ files = files.map(function(file) {
     return file;
 });
 
-require('./template').jsonData(entities.nodes, entities.edges);
+// generate the Cosmoscope
+require('./template').jsonData(entities.nodes, entities.links);
 require('./template').colors();
 require('./template').cosmoscope(files, savePath);
-
+// generate data files
 dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
-dataGenerator.edges(JSON.stringify(entities.edges), savePath);
+dataGenerator.links(JSON.stringify(entities.links), savePath);
+
+/**
+ * Feed entities.edges object with link object
+ * @param {object} file - File after links parsing
+ */
 
 function registerLinks(file) {
     if (file.links.length === 0) { return; }
 
     for (const link of file.links) {
-        entities.edges.push({
+        entities.links.push({
             id: Number(id++),
             type: link.type,
             source: Number(file.metas.id),
@@ -116,6 +124,11 @@ function registerLinks(file) {
         });
     }
 }
+
+/**
+ * Feed entities.nodes object with node object
+ * @param {object} file - File after links & backlinks parsing
+ */
 
 function registerNodes(file) {
     const size = edges.getRank(file.links.length, file.backlinks.length);
@@ -132,51 +145,72 @@ function registerNodes(file) {
     });
 }
 
-function findLinkName(linkAim) {
+/**
+ * Find file title by its id
+ * @param {int} linkAim - File after links & backlinks parsing
+ */
+
+function findFileName(linkAim) {
     return title = files.find(function(file) {
         return file.metas.id === linkAim;
     }).metas.title;
 }
 
+/**
+ * Find nodes connected around a single one on several levels
+ * @param {int} nodeId - File id
+ * @returns {array} - Contain one array per radius level
+ */
+
 function getNodeRadius(nodeId) {
 
+    // config.radius.max = number of levels
     if (config.radius.max === 0) { return []; }
 
     let index = [[nodeId]];
-    let flatIndex = [];
+    let idsList = [];
 
     for (let i = 0 ; i < config.radius.max ; i++) {
 
-        let niv = [];
+        let level = [];
         
+        // searching connections for each nodes from the last registred level
         for (const target of index[index.length - 1]) {
+            let result = getTargets(target);
+            if (result === false) { continue; } // node have not connections
 
-            result = getTargets(target);
+            // throw ids already registered in an other level
+            result = result.filter(target => idsList.indexOf(target) === -1);
 
-            if (result === false) { continue; }
-            result = result.filter(target => flatIndex.indexOf(target) === -1)
-
-            niv = niv.concat(result);
+            level = level.concat(result);
         }
 
-        if (niv.length === 0) { break; }
+        // stop : current level contain any connection
+        if (level.length === 0) { break; }
 
-        niv = niv.filter((item, index) => {
-            return niv.indexOf(item) === index
+        // ignore duplicated ids
+        level = level.filter((item, index) => {
+            return level.indexOf(item) === index
         });
 
-        index.push(niv);
-        flatIndex = index.flat();
+        index.push(level);
+        idsList = index.flat();
     }
 
     return index;
 }
 
-function getTargets(nodeId) {
-    const edges = entities.edges;
+/**
+ * Get connected links & backlinks from a node
+ * @param {int} nodeId - File id
+ * @returns {array} - Links and backlinks ids list
+ */
 
-    let sources = edges.filter(edge => edge.source === nodeId).map(edge => edge.target);
-    let targets = edges.filter(edge => edge.target === nodeId).map(edge => edge.source);
+function getTargets(nodeId) {
+    const links = entities.links;
+
+    let sources = links.filter(edge => edge.source === nodeId).map(edge => edge.target);
+    let targets = links.filter(edge => edge.target === nodeId).map(edge => edge.source);
 
     targets = targets.concat(sources);
 
@@ -185,6 +219,13 @@ function getTargets(nodeId) {
 
     return targets;
 }
+
+/**
+ * Get a random decimal number
+ * @param {int} max - Number max
+ * @param {int} min - Number min
+ * @returns {float} - Decimal number
+ */
 
 function randFloat(max, min = 0) {
     return Math.random() * (max - min) + min;
