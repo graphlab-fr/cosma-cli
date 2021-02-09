@@ -3,7 +3,6 @@ const fs = require('fs')
     , moment = require('moment')
     , path = require('path')
     , edges = require('./edges')
-    , dataGenerator = require('./data')
     , savePath = require('./history').historyPath
     , config = require('./verifconfig').config;
 
@@ -103,9 +102,12 @@ files = files.map(function(file) {
 require('./template').jsonData(entities.nodes, entities.links);
 require('./template').colors();
 require('./template').cosmoscope(files, savePath);
+
 // generate data files
-dataGenerator.nodes(JSON.stringify(entities.nodes), savePath);
-dataGenerator.links(JSON.stringify(entities.links), savePath);
+fs.writeFile(savePath + 'data/nodes.json', JSON.stringify(entities.nodes), (err) => {
+    if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write nodes.json file : ' + err) } });
+fs.writeFile(savePath + 'data/links.json', JSON.stringify(entities.links), (err) => {
+    if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write links.json file : ' + err) } });
 
 /**
  * Feed entities.edges object with link object
@@ -147,12 +149,12 @@ function registerNodes(file) {
 
 /**
  * Find file title by its id
- * @param {int} linkAim - File after links & backlinks parsing
+ * @param {int} fileId - File after links & backlinks parsing
  */
 
-function findFileName(linkAim) {
+function findFileName(fileId) {
     return title = files.find(function(file) {
-        return file.metas.id === linkAim;
+        return file.metas.id === fileId;
     }).metas.title;
 }
 
