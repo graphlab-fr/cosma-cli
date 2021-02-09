@@ -3,30 +3,37 @@ const fs = require('fs')
 
 // Write config file if not exist
 
+const baseConfig = {
+    files_origin: '',
+    export_target: '',
+    radius: {max: 3},
+    types: {'undefined': {'color': 'grey'}},
+    linkType: {'undefined': {'color': 'grey'}},
+    graph_params: {
+        center: { x: 0.5, y: 0.5 },
+        charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
+        collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
+        link: { enabled: true, distance: 1, iterations: 1 },
+        node: { sizeCoeff: 1 },
+        forceX: { enabled: true, strength: 0.1, x: 0.5 },
+        forceY: { enabled: true, strength: 0.1, y: 0.5 },
+        highlightColor: 'red'
+    }
+};
+
+// console.log(Object.keys(baseConfig));
+
 if (!fs.existsSync('config.yml')){
-    let baseConfig = yamlEditor.safeDump({
-        files_origin: '',
-        export_target: '',
-        radius: {max: 3},
-        types: {'undefined': {'color': 'grey'}},
-        linkType: {'undefined': {'color': 'grey'}},
-        graph_params: {
-            center: { x: 0.5, y: 0.5 },
-            charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
-            collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
-            link: { enabled: true, distance: 1, iterations: 1 },
-            node: { sizeCoeff: 1 },
-            forceX: { enabled: true, strength: 0.1, x: 0.5 },
-            forceY: { enabled: true, strength: 0.1, y: 0.5 },
-            highlightColor: 'red'
-        }
-    });
 
-    console.log('create config.yml file');
+    const configYml = yamlEditor.safeDump(baseConfig);
 
-    fs.writeFileSync('config.yml', baseConfig, (err) => {
+    console.log('\x1b[32m', 'Create config.yml file', '\x1b[0m');
+
+    fs.writeFileSync('config.yml', configYml, (err) => {
         if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write config.yml file : ' + err) }
     });
+
+    process.exit();
 }
 
 // Read config
@@ -35,17 +42,27 @@ const config = yamlEditor.safeLoad(fs.readFileSync('config.yml', 'utf8'));
 
 // Valid & export config values
 
-if (config.files_origin === undefined
-    || config.export_target === undefined
-    || config.types === undefined
-    || config.graph_params === undefined) {
+let errors = [];
 
-    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'The config is not complete. Check it, or reboot.')
+for (const prop in baseConfig) {
+    if (config[prop] === undefined || config[prop] === null || config[prop] === '') {
+        errors.push(prop);
+    }
+}
+
+if (errors.length !== 0) {
+    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'The config is not complete. Check or delete.');
+    console.error('\x1b[37m', 'About props : ' + errors.join(', '), '\x1b[0m');
     process.exit();
 }
 
 if (!fs.existsSync(config.files_origin)) {
-    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid file path to your Markdown database file.');
+    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid folder path to your Markdown files database in config file.');
+    process.exit();
+}
+
+if (!fs.existsSync(config.export_target)) {
+    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid folder path to export Cosmoscope in the config file.');
     process.exit();
 }
 
