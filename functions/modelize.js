@@ -2,7 +2,8 @@ const fs = require('fs')
     , yamlFrontmatter = require('yaml-front-matter')
     , moment = require('moment')
     , path = require('path')
-    , edges = require('./edges')
+    , linksTools = require('./links')
+    , logTools = require('./log')
     , savePath = require('./history').historyPath
     , config = require('./verifconfig').config;
 
@@ -57,7 +58,7 @@ let fileIds = []
             file.metas.tags = file.metas.tags || [];
 
             // analysis file content by regex : get links
-            file.links = edges.getOutLinks(file.content)
+            file.links = linksTools.catchLinksFromContent(file.content)
             // throw links from/to unknown file id
                 .filter(function(link) {
                     if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
@@ -74,7 +75,9 @@ let fileIds = []
         });
 
 delete fileIds;
-require('./log').register(logs, savePath); // save errors & warnings
+// save & show : errors & warnings
+logTools.show(logs);
+logTools.register(logs, savePath);
 delete logs;
 
 files = files.map(function(file) {
@@ -91,7 +94,7 @@ files = files.map(function(file) {
         return {type: edge.type, aim: edge.source, aimName: findFileName(edge.source)};
     });
 
-    file.radius = getNodeRadius(file.metas.id);
+    file.levels = ((config.radius.max === 0) ? null : getConnectionLevels(file.metas.id, config.radius.max));
 
     registerNodes(file);
 
@@ -133,7 +136,7 @@ function registerLinks(file) {
  */
 
 function registerNodes(file) {
-    const size = edges.getRank(file.links.length, file.backlinks.length);
+    const size = linksTools.getRank(file.links.length, file.backlinks.length);
 
     entities.nodes.push({
         id: Number(file.metas.id),
@@ -161,24 +164,21 @@ function findFileName(fileId) {
 /**
  * Find nodes connected around a single one on several levels
  * @param {int} nodeId - File id
- * @returns {array} - Contain one array per radius level
+ * @returns {array} - Contain one array per connection level
  */
 
-function getNodeRadius(nodeId) {
-
-    // config.radius.max = number of levels
-    if (config.radius.max === 0) { return []; }
+function getConnectionLevels(nodeId, maxLevel) {
 
     let index = [[nodeId]];
     let idsList = [];
 
-    for (let i = 0 ; i < config.radius.max ; i++) {
+    for (let i = 0 ; i < maxLevel ; i++) {
 
         let level = [];
         
         // searching connections for each nodes from the last registred level
         for (const target of index[index.length - 1]) {
-            let result = getTargets(target);
+            let result = getConnectedIds(target);
             if (result === false) { continue; } // node have not connections
 
             // throw ids already registered in an other level
@@ -208,7 +208,7 @@ function getNodeRadius(nodeId) {
  * @returns {array} - Links and backlinks ids list
  */
 
-function getTargets(nodeId) {
+function getConnectedIds(nodeId) {
     const links = entities.links;
 
     let sources = links.filter(edge => edge.source === nodeId).map(edge => edge.target);

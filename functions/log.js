@@ -1,10 +1,17 @@
 const fs = require('fs')
     , moment = require('moment');
 
+/**
+ * Show errors & warnings into terminal (limited lines)
+ * @param {object} logs - Objets contain errors & warnings arrays
+ */
+
 function show(logs) {
 
     const errors = logs.err;
     const warnings = logs.warn;
+
+    // if array contain more than 3 errors/warnings : do not list, just note the number of elements
 
     if (errors.length <= 3) {
         for (const err of errors) {
@@ -21,25 +28,27 @@ function show(logs) {
     } else {
         console.error('\x1b[33m', 'Warn.', '\x1b[0m', `${warnings.length} warnings are recorded`);
     }
-
 }
 
+exports.show = show;
+
+/**
+ * Templating & create the logs file into history
+ * @param {object} logs - Objets contain errors & warnings arrays
+ * @param {string} path - Path for history folder
+ */
+
 function register(logs, path) {
-    
-    show(logs);
 
-    logs.err = logs.err.map(err => 'Err : ' + err);
-    logs.warn = logs.warn.map(warn => 'Warn : ' + warn);
+    logs.err = logs.err.map(err => '\n- Err : ' + err);
+    logs.warn = logs.warn.map(warn => '\n- Warn : ' + warn);
+    logs = logs.err.concat(logs.warn);
 
-    let content = logs.err.concat(logs.warn);
-    content = content.join('\n  - ');
-    content = '\n  - ' + content;
+    let content = moment().format('YYYY-MM-DD_HH-mm-ss');
+    content += logs.join('');
 
-    content = moment().format('YYYY-MM-DD_HH-mm-ss') + content;
-
-    fs.writeFileSync(path + 'error.log', content, (err) => {
+    fs.writeFile(path + 'error.log', content, (err) => {
         if (err) { return console.error( 'Err. write error.log file : ' + err) }
-        console.log('create error.log file');
     });
 }
 

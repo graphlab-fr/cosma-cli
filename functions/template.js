@@ -2,25 +2,33 @@ const fs = require('fs')
     , pug = require('pug')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
+    , linksTools = require('./links')
     , config = require('./verifconfig').config;
 
 let types = {}
     , tags = {};
 
+// markdown-it plugin for convertLinks()
 mdIt.use(mdItAttr, {
     leftDelimiter: '{',
     rightDelimiter: '}',
     allowedAttributes: []
 })
 
-function jsonData(nodes, edges) {
+/**
+ * Templating & create mass data & config export for Cosmoscope's JavaScript processing
+ * @param {object} nodes - All graph nodes
+ * @param {object} links - All graph links
+ */
+
+function jsonData(nodes, links) {
 
     let allNodeIds = [];
 
     const index = nodes.map(function(node) {
         allNodeIds.push(node.id);
         return {id: node.id, title: node.label};
-    })
+    });
 
     const graphScript =
 `const allNodeIds = [${allNodeIds.join(',')}];
@@ -33,7 +41,7 @@ const fuse = new Fuse(${JSON.stringify(index)}, {
 const forceProperties = ${JSON.stringify(config.graph_params)}
 
 // load the data
-let graph = ${JSON.stringify({nodes: nodes, links: edges})};
+let graph = ${JSON.stringify({nodes: nodes, links: links})};
 initializeDisplay();
 initializeSimulation();`;
 
@@ -45,7 +53,13 @@ initializeSimulation();`;
 
 exports.jsonData = jsonData;
 
+/**
+ * Templating & create stylesheet with types from config
+ */
+
 function colors() {
+    // get types from config
+
     const nodesTypes = Object.keys(config.types).map(function(key) {
         return {prefix: 't_', name: key, color: config.types[key].color}; });
 
@@ -54,17 +68,19 @@ function colors() {
 
     const types = nodesTypes.concat(linksTypes);
 
-    let globals = types.map(type => `--${type.name}: ${type.color};`)
-    let colors = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.name}); fill:var(--${type.name}); stroke:var(--${type.name});}`)
+    // map the CSS syntax
 
-    globals.push(`--highlight: ${config.graph_params.highlightColor};`);
+    let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
+    let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.name}); fill:var(--${type.name}); stroke:var(--${type.name});}`)
 
-    globals = globals.join('\n');
-    colors = colors.join('\n');
+    globalsStyles.push(`--highlight: ${config.graph_params.highlightColor};`);
 
-    globals = ':root {\n' + globals + '\n}';
+    globalsStyles = globalsStyles.join('\n'); // array to sting…
+    colorsStyles = colorsStyles.join('\n'); // …by line breaks
 
-    const content = '\n' + globals + '\n\n' + colors;
+    globalsStyles = ':root {\n' + globalsStyles + '\n}';
+
+    const content = '\n' + globalsStyles + '\n\n' + colorsStyles;
 
     fs.writeFileSync('./template/colors.css', content, (err) => {
         if (err) { console.error( 'Err. write color style file: ' + err) }
@@ -73,12 +89,18 @@ function colors() {
 
 exports.colors = colors;
 
+/**
+ * Templating & create the Cosmoscope file
+ * @param {array} files - All files array
+ * @param {string} path - History save path
+ */
+
 function cosmoscope(files, path) {
 
     const htmlRender = pug.compileFile('template/scope.pug')({
-        index: files.map(function (file) {
 
-            file.content = convertLinks(file.content, file);
+        index: files.map(function (file) { // normalize files as records for Pug templating
+            file.content = linksTools.convertLinks(file.content, file);
             registerType(file.metas.type, file.metas.id);
             registerTags(file.metas.tags, file.metas.id);
 
@@ -86,28 +108,29 @@ function cosmoscope(files, path) {
                 id: file.metas.id,
                 title: file.metas.title,
                 type: file.metas.type,
-                tags: file.metas.tags.join(', '),
+                tags: file.metas.tags.join(', '), // array to string
                 mtime: file.metas.mtime,
-                content: mdIt.render(file.content),
+                content: mdIt.render(file.content), // Mardown to HTML
                 links: file.links,
                 backlinks: file.backlinks,
-                radius: radiusToLevel(file.radius)
+                radius: ((file.levels === null) ? [] : levelsToRadius(file.levels))
             }
         }),
+        views: config.views || [],
+        // objects to objects array
         types: Object.keys(types).map(function(type) {
-            return {name: type, nodes: types[type].join(',')};
+            return { name: type, nodes: types[type].join(',') };
         }),
         tags: Object.keys(tags).map(function(tag) {
-            return {name: tag, nodes: tags[tag].join(',')};
-        }),
-        views: config.views || []
+            return { name: tag, nodes: tags[tag].join(',') };
+        })
     });
 
-    fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => {
-        if (err) {console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
+    fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
+        if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
     });
 
-    fs.writeFile(config.export_target + 'cosmoscope.html', htmlRender, (err) => {
+    fs.writeFile(config.export_target + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for export folder
         if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
         console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${files.length} records)`)
     });
@@ -115,43 +138,46 @@ function cosmoscope(files, path) {
 
 exports.cosmoscope = cosmoscope;
 
-function registerType(type, id) {
-    if (types[type] === undefined) {
-        types[type] = []; }
+/**
+ * Feed types object with file type
+ * @param {array} fileType - File type
+ * @param {int} fileId - File id
+ */
 
-    types[type].push(id);
+function registerType(fileType, fileId) {
+    // create associate object key for type if not exist
+    if (types[fileType] === undefined) {
+        types[fileType] = []; }
+    // push the file id into associate object key
+    types[fileType].push(fileId);
 }
 
-function registerTags(tagList, id) {
-    for (const tag of tagList) {
+/**
+ * Feed tags object with file tags
+ * @param {array} fileTagList - Tags list
+ * @param {int} fileId - File id
+ */
+
+function registerTags(fileTagList, fileId) {
+    for (const tag of fileTagList) {
+        // create associate object key for tag if not exist
         if (tags[tag] === undefined) {
             tags[tag] = []; }
-    
-        tags[tag].push(id);
+        // push the file id into associate object key
+        tags[tag].push(fileId);
     }
 }
 
-function convertLinks(content, file) {
-    return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) {
-        let link = extract.slice(0, -2).slice(2);
-        link = Number(link);
+/**
+ * Combining levels down to get radius fields
+ * @param {array} levels - Array contain one array per level
+ * @returns {array} - Array contain radius fields
+ */
 
-        const associatedLink = file.links.find(function(i) {
-            return i.aim === link;
-        });
-
-        if (associatedLink === undefined) { return extract; }
-
-        link = associatedLink;
-
-        return `[${extract}](#){title="${link.aimName}" onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;        
-    });
-}
-
-function radiusToLevel(radius) {
-    let level = radius;
-    for (let i = 1; i < level.length; i++) {
-        level[i] = level[i].concat(level[i - 1]);
+function levelsToRadius(levels) {
+    for (let i = 1; i < levels.length; i++) {
+        // take previous array and concat it with the actual
+        levels[i] = levels[i].concat(levels[i - 1]);
     }
-    return level = level.slice(1);
+    return levels = levels.slice(1); // ignore first level, uncombined
 }
