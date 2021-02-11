@@ -1,48 +1,73 @@
-let nodeNetwork = undefined;
+let filters = Array.from(document.querySelectorAll('[data-filter]'));
+filters = filters.map(function(btn) {
+    // extract nodes id affected by the filter from the linked button
+    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
+    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
+});
 
 (function() {
-    const btns = document.querySelectorAll('[data-filter]');
-
-    for (const btn of btns) {
+    for (const filter of filters) {
+        const btn = filter.btn;
         btn.dataset.active = 'false';
 
-        const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-        
         btn.addEventListener('click', () => {
-
             if (btn.dataset.active === 'true') {
-                displayNodes(nodeIds);
-                view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
-                btn.dataset.active = 'false';
-            } else {
-                hideNodes(nodeIds);
-                view.activeFilters.push(btn.dataset.name);
-                btn.dataset.active = 'true';
-            }
+                filterOff(filter); }
+            else {
+                filterOn(filter); }
 
             isolateByElement(view.isolateId);
         });
     }
 })();
 
+/**
+ * Activate filters by their name
+ * @param {array} filtersToActivate - List of filter names
+ */
+
 function setFilters(filtersToActivate) {
-    const btns = document.querySelectorAll('[data-filter]');
-
-    for (const btn of btns) {
-
-        const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-
-        if (filtersToActivate.indexOf(btn.dataset.name) !== -1) {
+    for (const filter of filters) {
+        if (filtersToActivate.indexOf(filter.name) !== -1) {
             // if filter is "ToActivate"
-            hideNodes(nodeIds);
-            view.activeFilters.push(btn.dataset.name);
-            btn.dataset.active = 'true';
-        } else {
-            displayNodes(nodeIds);
-            view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
-            btn.dataset.active = 'false';
-        }
+            filterOn(filter); }
+        else {
+            filterOff(filter); }
     }
+}
+
+/**
+ * Activate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ */
+
+function filterOn(filterObj) {
+    hideNodes(filterObj.nodeIds);
+    view.activeFilters.push(filterObj.name);
+    filterObj.btn.dataset.active = 'true';
+}
+
+/**
+ * Desactivate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ */
+
+function filterOff(filterObj) {
+    displayNodes(filterObj.nodeIds);
+    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
+    filterObj.btn.dataset.active = 'false';
+}
+
+/**
+ * Get ids list from hiden (by filter) nodes
+ * @returns {array} - Ids list (integer value)
+ */
+
+function getFiltedNodes() {
+    let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
+    return nodeIds = Array.from(nodeIds)
+        .map(filter => filter.dataset.filter.split(',')).flat()
+        .map(nodeId => Number(nodeId));
 }
 
 function isolate() {
@@ -63,39 +88,17 @@ function isolate() {
     displayNodes(toDisplayIds);
 }
 
-function getLinksFromNode(nodeId) {
-    let links = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
-    return Array.from(links);
-}
+function isolateByElement(eltId) {
+    if (eltId === undefined) { return; }
 
-function hideNodes(nodeIds) {
-    const elts = getNodeNetwork(nodeIds);
+    let nodeIds = window[eltId];
+    nodeIds = nodeIds.getAttribute('onclick');
+    nodeIds = nodeIds.split('(', 2)[1].split(')', 1)[0];
+    nodeIds = nodeIds.split(',');
+    nodeIds = nodeIds.map(id => Number(id));
+    isolate(nodeIds);
 
-    // compare already hidden nodes
-    nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
-
-    view.hidenNodes = view.hidenNodes.concat(nodeIds);
-
-    for (const elt of elts) {
-        elt.style.display = 'none';
-    }
-}
-
-function displayNodes(nodeIds) {
-    view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
-    
-    const elts = getNodeNetwork(nodeIds);
-
-    for (const elt of elts) {
-        elt.style.display = null;
-    }
-}
-
-function getFiltedNodes() {
-    let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
-    return nodeIds = Array.from(nodeIds)
-        .map(filter => filter.dataset.filter.split(',')).flat()
-        .map(nodeId => Number(nodeId));
+    view.isolateId = eltId;
 }
 
 function resetNodes() {

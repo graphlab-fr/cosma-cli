@@ -33,65 +33,30 @@ html(lang='fr')
                             li(class='filter t_' + typ.name,data-filter=typ.nodes,data-name=typ.name) #{typ.name}
 
                 section
-                    h1(class='arrow-switch',id='tag-stick') Tags
+                    details
+                        summary Tags
 
-                    ul(id='tag-list',class='tags')
-                        each tag in tags
-                            li(class='tag',data-tag=tag.nodes) #{tag.name}
-
-                section
-                    h1(class='arrow-switch',id='index-stick') Index
-
-                    div(id='sort-box')
-                        button(data-sort='record-list-alphabetic') A-Z
-                        button(data-sort='record-list-alphabetic-reverse') Z-A
-                        button(data-sort='record-list-bytime') time
-                        button(data-sort='record-list-bytime-reverse') rtime
-
-                    ul(id='record-list')
-
-                        li(id='record-list-alphabetic', class='record-sorting active')
-                            ul
-                                each link in index
-                                    li(
-                                        class='id-link',
-                                        title=link.id,
-                                        onclick='openRecord(' + link.id + ')') #{link.title}
-
-                        - var index = index.reverse();
-
-                        li(id='record-list-alphabetic-reverse', class='record-sorting')
-                            ul
-                                each link in index
-                                    li(
-                                        class='id-link',
-                                        title=link.id,
-                                        onclick='openRecord(' + link.id + ')') #{link.title}
-
-                        - var index = index.sort(function(a, b) { if (a.mtime < b.mtime) {return -1; } if (a.mtime > b.mtime) { return 1; } });
-
-                        li(id='record-list-bytime', class='record-sorting')
-                            ul
-                                each link in index
-                                    li(
-                                        class='id-link',
-                                        title=link.id,
-                                        onclick='openRecord(' + link.id + ')') #{link.title}
-
-                        - var index = index.reverse();
-
-                        li(id='record-list-bytime-reverse', class='record-sorting')
-                            ul
-                                each link in index
-                                    li(
-                                        class='id-link',
-                                        title=link.id,
-                                        onclick='openRecord(' + link.id + ')') #{link.title}
+                        ul
+                            each tag in tags
+                                li(class='tag',data-tag=tag.nodes) #{tag.name}
 
                 section
-                    h1(class='arrow-switch',id='control-stick') Paramètres du graphe
-                    div(class='controls',id='control-list')
-                        include graph-d3.html
+                    details
+                        summary Index
+
+                        div(id='sort-box')
+                            button(data-sort='record-list-alphabetic') A-Z
+                            button(data-sort='record-list-alphabetic-reverse') Z-A
+                            button(data-sort='record-list-bytime') time
+                            button(data-sort='record-list-bytime-reverse') rtime
+
+                        include records-list.pug
+
+                section
+                    details
+                        summary Paramètres du graphe
+                        div(class='controls')
+                            include graph-d3.html
 
                 section
                     div
@@ -105,9 +70,9 @@ html(lang='fr')
                                 button(onclick='changeView("' + viewString + '")') #{viewName}
 
                 div(class='zoom-controls')
-                    button(id='zoom-more',onclick='zoomMore()') +
-                    button(id='zoom-less',onclick='zoomLess()') -
-                    button(id='zoom-reset',onclick='zoomReset()') O
+                    button(onclick='zoomMore()') +
+                    button(onclick='zoomLess()') -
+                    button(onclick='zoomReset()') O
 
             section(class='fiche-content',id='record-container')
 
@@ -148,12 +113,14 @@ html(lang='fr')
         svg(id='graph_canvas')
 
         script
+            include graph-data.js
+            include scripts/main.js
             include scripts/graph.js
+            include scripts/zoom.js
+            include scripts/search.js
             include scripts/filter.js
             include scripts/tag.js
-            include scripts/sort.js
+            include scripts/nodes.js
             include scripts/record.js
-            include scripts/search.js
             include scripts/controls.js
-            include scripts/controler.js
-            include graph-data.js
+            include scripts/view.js

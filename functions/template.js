@@ -42,8 +42,7 @@ const forceProperties = ${JSON.stringify(config.graph_params)}
 
 // load the data
 let graph = ${JSON.stringify({nodes: nodes, links: links})};
-initializeDisplay();
-initializeSimulation();`;
+`;
 
     fs.writeFileSync('./template/graph-data.js', graphScript, (err) => {
         if (err) { return console.error( 'Err. write graph-data.js file : ' + err) }
