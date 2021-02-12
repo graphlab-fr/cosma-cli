@@ -1,9 +1,6 @@
-(function () {
-    document.querySelector('#tag-stick').addEventListener('click', () => {
-        document.querySelector('#tag-list').classList.toggle('active');
-        document.querySelector('#tag-stick').classList.toggle('active');
-    })
-})();
+/**
+ * Make tag list functional
+ */
 
 (function () {
     const btns = document.querySelectorAll('[data-tag]');

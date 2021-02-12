@@ -1,3 +1,9 @@
+/**
+ * Open the record reading panel & show one
+ * @param {array} id - Record/node id
+ * @param {boolean} history - If history must be actualised, true by default
+ */
+
 function openRecord(id, history = true) {
     if (view.openedRecord !== undefined) {
         // hide last record
@@ -5,26 +11,22 @@ function openRecord(id, history = true) {
             .style.display = 'none';
     }
 
-    if (id === undefined) {
-        document.querySelector('#record-container').classList.remove('active');
-        return;
-    }
-
     // open records container
-    const recordContainer = document.querySelector('#record-container');
-    recordContainer.classList.add('active');
+    window['record-container'].classList.add('active');
 
     // show record
-    const elt = document.getElementById(id);
-    elt.style.display = 'unset';
+    const recordContent = window[id];
+    recordContent.style.display = 'unset';
 
     // page's <title> become record's name
-    const recordTitle = elt.querySelector('h1').textContent;
+    const recordTitle = recordContent.querySelector('h1').textContent;
     document.title = recordTitle + ' - Cosma';
 
     // adjust record view
-    recordContainer.scrollTo({ top: 0 });
+    window['record-container'].scrollTo({ top: 0 });
 
+
+    // reset nodes highlighting
     unlightNodes();
     highlightNodes([id]);
 
@@ -35,76 +37,38 @@ function openRecord(id, history = true) {
 
 }
 
+/**
+ * Close the record reading panel & the opended one
+ */
+
 function closeRecord() {
-    document.getElementById(view.openedRecord).style.display = 'none';
+    window[view.openedRecord].style.display = 'none';
     view.openedRecord = undefined;
     document.querySelector('#record-container').classList.remove('active');
 
     unlightNodes();
 }
 
+/**
+ * Make record sorting lists functional
+ */
+
 (function () {
-    document.querySelector('#index-stick').addEventListener('click', () => {
-        document.querySelector('#record-list').classList.toggle('active')
-        document.querySelector('#index-stick').classList.toggle('active')
-        document.querySelector('#sort-box').classList.toggle('active')
-    })
+    // first active sorted list
+    let activeList = document.querySelector('.record-sorting.active');
+    // btns for each sorted list
+    const btns = document.querySelectorAll('[data-sort]');
+
+    for (const btn of btns) {
+        const list = window[btn.dataset.sort];
+
+        btn.addEventListener('click', () => {
+            if (list === activeList) { return; }
+
+            activeList.classList.remove('active');
+
+            list.classList.add('active');
+            activeList = list;
+        })
+    }
 })();
-
-function highlightNodes(nodeIds) {
-
-    const elts = getNodeNetwork(nodeIds);
-
-    for (const elt of elts) {
-        elt.style.stroke = 'var(--highlight)';
-        elt.style.fill = 'var(--highlight)';
-    }
-
-    view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
-}
-
-function unlightNodes() {
-    if (view.highlightedNodes.length === 0) { return; }
-
-
-    const elts = getNodeNetwork(view.highlightedNodes);
-
-    for (const elt of elts) {
-        elt.style.stroke = null;
-        elt.style.fill = null;
-    }
-}
-
-function getNodeNetwork(nodeIds) {
-
-    let nodes = [], edges = [];
-
-    for (const nodeId of nodeIds) {
-        nodes.push(document.querySelector('[data-node="' + nodeId + '"]'));
-
-        let tempSources = document.querySelectorAll('[data-source="' + nodeId + '"]');
-        tempSources = Array.from(tempSources);
-        tempSources = tempSources.filter(function(source) {
-            if (view.hidenNodes.indexOf(Number(source.dataset.target)) === -1) {
-                return true;
-            }
-        })
-
-        let tempTargets = document.querySelectorAll('[data-target="' + nodeId + '"]');
-        tempTargets = Array.from(tempTargets);
-        tempTargets = tempTargets.filter(function(source) {
-            if (view.hidenNodes.indexOf(Number(source.dataset.source)) === -1) {
-                return true;
-            }
-        })
-
-        edges = edges.concat(tempSources, tempTargets);
-    }
-
-    // delete duplicated elts
-    edges = edges.filter((item, index) => {
-        return edges.indexOf(item) === index
-    });
-
-    return nodes.concat(edges);
-}

@@ -1,59 +1,85 @@
-let nodeNetwork = undefined;
+let filters = Array.from(document.querySelectorAll('[data-filter]'));
+filters = filters.map(function(btn) {
+    // extract nodes id affected by the filter from the linked button
+    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
+    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
+});
+
+/**
+ * Make filters functional
+ */
 
 (function() {
-    const btns = document.querySelectorAll('[data-filter]');
-
-    for (const btn of btns) {
+    for (const filter of filters) {
+        const btn = filter.btn;
         btn.dataset.active = 'false';
 
-        const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-        
         btn.addEventListener('click', () => {
-
             if (btn.dataset.active === 'true') {
-                displayNodes(nodeIds);
-                view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
-                btn.dataset.active = 'false';
-            } else {
-                hideNodes(nodeIds);
-                view.activeFilters.push(btn.dataset.name);
-                btn.dataset.active = 'true';
-            }
+                filterOff(filter); }
+            else {
+                filterOn(filter); }
 
             isolateByElement(view.isolateId);
         });
     }
 })();
 
+/**
+ * Activate filters by their name
+ * @param {array} filtersToActivate - List of filter names
+ */
+
 function setFilters(filtersToActivate) {
-    const btns = document.querySelectorAll('[data-filter]');
-
-    for (const btn of btns) {
-
-        const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-
-        if (filtersToActivate.indexOf(btn.dataset.name) !== -1) {
+    for (const filter of filters) {
+        if (filtersToActivate.indexOf(filter.name) !== -1) {
             // if filter is "ToActivate"
-            hideNodes(nodeIds);
-            view.activeFilters.push(btn.dataset.name);
-            btn.dataset.active = 'true';
-        } else {
-            displayNodes(nodeIds);
-            view.activeFilters = view.activeFilters.filter(filterName => filterName !== btn.dataset.name);
-            btn.dataset.active = 'false';
-        }
+            filterOn(filter); }
+        else {
+            filterOff(filter); }
     }
 }
 
-function isolate() {
-    let toDisplayIds = [];
+/**
+ * Activate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ */
 
-    if (Array.isArray(arguments[0])) {
-        toDisplayIds = arguments[0];
-    } else {
-        toDisplayIds = Array.from(arguments); // nodes to keep displayed
-    }
+function filterOn(filterObj) {
+    hideNodes(filterObj.nodeIds);
+    view.activeFilters.push(filterObj.name);
+    filterObj.btn.dataset.active = 'true';
+}
 
+/**
+ * Desactivate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ */
+
+function filterOff(filterObj) {
+    displayNodes(filterObj.nodeIds);
+    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
+    filterObj.btn.dataset.active = 'false';
+}
+
+/**
+ * Get ids list from hiden (by filter) nodes
+ * @returns {array} - Ids list (integer value)
+ */
+
+function getFiltedNodes() {
+    let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
+    return nodeIds = Array.from(nodeIds)
+        .map(filter => filter.dataset.filter.split(',')).flat()
+        .map(nodeId => Number(nodeId));
+}
+
+/**
+ * Display some nodes, hide others
+ * @param {array} - Ids from nodes to keep displayed
+ */
+
+function isolate(toDisplayIds) {
     toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
 
     // get nodes to hide
@@ -63,40 +89,27 @@ function isolate() {
     displayNodes(toDisplayIds);
 }
 
-function getLinksFromNode(nodeId) {
-    let links = document.querySelectorAll('[data-source="' + nodeId + '"], [data-target="' + nodeId + '"]');
-    return Array.from(links);
+/**
+ * Launch isolate() from the onclick value of an identified element
+ * @param {string} - Id of the element for extract nodes ids
+ */
+
+function isolateByElement(eltId) {
+    if (eltId === undefined) { return; }
+
+    let nodeIds = window[eltId];
+    nodeIds = nodeIds.getAttribute('onclick');
+    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
+    nodeIds = nodeIds.split(',');
+    nodeIds = nodeIds.map(id => Number(id));
+    isolate(nodeIds);
+
+    view.isolateId = eltId;
 }
 
-function hideNodes(nodeIds) {
-    const elts = getNodeNetwork(nodeIds);
-
-    // compare already hidden nodes
-    nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
-
-    view.hidenNodes = view.hidenNodes.concat(nodeIds);
-
-    for (const elt of elts) {
-        elt.style.display = 'none';
-    }
-}
-
-function displayNodes(nodeIds) {
-    view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
-    
-    const elts = getNodeNetwork(nodeIds);
-
-    for (const elt of elts) {
-        elt.style.display = null;
-    }
-}
-
-function getFiltedNodes() {
-    let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
-    return nodeIds = Array.from(nodeIds)
-        .map(filter => filter.dataset.filter.split(',')).flat()
-        .map(nodeId => Number(nodeId));
-}
+/**
+ * Display all nodes, except filtered ones
+ */
 
 function resetNodes() {
     const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
