@@ -7,12 +7,9 @@
 
     for (const btn of btns) {
         btn.addEventListener('click', () => {
-            let elts = btn.dataset.tag.split(',')
-                .map(id => document.querySelector('[data-node="' + id + '"]'));
-
-            elts.forEach(node => {
-                console.log(node);
-            });
+            let nodeIds = btn.dataset.tag.split(',');
+            unlightNodes();
+            highlightNodes(nodeIds);
         })
     }
 })();
