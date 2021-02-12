@@ -1,0 +1,56 @@
+mixin form-head(name, graphParameter, defaultValue, description)
+    div(class='control-head')
+        label #{name}
+
+        if graphParameter && defaultValue == true
+            input(type='checkbox', checked, onchange=graphParameter + ' = this.checked; updateForces();')
+        else if graphParameter
+            input(type='checkbox', onchange=graphParameter + ' = this.checked; updateForces();')
+
+        p #{description}
+
+mixin input-range(name, graphParameter, defaultValue, min, max, description)
+    form(oninput='result.value = range.value; ' + graphParameter + ' = range.value; updateForces();')
+        label(title=description) #{name}
+            output(class='counter',name='result') #{defaultValue}
+        input(type='range', min=min, max=max, value=defaultValue, name='range', step=".1")
+
+//- ===========
+
+article
+    +form-head('charge', 'forceProperties.charge.enabled', graphConfig.charge.enabled, 'Attracts (+) or repels (-) nodes to/from each other.')
+
+    +input-range('strength', 'forceProperties.charge.strength', graphConfig.charge.strength, -200, 50, 'Negative strength repels nodes. Positive strength attracts nodes.')
+    +input-range('distanceMin', 'forceProperties.charge.distanceMin', graphConfig.charge.distanceMin, 0, 50, 'Minimum distance where force is applied.')
+    +input-range('distanceMax', 'forceProperties.charge.distanceMax', graphConfig.charge.distanceMax, 0, 2000, 'Maximum distance where force is applied.')
+
+article
+    +form-head('link', 'forceProperties.link.enabled', graphConfig.link.enabled, 'Sets link length.')
+
+    +input-range('distance', 'forceProperties.link.distance', graphConfig.link.distance, 0, 100, 'The force will push/pull nodes to make links this long.')
+    +input-range('iterations', 'forceProperties.link.iterations', graphConfig.link.iterations, 1, 10, 'The force will push/pull nodes to make links this long.')
+
+article
+    +form-head('collide', 'forceProperties.collide.enabled', graphConfig.collide.enabled, 'Prevents nodes from overlapping.')
+
+    +input-range('strength', 'forceProperties.collide.strength', graphConfig.collide.strength, 0, 2, '')
+    +input-range('radius', 'forceProperties.collide.radius', graphConfig.collide.radius, 1, 100, 'Size of nodes.')
+    +input-range('radius', 'forceProperties.collide.iterations', graphConfig.collide.iterations, 1, 10, 'Higher values increase rigidity of the nodes (WARNING: high values are computationally expensive).')
+
+article
+    +form-head('forceX', 'forceProperties.forceX.enabled', graphConfig.forceX.enabled, 'Acts like gravity. Pulls all points towards an X location.')
+
+    +input-range('strength', 'forceProperties.forceX.strength', graphConfig.forceX.strength, 0, 1, '')
+    +input-range('strength', 'forceProperties.forceX.x', graphConfig.forceX.x, 0, 1, 'The X location that the force will push the nodes to (NOTE: This demo multiplies by the svg width).')
+
+article
+    +form-head('forceY', 'forceProperties.forceY.enabled', graphConfig.forceY.enabled, 'Acts like gravity. Pulls all points towards a Y location.')
+
+    +input-range('strength', 'forceProperties.forceY.strength', graphConfig.forceY.strength, 0, 1, '')
+    +input-range('strength', 'forceProperties.forceY.y', graphConfig.forceY.y, 0, 1, 'The Y location that the force will push the nodes to (NOTE: This demo multiplies by the svg height).')
+
+article
+    +form-head('center', false, 'Shifts the view, so the graph is centered at this location.')
+
+    +input-range('x', 'forceProperties.center.x', graphConfig.center.x, 0, 1, '')
+    +input-range('y', 'forceProperties.center.y', graphConfig.center.y, 0, 1, '')

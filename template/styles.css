@@ -2,6 +2,7 @@
 html {
 	width: 100%;
 	height: 100%;
+	font-size: 62.5%;
 }
 html * { box-sizing: border-box }
 body {
@@ -10,7 +11,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-	font-size: 80%;
+	font-size: 1.3rem;
 	overflow: hidden;
 }
 .interface {
@@ -96,59 +97,44 @@ li.filter[data-active="true"] {
 
 /* CONTRÔLES */
 
-.controls .force {
-	background-color: #eee;
-	border-radius: 3px;
-	padding: 5px;
-	margin: 5px 0;
+.controls article {
+	padding: 2rem 0;
 }
-.controls .force p label {
-	margin-right: .5em;
-	font-size: 120%;
+.controls article+article {
+	border-top: 1px solid rgb(236, 236, 236);
+}
+.controls .control-head>label {
 	font-weight: bold;
+	font-size: 1.4rem;
 }
-.controls .force p {
-	margin-top: 0;
+.controls .counter {
+	font-family: monospace;
+	margin-left: 0.2rem;
 }
-.controls .force label {
-	display: inline-block;
-}
-.controls input[type="checkbox"] {
-	transform: scale(1.2, 1.2);
-}
-.controls input[type="range"] {
-	margin: 0 5% 0.5em 5%;
-	width: 90%;
-}
+.controls input[type="range"] { width: 100%; }
 /* Alpha */
-.controls .alpha p {
-	margin-bottom: .25em;
-}
-.controls .alpha .alpha_bar {
+.alpha_bar {
 	height: .5em;
 	border: 1px #777 solid;
 	border-radius: 2px;
 	padding: 1px;
 	display: flex;
+	margin: 1rem 0;
 }
-.controls .alpha .alpha_bar #alpha_value {
+.alpha_bar #alpha_value {
 	background-color: #555;
 	border-radius: 1px;
 	flex-basis: 100%
 }
-.controls .alpha .alpha_bar:hover {
-	border-width: 2px;
-	margin: -1px;
-}
-.controls .alpha .alpha_bar:active #alpha_value {
+.alpha_bar:active #alpha_value {
 	background-color: #222
 }
 
 .zoom-controls {
 	display: flex;
 	flex-direction: column;
-	position: absolute;
-	right: 20px;
+	position: fixed;
+	left: 330px;
 	bottom: 20px;
 }
 .zoom-controls button {
@@ -205,6 +191,7 @@ circle:hover {
 }
 .fiche .metas * { display: block; }
 .fiche .metas .fiche-type { text-transform: capitalize; }
+.fiche .metas .fiche-id { font-family: monospace; }
 .fiche-content {
 	position: absolute;
 	z-index: 100;

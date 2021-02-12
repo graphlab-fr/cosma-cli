@@ -15,7 +15,7 @@ function openRecord(id, history = true) {
     window['record-container'].classList.add('active');
 
     // show record
-    const recordContent = window[id];
+    const recordContent = document.getElementById(id);
     recordContent.style.display = 'unset';
 
     // page's <title> become record's name

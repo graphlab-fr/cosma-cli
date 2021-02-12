@@ -179,6 +179,8 @@ function ticked() {
     node.attr("cx", (d) => d.x)
         .attr("cy", (d) => d.y)
         .attr("r", (d) => d.size * forceProperties.node.sizeCoeff);
+
+    d3.select('#alpha_value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }
 
 })();

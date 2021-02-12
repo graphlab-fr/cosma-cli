@@ -116,6 +116,7 @@ function cosmoscope(files, path) {
             }
         }),
         views: config.views || [],
+        graphConfig: config.graph_params,
         // objects to objects array
         types: Object.keys(types).map(function(type) {
             return { name: type, nodes: types[type] };

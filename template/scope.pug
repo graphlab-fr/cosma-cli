@@ -23,6 +23,9 @@ html(lang='fr')
 
                 include cosmalogo.svg
 
+                div(class='alpha_bar', onclick='updateForces()')
+                    div(id='alpha_value')
+
                 input(class='search-bar',id='search',placeholder='Rechercher...',autocomplete='off')
                 ul(id='search-result-list')
 
@@ -56,11 +59,11 @@ html(lang='fr')
 
                         include records-list.pug
 
-                section
+                section(class='controls')
                     details
                         summary Paramètres du graphe
-                        div(class='controls')
-                            include graph-d3.html
+
+                        include graph-controls.pug
 
                 section
                     div
