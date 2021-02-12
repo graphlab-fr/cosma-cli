@@ -66,8 +66,6 @@
  */
     
 function translate() {
-    if (!view.position.x || !view.position.y || !view.position.zoom) { return; }
-
     document.querySelector('#graph_canvas')
         .setAttribute('style', `transform:translate(${view.position.x}px, ${view.position.y}px) scale(${view.position.zoom});`);
 }
