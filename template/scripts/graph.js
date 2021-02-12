@@ -48,6 +48,9 @@ function initializeForces() {
 
 function updateForces() {
     // get each force by name and update the properties
+
+    // forceProperties = graph config
+
     simulation.force("center")
         .x(width * forceProperties.center.x)
         .y(height * forceProperties.center.y);
@@ -71,12 +74,11 @@ function updateForces() {
         .y(height * forceProperties.forceY.y);
 
     simulation.force("link")
-        .id(function (d) { return d.id; })
+        .id((d) => d.id)
         .distance(forceProperties.link.distance)
         .iterations(forceProperties.link.iterations)
         .links(forceProperties.link.enabled ? graph.links : []);
 
-    // updates ignored until this is run
     // restarts the simulation (important if simulation has already slowed down)
     simulation.alpha(1).restart();
 }
@@ -119,20 +121,13 @@ function initializeDisplay() {
                 d.fy = null;
             }));
     
-    link.attr("data-source", function (d) {
-        return d.source; })
-        .attr("data-target", function (d) {
-        return d.target; })
-        .attr("class", function (d) {
-        return 'l_' + d.type;
-    });
+    link.attr("data-source", (d) => d.source)
+        .attr("data-target", (d) => d.target)
+        .attr("class", (d) => 'l_' + d.type);
 
     // node class
-    node.attr("class", function (d) {
-        return "t_" + d.type; })
-        .attr("data-node", function (d) {
-        return d.id;
-    });
+    node.attr("class", (d) => "t_" + d.type)
+        .attr("data-node", (d) => d.id);
 
     let tip = undefined;
 
@@ -176,21 +171,14 @@ function initializeDisplay() {
  */
 
 function ticked() {
-    link.attr("x1", function (d) {
-            return d.source.x; })
-        .attr("y1", function (d) {
-            return d.source.y; })
-        .attr("x2", function (d) {
-            return d.target.x; })
-        .attr("y2", function (d) {
-            return d.target.y; });
+    link.attr("x1", (d) => d.source.x)
+        .attr("y1", (d) => d.source.y)
+        .attr("x2", (d) => d.target.x)
+        .attr("y2", (d) => d.target.y);
 
-    node.attr("cx", function (d) {
-            return d.x; })
-        .attr("cy", function (d) {
-            return d.y; })
-        .attr("r", function (d) {
-            return d.size * forceProperties.node.sizeCoeff;
-        });
+    node.attr("cx", (d) => d.x)
+        .attr("cy", (d) => d.y)
+        .attr("r", (d) => d.size * forceProperties.node.sizeCoeff);
 }
+
 })();

@@ -1,3 +1,9 @@
+/**
+ * Open the record reading panel & show one
+ * @param {array} id - Record/node id
+ * @param {boolean} history - If history must be actualised, true by default
+ */
+
 function openRecord(id, history = true) {
     if (view.openedRecord !== undefined) {
         // hide last record
@@ -5,26 +11,22 @@ function openRecord(id, history = true) {
             .style.display = 'none';
     }
 
-    if (id === undefined) {
-        document.querySelector('#record-container').classList.remove('active');
-        return;
-    }
-
     // open records container
-    const recordContainer = document.querySelector('#record-container');
-    recordContainer.classList.add('active');
+    window['record-container'].classList.add('active');
 
     // show record
-    const elt = window[id];
-    elt.style.display = 'unset';
+    const recordContent = window[id];
+    recordContent.style.display = 'unset';
 
     // page's <title> become record's name
-    const recordTitle = elt.querySelector('h1').textContent;
+    const recordTitle = recordContent.querySelector('h1').textContent;
     document.title = recordTitle + ' - Cosma';
 
     // adjust record view
-    recordContainer.scrollTo({ top: 0 });
+    window['record-container'].scrollTo({ top: 0 });
 
+
+    // reset nodes highlighting
     unlightNodes();
     highlightNodes([id]);
 
@@ -35,6 +37,10 @@ function openRecord(id, history = true) {
 
 }
 
+/**
+ * Close the record reading panel & the opended one
+ */
+
 function closeRecord() {
     window[view.openedRecord].style.display = 'none';
     view.openedRecord = undefined;
@@ -42,3 +48,27 @@ function closeRecord() {
 
     unlightNodes();
 }
+
+/**
+ * Make record sorting lists functional
+ */
+
+(function () {
+    // first active sorted list
+    let activeList = document.querySelector('.record-sorting.active');
+    // btns for each sorted list
+    const btns = document.querySelectorAll('[data-sort]');
+
+    for (const btn of btns) {
+        const list = window[btn.dataset.sort];
+
+        btn.addEventListener('click', () => {
+            if (list === activeList) { return; }
+
+            activeList.classList.remove('active');
+
+            list.classList.add('active');
+            activeList = list;
+        })
+    }
+})();

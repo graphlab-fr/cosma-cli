@@ -1,18 +1,23 @@
+/**
+ * Make search input functional
+ */
+
 (function() {
     let searchInput = document.querySelector('#search')
-    let searchResult = document.querySelector('#search-result-list')
+        , resultContainer = document.querySelector('#search-result-list')
+        , maxResultNb = 5
 
-    searchInput.value = '';
+    searchInput.value = ''; // reset at page loading
 
     searchInput.addEventListener('input', () => {
-
-        searchResult.innerHTML = '';
+        // reset for each input valut modification
+        resultContainer.innerHTML = '';
 
         if (searchInput.value === '') { return; }
         
         const resultList = fuse.search(searchInput.value);
 
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < maxResultNb; i++) {
             let result = resultList[i];
 
             if (result === undefined) { break; }
@@ -20,14 +25,12 @@
             var resultElement = document.createElement('li');
             resultElement.classList.add('search-result', 'id-link');
             resultElement.textContent = result.item.title;
-            searchResult.appendChild(resultElement);
         
             resultElement.addEventListener('click', () => {
                 openRecord(result.item.id);
             });
 
-            // limit to 5 results
-            if (i > 5) { break; }
+            resultContainer.appendChild(resultElement);
         }
     });
 })();

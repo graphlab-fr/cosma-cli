@@ -1,3 +1,7 @@
+/**
+ * Make tag list functional
+ */
+
 (function () {
     const btns = document.querySelectorAll('[data-tag]');
 

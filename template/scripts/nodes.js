@@ -1,3 +1,8 @@
+/**
+ * Apply highlightColor (from config) to somes nodes and their links
+ * @param {array} nodeIds - List of nodes ids
+ */
+
 function highlightNodes(nodeIds) {
 
     const elts = getNodeNetwork(nodeIds);
@@ -10,9 +15,12 @@ function highlightNodes(nodeIds) {
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
 }
 
+/**
+ * remove highlightColor (from config) from all highlighted nodes and their links
+ */
+
 function unlightNodes() {
     if (view.highlightedNodes.length === 0) { return; }
-
 
     const elts = getNodeNetwork(view.highlightedNodes);
 
@@ -20,15 +28,25 @@ function unlightNodes() {
         elt.style.stroke = null;
         elt.style.fill = null;
     }
+
+    view.highlightedNodes = [];
 }
+
+/**
+ * Get the valid link network for some nodes
+ * @param {array} nodeIds - List of nodes ids
+ * @returns {array} - DOM elts : nodes and their links
+ */
 
 function getNodeNetwork(nodeIds) {
 
-    let nodes = [], edges = [];
+    let nodes = [], links = [];
 
     for (const nodeId of nodeIds) {
+        // get nodes DOM element
         nodes.push(document.querySelector('[data-node="' + nodeId + '"]'));
 
+        // get links DOM element from nodes, if their target is not hidden
         let tempSources = document.querySelectorAll('[data-source="' + nodeId + '"]');
         tempSources = Array.from(tempSources);
         tempSources = tempSources.filter(function(source) {
@@ -37,6 +55,7 @@ function getNodeNetwork(nodeIds) {
             }
         })
 
+        // get links DOM element to nodes, if their source is not hidden
         let tempTargets = document.querySelectorAll('[data-target="' + nodeId + '"]');
         tempTargets = Array.from(tempTargets);
         tempTargets = tempTargets.filter(function(source) {
@@ -45,16 +64,21 @@ function getNodeNetwork(nodeIds) {
             }
         })
 
-        edges = edges.concat(tempSources, tempTargets);
+        links = links.concat(tempSources, tempTargets);
     }
 
-    // delete duplicated elts
-    edges = edges.filter((item, index) => {
-        return edges.indexOf(item) === index
+    // delete duplicated links DOM element
+    links = links.filter((item, index) => {
+        return links.indexOf(item) === index
     });
 
-    return nodes.concat(edges);
+    return nodes.concat(links);
 }
+
+/**
+ * Hide some nodes & their links, by their id
+ * @param {array} nodeIds - List of nodes ids
+ */
 
 function hideNodes(nodeIds) {
     const elts = getNodeNetwork(nodeIds);
@@ -68,6 +92,11 @@ function hideNodes(nodeIds) {
         elt.style.display = 'none';
     }
 }
+
+/**
+ * Display some nodes & their links, by their id
+ * @param {array} nodeIds - List of nodes ids
+ */
 
 function displayNodes(nodeIds) {
     view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);

@@ -5,6 +5,10 @@ filters = filters.map(function(btn) {
     return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
 });
 
+/**
+ * Make filters functional
+ */
+
 (function() {
     for (const filter of filters) {
         const btn = filter.btn;
@@ -70,15 +74,12 @@ function getFiltedNodes() {
         .map(nodeId => Number(nodeId));
 }
 
-function isolate() {
-    let toDisplayIds = [];
+/**
+ * Display some nodes, hide others
+ * @param {array} - Ids from nodes to keep displayed
+ */
 
-    if (Array.isArray(arguments[0])) {
-        toDisplayIds = arguments[0];
-    } else {
-        toDisplayIds = Array.from(arguments); // nodes to keep displayed
-    }
-
+function isolate(toDisplayIds) {
     toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
 
     // get nodes to hide
@@ -88,18 +89,27 @@ function isolate() {
     displayNodes(toDisplayIds);
 }
 
+/**
+ * Launch isolate() from the onclick value of an identified element
+ * @param {string} - Id of the element for extract nodes ids
+ */
+
 function isolateByElement(eltId) {
     if (eltId === undefined) { return; }
 
     let nodeIds = window[eltId];
     nodeIds = nodeIds.getAttribute('onclick');
-    nodeIds = nodeIds.split('(', 2)[1].split(')', 1)[0];
+    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
     nodeIds = nodeIds.split(',');
     nodeIds = nodeIds.map(id => Number(id));
     isolate(nodeIds);
 
     view.isolateId = eltId;
 }
+
+/**
+ * Display all nodes, except filtered ones
+ */
 
 function resetNodes() {
     const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);

@@ -1,3 +1,9 @@
+/**
+ * Take 'view' object values & encode them on base64
+ * (no ACSII caracters are allowed)
+ * @returns {string} - base64 string
+ */
+
 function registerView() {
     const viewObj = {
         recordId: view.openedRecord,
@@ -12,6 +18,10 @@ function registerView() {
     return key;
 }
 
+/**
+ * Copy registerView() output on clipboard
+ */
+
 function saveView() {
     const tempInput = document.createElement('input');
     document.body.appendChild(tempInput);
@@ -20,6 +30,11 @@ function saveView() {
     document.execCommand('copy');
     document.body.removeChild(tempInput);
 }
+
+/**
+ * Update 'view' object values from a encoded base64 string
+ * @param {string} key - base64 string contain an encoded image from the 'view' object
+ */
 
 function changeView(key) {
     key = decodeURIComponent(key);
@@ -30,14 +45,11 @@ function changeView(key) {
     translate();
 
     if (key.recordId) {
-        openRecord(key.recordId, false);
-    }
+        openRecord(key.recordId, false); }
 
     if (key.filters) {
-        setFilters(key.filters);
-    }
+        setFilters(key.filters); }
     
     if (key.isolateId) {
-        isolateByElement(key.isolateId);
-    }
+        isolateByElement(key.isolateId); }
 }
