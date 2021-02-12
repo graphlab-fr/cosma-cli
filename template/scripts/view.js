@@ -7,7 +7,6 @@
 function registerView() {
     const viewObj = {
         recordId: view.openedRecord,
-        pos : view.position,
         filters : ((view.activeFilters.length === 0) ? undefined : view.activeFilters),
         isolateId : view.isolateId
     }
@@ -40,9 +39,6 @@ function changeView(key) {
     key = decodeURIComponent(key);
     key = window.atob(key);
     key = JSON.parse(key);
-
-    view.position = key.pos;
-    translate();
 
     if (key.recordId) {
         openRecord(key.recordId, false); }
