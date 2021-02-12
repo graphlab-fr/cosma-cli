@@ -118,10 +118,10 @@ function cosmoscope(files, path) {
         views: config.views || [],
         // objects to objects array
         types: Object.keys(types).map(function(type) {
-            return { name: type, nodes: types[type].join(',') };
+            return { name: type, nodes: types[type] };
         }),
         tags: Object.keys(tags).map(function(tag) {
-            return { name: tag, nodes: tags[tag].join(',') };
+            return { name: tag, nodes: tags[tag] };
         })
     });
 

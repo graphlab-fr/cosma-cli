@@ -27,22 +27,26 @@ html(lang='fr')
                 ul(id='search-result-list')
 
                 section
-                    h1 Filtres
-                    ul
-                        each typ in types
-                            li(class='filter t_' + typ.name,data-filter=typ.nodes,data-name=typ.name) #{typ.name}
+                    details(open)
+                        summary Filtres (#{types.length})
+                        ul
+                            each typ in types
+                                li(class='filter t_' + typ.name,
+                                    data-filter=typ.nodes.join(','),
+                                    data-name=typ.name) #{typ.name} (#{typ.nodes.length})
 
                 section
                     details
-                        summary Tags
+                        summary Tags (#{tags.length})
 
                         ul
                             each tag in tags
-                                li(class='tag',data-tag=tag.nodes) #{tag.name}
+                                li(class='tag'
+                                    ,data-tag=tag.nodes.join(',')) #{tag.name} (#{tag.nodes.length})
 
                 section
                     details
-                        summary Index
+                        summary Index (#{index.length})
 
                         div(id='sort-box')
                             button(data-sort='record-list-alphabetic') A-Z

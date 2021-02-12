@@ -37,10 +37,16 @@ button { cursor: pointer; }
 
 .index section>h1 { cursor: pointer; }
 
-.index ul li.filter, .index ul li.tag {
+.index ul li {
 	cursor: pointer;
 	padding-left: 1rem;
 	text-transform: capitalize;
+}
+
+.index summary {
+	cursor: pointer;
+	font-weight: bold;
+	margin: 0.2rem;
 }
 
 /* FILTRES */
