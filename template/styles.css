@@ -239,3 +239,12 @@ circle:hover {
 a {
 	color: inherit;
 }
+
+#graph_canvas line {
+	stroke:var(--link);
+}
+
+#graph_canvas marker {
+	fill:var(--arrows);
+	stroke:var(--arrows);
+}

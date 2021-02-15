@@ -38,7 +38,7 @@ const fuse = new Fuse(${JSON.stringify(index)}, {
     keys: ['title']
 });
 
-const forceProperties = ${JSON.stringify(config.graph_params)}
+const graphProperties = ${JSON.stringify(config.graph_params)}
 
 // load the data
 let graph = ${JSON.stringify({nodes: nodes, links: links})};
@@ -59,20 +59,19 @@ exports.jsonData = jsonData;
 function colors() {
     // get types from config
 
-    const nodesTypes = Object.keys(config.types).map(function(key) {
+    const types = Object.keys(config.types).map(function(key) {
         return {prefix: 't_', name: key, color: config.types[key].color}; });
-
-    const linksTypes = Object.keys(config.linkType).map(function(key) {
-        return {prefix: 'l_', name: key, color: config.linkType[key].color}; });
-
-    const types = nodesTypes.concat(linksTypes);
 
     // map the CSS syntax
 
-    let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
     let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.name}); fill:var(--${type.name}); stroke:var(--${type.name});}`)
 
-    globalsStyles.push(`--highlight: ${config.graph_params.highlightColor};`);
+    // add specifics parametered colors from config
+    types.push({name: 'highlight', color: config.graph_params.highlightColor});
+    types.push({name: 'link', color: config.graph_params.linksColor});
+    types.push({name: 'arrows', color: config.graph_params.linksColor});
+
+    let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
 
     globalsStyles = globalsStyles.join('\n'); // array to sting…
     colorsStyles = colorsStyles.join('\n'); // …by line breaks

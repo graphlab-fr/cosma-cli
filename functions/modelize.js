@@ -124,6 +124,7 @@ function registerLinks(file) {
         entities.links.push({
             id: Number(id++),
             type: link.type,
+            shape: getLinkShape(link.type),
             source: Number(file.metas.id),
             target: Number(link.aim)
         });
@@ -159,6 +160,32 @@ function findFileName(fileId) {
     return title = files.find(function(file) {
         return file.metas.id === fileId;
     }).metas.title;
+}
+
+/**
+ * Get dash/dotted values according to the link type
+ * @param {string} linkType - Link type extract from his registration
+ * @returns {object} - Dash/dotted values or null value
+ */
+
+function getLinkShape(linkType) {
+    const look = config.hierarchy[linkType];
+
+    switch (look) {
+        case 'simple':
+            return { look: look, value: null };
+
+        case 'double':
+            return { look: look, value: null };
+
+        case 'dash':
+            return { look: look, value: '4, 5' };
+
+        case 'dotted':
+            return { look: look, value: '1, 3' };
+    }
+
+    return { look: 'simple', value: null };
 }
 
 /**

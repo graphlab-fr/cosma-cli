@@ -118,6 +118,12 @@ html(lang='fr')
                                     li(class='id-link l_' + backlink.type,title=backlink.aimName,onclick='openRecord(' + backlink.aim + ')') #{backlink.aimName}
 
         svg(id='graph_canvas')
+            defs
+                marker(id='arrow',viewBox='0 0 10 10',refX='12',refY='5',markerUnits='strokeWidth',markerWidth='7',markerHeight='7',orient='auto')
+                    path(d='M 0 0 L 10 5 L 0 10 z')
+                filter(id='double')
+                    feMorphology(in='SourceGraphic',result='a',operator='dilate',radius='0.2')
+                    feComposite(in='SourceGraphic',in2='a',result='xx',operator='xor')
 
         script
             include graph-data.js

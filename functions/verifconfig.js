@@ -8,7 +8,7 @@ const baseConfig = {
     export_target: '',
     radius: {max: 3},
     types: {'undefined': {'color': 'grey'}},
-    linkType: {'undefined': {'color': 'grey'}},
+    hierarchy: { générique: "dash", spécifique: "dash", fort: "double", faible: "dotted" },
     graph_params: {
         center: { x: 0.5, y: 0.5 },
         charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
@@ -17,7 +17,10 @@ const baseConfig = {
         node: { sizeCoeff: 1 },
         forceX: { enabled: true, strength: 0.1, x: 0.5 },
         forceY: { enabled: true, strength: 0.1, y: 0.5 },
-        highlightColor: 'red'
+        highlightColor: 'red',
+        linksColor: 'grey',
+        arrows: false,
+        arrowsColor: 'black'
     }
 };
 

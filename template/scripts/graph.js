@@ -49,35 +49,35 @@ function initializeForces() {
 function updateForces() {
     // get each force by name and update the properties
 
-    // forceProperties = graph config
+    // graphProperties = graph config
 
     simulation.force("center")
-        .x(width * forceProperties.center.x)
-        .y(height * forceProperties.center.y);
+        .x(width * graphProperties.center.x)
+        .y(height * graphProperties.center.y);
 
     simulation.force("charge")
-        .strength(forceProperties.charge.strength * forceProperties.charge.enabled)
-        .distanceMin(forceProperties.charge.distanceMin)
-        .distanceMax(forceProperties.charge.distanceMax);
+        .strength(graphProperties.charge.strength * graphProperties.charge.enabled)
+        .distanceMin(graphProperties.charge.distanceMin)
+        .distanceMax(graphProperties.charge.distanceMax);
 
     simulation.force("collide")
-        .strength(forceProperties.collide.strength * forceProperties.collide.enabled)
-        .radius(forceProperties.collide.radius)
-        .iterations(forceProperties.collide.iterations);
+        .strength(graphProperties.collide.strength * graphProperties.collide.enabled)
+        .radius(graphProperties.collide.radius)
+        .iterations(graphProperties.collide.iterations);
 
     simulation.force("forceX")
-        .strength(forceProperties.forceX.strength * forceProperties.forceX.enabled)
-        .x(width * forceProperties.forceX.x);
+        .strength(graphProperties.forceX.strength * graphProperties.forceX.enabled)
+        .x(width * graphProperties.forceX.x);
 
     simulation.force("forceY")
-        .strength(forceProperties.forceY.strength * forceProperties.forceY.enabled)
-        .y(height * forceProperties.forceY.y);
+        .strength(graphProperties.forceY.strength * graphProperties.forceY.enabled)
+        .y(height * graphProperties.forceY.y);
 
     simulation.force("link")
         .id((d) => d.id)
-        .distance(forceProperties.link.distance)
-        .iterations(forceProperties.link.iterations)
-        .links(forceProperties.link.enabled ? graph.links : []);
+        .distance(graphProperties.link.distance)
+        .iterations(graphProperties.link.iterations)
+        .links(graphProperties.link.enabled ? graph.links : []);
 
     // restarts the simulation (important if simulation has already slowed down)
     simulation.alpha(1).restart();
@@ -123,7 +123,20 @@ function initializeDisplay() {
     
     link.attr("data-source", (d) => d.source)
         .attr("data-target", (d) => d.target)
-        .attr("class", (d) => 'l_' + d.type);
+        .attr("stroke-dasharray", function(d) {
+            if (d.shape.look === 'dash' || d.shape.look === 'dotted') {
+                return d.shape.value }
+            return false;
+        })
+        .attr("filter", function(d) {
+            if (d.shape.look === 'double') {
+                return 'url(#double)' }
+            return false;
+        });
+
+    if (graphProperties.arrows === true) {
+        link.attr("marker-end", 'url(#arrow)');
+    }
 
     // node class
     node.attr("class", (d) => "t_" + d.type)
@@ -177,8 +190,13 @@ function ticked() {
         .attr("y2", (d) => d.target.y);
 
     node.attr("cx", (d) => d.x)
-        .attr("cy", (d) => d.y)
-        .attr("r", (d) => d.size * forceProperties.node.sizeCoeff);
+        .attr("cy", (d) => d.y);
+
+    if (graphProperties.arrows === true) {
+        node.attr("r", (d) => 2);
+    } else {
+        node.attr("r", (d) => d.size * graphProperties.node.sizeCoeff);
+    }
 
     d3.select('#alpha_value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }
