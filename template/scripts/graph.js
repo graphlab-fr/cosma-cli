@@ -193,7 +193,7 @@ function ticked() {
         .attr("cy", (d) => d.y);
 
     if (graphProperties.arrows === true) {
-        node.attr("r", (d) => 2);
+        node.attr("r", (d) => 7);
     } else {
         node.attr("r", (d) => d.size * graphProperties.node.sizeCoeff);
     }
