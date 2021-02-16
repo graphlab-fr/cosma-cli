@@ -11,6 +11,7 @@ let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
     , id = 0
+    , hierarchyList = Object.keys(config.hierarchy)
     , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
         .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
         .map(function(file) { // file analysis
@@ -66,7 +67,13 @@ let fileIds = []
                         logs.warn.push(warn);
                         return false;
                     }
-                return true;
+
+                    if (hierarchyList.indexOf(link.type) === -1) {
+                        let warn = 'The type of a link from file "' + file.metas.title + '" is unknowed';
+                        logs.warn.push(warn);
+                    }
+
+                    return true;
                 });
 
             registerLinks(file);
