@@ -94,7 +94,7 @@ files = files.map(function(file) {
         return {type: edge.type, aim: edge.source, aimName: findFileName(edge.source)};
     });
 
-    file.levels = ((config.radius.max === 0) ? null : getConnectionLevels(file.metas.id, config.radius.max));
+    file.levels = ((config.radiusMax === 0) ? null : getConnectionLevels(file.metas.id, config.radiusMax));
 
     registerNodes(file);
 

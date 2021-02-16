@@ -6,22 +6,19 @@ const fs = require('fs')
 const baseConfig = {
     files_origin: '',
     export_target: '',
-    radius: {max: 3},
-    types: {'undefined': {'color': 'grey'}},
-    hierarchy: { générique: "dash", spécifique: "dash", fort: "double", faible: "dotted" },
+    radiusMax: 3,
+    types: { undefined: {color: 'grey'} },
+    hierarchy: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {
         center: { x: 0.5, y: 0.5 },
         charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
         collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
-        link: { enabled: true, distance: 1, iterations: 1 },
+        link: { enabled: true, distance: 1, iterations: 1, color: 'grey', highlightColor: 'red' },
         node: { sizeCoeff: 1 },
         forceX: { enabled: true, strength: 0.1, x: 0.5 },
         forceY: { enabled: true, strength: 0.1, y: 0.5 },
-        highlightColor: 'red',
-        linksColor: 'grey',
-        arrows: false,
-        arrowsColor: 'black'
-    }
+    },
+    arrows: {enabled: true, color: 'black'}
 };
 
 if (!fs.existsSync('config.yml')){
