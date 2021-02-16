@@ -7,7 +7,7 @@ const baseConfig = {
     files_origin: '',
     export_target: '',
     radiusMax: 3,
-    types: { undefined: {color: 'grey'} },
+    types: { undefined: 'grey' },
     hierarchy: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {
         center: { x: 0.5, y: 0.5 },
@@ -121,14 +121,7 @@ function addType(name, color) {
     if (!color) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type color.'); }
 
-    for (const yetType in config.types) {
-        if (name === yetType) {
-            console.error('\x1b[31m', 'Err.', '\x1b[0m', `Type "${yetType}" already registred`);
-            return;
-        }
-    }
-
-    config.types[name] = {color: color};
+    config.types[name] = color;
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
         if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }

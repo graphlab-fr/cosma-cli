@@ -60,7 +60,7 @@ function colors() {
     // get types from config
 
     const types = Object.keys(config.types).map(function(key) {
-        return {prefix: 't_', name: key, color: config.types[key].color}; });
+        return {prefix: 't_', name: key, color: config.types[key]}; });
 
     // map the CSS syntax
 
