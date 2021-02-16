@@ -60,7 +60,8 @@ function normalizeLink(link) {
 function convertLinks(content, file) {
     return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) { // get '[[***]]' strings
         let link = extract.slice(0, -2).slice(2); // extract link id, without '[[' & ']]' caracters
-        link = Number(link);
+
+        link = normalizeLink(link).aim;
 
         if (link === NaN) { return extract; } // only return the '[[***]]' string
 
@@ -69,6 +70,7 @@ function convertLinks(content, file) {
         });
 
         if (associatedMetas === undefined) { return extract; } // only return the '[[***]]' string
+
         link = associatedMetas;
         // return '[[***]]' string into a Mardown link with openRecord function & class
         return `[${extract}](#){title="${link.aimName}" onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;        
