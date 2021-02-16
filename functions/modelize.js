@@ -11,7 +11,7 @@ let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
     , id = 0
-    , hierarchyList = Object.keys(config.hierarchy)
+    , typesOf = { records: Object.keys(config.types), links: Object.keys(config.hierarchy) }
     , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
         .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
         .map(function(file) { // file analysis
@@ -51,7 +51,7 @@ let fileIds = []
         })
         .map(function(file) { // normalize metas
             // null or wrong type change to "undefined"
-            if (file.metas.type === null || Object.keys(config.types).indexOf(file.metas.type) === -1) {
+            if (file.metas.type === null || typesOf.records.indexOf(file.metas.type) === -1) {
                 file.metas.type = 'undefined';
                 logs.warn.push('Type of ' + file.metas.title + ' changed to undefined');
             }
@@ -68,7 +68,7 @@ let fileIds = []
                         return false;
                     }
 
-                    if (hierarchyList.indexOf(link.type) === -1) {
+                    if (typesOf.records.indexOf(link.type) === -1) {
                         let warn = 'The type of a link from file "' + file.metas.title + '" is unknowed';
                         logs.warn.push(warn);
                     }
