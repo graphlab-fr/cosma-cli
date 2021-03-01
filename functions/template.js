@@ -1,5 +1,6 @@
 const fs = require('fs')
     , pug = require('pug')
+    , nunjucks = require('nunjucks')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
     , linksTools = require('./links')
@@ -95,7 +96,8 @@ exports.colors = colors;
 
 function cosmoscope(files, path) {
 
-    const htmlRender = pug.compileFile('template/scope.pug')({
+    nunjucks.configure('template', { autoescape: true });
+    const htmlRender = nunjucks.render('index.njk', {
 
         index: files.map(function (file) { // normalize files as records for Pug templating
             file.content = linksTools.convertLinks(file.content, file);
