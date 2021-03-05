@@ -41,7 +41,6 @@ button { cursor: pointer; }
 .index ul li {
 	cursor: pointer;
 	padding-left: 1rem;
-	text-transform: capitalize;
 }
 
 .index summary {
