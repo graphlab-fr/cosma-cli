@@ -204,7 +204,7 @@
             <div class="zoom-controls">
                 <button onclick="zoomMore()">+</button>
                 <button onclick="zoomLess()">-</button>
-                <button onclick="zoomReset()">O</button>
+                <button onclick="zoomReset()">Réinitialiser</button>
             </div>
             
         </div>
@@ -218,9 +218,9 @@
                 <div class="metas">
                     <h1>{{ record.title }}</h1>
                     <time class="fiche-date" datetime="{{ record.mtime }}">{{ record.mtime }}</time>
-                    <time class="fiche-type">{{ record.type }}</time>
-                    <time class="fiche-tags">{{ record.tags }}</time>
-                    <time class="fiche-id">{{ record.id }}</time>
+                    <span class="fiche-type">{{ record.type }}</span>
+                    <span class="fiche-tags">{{ record.tags }}</span>
+                    <span class="fiche-id">{{ record.id }}</span>
                 </div>
 
                 <hr/>
