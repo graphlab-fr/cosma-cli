@@ -1,5 +1,4 @@
 const fs = require('fs')
-    , pug = require('pug')
     , nunjucks = require('nunjucks')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
