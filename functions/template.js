@@ -97,7 +97,7 @@ exports.colors = colors;
 function cosmoscope(files, path) {
 
     nunjucks.configure('template', { autoescape: true });
-    const htmlRender = nunjucks.render('index.njk', {
+    const htmlRender = nunjucks.render('template.njk', {
 
         index: files.map(function (file) { // normalize files as records for Pug templating
             file.content = linksTools.convertLinks(file.content, file);
@@ -115,7 +115,7 @@ function cosmoscope(files, path) {
                 backlinks: file.backlinks,
                 radius: ((file.levels === null) ? [] : levelsToRadius(file.levels))
             }
-        }),
+        }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
         views: config.views || [],
         graphConfig: config.graph_params,
         // objects to objects array

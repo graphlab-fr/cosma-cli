@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Cosma 1.0">
+    <meta name="description" content="Cosma est un logiciel de création et de visualisation
+        de graphe documentaire. Il permet de générer et représenter des documents interreliés
+        sous la forme d’un réseau interactif dans un navigateur web.">
+    <title>Cosma - Cosmoscope</title>
+
+    <style>
+        {% include "colors.css" %}
+        {% include "styles.css" %}
+    </style>
+
+    <script>
+        {% include "libs/d3.js" %}
+        {% include "libs/fuse.js" %}
+    </script>
+</head>
+
+<body>
+    <main class="interface">
+        <div class="index">
+            {% include "cosmalogo.svg" %}
+
+            <div class="alpha_bar", onclick="updateForces()">
+                <div id="alpha_value"></div>
+            </div>
+
+            <input class="search-bar" id="search" placeholder="Rechercher..." autocomplete="off" />
+            <ul id="search-result-list"></ul>
+
+            <section>
+                <details open="open">
+                    <summary>Filtres ({{ types | length }})</summary>
+
+                    <ul>
+                        {% for type in types %}
+                        <li class="filter t_{{ type.name }}"
+                        data-filter="{{ type.nodes | join(",") }}"
+                        data-name="{{ type.name }}">{{ type.name | capitalize }} ({{ type.nodes | length }})</li>
+                        {% endfor %}
+                    </ul>
+                </details>
+            </section>
+
+            <section>
+                <details>
+                    <summary>Tags ({{ tags | length }})</summary>
+
+                    <ul>
+                        {% for tag in tags %}
+                        <li class="tag"
+                        data-tag="{{ tag.nodes | join(",") }}">{{ tag.name | capitalize }} ({{ tag.nodes | length }})</li>
+                        {% endfor %}
+                    </ul>
+                </details>
+            </section>
+
+            <section>
+                <details>
+                    <summary>Index ({{ index | length }})</summary>
+
+                    <div id="sort-box">
+                        <button data-sort="record-list-alphabetic">A-Z</button>
+                        <button data-sort="record-list-alphabetic-reverse">Z-A</button>
+                        <button data-sort="record-list-bytime">time</button>
+                        <button data-sort="record-list-bytime-reverse">rtime</button>
+                    </div>
+
+                    <ul>
+                        <li id="record-list-alphabetic" class="record-sorting active">
+                            <ul>
+                                {% for link in index %}
+                                <li class="id-link" title="{{ link.id }}"
+                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <li id="record-list-alphabetic-reverse" class="record-sorting">
+                            <ul>
+                                {% for link in index | reverse %}
+                                <li class="id-link" title="link.id"
+                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <li id="record-list-bytime" class="record-sorting">
+                            <ul>
+                                {% for link in index | sort(false, false, 'mtime') %}
+                                <li class="id-link" title="link.id"
+                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        <li id="record-list-bytime-reverse" class="record-sorting">
+                            <ul>
+                                {% for link in index | sort(true, false, 'mtime') %}
+                                <li class="id-link" title="link.id"
+                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </details>
+            </section>
+
+            <section class="controls">
+                <details>
+                    <summary>Paramètres du graphe</summary>
+
+                    {% macro formHead(name, graphParameter, defaultValue, description) %}
+                    <div class="control-head">
+                        <label>{{ name }}</label>
+
+                        {% if graphParameter and defaultValue == true %}
+                        <input type="checkbox" onchange="graphProperties.{{ graphParameter }} = this.checked; updateForces();" checked>
+                        {% elif graphParameter %}
+                        <input type="checkbox" onchange="graphProperties.{{ graphParameter }} = this.checked; updateForces();">
+                        {% endif %}
+
+                        <p>{{ description }}</p>
+                    </div>
+                    {% endmacro %}
+
+                    {% macro inputRange(name, graphParameter, defaultValue, min, max, description) %}
+                    <form oninput="result.value = range.value; graphProperties.{{ graphParameter }} = range.value; updateForces();">
+                        <label title="{{ description }}">
+                            {{ name }}
+                            <output class="counter" name="result">{{ defaultValue }}</output>
+                        </label>
+                        <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step=".1" />
+                    </form>
+                    {% endmacro %}
+
+                    <article>
+                        {{ formHead('charge', 'charge.enabled', graphConfig.charge.enabled, 'Attracts (+) or repels (-) nodes to/from each other.') }}
+
+                        {{ inputRange('strength', 'charge.strength', graphConfig.charge.strength, -200, 50, 'Negative strength repels nodes. Positive strength attracts nodes.') }}
+                        {{ inputRange('distanceMin', 'charge.distanceMin', graphConfig.charge.distanceMin, 0, 50, 'Minimum distance where force is applied.') }}
+                        {{ inputRange('distanceMax', 'charge.distanceMax', graphConfig.charge.distanceMax, 0, 2000, 'Maximum distance where force is applied.') }}
+                    </article>
+
+                    <article>
+                        {{ formHead('link', 'link.enabled', graphConfig.link.enabled, 'Sets link length.') }}
+
+                        {{ inputRange('distance', 'link.distance', graphConfig.link.distance, 0, 100, 'The force will push/pull nodes to make links this long.') }}
+                        {{ inputRange('iterations', 'link.iterations', graphConfig.link.iterations, 1, 10, 'The force will push/pull nodes to make links this long.') }}
+                    </article>
+
+                    <article>
+                        {{ formHead('collide', 'collide.enabled', graphConfig.collide.enabled, 'Prevents nodes from overlapping.') }}
+
+                        {{ inputRange('strength', 'collide.strength', graphConfig.collide.strength, 0, 2, '') }}
+                        {{ inputRange('radius', 'collide.radius', graphConfig.collide.radius, 1, 100, 'Size of nodes.') }}
+                        {{ inputRange('radius', 'collide.iterations', graphConfig.collide.iterations, 1, 10, 'Higher values increase rigidity of the nodes (WARNING: high values are computationally expensive).') }}
+                    </article>
+
+                    <article>
+                        {{ formHead('forceX', 'forceX.enabled', graphConfig.forceX.enabled, 'Acts like gravity. Pulls all points towards an X location.') }}
+
+                        {{ inputRange('strength', 'forceX.strength', graphConfig.forceX.strength, 0, 1, '') }}
+                        {{ inputRange('strength', 'forceX.x', graphConfig.forceX.x, 0, 1, 'The X location that the force will push the nodes to (NOTE: This demo multiplies by the svg width).') }}
+                    </article>
+
+                    <article>
+                        {{ formHead('forceY', 'forceY.enabled', graphConfig.forceY.enabled, 'Acts like gravity. Pulls all points towards a Y location.') }}
+
+                        {{ inputRange('strength', 'forceY.strength', graphConfig.forceY.strength, 0, 1, '') }}
+                        {{ inputRange('strength', 'forceY.y', graphConfig.forceY.y, 0, 1, 'The Y location that the force will push the nodes to (NOTE: This demo multiplies by the svg height).') }}
+                    </article>
+
+                    <article>
+                        {{ formHead('center', false, 'Shifts the view, so the graph is centered at this location.') }}
+
+                        {{ inputRange('x', 'center.x', graphConfig.center.x, 0, 1, '') }}
+                        {{ inputRange('y', 'center.y', graphConfig.center.y, 0, 1, '') }}
+                    </article>
+                </details>
+            </section>
+
+            <section>
+                <div>
+                    <button onclick="resetNodes()">Reset</button>
+                </div>
+                <div>
+                    <button onclick="saveView()">Sauvegarder la vue</button>
+                </div>
+
+                {% if views.length !== 0 %}
+                <div>
+                    {% for viewName, viewString in views %}
+                    <button onclick="changeView('{{ viewString }}')">{{ viewName }}</button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </section>
+
+            <div class="zoom-controls">
+                <button onclick="zoomMore()">+</button>
+                <button onclick="zoomLess()">-</button>
+                <button onclick="zoomReset()">O</button>
+            </div>
+            
+        </div>
+
+        <section id="record-container" class="fiche-content">
+            <button class="fiche__btn-close"
+            onclick="closeRecord()">Fermer</button>
+
+            {% for record in index %}
+            <aside id="{{ record.id }}" class="fiche">
+                <div class="metas">
+                    <h1>{{ record.title }}</h1>
+                    <time class="fiche-date" datetime="{{ record.mtime }}">{{ record.mtime }}</time>
+                    <time class="fiche-type">{{ record.type }}</time>
+                    <time class="fiche-tags">{{ record.tags }}</time>
+                    <time class="fiche-id">{{ record.id }}</time>
+                </div>
+
+                <hr/>
+
+                <div>{{ record.content | safe }}</div>
+
+                {% if record.radius.length !== 0 %}
+                <h2>Graphe</h2>
+                {% for niv in record.radius %}
+                <button id="{{ record.id }}-{{ loop.index + 1 }}"
+                class="radius-btn"
+                onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index + 1 }}'">{{ loop.index + 1 }}</button>
+                {% endfor %}
+                {% endif %}
+
+                {% if record.links.length !== 0 %}
+                <h2>Liens</h2>
+                <ul>
+                    {% for link in record.links %}
+                    <li class="id-link l_{{ link.type }}
+                    title="{{ link.aimName }}"
+                    onclick="openRecord({{ link.aim }})">{{ link.aimName }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if record.backlinks.length !== 0 %}
+                <h2>Rétroliens</h2>
+                <ul>
+                    {% for backlink in record.backlinks %}
+                    <li class="id-link l_{{ backlink.type }}
+                    title="{{ link.aimName }}"
+                    onclick="openRecord({{ backlink.aim }})">{{ backlink.aimName }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </aside>
+            {% endfor %}
+        </section>
+    </main>
+
+    <svg id="graph_canvas">
+        <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerUnits="strokeWidth" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+            <filter id="double">
+                <feMorphology in="SourceGraphic" result="a" operator="dilate" radius="0.2"></feMorphology>
+                <feComposite in="SourceGraphic" in2="a" result="xx" operator="xor"></feComposite>
+            </filter>
+        </defs>
+    </svg>
+
+    <script>
+        {% include "graph-data.js" %}
+        {% include "scripts/main.js" %}
+        {% include "scripts/graph.js" %}
+        {% include "scripts/zoom.js" %}
+        {% include "scripts/search.js" %}
+        {% include "scripts/filter.js" %}
+        {% include "scripts/tag.js" %}
+        {% include "scripts/nodes.js" %}
+        {% include "scripts/record.js" %}
+        {% include "scripts/view.js" %}
+    </script>
+</body>
+
+</html>
