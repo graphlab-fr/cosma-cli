@@ -97,6 +97,22 @@
                 </details>
             </section>
 
+            <section>
+                <details open="open">
+                    <summary class="menu-title">Vues ({{ views | length }})</summary>
+
+                    <button onclick="saveView()">Sauvegarder la vue actuelle</button>
+
+                    {% if views.length !== 0 %}
+                    <ul>
+                        {% for viewName, viewString in views %}
+                        <li onclick="changeView('{{ viewString }}')">{{ viewName | capitalize }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </details>
+            </section>
+
             <section class="controls">
                 <details>
                     <summary class="menu-title">Paramètres du graphe</summary>
@@ -170,22 +186,6 @@
                     </article>
                 </details>
             </section>
-
-            {% if views.length !== 0 %}
-            <section>
-                <details open="open">
-                    <summary class="menu-title">Vues ({{ views | length }})</summary>
-
-                    <button onclick="saveView()">Sauvegarder la vue actuelle</button>
-
-                    <ul>
-                        {% for viewName, viewString in views %}
-                        <li onclick="changeView('{{ viewString }}')">{{ viewName | capitalize }}</li>
-                        {% endfor %}
-                    </ul>
-                </details>
-            </section>
-            {% endif %}
         </aside>
 
         <main id="record-container" class="fiche-container">

@@ -211,14 +211,16 @@ details[data-sort] .toggle {
 	cursor: pointer;
 	text-align: right;
 	color: rgb(87, 87, 87);
+	font-weight: bold;
+	margin-bottom: 0.8rem;
 }
 
 details[data-sort] .toggle::after {
-	content: '▼';
+	content: 'ᐯ';
 }
 
 details[data-sort] .toggle.active::after {
-	content: '▲';
+	content: 'ᐱ';
 }
 
 details[data-sort] .sort:not(.active) {
