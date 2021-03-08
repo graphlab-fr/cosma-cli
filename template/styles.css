@@ -11,10 +11,10 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
-	font-size: 1.3rem;
+	font-size: 1.4rem;
 	overflow: hidden;
 }
-.interface {
+.wrapper {
 	width: 100%;
 	height: 100%;
 	margin: 0;
@@ -23,31 +23,10 @@ body {
 	display: flex;
 	justify-content: space-between;
 	z-index: 1;
-/* 	background-color: transparent; */
 }
-ul, ol {
-	padding: 0;
-	margin: 0;
-	list-style-position: inside;
-}
-li {
-	padding: 0;
-	margin: 5px 0;
-}
+
 button { cursor: pointer; }
-
-.index section>h1 { cursor: pointer; }
-
-.index ul li {
-	cursor: pointer;
-	padding-left: 1rem;
-}
-
-.index summary {
-	cursor: pointer;
-	font-weight: bold;
-	margin: 0.2rem;
-}
+a { color: inherit; }
 
 /* FILTRES */
 
@@ -74,44 +53,6 @@ li.filter[data-active="true"] {
 #logo {
   width: 100%;
 }
-.index section {
-	border-top: 1px solid lightgray;
-	padding: 1em 0;
-}
-.index h1 {
-	font-size: 1em;
-	padding-left: 5px;	
-	margin: 0;
-}
-.index ul li {
-	list-style-type: none;
-}
-.index ul li.id-link {
-	margin: 5px 0;
-	padding-left: 1rem;
-	text-indent: -1rem;
-}
-
-.record-sorting:not(.record-sorting.active) { display: none; }
-
-/* CONTRÔLES */
-
-.controls article {
-	padding: 2rem 0;
-}
-.controls article+article {
-	border-top: 1px solid rgb(236, 236, 236);
-}
-.controls .control-head>label {
-	font-weight: bold;
-	font-size: 1.4rem;
-}
-.controls .counter {
-	font-family: monospace;
-	margin-left: 0.2rem;
-}
-.controls input[type="range"] { width: 100%; }
-/* Alpha */
 .alpha_bar {
 	height: .5em;
 	border: 1px #777 solid;
@@ -128,6 +69,26 @@ li.filter[data-active="true"] {
 .alpha_bar:active #alpha_value {
 	background-color: #222
 }
+
+.record-sorting:not(.record-sorting.active) { display: none; }
+
+/* CONTRÔLES */
+
+article {
+	padding: 2rem 0;
+}
+.controls article+article {
+	border-top: 1px solid rgb(236, 236, 236);
+}
+.controls .control-head>label {
+	font-weight: bold;
+	font-size: 1.4rem;
+}
+.controls .counter {
+	font-family: monospace;
+	margin-left: 0.2rem;
+}
+.controls input[type="range"] { width: 100%; }
 
 .zoom-controls {
 	display: flex;
@@ -181,24 +142,15 @@ circle:hover {
 
 /* FICHES */
 
-.fiche { display: none; }
-.fiche .metas {
-	margin: 0;
-	font-family: sans-serif;
-}
-.fiche .metas * { display: block; }
-.fiche .metas .fiche-type { text-transform: capitalize; }
-.fiche .metas .fiche-id { font-family: monospace; }
-.fiche-content {
+.fiche-container {
 	position: absolute;
 	z-index: 100;
 	top: 0;
 	right: 0;
-    width: 500px;
-    overflow: auto;
-    height: 100vh;
-    font: 16px/1.5 "Georgia", serif;
 	padding: 1rem 2rem;
+    width: 500px;
+    height: 100vh;
+    overflow: auto;
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transform: translate(100%);
@@ -206,35 +158,78 @@ circle:hover {
     transition-timing-function: cubic-bezier(.64,-0.01,.87,.66);
 }
 
-.fiche-content.active {	transform: translate(0%); }
+.fiche-container.active { transform: unset; }
 
-/* Adapté de Typesafe.css: */
-.fiche-content h1,h2,h3,h4,h5,h6 {font-family:sans-serif;margin:2.5rem 0 0.5rem;}
-.fiche-content h1{font-size:1.2em}
-.fiche-content h2{font-size:1.1em}
-.fiche-content h3{font-size:1em}
-.fiche-content ul li, .fiche ol li {margin:0.5rem 0 0 0;}
-.fiche-content img{height:auto;max-width:100%;}
-.fiche-content pre{overflow:auto;font-size: 90%;white-space: pre-wrap;}
-.fiche-content code{display:inline-block;}
-.fiche-content pre code{padding-left:1rem;}
-.fiche-content blockquote{border-left:5px solid lightgrey;margin:0;padding-left:1rem;}
-.fiche-content table{border-collapse:collapse;margin:2rem 0;text-align:left;width:100%;}
-.fiche-content tr{border-bottom:1px solid lightgrey;}
-.fiche-content th, .fiche-content td{padding:0.5rem;}
-.fiche-content hr{background:lightgrey;border:0;height:1px;margin:2rem 0;}
-.fiche-content a {word-wrap: break-word;}
-/* fin */
-
-/* LIENS */
-
-.id-link {
-    text-decoration: underline;
-	cursor: pointer;
+.fiche { display: none; }
+.fiche header { font-family: sans-serif; }
+/* .fiche header .fiche-id { font-family: monospace; } */
+.fiche header div {
+	display: flex;
+	align-items: baseline;
+}
+.fiche header div+div { margin-top: 0.8rem; }
+.fiche header div span:first-of-type {
+	font-size: 1.6rem;
+	font-family: monospace;
+	margin-right: 0.8rem;
 }
 
-a {
-	color: inherit;
+/* Adapté de Typesafe.css: */
+article.fiche main {font: 16px/1.5 "Georgia", serif;}
+article.fiche main h1,h2,h3,h4,h5,h6 {font-family:sans-serif;margin:2.5rem 0 0.5rem;}
+article.fiche main h1{font-size:1.2em}
+article.fiche main h2{font-size:1.1em}
+article.fiche main h3{font-size:1em}
+article.fiche main ul, article.fiche main ol {padding: 0; list-style-position: inside;}
+article.fiche main ul ul, article.fiche main ol ol {padding-left: 2rem;}
+article.fiche main ul li, .fiche ol li {margin:0.5rem 0 0 0;}
+article.fiche main img{height:auto;max-width:100%;}
+article.fiche main pre{overflow:auto;font-size: 90%;white-space: pre-wrap;}
+article.fiche main code{display:inline-block;}
+article.fiche main pre code{padding-left:1rem;}
+article.fiche main blockquote{border-left:5px solid lightgrey;margin:0;padding-left:1rem;}
+article.fiche main table{border-collapse:collapse;margin:2rem 0;text-align:left;width:100%;}
+article.fiche main tr{border-bottom:1px solid lightgrey;}
+article.fiche main th, article.fiche main td{padding:0.5rem;}
+article.fiche main hr{background:lightgrey;border:0;height:1px;margin:2rem 0;}
+article.fiche main a {word-wrap: break-word;}
+article.fiche header {
+	padding-bottom: 1.5rem;
+	margin-bottom: 3rem;
+	border-bottom: 1px solid black;
+}
+article.fiche footer {
+	margin-top: 3rem;
+	border-top: 1px solid black;
+}
+/* fin */
+
+details {
+	border-top: 1px solid lightgray;
+	padding: 1rem 0;
+}
+
+details>summary {
+	cursor: pointer;
+	font-family: sans-serif;
+	margin: 1rem 0;
+	font-weight: bold;
+}
+
+details ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+details ul li {
+	cursor: pointer;
+	padding: 0.5rem 0 0.5rem 1rem;
+	list-style-position: inside;
+}
+
+details ul li:nth-child(even) {
+	background-color: rgb(230, 230, 230);
 }
 
 #graph_canvas line {

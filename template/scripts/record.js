@@ -8,7 +8,7 @@ function openRecord(id, history = true) {
     if (view.openedRecord !== undefined) {
         // hide last record
         document.getElementById(view.openedRecord)
-            .style.display = 'none';
+            .style.display = null;
     }
 
     // open records container
@@ -16,7 +16,7 @@ function openRecord(id, history = true) {
 
     // show record
     const recordContent = document.getElementById(id);
-    recordContent.style.display = 'unset';
+    recordContent.style.display = 'block';
 
     // page's <title> become record's name
     const recordTitle = recordContent.querySelector('h1').textContent;
@@ -42,7 +42,7 @@ function openRecord(id, history = true) {
  */
 
 function closeRecord() {
-    window[view.openedRecord].style.display = 'none';
+    window[view.openedRecord].style.display = null;
     view.openedRecord = undefined;
     document.querySelector('#record-container').classList.remove('active');
 

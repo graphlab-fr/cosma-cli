@@ -21,20 +21,25 @@
 </head>
 
 <body>
-    <main class="interface">
-        <div class="index">
-            {% include "cosmalogo.svg" %}
+    <div class="wrapper">
+        <aside class="index">
 
-            <div class="alpha_bar", onclick="updateForces()">
-                <div id="alpha_value"></div>
-            </div>
+            <header role="banner">
+                {% include "cosmalogo.svg" %}
 
-            <input class="search-bar" id="search" placeholder="Rechercher..." autocomplete="off" />
-            <ul id="search-result-list"></ul>
+                <div class="alpha_bar", onclick="updateForces()">
+                    <div id="alpha_value"></div>
+                </div>
+            </header>
+
+            <section>
+                <input class="search-bar" id="search" placeholder="Rechercher..." autocomplete="off" />
+                <ul id="search-result-list"></ul>
+            </section>
 
             <section>
                 <details open="open">
-                    <summary>Filtres ({{ types | length }})</summary>
+                    <summary class="menu-title">Filtres ({{ types | length }})</summary>
 
                     <ul>
                         {% for type in types %}
@@ -48,7 +53,7 @@
 
             <section>
                 <details>
-                    <summary>Tags ({{ tags | length }})</summary>
+                    <summary class="menu-title">Mots-clés ({{ tags | length }})</summary>
 
                     <ul>
                         {% for tag in tags %}
@@ -61,61 +66,36 @@
 
             <section>
                 <details>
-                    <summary>Index ({{ index | length }})</summary>
+                    <summary class="menu-title">Index ({{ index | length }})</summary>
 
                     <div id="sort-box">
                         <button data-sort="record-list-alphabetic">A-Z</button>
                         <button data-sort="record-list-alphabetic-reverse">Z-A</button>
-                        <button data-sort="record-list-bytime">time</button>
-                        <button data-sort="record-list-bytime-reverse">rtime</button>
                     </div>
 
-                    <ul>
-                        <li id="record-list-alphabetic" class="record-sorting active">
-                            <ul>
-                                {% for link in index %}
-                                <li class="id-link" title="{{ link.id }}"
-                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-
-                        <li id="record-list-alphabetic-reverse" class="record-sorting">
-                            <ul>
-                                {% for link in index | reverse %}
-                                <li class="id-link" title="link.id"
-                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-
-                        <li id="record-list-bytime" class="record-sorting">
-                            <ul>
-                                {% for link in index | sort(false, false, 'mtime') %}
-                                <li class="id-link" title="link.id"
-                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-
-                        <li id="record-list-bytime-reverse" class="record-sorting">
-                            <ul>
-                                {% for link in index | sort(true, false, 'mtime') %}
-                                <li class="id-link" title="link.id"
-                                onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
-                                {% endfor %}
-                            </ul>
-                        </li>
+                    <ul id="record-list-alphabetic" class="record-sorting active">
+                        {% for link in index %}
+                        <li title="{{ link.id }}"
+                        onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                        {% endfor %}
                     </ul>
+
+                    <ul id="record-list-alphabetic-reverse" class="record-sorting">
+                        {% for link in index | reverse %}
+                        <li title="link.id"
+                        onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                        {% endfor %}
+                    </ul>
+
                 </details>
             </section>
 
             <section class="controls">
                 <details>
-                    <summary>Paramètres du graphe</summary>
+                    <summary class="menu-title">Paramètres du graphe</summary>
 
                     {% macro formHead(name, graphParameter, defaultValue, description) %}
-                    <div class="control-head">
+                    <header class="control-head">
                         <label>{{ name }}</label>
 
                         {% if graphParameter and defaultValue == true %}
@@ -125,7 +105,7 @@
                         {% endif %}
 
                         <p>{{ description }}</p>
-                    </div>
+                    </header>
                     {% endmacro %}
 
                     {% macro inputRange(name, graphParameter, defaultValue, min, max, description) %}
@@ -206,61 +186,89 @@
                 <button onclick="zoomLess()">-</button>
                 <button onclick="zoomReset()">Réinitialiser</button>
             </div>
-            
-        </div>
+        </aside>
 
-        <section id="record-container" class="fiche-content">
-            <button class="fiche__btn-close"
-            onclick="closeRecord()">Fermer</button>
+        <main id="record-container" class="fiche-container">
+                <button class="fiche__btn-close" onclick="closeRecord()">Fermer</button>
 
             {% for record in index %}
-            <aside id="{{ record.id }}" class="fiche">
-                <div class="metas">
-                    <h1>{{ record.title }}</h1>
-                    <time class="fiche-date" datetime="{{ record.mtime }}">{{ record.mtime }}</time>
-                    <span class="fiche-type">{{ record.type }}</span>
-                    <span class="fiche-tags">{{ record.tags }}</span>
-                    <span class="fiche-id">{{ record.id }}</span>
-                </div>
+            <article id="{{ record.id }}" class="fiche">
+                <header>
+                    <h1>{{ record.title | capitalize }}</h1>
 
-                <hr/>
+                    <div>
+                        <span>id :</span>
+                        <span>{{ record.id }}</span>
+                    </div>
 
-                <div>{{ record.content | safe }}</div>
+                    <div style="display:none;">
+                        <span>dernière édition :</span>
+                        <time class="fiche-date" datetime="{{ record.mtime }}">{{ record.mtime }}</time>
+                    </div>
 
-                {% if record.radius.length !== 0 %}
-                <h2>Graphe</h2>
-                {% for niv in record.radius %}
-                <button id="{{ record.id }}-{{ loop.index + 1 }}"
-                class="radius-btn"
-                onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index + 1 }}'">{{ loop.index + 1 }}</button>
-                {% endfor %}
-                {% endif %}
+                    <div>
+                        <span>type :</span>
+                        <span>{{ record.type | capitalize }}</span>
+                    </div>
 
-                {% if record.links.length !== 0 %}
-                <h2>Liens</h2>
-                <ul>
-                    {% for link in record.links %}
-                    <li class="id-link l_{{ link.type }}
-                    title="{{ link.aimName }}"
-                    onclick="openRecord({{ link.aim }})">{{ link.aimName }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+                    {% if record.tags %}
+                    <div>
+                        <span>mots-clés :</span>
+                        <span>{{ record.tags }}</span>
+                    </div>
+                    {% endif %}
 
-                {% if record.backlinks.length !== 0 %}
-                <h2>Rétroliens</h2>
-                <ul>
-                    {% for backlink in record.backlinks %}
-                    <li class="id-link l_{{ backlink.type }}
-                    title="{{ link.aimName }}"
-                    onclick="openRecord({{ backlink.aim }})">{{ backlink.aimName }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </aside>
+                    {% if record.radius.length !== 0 %}
+                    <div title="Choisir le nombre de sections autour du nœud à afficher">
+                        <span>sections :</span>
+                        <span>
+                            {% for niv in record.radius %}
+                            <button id="{{ record.id }}-{{ loop.index + 1 }}"
+                            class="radius-btn"
+                            onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index + 1 }}'">{{ loop.index + 1 }}</button>
+                            {% endfor %}
+                        </span>
+                    </div>
+                    {% endif %}
+                </header>
+
+                <main>{{ record.content | safe }}</main>
+
+                <footer>
+                    {% if record.links.length !== 0 %}
+                    <section>
+                        <details open="open">
+                            <summary class="menu-title">Liens ({{ record.links | length }})</summary>
+
+                            <ul>
+                                {% for link in record.links %}
+                                <li title="{{ link.aimName }}"
+                                onclick="openRecord({{ link.aim }})">{{ link.aimName }}</li>
+                                {% endfor %}
+                            </ul>
+                        </details>
+                    </section>
+                    {% endif %}
+
+                    {% if record.backlinks.length !== 0 %}
+                    <section>
+                        <details open="open">
+                            <summary class="menu-title">Rétroliens ({{ record.backlinks | length }})</summary>
+
+                            <ul>
+                                {% for backlink in record.backlinks %}
+                                <li title="{{ link.aimName }}"
+                                onclick="openRecord({{ backlink.aim }})">{{ backlink.aimName }}</li>
+                                {% endfor %}
+                            </ul>
+                        </details>
+                    </section>
+                    {% endif %}
+                </footer>
+            </article>
             {% endfor %}
-        </section>
-    </main>
+        </main>
+    </div>
 
     <svg id="graph_canvas">
         <defs>
