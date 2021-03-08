@@ -1,4 +1,6 @@
-let filters = Array.from(document.querySelectorAll('[data-filter]'));
+let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
+    , resetBtn = document.getElementById('reset-nodes'); // anti isolate() function btn
+
 filters = filters.map(function(btn) {
     // extract nodes id affected by the filter from the linked button
     const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
@@ -80,8 +82,9 @@ function getFiltedNodes() {
  */
 
 function isolate(toDisplayIds) {
-    toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+    resetBtn.style.display = 'block';
 
+    toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
     // get nodes to hide
     let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
 
@@ -112,7 +115,9 @@ function isolateByElement(eltId) {
  */
 
 function resetNodes() {
-    const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
     view.isolateId = undefined;
+    resetBtn.style.display = null;
+
+    const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
     displayNodes(toDisplayIds);
 }

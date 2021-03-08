@@ -166,9 +166,6 @@
 
             <section>
                 <div>
-                    <button onclick="resetNodes()">Reset</button>
-                </div>
-                <div>
                     <button onclick="saveView()">Sauvegarder la vue</button>
                 </div>
 
@@ -180,12 +177,6 @@
                 </div>
                 {% endif %}
             </section>
-
-            <div class="zoom-controls">
-                <button onclick="zoomMore()">+</button>
-                <button onclick="zoomLess()">-</button>
-                <button onclick="zoomReset()">Réinitialiser</button>
-            </div>
         </aside>
 
         <main id="record-container" class="fiche-container">
@@ -270,17 +261,28 @@
         </main>
     </div>
 
-    <svg id="graph_canvas">
-        <defs>
-            <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerUnits="strokeWidth" markerWidth="7" markerHeight="7" orient="auto">
-                <path d="M 0 0 L 10 5 L 0 10 z"></path>
-            </marker>
-            <filter id="double">
-                <feMorphology in="SourceGraphic" result="a" operator="dilate" radius="0.2"></feMorphology>
-                <feComposite in="SourceGraphic" in2="a" result="xx" operator="xor"></feComposite>
-            </filter>
-        </defs>
-    </svg>
+    <div class="graph-wrapper">
+        <svg id="graph_canvas">
+            <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerUnits="strokeWidth" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                </marker>
+                <filter id="double">
+                    <feMorphology in="SourceGraphic" result="a" operator="dilate" radius="0.2"></feMorphology>
+                    <feComposite in="SourceGraphic" in2="a" result="xx" operator="xor"></feComposite>
+                </filter>
+            </defs>
+        </svg>
+
+        <div class="zoom-controls">
+            <div>
+                <button onclick="zoomLess()">-</button>
+                <button onclick="zoomMore()">+</button>
+            </div>
+            <button onclick="zoomReset()">Recentrer</button>
+            <button id="reset-nodes" onclick="resetNodes()">Réafficher</button>
+        </div>
+    </div>
 
     <script>
         {% include "graph-data.js" %}
