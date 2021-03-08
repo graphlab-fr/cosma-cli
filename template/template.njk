@@ -51,6 +51,7 @@
                 </details>
             </section>
 
+            {% if tags.length !== 0 %}
             <section>
                 <details>
                     <summary class="menu-title">Mots-clés ({{ tags | length }})</summary>
@@ -63,6 +64,7 @@
                     </ul>
                 </details>
             </section>
+            {% endif %}
 
             <section>
                 <details>
@@ -164,19 +166,21 @@
                 </details>
             </section>
 
+            {% if views.length !== 0 %}
             <section>
-                <div>
-                    <button onclick="saveView()">Sauvegarder la vue</button>
-                </div>
+                <details open="open">
+                    <summary class="menu-title">Vues ({{ views | length }})</summary>
 
-                {% if views.length !== 0 %}
-                <div>
-                    {% for viewName, viewString in views %}
-                    <button onclick="changeView('{{ viewString }}')">{{ viewName }}</button>
-                    {% endfor %}
-                </div>
-                {% endif %}
+                    <button onclick="saveView()">Sauvegarder la vue actuelle</button>
+
+                    <ul>
+                        {% for viewName, viewString in views %}
+                        <li onclick="changeView('{{ viewString }}')">{{ viewName | capitalize }}</li>
+                        {% endfor %}
+                    </ul>
+                </details>
             </section>
+            {% endif %}
         </aside>
 
         <main id="record-container" class="fiche-container">

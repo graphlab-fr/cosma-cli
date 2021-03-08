@@ -207,6 +207,10 @@ details {
 	padding: 1rem 0;
 }
 
+details button {
+	margin: 0.8rem 0;
+}
+
 details>summary {
 	cursor: pointer;
 	font-family: sans-serif;
