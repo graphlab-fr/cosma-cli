@@ -207,6 +207,24 @@ details {
 	padding: 1rem 0;
 }
 
+details[data-sort] .toggle {
+	cursor: pointer;
+	text-align: right;
+	color: rgb(87, 87, 87);
+}
+
+details[data-sort] .toggle::after {
+	content: '▼';
+}
+
+details[data-sort] .toggle.active::after {
+	content: '▲';
+}
+
+details[data-sort] .sort:not(.active) {
+	display: none;
+}
+
 details button {
 	margin: 0.8rem 0;
 }

@@ -53,13 +53,22 @@
 
             {% if tags.length !== 0 %}
             <section>
-                <details>
+                <details data-sort="tag">
                     <summary class="menu-title">Mots-clés ({{ tags | length }})</summary>
 
-                    <ul>
+                    <div class="toggle"></div>
+
+                    <ul class="sort active">
                         {% for tag in tags %}
                         <li class="tag"
-                        data-tag="{{ tag.nodes | join(",") }}">{{ tag.name | capitalize }} ({{ tag.nodes | length }})</li>
+                        data-tag="{{ tag.nodes | join(', ') }}">{{ tag.name | capitalize }} ({{ tag.nodes | length }})</li>
+                        {% endfor %}
+                    </ul>
+
+                    <ul class="sort">
+                        {% for tag in tags | reverse %}
+                        <li class="tag"
+                        data-tag="{{ tag.nodes | join(', ') }}">{{ tag.name | capitalize }} ({{ tag.nodes | length }})</li>
                         {% endfor %}
                     </ul>
                 </details>
@@ -67,28 +76,24 @@
             {% endif %}
 
             <section>
-                <details>
+                <details data-sort="record">
                     <summary class="menu-title">Index ({{ index | length }})</summary>
 
-                    <div id="sort-box">
-                        <button data-sort="record-list-alphabetic">A-Z</button>
-                        <button data-sort="record-list-alphabetic-reverse">Z-A</button>
-                    </div>
+                    <div class="toggle"></div>
 
-                    <ul id="record-list-alphabetic" class="record-sorting active">
+                    <ul class="sort active">
                         {% for link in index %}
                         <li title="{{ link.id }}"
                         onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
                         {% endfor %}
                     </ul>
 
-                    <ul id="record-list-alphabetic-reverse" class="record-sorting">
+                    <ul class="sort">
                         {% for link in index | reverse %}
                         <li title="link.id"
                         onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
                         {% endfor %}
                     </ul>
-
                 </details>
             </section>
 

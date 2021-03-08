@@ -50,25 +50,17 @@ function closeRecord() {
 }
 
 /**
- * Make record sorting lists functional
+ * Display/hide lists from a 'data-sort' container
+ * and animate the arrow
  */
 
 (function () {
-    // first active sorted list
-    let activeList = document.querySelector('.record-sorting.active');
-    // btns for each sorted list
-    const btns = document.querySelectorAll('[data-sort]');
-
-    for (const btn of btns) {
-        const list = window[btn.dataset.sort];
-
-        btn.addEventListener('click', () => {
-            if (list === activeList) { return; }
-
-            activeList.classList.remove('active');
-
-            list.classList.add('active');
-            activeList = list;
-        })
+    const sorters = document.querySelectorAll('details[data-sort]');
+    for (const sorter of sorters) {
+        const sorts = sorter.querySelectorAll('ul.sort');
+        sorter.querySelector('.toggle').addEventListener('click', (e) => {
+            e.target.classList.toggle('active');
+            for (const sort of sorts) {  sort.classList.toggle('active'); }
+        });
     }
 })();
