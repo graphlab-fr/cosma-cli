@@ -58,19 +58,19 @@
 
                     <div class="toggle"></div>
 
-                    <ul class="sort active">
+                    <div class="sort active">
                         {% for tag in tags %}
-                        <li class="tag"
-                        data-tag="{{ tag.nodes | join(', ') }}">{{ tag.name | capitalize }} ({{ tag.nodes | length }})</li>
+                        <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        {{ tag.name | capitalize }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
-                    </ul>
+                    </div>
 
-                    <ul class="sort">
+                    <div class="sort">
                         {% for tag in tags | reverse %}
-                        <li class="tag"
-                        data-tag="{{ tag.nodes | join(', ') }}">{{ tag.name | capitalize }} ({{ tag.nodes | length }})</li>
+                        <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        {{ tag.name | capitalize }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
-                    </ul>
+                    </div>
                 </details>
             </section>
             {% endif %}
@@ -300,7 +300,6 @@
         {% include "scripts/zoom.js" %}
         {% include "scripts/search.js" %}
         {% include "scripts/filter.js" %}
-        {% include "scripts/tag.js" %}
         {% include "scripts/nodes.js" %}
         {% include "scripts/record.js" %}
         {% include "scripts/view.js" %}

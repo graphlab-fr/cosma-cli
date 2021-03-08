@@ -225,10 +225,6 @@ details[data-sort] .sort:not(.active) {
 	display: none;
 }
 
-details button {
-	margin: 0.8rem 0;
-}
-
 details>summary {
 	cursor: pointer;
 	font-family: sans-serif;

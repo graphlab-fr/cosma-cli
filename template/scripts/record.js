@@ -57,7 +57,7 @@ function closeRecord() {
 (function () {
     const sorters = document.querySelectorAll('details[data-sort]');
     for (const sorter of sorters) {
-        const sorts = sorter.querySelectorAll('ul.sort');
+        const sorts = sorter.querySelectorAll('.sort');
         sorter.querySelector('.toggle').addEventListener('click', (e) => {
             e.target.classList.toggle('active');
             for (const sort of sorts) {  sort.classList.toggle('active'); }
