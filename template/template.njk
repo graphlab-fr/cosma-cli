@@ -219,13 +219,13 @@
                     {% endif %}
 
                     {% if record.radius.length !== 0 %}
-                    <div title="Choisir le nombre de sections autour du nœud à afficher">
-                        <span>sections :</span>
+                    <div title="Choisir le rayon du mode focus">
+                        <span>mode focus :</span>
                         <span>
                             {% for niv in record.radius %}
-                            <button id="{{ record.id }}-{{ loop.index + 1 }}"
+                            <button id="{{ record.id }}-{{ loop.index }}"
                             class="radius-btn"
-                            onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index + 1 }}'">{{ loop.index + 1 }}</button>
+                            onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index }}'">{{ loop.index }}</button>
                             {% endfor %}
                         </span>
                     </div>
