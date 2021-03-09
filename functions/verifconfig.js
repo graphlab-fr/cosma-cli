@@ -11,15 +11,12 @@ const baseConfig = {
     link_types: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {
         background_color: 'white',
-        center: { x: 0.5, y: 0.5 },
-        charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
-        collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
-        link: { enabled: true, distance: 1, iterations: 1, color: 'grey', highlightColor: 'red' },
-        node: { sizeCoeff: 1 },
-        forceX: { enabled: true, strength: 0.1, x: 0.5 },
-        forceY: { enabled: true, strength: 0.1, y: 0.5 },
+        position: { x: 0.5, y: 0.5 },
+        attraction: { force: -50, min: 1, max: 500, verticale: 0.1, horizontale: 0.1 },
+        link: { distance: 1, color: "grey", highlightColor: "red" },
+        node: { size_coeff: 1 },
         arrows: false
-    }
+      }
 };
 
 if (!fs.existsSync('config.yml')){
