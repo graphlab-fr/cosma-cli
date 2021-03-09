@@ -1,4 +1,5 @@
 const fs = require('fs')
+    , moment = require('moment')
     , yamlEditor = require('js-yaml');
 
 // Write config file if not exist
@@ -62,6 +63,10 @@ if (!fs.existsSync(config.export_target)) {
     console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid folder path to export Cosmoscope in the config file.');
     process.exit();
 }
+
+// add the date of the process to the config
+if (config['metas'] === undefined) { config['metas'] = {} }
+config.metas.date = moment().format('YYYY-MM-DD');
 
 exports.config = config;
 

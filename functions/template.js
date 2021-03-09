@@ -122,7 +122,8 @@ function cosmoscope(files, path) {
         }),
         tags: Object.keys(tags).map(function(tag) {
             return { name: tag, nodes: tags[tag] };
-        })
+        }),
+        metas: config.metas
     });
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
