@@ -156,8 +156,8 @@ circle:hover {
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transform: translate(100%);
-	transition: transform .2s;
-    transition-timing-function: cubic-bezier(.64,-0.01,.87,.66);
+	transition: transform .6s;
+    transition-timing-function: cubic-bezier(.02,1.18,0,.98);
 }
 
 .fiche-container.active { transform: unset; }
