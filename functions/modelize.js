@@ -43,6 +43,9 @@ let fileIds = []
                 logs.err.push(`File ${file.metas.fileName} throw out : no valid title`);
                 return false; }
 
+            if (fileIds.indexOf(file.metas.id) !== -1) {
+                logs.err.push(`File ${file.metas.fileName} uses an identifier common to another file`); }
+
             fileIds.push(file.metas.id);
 
             return true;
