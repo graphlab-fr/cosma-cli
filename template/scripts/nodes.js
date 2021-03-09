@@ -6,6 +6,7 @@
 function highlightNodes(nodeIds) {
 
     const elts = getNodeNetwork(nodeIds);
+    console.log(elts);
 
     for (const elt of elts) {
         elt.style.stroke = 'var(--highlight)';
@@ -44,7 +45,10 @@ function getNodeNetwork(nodeIds) {
 
     for (const nodeId of nodeIds) {
         // get nodes DOM element
-        nodes.push(document.querySelector('[data-node="' + nodeId + '"]'));
+        var node = document.querySelector('[data-node="' + nodeId + '"]');
+        if (!node) { continue; }
+
+        nodes.push(toto);
 
         // get links DOM element from nodes, if their target is not hidden
         let tempSources = document.querySelectorAll('[data-source="' + nodeId + '"]');

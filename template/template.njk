@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="generator" content="Cosma 1.0">
+    <meta name="generator" content="https://github.com/hyperotlet/cosma">
     <meta name="description" content="Cosma est un logiciel de création et de visualisation
         de graphe documentaire. Il permet de générer et représenter des documents interreliés
         sous la forme d’un réseau interactif dans un navigateur web.">
@@ -25,7 +25,10 @@
         <aside class="index">
 
             <header role="banner">
-                {% include "cosmalogo.svg" %}
+                <div class="self">
+                    {% include "cosmalogo.svg" %}
+                    <span onclick="openRecord('credits', false)">Crédits</span>
+                </div>
 
                 <div class="alpha_bar", onclick="updateForces()">
                     <div id="alpha_value"></div>
@@ -189,7 +192,7 @@
         </aside>
 
         <main id="record-container" class="fiche-container">
-                <button class="fiche__btn-close" onclick="closeRecord()">Fermer</button>
+            <button class="fiche__btn-close" onclick="closeRecord()">Fermer</button>
 
             {% for record in index %}
             <article id="{{ record.id }}" class="fiche">
@@ -267,6 +270,44 @@
                 </footer>
             </article>
             {% endfor %}
+
+            <article id="credits" class="fiche">
+                <main>
+                    <h1>Crédits</h1>
+                    <p>Cosma est un logiciel de création et de visualisation de graphe documentaire.
+                        Il a été développé dans le cadre du projet ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>
+                        et conçu par Arthur Perret, Guillaume Brioudes, Olivier Le Deuff et Clément Borel.</p>
+
+                    <h2>Bibliothèques</h2>
+                    <p>Le fonctionnement de Cosma repose sur les logiciels suivants :</p>
+                    <ul>
+                        <li>
+                            <strong><a href="https://github.com/d3/d3" target="_blank">D3</a></strong>
+                            (Mike Bostock, BSD 3-Clause) : graphe intéractif
+                        </li>
+                        <li>
+                            <strong><a href="https://github.com/mozilla/nunjucks" target="_blank">Nunjucks</a></strong>
+                            (James Long, BSD 2-Clause) : intégration de l'interface
+                        </li>
+                        <li>
+                            <strong><a href="https://github.com/markdown-it/markdown-it" target="_blank">Markdown it</a></strong>
+                            (Vitaly Puzrin, Alex Kocharin, MIT License) : sérialisation des fiches
+                        </li>
+                        <li>
+                            <strong><a href="https://github.com/krisk/fuse" target="_blank">FuseJs</a></strong>
+                            (Kiro Risk, Apache License 2.0) : moteur de recherche
+                        </li>
+                        <li>
+                            <strong><a href="https://github.com/ParkSB/markdown-it-front-matter" target="_blank">YAML Front Matter</a></strong>
+                            (ParkSB, MIT License) : lecture des métadonnées
+                        </li>
+                        <li>
+                            <strong><a href="https://github.com/moment/moment" target="_blank">MomentJs</a></strong>
+                            (Iskren Ivov Chernev, MIT License) : conversion des dates
+                        </li>
+                    </ul>
+                </main>
+            </article>
         </main>
     </div>
 

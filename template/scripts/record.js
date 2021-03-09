@@ -13,6 +13,8 @@ function openRecord(id, history = true) {
 
     // open records container
     window['record-container'].classList.add('active');
+    // adjust record view
+    window['record-container'].scrollTo({ top: 0 });
 
     // show record
     const recordContent = document.getElementById(id);
@@ -21,10 +23,6 @@ function openRecord(id, history = true) {
     // page's <title> become record's name
     const recordTitle = recordContent.querySelector('h1').textContent;
     document.title = recordTitle + ' - Cosma';
-
-    // adjust record view
-    window['record-container'].scrollTo({ top: 0 });
-
 
     // reset nodes highlighting
     unlightNodes();

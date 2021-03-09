@@ -27,6 +27,7 @@ body {
 
 button { cursor: pointer; }
 a { color: inherit; }
+[onclick] { cursor: pointer; }
 
 /* FILTRES */
 
@@ -50,8 +51,11 @@ li.filter[data-active="true"] {
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-#logo {
-  width: 100%;
+
+.self span {
+	display: block;
+	font-family: monospace;
+	text-align: center;
 }
 .alpha_bar {
 	height: .5em;
@@ -241,7 +245,6 @@ details ul {
 }
 
 details ul li {
-	cursor: pointer;
 	padding: 0.5rem 0 0.5rem 1rem;
 	list-style-position: inside;
 }
