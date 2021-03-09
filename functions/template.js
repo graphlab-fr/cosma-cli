@@ -69,7 +69,6 @@ function colors() {
     // add specifics parametered colors from config
     types.push({name: 'highlight', color: config.graph_params.link.highlightColor});
     types.push({name: 'link', color: config.graph_params.link.color});
-    types.push({name: 'arrows', color: config.arrows.color});
 
     let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
 
