@@ -40,9 +40,16 @@ function openRecord(id, history = true) {
  */
 
 function closeRecord() {
+    const container = document.querySelector('#record-container');
+    container.classList.remove('active');
+    container.addEventListener('animationend', () => {
+        // this.fields.permalien.textContent = 'Permalink' ;
+        // this.fields.permalien.classList.remove('active')
+        console.log('càuou');
+    });
+
     window[view.openedRecord].style.display = null;
     view.openedRecord = undefined;
-    document.querySelector('#record-container').classList.remove('active');
 
     unlightNodes();
 }
