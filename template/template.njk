@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="generator" content="https://github.com/hyperotlet/cosma">
-    <meta name="description" content="Cosma est un logiciel de création et de visualisation
-        de graphe documentaire. Il permet de générer et représenter des documents interreliés
-        sous la forme d’un réseau interactif dans un navigateur web.">
+    {% for meta, value in metas %}
+    <meta name="{{ meta }}" content="{{ value }}">
+    {% endfor %}
     <title>Cosma - Cosmoscope</title>
 
     <style>
@@ -241,8 +241,10 @@
             <article id="credits" class="fiche">
                 <main>
                     <h1>Crédits</h1>
-                    <p>Cosma est un logiciel de création et de visualisation de graphe documentaire.
-                        Il a été développé dans le cadre du projet ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>
+                    <p>Cosma est un logiciel de création et de visualisation de graphe documentaire. Il permet de générer
+                        et représenter des documents interreliés sous la forme d’un réseau interactif dans un navigateur web</p>
+
+                    <p>Il a été développé dans le cadre du projet ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>
                         et conçu par Arthur Perret, Guillaume Brioudes, Olivier Le Deuff et Clément Borel.</p>
 
                     <h2>Bibliothèques</h2>
