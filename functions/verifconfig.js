@@ -10,6 +10,7 @@ const baseConfig = {
     record_types: { undefined: 'grey' },
     link_types: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {
+        background_color: 'white',
         center: { x: 0.5, y: 0.5 },
         charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
         collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
