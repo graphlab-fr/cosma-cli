@@ -59,8 +59,8 @@ exports.jsonData = jsonData;
 function colors() {
     // get types from config
 
-    const types = Object.keys(config.types).map(function(key) {
-        return {prefix: 't_', name: key, color: config.types[key]}; });
+    const types = Object.keys(config.record_types).map(function(key) {
+        return {prefix: 't_', name: key, color: config.record_types[key]}; });
 
     // map the CSS syntax
 
@@ -69,7 +69,6 @@ function colors() {
     // add specifics parametered colors from config
     types.push({name: 'highlight', color: config.graph_params.link.highlightColor});
     types.push({name: 'link', color: config.graph_params.link.color});
-    types.push({name: 'arrows', color: config.arrows.color});
 
     let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
 
@@ -112,7 +111,7 @@ function cosmoscope(files, path) {
                 content: mdIt.render(file.content), // Mardown to HTML
                 links: file.links,
                 backlinks: file.backlinks,
-                radius: ((file.levels === null) ? [] : levelsToRadius(file.levels))
+                radius: ((file.focusLevels === null) ? [] : levelsToRadius(file.focusLevels))
             }
         }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
         views: config.views || [],
@@ -123,7 +122,8 @@ function cosmoscope(files, path) {
         }),
         tags: Object.keys(tags).map(function(tag) {
             return { name: tag, nodes: tags[tag] };
-        })
+        }),
+        metas: config.metas
     });
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history

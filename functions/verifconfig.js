@@ -1,4 +1,5 @@
 const fs = require('fs')
+    , moment = require('moment')
     , yamlEditor = require('js-yaml');
 
 // Write config file if not exist
@@ -6,19 +7,17 @@ const fs = require('fs')
 const baseConfig = {
     files_origin: '',
     export_target: '',
-    radiusMax: 3,
-    types: { undefined: 'grey' },
-    hierarchy: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
+    focus_max: 2,
+    record_types: { undefined: 'grey' },
+    link_types: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {
-        center: { x: 0.5, y: 0.5 },
-        charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
-        collide: { enabled: true, strength: 0.7, iterations: 1, radius: 5 },
-        link: { enabled: true, distance: 1, iterations: 1, color: 'grey', highlightColor: 'red' },
-        node: { sizeCoeff: 1 },
-        forceX: { enabled: true, strength: 0.1, x: 0.5 },
-        forceY: { enabled: true, strength: 0.1, y: 0.5 },
-    },
-    arrows: {enabled: true, color: 'black'}
+        background_color: 'white',
+        position: { x: 0.5, y: 0.5 },
+        attraction: { force: -50, min: 1, max: 500, verticale: 0.1, horizontale: 0.1 },
+        link: { distance: 1, color: "grey", highlightColor: "red" },
+        node: { size_coeff: 1 },
+        arrows: false
+      }
 };
 
 if (!fs.existsSync('config.yml')){
@@ -64,6 +63,10 @@ if (!fs.existsSync(config.export_target)) {
     console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid folder path to export Cosmoscope in the config file.');
     process.exit();
 }
+
+// add the date of the process to the config
+if (config['metas'] === undefined) { config['metas'] = {} }
+config.metas.date = moment().format('YYYY-MM-DD');
 
 exports.config = config;
 
@@ -114,14 +117,14 @@ exports.modifyExportPath = modifyExportPath;
  * @param {string} color - Type color : hexa, rgb or color name.
  */
 
-function addType(name, color) {
+function addRecordType(name, color) {
 
     if (!name) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type name.'); }
     if (!color) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type color.'); }
 
-    config.types[name] = color;
+    config.record_types[name] = color;
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
         if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
@@ -130,7 +133,7 @@ function addType(name, color) {
     });
 }
 
-exports.addType = addType;
+exports.addRecordType = addRecordType;
 
 /**
  * Add a view key to config

@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="generator" content="https://github.com/hyperotlet/cosma">
-    <meta name="description" content="Cosma est un logiciel de création et de visualisation
-        de graphe documentaire. Il permet de générer et représenter des documents interreliés
-        sous la forme d’un réseau interactif dans un navigateur web.">
+    {% for meta, value in metas %}
+    <meta name="{{ meta }}" content="{{ value }}">
+    {% endfor %}
     <title>Cosma - Cosmoscope</title>
 
     <style>
@@ -120,21 +120,7 @@
                 <details>
                     <summary class="menu-title">Paramètres du graphe</summary>
 
-                    {% macro formHead(name, graphParameter, defaultValue, description) %}
-                    <header class="control-head">
-                        <label>{{ name }}</label>
-
-                        {% if graphParameter and defaultValue == true %}
-                        <input type="checkbox" onchange="graphProperties.{{ graphParameter }} = this.checked; updateForces();" checked>
-                        {% elif graphParameter %}
-                        <input type="checkbox" onchange="graphProperties.{{ graphParameter }} = this.checked; updateForces();">
-                        {% endif %}
-
-                        <p>{{ description }}</p>
-                    </header>
-                    {% endmacro %}
-
-                    {% macro inputRange(name, graphParameter, defaultValue, min, max, description) %}
+                    {% macro inputRange(name, graphParameter, defaultValue, min, max) %}
                     <form oninput="result.value = range.value; graphProperties.{{ graphParameter }} = range.value; updateForces();">
                         <label title="{{ description }}">
                             {{ name }}
@@ -145,47 +131,28 @@
                     {% endmacro %}
 
                     <article>
-                        {{ formHead('charge', 'charge.enabled', graphConfig.charge.enabled, 'Attracts (+) or repels (-) nodes to/from each other.') }}
-
-                        {{ inputRange('strength', 'charge.strength', graphConfig.charge.strength, -200, 50, 'Negative strength repels nodes. Positive strength attracts nodes.') }}
-                        {{ inputRange('distanceMin', 'charge.distanceMin', graphConfig.charge.distanceMin, 0, 50, 'Minimum distance where force is applied.') }}
-                        {{ inputRange('distanceMax', 'charge.distanceMax', graphConfig.charge.distanceMax, 0, 2000, 'Maximum distance where force is applied.') }}
+                        <p>Attraction</p>
+                        {{ inputRange('force', 'attraction.force', graphConfig.attraction.force, -200, 50') }}
+                        {{ inputRange('min', 'attraction.min', graphConfig.attraction.min, 0, 50) }}
+                        {{ inputRange('max', 'attraction.max', graphConfig.attraction.max, 0, 2000 ) }}
+                        {{ inputRange('verticale', 'attraction.verticale', graphConfig.attraction.verticale, 0, 1) }}
+                        {{ inputRange('horizontale', 'attraction.horizontale', graphConfig.attraction.horizontale, 0, 1) }}
                     </article>
 
                     <article>
-                        {{ formHead('link', 'link.enabled', graphConfig.link.enabled, 'Sets link length.') }}
-
-                        {{ inputRange('distance', 'link.distance', graphConfig.link.distance, 0, 100, 'The force will push/pull nodes to make links this long.') }}
-                        {{ inputRange('iterations', 'link.iterations', graphConfig.link.iterations, 1, 10, 'The force will push/pull nodes to make links this long.') }}
+                        <p>Liens</p>
+                        {{ inputRange('distance', 'link.distance', graphConfig.link.distance, 0, 100) }}
                     </article>
 
                     <article>
-                        {{ formHead('collide', 'collide.enabled', graphConfig.collide.enabled, 'Prevents nodes from overlapping.') }}
-
-                        {{ inputRange('strength', 'collide.strength', graphConfig.collide.strength, 0, 2, '') }}
-                        {{ inputRange('radius', 'collide.radius', graphConfig.collide.radius, 1, 100, 'Size of nodes.') }}
-                        {{ inputRange('radius', 'collide.iterations', graphConfig.collide.iterations, 1, 10, 'Higher values increase rigidity of the nodes (WARNING: high values are computationally expensive).') }}
+                        <p>Nœuds</p>
+                        {{ inputRange('taille', 'node.size_coeff', node.size_coeff, 0, 2) }}
                     </article>
 
                     <article>
-                        {{ formHead('forceX', 'forceX.enabled', graphConfig.forceX.enabled, 'Acts like gravity. Pulls all points towards an X location.') }}
-
-                        {{ inputRange('strength', 'forceX.strength', graphConfig.forceX.strength, 0, 1, '') }}
-                        {{ inputRange('strength', 'forceX.x', graphConfig.forceX.x, 0, 1, 'The X location that the force will push the nodes to (NOTE: This demo multiplies by the svg width).') }}
-                    </article>
-
-                    <article>
-                        {{ formHead('forceY', 'forceY.enabled', graphConfig.forceY.enabled, 'Acts like gravity. Pulls all points towards a Y location.') }}
-
-                        {{ inputRange('strength', 'forceY.strength', graphConfig.forceY.strength, 0, 1, '') }}
-                        {{ inputRange('strength', 'forceY.y', graphConfig.forceY.y, 0, 1, 'The Y location that the force will push the nodes to (NOTE: This demo multiplies by the svg height).') }}
-                    </article>
-
-                    <article>
-                        {{ formHead('center', false, 'Shifts the view, so the graph is centered at this location.') }}
-
-                        {{ inputRange('x', 'center.x', graphConfig.center.x, 0, 1, '') }}
-                        {{ inputRange('y', 'center.y', graphConfig.center.y, 0, 1, '') }}
+                        <p>Position</p>
+                        {{ inputRange('x', 'position.x', graphConfig.position.x, 0, 1, '') }}
+                        {{ inputRange('y', 'position.y', graphConfig.position.y, 0, 1, '') }}
                     </article>
                 </details>
             </section>
@@ -274,8 +241,10 @@
             <article id="credits" class="fiche">
                 <main>
                     <h1>Crédits</h1>
-                    <p>Cosma est un logiciel de création et de visualisation de graphe documentaire.
-                        Il a été développé dans le cadre du projet ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>
+                    <p>Cosma est un logiciel de création et de visualisation de graphe documentaire. Il permet de générer
+                        et représenter des documents interreliés sous la forme d’un réseau interactif dans un navigateur web</p>
+
+                    <p>Il a été développé dans le cadre du projet ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>
                         et conçu par Arthur Perret, Guillaume Brioudes, Olivier Le Deuff et Clément Borel.</p>
 
                     <h2>Bibliothèques</h2>

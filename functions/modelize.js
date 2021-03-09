@@ -11,7 +11,7 @@ let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
     , id = 0
-    , typesOf = { records: Object.keys(config.types), links: Object.keys(config.hierarchy) }
+    , typesOf = { records: Object.keys(config.record_types), links: Object.keys(config.link_types) }
     , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
         .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
         .map(function(file) { // file analysis
@@ -35,25 +35,26 @@ let fileIds = []
             }
         })
         .filter(function(file) { // throw files with bad metas
-            if (file.metas.id === undefined || isNaN(file.metas.id) === true) {
-                let err = 'File ' + file.metas.title + ' throw out : no valid id';
-                logs.err.push(err);
+            if (!file.metas.id || isNaN(file.metas.id) === true) {
+                logs.err.push(`File ${file.metas.fileName} throw out : no valid id`);
                 return false; }
 
-            if (file.metas.title === null) {
-                let err = 'File ' + file.metas.fileName + ' throw out : no title';
-                logs.err.push(err);
+            if (!file.metas.title) {
+                logs.err.push(`File ${file.metas.fileName} throw out : no valid title`);
                 return false; }
+
+            if (fileIds.indexOf(file.metas.id) !== -1) {
+                logs.err.push(`File ${file.metas.fileName} uses an identifier common to another file`); }
 
             fileIds.push(file.metas.id);
 
-            return file;
+            return true;
         })
         .map(function(file) { // normalize metas
-            // null or wrong type change to "undefined"
+            // null or no registered types changed to "undefined"
             if (file.metas.type === null || typesOf.records.indexOf(file.metas.type) === -1) {
                 file.metas.type = 'undefined';
-                logs.warn.push('Type of ' + file.metas.title + ' changed to undefined');
+                logs.warn.push(`Type of file ${file.metas.fileName} changed to undefined : no registered type`);
             }
 
             file.metas.tags = file.metas.tags || [];
@@ -63,14 +64,12 @@ let fileIds = []
             // throw links from/to unknown file id
                 .filter(function(link) {
                     if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
-                        let warn = 'A link has been removed from file "' + file.metas.title + '" : no valid target';
-                        logs.warn.push(warn);
+                        logs.warn.push(`The link "${link.aim}" from file ${file.metas.fileName} has been ignored : no valid target`);
                         return false;
                     }
 
-                    if (typesOf.records.indexOf(link.type) === -1) {
-                        let warn = 'The type of a link from file "' + file.metas.title + '" is unknowed';
-                        logs.warn.push(warn);
+                    if (link.type !== 'undefined' && typesOf.links.indexOf(link.type) === -1) {
+                        logs.warn.push(`The link "${link.aim}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
                     }
 
                     return true;
@@ -101,7 +100,7 @@ files = files.map(function(file) {
         return {type: edge.type, aim: edge.source, aimName: findFileName(edge.source)};
     });
 
-    file.levels = ((config.radiusMax === 0) ? null : getConnectionLevels(file.metas.id, config.radiusMax));
+    file.focusLevels = ((config.focus_max === 0) ? null : getConnectionLevels(file.metas.id, config.focus_max));
 
     registerNodes(file);
 
@@ -176,23 +175,23 @@ function findFileName(fileId) {
  */
 
 function getLinkShape(linkType) {
-    const look = config.hierarchy[linkType];
+    const look = config.link_types[linkType];
 
     switch (look) {
         case 'simple':
-            return { look: look, value: null };
+            return { look: look, dashInterval: null };
 
         case 'double':
-            return { look: look, value: null };
+            return { look: look, dashInterval: null };
 
         case 'dash':
-            return { look: look, value: '4, 5' };
+            return { look: look, dashInterval: '4, 5' };
 
         case 'dotted':
-            return { look: look, value: '1, 3' };
+            return { look: look, dashInterval: '1, 3' };
     }
 
-    return { look: 'simple', value: null };
+    return { look: 'simple', dashInterval: null };
 }
 
 /**

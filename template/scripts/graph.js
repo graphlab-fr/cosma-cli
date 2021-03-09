@@ -49,37 +49,27 @@ function initializeForces() {
 function updateForces() {
     // get each force by name and update the properties
 
-    // graphProperties = graph config
-
     simulation.force("center")
-        .x(width * graphProperties.center.x)
-        .y(height * graphProperties.center.y);
+        .x(width * graphProperties.position.x)
+        .y(height * graphProperties.position.y);
 
     simulation.force("charge")
-        .strength(graphProperties.charge.strength * graphProperties.charge.enabled)
-        .distanceMin(graphProperties.charge.distanceMin)
-        .distanceMax(graphProperties.charge.distanceMax);
-
-    simulation.force("collide")
-        .strength(graphProperties.collide.strength * graphProperties.collide.enabled)
-        .radius(graphProperties.collide.radius)
-        .iterations(graphProperties.collide.iterations);
+        .strength(graphProperties.attraction.force)
+        .distanceMin(graphProperties.attraction.min)
+        .distanceMax(graphProperties.attraction.max);
 
     simulation.force("forceX")
-        .strength(graphProperties.forceX.strength * graphProperties.forceX.enabled)
-        .x(width * graphProperties.forceX.x);
+    .strength(graphProperties.attraction.horizontale)
 
     simulation.force("forceY")
-        .strength(graphProperties.forceY.strength * graphProperties.forceY.enabled)
-        .y(height * graphProperties.forceY.y);
+        .strength(graphProperties.attraction.verticale)
 
     simulation.force("link")
         .id((d) => d.id)
         .distance(graphProperties.link.distance)
-        .iterations(graphProperties.link.iterations)
-        .links(graphProperties.link.enabled ? graph.links : []);
+        .links(graph.links);
 
-    // restarts the simulation (important if simulation has already slowed down)
+    // restarts the simulation
     simulation.alpha(1).restart();
 }
 
@@ -125,7 +115,7 @@ function initializeDisplay() {
         .attr("data-target", (d) => d.target)
         .attr("stroke-dasharray", function(d) {
             if (d.shape.look === 'dash' || d.shape.look === 'dotted') {
-                return d.shape.value }
+                return d.shape.dashInterval }
             return false;
         })
         .attr("filter", function(d) {
@@ -195,7 +185,7 @@ function ticked() {
     if (graphProperties.arrows === true) {
         node.attr("r", (d) => 7);
     } else {
-        node.attr("r", (d) => d.size * graphProperties.node.sizeCoeff);
+        node.attr("r", (d) => d.size * graphProperties.node.size_coeff);
     }
 
     d3.select('#alpha_value').style('flex-basis', (simulation.alpha() * 100) + '%');
