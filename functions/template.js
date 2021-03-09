@@ -112,7 +112,7 @@ function cosmoscope(files, path) {
                 content: mdIt.render(file.content), // Mardown to HTML
                 links: file.links,
                 backlinks: file.backlinks,
-                radius: ((file.levels === null) ? [] : levelsToRadius(file.levels))
+                radius: ((file.focusLevels === null) ? [] : levelsToRadius(file.focusLevels))
             }
         }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
         views: config.views || [],

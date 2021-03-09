@@ -6,7 +6,7 @@ const fs = require('fs')
 const baseConfig = {
     files_origin: '',
     export_target: '',
-    radiusMax: 2,
+    focus_max: 2,
     record_types: { undefined: 'grey' },
     link_types: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {

@@ -100,7 +100,7 @@ files = files.map(function(file) {
         return {type: edge.type, aim: edge.source, aimName: findFileName(edge.source)};
     });
 
-    file.levels = ((config.radiusMax === 0) ? null : getConnectionLevels(file.metas.id, config.radiusMax));
+    file.focusLevels = ((config.focus_max === 0) ? null : getConnectionLevels(file.metas.id, config.focus_max));
 
     registerNodes(file);
 
