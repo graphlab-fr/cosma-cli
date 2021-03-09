@@ -6,9 +6,9 @@ const fs = require('fs')
 const baseConfig = {
     files_origin: '',
     export_target: '',
-    radiusMax: 3,
-    types: { undefined: 'grey' },
-    hierarchy: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
+    radiusMax: 2,
+    record_types: { undefined: 'grey' },
+    link_types: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
     graph_params: {
         center: { x: 0.5, y: 0.5 },
         charge: { enabled: true, strength: -50, distanceMin: 1, distanceMax: 500 },
@@ -114,14 +114,14 @@ exports.modifyExportPath = modifyExportPath;
  * @param {string} color - Type color : hexa, rgb or color name.
  */
 
-function addType(name, color) {
+function addRecordType(name, color) {
 
     if (!name) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type name.'); }
     if (!color) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a type color.'); }
 
-    config.types[name] = color;
+    config.record_types[name] = color;
 
     fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
         if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
@@ -130,7 +130,7 @@ function addType(name, color) {
     });
 }
 
-exports.addType = addType;
+exports.addRecordType = addRecordType;
 
 /**
  * Add a view key to config

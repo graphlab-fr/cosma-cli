@@ -28,7 +28,7 @@ switch (args[0]) {
     break;
 
     case 'atype':
-        require('./functions/verifconfig').addType(args[1], args[2]);
+        require('./functions/verifconfig').addRecordType(args[1], args[2]);
     break;
 
     case 'aview':

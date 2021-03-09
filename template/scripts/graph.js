@@ -125,7 +125,7 @@ function initializeDisplay() {
         .attr("data-target", (d) => d.target)
         .attr("stroke-dasharray", function(d) {
             if (d.shape.look === 'dash' || d.shape.look === 'dotted') {
-                return d.shape.value }
+                return d.shape.dashInterval }
             return false;
         })
         .attr("filter", function(d) {

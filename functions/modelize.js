@@ -11,7 +11,7 @@ let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
     , id = 0
-    , typesOf = { records: Object.keys(config.types), links: Object.keys(config.hierarchy) }
+    , typesOf = { records: Object.keys(config.record_types), links: Object.keys(config.link_types) }
     , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
         .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
         .map(function(file) { // file analysis
@@ -68,8 +68,8 @@ let fileIds = []
                         return false;
                     }
 
-                    if (typesOf.records.indexOf(link.type) === -1) {
-                        let warn = 'The type of a link from file "' + file.metas.title + '" is unknowed';
+                    if (link.type !== 'undefined' && typesOf.links.indexOf(link.type) === -1) {
+                        let warn = 'The type ' + link.type + ' of a link from file "' + file.metas.title + '" is unknowed';
                         logs.warn.push(warn);
                     }
 
@@ -176,23 +176,23 @@ function findFileName(fileId) {
  */
 
 function getLinkShape(linkType) {
-    const look = config.hierarchy[linkType];
+    const look = config.link_types[linkType];
 
     switch (look) {
         case 'simple':
-            return { look: look, value: null };
+            return { look: look, dashInterval: null };
 
         case 'double':
-            return { look: look, value: null };
+            return { look: look, dashInterval: null };
 
         case 'dash':
-            return { look: look, value: '4, 5' };
+            return { look: look, dashInterval: '4, 5' };
 
         case 'dotted':
-            return { look: look, value: '1, 3' };
+            return { look: look, dashInterval: '1, 3' };
     }
 
-    return { look: 'simple', value: null };
+    return { look: 'simple', dashInterval: null };
 }
 
 /**
