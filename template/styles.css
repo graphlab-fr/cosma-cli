@@ -58,7 +58,7 @@ li.filter[data-active="true"]::after {
 .search-bar { width: 100%; }
 #search-result-list { margin-bottom: 20px; }
 
-.index {
+aside {
 	position: relative;
 	z-index: 100;
     overflow: auto;

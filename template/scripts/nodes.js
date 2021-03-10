@@ -90,6 +90,7 @@ function hideNodes(nodeIds) {
     nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
 
     view.hidenNodes = view.hidenNodes.concat(nodeIds);
+    hideFromIndex(view.hidenNodes);
 
     for (const elt of elts) {
         elt.style.display = 'none';
@@ -102,8 +103,10 @@ function hideNodes(nodeIds) {
  */
 
 function displayNodes(nodeIds) {
+    // remove id to display from the hidden nodes list
     view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
     
+    displayFromIndex(nodeIds);
     const elts = getNodeNetwork(nodeIds);
 
     for (const elt of elts) {
