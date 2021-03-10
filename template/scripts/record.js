@@ -46,19 +46,3 @@ function closeRecord() {
 
     unlightNodes();
 }
-
-/**
- * Display/hide lists from a 'data-sort' container
- * and animate the arrow
- */
-
-(function () {
-    const sorters = document.querySelectorAll('details[data-sort]');
-    for (const sorter of sorters) {
-        const sorts = sorter.querySelectorAll('.sort');
-        sorter.querySelector('.toggle').addEventListener('click', (e) => {
-            e.target.classList.toggle('active');
-            for (const sort of sorts) {  sort.classList.toggle('active'); }
-        });
-    }
-})();
