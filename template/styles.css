@@ -31,8 +31,26 @@ a { color: inherit; }
 
 /* FILTRES */
 
-li.filter[data-active="true"] {
-	text-decoration: line-through;
+li.filter {
+	position: relative;
+}
+
+li.filter::after {
+	position: absolute;
+	content: '';
+	color: black;
+	width: 15px;
+	height: 15px;
+	background-color: lightgrey;
+	border-radius: 2px;
+	right: 10px;
+	font-size: 1.2rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+li.filter[data-active="true"]::after {
+	content: '✓';
 }
 
 /* INDEX */
@@ -236,6 +254,10 @@ details>summary {
 	font-family: sans-serif;
 	margin: 1rem 0;
 	font-weight: bold;
+}
+
+summary+button {
+	margin: 1rem 0;
 }
 
 details ul {
