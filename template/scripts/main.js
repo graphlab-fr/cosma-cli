@@ -1,7 +1,7 @@
 const view = {
         // actualised from nodes.js
         highlightedNodes: [],
-        hidenNodes: [],
+        isolateMode: false,
         // actualised from filter.js
         activeFilters: [],
         isolateId: undefined, 

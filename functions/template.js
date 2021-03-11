@@ -23,20 +23,12 @@ mdIt.use(mdItAttr, {
 
 function jsonData(nodes, links) {
 
-    let allNodeIds = [];
-
     const index = nodes.map(function(node) {
-        allNodeIds.push(node.id);
-        return {id: node.id, title: node.label};
+        return {id: node.id, title: node.label, hidden: false, isolated: false};
     });
 
     const graphScript =
-`const allNodeIds = [${allNodeIds.join(',')}];
-
-const fuse = new Fuse(${JSON.stringify(index)}, {
-    includeScore: false,
-    keys: ['title']
-});
+`let index = ${JSON.stringify(index)};
 
 const graphProperties = ${JSON.stringify(config.graph_params)}
 

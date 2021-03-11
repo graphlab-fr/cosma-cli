@@ -1,5 +1,5 @@
 let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
-    , resetBtn = document.getElementById('reset-nodes'); // anti isolate() function btn
+    , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
 
 filters = filters.map(function(btn) {
     // extract nodes id affected by the filter from the linked button
@@ -8,7 +8,7 @@ filters = filters.map(function(btn) {
 });
 
 /**
- * Make filters functional
+ * Select filters btns and activate them
  */
 
 (function() {
@@ -21,8 +21,6 @@ filters = filters.map(function(btn) {
                 filterOff(filter); }
             else {
                 filterOn(filter); }
-
-            isolateByElement(view.isolateId);
         });
     }
 })();
@@ -77,23 +75,37 @@ function getFiltedNodes() {
 }
 
 /**
- * Display some nodes, hide others
+ * Display some nodes, hide all others
+ * turn on the 'isolateMode'
  * @param {array} - Ids from nodes to keep displayed
  */
 
-function isolate(toDisplayIds) {
-    resetBtn.style.display = 'block';
+function isolate(nodeIds) {
+    view.isolateMode = false;
+    resetIsolateBtn.style.display = 'block';
 
-    toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
-    // get nodes to hide
-    let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
+    let idsToHide = [];
 
-    hideNodes(toHideIds);
-    displayNodes(toDisplayIds);
+    index = index.map(function(item) {
+        if (nodeIds.indexOf(item.id) !== -1) {
+            // if item is one of the nodeIds
+            item.isolated = true;
+        } else {
+            item.isolated = false;
+            idsToHide.push(item.id);
+        }
+        return item;
+    });
+    // display nodeIds if their are not filtered
+    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+
+    hideNodes(idsToHide);
+    view.isolateMode = true;
+    displayNodes(idsToDisplay);
 }
 
 /**
- * Launch isolate() from the onclick value of an identified element
+ * Launch isolate() from the onclick attribute of an identified element
  * @param {string} - Id of the element for extract nodes ids
  */
 
@@ -111,13 +123,25 @@ function isolateByElement(eltId) {
 }
 
 /**
- * Display all nodes, except filtered ones
+ * Display nodes hidden by isolate(),
+ * if their are not filtered
  */
 
 function resetNodes() {
     view.isolateId = undefined;
-    resetBtn.style.display = null;
 
-    const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
-    displayNodes(toDisplayIds);
+    const idsToDisplay = index.filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
+        .map(item => item.id);
+
+    index = index.map(function(item) {
+        if (item.isolated === true) {
+            item.isolated === false; }
+
+        return item;
+    });
+
+    view.isolateMode = false;
+    displayNodes(idsToDisplay);
+
+    resetIsolateBtn.style.display = null;
 }
