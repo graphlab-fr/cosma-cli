@@ -122,7 +122,8 @@ article {
 }
 .zoom-controls button { margin-top: 0.8rem; }
 .zoom-controls div { display: flex; justify-content: space-between; }
-.zoom-controls #reset-nodes { display: none; }
+.zoom-controls #reset-isolate { display: none; }
+.zoom-controls #reset-highlight { display: none; }
 
 /* GRAPHE */
 

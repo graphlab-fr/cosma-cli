@@ -1,5 +1,5 @@
 let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
-    , resetBtn = document.getElementById('reset-nodes'); // anti isolate() function btn
+    , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
 
 filters = filters.map(function(btn) {
     // extract nodes id affected by the filter from the linked button
@@ -82,7 +82,7 @@ function getFiltedNodes() {
 
 function isolate(nodeIds) {
     view.isolateMode = false;
-    resetBtn.style.display = 'block'; // button "Réafficher"
+    resetIsolateBtn.style.display = 'block';
 
     let idsToHide = [];
 
@@ -143,5 +143,5 @@ function resetNodes() {
     view.isolateMode = false;
     displayNodes(idsToDisplay);
 
-    resetBtn.style.display = null; // button "Réafficher"
+    resetIsolateBtn.style.display = null;
 }
