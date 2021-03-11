@@ -42,6 +42,13 @@ function getNodeNetwork(nodeIds) {
 
     let nodes = [], links = [];
 
+    const diplayedNodes = index.filter(function(item) {
+        if (item.hidden === true) {
+            return false; }
+
+        return item;
+    }).map(item => item.id);
+
     for (const nodeId of nodeIds) {
         // get nodes DOM element
         var node = document.querySelector('[data-node="' + nodeId + '"]');
@@ -53,7 +60,7 @@ function getNodeNetwork(nodeIds) {
         let tempSources = document.querySelectorAll('[data-source="' + nodeId + '"]');
         tempSources = Array.from(tempSources);
         tempSources = tempSources.filter(function(source) {
-            if (view.hidenNodes.indexOf(Number(source.dataset.target)) === -1) {
+            if (diplayedNodes.indexOf(Number(source.dataset.target)) !== -1) {
                 return true;
             }
         })
@@ -62,7 +69,7 @@ function getNodeNetwork(nodeIds) {
         let tempTargets = document.querySelectorAll('[data-target="' + nodeId + '"]');
         tempTargets = Array.from(tempTargets);
         tempTargets = tempTargets.filter(function(source) {
-            if (view.hidenNodes.indexOf(Number(source.dataset.source)) === -1) {
+            if (diplayedNodes.indexOf(Number(source.dataset.source)) !== -1) {
                 return true;
             }
         })
@@ -84,17 +91,30 @@ function getNodeNetwork(nodeIds) {
  */
 
 function hideNodes(nodeIds) {
-    const elts = getNodeNetwork(nodeIds);
+    let nodesToHide = index.filter(function(item) {
+        if (!view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === false)) {
+            return true;
+        }
+        if (view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === false) && (item.isolated === true)) {
+            return true;
+        }
+        return false;
+    }).map(item => item.id);
 
-    // compare already hidden nodes
-    nodeIds = nodeIds.filter(id => view.hidenNodes.indexOf(Number(id)) === -1);
-
-    view.hidenNodes = view.hidenNodes.concat(nodeIds);
-    hideFromIndex(view.hidenNodes);
+    hideFromIndex(nodesToHide);
+    const elts = getNodeNetwork(nodesToHide);
 
     for (const elt of elts) {
         elt.style.display = 'none';
     }
+
+    index = index.map(function(item) {
+        if (nodesToHide.indexOf(item.id) !== -1) {
+            item.hidden = true;
+        }
+        return item;
+    });
+
 }
 
 /**
@@ -103,11 +123,25 @@ function hideNodes(nodeIds) {
  */
 
 function displayNodes(nodeIds) {
+    // si mode isolé, n'agir que sur les noeuds isolés
+    let nodesToDisplay = [];
+
+    index = index.map(function(item) {
+        if (!view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === true)) {
+            item.hidden = false;
+            nodesToDisplay.push(item.id);
+        }
+        if (view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === true) && (item.isolated === true)) {
+            item.hidden = false;
+            nodesToDisplay.push(item.id);
+        }
+        return item;
+    });
     // remove id to display from the hidden nodes list
     view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
     
-    displayFromIndex(nodeIds);
-    const elts = getNodeNetwork(nodeIds);
+    displayFromIndex(nodesToDisplay);
+    const elts = getNodeNetwork(nodesToDisplay);
 
     for (const elt of elts) {
         elt.style.display = null;

@@ -21,8 +21,6 @@ filters = filters.map(function(btn) {
                 filterOff(filter); }
             else {
                 filterOn(filter); }
-
-            isolateByElement(view.isolateId);
         });
     }
 })();
@@ -81,14 +79,26 @@ function getFiltedNodes() {
  * @param {array} - Ids from nodes to keep displayed
  */
 
-function isolate(toDisplayIds) {
+function isolate(nodeIds) {
+    view.isolateMode = false;
     resetBtn.style.display = 'block';
 
-    toDisplayIds = toDisplayIds.filter(id => getFiltedNodes().indexOf(id) === -1);
-    // get nodes to hide
-    let toHideIds = allNodeIds.filter(id => toDisplayIds.indexOf(id) === -1);
+    let toHideIds = [];
+
+    index = index.map(function(item) {
+        if (nodeIds.indexOf(item.id) !== -1) {
+            item.isolated = true;
+        } else {
+            item.isolated = false;
+            toHideIds.push(item.id);
+        }
+        return item;
+    });
+
+    let toDisplayIds = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
 
     hideNodes(toHideIds);
+    view.isolateMode = true;
     displayNodes(toDisplayIds);
 }
 
@@ -116,8 +126,18 @@ function isolateByElement(eltId) {
 
 function resetNodes() {
     view.isolateId = undefined;
-    resetBtn.style.display = null;
+    const toDisplayIds = index.filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
+        .map(item => item.id);
 
-    const toDisplayIds = allNodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+    view.isolateMode = false;
+    index = index.map(function(item) {
+        if (item.isolated === true) {
+            item.isolated === false; }
+
+        return item;
+    });
+
     displayNodes(toDisplayIds);
+
+    resetBtn.style.display = null;
 }
