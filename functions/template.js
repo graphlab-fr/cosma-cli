@@ -87,7 +87,7 @@ exports.colors = colors;
 function cosmoscope(files, path) {
 
     nunjucks.configure('template', { autoescape: true });
-    const htmlRender = nunjucks.render('template.njk', {
+    let htmlRender = nunjucks.render('template.njk', {
 
         index: files.map(function (file) { // normalize files as records for Pug templating
             file.content = linksTools.convertLinks(file.content, file);
@@ -117,6 +117,11 @@ function cosmoscope(files, path) {
         }),
         metas: config.metas
     });
+
+    if (config.minify && config.minify === true) {
+        const minifyHtml = require("@minify-html/js");
+        htmlRender = minifyHtml.minify(htmlRender, minifyHtml.createConfiguration({ minifyJs: true, minifyCss: true }))
+    }
 
     fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
         if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
