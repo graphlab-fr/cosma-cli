@@ -33,13 +33,13 @@ function unlightNodes() {
 }
 
 /**
- * Get the valid link network for some nodes
+ * Get nodes
+ * Get links of nodes if their source and their target are not hidden
  * @param {array} nodeIds - List of nodes ids
  * @returns {array} - DOM elts : nodes and their links
  */
 
 function getNodeNetwork(nodeIds) {
-
     let nodes = [], links = [];
 
     const diplayedNodes = index.filter(function(item) {
@@ -57,24 +57,24 @@ function getNodeNetwork(nodeIds) {
         nodes.push(node);
 
         // get links DOM element from nodes, if their target is not hidden
-        let tempSources = document.querySelectorAll('[data-source="' + nodeId + '"]');
-        tempSources = Array.from(tempSources);
-        tempSources = tempSources.filter(function(source) {
+        let sources = document.querySelectorAll('[data-source="' + nodeId + '"]');
+        sources = Array.from(sources);
+        sources = sources.filter(function(source) {
             if (diplayedNodes.indexOf(Number(source.dataset.target)) !== -1) {
                 return true;
             }
         })
 
         // get links DOM element to nodes, if their source is not hidden
-        let tempTargets = document.querySelectorAll('[data-target="' + nodeId + '"]');
-        tempTargets = Array.from(tempTargets);
-        tempTargets = tempTargets.filter(function(source) {
+        let targets = document.querySelectorAll('[data-target="' + nodeId + '"]');
+        targets = Array.from(targets);
+        targets = targets.filter(function(source) {
             if (diplayedNodes.indexOf(Number(source.dataset.source)) !== -1) {
                 return true;
             }
         })
 
-        links = links.concat(tempSources, tempTargets);
+        links = links.concat(sources, targets);
     }
 
     // delete duplicated links DOM element
@@ -92,11 +92,13 @@ function getNodeNetwork(nodeIds) {
 
 function hideNodes(nodeIds) {
     let nodesToHide = index.filter(function(item) {
-        if (!view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === false)) {
-            return true;
-        }
-        if (view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === false) && (item.isolated === true)) {
-            return true;
+        if (nodeIds.indexOf(item.id) !== -1 && item.hidden === false) {
+            // return nodes are not yet hidden…
+            if (view.isolateMode) {
+                if (item.isolated === true) { return true; } // … and part of the isolated ones
+            } else {
+                return true;
+            }
         }
         return false;
     }).map(item => item.id);
@@ -110,11 +112,10 @@ function hideNodes(nodeIds) {
 
     index = index.map(function(item) {
         if (nodesToHide.indexOf(item.id) !== -1) {
-            item.hidden = true;
+            item.hidden = true; // for each nodesToHide
         }
         return item;
     });
-
 }
 
 /**
@@ -123,23 +124,24 @@ function hideNodes(nodeIds) {
  */
 
 function displayNodes(nodeIds) {
-    // si mode isolé, n'agir que sur les noeuds isolés
     let nodesToDisplay = [];
 
     index = index.map(function(item) {
-        if (!view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === true)) {
-            item.hidden = false;
-            nodesToDisplay.push(item.id);
-        }
-        if (view.isolateMode && (nodeIds.indexOf(item.id) !== -1) && (item.hidden === true) && (item.isolated === true)) {
-            item.hidden = false;
-            nodesToDisplay.push(item.id);
+        if (nodeIds.indexOf(item.id) !== -1 && item.hidden === true) {
+            // push on nodesToDisplay nodes are not yet displayed…
+            if (view.isolateMode) {
+                if (item.isolated === true) { // … and part of the isolated ones
+                    item.hidden = false;
+                    nodesToDisplay.push(item.id);
+                }
+            } else {
+                item.hidden = false;
+                nodesToDisplay.push(item.id);
+            }
         }
         return item;
     });
-    // remove id to display from the hidden nodes list
-    view.hidenNodes = view.hidenNodes.filter(id => nodeIds.indexOf(id) === -1);
-    
+
     displayFromIndex(nodesToDisplay);
     const elts = getNodeNetwork(nodesToDisplay);
 

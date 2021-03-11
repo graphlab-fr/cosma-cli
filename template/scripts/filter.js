@@ -8,7 +8,7 @@ filters = filters.map(function(btn) {
 });
 
 /**
- * Make filters functional
+ * Select filters btns and activate them
  */
 
 (function() {
@@ -75,35 +75,37 @@ function getFiltedNodes() {
 }
 
 /**
- * Display some nodes, hide others
+ * Display some nodes, hide all others
+ * turn on the 'isolateMode'
  * @param {array} - Ids from nodes to keep displayed
  */
 
 function isolate(nodeIds) {
     view.isolateMode = false;
-    resetBtn.style.display = 'block';
+    resetBtn.style.display = 'block'; // button "Réafficher"
 
-    let toHideIds = [];
+    let idsToHide = [];
 
     index = index.map(function(item) {
         if (nodeIds.indexOf(item.id) !== -1) {
+            // if item is one of the nodeIds
             item.isolated = true;
         } else {
             item.isolated = false;
-            toHideIds.push(item.id);
+            idsToHide.push(item.id);
         }
         return item;
     });
+    // display nodeIds if their are not filtered
+    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
 
-    let toDisplayIds = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
-
-    hideNodes(toHideIds);
+    hideNodes(idsToHide);
     view.isolateMode = true;
-    displayNodes(toDisplayIds);
+    displayNodes(idsToDisplay);
 }
 
 /**
- * Launch isolate() from the onclick value of an identified element
+ * Launch isolate() from the onclick attribute of an identified element
  * @param {string} - Id of the element for extract nodes ids
  */
 
@@ -121,15 +123,16 @@ function isolateByElement(eltId) {
 }
 
 /**
- * Display all nodes, except filtered ones
+ * Display nodes hidden by isolate(),
+ * if their are not filtered
  */
 
 function resetNodes() {
     view.isolateId = undefined;
-    const toDisplayIds = index.filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
+
+    const idsToDisplay = index.filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
         .map(item => item.id);
 
-    view.isolateMode = false;
     index = index.map(function(item) {
         if (item.isolated === true) {
             item.isolated === false; }
@@ -137,7 +140,8 @@ function resetNodes() {
         return item;
     });
 
-    displayNodes(toDisplayIds);
+    view.isolateMode = false;
+    displayNodes(idsToDisplay);
 
-    resetBtn.style.display = null;
+    resetBtn.style.display = null; // button "Réafficher"
 }

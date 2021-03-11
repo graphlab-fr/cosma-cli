@@ -3,43 +3,44 @@
  */
 
 (function() {
-    let searchInput = document.querySelector('#search')
-        , resultContainer = document.querySelector('#search-result-list')
-        , maxResultNb = 5
-        , fuse;
 
-    searchInput.value = ''; // reset at page loading
+let searchInput = document.querySelector('#search')
+    , resultContainer = document.querySelector('#search-result-list')
+    , maxResultNb = 5
+    , fuse;
 
-    searchInput.addEventListener('focus', () => {
-        fuse = new Fuse(index.filter(item => item.hidden === false), {
-            includeScore: false,
-            keys: ['title']
-        });
+searchInput.value = ''; // reset at page loading
 
-        searchInput.addEventListener('input', () => {
-            // reset for each input valut modification
-            resultContainer.innerHTML = '';
-    
-            if (searchInput.value === '') { return; }
-            
-            const resultList = fuse.search(searchInput.value);
-    
-            for (let i = 0; i < maxResultNb; i++) {
-                let result = resultList[i];
-    
-                if (result === undefined) { break; }
-    
-                var resultElement = document.createElement('li');
-                resultElement.classList.add('search-result', 'id-link');
-                resultElement.textContent = result.item.title;
-            
-                resultElement.addEventListener('click', () => {
-                    openRecord(result.item.id);
-                });
-    
-                resultContainer.appendChild(resultElement);
-            }
-        });
-
+searchInput.addEventListener('focus', () => {
+    // initialize search engine with no hidden nodes
+    fuse = new Fuse(index.filter(item => item.hidden === false), {
+        includeScore: false,
+        keys: ['title']
     });
+
+    searchInput.addEventListener('input', () => {
+        // reset search results for each input value modification
+        resultContainer.innerHTML = '';
+
+        if (searchInput.value === '') { return; }
+        
+        const resultList = fuse.search(searchInput.value);
+
+        for (let i = 0; i < maxResultNb; i++) {
+            let result = resultList[i];
+
+            if (result === undefined) { break; }
+            // include search result element on DOM
+            var resultElement = document.createElement('li');
+            resultElement.classList.add('search-result', 'id-link');
+            resultElement.textContent = result.item.title;
+            resultContainer.appendChild(resultElement);
+        
+            resultElement.addEventListener('click', () => {
+                openRecord(result.item.id);
+            });
+        }
+    });
+});
+
 })();

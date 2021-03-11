@@ -24,7 +24,7 @@ mdIt.use(mdItAttr, {
 function jsonData(nodes, links) {
 
     const index = nodes.map(function(node) {
-        return {id: node.id, title: node.label, hidden: false, isolated: false, highlighted: false};
+        return {id: node.id, title: node.label, hidden: false, isolated: false};
     });
 
     const graphScript =
