@@ -33,9 +33,16 @@ a { color: inherit; }
 
 li.filter {
 	position: relative;
+	display: flex;
+	align-items: center;
 }
 
-li.filter::after {
+li.filter label {
+	margin-left: 0.8rem;
+	width: 100%;
+}
+
+/* li.filter::after {
 	position: absolute;
 	content: '';
 	color: black;
@@ -51,7 +58,7 @@ li.filter::after {
 
 li.filter[data-active="true"]::after {
 	content: '✓';
-}
+} */
 
 /* INDEX */
 

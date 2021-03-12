@@ -46,9 +46,10 @@
 
                     <ul>
                         {% for type in types %}
-                        <li class="filter t_{{ type.name }}"
-                        data-filter="{{ type.nodes | join(",") }}"
-                        data-name="{{ type.name }}">{{ type.name | capitalize }} ({{ type.nodes | length }})</li>
+                        <li class="filter t_{{ type.name }}">
+                        <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}" data-active="false" type="checkbox" id="f-{{ type.name }}">
+                        <label for="f-{{ type.name }}">{{ type.name | capitalize }} ({{ type.nodes | length }})</label>
+                    </li>
                         {% endfor %}
                     </ul>
                 </details>
