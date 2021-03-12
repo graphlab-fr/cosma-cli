@@ -8,6 +8,7 @@ const resetHighlightBtn = document.getElementById('reset-highlight'); // anti hi
 function highlightNodes(nodeIds) {
 
     const elts = getNodeNetwork(nodeIds);
+    if (elts.length === 0) { return; }
 
     for (const elt of elts) {
         elt.style.stroke = 'var(--highlight)';
@@ -26,6 +27,7 @@ function unlightNodes() {
     if (view.highlightedNodes.length === 0) { return; }
 
     const elts = getNodeNetwork(view.highlightedNodes);
+    if (elts.length === 0) { return; }
 
     for (const elt of elts) {
         elt.style.stroke = null;
@@ -109,6 +111,7 @@ function hideNodes(nodeIds) {
 
     hideFromIndex(nodesToHide);
     const elts = getNodeNetwork(nodesToHide);
+    if (elts.length === 0) { return; }
 
     for (const elt of elts) {
         elt.style.display = 'none';
@@ -148,6 +151,7 @@ function displayNodes(nodeIds) {
 
     displayFromIndex(nodesToDisplay);
     const elts = getNodeNetwork(nodesToDisplay);
+    if (elts.length === 0) { return; }
 
     for (const elt of elts) {
         elt.style.display = null;

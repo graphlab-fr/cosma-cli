@@ -35,30 +35,13 @@ li.filter {
 	position: relative;
 	display: flex;
 	align-items: center;
+	user-select: none;
 }
 
 li.filter label {
 	margin-left: 0.8rem;
 	width: 100%;
 }
-
-/* li.filter::after {
-	position: absolute;
-	content: '';
-	color: black;
-	width: 15px;
-	height: 15px;
-	background-color: lightgrey;
-	border-radius: 2px;
-	right: 10px;
-	font-size: 1.2rem;
-	font-weight: bold;
-	text-align: center;
-}
-
-li.filter[data-active="true"]::after {
-	content: '✓';
-} */
 
 /* INDEX */
 
@@ -72,16 +55,11 @@ aside {
     height: 100%;
     width: 300px;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 20px 30px 20px;
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.self span {
-	display: block;
-	font-family: monospace;
-	text-align: center;
-}
 .alpha_bar {
 	height: .5em;
 	border: 1px #777 solid;
@@ -100,6 +78,10 @@ aside {
 }
 
 .record-sorting:not(.record-sorting.active) { display: none; }
+
+aside main {
+	
+}
 
 /* CONTRÔLES */
 
@@ -131,6 +113,18 @@ article {
 .zoom-controls div { display: flex; justify-content: space-between; }
 .zoom-controls #reset-isolate { display: none; }
 .zoom-controls #reset-highlight { display: none; }
+
+aside footer {
+	width: 100%;
+	margin-top: 1rem;
+	background-color: white;
+}
+
+.a-propos {
+	display: block;
+	font-family: monospace;
+	text-align: center;
+}
 
 /* GRAPHE */
 
