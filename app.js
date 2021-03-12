@@ -36,7 +36,7 @@ switch (args[0]) {
     break;
 
     case undefined:
-        console.log('Please, choose an action');
+        require('./functions/modelize');
     break;
 
     default:

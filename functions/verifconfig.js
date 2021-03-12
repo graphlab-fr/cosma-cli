@@ -25,10 +25,9 @@ if (!fs.existsSync('config.yml')){
 
     const configYml = yamlEditor.safeDump(baseConfig); // JSON -> YAML
 
-    console.log('\x1b[32m', 'Create config.yml file', '\x1b[0m');
-
     fs.writeFileSync('config.yml', configYml, (err) => {
         if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write config.yml file : ' + err) }
+        console.log('\x1b[32m', 'Create config.yml file', '\x1b[0m');
     });
 
     process.exit();
@@ -54,6 +53,8 @@ if (errors.length !== 0) {
     console.error('\x1b[37m', 'About props : ' + errors.join(', '), '\x1b[0m');
     process.exit();
 }
+
+// Valid config paths
 
 if (!fs.existsSync(config.files_origin)) {
     console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid folder path to your Markdown files database in config file.');
