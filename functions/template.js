@@ -30,7 +30,7 @@ function jsonData(nodes, links) {
     const graphScript =
 `let index = ${JSON.stringify(index)};
 
-const graphProperties = ${JSON.stringify(config.graph_params)}
+const graphProperties = ${JSON.stringify(config.graph_config)}
 
 // load the data
 let graph = ${JSON.stringify({nodes: nodes, links: links})};
@@ -59,8 +59,8 @@ function colors() {
     let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.name}); fill:var(--${type.name}); stroke:var(--${type.name});}`)
 
     // add specifics parametered colors from config
-    types.push({name: 'highlight', color: config.graph_params.link.highlightColor});
-    types.push({name: 'link', color: config.graph_params.link.color});
+    types.push({name: 'highlight', color: config.graph_config.highlight_color});
+    types.push({name: 'link', color: config.graph_config.link.color});
 
     let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
 
@@ -107,7 +107,7 @@ function cosmoscope(files, path) {
             }
         }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
         views: config.views || [],
-        graphConfig: config.graph_params,
+        graphConfig: config.graph_config,
         // objects to objects array
         types: Object.keys(types).map(function(type) {
             return { name: type, nodes: types[type] };

@@ -10,11 +10,12 @@ const baseConfig = {
     focus_max: 2,
     record_types: { undefined: 'grey' },
     link_types: { générique: 'dash', spécifique: 'dash', fort: 'double', faible: 'dotted' },
-    graph_params: {
+    graph_config: {
         background_color: 'white',
+        highlight_color: 'red',
         position: { x: 0.5, y: 0.5 },
         attraction: { force: -50, min: 1, max: 500, verticale: 0.1, horizontale: 0.1 },
-        link: { distance: 1, color: "grey", highlightColor: "red" },
+        link: { distance: 1, color: 'grey' },
         node: { size_coeff: 1 },
         arrows: false
       }
