@@ -25,9 +25,10 @@ if (!fs.existsSync('config.yml')){
 
     const configYml = yamlEditor.safeDump(baseConfig); // JSON -> YAML
 
+    console.log('\x1b[32m', 'Create config.yml file', '\x1b[0m');
+
     fs.writeFileSync('config.yml', configYml, (err) => {
         if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write config.yml file : ' + err) }
-        console.log('\x1b[32m', 'Create config.yml file', '\x1b[0m');
     });
 
     process.exit();

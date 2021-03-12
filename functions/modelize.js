@@ -127,8 +127,6 @@ files = files.map(function(file) {
             };
         });
 
-        console.log(file.backlinks);
-
     file.focusLevels = ((config.focus_max === 0) ? null : getConnectionLevels(file.metas.id, config.focus_max));
 
     registerNodes(file);
