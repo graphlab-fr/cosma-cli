@@ -59,20 +59,23 @@ let fileIds = []
 
             file.metas.tags = file.metas.tags || [];
 
-            // analysis file content by regex : get links
+            // analysis file content by regex : get links target id
             file.links = linksTools.catchLinksFromContent(file.content)
             // throw links from/to unknown file id
                 .filter(function(link) {
-                    if (fileIds.indexOf(Number(link.aim)) === -1 || isNaN(link.aim) !== false) {
-                        logs.warn.push(`The link "${link.aim}" from file ${file.metas.fileName} has been ignored : no valid target`);
+                    if (fileIds.indexOf(link.target.id) === -1 || isNaN(link.target.id) !== false) {
+                        logs.warn.push(`The link "${link.target.id}" from file ${file.metas.fileName} has been ignored : no valid target`);
                         return false;
                     }
 
                     if (link.type !== 'undefined' && typesOf.links.indexOf(link.type) === -1) {
-                        logs.warn.push(`The link "${link.aim}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
+                        logs.warn.push(`The link "${link.target.id}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
                     }
 
                     return true;
+                }).map(function(link) {
+                    link.source = { id: file.metas.id };
+                    return link
                 });
 
             registerLinks(file);
@@ -88,17 +91,43 @@ delete logs;
 
 files = files.map(function(file) {
 
-    file.links.map(function(link) {
-        return link.aimName = findFileName(link.aim)
+    file.links = file.links.map(function(link) {
+        const targetMetas = findFileMeta(link.target.id);
+        return {
+            type: link.type,
+            target: {
+                id: link.target.id,
+                title: targetMetas.title,
+                type: targetMetas.type
+            },
+            source: {
+                id: link.source.id,
+                title: file.metas.title,
+                type: file.metas.type
+            }
+        };
     });
 
-    file.backlinks = entities.links.filter(function(edge) {
-        if (edge.target === file.metas.id) {
-            return true;
-        }
-    }).map(function(edge) {
-        return {type: edge.type, aim: edge.source, aimName: findFileName(edge.source)};
-    });
+    file.backlinks = entities.links.filter(link => link.target === file.metas.id)
+        .map(function(link) {
+            const sourceMetas = findFileMeta(link.target);
+            const targetMetas = findFileMeta(link.source);
+            return {
+                type: link.type,
+                target: {
+                    id: link.source,
+                    title: targetMetas.title,
+                    type: targetMetas.type
+                },
+                source: {
+                    id: link.target,
+                    title: file.metas.title,
+                    type: file.metas.type
+                }
+            };
+        });
+
+        console.log(file.backlinks);
 
     file.focusLevels = ((config.focus_max === 0) ? null : getConnectionLevels(file.metas.id, config.focus_max));
 
@@ -131,8 +160,8 @@ function registerLinks(file) {
             id: Number(id++),
             type: link.type,
             shape: getLinkShape(link.type),
-            source: Number(file.metas.id),
-            target: Number(link.aim)
+            source: Number(link.source.id),
+            target: Number(link.target.id)
         });
     }
 }
@@ -158,14 +187,14 @@ function registerNodes(file) {
 }
 
 /**
- * Find file title by its id
+ * Find file metas by its id
  * @param {int} fileId - File after links & backlinks parsing
  */
 
-function findFileName(fileId) {
+function findFileMeta(fileId) {
     return title = files.find(function(file) {
         return file.metas.id === fileId;
-    }).metas.title;
+    }).metas;
 }
 
 /**

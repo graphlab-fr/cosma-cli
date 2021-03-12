@@ -214,8 +214,10 @@
 
                             <ul>
                                 {% for link in record.links %}
-                                <li title="{{ link.aimName }}"
-                                onclick="openRecord({{ link.aim }})">{{ link.aimName }}</li>
+                                <li onclick="openRecord({{ link.target.id }})">
+                                    <span class="t_{{ link.target.type }}">⦿</span>
+                                    <span>{{ link.target.title }}</span>
+                                </li>
                                 {% endfor %}
                             </ul>
                         </details>
@@ -229,8 +231,10 @@
 
                             <ul>
                                 {% for backlink in record.backlinks %}
-                                <li title="{{ link.aimName }}"
-                                onclick="openRecord({{ backlink.aim }})">{{ backlink.aimName }}</li>
+                                <li onclick="openRecord({{ backlink.target.id }})">
+                                    <span class="t_{{ backlink.target.type }}">⦿</span>
+                                    <span>{{ backlink.target.title }}</span>
+                                </li>
                                 {% endfor %}
                             </ul>
                         </details>

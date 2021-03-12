@@ -45,9 +45,9 @@ exports.getRank = getRank;
 function normalizeLink(link) {
     link = link.split(':', 2);
     if (link.length === 2) {
-        return {type: link[0], aim: Number(link[1])};
+        return {type: link[0], target: {id: Number(link[1])} };
     }
-    return {type: 'undefined', aim: Number(link[0])};
+    return {type: 'undefined', target: {id: Number(link[0])} };
 }
 
 /**
@@ -61,19 +61,19 @@ function convertLinks(content, file) {
     return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) { // get '[[***]]' strings
         let link = extract.slice(0, -2).slice(2); // extract link id, without '[[' & ']]' caracters
 
-        link = normalizeLink(link).aim;
+        link = normalizeLink(link).target.id;
 
         if (link === NaN) { return extract; } // only return the '[[***]]' string
 
         const associatedMetas = file.links.find(function(i) {
-            return i.aim === link;
+            return i.target.id === link;
         });
 
         if (associatedMetas === undefined) { return extract; } // only return the '[[***]]' string
 
         link = associatedMetas;
         // return '[[***]]' string into a Mardown link with openRecord function & class
-        return `[${extract}](#){title="${link.aimName}" onclick=openRecord(${link.aim}) .id-link .l_${link.type}}`;        
+        return `[${extract}](#){title="${link.target.title}" onclick=openRecord(${link.target.id}) .id-link .l_${link.type}}`;        
     });
 }
 
