@@ -226,6 +226,21 @@ article.fiche footer {
 }
 /* fin */
 
+article#credits {
+	text-align: center;
+}
+article#credits ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+article#credits dt {
+	font-weight: bold;
+}
+article#credits dd, article#credits li {
+	margin: 0;
+	padding: 0 0 0.5rem 0;
+}
 details {
 	border-top: 1px solid lightgray;
 	padding: 1rem 0;
@@ -273,9 +288,12 @@ summary+button {
 	list-style-position: inside;
 }
 
-.list-content ul li:nth-child(odd) {
+.list-content ul li.search-result:nth-child(odd),
+.list-content ul li.index-entry:nth-child(odd) {
 	background-color: rgb(245, 245, 245);
 }
+
+
 
 #graph_canvas line {
 	stroke:var(--link);

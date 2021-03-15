@@ -86,14 +86,14 @@
 
                     <ul class="sort active">
                         {% for link in index %}
-                        <li data-index="{{ link.id }}"
+                        <li class="index-entry" data-index="{{ link.id }}"
                         onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
                         {% endfor %}
                     </ul>
 
                     <ul class="sort">
                         {% for link in index | reverse %}
-                        <li data-index="link.id"
+                        <li class="index-entry" data-index="link.id"
                         onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
                         {% endfor %}
                     </ul>
@@ -246,41 +246,29 @@
 
             <article id="credits" class="fiche">
                 <main>
-                    <h1>Crédits</h1>
-                    <p>Cosma est un logiciel de création et de visualisation de graphe documentaire. Il permet de générer
-                        et représenter des documents interreliés sous la forme d’un réseau interactif dans un navigateur web</p>
-
-                    <p>Il a été développé dans le cadre du projet ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>
-                        et conçu par Arthur Perret, Guillaume Brioudes, Olivier Le Deuff et Clément Borel.</p>
-
-                    <h2>Bibliothèques</h2>
-                    <p>Le fonctionnement de Cosma repose sur les logiciels suivants :</p>
+                    <h1>Cosma</h1>
+                    <p>Version 0.9.0-alpha • Licence MIT</p>
                     <ul>
-                        <li>
-                            <strong><a href="https://github.com/d3/d3" target="_blank">D3</a></strong>
-                            (Mike Bostock, BSD 3-Clause) : graphe intéractif
-                        </li>
-                        <li>
-                            <strong><a href="https://github.com/mozilla/nunjucks" target="_blank">Nunjucks</a></strong>
-                            (James Long, BSD 2-Clause) : intégration de l'interface
-                        </li>
-                        <li>
-                            <strong><a href="https://github.com/markdown-it/markdown-it" target="_blank">Markdown it</a></strong>
-                            (Vitaly Puzrin, Alex Kocharin, MIT License) : sérialisation des fiches
-                        </li>
-                        <li>
-                            <strong><a href="https://github.com/krisk/fuse" target="_blank">FuseJs</a></strong>
-                            (Kiro Risk, Apache License 2.0) : moteur de recherche
-                        </li>
-                        <li>
-                            <strong><a href="https://github.com/ParkSB/markdown-it-front-matter" target="_blank">YAML Front Matter</a></strong>
-                            (ParkSB, MIT License) : lecture des métadonnées
-                        </li>
-                        <li>
-                            <strong><a href="https://github.com/moment/moment" target="_blank">MomentJs</a></strong>
-                            (Iskren Ivov Chernev, MIT License) : conversion des dates
-                        </li>
+                        <li>Arthur Perret</li>
+                        <li>Guillaume Brioudes</li>
+                        <li>Olivier Le Deuff</li>
+                        <li>Clément Borel</li>
+                        <li>Programme ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a></li>
                     </ul>
+                    <dl>
+                        <dt><a href="https://github.com/d3/d3" target="_blank">D3</a></dt>
+                        <dd>Mike Bostock (BSD 3-Clause)</dd>
+                        <dt><a href="https://github.com/mozilla/nunjucks" target="_blank">Nunjucks</a></dt>
+                        <dd>James Long (BSD 2-Clause)</dd>
+                        <dt><a href="https://github.com/markdown-it/markdown-it" target="_blank">markdown-it</a></dt>
+                        <dd>Vitaly Puzrin, Alex Kocharin (MIT License)</dd>
+                        <dt><a href="https://github.com/krisk/fuse" target="_blank">Fuse.js</a></dt>
+                        <dd>Kiro Risk (Apache License 2.0)</dd>
+                        <dt><a href="https://github.com/ParkSB/markdown-it-front-matter" target="_blank">YAML Front Matter</a></dt>
+                        <dd>ParkSB (MIT License)</dd>
+                        <dt><a href="https://github.com/moment/moment" target="_blank">Moment.js</a></dt>
+                        <dd>Iskren Ivov Chernev (MIT License)</dd>
+                    </dl>
                 </main>
             </article>
         </main>
