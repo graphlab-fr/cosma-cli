@@ -22,7 +22,7 @@
 
 <body>
     <div class="wrapper">
-        <aside>
+        <aside class="list-content">
 
             <header role="banner">
                 <div class="self">
@@ -206,7 +206,7 @@
 
                 <main>{{ record.content | safe }}</main>
 
-                <footer>
+                <footer class="list-content">
                     {% if record.links.length !== 0 %}
                     <section>
                         <details open="open">

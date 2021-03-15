@@ -45,7 +45,7 @@ li.filter label {
 
 /* INDEX */
 
-.search-bar { width: 100%; }
+.search-bar { width: 100%; margin-bottom: 0.8rem; }
 #search-result-list { margin-bottom: 20px; }
 
 aside {
@@ -262,18 +262,18 @@ summary+button {
 	margin: 1rem 0;
 }
 
-details ul {
+.list-content ul {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-details ul li {
+.list-content ul li {
 	padding: 0.5rem 0 0.5rem 1rem;
 	list-style-position: inside;
 }
 
-details ul li:nth-child(odd) {
+.list-content ul li:nth-child(odd) {
 	background-color: rgb(245, 245, 245);
 }
 
