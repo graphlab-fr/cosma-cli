@@ -110,7 +110,6 @@ files = files.map(function(file) {
 
     file.backlinks = entities.links.filter(link => link.target === file.metas.id)
         .map(function(link) {
-            const sourceMetas = findFileMeta(link.target);
             const targetMetas = findFileMeta(link.source);
             return {
                 type: link.type,
