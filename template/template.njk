@@ -47,7 +47,7 @@
                         {% for type in types %}
                         <li class="filter t_{{ type.name }}">
                         <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}" data-active="false" type="checkbox" id="f-{{ type.name }}">
-                        <label for="f-{{ type.name }}">{{ type.name | capitalize }} ({{ type.nodes | length }})</label>
+                        <label for="f-{{ type.name }}">{{ type.name }} ({{ type.nodes | length }})</label>
                     </li>
                         {% endfor %}
                     </ul>
@@ -64,14 +64,14 @@
                     <div class="sort active">
                         {% for tag in tags %}
                         <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
-                        {{ tag.name | capitalize }} ({{ tag.nodes | length }})</button>
+                        {{ tag.name }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
                     </div>
 
                     <div class="sort">
                         {% for tag in tags | reverse %}
                         <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
-                        {{ tag.name | capitalize }} ({{ tag.nodes | length }})</button>
+                        {{ tag.name }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
                     </div>
                 </details>
@@ -87,14 +87,14 @@
                     <ul class="sort active">
                         {% for link in index %}
                         <li class="index-entry" data-index="{{ link.id }}"
-                        onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                        onclick="openRecord({{ link.id }})">{{ link.title }}</li>
                         {% endfor %}
                     </ul>
 
                     <ul class="sort">
                         {% for link in index | reverse %}
                         <li class="index-entry" data-index="link.id"
-                        onclick="openRecord({{ link.id }})">{{ link.title | capitalize }}</li>
+                        onclick="openRecord({{ link.id }})">{{ link.title }}</li>
                         {% endfor %}
                     </ul>
                 </details>
@@ -109,7 +109,7 @@
                     {% if views.length !== 0 %}
                     <ul>
                         {% for viewName, viewString in views %}
-                        <li onclick="changeView('{{ viewString }}')">{{ viewName | capitalize }}</li>
+                        <li onclick="changeView('{{ viewString }}')">{{ viewName }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}
@@ -166,7 +166,7 @@
             {% for record in index %}
             <article id="{{ record.id }}" class="fiche">
                 <header>
-                    <h1>{{ record.title | capitalize }}</h1>
+                    <h1>{{ record.title }}</h1>
 
                     <div>
                         <span>id :</span>
@@ -180,7 +180,7 @@
 
                     <div>
                         <span>type :</span>
-                        <span>{{ record.type | capitalize }}</span>
+                        <span>{{ record.type }}</span>
                     </div>
 
                     {% if record.tags %}
