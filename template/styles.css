@@ -79,10 +79,6 @@ aside {
 
 .record-sorting:not(.record-sorting.active) { display: none; }
 
-aside main {
-	
-}
-
 /* CONTRÔLES */
 
 article {
@@ -139,6 +135,10 @@ aside footer {
 #graph_canvas {
 	width: 100%;
 	height: 100%;
+}
+
+#graph_canvas line {
+	stroke:var(--link);
 }
 
 /* Couleur des noeuds selon le type de fiche */
@@ -291,15 +291,4 @@ summary+button {
 .list-content ul li.search-result:nth-child(odd),
 .list-content ul li.index-entry:nth-child(odd) {
 	background-color: rgb(245, 245, 245);
-}
-
-
-
-#graph_canvas line {
-	stroke:var(--link);
-}
-
-#graph_canvas marker {
-	fill:var(--arrows);
-	stroke:var(--arrows);
 }
