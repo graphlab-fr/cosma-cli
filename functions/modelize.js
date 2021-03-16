@@ -11,7 +11,6 @@ let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
     , id = 0
-    , typesOf = { records: Object.keys(config.record_types), links: Object.keys(config.link_types) }
     , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
         .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
         .map(function(file) { // file analysis
@@ -52,7 +51,7 @@ let fileIds = []
         })
         .map(function(file) { // normalize metas
             // null or no registered types changed to "undefined"
-            if (file.metas.type === null || typesOf.records.indexOf(file.metas.type) === -1) {
+            if (file.metas.type === null || config.record_types_list.indexOf(file.metas.type) === -1) {
                 file.metas.type = 'undefined';
                 logs.warn.push(`Type of file ${file.metas.fileName} changed to undefined : no registered type`);
             }
@@ -68,7 +67,7 @@ let fileIds = []
                         return false;
                     }
 
-                    if (link.type !== 'undefined' && typesOf.links.indexOf(link.type) === -1) {
+                    if (link.type !== 'undefined' && config.link_types_list.indexOf(link.type) === -1) {
                         logs.warn.push(`The link "${link.target.id}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
                     }
 

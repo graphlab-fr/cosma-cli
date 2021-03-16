@@ -15,11 +15,9 @@ function genMdFile(title, type, tags) {
     if (!title) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a record title.'); }
 
-    const validTypes = Object.keys(config.types).map(key => key);
-
     if (!type) {
         type = ''
-    } else if (validTypes.indexOf(type) === -1) {
+    } else if (config.record_types_list.indexOf(type) === -1) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown type. Add it to config.yml beforehand.');
     }
 

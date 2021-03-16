@@ -67,9 +67,14 @@ if (!fs.existsSync(config.export_target)) {
     process.exit();
 }
 
-// add the date of the process to the config
+// Add computed values to config
+
+// add the date of the process
 if (config['metas'] === undefined) { config['metas'] = {} }
 config.metas.date = moment().format('YYYY-MM-DD');
+// config lists
+config.record_types_list = Object.keys(config.record_types);
+config.link_types_list = Object.keys(config.link_types);
 
 exports.config = config;
 
