@@ -59,16 +59,16 @@
                 <details data-sort="tag">
                     <summary class="menu-title">Mots-clés ({{ tags | length }})</summary>
 
-                    <div class="toggle"></div>
+                    <button class="sort-btn">A-Z</button>
 
-                    <div class="sort active">
+                    <div class="sort-box active">
                         {% for tag in tags %}
                         <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                         {{ tag.name }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
                     </div>
 
-                    <div class="sort">
+                    <div class="sort-box">
                         {% for tag in tags | reverse %}
                         <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                         {{ tag.name }} ({{ tag.nodes | length }})</button>
@@ -82,16 +82,16 @@
                 <details data-sort="record">
                     <summary class="menu-title">Index ({{ index | length }})</summary>
 
-                    <div class="toggle"></div>
+                    <button class="sort-btn">A-Z</button>
 
-                    <ul class="sort active">
+                    <ul class="sort-box active">
                         {% for link in index %}
                         <li class="index-entry" data-index="{{ link.id }}"
                         onclick="openRecord({{ link.id }})">{{ link.title }}</li>
                         {% endfor %}
                     </ul>
 
-                    <ul class="sort">
+                    <ul class="sort-box">
                         {% for link in index | reverse %}
                         <li class="index-entry" data-index="link.id"
                         onclick="openRecord({{ link.id }})">{{ link.title }}</li>

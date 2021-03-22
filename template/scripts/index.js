@@ -6,12 +6,25 @@ const indexContainer = document.getElementById('index');
  */
 
  (function () {
-    const sorters = document.querySelectorAll('details[data-sort]');
-    for (const sorter of sorters) {
-        const sorts = sorter.querySelectorAll('.sort');
-        sorter.querySelector('.toggle').addEventListener('click', (e) => {
-            e.target.classList.toggle('active');
-            for (const sort of sorts) {  sort.classList.toggle('active'); }
+    const sortContainer = document.querySelectorAll('[data-sort]');
+    for (const container of sortContainer) {
+        const box = container.querySelectorAll('.sort-box')
+            , increasing = box[0]
+            , decreasing = box[1]
+            , btn = container.querySelector('.sort-btn');
+
+        let isIncreasing = true;
+
+        btn.addEventListener('click', () => {
+            if (isIncreasing) {
+                btn.textContent = 'Z-A';
+                increasing.classList.remove('active'); decreasing.classList.add('active');
+                isIncreasing = false;
+            } else {
+                btn.textContent = 'A-Z';
+                increasing.classList.add('active'); decreasing.classList.remove('active');
+                isIncreasing = true;
+            }
         });
     }
 })();

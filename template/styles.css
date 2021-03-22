@@ -254,15 +254,7 @@ details[data-sort] .toggle {
 	margin-bottom: 0.8rem;
 }
 
-details[data-sort] .toggle::after {
-	content: 'ᐯ';
-}
-
-details[data-sort] .toggle.active::after {
-	content: 'ᐱ';
-}
-
-details[data-sort] .sort:not(.active) {
+details[data-sort] .sort-box:not(.active) {
 	display: none;
 }
 
@@ -271,6 +263,7 @@ details>summary {
 	font-family: sans-serif;
 	margin: 1rem 0;
 	font-weight: bold;
+	outline: none;
 }
 
 summary+button {
