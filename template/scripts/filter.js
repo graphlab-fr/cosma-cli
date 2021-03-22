@@ -48,6 +48,7 @@ function setFilters(filtersToActivate) {
 function filterOn(filterObj) {
     hideNodes(filterObj.nodeIds);
     view.activeFilters.push(filterObj.name);
+    filterObj.btn.checked = true;
     filterObj.btn.dataset.active = 'true';
 }
 
@@ -59,6 +60,7 @@ function filterOn(filterObj) {
 function filterOff(filterObj) {
     displayNodes(filterObj.nodeIds);
     view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
+    filterObj.btn.checked = false;
     filterObj.btn.dataset.active = 'false';
 }
 
