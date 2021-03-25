@@ -285,3 +285,9 @@ summary+button {
 .list-content ul li.index-entry:nth-child(odd) {
 	background-color: rgb(245, 245, 245);
 }
+
+.target-type { /* colored dot before links */
+	font-size: 0.8em;
+	vertical-align: 15%;
+	padding-right: 0.2em;
+}
