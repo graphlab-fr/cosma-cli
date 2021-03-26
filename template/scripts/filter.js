@@ -14,7 +14,7 @@ filters = filters.map(function(btn) {
 (function() {
     for (const filter of filters) {
         const btn = filter.btn;
-        btn.dataset.active = 'false';
+        btn.dataset.active = 'true';
 
         btn.addEventListener('click', () => {
             if (btn.dataset.active === 'true') {
@@ -34,9 +34,11 @@ function setFilters(filtersToActivate) {
     for (const filter of filters) {
         if (filtersToActivate.indexOf(filter.name) !== -1) {
             // if filter is "ToActivate"
-            filterOn(filter); }
+            filterOff(filter);
+        }
         else {
-            filterOff(filter); }
+            filterOn(filter);
+        }
     }
 }
 
@@ -46,8 +48,8 @@ function setFilters(filtersToActivate) {
  */
 
 function filterOn(filterObj) {
-    hideNodes(filterObj.nodeIds);
-    view.activeFilters.push(filterObj.name);
+    displayNodes(filterObj.nodeIds);
+    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
     filterObj.btn.checked = true;
     filterObj.btn.dataset.active = 'true';
 }
@@ -58,8 +60,8 @@ function filterOn(filterObj) {
  */
 
 function filterOff(filterObj) {
-    displayNodes(filterObj.nodeIds);
-    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
+    hideNodes(filterObj.nodeIds);
+    view.activeFilters.push(filterObj.name);
     filterObj.btn.checked = false;
     filterObj.btn.dataset.active = 'false';
 }
@@ -70,7 +72,7 @@ function filterOff(filterObj) {
  */
 
 function getFiltedNodes() {
-    let nodeIds = document.querySelectorAll('[data-filter][data-active="true"]');
+    let nodeIds = document.querySelectorAll('[data-filter][data-active="false"]');
     return nodeIds = Array.from(nodeIds)
         .map(filter => filter.dataset.filter.split(',')).flat()
         .map(nodeId => Number(nodeId));

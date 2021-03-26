@@ -41,12 +41,12 @@
 
             <section>
                 <details open="open">
-                    <summary class="menu-title">Filtres ({{ types | length }})</summary>
+                    <summary class="menu-title">Types ({{ types | length }})</summary>
 
                     <ul>
                         {% for type in types %}
                         <li class="filter t_{{ type.name }}">
-                        <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}" data-active="false" type="checkbox" id="f-{{ type.name }}">
+                        <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}" data-active="true" type="checkbox" checked id="f-{{ type.name }}">
                         <label for="f-{{ type.name }}">{{ type.name }} ({{ type.nodes | length }})</label>
                     </li>
                         {% endfor %}
