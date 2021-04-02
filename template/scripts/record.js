@@ -20,10 +20,6 @@ function openRecord(id, history = true) {
     const recordContent = document.getElementById(id);
     recordContent.style.display = 'block';
 
-    // page's <title> become record's name
-    const recordTitle = recordContent.querySelector('h1').textContent;
-    document.title = recordTitle + ' - Cosma';
-
     // reset nodes highlighting
     unlightNodes();
     highlightNodes([id]);
@@ -31,7 +27,10 @@ function openRecord(id, history = true) {
     view.openedRecord = id;
 
     if (history) {
-        historique.actualiser(id);}
+        // page's <title> become record's name
+        const recordTitle = recordContent.querySelector('h1').textContent;
+        historique.actualiser(id, recordTitle);
+    }
 
 }
 

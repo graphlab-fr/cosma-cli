@@ -13,17 +13,20 @@ const view = {
     , svg = d3.select("#graph_canvas");
 
 const historique = {
-    actualiser: function(recordId) {
+    actualiser: function(recordId, recordTitle) {
         // add opened record id to history
-        if (history.state == null) { this.init(recordId); }
+        if (history.state == null) { this.init(recordId, recordTitle); }
         else {
             const timeline = history.state.hist;
             timeline.push(recordId);
-            history.pushState({hist : timeline}, 'record ' + recordId);
+            history.pushState({hist : timeline}, recordTitle);
         }
+
+        // change page title
+        document.title = recordTitle + ' - Cosma';
     },
-    init: function(recordId) {
-        history.pushState({hist : [recordId]}, 'record ' + recordId);
+    init: function(recordId, recordTitle) {
+        history.pushState({hist : [recordId]}, recordTitle);
     }
 }
 
