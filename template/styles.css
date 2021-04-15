@@ -51,7 +51,7 @@ li.filter label {
 /* INDEX */
 
 .search-bar { width: 100%; margin-bottom: 0.8rem; }
-#search-result-list { margin-bottom: 20px; }
+#search-result-list { margin-bottom: 0.8rem; }
 
 aside {
 	position: relative;
@@ -85,7 +85,7 @@ aside {
 /* CONTRÔLES */
 
 article {
-	padding: 2rem 0;
+	padding: 0.8rem 0;
 }
 .controls article+article {
 	border-top: 1px solid rgb(236, 236, 236);
@@ -246,7 +246,7 @@ article#credits dd, article#credits li {
 }
 details {
 	border-top: 1px solid lightgray;
-	padding: 1rem 0;
+	padding: 0.5rem 0;
 }
 
 details[data-sort] .toggle {
@@ -280,7 +280,7 @@ summary+button {
 }
 
 .list-content ul li {
-	padding: 0.5rem 0 0.5rem 1rem;
+	padding: 0.3rem 0 0.3rem 1rem;
 	list-style-position: inside;
 }
 
