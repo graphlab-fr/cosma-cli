@@ -188,7 +188,7 @@ function ticked() {
         node.attr("r", (d) => d.size * graphProperties.node.size_coeff);
     }
 
-    d3.select('#alpha_value').style('flex-basis', (simulation.alpha() * 100) + '%');
+    d3.select('#head-load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }
 
 })();
