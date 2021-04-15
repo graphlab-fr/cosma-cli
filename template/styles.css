@@ -284,8 +284,7 @@ summary+button {
 	list-style-position: inside;
 }
 
-.list-content ul li.search-result:nth-child(odd),
-.list-content ul li.index-entry:nth-child(odd) {
+.list-content ul li.search-result:nth-child(odd) {
 	background-color: rgb(245, 245, 245);
 }
 

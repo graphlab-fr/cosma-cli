@@ -86,15 +86,19 @@
 
                     <ul class="sort-box active">
                         {% for link in index %}
-                        <li class="index-entry" data-index="{{ link.id }}"
-                        onclick="openRecord({{ link.id }})">{{ link.title }}</li>
+                        <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
+                            <span class="target-type t_{{ link.type }}">⬤</span>
+                            <span>{{ link.title }}</span>
+                        </li>
                         {% endfor %}
                     </ul>
 
                     <ul class="sort-box">
                         {% for link in index | reverse %}
-                        <li class="index-entry" data-index="link.id"
-                        onclick="openRecord({{ link.id }})">{{ link.title }}</li>
+                        <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
+                            <span class="target-type t_{{ link.type }}">⬤</span>
+                            <span>{{ link.title }}</span>
+                        </li>
                         {% endfor %}
                     </ul>
                 </details>
@@ -132,7 +136,7 @@
 
                     <article>
                         <p>Attraction</p>
-                        {{ inputRange('force', 'attraction.force', graphConfig.attraction.force, -200, 50') }}
+                        {{ inputRange('force', 'attraction.force', graphConfig.attraction.force, -200, 50) }}
                         {{ inputRange('min', 'attraction.min', graphConfig.attraction.min, 0, 50) }}
                         {{ inputRange('max', 'attraction.max', graphConfig.attraction.max, 0, 2000 ) }}
                         {{ inputRange('verticale', 'attraction.verticale', graphConfig.attraction.verticale, 0, 1) }}
