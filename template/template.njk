@@ -87,7 +87,7 @@
                     <ul class="sort-box active">
                         {% for link in index %}
                         <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
-                            <span class="target-type t_{{ link.type }}">⬤</span>
+                            <span class="type-point t_{{ link.type }}">⬤</span>
                             <span>{{ link.title }}</span>
                         </li>
                         {% endfor %}
@@ -96,7 +96,7 @@
                     <ul class="sort-box">
                         {% for link in index | reverse %}
                         <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
-                            <span class="target-type t_{{ link.type }}">⬤</span>
+                            <span class="type-point t_{{ link.type }}">⬤</span>
                             <span>{{ link.title }}</span>
                         </li>
                         {% endfor %}
@@ -219,7 +219,7 @@
                             <ul>
                                 {% for link in record.links %}
                                 <li onclick="openRecord({{ link.target.id }})">
-                                    <span class="target-type t_{{ link.target.type }}">⬤</span>
+                                    <span class="type-point t_{{ link.target.type }}">⬤</span>
                                     <span>{{ link.target.title }}</span>
                                 </li>
                                 {% endfor %}
@@ -236,7 +236,7 @@
                             <ul>
                                 {% for backlink in record.backlinks %}
                                 <li onclick="openRecord({{ backlink.target.id }})">
-                                    <span class="target-type t_{{ backlink.target.type }}">⬤</span>
+                                    <span class="type-point t_{{ backlink.target.type }}">⬤</span>
                                     <span>{{ backlink.target.title }}</span>
                                 </li>
                                 {% endfor %}

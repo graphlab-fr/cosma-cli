@@ -33,7 +33,9 @@ searchInput.addEventListener('focus', () => {
             // include search result element on DOM
             var resultElement = document.createElement('li');
             resultElement.classList.add('search-result', 'id-link');
-            resultElement.textContent = result.item.title;
+            resultElement.innerHTML =
+            `<span class="type-point t_${result.item.type}">⬤</span>
+            <span>${result.item.title}</span>`;
             resultContainer.appendChild(resultElement);
         
             resultElement.addEventListener('click', () => {

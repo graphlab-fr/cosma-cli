@@ -284,11 +284,7 @@ summary+button {
 	list-style-position: inside;
 }
 
-.list-content ul li.search-result:nth-child(odd) {
-	background-color: rgb(245, 245, 245);
-}
-
-.target-type { /* colored dot before links */
+.type-point { /* colored dot before links */
 	font-size: 0.8em;
 	vertical-align: 15%;
 	padding-right: 0.2em;
