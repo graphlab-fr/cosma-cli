@@ -63,14 +63,14 @@
 
                     <div class="sort-box active">
                         {% for tag in tags %}
-                        <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        <button class="tag-btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                         {{ tag.name }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
                     </div>
 
                     <div class="sort-box">
                         {% for tag in tags | reverse %}
-                        <button onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        <button class="tag-btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                         {{ tag.name }} ({{ tag.nodes | length }})</button>
                         {% endfor %}
                     </div>

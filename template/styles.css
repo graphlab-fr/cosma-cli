@@ -34,6 +34,12 @@ button { cursor: pointer; margin: 0.2rem; }
 a { color: inherit; }
 [onclick] { cursor: pointer; }
 
+.tag-btn { background-color: var(--cosma-blue);
+	border: unset;
+	color: white;
+	border-radius: 1px;
+}
+
 /* FILTRES */
 
 li.filter {
