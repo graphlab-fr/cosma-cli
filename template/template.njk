@@ -41,14 +41,19 @@
 
             <section>
                 <details open="open">
-                    <summary class="menu-title">Types ({{ types | length }})</summary>
+                    <summary class="menu-title">
+                        Types <span class="badge">{{ types | length }}</span>
+                    </summary>
 
                     <ul>
                         {% for type in types %}
                         <li class="filter t_{{ type.name }}">
-                        <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}" data-active="true" type="checkbox" checked id="f-{{ type.name }}">
-                        <label for="f-{{ type.name }}">{{ type.name }} ({{ type.nodes | length }})</label>
-                    </li>
+                            <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}"
+                                data-active="true" type="checkbox" checked id="f-{{ type.name }}">
+                            <label for="f-{{ type.name }}">
+                                {{ type.name }} <span class="badge">{{ type.nodes | length }}</span>
+                            </label>
+                        </li>
                         {% endfor %}
                     </ul>
                 </details>
@@ -57,21 +62,25 @@
             {% if tags.length !== 0 %}
             <section>
                 <details data-sort="tag">
-                    <summary class="menu-title">Mots-clés ({{ tags | length }})</summary>
+                    <summary class="menu-title">
+                        Mots-clés <span class="badge">{{ tags | length }}</span>
+                    </summary>
 
                     <button class="sort-btn">A-Z</button>
 
                     <div class="sort-box active">
                         {% for tag in tags %}
                         <button class="tag-btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
-                        {{ tag.name }} ({{ tag.nodes | length }})</button>
+                            {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
+                        </button>
                         {% endfor %}
                     </div>
 
                     <div class="sort-box">
                         {% for tag in tags | reverse %}
                         <button class="tag-btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
-                        {{ tag.name }} ({{ tag.nodes | length }})</button>
+                            {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
+                        </button>
                         {% endfor %}
                     </div>
                 </details>
@@ -80,7 +89,9 @@
 
             <section id="index">
                 <details data-sort="record">
-                    <summary class="menu-title">Index ({{ index | length }})</summary>
+                    <summary class="menu-title">
+                        Index <span class="badge">{{ index | length }}</span>
+                    </summary>
 
                     <button class="sort-btn">A-Z</button>
 
@@ -106,7 +117,9 @@
 
             <section>
                 <details open="open">
-                    <summary class="menu-title">Vues ({{ views | length }})</summary>
+                    <summary class="menu-title">
+                        Vues <span class="badge">{{ views | length }}</span>
+                    </summary>
 
                     <button onclick="saveView()">Sauvegarder la vue actuelle</button>
 
@@ -128,7 +141,7 @@
                     <form oninput="result.value = range.value; graphProperties.{{ graphParameter }} = range.value; updateForces();">
                         <label title="{{ description }}">
                             {{ name }}
-                            <output class="counter" name="result">{{ defaultValue }}</output>
+                            <output class="badge" name="result">{{ defaultValue }}</output>
                         </label>
                         <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step=".1" />
                     </form>
@@ -150,7 +163,7 @@
 
                     <article>
                         <p>Nœuds</p>
-                        {{ inputRange('taille', 'node.size_coeff', node.size_coeff, 0, 2) }}
+                        {{ inputRange('taille', 'node.size_coeff', graphConfig.node.size_coeff, 0, 2) }}
                     </article>
 
                     <article>
@@ -214,7 +227,9 @@
                     {% if record.links.length !== 0 %}
                     <section>
                         <details open="open">
-                            <summary class="menu-title">Liens ({{ record.links | length }})</summary>
+                            <summary class="menu-title">
+                                Liens <span class="badge">{{ record.links | length }}</span>
+                            </summary>
 
                             <ul>
                                 {% for link in record.links %}
@@ -231,7 +246,9 @@
                     {% if record.backlinks.length !== 0 %}
                     <section>
                         <details open="open">
-                            <summary class="menu-title">Rétroliens ({{ record.backlinks | length }})</summary>
+                            <summary class="menu-title">
+                                Rétroliens <span class="badge">{{ record.backlinks | length }}</span>
+                            </summary>
 
                             <ul>
                                 {% for backlink in record.backlinks %}
