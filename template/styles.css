@@ -161,7 +161,7 @@ aside footer {
 	height: 100%;
 }
 
-#graph_canvas line {
+line {
 	stroke:var(--link);
 }
 

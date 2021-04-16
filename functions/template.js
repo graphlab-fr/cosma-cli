@@ -51,8 +51,15 @@ exports.jsonData = jsonData;
 function colors() {
     // get types from config
 
-    const types = Object.keys(config.record_types).map(function(key) {
+    let types;
+
+    const typesRecord = Object.keys(config.record_types).map(function(key) {
         return {prefix: 't_', name: key, color: config.record_types[key]}; });
+
+    const typesLinks = Object.keys(config.link_types).map(function(key) {
+        return {prefix: 'l_', name: key, color: config.link_types[key].color}; });
+
+    types = typesRecord.concat(typesLinks);
 
     // map the CSS syntax
 

@@ -111,15 +111,16 @@ function initializeDisplay() {
                 d.fy = null;
             }));
     
-    link.attr("data-source", (d) => d.source)
+    link.attr("class", (d) => 'l_' + d.type)
+        .attr("data-source", (d) => d.source)
         .attr("data-target", (d) => d.target)
         .attr("stroke-dasharray", function(d) {
-            if (d.shape.look === 'dash' || d.shape.look === 'dotted') {
+            if (d.shape.stroke === 'dash' || d.shape.stroke === 'dotted') {
                 return d.shape.dashInterval }
             return false;
         })
         .attr("filter", function(d) {
-            if (d.shape.look === 'double') {
+            if (d.shape.stroke === 'double') {
                 return 'url(#double)' }
             return false;
         });

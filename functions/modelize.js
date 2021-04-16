@@ -152,10 +152,13 @@ function registerLinks(file) {
     if (file.links.length === 0) { return; }
 
     for (const link of file.links) {
+        const style = getLinkStyle(link.type);
+
         entities.links.push({
             id: Number(id++),
             type: link.type,
-            shape: getLinkShape(link.type),
+            shape: style.shape,
+            color: style.color,
             source: Number(link.source.id),
             target: Number(link.target.id)
         });
@@ -199,24 +202,33 @@ function findFileMeta(fileId) {
  * @returns {object} - Dash/dotted values or null value
  */
 
-function getLinkShape(linkType) {
-    const look = config.link_types[linkType];
+function getLinkStyle(linkType) {
+    const linkTypeConfig = config.link_types[linkType];
+    let stroke, color;
 
-    switch (look) {
-        case 'simple':
-            return { look: look, dashInterval: null };
-
-        case 'double':
-            return { look: look, dashInterval: null };
-
-        case 'dash':
-            return { look: look, dashInterval: '4, 5' };
-
-        case 'dotted':
-            return { look: look, dashInterval: '1, 3' };
+    if (linkTypeConfig) {
+        stroke = config.link_types[linkType].stroke;
+        color = config.link_types[linkType].color;
+    } else {
+        stroke = 'simple';
+        color = null;
     }
 
-    return { look: 'simple', dashInterval: null };
+    switch (stroke) {
+        case 'simple':
+            return { shape: { stroke: stroke, dashInterval: null }, color: color };
+            
+        case 'double':
+            return { shape: { stroke: stroke, dashInterval: null }, color: color };
+
+        case 'dash':
+            return { shape: { stroke: stroke, dashInterval: '4, 5' }, color: color };
+
+        case 'dotted':
+            return { shape: { stroke: stroke, dashInterval: '1, 3' }, color: color };
+    }
+
+    return { shape: { stroke: 'simple', dashInterval: null }, color: color };
 }
 
 /**
