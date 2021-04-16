@@ -114,7 +114,7 @@ function cosmoscope(files, path) {
         }),
         tags: Object.keys(tags).map(function(tag) {
             return { name: tag, nodes: tags[tag] };
-        }),
+        }).sort(function (a, b) { return a.name.localeCompare(b.name); }),
         metas: config.metas
     });
 
