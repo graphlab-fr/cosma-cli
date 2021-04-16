@@ -68,9 +68,9 @@
 
                     <button class="sort-btn">A-Z</button>
 
-                    <div class="sort-box active">
+                    <div id="tags-container" class="sort-box active">
                         {% for tag in tags %}
-                        <button class="btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        <button class="btn" onclick="activeFromParent(this);unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                             {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                         </button>
                         {% endfor %}
@@ -78,7 +78,7 @@
 
                     <div class="sort-box">
                         {% for tag in tags | reverse %}
-                        <button class="btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        <button class="btn" onclick="activeFromParent(this);unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                             {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                         </button>
                         {% endfor %}
@@ -124,9 +124,9 @@
                     <button onclick="saveView()">Sauvegarder la vue actuelle</button>
 
                     {% if views.length !== 0 %}
-                    <ul>
+                    <ul id="views-container">
                         {% for viewName, viewString in views %}
-                        <button class="btn" onclick="changeView('{{ viewString }}')">
+                        <button class="btn" onclick="activeFromParent(this);changeView('{{ viewString }}')">
                             {{ viewName }}
                         </button>
                         {% endfor %}

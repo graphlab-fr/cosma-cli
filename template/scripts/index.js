@@ -30,6 +30,37 @@ const indexContainer = document.getElementById('index');
 })();
 
 /**
+ * Highligth clicked element and unlighligth the others from the same parent
+ * @param {HTMLElement} child - clicked element
+ */
+
+function activeFromParent(child) {
+    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
+        activeElt.style.filter = null;
+    }
+
+    child.classList.add('active')
+    child.style.filter = 'brightness(1.5)';
+}
+
+/**
+ * Unlighligth all activated elements from parent
+ * @param {HTMLElement} parent - parent of elements
+ */
+
+function unactiveFromParent(parent) {
+    const activeElt = parent.querySelector('.active');
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
+        activeElt.style.filter = null;
+    }
+}
+
+/**
  * Hide items from the index list that correspond to the nodes ids
  * @param {array} nodeIds - List of nodes ids
  */

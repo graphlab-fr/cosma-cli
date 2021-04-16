@@ -134,7 +134,8 @@ function isolateByElement(eltId) {
 function resetNodes() {
     view.isolateId = undefined;
 
-    const idsToDisplay = index.filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
+    const idsToDisplay = index
+        .filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
         .map(item => item.id);
 
     index = index.map(function(item) {
@@ -146,6 +147,8 @@ function resetNodes() {
 
     view.isolateMode = false;
     displayNodes(idsToDisplay);
+
+    unactiveFromParent(document.getElementById('views-container'));
 
     resetIsolateBtn.style.display = null;
 }

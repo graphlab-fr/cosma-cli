@@ -36,6 +36,8 @@ function unlightNodes() {
 
     view.highlightedNodes = [];
     resetHighlightBtn.style = null;
+
+    unactiveFromParent(document.getElementById('tags-container'));
 }
 
 /**
