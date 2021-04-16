@@ -70,7 +70,7 @@
 
                     <div class="sort-box active">
                         {% for tag in tags %}
-                        <button class="tag-btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        <button class="btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                             {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                         </button>
                         {% endfor %}
@@ -78,7 +78,7 @@
 
                     <div class="sort-box">
                         {% for tag in tags | reverse %}
-                        <button class="tag-btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                        <button class="btn" onclick="unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
                             {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                         </button>
                         {% endfor %}
@@ -126,7 +126,9 @@
                     {% if views.length !== 0 %}
                     <ul>
                         {% for viewName, viewString in views %}
-                        <li onclick="changeView('{{ viewString }}')">{{ viewName }}</li>
+                        <button class="btn" onclick="changeView('{{ viewString }}')">
+                            {{ viewName }}
+                        </button>
                         {% endfor %}
                     </ul>
                     {% endif %}

@@ -35,7 +35,7 @@ button { cursor: pointer; margin: 0.2rem; }
 a { color: inherit; }
 [onclick] { cursor: pointer; }
 
-.tag-btn {
+.btn {
 	background-color: var(--cosma-blue-dark);
 	border: unset;
 	color: white;
