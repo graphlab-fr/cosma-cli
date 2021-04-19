@@ -175,6 +175,11 @@ circle {
 circle:hover {
 	stroke: yellow;
 }
+
+text {
+	fill: gray;
+}
+
 /* Infobulles */
 .tip_type {
 	font-weight: bold;

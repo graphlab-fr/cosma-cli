@@ -1,7 +1,6 @@
 (function() {
 
-let links
-    , nodes
+let link, node, cicles, labels
     , simulation = d3.forceSimulation()
     , width = +svg.node().getBoundingClientRect().width
     , height = +svg.node().getBoundingClientRect().height;
@@ -91,13 +90,17 @@ function initializeDisplay() {
     // set the data and properties of node circles
     node = svg.append("g")
         .attr("class", "nodes")
-        .selectAll("circle")
+        .selectAll("g")
         .data(graph.nodes)
-        .enter().append("circle")
+        .enter().append("g")
+        .attr("data-node", (d) => d.id)
         .on('click', function(nodeMetas) {
             openRecord(nodeMetas.id);
         })
-        .call(d3.drag()
+
+    circles = node.append("circle")
+      .attr("r", (d) => d.size)
+      .call(d3.drag()
             .on("start", function(d) {
                 if (!d3.event.active) simulation.alphaTarget(0.3).restart();
                 d.fx = d.x;
@@ -110,6 +113,14 @@ function initializeDisplay() {
                 d.fx = null;
                 d.fy = null;
             }));
+
+    labels = node.append("text")
+      .text(function(d) {
+        return d.label;
+      })
+      .attr('font-size', 10)
+      .attr('x', -20)
+      .attr('y', (d) => 10 + d.size);
     
     link.attr("class", (d) => 'l_' + d.type)
         .attr("data-source", (d) => d.source)
@@ -130,44 +141,7 @@ function initializeDisplay() {
     }
 
     // node class
-    node.attr("class", (d) => "t_" + d.type)
-        .attr("data-node", (d) => d.id);
-
-    let tip = undefined;
-
-    node.on("mouseover", function (d) {
-
-        tip = svg.append("g")
-            .attr("transform", "translate(" + d.x + "," + d.y + ")");
-
-        var rect = tip.append("rect")
-            .style("fill", "white")
-            .attr("class", "t_" + d.type)
-            .attr("rx", 2)
-            .attr("ry", 2);
-        
-        tip.append("text")
-            .text(d.type)
-            .attr("dy", "1.5em")
-            .attr("x", 5)
-            .attr("class", "tip_type");
-
-        tip.append("text")
-            .text(d.label)
-            .attr("dy", "1.8em")
-            .attr("x", 5)
-            .attr("class", "tip_title");
-
-        const bbox = tip.node().getBBox();
-        rect.attr("width", bbox.width + 20)
-            .attr("height", bbox.height + 14);
-
-        tip.attr("transform", "translate(" + (d.x - ((bbox.width + 10) / 2)) + "," + (d.y - (bbox.height + 20)) + ")")
-    });
-
-    node.on("mouseout", function (d) {
-        if (tip) tip.remove();
-    });
+    circles.attr("class", (d) => "t_" + d.type);
 }
 
 /**
@@ -180,14 +154,9 @@ function ticked() {
         .attr("x2", (d) => d.target.x)
         .attr("y2", (d) => d.target.y);
 
-    node.attr("cx", (d) => d.x)
-        .attr("cy", (d) => d.y);
-
-    if (graphProperties.arrows === true) {
-        node.attr("r", (d) => 7);
-    } else {
-        node.attr("r", (d) => d.size * graphProperties.node.size_coeff);
-    }
+    node.attr("transform", function(d) {
+          return "translate(" + d.x + "," + d.y + ")";
+        })
 
     d3.select('#head-load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }
