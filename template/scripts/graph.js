@@ -65,7 +65,6 @@ function updateForces() {
 
     simulation.force("link")
         .id((d) => d.id)
-        .distance(graphProperties.link.distance)
         .links(graph.links);
 
     // restarts the simulation
