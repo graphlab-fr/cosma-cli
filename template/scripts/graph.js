@@ -114,16 +114,13 @@ function initializeDisplay() {
             }));
 
     labels = node.append("text")
-      .text(function(d) {
-          const lengthMax = 17;
-          if (d.label.length > lengthMax) {
-              return d.label.slice(0, lengthMax) + '…'; }
-          return d.label
-      })
+      .text((d) => d.label)
       .attr('font-size', 10)
-      .attr('x', -30)
-      .attr('y', (d) => 10 + d.size);
-    
+      .attr('x', 0)
+      .attr('y', (d) => 10 + d.size)
+      .attr('dominant-baseline', 'middle')
+      .attr('text-anchor', 'middle');
+
     link.attr("class", (d) => 'l_' + d.type)
         .attr("data-source", (d) => d.source)
         .attr("data-target", (d) => d.target)
