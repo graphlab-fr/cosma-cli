@@ -121,6 +121,7 @@ article {
 	font-weight: bold;
 	font-size: 1.4rem;
 }
+.controls input[type="number"] { width: 70px; margin-left: 1rem; }
 .controls input[type="range"] { width: 100%; }
 
 .zoom-controls {

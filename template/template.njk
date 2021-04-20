@@ -140,12 +140,10 @@
                     <summary class="menu-title">Paramètres du graphe</summary>
 
                     {% macro inputRange(name, graphParameter, defaultValue, min, max) %}
-                    <form oninput="result.value = range.value; graphProperties.{{ graphParameter }} = range.value; updateForces();">
-                        <label title="{{ description }}">
-                            {{ name }}
-                            <output class="badge" name="result">{{ defaultValue }}</output>
-                        </label>
-                        <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step=".1" />
+                    <form oninput="graphProperties.{{ graphParameter }} = range.value; updateForces();">
+                        <label>{{ name }}</label>
+                        <input type="number" value="{{ defaultValue }}" name="number" oninput="range.value = number.value"/>
+                        <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step=".1" oninput="number.value = range.value"/>
                     </form>
                     {% endmacro %}
 
