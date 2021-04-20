@@ -115,10 +115,13 @@ function initializeDisplay() {
 
     labels = node.append("text")
       .text(function(d) {
-        return d.label;
+          const lengthMax = 17;
+          if (d.label.length > lengthMax) {
+              return d.label.slice(0, lengthMax) + '…'; }
+          return d.label
       })
       .attr('font-size', 10)
-      .attr('x', -20)
+      .attr('x', -30)
       .attr('y', (d) => 10 + d.size);
     
     link.attr("class", (d) => 'l_' + d.type)
