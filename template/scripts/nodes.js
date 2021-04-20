@@ -7,12 +7,28 @@ const resetHighlightBtn = document.getElementById('reset-highlight'); // anti hi
 
 function highlightNodes(nodeIds) {
 
-    const elts = getNodeNetwork(nodeIds);
+    let elts = getNodeNetwork(nodeIds);
     if (elts.length === 0) { return; }
 
+    elts = explodeNode(elts);
+
     for (const elt of elts) {
-        elt.style.stroke = 'var(--highlight)';
-        elt.style.fill = 'var(--highlight)';
+
+        switch (elt.tagName) {
+            case 'circle':
+                elt.style.stroke = 'var(--highlight)';
+                elt.style.fill = 'var(--highlight)';
+                break;
+                
+            case 'text':
+                elt.style.fill = 'var(--highlight)';
+
+                break;
+
+            case 'line':
+                elt.style.stroke = 'var(--highlight)';
+                break;
+        }
     }
 
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
@@ -26,8 +42,10 @@ function highlightNodes(nodeIds) {
 function unlightNodes() {
     if (view.highlightedNodes.length === 0) { return; }
 
-    const elts = getNodeNetwork(view.highlightedNodes);
+    let elts = getNodeNetwork(view.highlightedNodes);
     if (elts.length === 0) { return; }
+
+    elts = explodeNode(elts);
 
     for (const elt of elts) {
         elt.style.stroke = null;
@@ -38,6 +56,23 @@ function unlightNodes() {
     resetHighlightBtn.style = null;
 
     unactiveFromParent(document.getElementById('tags-container'));
+}
+
+/**
+ * Get 'circle' & 'text' elts from a 'g' one
+ * @param {array} nodeNetworkElts - List of elts from getNodeNetwork()
+ */
+
+function explodeNode(nodeNetworkElts) {
+    for (let i = 0; i < nodeNetworkElts.length; i++) {
+        if (nodeNetworkElts[i].tagName === 'g') {
+            nodeNetworkElts = nodeNetworkElts
+                .concat(Array.from(nodeNetworkElts[i].childNodes))
+            nodeNetworkElts.splice(i, 1);
+        }
+    }
+
+    return nodeNetworkElts;
 }
 
 /**
