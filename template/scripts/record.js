@@ -5,6 +5,10 @@
  */
 
 function openRecord(id, history = true) {
+    const recordContent = document.getElementById(id);
+
+    if (!recordContent) { return; }
+
     if (view.openedRecord !== undefined) {
         // hide last record
         document.getElementById(view.openedRecord)
@@ -17,7 +21,6 @@ function openRecord(id, history = true) {
     window['record-container'].scrollTo({ top: 0 });
 
     // show record
-    const recordContent = document.getElementById(id);
     recordContent.style.display = 'block';
 
     // reset nodes highlighting
@@ -45,3 +48,12 @@ function closeRecord() {
 
     unlightNodes();
 }
+
+/**
+ * Open a record at page load if his id follow a '#' as '#20200801210302'
+ */
+
+window.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash.substr(1);
+    openRecord(hash);
+});
