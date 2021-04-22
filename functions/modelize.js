@@ -179,9 +179,7 @@ function registerNodes(file) {
         type: String(file.metas.type),
         size: Number(size),
         outLink: Number(file.links.length),
-        inLink: Number(file.backlinks.length),
-        x: Number(randFloat(40, 50)),
-        y: Number(randFloat(40, 50))
+        inLink: Number(file.backlinks.length)
     });
 }
 
@@ -290,15 +288,4 @@ function getConnectedIds(nodeId) {
         return false; }
 
     return targets;
-}
-
-/**
- * Get a random decimal number
- * @param {int} max - Number max
- * @param {int} min - Number min
- * @returns {float} - Decimal number
- */
-
-function randFloat(max, min = 0) {
-    return Math.random() * (max - min) + min;
 }
