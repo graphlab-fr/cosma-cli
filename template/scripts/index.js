@@ -67,8 +67,10 @@ function unactiveFromParent(parent) {
 
 function hideFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
-        indexContainer.querySelector('[data-index="' + indexItem + '"]')
-            .style.display = 'none';
+        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+            .forEach(elt => {
+                elt.style.display = 'none';
+            });
     }
 }
 

@@ -45,6 +45,8 @@ a { color: inherit; }
 	height: 23px;
 }
 
+.btn.active { background-color: var(--light-gray); }
+
 .badge {
 	display: inline-block;
 	background-color: var(--light-gray);
