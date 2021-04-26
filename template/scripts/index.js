@@ -35,15 +35,8 @@ const indexContainer = document.getElementById('index');
  */
 
 function activeFromParent(child) {
-    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
-
-    if (activeElt) {
-        activeElt.classList.remove('active')
-        activeElt.style.filter = null;
-    }
-
     child.classList.add('active')
-    child.style.filter = 'brightness(1.5)';
+    child.style.borderColor = 'black';
 }
 
 /**
@@ -56,7 +49,7 @@ function unactiveFromParent(parent) {
 
     if (activeElt) {
         activeElt.classList.remove('active')
-        activeElt.style.filter = null;
+        activeElt.style.borderColor = null;
     }
 }
 
