@@ -256,6 +256,7 @@ article.fiche footer {
 	margin-top: 3rem;
 	border-top: 1px solid black;
 }
+article.fiche .id-link { color: #337ab7; }
 /* fin */
 
 article#credits {

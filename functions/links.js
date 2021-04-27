@@ -73,7 +73,7 @@ function convertLinks(content, file) {
 
         link = associatedMetas;
         // return '[[***]]' string into a Mardown link with openRecord function & class
-        return `[${extract}](#){title="${link.target.title}" onclick=openRecord(${link.target.id}) .id-link .l_${link.type}}`;        
+        return `[${extract}](#${link.target.id}){title="${link.target.title}" onclick=openRecord(${link.target.id}) .id-link}`;        
     });
 }
 
