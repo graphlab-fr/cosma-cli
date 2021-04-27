@@ -47,7 +47,7 @@
 
                     <ul>
                         {% for type in types %}
-                        <li class="filter t_{{ type.name }}">
+                        <li class="filter n_{{ type.name }}">
                             <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}"
                                 data-active="true" type="checkbox" checked id="f-{{ type.name }}">
                             <label for="f-{{ type.name }}">
@@ -98,7 +98,7 @@
                     <ul class="sort-box active">
                         {% for link in index %}
                         <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
-                            <span class="type-point t_{{ link.type }}">⬤</span>
+                            <span class="type-point n_{{ link.type }}">⬤</span>
                             <span>{{ link.title }}</span>
                         </li>
                         {% endfor %}
@@ -107,7 +107,7 @@
                     <ul class="sort-box">
                         {% for link in index | reverse %}
                         <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
-                            <span class="type-point t_{{ link.type }}">⬤</span>
+                            <span class="type-point n_{{ link.type }}">⬤</span>
                             <span>{{ link.title }}</span>
                         </li>
                         {% endfor %}
@@ -224,7 +224,7 @@
                             <ul>
                                 {% for link in record.links %}
                                 <li onclick="openRecord({{ link.target.id }})">
-                                    <span class="type-point t_{{ link.target.type }}">⬤</span>
+                                    <span class="type-point n_{{ link.target.type }}">⬤</span>
                                     <span>{{ link.target.title }}</span>
                                 </li>
                                 {% endfor %}
@@ -243,7 +243,7 @@
                             <ul>
                                 {% for backlink in record.backlinks %}
                                 <li onclick="openRecord({{ backlink.target.id }})">
-                                    <span class="type-point t_{{ backlink.target.type }}">⬤</span>
+                                    <span class="type-point n_{{ backlink.target.type }}">⬤</span>
                                     <span>{{ backlink.target.title }}</span>
                                 </li>
                                 {% endfor %}

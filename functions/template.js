@@ -51,25 +51,25 @@ exports.jsonData = jsonData;
 function colors() {
     // get types from config
 
+    const replacementColor = 'grey';
     let types;
 
-    const typesRecord = Object.keys(config.record_types).map(function(key) {
-        return {prefix: 't_', name: key, color: config.record_types[key]}; });
+    const typesRecord = Object.keys(config.record_types)
+        .map(function(key) { return {prefix: 'n_', name: key, color: config.record_types[key] || replacementColor}; });
 
-    const typesLinks = Object.keys(config.link_types).map(function(key) {
-        return {prefix: 'l_', name: key, color: config.link_types[key].color}; });
+    const typesLinks = Object.keys(config.link_types)
+        .map(function(key) { return {prefix: 'l_', name: key, color: config.link_types[key].color || replacementColor}; });
 
     types = typesRecord.concat(typesLinks);
 
     // map the CSS syntax
 
-    let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.name}); fill:var(--${type.name}); stroke:var(--${type.name});}`)
+    let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.prefix}${type.name}); fill:var(--${type.prefix}${type.name}); stroke:var(--${type.prefix}${type.name});}`)
 
     // add specifics parametered colors from config
-    types.push({name: 'highlight', color: config.graph_config.highlight_color});
-    types.push({name: 'link', color: config.graph_config.link.color});
+    types.push({prefix: '', name: 'highlight', color: config.graph_config.highlight_color});
 
-    let globalsStyles = types.map(type => `--${type.name}: ${type.color};`)
+    let globalsStyles = types.map(type => `--${type.prefix}${type.name}: ${type.color};`)
 
     globalsStyles = globalsStyles.join('\n'); // array to sting…
     colorsStyles = colorsStyles.join('\n'); // …by line breaks

@@ -140,7 +140,7 @@ function initializeDisplay() {
     }
 
     // node class
-    circles.attr("class", (d) => "t_" + d.type);
+    circles.attr("class", (d) => "n_" + d.type);
 }
 
 /**
