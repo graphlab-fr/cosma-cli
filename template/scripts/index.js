@@ -35,6 +35,13 @@ const indexContainer = document.getElementById('index');
  */
 
 function activeFromParent(child) {
+    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
+        activeElt.style.borderColor = null;
+    }
+
     child.classList.add('active')
     child.style.borderColor = 'black';
 }
@@ -46,11 +53,21 @@ function activeFromParent(child) {
 
 function unactiveFromParent(parent) {
     const activeElt = parent.querySelector('.active');
+    console.log(activeElt);
 
     if (activeElt) {
         activeElt.classList.remove('active')
         activeElt.style.borderColor = null;
     }
+}
+
+/**
+ * Hide items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function unactiveTagsButton() {
+    unactiveFromParent(document.getElementById('tags-container'));
 }
 
 /**
