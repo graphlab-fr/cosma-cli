@@ -24,6 +24,7 @@ const historique = {
 
         // change page title
         document.title = recordTitle + ' - Cosma';
+        window.location.hash = recordId;
     },
     init: function(recordId, recordTitle) {
         history.pushState({hist : [recordId]}, recordTitle);
