@@ -43,7 +43,6 @@ function activeFromParent(child) {
     }
 
     child.classList.add('active')
-    child.style.borderColor = 'black';
 }
 
 /**
@@ -57,7 +56,6 @@ function unactiveFromParent(parent) {
 
     if (activeElt) {
         activeElt.classList.remove('active')
-        activeElt.style.borderColor = null;
     }
 }
 
