@@ -152,7 +152,7 @@ function addView(name, key) {
 
     if (!name) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a view name.'); }
-    if (!color) {
+    if (!key) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a view key.'); }
 
     if (config.views === undefined) {
