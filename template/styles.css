@@ -78,8 +78,7 @@ li.filter label {
 }
 
 /* INDEX */
-
-.search-bar { width: 100%; margin-bottom: 0.8rem; }
+.search-bar { width: 100%; margin: 0.8rem 0; }
 #search-result-list { margin-bottom: 0.8rem; }
 
 aside {
@@ -275,15 +274,11 @@ article#credits dd, article#credits li {
 	padding: 0 0 0.5rem 0;
 }
 
-details {
-	border-top: 1px solid var(--gray);
-	padding: 0.5rem 0;
-}
-
+details { padding: 0.6rem 0; }
+details:not(:first-of-type) {
+	border-top: 1px solid var(--gray); }
 details[data-sort] .sort-box:not(.active) {
-	display: none;
-}
-
+	display: none; }
 details>summary {
 	cursor: pointer;
 	font-family: sans-serif;
@@ -291,10 +286,7 @@ details>summary {
 	font-weight: bold;
 	outline: none;
 }
-
-summary+button {
-	margin: 1rem 0;
-}
+summary+button { margin: 1rem 0; }
 
 .list-content ul {
 	list-style: none;
