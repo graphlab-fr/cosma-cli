@@ -67,7 +67,7 @@
 
                 <div id="tags-container" class="sort-box active">
                     {% for tag in tags %}
-                    <button class="btn" data-tag="{{ loop.index }}" onclick="activeTagButton(this);unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                    <button class="btn" data-tag="{{ loop.index }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
                         {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                     </button>
                     {% endfor %}
@@ -75,7 +75,7 @@
 
                 <div class="sort-box">
                     {% for tag in tags | reverse %}
-                    <button class="btn" data-tag="{{ loop.length - loop.index0 }}" onclick="activeTagButton(this);unlightNodes();highlightNodes([{{ tag.nodes | join(',') }}])">
+                    <button class="btn" data-tag="{{ loop.length - loop.index0 }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
                         {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                     </button>
                     {% endfor %}

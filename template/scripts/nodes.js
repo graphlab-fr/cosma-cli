@@ -52,6 +52,12 @@ function unlightNodes() {
         elt.style.fill = null;
     }
 
+    if (view.activeTag !== undefined) {
+        // if there is an active tag, remove the highlight of its button
+        document.querySelectorAll('[data-tag="' + view.activeTag + '"]')
+            .forEach(button => { button.classList.remove('active'); });
+    }
+
     view.highlightedNodes = [];
     resetHighlightBtn.style = null;
 }
