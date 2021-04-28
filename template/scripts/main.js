@@ -14,20 +14,20 @@ const view = {
 
 const historique = {
     actualiser: function(recordId, recordTitle) {
+        const url = new URL('#' + recordId, window.location);
         // add opened record id to history
-        if (history.state == null) { this.init(recordId, recordTitle); }
+        if (history.state == null) { this.init(recordId, recordTitle, url); }
         else {
             const timeline = history.state.hist;
             timeline.push(recordId);
-            history.pushState({hist : timeline}, recordTitle);
+            history.pushState({hist : timeline}, recordTitle, url);
         }
 
         // change page title
         document.title = recordTitle + ' - Cosma';
-        window.location.hash = recordId;
     },
-    init: function(recordId, recordTitle) {
-        history.pushState({hist : [recordId]}, recordTitle);
+    init: function(recordId, recordTitle, url) {
+        history.pushState({hist : [recordId]}, recordTitle, url);
     }
 }
 
