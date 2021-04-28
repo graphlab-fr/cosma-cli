@@ -7,6 +7,8 @@ const view = {
         isolateId: undefined, 
         // actualised from record.js
         openedRecord: undefined,
+        // actualised from index.js
+        activeTag: undefined,
         // actualised from zoom.js
         position: {x: 0, y: 0, zoom: 1}
     }

@@ -30,6 +30,25 @@ const indexContainer = document.getElementById('index');
 })();
 
 /**
+ * Highligth clicked tag button & unligth the last activated
+ * @param {HTMLElement} button - clicked tag button
+ */
+
+ function activeTagButton(button) {
+    if (view.activeTag !== undefined) {
+        document.querySelectorAll('[data-tag="' + view.activeTag + '"]')
+            .forEach(button => { button.classList.remove('active'); });
+    }
+
+    const tagId = button.dataset.tag;
+
+    document.querySelectorAll('[data-tag="' + tagId + '"]')
+        .forEach(button => { button.classList.add('active'); });
+
+    view.activeTag = tagId;
+}
+
+/**
  * Highligth clicked element and unlighligth the others from the same parent
  * @param {HTMLElement} child - clicked element
  */
