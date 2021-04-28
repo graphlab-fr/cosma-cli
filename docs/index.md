@@ -3,7 +3,7 @@ title: Documentation de Cosma
 author:
   - Guillaume Brioudes <https://myllaume.fr/>
   - Arthur Perret <https://www.arthurperret.fr/>
-date: 2021-04-27
+date: 2021-04-28
 lang: fr-FR
 ---
 
