@@ -15,7 +15,7 @@ const baseConfig = {
         highlight_color: 'red',
         text_size: 10,
         position: { x: 5, y: 5 },
-        attraction: { force: -50, min: 1, max: 500, verticale: 5, horizontale: 5 },
+        attraction: { force: -50, max: 250, verticale: 0, horizontale: 0 },
         arrows: false
       }
 };

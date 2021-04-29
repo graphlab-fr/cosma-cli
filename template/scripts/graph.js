@@ -49,19 +49,18 @@ function updateForces() {
     // get each force by name and update the properties
 
     simulation.force("center")
-        .x(width * graphProperties.position.x / 10)
-        .y(height * graphProperties.position.y / 10);
+        .x(width * graphProperties.position.x)
+        .y(height * graphProperties.position.y);
 
     simulation.force("charge")
         .strength(graphProperties.attraction.force)
-        .distanceMin(graphProperties.attraction.min)
         .distanceMax(graphProperties.attraction.max);
 
     simulation.force("forceX")
-    .strength(graphProperties.attraction.horizontale / 10)
+        .strength(graphProperties.attraction.horizontale)
 
     simulation.force("forceY")
-        .strength(graphProperties.attraction.verticale / 10)
+        .strength(graphProperties.attraction.verticale)
 
     simulation.force("link")
         .id((d) => d.id)
