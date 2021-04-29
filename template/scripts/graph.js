@@ -128,13 +128,13 @@ function initializeDisplay() {
             let label = '';
 
             for (let i = 0; i < words.length; i++) {
-                const word = words[i];
-                
-                label += word + ' ';
+                label += words[i] + ' ';
+
                 if (label.length < max && i !== words.length - 1) { continue; }
+
                 text.append("tspan")
                     .attr('x', 0)
-                    .attr('dy', '1em')
+                    .attr('dy', '1.2em')
                     .text(label.slice(0, -1));
     
                 label = '';
@@ -142,7 +142,7 @@ function initializeDisplay() {
         })
         .attr('font-size', graphProperties.text_size)
         .attr('x', 0)
-        .attr('y', (d) => 10 + d.size)
+        .attr('y', (d) => d.size)
         .attr('dominant-baseline', 'middle')
         .attr('text-anchor', 'middle');
 
