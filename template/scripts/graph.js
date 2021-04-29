@@ -49,8 +49,8 @@ function updateForces() {
     // get each force by name and update the properties
 
     simulation.force("center")
-        .x(width * graphProperties.position.x)
-        .y(height * graphProperties.position.y);
+        .x(width * graphProperties.position.x / 10)
+        .y(height * graphProperties.position.y / 10);
 
     simulation.force("charge")
         .strength(graphProperties.attraction.force)
@@ -58,10 +58,10 @@ function updateForces() {
         .distanceMax(graphProperties.attraction.max);
 
     simulation.force("forceX")
-    .strength(graphProperties.attraction.horizontale)
+    .strength(graphProperties.attraction.horizontale / 10)
 
     simulation.force("forceY")
-        .strength(graphProperties.attraction.verticale)
+        .strength(graphProperties.attraction.verticale / 10)
 
     simulation.force("link")
         .id((d) => d.id)
@@ -72,6 +72,13 @@ function updateForces() {
 }
 
 window.updateForces = updateForces;
+
+function updateGraphTextSize() {
+    node.selectAll("text")
+        .attr('font-size', graphProperties.text_size);
+}
+
+window.updateGraphTextSize = updateGraphTextSize;
 
 /**
  * Initialize visualisation
@@ -115,7 +122,7 @@ function initializeDisplay() {
 
     labels = node.append("text")
       .text((d) => d.label)
-      .attr('font-size', 10)
+      .attr('font-size', graphProperties.text_size)
       .attr('x', 0)
       .attr('y', (d) => 10 + d.size)
       .attr('dominant-baseline', 'middle')

@@ -130,27 +130,33 @@
             <details class="controls">
                 <summary class="menu-title">Paramètres du graphe</summary>
 
-                {% macro inputRange(name, graphParameter, defaultValue, min, max) %}
-                <form oninput="graphProperties.{{ graphParameter }} = range.value; updateForces();">
+                {% macro inputRange(name, graphParameter, fx, defaultValue, min, max) %}
+                <form oninput="graphProperties.{{ graphParameter }} = range.value; {{ fx }}">
                     <label>{{ name }}</label>
-                    <input type="number" value="{{ defaultValue }}" name="number" oninput="range.value = number.value"/>
+                    <input type="number" value="{{ defaultValue }}" name="number" min="{{ min }}" max="{{ max }}" oninput="range.value = number.value"/>
                     <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step=".1" oninput="number.value = range.value"/>
                 </form>
                 {% endmacro %}
 
                 <article>
                     <p>Attraction</p>
-                    {{ inputRange('force', 'attraction.force', graphConfig.attraction.force, -200, 50) }}
-                    {{ inputRange('min', 'attraction.min', graphConfig.attraction.min, 0, 50) }}
-                    {{ inputRange('max', 'attraction.max', graphConfig.attraction.max, 0, 2000 ) }}
-                    {{ inputRange('verticale', 'attraction.verticale', graphConfig.attraction.verticale, 0, 1) }}
-                    {{ inputRange('horizontale', 'attraction.horizontale', graphConfig.attraction.horizontale, 0, 1) }}
+                    {{ inputRange('force', 'attraction.force', 'updateForces()', graphConfig.attraction.force, -200, 50) }}
+                    {{ inputRange('min', 'attraction.min', 'updateForces()', graphConfig.attraction.min, 0, 50) }}
+                    {{ inputRange('max', 'attraction.max', 'updateForces()', graphConfig.attraction.max, 0, 2000 ) }}
+                    {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graphConfig.attraction.verticale, 0, 10) }}
+                    {{ inputRange('horizontale', 'attraction.horizontale', 'updateForces()', graphConfig.attraction.horizontale, 0, 10) }}
                 </article>
 
                 <article>
                     <p>Position</p>
-                    {{ inputRange('x', 'position.x', graphConfig.position.x, 0, 1, '') }}
-                    {{ inputRange('y', 'position.y', graphConfig.position.y, 0, 1, '') }}
+                    {{ inputRange('x', 'position.x', 'updateForces()', graphConfig.position.x, 0, 10) }}
+                    {{ inputRange('y', 'position.y', 'updateForces()', graphConfig.position.y, 0, 10) }}
+                </article>
+
+                <article>
+                    <p>Nœuds</p>
+                    {{ inputRange('taille', 'node_size', 'updateForces()', graphConfig.node_size, 0, 3, '') }}
+                    {{ inputRange('texte', 'text_size', 'updateGraphTextSize()', graphConfig.text_size, 5, 15, '') }}
                 </article>
             </details>
 

@@ -13,9 +13,9 @@ const baseConfig = {
     graph_config: {
         background_color: 'white',
         highlight_color: 'red',
-        position: { x: 0.5, y: 0.5 },
-        attraction: { force: -50, min: 1, max: 500, verticale: 0.1, horizontale: 0.1 },
-        node: { size_coeff: 1 },
+        text_size: 10,
+        position: { x: 5, y: 5 },
+        attraction: { force: -50, min: 1, max: 500, verticale: 5, horizontale: 5 },
         arrows: false
       }
 };
