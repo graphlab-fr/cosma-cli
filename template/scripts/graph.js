@@ -105,28 +105,46 @@ function initializeDisplay() {
         })
 
     circles = node.append("circle")
-      .attr("r", (d) => d.size)
-      .call(d3.drag()
-            .on("start", function(d) {
-                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                d.fx = d.x;
-                d.fy = d.y; })
-            .on("drag", function(d) {
-                d.fx = d3.event.x;
-                d.fy = d3.event.y; })
-            .on("end", function(d) {
-                if (!d3.event.active) simulation.alphaTarget(0.0001);
-                d.fx = null;
-                d.fy = null;
-            }));
+        .attr("r", (d) => d.size)
+        .call(d3.drag()
+                .on("start", function(d) {
+                    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+                    d.fx = d.x;
+                    d.fy = d.y; })
+                .on("drag", function(d) {
+                    d.fx = d3.event.x;
+                    d.fy = d3.event.y; })
+                .on("end", function(d) {
+                    if (!d3.event.active) simulation.alphaTarget(0.0001);
+                    d.fx = null;
+                    d.fy = null; })
+        );
 
     labels = node.append("text")
-      .text((d) => d.label)
-      .attr('font-size', graphProperties.text_size)
-      .attr('x', 0)
-      .attr('y', (d) => 10 + d.size)
-      .attr('dominant-baseline', 'middle')
-      .attr('text-anchor', 'middle');
+        .each(function(d) {
+            const words = d.label.split(' ')
+                , max = 25
+                , text = d3.select(this);
+            let label = '';
+
+            for (let i = 0; i < words.length; i++) {
+                const word = words[i];
+                
+                label += word + ' ';
+                if (label.length < max && i !== words.length - 1) { continue; }
+                text.append("tspan")
+                    .attr('x', 0)
+                    .attr('dy', '1em')
+                    .text(label.slice(0, -1));
+    
+                label = '';
+            }
+        })
+        .attr('font-size', graphProperties.text_size)
+        .attr('x', 0)
+        .attr('y', (d) => 10 + d.size)
+        .attr('dominant-baseline', 'middle')
+        .attr('text-anchor', 'middle');
 
     link.attr("class", (d) => 'l_' + d.type)
         .attr("data-source", (d) => d.source)
