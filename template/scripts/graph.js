@@ -54,7 +54,7 @@ function updateForces() {
 
     simulation.force("charge")
         .strength(graphProperties.attraction.force)
-        .distanceMax(graphProperties.attraction.max);
+        .distanceMax(graphProperties.attraction.distance_max);
 
     simulation.force("forceX")
         .strength(graphProperties.attraction.horizontale)
