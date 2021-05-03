@@ -28,6 +28,7 @@ Ils pourront actualiser les documentations en utilisant les commandes et outils 
 - [GitHub Pages Import](https://github.com/c-w/ghp-import)
 
 ```
+npm install --dev
 npm run doc-gen
 npm run doc-upload
 ```
