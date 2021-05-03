@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activeFromParent">activeFromParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activeTagButton">activeTagButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#changeView">changeView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#closeRecord">closeRecord</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#displayFromIndex">displayFromIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#displayNodes">displayNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#explodeNode">explodeNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#filterOff">filterOff</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#filterOn">filterOn</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getFiltedNodes">getFiltedNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getNodeNetwork">getNodeNetwork</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#hideFromIndex">hideFromIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#hideNodes">hideNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#highlightNodes">highlightNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isolate">isolate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isolateByElement">isolateByElement</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#openRecord">openRecord</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerView">registerView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#resetNodes">resetNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#saveView">saveView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setFilters">setFilters</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#translate">translate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unactiveFromParent">unactiveFromParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unactiveTagsButton">unactiveTagsButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unlightNodes">unlightNodes</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const indexContainer = document.getElementById('index');
+
+/**
+ * Display/hide lists from a 'data-sort' container
+ * and animate the arrow
+ */
+
+ (function () {
+    const sortContainer = document.querySelectorAll('[data-sort]');
+    for (const container of sortContainer) {
+        const box = container.querySelectorAll('.sort-box')
+            , increasing = box[0]
+            , decreasing = box[1]
+            , btn = container.querySelector('.sort-btn');
+
+        let isIncreasing = true;
+
+        btn.addEventListener('click', () => {
+            if (isIncreasing) {
+                btn.textContent = 'Z-A';
+                increasing.classList.remove('active'); decreasing.classList.add('active');
+                isIncreasing = false;
+            } else {
+                btn.textContent = 'A-Z';
+                increasing.classList.add('active'); decreasing.classList.remove('active');
+                isIncreasing = true;
+            }
+        });
+    }
+})();
+
+/**
+ * Highligth clicked tag button
+ * @param {HTMLElement} button - clicked tag button
+ */
+
+ function activeTagButton(button) {
+    const tagId = button.dataset.tag;
+
+    document.querySelectorAll('[data-tag="' + tagId + '"]')
+        .forEach(button => { button.classList.add('active'); });
+
+    view.activeTag = tagId;
+}
+
+/**
+ * Highligth clicked element and unlighligth the others from the same parent
+ * @param {HTMLElement} child - clicked element
+ */
+
+function activeFromParent(child) {
+    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
+        activeElt.style.borderColor = null;
+    }
+
+    child.classList.add('active')
+}
+
+/**
+ * Unlighligth all activated elements from parent
+ * @param {HTMLElement} parent - parent of elements
+ */
+
+function unactiveFromParent(parent) {
+    const activeElt = parent.querySelector('.active');
+    console.log(activeElt);
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
+    }
+}
+
+/**
+ * Hide items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function unactiveTagsButton() {
+    unactiveFromParent(document.getElementById('tags-container'));
+}
+
+/**
+ * Hide items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function hideFromIndex(nodesIds) {
+    for (const indexItem of nodesIds) {
+        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+            .forEach(elt => {
+                elt.style.display = 'none';
+            });
+    }
+}
+
+/**
+ * Display items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function displayFromIndex(nodesIds) {
+    for (const indexItem of nodesIds) {
+        indexContainer.querySelector('[data-index="' + indexItem + '"]')
+            .style.display = null;
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 11:53:24 GMT+0200 (heure d’été d’Europe centrale) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

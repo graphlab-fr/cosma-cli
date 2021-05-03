@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>zoom.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activeFromParent">activeFromParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activeTagButton">activeTagButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#changeView">changeView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#closeRecord">closeRecord</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#displayFromIndex">displayFromIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#displayNodes">displayNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#explodeNode">explodeNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#filterOff">filterOff</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#filterOn">filterOn</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getFiltedNodes">getFiltedNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getNodeNetwork">getNodeNetwork</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#hideFromIndex">hideFromIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#hideNodes">hideNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#highlightNodes">highlightNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isolate">isolate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isolateByElement">isolateByElement</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#openRecord">openRecord</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerView">registerView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#resetNodes">resetNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#saveView">saveView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setFilters">setFilters</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#translate">translate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unactiveFromParent">unactiveFromParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unactiveTagsButton">unactiveTagsButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unlightNodes">unlightNodes</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">zoom.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Make zoom functionnal
+ */
+
+(function () {
+
+    const zoomInterval = 0.3 // interval between two (de)zoom
+        , zoomMax = 3
+        , zoomMin = 0.6;
+    
+    svg.call(d3.zoom().on('zoom', function () {
+        // for each move one the SVG
+        if (d3.event.sourceEvent.type === 'wheel') {
+            // by mouse wheel
+            if (d3.event.sourceEvent.deltaY >= 0) {
+                zoomLess();
+            } else {
+                zoomMore();
+            }
+        }
+    
+        if (d3.event.sourceEvent.type === 'mousemove') {
+            // by drag and move with mouse
+            view.position.x += d3.event.sourceEvent.movementX;
+            view.position.y += d3.event.sourceEvent.movementY;
+    
+            translate();
+        }
+    }));
+
+    function zoomMore() {
+        view.position.zoom += zoomInterval;
+    
+        if (view.position.zoom >= zoomMax) {
+            view.position.zoom = zoomMax; }
+    
+        translate();
+    }
+    
+    function zoomLess() {
+        view.position.zoom -= zoomInterval;
+    
+        if (view.position.zoom &lt;= zoomMin) {
+            view.position.zoom = zoomMin; }
+    
+        translate();
+    }
+    
+    function zoomReset() {
+        view.position.zoom = 1;
+        view.position.x = 0;
+        view.position.y = 0;
+    
+        translate();
+    }
+    
+    // export functions on global name space
+    window.zoomMore = zoomMore;
+    window.zoomLess = zoomLess;
+    window.zoomReset = zoomReset;
+    
+})();
+
+/**
+ * Change 'style' attribute of SVG to change view
+ */
+    
+function translate() {
+    document.querySelector('#graph_canvas')
+        .setAttribute('style', `transform:translate(${view.position.x}px, ${view.position.y}px) scale(${view.position.zoom});`);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 11:53:24 GMT+0200 (heure d’été d’Europe centrale) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

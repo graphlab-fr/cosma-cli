@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>filter.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activeFromParent">activeFromParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#activeTagButton">activeTagButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#changeView">changeView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#closeRecord">closeRecord</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#displayFromIndex">displayFromIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#displayNodes">displayNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#explodeNode">explodeNode</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#filterOff">filterOff</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#filterOn">filterOn</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getFiltedNodes">getFiltedNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getNodeNetwork">getNodeNetwork</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#hideFromIndex">hideFromIndex</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#hideNodes">hideNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#highlightNodes">highlightNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isolate">isolate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#isolateByElement">isolateByElement</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#openRecord">openRecord</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerView">registerView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#resetNodes">resetNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#saveView">saveView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#setFilters">setFilters</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#translate">translate</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unactiveFromParent">unactiveFromParent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unactiveTagsButton">unactiveTagsButton</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#unlightNodes">unlightNodes</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">filter.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
+    , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
+
+filters = filters.map(function(btn) {
+    // extract nodes id affected by the filter from the linked button
+    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
+    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
+});
+
+/**
+ * Select filters btns and activate them
+ */
+
+(function() {
+    for (const filter of filters) {
+        const btn = filter.btn;
+        btn.dataset.active = 'true';
+
+        btn.addEventListener('click', () => {
+            if (btn.dataset.active === 'true') {
+                filterOff(filter); }
+            else {
+                filterOn(filter); }
+        });
+    }
+})();
+
+/**
+ * Activate filters by their name
+ * @param {array} filtersToActivate - List of filter names
+ */
+
+function setFilters(filtersToActivate) {
+    for (const filter of filters) {
+        if (filtersToActivate.indexOf(filter.name) !== -1) {
+            // if filter is "ToActivate"
+            filterOff(filter);
+        }
+        else {
+            filterOn(filter);
+        }
+    }
+}
+
+/**
+ * Activate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked &amp; name
+ */
+
+function filterOn(filterObj) {
+    displayNodes(filterObj.nodeIds);
+    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
+    filterObj.btn.checked = true;
+    filterObj.btn.dataset.active = 'true';
+}
+
+/**
+ * Desactivate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked &amp; name
+ */
+
+function filterOff(filterObj) {
+    hideNodes(filterObj.nodeIds);
+    view.activeFilters.push(filterObj.name);
+    filterObj.btn.checked = false;
+    filterObj.btn.dataset.active = 'false';
+}
+
+/**
+ * Get ids list from hiden (by filter) nodes
+ * @returns {array} - Ids list (integer value)
+ */
+
+function getFiltedNodes() {
+    let nodeIds = document.querySelectorAll('[data-filter][data-active="false"]');
+    return nodeIds = Array.from(nodeIds)
+        .map(filter => filter.dataset.filter.split(',')).flat()
+        .map(nodeId => Number(nodeId));
+}
+
+/**
+ * Display some nodes, hide all others
+ * turn on the 'isolateMode'
+ * @param {array} - Ids from nodes to keep displayed
+ */
+
+function isolate(nodeIds) {
+    view.isolateMode = false;
+    resetIsolateBtn.style.display = 'block';
+
+    let idsToHide = [];
+
+    index = index.map(function(item) {
+        if (nodeIds.indexOf(item.id) !== -1) {
+            // if item is one of the nodeIds
+            item.isolated = true;
+        } else {
+            item.isolated = false;
+            idsToHide.push(item.id);
+        }
+        return item;
+    });
+    // display nodeIds if their are not filtered
+    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+
+    hideNodes(idsToHide);
+    view.isolateMode = true;
+    displayNodes(idsToDisplay);
+}
+
+/**
+ * Launch isolate() from the onclick attribute of an identified element
+ * @param {string} - Id of the element for extract nodes ids
+ */
+
+function isolateByElement(eltId) {
+    if (eltId === undefined) { return; }
+
+    let nodeIds = window[eltId];
+    nodeIds = nodeIds.getAttribute('onclick');
+    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
+    nodeIds = nodeIds.split(',');
+    nodeIds = nodeIds.map(id => Number(id));
+    isolate(nodeIds);
+
+    view.isolateId = eltId;
+}
+
+/**
+ * Display nodes hidden by isolate(),
+ * if their are not filtered
+ */
+
+function resetNodes() {
+    view.isolateId = undefined;
+
+    const idsToDisplay = index
+        .filter(item => item.isolated === false &amp;&amp; getFiltedNodes().indexOf(item.id) === -1)
+        .map(item => item.id);
+
+    index = index.map(function(item) {
+        if (item.isolated === true) {
+            item.isolated === false; }
+
+        return item;
+    });
+
+    view.isolateMode = false;
+    displayNodes(idsToDisplay);
+
+    unactiveFromParent(document.getElementById('views-container'));
+
+    resetIsolateBtn.style.display = null;
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 11:53:24 GMT+0200 (heure d’été d’Europe centrale) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

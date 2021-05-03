@@ -1,211 +1,55 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR" xml:lang="fr-FR" >
+<html lang="fr">
 
 <head>
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-<meta name="author" content="Guillaume Brioudes https://myllaume.fr/" />
-<meta name="author" content="Arthur Perret https://www.arthurperret.fr/" />
-<meta name="dcterms.date" content="2021-04-28" />
-<title>Documentation de Cosma</title>
-
-<link rel="stylesheet" href="style.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuel d'utilisation de l'Otletosphère</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    	main {margin: 0 auto; width: 800px;}
+		h1.title {line-height: 1.5}
+		ul.languages {
+			list-style: none;
+			padding: 0;
+			max-width: 300px;
+			margin: 0 auto;
+		}
+		ul.languages a {
+			display: block;
+			background: rgb(241, 241, 241);
+			padding: 2rem;
+			margin: 0.2rem 0;
+			text-decoration: none;
+			font-size: 1.5rem;
+			text-align: center;
+		}
+		ul.languages a:hover {
+			background: #ccc;
+		}
+    </style>
 </head>
 
 <body>
 
+    <main>
+        <h1 class="title">Documentation de Cosma<br/>Documentation of Cosma</h1>
 
-<nav id="TOC" role="doc-toc">
-<ul>
-<li><a href="#presentation"><span class="toc-section-number">1</span> Présentation</a>
-<ul>
-<li><a href="#modularite"><span class="toc-section-number">1.1</span> Modularité</a></li>
-<li><a href="#interoperabilite"><span class="toc-section-number">1.2</span> Interopérabilité</a></li>
-<li><a href="#portabilite"><span class="toc-section-number">1.3</span> Portabilité</a></li>
-</ul></li>
-<li><a href="#installation"><span class="toc-section-number">2</span> Installation</a>
-<ul>
-<li><a href="#pre-requis"><span class="toc-section-number">2.1</span> Pré-requis</a></li>
-<li><a href="#telechargement"><span class="toc-section-number">2.2</span> Téléchargement</a></li>
-<li><a href="#installation-1"><span class="toc-section-number">2.3</span> Installation</a></li>
-</ul></li>
-<li><a href="#configuration"><span class="toc-section-number">3</span> Configuration</a></li>
-<li><a href="#utilisation-du-cosmographe"><span class="toc-section-number">4</span> Utilisation du cosmographe</a></li>
-<li><a href="#utilisation-du-cosmoscope"><span class="toc-section-number">5</span> Utilisation du cosmoscope</a>
-<ul>
-<li><a href="#graphe"><span class="toc-section-number">5.1</span> Graphe</a></li>
-<li><a href="#index"><span class="toc-section-number">5.2</span> Index</a></li>
-<li><a href="#moteur-de-recherche"><span class="toc-section-number">5.3</span> Moteur de recherche</a></li>
-<li><a href="#filtres"><span class="toc-section-number">5.4</span> Filtres</a></li>
-<li><a href="#mots-cles"><span class="toc-section-number">5.5</span> Mots-clés</a></li>
-<li><a href="#parametres-du-graphe"><span class="toc-section-number">5.6</span> Paramètres du graphe</a></li>
-<li><a href="#vues"><span class="toc-section-number">5.7</span> Vues</a></li>
-<li><a href="#fiches"><span class="toc-section-number">5.8</span> Fiches</a></li>
-</ul></li>
-<li><a href="#credits"><span class="toc-section-number">6</span> Crédits</a>
-<ul>
-<li><a href="#equipe"><span class="toc-section-number">6.1</span> Équipe</a></li>
-<li><a href="#bibliotheques-utilisees"><span class="toc-section-number">6.2</span> Bibliothèques utilisées</a></li>
-</ul></li>
-</ul>
-</nav>
+		<h2>Pour les utilisateurs<br/>For users</h2>
 
-<main>
-<article>
-<h1 class="title">Documentation de Cosma</h1>
-<p>Cosma est un logiciel de visualisation de graphe documentaire. Il permet de représenter des notes interreliées sous la forme d’un réseau interactif dans une interface web. Le logiciel est conçu pour fonctionner avec des fichiers texte en Markdown et s’adapte aussi bien à une petite collection (centaine de documents) qu’à une vaste documentation (jusqu’à plusieurs milliers de documents).</p>
-<p>Cosma est développé dans le cadre du programme de recherche ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a>.</p>
-<div class="sommaire">
-<ol>
-<li><a href="#presentation">Présentation</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#utilisation-du-cosmographe">Utilisation du cosmographe</a></li>
-<li><a href="#utilisation-du-cosmoscope">Utilisation du cosmoscope</a></li>
-</ol>
-</div>
-<h1 data-number="1" id="presentation"><span class="header-section-number">1</span> Présentation</h1>
-<p>Le logiciel repose sur trois principes : la modularité, l’interopérabilité et la portabilité.</p>
-<h2 data-number="1.1" id="modularite"><span class="header-section-number">1.1</span> Modularité</h2>
-<p>Cosma fonctionne avec un répertoire de fichiers au format texte. Vous pouvez gérer librement vos fichiers : stockage local uniquement, synchronisation via un service tiers comme Dropbox, versionnement avec git… Installez Cosma, indiquez-lui où sont vos fichiers et continuez à travailler avec votre éditeur de texte favori. Désinstaller Cosma n’a aucune incidence sur vos fichiers.</p>
-<h2 data-number="1.2" id="interoperabilite"><span class="header-section-number">1.2</span> Interopérabilité</h2>
-<p>Les logiciels s’envolent mais les données restent. Cosma ne prescrit pas de logiciel d’écriture, mais son fonctionnement repose sur l’adoption simultanée de plusieurs normes d’écriture qui visent à accroître l’interopérabilité et la pérennité des données :</p>
-<ul>
-<li>YAML pour la configuration du logiciel et les métadonnées des fichiers ;</li>
-<li>Markdown pour le contenu des fichiers ;</li>
-<li>une syntaxe de type wiki (doubles crochets) pour créer des liens internes ;</li>
-<li>des identifiants uniques qui servent de cibles aux liens internes.</li>
-</ul>
-<p>Cet ensemble de normes correspond à l’intersection de plusieurs cultures textuelles : documentation, wikis, prise de notes avec la méthode Zettelkasten ou encore écriture académique avec Pandoc. Les environnements d’écriture qui partagent cette approche fonctionnent particulièrement bien en tandem avec Cosma.</p>
-<p>Exemples :</p>
-<ul>
-<li>l’éditeur Markdown <a href="https://zettlr.com">Zettlr</a> ;</li>
-<li>l’extension <a href="https://foambubble.github.io/foam/">Foam</a> pour les éditeurs Visual Studio Code et VSCodium.</li>
-</ul>
-<h2 data-number="1.3" id="portabilite"><span class="header-section-number">1.3</span> Portabilité</h2>
-<p>Cosma se divise en deux parties : le <strong>cosmographe</strong>, qui est une interface de fabrication, et le <strong>cosmoscope</strong>, qui est une interface de visualisation.</p>
-<p>Le <strong>cosmographe</strong> est un logiciel basé sur NodeJS qui inclut deux fonctionnalités principales. La première consiste à faciliter la création de documents aux normes de Cosma via un formulaire. La seconde consiste à lire un répertoire de documents, le modéliser sous la forme de données au format JSON, et générer un <strong>cosmoscope</strong> à partir de ces données.</p>
-<!-- Capture d'écran -->
-<p>Le <strong>cosmoscope</strong> est un fichier HTML à ouvrir avec un navigateur web. Il contient une représentation graphique interactive du répertoire de documents analysé par le cosmographe, avec de nombreuses fonctionnalités : graphe interactif, index, moteur de recherche, filtres d’affichage, enregistrement de vues, paramétrage de l’algorithme de dessin, affichage des documents avec liste des liens et rétroliens, etc.</p>
-<!-- Capture d'écran -->
-<p>Ce fichier HTML se suffit à lui-même : il contient à la fois les données et l’interface, sans aucune dépendance logicielle. Par conséquent, vous pouvez partager un cosmoscope aussi facilement que n’importe quelle pièce jointe, l’utiliser hors connexion ou encore le déposer sur un serveur pour le rendre public. Et Cosma stocke une copie de chaque cosmoscope généré dans un répertoire sur votre machine.</p>
-<h1 data-number="2" id="installation"><span class="header-section-number">2</span> Installation</h1>
-<h2 data-number="2.1" id="pre-requis"><span class="header-section-number">2.1</span> Pré-requis</h2>
-<p>Installer <a href="https://nodejs.org/fr/download/">NodeJS</a> version 12 ou supérieure.</p>
-<h2 data-number="2.2" id="telechargement"><span class="header-section-number">2.2</span> Téléchargement</h2>
-<p>Télécharger le dépôt git de Cosma en saisissant la commande ci-dessous dans un terminal, ou en cliquant sur le lien suivant : <a href="https://github.com/hyperotlet/cosma/archive/master.zip" class="uri">https://github.com/hyperotlet/cosma/archive/master.zip</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/hyperotlet/cosma.git</span></code></pre></div>
-<h2 data-number="2.3" id="installation-1"><span class="header-section-number">2.3</span> Installation</h2>
-<p>Installer les dépendances nécessaires au bon fonctionnement de l’application :</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cosma</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> i</span></code></pre></div>
-<p>Exécuter la commande suivante pour créer le fichier de configuration (<code>config.yml</code>) :</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app</span></code></pre></div>
-<h1 data-number="3" id="configuration"><span class="header-section-number">3</span> Configuration</h1>
-<p>Le fichier de configuration est au format YAML. La hiérarchie des paramètres est mise en œuvre par l’indentation, c’est-à-dire la présence d’espaces en début de ligne. L’utilisation de tabulations dans l’indentation est interdite en YAML. Pour l’unité d’indentation, il est conseillé de choisir un multiple de 2 (2 ou 4) et de s’y tenir pour tout le fichier.</p>
-<p>La configuration peut contenir les paramètres suivants :</p>
-<p><code>files_origin</code> : chemin du répertoire de fichiers à utiliser.</p>
-<p><code>export_target</code> : chemin vers le répertoire d’export des cosmoscopes.</p>
-<p><code>metas</code> (facultatif) : <!-- compléter --></p>
-<p><code>focus_max</code> (nombre entier) : distance maximale du mode focus. Le mode focus modifie l’affichage du graphe pour n’afficher que la fiche sélectionnée et ses connexions immédiates (distance = 1). On peut augmenter le rayon du mode focus pour étendre l’affichage au connexions des connexions (distance = 2) et ainsi de suite (distance = n). <code>focus_max</code> fixe une valeur maximum pour cette distance.</p>
-<p><code>record_types</code> : types de fiches. Forme : <code>nom: couleur</code> <!-- compléter --></p>
-<p><code>link_types</code> : types de liens.</p>
-<ul>
-<li><code>color</code> (nom de couleur prédéfini ou valeur RVB, HEX, HSL, RVBA et HSLA) : couleur du type de lien.</li>
-<li><code>stroke</code> <!-- compléter --></li>
-</ul>
-<p><code>graph_config</code> : paramètres de l’algorithme de dessin du graphe.</p>
-<ul>
-<li><code>position</code> : position <code>x</code> et <code>y</code> du graphe dans la page.</li>
-<li><code>attraction</code> <!-- compléter -->
-<ul>
-<li><code>force</code> <!-- compléter --></li>
-<li><code>min</code> <!-- compléter --></li>
-<li><code>max</code> <!-- compléter --></li>
-<li><code>verticale</code> <!-- compléter --></li>
-<li><code>horizontale</code> <!-- compléter --></li>
-</ul></li>
-<li><code>arrows</code> (booléen) <!-- compléter --></li>
-</ul>
-<p><code>minify</code> <!-- compléter --></p>
-<p><code>views</code> : vues enregistrées.</p>
-<!-- Exemple de configuration ? -->
-<h1 data-number="4" id="utilisation-du-cosmographe"><span class="header-section-number">4</span> Utilisation du cosmographe</h1>
-<p>Modifier le chemin vers les fichiers sources :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app import <span class="op">&lt;</span>path<span class="op">&gt;</span></span></code></pre></div>
-<p>Modifier le chemin d’export du cosmoscope :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app export <span class="op">&lt;</span>path<span class="op">&gt;</span></span></code></pre></div>
-<p>Ajouter des types valides :</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app atype <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>color<span class="op">&gt;</span></span></code></pre></div>
-<p>Créer une nouvelle fiche :</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app record</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app autorecord <span class="op">&lt;</span>titre<span class="op">&gt;</span> <span class="op">&lt;</span>type<span class="op">&gt;</span> <span class="op">&lt;</span>mots-clés<span class="op">&gt;</span></span></code></pre></div>
-<p><code>&lt;type&gt;</code> doit correspondre à l’un des types définis dans la configuration. <code>&lt;mots-clés&gt;</code> doit correspondre à une liste de mots-clés</p>
-<p>Ceci génère un fichier avec la structure suivante :</p>
-<pre><code>---
-title: Titre du document
-id: 20201209111625
-type: undefined
-tags:
-  - tag 1
-  - tag 2
----
+        <ul class="languages">
+            <li><a href="manuel-utilisation.html">🇫🇷  Français</a></li>
+            <li><a href="user-manuel.html">🇬🇧  English</a></li>
+        </ul>
 
-</code></pre>
-<p>L’identifiant <code>id</code> doit être une suite de chiffres unique.</p>
-<p>Par défaut, Cosma génère des identifiants à 14 chiffres par horodatage de la création du fichier (année, mois, jour, heure, minute et seconde), sur le modèle de certains logiciels de prise de notes type Zettelkasten comme <a href="https://zettelkasten.de/the-archive/">The Archive</a> ou <a href="https://www.zettlr.com">Zettlr</a>.</p>
-<p>Générer un cosmoscope :</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app modelize</span></code></pre></div>
-<p>Le fichier <code>cosmoscope.html</code> est exporté dans le répertoire défini dans la configuration. Ce fichier est également copié dans le répertoire <code>/history</code>, dans un sous-répertoire portant la date du jour, avec un sous-répertoire contenant les données au format JSON.</p>
-<p>Ajouter des vues :</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app aview <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>key<span class="op">&gt;</span></span></code></pre></div>
-<h1 data-number="5" id="utilisation-du-cosmoscope"><span class="header-section-number">5</span> Utilisation du cosmoscope</h1>
-<!-- Description générale, portabilité -->
-<h2 data-number="5.1" id="graphe"><span class="header-section-number">5.1</span> Graphe</h2>
-<p>Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante.</p>
-<!-- À compléter. Zoom etc. -->
-<h2 data-number="5.2" id="index"><span class="header-section-number">5.2</span> Index</h2>
-<p>Liste des fiches. L’affichage peut être trié par ordre alphabétique et par date de dernière modification (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.</p>
-<h2 data-number="5.3" id="moteur-de-recherche"><span class="header-section-number">5.3</span> Moteur de recherche</h2>
-<!-- Préciser la bibliothèque sous-jacente ? -->
-<p>Cliquer sur une suggestion sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.</p>
-<h2 data-number="5.4" id="filtres"><span class="header-section-number">5.4</span> Filtres</h2>
-<p>Correspondent aux types de fiches renseignés dans le fichier de configuration. Cliquer sur un filtre permet de masquer ou de réafficher les fiches du type correspondant dans le graphe, l’index et les suggestions du moteur de recherche.</p>
-<h2 data-number="5.5" id="mots-cles"><span class="header-section-number">5.5</span> Mots-clés</h2>
-<p>Correspondent à l’ensemble des mots-clés trouvés dans les fiches. Cliquer sur un mot-clé met en surbrillance toutes les fiches correspondantes dans le graphe.</p>
-<h2 data-number="5.6" id="parametres-du-graphe"><span class="header-section-number">5.6</span> Paramètres du graphe</h2>
-<p>Configuration des différentes forces simulées par l’algorithme de dessin du graphe. Les valeurs par défaut peuvent être modifiées dans le fichier de configuration.</p>
-<h2 data-number="5.7" id="vues"><span class="header-section-number">5.7</span> Vues</h2>
-<p>À tout moment, l’état de l’interface (fiche sélectionnée, filtres actifs, mode focus) peut être sauvegardé pour un accès plus rapide. Cliquer sur le bouton « Sauvegarder la vue » insère un code dans le presse-papier de l’utilisateur. Ce code peut être ajouté dans le fichier de configuration : ceci ajoute un bouton vers la vue en question dans les cosmoscopes générés ultérieurement.</p>
-<p>Exemple :</p>
-<pre><code>views:
-  Une vue intéressante: eyJwb3MiOnsieCI6MCwieSI6MCwiem9vbSI6MX19</code></pre>
-<h2 data-number="5.8" id="fiches"><span class="header-section-number">5.8</span> Fiches</h2>
-<p>Les fiches sont présentées dans un volet latéral qui permet de consulter leur contenu, modifier l’affichage du graphe et naviguer dans le graphe via les liens.</p>
-<p>Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud correspondant dans le graphe.</p>
-<p>Le contenu de la fiche est suivi d’une liste des fiches vers lesquelles elle renvoie (liens sortants) et des fiches qui pointent vers elle (liens entrants ou rétroliens).</p>
-<p>Cliquer sur les différents niveaux de focus permet de modifier l’affichage du graphe pour isoler le nœud correspondant à la fiche. Le bouton <code>1</code> isole la fiche et ses connexions immédiates (distance = 1). Les boutons suivants étendent le rayon (<code>focus</code>) aux connexions situées à plusieurs liens de distance jusqu’au maximum permis par le paramètre <code>focus_max</code> du fichier de configuration.</p>
-<h1 data-number="6" id="credits"><span class="header-section-number">6</span> Crédits</h1>
-<h2 data-number="6.1" id="equipe"><span class="header-section-number">6.1</span> Équipe</h2>
-<ul>
-<li><a href="https://www.arthurperret.fr">Arthur Perret</a> (chef de projet)</li>
-<li><a href="https://myllaume.fr/">Guillaume Brioudes</a> (développeur)</li>
-<li><a href="http://www.guidedesegares.info">Olivier Le Deuff</a> (chercheur)</li>
-<li><a href="https://mica.u-bordeaux-montaigne.fr/borel-clement/">Clément Borel</a> (chercheur)</li>
-</ul>
-<h2 data-number="6.2" id="bibliotheques-utilisees"><span class="header-section-number">6.2</span> Bibliothèques utilisées</h2>
-<p>Pour améliorer la maintenabilité et la lisibilité du code source, l’équipe de développement a recouru aux bibliothèques suivantes.</p>
-<!-- liste des dépendances sur le modèle suivant :
+		<h2>Pour les développeurs<br/>For developers</h2>
 
-- [Nom](lien) version (licence) : description
+        <ul class="languages">
+            <li><a href="documentation-code.html">🇫🇷  Français</a></li>
+            <li><a href="code-documentation.html">🇬🇧  English</a></li>
+        </ul>
 
--->
-</article>
-</main>
-
-
+    </main>
 
 </body>
 
