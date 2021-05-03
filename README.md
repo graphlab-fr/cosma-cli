@@ -1,4 +1,4 @@
-![logo de Cosma](template/cosmalogo.svg)
+# Cosma [![DOI](https://zenodo.org/badge/308555323.svg)](https://zenodo.org/badge/latestdoi/308555323)
 
 Cosma est un logiciel de visualisation de graphe documentaire. Il permet d’enregistrer et lire des fiches interreliées sous la forme d’un réseau interactif dans un navigateur web.
 
@@ -18,14 +18,14 @@ Il est basé sur [NodeJS](https://nodejs.org/fr/) (version 12 ou supérieure) et
 
 Lisez la documentation pour recevoir les informations **d’installation et d’utilisation** : https://hyperotlet.github.io/cosma/manuel-utilisation.html.
 
-# Maintenance
+# Mise à jour de la documentation
 
-Les développeurs seront intressés par la documentaiton technique de Cosma : https://hyperotlet.github.io/cosma/documentation-code.html.
-
-Ils pourront actualiser les documentations en utilisant les commandes et outils suivants :
+La documentation nécessite les outils suivants :
 
 - [Pandoc](https://pandoc.org/)
 - [GitHub Pages Import](https://github.com/c-w/ghp-import)
+
+Elle peut être mise à jour via les commandes suivantes :
 
 ```
 npm install --dev
