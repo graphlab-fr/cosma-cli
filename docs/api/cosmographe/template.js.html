@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>template.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addRecordType">addRecordType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addView">addView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#catchLinksFromContent">catchLinksFromContent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#colors">colors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#convertLinks">convertLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cosmoscope">cosmoscope</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#genMdFile">genMdFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRank">getRank</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#jsonData">jsonData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#levelsToRadius">levelsToRadius</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyExportPath">modifyExportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyImportPath">modifyImportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#normalizeLink">normalizeLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#register">register</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerTags">registerTags</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerType">registerType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#show">show</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">template.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const fs = require('fs')
+    , nunjucks = require('nunjucks')
+    , mdIt = require('markdown-it')()
+    , mdItAttr = require('markdown-it-attrs')
+    , linksTools = require('./links')
+    , config = require('./verifconfig').config;
+
+let types = {}
+    , tags = {};
+
+// markdown-it plugin for convertLinks()
+mdIt.use(mdItAttr, {
+    leftDelimiter: '{',
+    rightDelimiter: '}',
+    allowedAttributes: []
+})
+
+/**
+ * Templating &amp; create mass data &amp; config export for Cosmoscope's JavaScript processing
+ * @param {object} nodes - All graph nodes
+ * @param {object} links - All graph links
+ */
+
+function jsonData(nodes, links) {
+
+    const index = nodes.map(function(node) {
+        return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
+    });
+
+    const graphScript =
+`let index = ${JSON.stringify(index)};
+
+const graphProperties = ${JSON.stringify(config.graph_config)}
+
+// load the data
+let graph = ${JSON.stringify({nodes: nodes, links: links})};
+`;
+
+    fs.writeFileSync('./template/graph-data.js', graphScript, (err) => {
+        if (err) { return console.error( 'Err. write graph-data.js file : ' + err) }
+        console.log('create graph-data.js file');
+    });
+}
+
+exports.jsonData = jsonData;
+
+/**
+ * Templating &amp; create stylesheet with types from config
+ */
+
+function colors() {
+    // get types from config
+
+    const replacementColor = 'grey';
+    let types;
+
+    const typesRecord = Object.keys(config.record_types)
+        .map(function(key) { return {prefix: 'n_', name: key, color: config.record_types[key] || replacementColor}; });
+
+    const typesLinks = Object.keys(config.link_types)
+        .map(function(key) { return {prefix: 'l_', name: key, color: config.link_types[key].color || replacementColor}; });
+
+    types = typesRecord.concat(typesLinks);
+
+    // map the CSS syntax
+
+    let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.prefix}${type.name}); fill:var(--${type.prefix}${type.name}); stroke:var(--${type.prefix}${type.name});}`)
+
+    // add specifics parametered colors from config
+    types.push({prefix: '', name: 'highlight', color: config.graph_config.highlight_color});
+
+    let globalsStyles = types.map(type => `--${type.prefix}${type.name}: ${type.color};`)
+
+    globalsStyles = globalsStyles.join('\n'); // array to sting…
+    colorsStyles = colorsStyles.join('\n'); // …by line breaks
+
+    globalsStyles = ':root {\n' + globalsStyles + '\n}';
+
+    const content = '\n' + globalsStyles + '\n\n' + colorsStyles;
+
+    fs.writeFileSync('./template/colors.css', content, (err) => {
+        if (err) { console.error( 'Err. write color style file: ' + err) }
+    });
+}
+
+exports.colors = colors;
+
+/**
+ * Templating &amp; create the Cosmoscope file
+ * @param {array} files - All files array
+ * @param {string} path - History save path
+ */
+
+function cosmoscope(files, path) {
+
+    nunjucks.configure('template', { autoescape: true });
+    let htmlRender = nunjucks.render('template.njk', {
+
+        index: files.map(function (file) { // normalize files as records for Pug templating
+            file.content = linksTools.convertLinks(file.content, file);
+            registerType(file.metas.type, file.metas.id);
+            registerTags(file.metas.tags, file.metas.id);
+
+            return {
+                id: file.metas.id,
+                title: file.metas.title,
+                type: file.metas.type,
+                tags: file.metas.tags.join(', '), // array to string
+                mtime: file.metas.mtime,
+                content: mdIt.render(file.content), // Mardown to HTML
+                links: file.links,
+                backlinks: file.backlinks,
+                radius: ((file.focusLevels === null) ? [] : levelsToRadius(file.focusLevels))
+            }
+        }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
+        views: config.views || [],
+        graphConfig: config.graph_config,
+        // objects to objects array
+        types: Object.keys(types).map(function(type) {
+            return { name: type, nodes: types[type] };
+        }),
+        tags: Object.keys(tags).map(function(tag) {
+            return { name: tag, nodes: tags[tag] };
+        }).sort(function (a, b) { return a.name.localeCompare(b.name); }),
+        metas: config.metas
+    });
+
+    if (config.minify &amp;&amp; config.minify === true) {
+        const minifyHtml = require("@minify-html/js");
+        htmlRender = minifyHtml.minify(htmlRender, minifyHtml.createConfiguration({ minifyJs: true, minifyCss: true }))
+    }
+
+    fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
+        if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
+    });
+
+    fs.writeFile(config.export_target + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for export folder
+        if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
+        console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${files.length} records)`)
+    });
+}
+
+exports.cosmoscope = cosmoscope;
+
+/**
+ * Feed types object with file type
+ * @param {array} fileType - File type
+ * @param {int} fileId - File id
+ */
+
+function registerType(fileType, fileId) {
+    // create associate object key for type if not exist
+    if (types[fileType] === undefined) {
+        types[fileType] = []; }
+    // push the file id into associate object key
+    types[fileType].push(fileId);
+}
+
+/**
+ * Feed tags object with file tags
+ * @param {array} fileTagList - Tags list
+ * @param {int} fileId - File id
+ */
+
+function registerTags(fileTagList, fileId) {
+    for (const tag of fileTagList) {
+        // create associate object key for tag if not exist
+        if (tags[tag] === undefined) {
+            tags[tag] = []; }
+        // push the file id into associate object key
+        tags[tag].push(fileId);
+    }
+}
+
+/**
+ * Combining levels down to get radius fields
+ * @param {array} levels - Array contain one array per level
+ * @returns {array} - Array contain radius fields
+ */
+
+function levelsToRadius(levels) {
+    for (let i = 1; i &lt; levels.length; i++) {
+        // take previous array and concat it with the actual
+        levels[i] = levels[i].concat(levels[i - 1]);
+    }
+    return levels = levels.slice(1); // ignore first level, uncombined
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 14:52:03 GMT+0200 (GMT+02:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

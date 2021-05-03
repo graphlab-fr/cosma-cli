@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>zoom.js - Documentation</title>
+    <title>filter.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">zoom.js</h1>
+    <h1 class="page-title">filter.js</h1>
     
 
     
@@ -39,76 +39,159 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Make zoom functionnal
+            <pre class="prettyprint source linenums"><code>let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
+    , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
+
+filters = filters.map(function(btn) {
+    // extract nodes id affected by the filter from the linked button
+    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
+    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
+});
+
+/**
+ * Select filters btns and activate them
  */
 
-(function () {
+(function() {
+    for (const filter of filters) {
+        const btn = filter.btn;
+        btn.dataset.active = 'true';
 
-    const zoomInterval = 0.3 // interval between two (de)zoom
-        , zoomMax = 3
-        , zoomMin = 0.6;
-    
-    svg.call(d3.zoom().on('zoom', function () {
-        // for each move one the SVG
-        if (d3.event.sourceEvent.type === 'wheel') {
-            // by mouse wheel
-            if (d3.event.sourceEvent.deltaY >= 0) {
-                zoomLess();
-            } else {
-                zoomMore();
-            }
-        }
-    
-        if (d3.event.sourceEvent.type === 'mousemove') {
-            // by drag and move with mouse
-            view.position.x += d3.event.sourceEvent.movementX;
-            view.position.y += d3.event.sourceEvent.movementY;
-    
-            translate();
-        }
-    }));
-
-    function zoomMore() {
-        view.position.zoom += zoomInterval;
-    
-        if (view.position.zoom >= zoomMax) {
-            view.position.zoom = zoomMax; }
-    
-        translate();
+        btn.addEventListener('click', () => {
+            if (btn.dataset.active === 'true') {
+                filterOff(filter); }
+            else {
+                filterOn(filter); }
+        });
     }
-    
-    function zoomLess() {
-        view.position.zoom -= zoomInterval;
-    
-        if (view.position.zoom &lt;= zoomMin) {
-            view.position.zoom = zoomMin; }
-    
-        translate();
-    }
-    
-    function zoomReset() {
-        view.position.zoom = 1;
-        view.position.x = 0;
-        view.position.y = 0;
-    
-        translate();
-    }
-    
-    // export functions on global name space
-    window.zoomMore = zoomMore;
-    window.zoomLess = zoomLess;
-    window.zoomReset = zoomReset;
-    
 })();
 
 /**
- * Change 'style' attribute of SVG to change view
+ * Activate filters by their name
+ * @param {array} filtersToActivate - List of filter names
  */
-    
-function translate() {
-    document.querySelector('#graph_canvas')
-        .setAttribute('style', `transform:translate(${view.position.x}px, ${view.position.y}px) scale(${view.position.zoom});`);
+
+function setFilters(filtersToActivate) {
+    for (const filter of filters) {
+        if (filtersToActivate.indexOf(filter.name) !== -1) {
+            // if filter is "ToActivate"
+            filterOff(filter);
+        }
+        else {
+            filterOn(filter);
+        }
+    }
+}
+
+/**
+ * Activate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked &amp; name
+ */
+
+function filterOn(filterObj) {
+    displayNodes(filterObj.nodeIds);
+    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
+    filterObj.btn.checked = true;
+    filterObj.btn.dataset.active = 'true';
+}
+
+/**
+ * Desactivate a filter
+ * @param {object} filterObj - Filter's btn, nodesIds linked &amp; name
+ */
+
+function filterOff(filterObj) {
+    hideNodes(filterObj.nodeIds);
+    view.activeFilters.push(filterObj.name);
+    filterObj.btn.checked = false;
+    filterObj.btn.dataset.active = 'false';
+}
+
+/**
+ * Get ids list from hiden (by filter) nodes
+ * @returns {array} - Ids list (integer value)
+ */
+
+function getFiltedNodes() {
+    let nodeIds = document.querySelectorAll('[data-filter][data-active="false"]');
+    return nodeIds = Array.from(nodeIds)
+        .map(filter => filter.dataset.filter.split(',')).flat()
+        .map(nodeId => Number(nodeId));
+}
+
+/**
+ * Display some nodes, hide all others
+ * turn on the 'isolateMode'
+ * @param {array} - Ids from nodes to keep displayed
+ */
+
+function isolate(nodeIds) {
+    view.isolateMode = false;
+    resetIsolateBtn.style.display = 'block';
+
+    let idsToHide = [];
+
+    index = index.map(function(item) {
+        if (nodeIds.indexOf(item.id) !== -1) {
+            // if item is one of the nodeIds
+            item.isolated = true;
+        } else {
+            item.isolated = false;
+            idsToHide.push(item.id);
+        }
+        return item;
+    });
+    // display nodeIds if their are not filtered
+    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+
+    hideNodes(idsToHide);
+    view.isolateMode = true;
+    displayNodes(idsToDisplay);
+}
+
+/**
+ * Launch isolate() from the onclick attribute of an identified element
+ * @param {string} - Id of the element for extract nodes ids
+ */
+
+function isolateByElement(eltId) {
+    if (eltId === undefined) { return; }
+
+    let nodeIds = window[eltId];
+    nodeIds = nodeIds.getAttribute('onclick');
+    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
+    nodeIds = nodeIds.split(',');
+    nodeIds = nodeIds.map(id => Number(id));
+    isolate(nodeIds);
+
+    view.isolateId = eltId;
+}
+
+/**
+ * Display nodes hidden by isolate(),
+ * if their are not filtered
+ */
+
+function resetNodes() {
+    view.isolateId = undefined;
+
+    const idsToDisplay = index
+        .filter(item => item.isolated === false &amp;&amp; getFiltedNodes().indexOf(item.id) === -1)
+        .map(item => item.id);
+
+    index = index.map(function(item) {
+        if (item.isolated === true) {
+            item.isolated === false; }
+
+        return item;
+    });
+
+    view.isolateMode = false;
+    displayNodes(idsToDisplay);
+
+    unactiveFromParent(document.getElementById('views-container'));
+
+    resetIsolateBtn.style.display = null;
 }</code></pre>
         </article>
     </section>
@@ -121,7 +204,7 @@ function translate() {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 11:53:24 GMT+0200 (heure d’été d’Europe centrale) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 14:52:04 GMT+0200 (GMT+02:00) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

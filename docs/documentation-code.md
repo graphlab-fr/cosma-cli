@@ -10,5 +10,5 @@ description: Documentation du code de Cosma pour faciliter sa réutilisation
 
 Lien vers les API :
 
-- [Cosmographe](./api/cosmographe)
-- [Cosmoscope](./api/cosmoscope)
+- [Cosmographe](./api/cosmographe/index.html)
+- [Cosmoscope](./api/cosmoscope/index.html)

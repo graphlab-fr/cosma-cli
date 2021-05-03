@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>index.js - Documentation</title>
+    <title>record.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">record.js</h1>
     
 
     
@@ -39,115 +39,65 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const indexContainer = document.getElementById('index');
-
-/**
- * Display/hide lists from a 'data-sort' container
- * and animate the arrow
+            <pre class="prettyprint source linenums"><code>/**
+ * Open the record reading panel &amp; show one
+ * @param {array} id - Record/node id
+ * @param {boolean} history - If history must be actualised, true by default
  */
 
- (function () {
-    const sortContainer = document.querySelectorAll('[data-sort]');
-    for (const container of sortContainer) {
-        const box = container.querySelectorAll('.sort-box')
-            , increasing = box[0]
-            , decreasing = box[1]
-            , btn = container.querySelector('.sort-btn');
+function openRecord(id, history = true) {
+    const recordContent = document.getElementById(id);
 
-        let isIncreasing = true;
+    if (!recordContent) { return; }
 
-        btn.addEventListener('click', () => {
-            if (isIncreasing) {
-                btn.textContent = 'Z-A';
-                increasing.classList.remove('active'); decreasing.classList.add('active');
-                isIncreasing = false;
-            } else {
-                btn.textContent = 'A-Z';
-                increasing.classList.add('active'); decreasing.classList.remove('active');
-                isIncreasing = true;
-            }
-        });
-    }
-})();
-
-/**
- * Highligth clicked tag button
- * @param {HTMLElement} button - clicked tag button
- */
-
- function activeTagButton(button) {
-    const tagId = button.dataset.tag;
-
-    document.querySelectorAll('[data-tag="' + tagId + '"]')
-        .forEach(button => { button.classList.add('active'); });
-
-    view.activeTag = tagId;
-}
-
-/**
- * Highligth clicked element and unlighligth the others from the same parent
- * @param {HTMLElement} child - clicked element
- */
-
-function activeFromParent(child) {
-    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
-
-    if (activeElt) {
-        activeElt.classList.remove('active')
-        activeElt.style.borderColor = null;
-    }
-
-    child.classList.add('active')
-}
-
-/**
- * Unlighligth all activated elements from parent
- * @param {HTMLElement} parent - parent of elements
- */
-
-function unactiveFromParent(parent) {
-    const activeElt = parent.querySelector('.active');
-    console.log(activeElt);
-
-    if (activeElt) {
-        activeElt.classList.remove('active')
-    }
-}
-
-/**
- * Hide items from the index list that correspond to the nodes ids
- * @param {array} nodeIds - List of nodes ids
- */
-
-function unactiveTagsButton() {
-    unactiveFromParent(document.getElementById('tags-container'));
-}
-
-/**
- * Hide items from the index list that correspond to the nodes ids
- * @param {array} nodeIds - List of nodes ids
- */
-
-function hideFromIndex(nodesIds) {
-    for (const indexItem of nodesIds) {
-        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
-            .forEach(elt => {
-                elt.style.display = 'none';
-            });
-    }
-}
-
-/**
- * Display items from the index list that correspond to the nodes ids
- * @param {array} nodeIds - List of nodes ids
- */
-
-function displayFromIndex(nodesIds) {
-    for (const indexItem of nodesIds) {
-        indexContainer.querySelector('[data-index="' + indexItem + '"]')
+    if (view.openedRecord !== undefined) {
+        // hide last record
+        document.getElementById(view.openedRecord)
             .style.display = null;
     }
-}</code></pre>
+
+    // open records container
+    window['record-container'].classList.add('active');
+    // adjust record view
+    window['record-container'].scrollTo({ top: 0 });
+
+    // show record
+    recordContent.style.display = 'block';
+
+    // reset nodes highlighting
+    unlightNodes();
+    highlightNodes([id]);
+
+    view.openedRecord = id;
+
+    if (history) {
+        // page's &lt;title> become record's name
+        const recordTitle = recordContent.querySelector('h1').textContent;
+        historique.actualiser(id, recordTitle);
+    }
+
+}
+
+/**
+ * Close the record reading panel &amp; the opended one
+ */
+
+function closeRecord() {
+    document.querySelector('#record-container').classList.remove('active');
+    window[view.openedRecord].style.display = null;
+    view.openedRecord = undefined;
+
+    unlightNodes();
+}
+
+/**
+ * Open a record at page load if his id follow a '#' as '#20200801210302'
+ */
+
+window.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash.substr(1);
+    openRecord(hash);
+});</code></pre>
         </article>
     </section>
 
@@ -159,7 +109,7 @@ function displayFromIndex(nodesIds) {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 11:53:24 GMT+0200 (heure d’été d’Europe centrale) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 14:52:04 GMT+0200 (GMT+02:00) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

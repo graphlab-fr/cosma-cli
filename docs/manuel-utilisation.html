@@ -140,15 +140,15 @@
 </ul>
 <h2 data-number="3.2" id="telechargement"><span class="header-section-number">3.2</span> Téléchargement</h2>
 <p>Télécharger le dépôt git de Cosma en saisissant les commandes ci-dessous dans un terminal, ou en cliquant sur le lien suivant : <a href="https://github.com/hyperotlet/cosma/archive/master.zip" class="uri">https://github.com/hyperotlet/cosma/archive/master.zip</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/hyperotlet/cosma.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cosma</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">git</span> clone https://github.com/hyperotlet/cosma.git</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">cd</span> cosma</span></code></pre></div>
 <h2 data-number="3.3" id="mise-en-route"><span class="header-section-number">3.3</span> Mise en route</h2>
 <p>Installer les dépendances nécessaires au bon fonctionnement de l’application avec la commande suivante. Le gestionnaire de dépendances NPM est installé en même temps que NodeJs.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> i</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">npm</span> i</span></code></pre></div>
 <h1 data-number="4" id="configuration"><span class="header-section-number">4</span> Configuration</h1>
 <p>Le fichier de configuration est une liste de paramètres avec pour chacun une valeur ou une liste de sous-paramètres à renseigner. Le fichier tel qu’il est généré est un modèle des paramètres qui doivent obligatoirement être renseignées pour une configuration valide.</p>
 <p>Exécutez la commande suivante pour créer le fichier de configuration (<code>config.yml</code>) s’il n’existe pas déjà. Vous pouvez aussi le supprimer et utiliser cette commande pour réinitialiser le fichier.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">node</span> app</span></code></pre></div>
 <p>Le fichier de configuration est au <a href="https://sweetohm.net/article/introduction-yaml.html">format YAML</a>. La hiérarchie des paramètres est mise en œuvre par l’indentation, c’est-à-dire la présence d’espaces en début de ligne. L’utilisation de tabulations dans l’indentation est interdite en YAML. Pour l’unité d’indentation, il est conseillé de choisir un multiple de 2 (2 ou 4) et de s’y tenir pour tout le fichier.</p>
 <h2 data-number="4.1" id="parametres-necessaires"><span class="header-section-number">4.1</span> Paramètres nécessaires</h2>
 <p>La configuration doit contenir les paramètres suivants.</p>
@@ -270,34 +270,34 @@
 </dl>
 <h2 data-number="4.3" id="exemples-de-configuration"><span class="header-section-number">4.3</span> Exemples de configuration</h2>
 <p>La configuration suivante permet de concentrer la visualisation sur le type des relations entre les nœuds. Les relations <code>undefined</code> sont poitillées tandis que les autres sont plus visibles. Nous vous proposons ci-dessous un typologie de relations type <strong>thesaurus</strong> avec des relations spécifique (<code>s</code>), génériques (<code>g</code>) et associées (<code>a</code>).</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">link_types</span><span class="kw">:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dotted</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> grey</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">s</span><span class="kw">:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dash</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">g</span><span class="kw">:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> double</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">a</span><span class="kw">:</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">link_types</span><span class="kw">:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dotted</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> grey</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="at">  </span><span class="fu">s</span><span class="kw">:</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dash</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="at">  </span><span class="fu">g</span><span class="kw">:</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> double</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="at">  </span><span class="fu">a</span><span class="kw">:</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span></code></pre></div>
 <h2 data-number="4.4" id="commandes"><span class="header-section-number">4.4</span> Commandes</h2>
 <p>Les commandes suivantes vous permettent d’agir rapidement sur la configuration.</p>
 <p>Modifier le chemin vers les fichiers sources :</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app import <span class="op">&lt;</span>chemin<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">node</span> app import <span class="op">&lt;</span>chemin<span class="op">&gt;</span></span></code></pre></div>
 <p>Modifier le chemin d’export du cosmoscope :</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app export <span class="op">&lt;</span>chemin<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">node</span> app export <span class="op">&lt;</span>chemin<span class="op">&gt;</span></span></code></pre></div>
 <p>Ajouter des types valides :</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app atype <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>couleur<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">node</span> app atype <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>couleur<span class="op">&gt;</span></span></code></pre></div>
 <p>Ajouter des vues :</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app aview <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>code<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">node</span> app aview <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>code<span class="op">&gt;</span></span></code></pre></div>
 <h1 data-number="5" id="utilisation-du-cosmographe"><span class="header-section-number">5</span> Utilisation du cosmographe</h1>
 <h2 data-number="5.1" id="creer-des-fiches"><span class="header-section-number">5.1</span> Créer des fiches</h2>
 <p>Pour créer une nouvelle fiche (une fois l’<a href="#">installation</a> et la <a href="#">configuration</a> effectuées) vous pouvez entrer l’une des deux commandes suivantes. Vous pouvez également créer un fichier Markdown par d’autres moyens, tant que vous respecter le modèle de fichier présenté plus bas.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app record</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app autorecord <span class="op">&lt;</span>titre<span class="op">&gt;</span> <span class="op">&lt;</span>type<span class="op">&gt;</span> <span class="op">&lt;</span>mots-clés<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">node</span> app record</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">node</span> app autorecord <span class="op">&lt;</span>titre<span class="op">&gt;</span> <span class="op">&lt;</span>type<span class="op">&gt;</span> <span class="op">&lt;</span>mots-clés<span class="op">&gt;</span></span></code></pre></div>
 <p><code>&lt;type&gt;</code> doit correspondre à l’un des types définis dans la configuration. <code>&lt;mots-clés&gt;</code> est une liste de mots-clés séparés par des virgules (sans espaces).</p>
 <p>Ces commandes génèrent un fichier mardkdown (<code>.md</code>) avec le contenu suivant. En entête le YAML Front Matter (entre les deux <code>---</code>) contenant le title (<code>title</code>) de la fiche, son identifiant unique (<code>id</code>), son type (<code>type</code>) et ses mots-clés (<code>tags</code>). Après l’entête, vous pouvez librement inscrire votre contenu :</p>
 <pre><code>---
@@ -315,8 +315,8 @@ tags:
 <p>À l’intérieur des fiches, vous pouvez créer des liens avec l’identifiant de la fiche cible entre double crochets (ex : <code>[[20201209111625]]</code>). Vous pouvez également donner un type à ce lien selon la typologie dressée dans la configuration. Pour cela vous devez inscrire le nom du type dans le lien tel que <code>[[type:20201209111625]]</code>.</p>
 <h2 data-number="5.3" id="export"><span class="header-section-number">5.3</span> Export</h2>
 <p>Générer un cosmoscope avec l’une de ces commandes :</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app modelize</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node</span> app</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">node</span> app modelize</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">node</span> app</span></code></pre></div>
 <p>Le fichier <code>cosmoscope.html</code> est exporté dans le répertoire défini dans la configuration. Il écrasera un fichier éponyme au même emplacement. Ce fichier est également copié dans le répertoire <code>/history</code>, dans un sous-répertoire portant la date du jour et avec les données modélisées au format JSON.</p>
 <h1 data-number="6" id="utilisation-du-cosmoscope"><span class="header-section-number">6</span> Utilisation du cosmoscope</h1>
 <!-- Description générale, portabilité -->

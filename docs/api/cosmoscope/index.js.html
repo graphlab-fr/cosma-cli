@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>filter.js - Documentation</title>
+    <title>index.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">filter.js</h1>
+    <h1 class="page-title">index.js</h1>
     
 
     
@@ -39,159 +39,114 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
-    , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
-
-filters = filters.map(function(btn) {
-    // extract nodes id affected by the filter from the linked button
-    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
-});
+            <pre class="prettyprint source linenums"><code>const indexContainer = document.getElementById('index');
 
 /**
- * Select filters btns and activate them
+ * Display/hide lists from a 'data-sort' container
+ * and animate the arrow
  */
 
-(function() {
-    for (const filter of filters) {
-        const btn = filter.btn;
-        btn.dataset.active = 'true';
+ (function () {
+    const sortContainer = document.querySelectorAll('[data-sort]');
+    for (const container of sortContainer) {
+        const box = container.querySelectorAll('.sort-box')
+            , increasing = box[0]
+            , decreasing = box[1]
+            , btn = container.querySelector('.sort-btn');
+
+        let isIncreasing = true;
 
         btn.addEventListener('click', () => {
-            if (btn.dataset.active === 'true') {
-                filterOff(filter); }
-            else {
-                filterOn(filter); }
+            if (isIncreasing) {
+                btn.textContent = 'Z-A';
+                increasing.classList.remove('active'); decreasing.classList.add('active');
+                isIncreasing = false;
+            } else {
+                btn.textContent = 'A-Z';
+                increasing.classList.add('active'); decreasing.classList.remove('active');
+                isIncreasing = true;
+            }
         });
     }
 })();
 
 /**
- * Activate filters by their name
- * @param {array} filtersToActivate - List of filter names
+ * Highligth clicked tag button
+ * @param {HTMLElement} button - clicked tag button
  */
 
-function setFilters(filtersToActivate) {
-    for (const filter of filters) {
-        if (filtersToActivate.indexOf(filter.name) !== -1) {
-            // if filter is "ToActivate"
-            filterOff(filter);
-        }
-        else {
-            filterOn(filter);
-        }
+ function activeTagButton(button) {
+    const tagId = button.dataset.tag;
+
+    document.querySelectorAll('[data-tag="' + tagId + '"]')
+        .forEach(button => { button.classList.add('active'); });
+
+    view.activeTag = tagId;
+}
+
+/**
+ * Highligth clicked element and unlighligth the others from the same parent
+ * @param {HTMLElement} child - clicked element
+ */
+
+function activeFromParent(child) {
+    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
+        activeElt.style.borderColor = null;
+    }
+
+    child.classList.add('active')
+}
+
+/**
+ * Unlighligth all activated elements from parent
+ * @param {HTMLElement} parent - parent of elements
+ */
+
+function unactiveFromParent(parent) {
+    const activeElt = parent.querySelector('.active');
+    console.log(activeElt);
+
+    if (activeElt) {
+        activeElt.classList.remove('active')
     }
 }
 
 /**
- * Activate a filter
- * @param {object} filterObj - Filter's btn, nodesIds linked &amp; name
+ * Hide items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
  */
 
-function filterOn(filterObj) {
-    displayNodes(filterObj.nodeIds);
-    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
-    filterObj.btn.checked = true;
-    filterObj.btn.dataset.active = 'true';
+function unactiveTagsButton() {
+    unactiveFromParent(document.getElementById('tags-container'));
 }
 
 /**
- * Desactivate a filter
- * @param {object} filterObj - Filter's btn, nodesIds linked &amp; name
+ * Hide items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
  */
 
-function filterOff(filterObj) {
-    hideNodes(filterObj.nodeIds);
-    view.activeFilters.push(filterObj.name);
-    filterObj.btn.checked = false;
-    filterObj.btn.dataset.active = 'false';
+function hideFromIndex(nodesIds) {
+    for (const indexItem of nodesIds) {
+        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+            .forEach(elt => {
+                elt.style.display = 'none';
+            });
+    }
 }
 
 /**
- * Get ids list from hiden (by filter) nodes
- * @returns {array} - Ids list (integer value)
+ * Display items from the index list that correspond to the nodes ids
+ * @param {array} nodeIds - List of nodes ids
  */
 
-function getFiltedNodes() {
-    let nodeIds = document.querySelectorAll('[data-filter][data-active="false"]');
-    return nodeIds = Array.from(nodeIds)
-        .map(filter => filter.dataset.filter.split(',')).flat()
-        .map(nodeId => Number(nodeId));
-}
-
-/**
- * Display some nodes, hide all others
- * turn on the 'isolateMode'
- * @param {array} - Ids from nodes to keep displayed
- */
-
-function isolate(nodeIds) {
-    view.isolateMode = false;
-    resetIsolateBtn.style.display = 'block';
-
-    let idsToHide = [];
-
-    index = index.map(function(item) {
-        if (nodeIds.indexOf(item.id) !== -1) {
-            // if item is one of the nodeIds
-            item.isolated = true;
-        } else {
-            item.isolated = false;
-            idsToHide.push(item.id);
-        }
-        return item;
-    });
-    // display nodeIds if their are not filtered
-    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
-
-    hideNodes(idsToHide);
-    view.isolateMode = true;
-    displayNodes(idsToDisplay);
-}
-
-/**
- * Launch isolate() from the onclick attribute of an identified element
- * @param {string} - Id of the element for extract nodes ids
- */
-
-function isolateByElement(eltId) {
-    if (eltId === undefined) { return; }
-
-    let nodeIds = window[eltId];
-    nodeIds = nodeIds.getAttribute('onclick');
-    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
-    nodeIds = nodeIds.split(',');
-    nodeIds = nodeIds.map(id => Number(id));
-    isolate(nodeIds);
-
-    view.isolateId = eltId;
-}
-
-/**
- * Display nodes hidden by isolate(),
- * if their are not filtered
- */
-
-function resetNodes() {
-    view.isolateId = undefined;
-
-    const idsToDisplay = index
-        .filter(item => item.isolated === false &amp;&amp; getFiltedNodes().indexOf(item.id) === -1)
-        .map(item => item.id);
-
-    index = index.map(function(item) {
-        if (item.isolated === true) {
-            item.isolated === false; }
-
-        return item;
-    });
-
-    view.isolateMode = false;
-    displayNodes(idsToDisplay);
-
-    unactiveFromParent(document.getElementById('views-container'));
-
-    resetIsolateBtn.style.display = null;
+function displayFromIndex(nodesIds) {
+    for (const indexItem of nodesIds) {
+        indexContainer.querySelector('[data-index="' + indexItem + '"]')
+            .style.display = null;
+    }
 }</code></pre>
         </article>
     </section>
@@ -204,7 +159,7 @@ function resetNodes() {
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 11:53:24 GMT+0200 (heure d’été d’Europe centrale) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 14:52:04 GMT+0200 (GMT+02:00) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

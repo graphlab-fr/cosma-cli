@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addRecordType">addRecordType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addView">addView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#catchLinksFromContent">catchLinksFromContent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#colors">colors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#convertLinks">convertLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cosmoscope">cosmoscope</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#genMdFile">genMdFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRank">getRank</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#jsonData">jsonData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#levelsToRadius">levelsToRadius</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyExportPath">modifyExportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyImportPath">modifyImportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#normalizeLink">normalizeLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#register">register</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerTags">registerTags</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerType">registerType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#show">show</a></span></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>Documentation du Cosmographe</h1>
+<p>Vous trouverez ci-contre l'ensemble des fonctions utilisées pour la génération du Cosmographe.</p>
+<p>Ci-dessous un schéma des structures de contrôle.</p>
+<p>Les liaisons <code>-.-</code> symbolisent l'appartenance et les liaisons <code>--&gt;</code> l'utilisation.</p>
+<pre class="prettyprint source"><code>flowchart LR
+
+verifconfig[[verifconfig.js]]
+	verifconfig -.- modifyImportPath
+	verifconfig -.- modifyExportPath
+	verifconfig -.- addRecordType
+	verifconfig -.- addView
+
+autorecord[[autorecord.js]]
+	autorecord -.- genMdFile
+	autorecord --> verifconfig
+
+links[[links.js]]
+	links -.- catchLinksFromContent --> normalizeLink
+	links -.- getRank
+	links -.- convertLinks --> normalizeLink
+
+log[[log.js]]
+	log -.- show
+	log -.- register
+
+modelize[[modelize.js]]
+	modelize --> registerLinks --> getLinkStyle
+	modelize --> registerNodes --> getRank
+	modelize --> findFileMeta
+	modelize --> getConnectionLevels --> getConnectedIds
+	modelize --> show
+	modelize --> register
+	modelize --> colors
+	modelize --> cosmoscope
+	modelize --> verifconfig
+
+modelize --> history[[history.js]]
+
+record[[record.js]]
+	record --> genMdFile
+	record --> verifconfig
+
+template[[template.js]]
+	template -.- jsonData
+	template -.- colors
+	template -.- cosmoscope --> registerType
+	cosmoscope --> registerTags
+	cosmoscope --> levelsToRadius
+	template --> verifconfig
+
+app((app.js))
+	app --> modifyImportPath
+	app --> modifyExportPath
+	app --> addRecordType
+	app --> addView
+	app --> modelize
+	app --> record
+	app --> autorecord
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 14:52:03 GMT+0200 (GMT+02:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>links.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addRecordType">addRecordType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addView">addView</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#catchLinksFromContent">catchLinksFromContent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#colors">colors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#convertLinks">convertLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cosmoscope">cosmoscope</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#genMdFile">genMdFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRank">getRank</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#jsonData">jsonData</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#levelsToRadius">levelsToRadius</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyExportPath">modifyExportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyImportPath">modifyImportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#normalizeLink">normalizeLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#register">register</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerTags">registerTags</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerType">registerType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#show">show</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">links.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Catch links from Mardown file content
+ * @param {string} fileContent - Mardown file content
+ * @returns {array} - Objets array : type &amp; aim id of links
+ */
+
+function catchLinksFromContent(fileContent) {
+    // get '[[***]]' strings
+    let links = fileContent.match(/(?&lt;=\[\[\s*).*?(?=\s*\]\])/gs);
+
+    if (links === null) { return []; }
+
+    // delete duplicated links
+    links = links.filter((item, index) => {
+        return links.indexOf(item) === index;
+    });
+
+    return links.map(normalizeLink);
+}
+
+exports.catchLinksFromContent = catchLinksFromContent;
+
+/**
+ * Get node rank from number of links &amp; backlinks
+ * @param {int} backLinkNb - Number of backlinks
+ * @param {int} linkNb - Number of links
+ * @returns {int} - Rank
+ */
+
+function getRank(backLinkNb, linkNb) {
+    let rank = 1;
+    rank += ~~(linkNb / 2);
+    rank += ~~(backLinkNb / 2);
+    return rank;
+}
+
+exports.getRank = getRank;
+
+/**
+ * Add its type to the link &amp; turn it to int value
+ * @param {int} link - A link aim
+ * @returns {int} - Objets : type &amp; aim
+ */
+
+function normalizeLink(link) {
+    link = link.split(':', 2);
+    if (link.length === 2) {
+        return {type: link[0], target: {id: Number(link[1])} };
+    }
+    return {type: 'undefined', target: {id: Number(link[0])} };
+}
+
+/**
+ * Combining levels down to get radius fields
+ * @param {string} content - Mardown file content
+ * @param {object} file - File after links parsing
+ * @returns {string} - Mardown content with converted links
+ */
+
+function convertLinks(content, file) {
+    return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) { // get '[[***]]' strings
+        let link = extract.slice(0, -2).slice(2); // extract link id, without '[[' &amp; ']]' caracters
+
+        link = normalizeLink(link).target.id;
+
+        if (link === NaN) { return extract; } // only return the '[[***]]' string
+
+        const associatedMetas = file.links.find(function(i) {
+            return i.target.id === link;
+        });
+
+        if (associatedMetas === undefined) { return extract; } // only return the '[[***]]' string
+
+        link = associatedMetas;
+        // return '[[***]]' string into a Mardown link with openRecord function &amp; class
+        return `[${extract}](#${link.target.id}){title="${link.target.title}" onclick=openRecord(${link.target.id}) .id-link}`;        
+    });
+}
+
+exports.convertLinks = convertLinks;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 03 2021 14:52:03 GMT+0200 (GMT+02:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
