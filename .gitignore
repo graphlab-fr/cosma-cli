@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-*.json
+package-lock.json
 config.yml
 graph-data.js
 cosmoscope.html

@@ -1,0 +1,21 @@
+{
+    "source": {
+        "include": [
+            "api-home.md",
+            "../template/scripts/filter.js",
+            "../template/scripts/graph.js",
+            "../template/scripts/index.js",
+            "../template/scripts/main.js",
+            "../template/scripts/nodes.js",
+            "../template/scripts/record.js",
+            "../template/scripts/search.js",
+            "../template/scripts/view.js",
+            "../template/scripts/zoom.js"
+        ]
+    },
+    "opts": {
+        "template": "../node_modules/minami",
+        "encoding": "utf8",
+        "destination": "./api/"
+    }
+}
