@@ -1,0 +1,18 @@
+{
+    "source": {
+        "include": [
+            "./api/cosmographe.md",
+            "../functions/autorecord.js",
+            "../functions/history.js",
+            "../functions/links.js",
+            "../functions/log.js",
+            "../functions/template.js",
+            "../functions/verifconfig.js"
+        ]
+    },
+    "opts": {
+        "template": "../node_modules/minami",
+        "encoding": "utf8",
+        "destination": "./api/cosmographe/"
+    }
+}

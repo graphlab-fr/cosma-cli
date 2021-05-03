@@ -1,7 +1,7 @@
 {
     "source": {
         "include": [
-            "api-home.md",
+            "./api/cosmoscope.md",
             "../template/scripts/filter.js",
             "../template/scripts/graph.js",
             "../template/scripts/index.js",
@@ -16,6 +16,6 @@
     "opts": {
         "template": "../node_modules/minami",
         "encoding": "utf8",
-        "destination": "./api/"
+        "destination": "./api/cosmoscope/"
     }
 }

@@ -16,4 +16,18 @@ Il est compatible avec d'autres logiciels comme l'éditeur Markdown [Zettlr](htt
 
 Il est basé sur [NodeJS](https://nodejs.org/fr/) (version 12 ou supérieure) et fonctionne pour le moment au terminal et est configuré via un fichier YAML. Une application *desktop* sera développée prochainement pour Windows. Une interface graphique est déjà disponible pour MacOs, permettant d'utiliser les fonctionnalités principales : https://github.com/hyperotlet/cosma-macos.
 
-Lisez la documentation pour recevoir les informations **d’installation et d’utilisation** : https://hyperotlet.github.io/cosma/.
+Lisez la documentation pour recevoir les informations **d’installation et d’utilisation** : https://hyperotlet.github.io/cosma/manuel-utilisation.html.
+
+# Maintenance
+
+Les développeurs seront intressés par la documentaiton technique de Cosma : https://hyperotlet.github.io/cosma/documentation-code.html.
+
+Ils pourront actualiser les documentations en utilisant les commandes et outils suivants :
+
+- [Pandoc](https://pandoc.org/)
+- [GitHub Pages Import](https://github.com/c-w/ghp-import)
+
+```
+npm run doc-gen
+npm run doc-upload
+```

@@ -8,4 +8,7 @@ lang: fr-FR
 description: Documentation du code de Cosma pour faciliter sa réutilisation
 ---
 
-Lien vers l'[API](./api/)
+Lien vers les API :
+
+- [Cosmographe](./api/cosmographe)
+- [Cosmoscope](./api/cosmoscope)

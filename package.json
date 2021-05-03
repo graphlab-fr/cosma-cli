@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "doc-gen": "cd docs && sh pandoc-build.sh && ../node_modules/.bin/jsdoc -c api-config-cosmographe.json && ../node_modules/.bin/jsdoc -c api-config-cosmoscope.json",
+    "doc-upload": "ghp-import -p docs"
   },
   "repository": {
     "type": "git",
