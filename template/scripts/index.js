@@ -35,12 +35,12 @@ const indexContainer = document.getElementById('index');
  */
 
  function activeTagButton(button) {
-    const tagId = button.dataset.tag;
+    const tagName = button.dataset.tag;
 
-    document.querySelectorAll('[data-tag="' + tagId + '"]')
+    document.querySelectorAll('[data-tag="' + tagName + '"]')
         .forEach(button => { button.classList.add('active'); });
 
-    view.activeTag = tagId;
+    view.activeTag = tagName;
 }
 
 /**
