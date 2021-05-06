@@ -7,9 +7,9 @@
 let searchInput = document.querySelector('#search')
     , resultContainer = document.querySelector('#search-result-list')
     , maxResultNb = 5
-    , fuse
+    , resultList = []
     , selectedResult = 0
-    , resultList = [];
+    , fuse;
 
 searchInput.value = ''; // reset at page loading
 
@@ -22,9 +22,7 @@ searchInput.addEventListener('focus', () => {
 
     searchInput.addEventListener('input', () => {
         // reset search results for each input value modification
-        resultContainer.innerHTML = '';
-        selectedResult = 0;
-        resultList = [];
+        resultContainer.innerHTML = ''; selectedResult = 0; resultList = [];
 
         if (searchInput.value === '') { return; }
         
@@ -41,17 +39,18 @@ searchInput.addEventListener('focus', () => {
             `<span class="type-point n_${result.item.type}">⬤</span>
             <span>${result.item.title}</span>`;
             resultContainer.appendChild(resultElement);
+
+            if (i === 0) { activeOutline(resultElement); }
         
             resultElement.addEventListener('click', () => {
-                openRecord(result.item.id);
-            });
+                openRecord(result.item.id); });
         }
     });
 
-    document.addEventListener('keydown', keys)
+    document.addEventListener('keydown', keyboardResultNavigation)
 });
 
-function keys(e) {
+function keyboardResultNavigation(e) {
     if (resultList.length === 0) { return; }
 
     switch (e.key) {
@@ -62,35 +61,35 @@ function keys(e) {
                 return;
             }
 
-            resultContainer.childNodes[selectedResult]
-                .style.outline = null;
-
+            removeOutlineElt(resultContainer.childNodes[selectedResult]);
             selectedResult--;
+            activeOutline(resultContainer.childNodes[selectedResult]);
 
-            console.log(selectedResult);
-            resultContainer.childNodes[selectedResult]
-                .style.outline = 'var(--cosma-blue) solid 1px';
             break;
         case 'ArrowDown':
 
             if (selectedResult === maxResultNb - 1 || selectedResult === resultList.length - 1) { return; }
 
-            resultContainer.childNodes[selectedResult]
-                .style.outline = null;
-
+            removeOutlineElt(resultContainer.childNodes[selectedResult]);
             selectedResult++;
+            activeOutline(resultContainer.childNodes[selectedResult]);
+            if (selectedResult === 1) {
+                searchInput.blur();
+            }
 
-            searchInput.blur();
-            
-            
-            console.log(selectedResult);
-            resultContainer.childNodes[selectedResult]
-                .style.outline = 'var(--cosma-blue) solid 1px';
             break;
         case 'Enter':
             openRecord(resultList[selectedResult].item.id);
             break;
     }
+}
+
+function activeOutline(elt) {
+    elt.style.outline = 'var(--cosma-blue) solid 1px';
+}
+
+function removeOutlineElt(elt) {
+    elt.style.outline = null;
 }
 
 })();
