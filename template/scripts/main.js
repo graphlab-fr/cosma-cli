@@ -43,9 +43,6 @@ window.onpopstate = function(e) {
 };
 
 document.onkeydown = (e) => {
-    console.log(e.key);
-    
-
     if (e.altKey === true) {
 
         switch (e.key) {

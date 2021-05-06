@@ -130,6 +130,17 @@
             <details class="controls">
                 <summary class="menu-title">Paramètres du graphe</summary>
 
+                <ul>
+                    <li>
+                        <input type="checkbox" name="check" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
+                        <label for="param-links">Afficher les liens</label>
+                    </li>
+                    <li>
+                        <input data-active="true" type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
+                        <label for="param-label">Afficher les étiquettes</label>
+                    </li>
+                </ul>
+
                 {% macro inputRange(name, graphParameter, fx, defaultValue, min, max, step) %}
                 <form oninput="graphProperties.{{ graphParameter }} = range.value; {{ fx }}">
                     <label>{{ name }}</label>
