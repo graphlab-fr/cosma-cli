@@ -2,10 +2,11 @@
  * Make search input functional
  */
 
+let searchInput = document.querySelector('#search');
+
 (function() {
 
-let searchInput = document.querySelector('#search')
-    , resultContainer = document.querySelector('#search-result-list')
+let resultContainer = document.querySelector('#search-result-list')
     , maxResultNb = 5
     , resultList = []
     , selectedResult = 0

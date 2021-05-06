@@ -43,7 +43,7 @@ function openRecord(id, history = true) {
 
 function closeRecord() {
     document.querySelector('#record-container').classList.remove('active');
-    window[view.openedRecord].style.display = null;
+    document.getElementById(view.openedRecord).style.display = null;
     view.openedRecord = undefined;
 
     unlightNodes();

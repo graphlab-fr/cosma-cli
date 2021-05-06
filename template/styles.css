@@ -79,6 +79,7 @@ li.filter label {
 /* INDEX */
 .search-bar { width: 100%; margin: 0.8rem 0; }
 #search-result-list { margin-bottom: 0.8rem; }
+.search-result { cursor: pointer; }
 
 aside {
 	position: relative;

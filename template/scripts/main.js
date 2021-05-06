@@ -41,3 +41,41 @@ window.onpopstate = function(e) {
 
     openRecord(recordId, false);
 };
+
+document.onkeydown = (e) => {
+    console.log(e.key);
+    
+
+    if (e.altKey === true) {
+
+        switch (e.key) {
+            case 's':
+                searchInput.focus();
+                return;
+
+            case '-':
+                zoomLess();
+                return;
+
+            case '+':
+                zoomMore();
+                return;
+
+            case 'r':
+                zoomReset();
+                return;
+
+            case 'w':
+                document.querySelector('.head-load-bar').click();
+                return;
+        }
+
+        return;
+    }
+
+    switch (e.key) {
+        case 'Escape':
+            closeRecord();
+            return;
+    }
+};
