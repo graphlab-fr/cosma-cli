@@ -44,25 +44,18 @@ window.onpopstate = function(e) {
 
 document.onkeydown = (e) => {
     if (e.altKey === true) {
+        e.preventDefault();
 
-        switch (e.key) {
-            case 's':
+        switch (e.code) {
+            case 'KeyS':
                 searchInput.focus();
                 return;
 
-            case '-':
-                zoomLess();
-                return;
-
-            case '+':
-                zoomMore();
-                return;
-
-            case 'r':
+            case 'KeyR':
                 zoomReset();
                 return;
 
-            case 'w':
+            case 'KeyW':
                 document.querySelector('.head-load-bar').click();
                 return;
         }
