@@ -22,7 +22,6 @@ function highlightNodes(nodeIds) {
                 
             case 'text':
                 elt.style.fill = 'var(--highlight)';
-
                 break;
 
             case 'line':
@@ -71,11 +70,9 @@ function explodeNode(nodeNetworkElts) {
     for (let i = 0; i < nodeNetworkElts.length; i++) {
         if (nodeNetworkElts[i].tagName === 'g') {
             nodeNetworkElts = nodeNetworkElts
-                .concat(Array.from(nodeNetworkElts[i].childNodes))
-            nodeNetworkElts.splice(i, 1);
+                .concat(Array.from(nodeNetworkElts[i].childNodes));
         }
     }
-
     return nodeNetworkElts;
 }
 
