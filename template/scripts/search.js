@@ -55,6 +55,7 @@ function keyboardResultNavigation(e) {
 
     switch (e.key) {
         case 'ArrowUp':
+            e.preventDefault();
 
             if (selectedResult === 0) {
                 searchInput.focus();
@@ -67,6 +68,7 @@ function keyboardResultNavigation(e) {
 
             break;
         case 'ArrowDown':
+            e.preventDefault();
 
             if (selectedResult === maxResultNb - 1 || selectedResult === resultList.length - 1) { return; }
 
@@ -79,6 +81,7 @@ function keyboardResultNavigation(e) {
 
             break;
         case 'Enter':
+            e.preventDefault();
             openRecord(resultList[selectedResult].item.id);
             break;
     }
