@@ -66,16 +66,14 @@ function activeFromParent(child) {
 
 function unactiveFromParent(parent) {
     const activeElt = parent.querySelector('.active');
-    console.log(activeElt);
 
     if (activeElt) {
-        activeElt.classList.remove('active')
+        activeElt.classList.remove('active');
     }
 }
 
 /**
- * Hide items from the index list that correspond to the nodes ids
- * @param {array} nodeIds - List of nodes ids
+ * Unlighligth all activated tag buttons from parent
  */
 
 function unactiveTagsButton() {
