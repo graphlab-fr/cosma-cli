@@ -4,18 +4,44 @@
  * @returns {array} - Objets array : type & aim id of links
  */
 
-function catchLinksFromContent(fileContent) {
-    // get '[[***]]' strings
-    let links = fileContent.match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
+ function catchLinksFromContent(fileContent) {
+    let links = [];
+
+    // get all paragraphs
+    const paraphs = fileContent.match(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/g);
+
+    for (let i = 0; i < paraphs.length; i++) {
+        // get '***' from '[[***]]' (wikilinks) strings, for each paragraph
+        let linksId = paraphs[i].match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
+        if (!linksId) { continue; }
+
+        linksId = linksId
+            .map(function(linkId) {
+                linkId = normalizeLink(linkId);
+                linkId.context = paraphs[i];
+                linkId.paraphNum = i + 1;
+                return linkId;
+            });
+        links = links.concat(linksId);
+    }
+
+    /**
+     * Ignore duplicated links. We save the first occurrence,
+     * the first paragraph where link is wrote down
+     */
+
+    let temp = []; // temp storage
+    links = links.filter(function(link) {
+        if (temp.indexOf(link.target.id) !== -1) {
+            return false;
+        }
+        temp.push(link.target.id);
+        return true;
+    })
 
     if (links === null) { return []; }
 
-    // delete duplicated links
-    links = links.filter((item, index) => {
-        return links.indexOf(item) === index;
-    });
-
-    return links.map(normalizeLink);
+    return links;
 }
 
 exports.catchLinksFromContent = catchLinksFromContent;

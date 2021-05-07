@@ -227,7 +227,7 @@
 
                         <ul>
                             {% for link in record.links %}
-                            <li onclick="openRecord({{ link.target.id }})">
+                            <li onclick="openRecord({{ link.target.id }})" data-context="{{ link.context }}">
                                 <span class="type-point n_{{ link.target.type }}">⬤</span>
                                 <span>{{ link.target.title }}</span>
                             </li>
@@ -244,7 +244,7 @@
 
                         <ul>
                             {% for backlink in record.backlinks %}
-                            <li onclick="openRecord({{ backlink.target.id }})">
+                            <li onclick="openRecord({{ backlink.target.id }})" data-context="{{ backlink.context }}">
                                 <span class="type-point n_{{ backlink.target.type }}">⬤</span>
                                 <span>{{ backlink.target.title }}</span>
                             </li>

@@ -258,6 +258,18 @@ article.fiche footer {
 article.fiche .id-link { color: #337ab7; }
 /* fin */
 
+[data-context] { position: relative; }
+[data-context]:hover::before {
+	content: attr(data-context);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    background: white;
+    border: 1px black solid;
+    border-radius: 2px;
+    padding: 0.8rem;
+    box-shadow: var(--shadow);
+}
+
 article#credits {
 	text-align: center;
 }
