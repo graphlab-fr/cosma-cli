@@ -10,6 +10,8 @@
     // get all paragraphs
     const paraphs = fileContent.match(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/g);
 
+    if (links === null) { return []; }
+
     for (let i = 0; i < paraphs.length; i++) {
         // get '***' from '[[***]]' (wikilinks) strings, for each paragraph
         let linksId = paraphs[i].match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
