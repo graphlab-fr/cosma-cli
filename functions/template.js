@@ -30,11 +30,6 @@ function jsonData(nodes, links) {
         return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
     });
 
-    links = links.map(function(link) {
-        delete link.context;
-        return link;
-    });
-
     const graphScript =
 `let index = ${JSON.stringify(index)};
 

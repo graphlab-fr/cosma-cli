@@ -5,7 +5,8 @@
  */
 
  function catchLinksFromContent(fileContent) {
-    let links = [];
+    let tLinks = {}, // temp link container
+    links = []; // final link container
 
     // get all paragraphs
     const paraphs = fileContent.match(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/g);
@@ -17,31 +18,32 @@
         let linksId = paraphs[i].match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
         if (!linksId) { continue; }
 
-        linksId = linksId
-            .map(function(linkId) {
-                linkId = normalizeLink(linkId);
-                linkId.context = paraphs[i];
-                linkId.paraphNum = i + 1;
-                return linkId;
-            });
-        links = links.concat(linksId);
+        for (const linkId of linksId) {
+            // each linkId is put to 'tLinks' for get a list witout duplicated links
+            if (tLinks[linkId]) {
+                // if the linkId is already registered, we juste save one more paragraph number
+                tLinks[linkId].paraphs.push(i)
+            } else {
+                // if the linkId is new, we register its type and a paragraph number
+                tLinks[linkId] = normalizeLink(linkId);
+                tLinks[linkId].paraphs = [i]
+            }
+        }
     }
 
-    /**
-     * Ignore duplicated links. We save the first occurrence,
-     * the first paragraph where link is wrote down
-     */
-
-    let temp = []; // temp storage
-    links = links.filter(function(link) {
-        if (temp.indexOf(link.target.id) !== -1) {
-            return false;
+    for (const linkMetas in tLinks) {
+        tLinks[linkMetas].context = [] // paraphs container
+        for (let i = 0; i < paraphs.length; i++) {
+            if (tLinks[linkMetas].paraphs.indexOf(i) !== -1) {
+                // if the paraph number 'i' is saved for this link, it is put in paraphs container
+                tLinks[linkMetas].context.push(paraphs[i]);
+            }
         }
-        temp.push(link.target.id);
-        return true;
-    })
-
-    if (links === null) { return []; }
+        // paraphs array to context string
+        tLinks[linkMetas].context = tLinks[linkMetas].context.join(' ');
+        delete tLinks[linkMetas].paraphs; // delete list of paraphs
+        links.push(tLinks[linkMetas]); // put all link metas on final 'links' container
+    }
 
     return links;
 }

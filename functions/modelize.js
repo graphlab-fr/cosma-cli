@@ -134,6 +134,10 @@ files = files.map(function(file) {
     return file;
 });
 
+entities.links = entities.links.map(function(link) {
+    delete link.context; return link;
+});
+
 // generate the Cosmoscope
 require('./template').jsonData(entities.nodes, entities.links);
 require('./template').colors();
