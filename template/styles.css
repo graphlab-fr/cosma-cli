@@ -79,6 +79,7 @@ li.filter label {
 /* INDEX */
 .search-bar { width: 100%; margin: 0.8rem 0; }
 #search-result-list { margin-bottom: 0.8rem; }
+.search-result { cursor: pointer; }
 
 aside {
 	position: relative;
@@ -256,6 +257,18 @@ article.fiche footer {
 }
 article.fiche .id-link { color: #337ab7; }
 /* fin */
+
+[data-context] { position: relative; }
+[data-context]:hover::before {
+	content: attr(data-context);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    background: white;
+    border: 1px black solid;
+    border-radius: 2px;
+    padding: 0.8rem;
+    box-shadow: var(--shadow);
+}
 
 article#credits {
 	text-align: center;

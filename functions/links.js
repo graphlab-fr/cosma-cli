@@ -4,18 +4,48 @@
  * @returns {array} - Objets array : type & aim id of links
  */
 
-function catchLinksFromContent(fileContent) {
-    // get '[[***]]' strings
-    let links = fileContent.match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
+ function catchLinksFromContent(fileContent) {
+    let tLinks = {}, // temp link container
+    links = []; // final link container
 
-    if (links === null) { return []; }
+    // get all paragraphs
+    const paraphs = fileContent.match(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/g);
 
-    // delete duplicated links
-    links = links.filter((item, index) => {
-        return links.indexOf(item) === index;
-    });
+    if (paraphs === null) { return []; }
 
-    return links.map(normalizeLink);
+    for (let i = 0; i < paraphs.length; i++) {
+        // get '***' from '[[***]]' (wikilinks) strings, for each paragraph
+        let linksId = paraphs[i].match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
+        if (!linksId) { continue; }
+
+        for (const linkId of linksId) {
+            // each linkId is put to 'tLinks' for get a list witout duplicated links
+            if (tLinks[linkId]) {
+                // if the linkId is already registered, we juste save one more paragraph number
+                tLinks[linkId].paraphs.push(i)
+            } else {
+                // if the linkId is new, we register its type and a paragraph number
+                tLinks[linkId] = normalizeLink(linkId);
+                tLinks[linkId].paraphs = [i]
+            }
+        }
+    }
+
+    for (const linkMetas in tLinks) {
+        tLinks[linkMetas].context = [] // paraphs container
+        for (let i = 0; i < paraphs.length; i++) {
+            if (tLinks[linkMetas].paraphs.indexOf(i) !== -1) {
+                // if the paraph number 'i' is saved for this link, it is put in paraphs container
+                tLinks[linkMetas].context.push(paraphs[i]);
+            }
+        }
+        // paraphs array to context string
+        tLinks[linkMetas].context = tLinks[linkMetas].context.join(' ');
+        delete tLinks[linkMetas].paraphs; // delete list of paraphs
+        links.push(tLinks[linkMetas]); // put all link metas on final 'links' container
+    }
+
+    return links;
 }
 
 exports.catchLinksFromContent = catchLinksFromContent;

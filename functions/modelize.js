@@ -94,6 +94,7 @@ files = files.map(function(file) {
         const targetMetas = findFileMeta(link.target.id);
         return {
             type: link.type,
+            context: link.context,
             target: {
                 id: link.target.id,
                 title: targetMetas.title,
@@ -112,6 +113,7 @@ files = files.map(function(file) {
             const targetMetas = findFileMeta(link.source);
             return {
                 type: link.type,
+                context: link.context,
                 target: {
                     id: link.source,
                     title: targetMetas.title,
@@ -130,6 +132,10 @@ files = files.map(function(file) {
     registerNodes(file);
 
     return file;
+});
+
+entities.links = entities.links.map(function(link) {
+    delete link.context; return link;
 });
 
 // generate the Cosmoscope
@@ -160,7 +166,8 @@ function registerLinks(file) {
             shape: style.shape,
             color: style.color,
             source: Number(link.source.id),
-            target: Number(link.target.id)
+            target: Number(link.target.id),
+            context: link.context
         });
     }
 }

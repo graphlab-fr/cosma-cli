@@ -6,7 +6,8 @@ const fs = require('fs')
     , config = require('./verifconfig').config;
 
 let types = {}
-    , tags = {};
+    , tags = {}
+    , nblinks = 0;
 
 // markdown-it plugin for convertLinks()
 mdIt.use(mdItAttr, {
@@ -22,6 +23,8 @@ mdIt.use(mdItAttr, {
  */
 
 function jsonData(nodes, links) {
+
+    nblinks = links.length;
 
     const index = nodes.map(function(node) {
         return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
@@ -122,7 +125,8 @@ function cosmoscope(files, path) {
         tags: Object.keys(tags).map(function(tag) {
             return { name: tag, nodes: tags[tag] };
         }).sort(function (a, b) { return a.name.localeCompare(b.name); }),
-        metas: config.metas
+        metas: config.metas,
+        nblinks: nblinks
     });
 
     if (config.minify && config.minify === true) {
