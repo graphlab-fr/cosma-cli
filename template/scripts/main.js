@@ -103,18 +103,20 @@ window.onpopstate = function(e) {
 document.onkeydown = (e) => {
 
     if (keyboardShortcutsAreWorking) {
-        e.preventDefault();
 
-        switch (e.code) {
-            case 'KeyS':
+        switch (e.key) {
+            case 's':
+                e.preventDefault();
                 searchInput.focus();
                 return;
 
-            case 'KeyR':
+            case 'r':
+                e.preventDefault();
                 zoomReset();
                 return;
 
-            case 'KeyW':
+            case ' ':
+                e.preventDefault();
                 document.querySelector('.head-load-bar').click();
                 return;
         }
