@@ -45,6 +45,8 @@ const view = {
     }
     , svg = d3.select("#graph_canvas");
 
+let keyboardShortcutsAreWorking = true
+
 /**
  * Navigation history entries managment
  * @namespace
@@ -94,10 +96,13 @@ window.onpopstate = function(e) {
     openRecord(recordId, false);
 };
 
-// keyboard shortcuts
+/**
+ * Keyboard shortcuts
+ */
+
 document.onkeydown = (e) => {
-    if (e.altKey === true) {
-        // shortcuts with 'Alt' key
+
+    if (keyboardShortcutsAreWorking) {
         e.preventDefault();
 
         switch (e.code) {
@@ -113,8 +118,6 @@ document.onkeydown = (e) => {
                 document.querySelector('.head-load-bar').click();
                 return;
         }
-
-        return;
     }
 
     switch (e.key) {
@@ -123,6 +126,10 @@ document.onkeydown = (e) => {
             return;
     }
 };
+
+/**
+ * Cosma logo animation onclick
+ */
 
 (function (){
 const roll = document.getElementById('cosma-roll');
