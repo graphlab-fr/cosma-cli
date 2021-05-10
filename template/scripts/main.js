@@ -123,3 +123,10 @@ document.onkeydown = (e) => {
             return;
     }
 };
+
+(function (){
+const roll = document.getElementById('cosma-roll');
+roll.parentElement.addEventListener('click', () => {
+    roll.classList.toggle('anim');
+});
+})();
