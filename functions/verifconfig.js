@@ -168,3 +168,32 @@ function addView(name, key) {
 }
 
 exports.addView = addView;
+
+/**
+ * Create custom.css file & update config about it
+ */
+
+function addCustomCSS() {
+
+    if (config.views === undefined) {
+        config.custom_css = true; }
+    else { config.custom_css = true; }
+
+    let filePath = 'template/custom.css';
+
+    fs.writeFile('config.yml', yamlEditor.safeDump(config), (err) => {
+        if (err) { return console.log('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
+        console.log('\x1b[32m', 'config updated', '\x1b[0m')
+    });
+
+    if (fs.existsSync(filePath)) {
+        return console.log('\x1b[0m', 'custom.css file already exist', '\x1b[0m');
+    }
+
+    fs.writeFile(filePath, '', (err) => {
+        if (err) { return console.log('\x1b[31m', 'Err.', '\x1b[0m', 'update config.yml file : ' + err); }
+        console.log('\x1b[32m', 'Create custom.css file', '\x1b[0m')
+    });
+}
+
+exports.addCustomCSS = addCustomCSS;
