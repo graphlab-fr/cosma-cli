@@ -106,7 +106,7 @@ function isolate(nodeIds) {
     let idsToHide = [];
 
     index = index.map(function(item) {
-        if (nodeIds.indexOf(item.id) !== -1) {
+        if (nodeIds.includes(item.id)) {
             // if item is one of the nodeIds
             item.isolated = true;
         } else {
@@ -116,7 +116,7 @@ function isolate(nodeIds) {
         return item;
     });
     // display nodeIds if their are not filtered
-    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+    let idsToDisplay = nodeIds.filter(id => !getFiltedNodes().includes(id));
 
     hideNodes(idsToHide);
     view.isolateMode = true;
@@ -150,7 +150,7 @@ function resetNodes() {
     view.isolateId = undefined;
 
     const idsToDisplay = index
-        .filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
+        .filter(item => item.isolated === false && !getFiltedNodes().includes(item.id))
         .map(item => item.id);
 
     index = index.map(function(item) {
