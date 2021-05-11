@@ -23,7 +23,7 @@ const view = {
          * @type {array}
          * @default
          */
-        openedRecord: undefined,
+        openedRecordId: undefined,
         /**
          * Name 'data-tag' from the activated tag
          * @type {string}
@@ -107,6 +107,11 @@ document.onkeydown = (e) => {
             case 'r':
                 e.preventDefault();
                 zoomReset();
+                return;
+
+            case 'f':
+                e.preventDefault();
+                isolateByView(view.openedRecordId, 1);
                 return;
 
             case ' ':

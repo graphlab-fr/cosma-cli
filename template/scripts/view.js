@@ -50,9 +50,6 @@ function changeView(key) {
         setFilters(key.filters); }
     
     if (key.focus) {
-        const focusrecord = document.getElementById(key.focus.fromRecordId)
-            , focusButton = focusrecord.querySelectorAll('[data-focus]')[key.focus.level - 1]
-
-        isolate(focusButton.dataset.focus);
+        isolateByView(key.focus.fromRecordId, key.focus.level);
     }
 }

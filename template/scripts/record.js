@@ -9,9 +9,9 @@ function openRecord(id, history = true) {
 
     if (!recordContent) { return; }
 
-    if (view.openedRecord !== undefined) {
+    if (view.openedRecordId !== undefined) {
         // hide last record
-        document.getElementById(view.openedRecord)
+        document.getElementById(view.openedRecordId)
             .style.display = null;
     }
 
@@ -27,7 +27,7 @@ function openRecord(id, history = true) {
     unlightNodes();
     highlightNodes([id]);
 
-    view.openedRecord = id;
+    view.openedRecordId = id;
 
     if (history) {
         // page's <title> become record's name
@@ -43,8 +43,8 @@ function openRecord(id, history = true) {
 
 function closeRecord() {
     document.querySelector('#record-container').classList.remove('active');
-    document.getElementById(view.openedRecord).style.display = null;
-    view.openedRecord = undefined;
+    document.getElementById(view.openedRecordId).style.display = null;
+    view.openedRecordId = undefined;
 
     unlightNodes();
 }

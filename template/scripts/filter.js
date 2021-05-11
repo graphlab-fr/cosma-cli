@@ -96,7 +96,7 @@ function getFiltedNodes() {
 /**
  * Display some nodes, hide all others
  * turn on the 'focusMode'
- * @param {string} - List of ids from nodes to keep displayed, separeted by comas
+ * @param {string} nodeIdsList - List of ids from nodes to keep displayed, separeted by comas
  */
 
 function isolate(nodeIdsList) {
@@ -124,6 +124,25 @@ function isolate(nodeIdsList) {
     hideNodes(idsToHide);
     view.focusMode = true;
     displayNodes(idsToDisplay);
+}
+
+/**
+ * Active Isolate function with information from the view
+ * We search the data-focus value from a button, from a record
+ * @param {number} recordId - Id of the target record
+ * @param {number} focusLevel - Focus level = focus button number - 1
+ */
+
+function isolateByView(recordId, focusLevel) {
+    const focusrecord = document.getElementById(recordId)
+        , focusButton = focusrecord.querySelectorAll('[data-focus]')[focusLevel - 1]
+
+    view.focus = {
+        fromRecordId: recordId,
+        level: focusLevel
+    }
+
+    isolate(focusButton.dataset.focus);
 }
 
 /**
