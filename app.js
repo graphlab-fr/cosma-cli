@@ -23,8 +23,8 @@ switch (args[0]) {
         require('./functions/verifconfig').modifyExportPath(args[1]);
     break;
 
-    case 'import':
-        require('./functions/verifconfig').modifyImportPath(args[1]);
+    case 'css':
+        require('./functions/verifconfig').addCustomCSS();
     break;
 
     case 'atype':

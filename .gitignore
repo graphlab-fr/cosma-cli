@@ -1,10 +1,7 @@
 .DS_Store
 node_modules
 package-lock.json
-config.yml
-graph-data.js
-cosmoscope.html
+
 /history
-.idea/
-template/colors.css
-template/colors.css
+config.yml
+custom.css

@@ -99,6 +99,7 @@ function cosmoscope(files, entities, path) {
 
         // join CSS global vars from config file
         colors: colors(),
+        customCss: config.custom_css,
         
         // join metadatas from config file
         metas: config.metas,

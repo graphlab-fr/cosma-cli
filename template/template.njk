@@ -13,6 +13,10 @@
         {{ colors | safe }}
         {% include "styles.css" %}
         {% include "print.css" %}
+
+        {% if customCss %}
+        {% include "custom.css" ignore missing %}
+        {% endif %}
     </style>
 
     {# JS libraries #}
