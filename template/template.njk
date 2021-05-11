@@ -10,9 +10,11 @@
     <title>Cosma - Cosmoscope</title>
 
     <style>
-        {% include "colors.css" %}
+        {{ colors | safe }}
         {% include "styles.css" %}
     </style>
+
+    {# JS libraries #}
 
     <script>
         {% include "libs/d3.js" %}
@@ -22,6 +24,9 @@
 
 <body>
     <div class="wrapper">
+
+        {# left side config board #}
+
         <aside class="list-content">
 
             <header role="banner">
@@ -47,10 +52,11 @@
                 <ul>
                     {% for type in types %}
                     <li class="filter n_{{ type.name }}">
-                        <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}"
-                            data-active="true" type="checkbox" checked id="f-{{ type.name }}">
-                        <label for="f-{{ type.name }}">
-                            {{ type.name }} <span class="badge">{{ type.nodes | length }}</span>
+                        <label>
+                            <input data-filter="{{ type.nodes | join(",") }}" name="{{ type.name }}"
+                                type="checkbox" checked onchange="filter(this.checked, this.dataset.filter)">
+                            {{ type.name }}
+                            <span class="badge">{{ type.nodes | length }}</span>
                         </label>
                     </li>
                     {% endfor %}
@@ -85,25 +91,25 @@
 
             <details id="index" data-sort="record">
                 <summary class="menu-title">
-                    Index <span class="badge">{{ index | length }}</span>
+                    Index <span class="badge">{{ records | length }}</span>
                 </summary>
 
                 <button class="sort-btn">A-Z</button>
 
                 <ul class="sort-box active">
-                    {% for link in index %}
-                    <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
-                        <span class="type-point n_{{ link.type }}">⬤</span>
-                        <span>{{ link.title }}</span>
+                    {% for record in records %}
+                    <li data-index="{{ record.id }}" onclick="openRecord({{ record.id }})">
+                        <span class="type-point n_{{ record.type }}">⬤</span>
+                        <span>{{ record.title }}</span>
                     </li>
                     {% endfor %}
                 </ul>
 
                 <ul class="sort-box">
-                    {% for link in index | reverse %}
-                    <li data-index="{{ link.id }}" onclick="openRecord({{ link.id }})">
-                        <span class="type-point n_{{ link.type }}">⬤</span>
-                        <span>{{ link.title }}</span>
+                    {% for record in records | reverse %}
+                    <li data-index="{{ record.id }}" onclick="openRecord({{ record.id }})">
+                        <span class="type-point n_{{ record.type }}">⬤</span>
+                        <span>{{ record.title }}</span>
                     </li>
                     {% endfor %}
                 </ul>
@@ -132,11 +138,11 @@
 
                 <ul>
                     <li>
-                        <input type="checkbox" name="check" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
+                        <input type="checkbox" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
                         <label for="param-links">Afficher les liens <span class="badge">{{ nblinks }}</span></label>
                     </li>
                     <li>
-                        <input data-active="true" type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
+                        <input type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
                         <label for="param-label">Afficher les étiquettes</label>
                     </li>
                 </ul>
@@ -151,31 +157,33 @@
 
                 <article>
                     <p>Attraction</p>
-                    {{ inputRange('force', 'attraction.force', 'updateForces()', graphConfig.attraction.force, -600, -50, 0.1) }}
-                    {{ inputRange('distance max', 'attraction.distance_max', 'updateForces()', graphConfig.attraction.distance_max, 0, 800, 0.1) }}
-                    {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graphConfig.attraction.verticale, 0, 1, 0.01) }}
-                    {{ inputRange('horizontale', 'attraction.horizontale', 'updateForces()', graphConfig.attraction.horizontale, 0, 1, 0.01) }}
+                    {{ inputRange('force', 'attraction.force', 'updateForces()', graph.config.attraction.force, -600, -50, 0.1) }}
+                    {{ inputRange('distance max', 'attraction.distance_max', 'updateForces()', graph.config.attraction.distance_max, 0, 800, 0.1) }}
+                    {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graph.config.attraction.verticale, 0, 1, 0.01) }}
+                    {{ inputRange('horizontale', 'attraction.horizontale', 'updateForces()', graph.config.attraction.horizontale, 0, 1, 0.01) }}
                 </article>
 
                 <article>
                     <p>Position</p>
-                    {{ inputRange('x', 'position.x', 'updateForces()', graphConfig.position.x, 0, 1, 0.05) }}
-                    {{ inputRange('y', 'position.y', 'updateForces()', graphConfig.position.y, 0, 1, 0.05) }}
+                    {{ inputRange('x', 'position.x', 'updateForces()', graph.config.position.x, 0, 1, 0.05) }}
+                    {{ inputRange('y', 'position.y', 'updateForces()', graph.config.position.y, 0, 1, 0.05) }}
                 </article>
 
                 <article>
                     <p>Texte</p>
-                    {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graphConfig.text_size, 5, 15, 0.5) }}
+                    {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graph.config.text_size, 5, 15, 0.5) }}
                 </article>
             </details>
 
             <footer class="a-propos" onclick="openRecord('credits', false)">À propos</footer>
         </aside>
 
+        {# right side reading board #}
+
         <main id="record-container" class="fiche-container">
             <button class="fiche__btn-close" onclick="closeRecord()">Fermer</button>
 
-            {% for record in index %}
+            {% for record in records %}
             <article id="{{ record.id }}" class="fiche">
                 <header>
                     <h1>{{ record.title }}</h1>
@@ -206,10 +214,10 @@
                     <div title="Choisir le rayon du mode focus">
                         <span>mode focus :</span>
                         <span>
-                            {% for niv in record.radius %}
-                            <button id="{{ record.id }}-{{ loop.index }}"
-                            class="radius-btn"
-                            onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index }}'">{{ loop.index }}</button>
+                            {% for nodesIds in record.radius %}
+                            <button id="{{ record.id }}-{{ loop.index }}" class="radius-btn" data-focus="{{nodesIds}}"
+                                onclick="isolate(this.dataset.focus);view.focus = { fromRecordId:{{ record.id }}, level:{{ loop.index }} }">
+                                {{ loop.index }}</button>
                             {% endfor %}
                         </span>
                     </div>
@@ -256,6 +264,8 @@
             </article>
             {% endfor %}
 
+            {# Cosma's authors & contributors credits #}
+
             <article id="credits" class="fiche">
                 <main>
                     <h1>Cosma</h1>
@@ -297,7 +307,9 @@
         </main>
     </div>
 
-    <div class="graph-wrapper" style="background-color: {{ graphConfig.background_color }}">
+    {# Cosma graph #}
+
+    <div class="graph-wrapper" style="background-color: {{ graph.config.background_color }}">
         <svg id="graph_canvas">
             <defs>
                 <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerUnits="strokeWidth" markerWidth="7" markerHeight="7" orient="auto">
@@ -321,8 +333,17 @@
         </div>
     </div>
 
+    {# Cosma data #}
+
     <script>
-        {% include "graph-data.js" %}
+        let index = {{ index | dump | safe }};
+        const graph = {{ graph.data | safe }};
+        const graphProperties = {{ graph.config | dump | safe }};
+    </script>
+
+    {# Cosma functions #}
+
+    <script>
         {% include "scripts/main.js" %}
         {% include "scripts/graph.js" %}
         {% include "scripts/zoom.js" %}

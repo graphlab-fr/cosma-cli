@@ -11,25 +11,19 @@ const view = {
          * @type {boolean}
          * @default
          */
-        isolateMode: false,
-        /**
-         * List of name from active filters
-         * @type {array}
-         * @default
-         */
-        activeFilters: [],
+        focusMode: false,
         /**
          * Id from the current isolated node
          * @type {array}
          * @default
          */
-        isolateId: undefined, 
+        focus: undefined, 
         /**
          * Id from the current diplayed record
          * @type {array}
          * @default
          */
-        openedRecord: undefined,
+        openedRecordId: undefined,
         /**
          * Name 'data-tag' from the activated tag
          * @type {string}
@@ -44,6 +38,8 @@ const view = {
         position: {x: 0, y: 0, zoom: 1}
     }
     , svg = d3.select("#graph_canvas");
+
+let keyboardShortcutsAreWorking = true
 
 /**
  * Navigation history entries managment
@@ -94,27 +90,35 @@ window.onpopstate = function(e) {
     openRecord(recordId, false);
 };
 
-// keyboard shortcuts
-document.onkeydown = (e) => {
-    if (e.altKey === true) {
-        // shortcuts with 'Alt' key
-        e.preventDefault();
+/**
+ * Keyboard shortcuts
+ */
 
-        switch (e.code) {
-            case 'KeyS':
+document.onkeydown = (e) => {
+
+    if (keyboardShortcutsAreWorking) {
+
+        switch (e.key) {
+            case 's':
+                e.preventDefault();
                 searchInput.focus();
                 return;
 
-            case 'KeyR':
+            case 'r':
+                e.preventDefault();
                 zoomReset();
                 return;
 
-            case 'KeyW':
+            case 'f':
+                e.preventDefault();
+                isolateByView(view.openedRecordId, 1);
+                return;
+
+            case ' ':
+                e.preventDefault();
                 document.querySelector('.head-load-bar').click();
                 return;
         }
-
-        return;
     }
 
     switch (e.key) {
@@ -123,3 +127,14 @@ document.onkeydown = (e) => {
             return;
     }
 };
+
+/**
+ * Cosma logo animation onclick
+ */
+
+(function (){
+const roll = document.getElementById('cosma-roll');
+roll.parentElement.addEventListener('click', () => {
+    roll.classList.toggle('anim');
+});
+})();

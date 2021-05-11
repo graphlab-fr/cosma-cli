@@ -5,11 +5,14 @@
  */
 
 function registerView() {
+    const activeFiltersNames = getActiveFilterNames();
+
     const viewObj = {
         recordId: view.openedRecord,
-        filters : ((view.activeFilters.length === 0) ? undefined : view.activeFilters),
-        isolateId : view.isolateId
+        filters: ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames)
     }
+
+    viewObj.focus = view.focus;
 
     let key = JSON.stringify(viewObj);
     key = window.btoa(key);
@@ -46,6 +49,7 @@ function changeView(key) {
     if (key.filters) {
         setFilters(key.filters); }
     
-    if (key.isolateId) {
-        isolateByElement(key.isolateId); }
+    if (key.focus) {
+        isolateByView(key.focus.fromRecordId, key.focus.level);
+    }
 }

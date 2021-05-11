@@ -15,6 +15,8 @@ let resultContainer = document.querySelector('#search-result-list')
 searchInput.value = ''; // reset at page loading
 
 searchInput.addEventListener('focus', () => {
+    keyboardShortcutsAreWorking = false;
+
     // initialize search engine with no hidden nodes
     fuse = new Fuse(index.filter(item => item.hidden === false), {
         includeScore: false,
@@ -51,6 +53,10 @@ searchInput.addEventListener('focus', () => {
     document.addEventListener('keydown', keyboardResultNavigation)
 });
 
+searchInput.addEventListener('blur', () => {
+    keyboardShortcutsAreWorking = true;
+})
+
 function keyboardResultNavigation(e) {
     if (resultList.length === 0) { return; }
 
@@ -76,6 +82,7 @@ function keyboardResultNavigation(e) {
             removeOutlineElt(resultContainer.childNodes[selectedResult]);
             selectedResult++;
             activeOutline(resultContainer.childNodes[selectedResult]);
+
             if (selectedResult === 1) {
                 searchInput.blur();
             }

@@ -1,69 +1,84 @@
-let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
+let filtersNames = Array.from(document.querySelectorAll('[data-filter]')).map(filter => filter.name)
     , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
 
-filters = filters.map(function(btn) {
-    // extract nodes id affected by the filter from the linked button
-    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
-});
-
 /**
- * Select filters btns and activate them
+ * Toggle filter from his checkbox or manually
+ * @param {bool} isChecked - Checkbox boolean : checked or not
+ * @param {string} nodeIdsList - List of node ids, separeted by comas
  */
 
-(function() {
-    for (const filter of filters) {
-        const btn = filter.btn;
-        btn.dataset.active = 'true';
+function filter(isChecked, nodeIdsList) {
+    nodeIdsList = parseIdsString(nodeIdsList);
 
-        btn.addEventListener('click', () => {
-            if (btn.dataset.active === 'true') {
-                filterOff(filter); }
-            else {
-                filterOn(filter); }
-        });
-    }
-})();
-
-/**
- * Activate filters by their name
- * @param {array} filtersToActivate - List of filter names
- */
-
-function setFilters(filtersToActivate) {
-    for (const filter of filters) {
-        if (filtersToActivate.indexOf(filter.name) !== -1) {
-            // if filter is "ToActivate"
-            filterOff(filter);
-        }
-        else {
-            filterOn(filter);
-        }
+    if (isChecked === true) {
+        displayNodes(nodeIdsList);
+    } else {
+        hideNodes(nodeIdsList);
     }
 }
 
 /**
- * Activate a filter
- * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ * Activate filters by their name and if their are not already activated
+ * Unsactive others filters if their are not already unactivated
+ * @param {array} filtersNamesToActivate - List of filter names
  */
 
-function filterOn(filterObj) {
-    displayNodes(filterObj.nodeIds);
-    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
-    filterObj.btn.checked = true;
-    filterObj.btn.dataset.active = 'true';
+function setFilters(filtersNamesToActivate) {
+    filtersToUnactivate = filtersNames.filter(function(filterName) {
+        if (filtersNamesToActivate.includes(filterName)) {
+            return false; }
+        if (getUnactiveFilterNames().includes(filterName)) {
+            return false; }
+
+        return true;
+    });
+
+    filtersNamesToActivate = filtersNamesToActivate.filter(function(filterName) {
+        if (getActiveFilterNames().includes(filterName)) {
+            return false; }
+
+        return true;
+    });
+
+    for (const filterName of filtersToUnactivate) {
+        let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
+            , data = filterElt.dataset.filter;
+
+        filterElt.checked = false;
+        filter(false, data);
+    }
+
+    for (const filterName of filtersNamesToActivate) {
+        let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
+            , data = filterElt.dataset.filter;
+
+        filterElt.checked = true;
+        filter(true, data);
+    }
 }
 
 /**
- * Desactivate a filter
- * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ * Get active filters name
+ * @returns {array} - Filter names
  */
 
-function filterOff(filterObj) {
-    hideNodes(filterObj.nodeIds);
-    view.activeFilters.push(filterObj.name);
-    filterObj.btn.checked = false;
-    filterObj.btn.dataset.active = 'false';
+function getActiveFilterNames() {
+    let filterElts = Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === true)
+
+    return filterElts.map(filterElt => filterElt.name);
+}
+
+/**
+ * Get unactive filters name
+ * @returns {array} - Filter names
+ */
+
+function getUnactiveFilterNames() {
+    let filterElts = Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === false)
+
+    return filterElts.map(filterElt => filterElt.name);
 }
 
 /**
@@ -80,19 +95,21 @@ function getFiltedNodes() {
 
 /**
  * Display some nodes, hide all others
- * turn on the 'isolateMode'
- * @param {array} - Ids from nodes to keep displayed
+ * turn on the 'focusMode'
+ * @param {string} nodeIdsList - List of ids from nodes to keep displayed, separeted by comas
  */
 
-function isolate(nodeIds) {
-    view.isolateMode = false;
+function isolate(nodeIdsList) {
+    nodeIdsList = parseIdsString(nodeIdsList);
+
+    view.focusMode = false; // for reset
     resetIsolateBtn.style.display = 'block';
 
     let idsToHide = [];
 
     index = index.map(function(item) {
-        if (nodeIds.indexOf(item.id) !== -1) {
-            // if item is one of the nodeIds
+        if (nodeIdsList.includes(item.id)) {
+            // if item comes from the nodeIdsList
             item.isolated = true;
         } else {
             item.isolated = false;
@@ -101,29 +118,31 @@ function isolate(nodeIds) {
         return item;
     });
     // display nodeIds if their are not filtered
-    let idsToDisplay = nodeIds.filter(id => getFiltedNodes().indexOf(id) === -1);
+    let idsToDisplay = nodeIdsList
+        .filter(id => !getFiltedNodes().includes(id));
 
     hideNodes(idsToHide);
-    view.isolateMode = true;
+    view.focusMode = true;
     displayNodes(idsToDisplay);
 }
 
 /**
- * Launch isolate() from the onclick attribute of an identified element
- * @param {string} - Id of the element for extract nodes ids
+ * Active Isolate function with information from the view
+ * We search the data-focus value from a button, from a record
+ * @param {number} recordId - Id of the target record
+ * @param {number} focusLevel - Focus level = focus button number - 1
  */
 
-function isolateByElement(eltId) {
-    if (eltId === undefined) { return; }
+function isolateByView(recordId, focusLevel) {
+    const focusrecord = document.getElementById(recordId)
+        , focusButton = focusrecord.querySelectorAll('[data-focus]')[focusLevel - 1]
 
-    let nodeIds = window[eltId];
-    nodeIds = nodeIds.getAttribute('onclick');
-    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
-    nodeIds = nodeIds.split(',');
-    nodeIds = nodeIds.map(id => Number(id));
-    isolate(nodeIds);
+    view.focus = {
+        fromRecordId: recordId,
+        level: focusLevel
+    }
 
-    view.isolateId = eltId;
+    isolate(focusButton.dataset.focus);
 }
 
 /**
@@ -132,23 +151,25 @@ function isolateByElement(eltId) {
  */
 
 function resetNodes() {
-    view.isolateId = undefined;
+    view.focus = undefined;
 
     const idsToDisplay = index
-        .filter(item => item.isolated === false && getFiltedNodes().indexOf(item.id) === -1)
+        .filter(item => item.isolated === false && !getFiltedNodes().includes(item.id))
         .map(item => item.id);
 
     index = index.map(function(item) {
-        if (item.isolated === true) {
-            item.isolated === false; }
-
+        item.isolated = false;
         return item;
     });
 
-    view.isolateMode = false;
+    view.focusMode = false;
     displayNodes(idsToDisplay);
 
     unactiveFromParent(document.getElementById('views-container'));
 
     resetIsolateBtn.style.display = null;
+}
+
+function parseIdsString(idsString) {
+    return idsString.split(',').map(id => Number(id));
 }

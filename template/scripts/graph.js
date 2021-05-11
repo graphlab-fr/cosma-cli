@@ -105,6 +105,7 @@ function initializeDisplay() {
 
     circles = node.append("circle")
         .attr("r", (d) => d.size)
+        .attr("class", (d) => "n_" + d.type)
         .call(d3.drag()
                 .on("start", function(d) {
                     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
@@ -162,9 +163,6 @@ function initializeDisplay() {
     if (graphProperties.arrows === true) {
         link.attr("marker-end", 'url(#arrow)');
     }
-
-    // node class
-    circles.attr("class", (d) => "n_" + d.type);
 }
 
 /**

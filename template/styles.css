@@ -316,3 +316,15 @@ summary+button { margin: 1rem 0; }
 	vertical-align: 15%;
 	padding-right: 0.2em;
 }
+
+ @keyframes rotate-center {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#cosma-roll {transform-origin : 96px 42px;}
+#cosma-roll.anim {animation: 2.2s linear infinite rotate-center;}

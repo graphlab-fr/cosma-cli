@@ -104,7 +104,7 @@ function getNodeNetwork(nodeIds) {
         let sources = document.querySelectorAll('[data-source="' + nodeId + '"]');
         sources = Array.from(sources);
         sources = sources.filter(function(source) {
-            if (diplayedNodes.indexOf(Number(source.dataset.target)) !== -1) {
+            if (diplayedNodes.includes(Number(source.dataset.target))) {
                 return true;
             }
         })
@@ -113,7 +113,7 @@ function getNodeNetwork(nodeIds) {
         let targets = document.querySelectorAll('[data-target="' + nodeId + '"]');
         targets = Array.from(targets);
         targets = targets.filter(function(source) {
-            if (diplayedNodes.indexOf(Number(source.dataset.source)) !== -1) {
+            if (diplayedNodes.includes(Number(source.dataset.source))) {
                 return true;
             }
         })
@@ -136,9 +136,9 @@ function getNodeNetwork(nodeIds) {
 
 function hideNodes(nodeIds) {
     let nodesToHide = index.filter(function(item) {
-        if (nodeIds.indexOf(item.id) !== -1 && item.hidden === false) {
+        if (nodeIds.includes(item.id) && item.hidden === false) {
             // return nodes are not yet hidden…
-            if (view.isolateMode) {
+            if (view.focusMode) {
                 if (item.isolated === true) { return true; } // … and part of the isolated ones
             } else {
                 return true;
@@ -156,7 +156,7 @@ function hideNodes(nodeIds) {
     }
 
     index = index.map(function(item) {
-        if (nodesToHide.indexOf(item.id) !== -1) {
+        if (nodesToHide.includes(item.id)) {
             item.hidden = true; // for each nodesToHide
         }
         return item;
@@ -172,9 +172,9 @@ function displayNodes(nodeIds) {
     let nodesToDisplay = [];
 
     index = index.map(function(item) {
-        if (nodeIds.indexOf(item.id) !== -1 && item.hidden === true) {
+        if (nodeIds.includes(item.id) && item.hidden === true) {
             // push on nodesToDisplay nodes are not yet displayed…
-            if (view.isolateMode) {
+            if (view.focusMode) {
                 if (item.isolated === true) { // … and part of the isolated ones
                     item.hidden = false;
                     nodesToDisplay.push(item.id);
