@@ -1,0 +1,50 @@
+@media print {
+	.wrapper {
+		height: unset;
+		overflow: unset;
+	}
+
+	/* app containers */
+    aside,
+	.graph-wrapper,
+	/* record elements */
+	.record-focus-container,
+	.record-btn-close {
+		display: none !important;
+	}
+
+	.fiche-container {
+		position: unset;
+		width: 100%;
+		height: unset;
+		overflow: unset;
+		box-shadow: unset;
+	}
+
+    .fiche-container header:before{ 
+        content:url(img/image.jpg) ;
+        position:relative; 
+        left:-3px;
+        top:10px;
+       }
+
+	.fiche-container footer {
+		break-before: page;
+	}
+
+	p {
+		orphans: 3;
+	}
+
+	[data-context]::after {
+		content: attr(data-context);
+		position: unset;
+		border-radius: 2px;
+		padding: 0.8rem;
+		font-style: italic;
+	}
+
+	a[href]:not([onclick]):after {
+		content: " (" attr(href) ")";
+	}
+}
