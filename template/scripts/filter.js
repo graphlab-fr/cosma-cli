@@ -1,69 +1,84 @@
-let filters = Array.from(document.querySelectorAll('[data-filter]')) // filter btns
+let filtersNames = Array.from(document.querySelectorAll('[data-filter]')).map(filter => filter.name)
     , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
 
-filters = filters.map(function(btn) {
-    // extract nodes id affected by the filter from the linked button
-    const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-    return {btn: btn, nodeIds: nodeIds, name: btn.dataset.name};
-});
+// filters = filters.map(function(btn) {
+//     // extract nodes id affected by the filter from the linked button
+//     const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
+//     return {btn: btn, nodeIds: nodeIds, name: btn.name};
+// });
 
-/**
- * Select filters btns and activate them
- */
+function filter(isChecked, data) {
+    data = parseIdsString(data);
 
-(function() {
-    for (const filter of filters) {
-        const btn = filter.btn;
-        btn.dataset.active = 'true';
-
-        btn.addEventListener('click', () => {
-            if (btn.dataset.active === 'true') {
-                filterOff(filter); }
-            else {
-                filterOn(filter); }
-        });
-    }
-})();
-
-/**
- * Activate filters by their name
- * @param {array} filtersToActivate - List of filter names
- */
-
-function setFilters(filtersToActivate) {
-    for (const filter of filters) {
-        if (filtersToActivate.indexOf(filter.name) !== -1) {
-            // if filter is "ToActivate"
-            filterOff(filter);
-        }
-        else {
-            filterOn(filter);
-        }
+    if (isChecked === true) {
+        displayNodes(data);
+    } else {
+        hideNodes(data);
     }
 }
 
 /**
- * Activate a filter
- * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ * Activate filters by their name and if their are not already activated
+ * Unsactive others filters if their are not already unactivated
+ * @param {array} filtersNamesToActivate - List of filter names
  */
 
-function filterOn(filterObj) {
-    displayNodes(filterObj.nodeIds);
-    view.activeFilters = view.activeFilters.filter(activeFilterName => activeFilterName !== filterObj.name);
-    filterObj.btn.checked = true;
-    filterObj.btn.dataset.active = 'true';
+function setFilters(filtersNamesToActivate) {
+    filtersToUnactivate = filtersNames.filter(function(filterName) {
+        if (filtersNamesToActivate.includes(filterName)) {
+            return false; }
+        if (getUnactiveFilterNames().includes(filterName)) {
+            return false; }
+
+        return true;
+    });
+
+    filtersNamesToActivate = filtersNamesToActivate.filter(function(filterName) {
+        if (getActiveFilterNames().includes(filterName)) {
+            return false; }
+
+        return true;
+    });
+
+    for (const filterName of filtersToUnactivate) {
+        let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
+            , data = filterElt.dataset.filter;
+
+        filterElt.checked = false;
+        filter(false, data);
+    }
+
+    for (const filterName of filtersNamesToActivate) {
+        let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
+            , data = filterElt.dataset.filter;
+
+        filterElt.checked = true;
+        filter(true, data);
+    }
 }
 
 /**
- * Desactivate a filter
- * @param {object} filterObj - Filter's btn, nodesIds linked & name
+ * Get active filters name
+ * @returns {array} - Filter names
  */
 
-function filterOff(filterObj) {
-    hideNodes(filterObj.nodeIds);
-    view.activeFilters.push(filterObj.name);
-    filterObj.btn.checked = false;
-    filterObj.btn.dataset.active = 'false';
+function getActiveFilterNames() {
+    let filterElts = Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === true)
+
+    return filterElts.map(filterElt => filterElt.name);
+}
+
+/**
+ * Get unactive filters name
+ * @returns {array} - Filter names
+ */
+
+function getUnactiveFilterNames() {
+    let filterElts = Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === false)
+
+    return filterElts.map(filterElt => filterElt.name);
 }
 
 /**
@@ -151,4 +166,8 @@ function resetNodes() {
     unactiveFromParent(document.getElementById('views-container'));
 
     resetIsolateBtn.style.display = null;
+}
+
+function parseIdsString(idsString) {
+    return idsString.split(',').map(id => Number(id));
 }

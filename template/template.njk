@@ -52,10 +52,11 @@
                 <ul>
                     {% for type in types %}
                     <li class="filter n_{{ type.name }}">
-                        <input data-filter="{{ type.nodes | join(",") }}" data-name="{{ type.name }}"
-                            data-active="true" type="checkbox" checked id="f-{{ type.name }}">
-                        <label for="f-{{ type.name }}">
-                            {{ type.name }} <span class="badge">{{ type.nodes | length }}</span>
+                        <label>
+                            <input data-filter="{{ type.nodes | join(",") }}" name="{{ type.name }}"
+                                type="checkbox" checked onchange="filter(this.checked, this.dataset.filter)">
+                            {{ type.name }}
+                            <span class="badge">{{ type.nodes | length }}</span>
                         </label>
                     </li>
                     {% endfor %}
@@ -137,11 +138,11 @@
 
                 <ul>
                     <li>
-                        <input type="checkbox" name="check" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
+                        <input type="checkbox" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
                         <label for="param-links">Afficher les liens <span class="badge">{{ nblinks }}</span></label>
                     </li>
                     <li>
-                        <input data-active="true" type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
+                        <input type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
                         <label for="param-label">Afficher les étiquettes</label>
                     </li>
                 </ul>

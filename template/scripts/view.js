@@ -5,9 +5,11 @@
  */
 
 function registerView() {
+    const activeFiltersNames = getActiveFilterNames();
+
     const viewObj = {
         recordId: view.openedRecord,
-        filters : ((view.activeFilters.length === 0) ? undefined : view.activeFilters),
+        filters : ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames),
         isolateId : view.isolateId
     }
 
