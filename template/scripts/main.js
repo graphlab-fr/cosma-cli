@@ -11,19 +11,13 @@ const view = {
          * @type {boolean}
          * @default
          */
-        isolateMode: false,
-        /**
-         * List of name from active filters
-         * @type {array}
-         * @default
-         */
-        activeFilters: [],
+        focusMode: false,
         /**
          * Id from the current isolated node
          * @type {array}
          * @default
          */
-        isolateId: undefined, 
+        focus: undefined, 
         /**
          * Id from the current diplayed record
          * @type {array}

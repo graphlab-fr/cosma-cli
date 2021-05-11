@@ -138,7 +138,7 @@ function hideNodes(nodeIds) {
     let nodesToHide = index.filter(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === false) {
             // return nodes are not yet hidden…
-            if (view.isolateMode) {
+            if (view.focusMode) {
                 if (item.isolated === true) { return true; } // … and part of the isolated ones
             } else {
                 return true;
@@ -174,7 +174,7 @@ function displayNodes(nodeIds) {
     index = index.map(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === true) {
             // push on nodesToDisplay nodes are not yet displayed…
-            if (view.isolateMode) {
+            if (view.focusMode) {
                 if (item.isolated === true) { // … and part of the isolated ones
                     item.hidden = false;
                     nodesToDisplay.push(item.id);

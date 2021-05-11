@@ -9,9 +9,10 @@ function registerView() {
 
     const viewObj = {
         recordId: view.openedRecord,
-        filters : ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames),
-        isolateId : view.isolateId
+        filters: ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames)
     }
+
+    viewObj.focus = view.focus;
 
     let key = JSON.stringify(viewObj);
     key = window.btoa(key);
@@ -48,6 +49,10 @@ function changeView(key) {
     if (key.filters) {
         setFilters(key.filters); }
     
-    if (key.isolateId) {
-        isolateByElement(key.isolateId); }
+    if (key.focus) {
+        const focusrecord = document.getElementById(key.focus.fromRecordId)
+            , focusButton = focusrecord.querySelectorAll('[data-focus]')[key.focus.level - 1]
+
+        isolate(focusButton.dataset.focus);
+    }
 }

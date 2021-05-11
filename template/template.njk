@@ -214,10 +214,10 @@
                     <div title="Choisir le rayon du mode focus">
                         <span>mode focus :</span>
                         <span>
-                            {% for niv in record.radius %}
-                            <button id="{{ record.id }}-{{ loop.index }}"
-                            class="radius-btn"
-                            onclick="isolate([{{niv}}]);view.isolateId='{{ record.id }}-{{ loop.index }}'">{{ loop.index }}</button>
+                            {% for nodesIds in record.radius %}
+                            <button id="{{ record.id }}-{{ loop.index }}" class="radius-btn" data-focus="{{nodesIds}}"
+                                onclick="isolate(this.dataset.focus);view.focus = { fromRecordId:{{ record.id }}, level:{{ loop.index }} }">
+                                {{ loop.index }}</button>
                             {% endfor %}
                         </span>
                     </div>

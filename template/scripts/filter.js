@@ -1,19 +1,19 @@
 let filtersNames = Array.from(document.querySelectorAll('[data-filter]')).map(filter => filter.name)
     , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
 
-// filters = filters.map(function(btn) {
-//     // extract nodes id affected by the filter from the linked button
-//     const nodeIds = btn.dataset.filter.split(',').map(id => Number(id));
-//     return {btn: btn, nodeIds: nodeIds, name: btn.name};
-// });
+/**
+ * Toggle filter from his checkbox or manually
+ * @param {bool} isChecked - Checkbox boolean : checked or not
+ * @param {string} nodeIdsList - List of node ids, separeted by comas
+ */
 
-function filter(isChecked, data) {
-    data = parseIdsString(data);
+function filter(isChecked, nodeIdsList) {
+    nodeIdsList = parseIdsString(nodeIdsList);
 
     if (isChecked === true) {
-        displayNodes(data);
+        displayNodes(nodeIdsList);
     } else {
-        hideNodes(data);
+        hideNodes(nodeIdsList);
     }
 }
 
@@ -95,19 +95,21 @@ function getFiltedNodes() {
 
 /**
  * Display some nodes, hide all others
- * turn on the 'isolateMode'
- * @param {array} - Ids from nodes to keep displayed
+ * turn on the 'focusMode'
+ * @param {string} - List of ids from nodes to keep displayed, separeted by comas
  */
 
-function isolate(nodeIds) {
-    view.isolateMode = false;
+function isolate(nodeIdsList) {
+    nodeIdsList = parseIdsString(nodeIdsList);
+
+    view.focusMode = false; // for reset
     resetIsolateBtn.style.display = 'block';
 
     let idsToHide = [];
 
     index = index.map(function(item) {
-        if (nodeIds.includes(item.id)) {
-            // if item is one of the nodeIds
+        if (nodeIdsList.includes(item.id)) {
+            // if item comes from the nodeIdsList
             item.isolated = true;
         } else {
             item.isolated = false;
@@ -116,29 +118,12 @@ function isolate(nodeIds) {
         return item;
     });
     // display nodeIds if their are not filtered
-    let idsToDisplay = nodeIds.filter(id => !getFiltedNodes().includes(id));
+    let idsToDisplay = nodeIdsList
+        .filter(id => !getFiltedNodes().includes(id));
 
     hideNodes(idsToHide);
-    view.isolateMode = true;
+    view.focusMode = true;
     displayNodes(idsToDisplay);
-}
-
-/**
- * Launch isolate() from the onclick attribute of an identified element
- * @param {string} - Id of the element for extract nodes ids
- */
-
-function isolateByElement(eltId) {
-    if (eltId === undefined) { return; }
-
-    let nodeIds = window[eltId];
-    nodeIds = nodeIds.getAttribute('onclick');
-    nodeIds = nodeIds.split('([', 2)[1].split('])', 1)[0];
-    nodeIds = nodeIds.split(',');
-    nodeIds = nodeIds.map(id => Number(id));
-    isolate(nodeIds);
-
-    view.isolateId = eltId;
 }
 
 /**
@@ -147,20 +132,18 @@ function isolateByElement(eltId) {
  */
 
 function resetNodes() {
-    view.isolateId = undefined;
+    view.focus = undefined;
 
     const idsToDisplay = index
         .filter(item => item.isolated === false && !getFiltedNodes().includes(item.id))
         .map(item => item.id);
 
     index = index.map(function(item) {
-        if (item.isolated === true) {
-            item.isolated === false; }
-
+        item.isolated = false;
         return item;
     });
 
-    view.isolateMode = false;
+    view.focusMode = false;
     displayNodes(idsToDisplay);
 
     unactiveFromParent(document.getElementById('views-container'));
