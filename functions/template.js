@@ -6,8 +6,7 @@ const fs = require('fs')
     , config = require('./verifconfig').config;
 
 let types = {}
-    , tags = {}
-    , nblinks = 0;
+    , tags = {};
 
 // markdown-it plugin for convertLinks()
 mdIt.use(mdItAttr, {
@@ -15,37 +14,6 @@ mdIt.use(mdItAttr, {
     rightDelimiter: '}',
     allowedAttributes: []
 })
-
-/**
- * Templating & create mass data & config export for Cosmoscope's JavaScript processing
- * @param {object} nodes - All graph nodes
- * @param {object} links - All graph links
- */
-
-function jsonData(nodes, links) {
-
-    nblinks = links.length;
-
-    const index = nodes.map(function(node) {
-        return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
-    });
-
-    const graphScript =
-`let index = ${JSON.stringify(index)};
-
-const graphProperties = ${JSON.stringify(config.graph_config)}
-
-// load the data
-let graph = ${JSON.stringify({nodes: nodes, links: links})};
-`;
-
-    fs.writeFileSync('./template/graph-data.js', graphScript, (err) => {
-        if (err) { return console.error( 'Err. write graph-data.js file : ' + err) }
-        console.log('create graph-data.js file');
-    });
-}
-
-exports.jsonData = jsonData;
 
 /**
  * Templating & create stylesheet with types from config
@@ -79,27 +47,24 @@ function colors() {
 
     globalsStyles = ':root {\n' + globalsStyles + '\n}';
 
-    const content = '\n' + globalsStyles + '\n\n' + colorsStyles;
-
-    fs.writeFileSync('./template/colors.css', content, (err) => {
-        if (err) { console.error( 'Err. write color style file: ' + err) }
-    });
+    return '\n' + globalsStyles + '\n\n' + colorsStyles;
 }
 
 exports.colors = colors;
 
 /**
- * Templating & create the Cosmoscope file
+ * Templating & create the Cosmoscope.html file
  * @param {array} files - All files array
  * @param {string} path - History save path
  */
 
-function cosmoscope(files, path) {
+function cosmoscope(files, entities, path) {
 
     nunjucks.configure('template', { autoescape: true });
     let htmlRender = nunjucks.render('template.njk', {
 
-        index: files.map(function (file) { // normalize files as records for Pug templating
+        // normalize files as records
+        records: files.map(function (file) {
             file.content = linksTools.convertLinks(file.content, file);
             registerType(file.metas.type, file.metas.id);
             registerTags(file.metas.tags, file.metas.id);
@@ -116,19 +81,38 @@ function cosmoscope(files, path) {
                 radius: ((file.focusLevels === null) ? [] : levelsToRadius(file.focusLevels))
             }
         }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
+
+        // normalize views, tags and types
         views: config.views || [],
-        graphConfig: config.graph_config,
-        // objects to objects array
         types: Object.keys(types).map(function(type) {
             return { name: type, nodes: types[type] };
         }),
         tags: Object.keys(tags).map(function(tag) {
             return { name: tag, nodes: tags[tag] };
         }).sort(function (a, b) { return a.name.localeCompare(b.name); }),
+
+        // normalize graph data & configuration 
+        graph: {
+            config: config.graph_config,
+            data: JSON.stringify({nodes: entities.nodes, links: entities.links})
+        },
+
+        // join CSS global vars from config file
+        colors: colors(),
+        
+        // join metadatas from config file
         metas: config.metas,
-        nblinks: nblinks
+
+        // count links
+        nblinks: entities.links.length,
+
+        // normalize an index from all nodes, to manage them overall
+        index: entities.nodes.map(function(node) {
+            return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
+        })
     });
 
+    // minify the render, if 'true' from config file
     if (config.minify && config.minify === true) {
         const minifyHtml = require("@minify-html/js");
         htmlRender = minifyHtml.minify(htmlRender, minifyHtml.createConfiguration({ minifyJs: true, minifyCss: true }))

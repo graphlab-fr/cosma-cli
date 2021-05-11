@@ -139,9 +139,7 @@ entities.links = entities.links.map(function(link) {
 });
 
 // generate the Cosmoscope
-require('./template').jsonData(entities.nodes, entities.links);
-require('./template').colors();
-require('./template').cosmoscope(files, savePath);
+require('./template').cosmoscope(files, entities, savePath);
 
 // generate data files
 fs.writeFile(savePath + 'data/nodes.json', JSON.stringify(entities.nodes), (err) => {
