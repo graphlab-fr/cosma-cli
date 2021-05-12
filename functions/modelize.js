@@ -7,6 +7,9 @@ const fs = require('fs')
     , savePath = require('./history').historyPath
     , config = require('./verifconfig').config;
 
+config.record_types_list = Object.keys(config.record_types);
+config.link_types_list = Object.keys(config.link_types);
+
 let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
