@@ -37,9 +37,9 @@ searchInput.addEventListener('focus', () => {
             if (result === undefined) { break; }
             // include search result element on DOM
             var resultElement = document.createElement('li');
-            resultElement.classList.add('search-result', 'id-link');
+            resultElement.classList.add('search-result-item');
             resultElement.innerHTML =
-            `<span class="type-point n_${result.item.type}">⬤</span>
+            `<span class="record-type-point n_${result.item.type}">⬤</span>
             <span>${result.item.title}</span>`;
             resultContainer.appendChild(resultElement);
 

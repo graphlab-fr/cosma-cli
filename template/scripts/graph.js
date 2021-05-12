@@ -179,7 +179,7 @@ function ticked() {
           return "translate(" + d.x + "," + d.y + ")";
         })
 
-    d3.select('#head-load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
+    d3.select('#load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }
 
 })();

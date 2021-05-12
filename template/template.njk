@@ -7,6 +7,7 @@
     {% for meta, value in metas %}
     <meta name="{{ meta }}" content="{{ value }}">
     {% endfor %}
+    <meta name="date" content="{{ date }}">
     <title>Cosma - Cosmoscope</title>
 
     <style>
@@ -28,291 +29,299 @@
 </head>
 
 <body>
-    <div class="wrapper">
 
-        {# left side config board #}
+    {# ========================================
+    left side menu board
+    ========================================= #}
 
-        <aside class="list-content">
+    <aside class="menu list-content-container">
 
-            <header role="banner">
-                <div class="self">
-                    {% include "cosmalogo.svg" %}
+        <header role="banner">
+            <div class="logo">
+                {% include "cosmalogo.svg" %}
+            </div>
+
+            <div class="load-bar", onclick="updateForces()">
+                <div id="load-bar-value"></div>
+            </div>
+        </header>
+
+        <section>
+            <input class="search-bar" id="search" placeholder="Rechercher…" autocomplete="off" role="search" />
+            <ul id="search-result-list"></ul>
+        </section>
+
+        <details class="menu-types" open="open">
+            <summary class="menu-title">
+                Types <span class="badge">{{ types | length }}</span>
+            </summary>
+
+            <ul class="menu-types-list">
+                {% for type in types %}
+                <li class="filter n_{{ type.name }}">
+                    <label>
+                        <input data-filter="{{ type.nodes | join(",") }}" name="{{ type.name }}"
+                            type="checkbox" checked onchange="filter(this.checked, this.dataset.filter)">
+                        {{ type.name }}
+                        <span class="badge">{{ type.nodes | length }}</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+        </details>
+
+        {% if tags.length !== 0 %}
+        <details class="menu-tags" data-sort="tag">
+            <summary class="menu-title">
+                Mots-clés <span class="badge">{{ tags | length }}</span>
+            </summary>
+
+            <button class="menu-tags-btn sort-btn">A-Z</button>
+
+            <div class="menu-types-container sort-box active">
+                {% for tag in tags %}
+                <button class="btn" data-tag="{{ loop.index }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
+                    {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
+                </button>
+                {% endfor %}
+            </div>
+
+            <div class="menu-types-container sort-box">
+                {% for tag in tags | reverse %}
+                <button class="btn" data-tag="{{ loop.length - loop.index0 }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
+                    {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
+                </button>
+                {% endfor %}
+            </div>
+        </details>
+        {% endif %}
+
+        <details class="menu-index" id="index" data-sort="record">
+            <summary class="menu-title">
+                Index <span class="badge">{{ records | length }}</span>
+            </summary>
+
+            <button class="menu-index-btn sort-btn">A-Z</button>
+
+            <ul class="menu-index-list sort-box active">
+                {% for record in records %}
+                <li data-index="{{ record.id }}" onclick="openRecord({{ record.id }})">
+                    <span class="record-type-point n_{{ record.type }}">⬤</span>
+                    <span>{{ record.title }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <ul class="menu-index-list sort-box">
+                {% for record in records | reverse %}
+                <li data-index="{{ record.id }}" onclick="openRecord({{ record.id }})">
+                    <span class="record-type-point n_{{ record.type }}">⬤</span>
+                    <span>{{ record.title }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </details>
+
+        <details class="menu-view" open="open">
+            <summary class="menu-title">
+                Vues <span class="badge">{{ views | length }}</span>
+            </summary>
+
+            <button onclick="saveView()">Sauvegarder la vue actuelle</button>
+
+            {% if views.length !== 0 %}
+            <div class="menu-view-container" id="views-container">
+                {% for viewName, viewString in views %}
+                <button class="btn" onclick="activeFromParent(this);changeView('{{ viewString }}')">
+                    {{ viewName }}
+                </button>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </details>
+
+        <details class="menu-controls">
+            <summary class="menu-title">Paramètres du graphe</summary>
+
+            <ul class="menu-controls-list">
+                <li>
+                    <input type="checkbox" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
+                    <label for="param-links">Afficher les liens <span class="badge">{{ nblinks }}</span></label>
+                </li>
+                <li>
+                    <input type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
+                    <label for="param-label">Afficher les étiquettes</label>
+                </li>
+            </ul>
+
+            {% macro inputRange(name, graphParameter, fx, defaultValue, min, max, step) %}
+            <form oninput="graphProperties.{{ graphParameter }} = range.value; {{ fx }}">
+                <label>{{ name }}</label>
+                <input type="number" value="{{ defaultValue }}" name="number" min="{{ min }}" max="{{ max }}" oninput="range.value = number.value"/>
+                <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step="{{ step }}" oninput="number.value = range.value"/>
+            </form>
+            {% endmacro %}
+
+            <article class="menu-controls-container">
+                <p>Attraction</p>
+                {{ inputRange('force', 'attraction.force', 'updateForces()', graph.config.attraction.force, -600, -50, 0.1) }}
+                {{ inputRange('distance max', 'attraction.distance_max', 'updateForces()', graph.config.attraction.distance_max, 0, 800, 0.1) }}
+                {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graph.config.attraction.verticale, 0, 1, 0.01) }}
+                {{ inputRange('horizontale', 'attraction.horizontale', 'updateForces()', graph.config.attraction.horizontale, 0, 1, 0.01) }}
+            </article>
+
+            <article class="menu-controls-container">
+                <p>Position</p>
+                {{ inputRange('x', 'position.x', 'updateForces()', graph.config.position.x, 0, 1, 0.05) }}
+                {{ inputRange('y', 'position.y', 'updateForces()', graph.config.position.y, 0, 1, 0.05) }}
+            </article>
+
+            <article class="menu-controls-container">
+                <p>Texte</p>
+                {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graph.config.text_size, 5, 15, 0.5) }}
+            </article>
+        </details>
+
+        <footer class="menu-footer" onclick="openRecord('credits', false)">À propos</footer>
+    </aside>
+
+    {# ========================================
+    right side records container
+    ========================================= #}
+
+    <main id="record-container" class="record-container">
+        <button class="record-btn-close" onclick="closeRecord()">Fermer</button>
+
+        {% for record in records %}
+        <article id="{{ record.id }}" class="record">
+            <header>
+                <h1 class="record-title">{{ record.title }}</h1>
+
+                <div class="record-id">
+                    <span>id :</span>
+                    <span>{{ record.id }}</span>
                 </div>
 
-                <div class="head-load-bar", onclick="updateForces()">
-                    <div id="head-load-bar-value"></div>
+                <div class="record-last-edit">
+                    <span>dernière édition :</span>
+                    <time class="record-date" datetime="{{ record.mtime }}">{{ record.mtime }}</time>
                 </div>
+
+                <div class="record-type">
+                    <span>type :</span>
+                    <span>{{ record.type }}</span>
+                </div>
+
+                {% if record.tags %}
+                <div class="record-tags">
+                    <span>mots-clés :</span>
+                    <span>{{ record.tags }}</span>
+                </div>
+                {% endif %}
+
+                {% if record.radius.length !== 0 %}
+                <div class="record-focus-container" title="Choisir le rayon du mode focus">
+                    <span>mode focus :</span>
+                    <span>
+                        {% for nodesIds in record.radius %}
+                        <button id="{{ record.id }}-{{ loop.index }}" class="radius-btn" data-focus="{{nodesIds}}"
+                            onclick="isolate(this.dataset.focus);view.focus = { fromRecordId:{{ record.id }}, level:{{ loop.index }} }">
+                            {{ loop.index }}</button>
+                        {% endfor %}
+                    </span>
+                </div>
+                {% endif %}
             </header>
 
-            <section>
-                <input class="search-bar" id="search" placeholder="Rechercher..." autocomplete="off" />
-                <ul id="search-result-list"></ul>
-            </section>
+            <main class="record-content">{{ record.content | safe }}</main>
 
-            <details open="open">
-                <summary class="menu-title">
-                    Types <span class="badge">{{ types | length }}</span>
-                </summary>
+            <footer class="list-content-container">
+                {% if record.links.length !== 0 %}
+                <details class="record-links" open="open">
+                    <summary class="menu-title">
+                        Liens <span class="badge">{{ record.links | length }}</span>
+                    </summary>
 
-                <ul>
-                    {% for type in types %}
-                    <li class="filter n_{{ type.name }}">
-                        <label>
-                            <input data-filter="{{ type.nodes | join(",") }}" name="{{ type.name }}"
-                                type="checkbox" checked onchange="filter(this.checked, this.dataset.filter)">
-                            {{ type.name }}
-                            <span class="badge">{{ type.nodes | length }}</span>
-                        </label>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </details>
-
-            {% if tags.length !== 0 %}
-            <details data-sort="tag">
-                <summary class="menu-title">
-                    Mots-clés <span class="badge">{{ tags | length }}</span>
-                </summary>
-
-                <button class="sort-btn">A-Z</button>
-
-                <div id="tags-container" class="sort-box active">
-                    {% for tag in tags %}
-                    <button class="btn" data-tag="{{ loop.index }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
-                        {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
-                    </button>
-                    {% endfor %}
-                </div>
-
-                <div class="sort-box">
-                    {% for tag in tags | reverse %}
-                    <button class="btn" data-tag="{{ loop.length - loop.index0 }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
-                        {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
-                    </button>
-                    {% endfor %}
-                </div>
-            </details>
-            {% endif %}
-
-            <details id="index" data-sort="record">
-                <summary class="menu-title">
-                    Index <span class="badge">{{ records | length }}</span>
-                </summary>
-
-                <button class="sort-btn">A-Z</button>
-
-                <ul class="sort-box active">
-                    {% for record in records %}
-                    <li data-index="{{ record.id }}" onclick="openRecord({{ record.id }})">
-                        <span class="type-point n_{{ record.type }}">⬤</span>
-                        <span>{{ record.title }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-
-                <ul class="sort-box">
-                    {% for record in records | reverse %}
-                    <li data-index="{{ record.id }}" onclick="openRecord({{ record.id }})">
-                        <span class="type-point n_{{ record.type }}">⬤</span>
-                        <span>{{ record.title }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </details>
-
-            <details open="open">
-                <summary class="menu-title">
-                    Vues <span class="badge">{{ views | length }}</span>
-                </summary>
-
-                <button onclick="saveView()">Sauvegarder la vue actuelle</button>
-
-                {% if views.length !== 0 %}
-                <ul id="views-container">
-                    {% for viewName, viewString in views %}
-                    <button class="btn" onclick="activeFromParent(this);changeView('{{ viewString }}')">
-                        {{ viewName }}
-                    </button>
-                    {% endfor %}
-                </ul>
+                    <ul class="record-links-list">
+                        {% for link in record.links %}
+                        <li onclick="openRecord({{ link.target.id }})">
+                            <span class="record-type-point n_{{ link.target.type }}">⬤</span>
+                            <span>{{ link.target.title }}</span>
+                            <span class="record-links-id">[[{{ link.target.id }}]]</span>
+                            <div class="record-links-context">{{ link.context | safe }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </details>
                 {% endif %}
-            </details>
 
-            <details class="controls">
-                <summary class="menu-title">Paramètres du graphe</summary>
+                {% if record.backlinks.length !== 0 %}
+                <details class="record-backlinks" open="open">
+                    <summary class="menu-title">
+                        Rétroliens <span class="badge">{{ record.backlinks | length }}</span>
+                    </summary>
+
+                    <ul class="record-backlinks-list">
+                        {% for backlink in record.backlinks %}
+                        <li onclick="openRecord({{ backlink.target.id }})">
+                            <span class="record-type-point n_{{ backlink.target.type }}">⬤</span>
+                            <span>{{ backlink.target.title }}</span>
+                            <span class="record-links-id">[[{{ backlink.target.id }}]]</span>
+                            <div class="record-links-context">{{ backlink.context | safe }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
+            </footer>
+        </article>
+        {% endfor %}
+
+        {# Cosma's authors & contributors credits #}
+
+        <article id="credits" class="record">
+            <main>
+                <h1>Cosma</h1>
+                <p>Version 1.0.0 • Licence MIT</p>
 
                 <ul>
-                    <li>
-                        <input type="checkbox" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
-                        <label for="param-links">Afficher les liens <span class="badge">{{ nblinks }}</span></label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
-                        <label for="param-label">Afficher les étiquettes</label>
-                    </li>
+                    <li>Arthur Perret</li>
+                    <li>Guillaume Brioudes</li>
+                    <li>Olivier Le Deuff</li>
+                    <li>Clément Borel</li>
+                    <li>Programme ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a></li>
                 </ul>
 
-                {% macro inputRange(name, graphParameter, fx, defaultValue, min, max, step) %}
-                <form oninput="graphProperties.{{ graphParameter }} = range.value; {{ fx }}">
-                    <label>{{ name }}</label>
-                    <input type="number" value="{{ defaultValue }}" name="number" min="{{ min }}" max="{{ max }}" oninput="range.value = number.value"/>
-                    <input type="range" min="{{ min }}" max="{{ max }}" value="{{ defaultValue }}" name="range" step="{{ step }}" oninput="number.value = range.value"/>
-                </form>
-                {% endmacro %}
+                <dl>
+                    <dt><a href="https://d3js.org/" target="_blank">D3 <span class="badge">v4.13.0</span></a></dt>
+                    <dd>Mike Bostock (BSD 3-Clause)</dd>
+                    <dt><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks <span class="badge">v3.2.3</span></a></dt>
+                    <dd>James Long (BSD 2-Clause)</dd>
+                    <dt><a href="https://github.com/nodeca/js-yaml" target="_blank">Js-yaml <span class="badge">v3.14.0</span></a></dt>
+                    <dd>Vitaly Puzrin (MIT License)</dd>
+                    <dt><a href="https://github.com/dworthen/js-yaml-front-matter" target="_blank">Js-yaml-front-matter <span class="badge">v4.1.0</span></a></dt>
+                    <dd>Derek Worthen (MIT License)</dd>
+                    <dt><a href="https://github.com/markdown-it/markdown-it" target="_blank">Markdown-it <span class="badge">v12.0.2</span></a></dt>
+                    <dd>Vitaly Puzrin, Alex Kocharin (MIT License)</dd>
+                    <dt><a href="https://github.com/wilsonzlin/minify-html" target="_blank">Minify-html <span class="badge">v0.4.3</span></a></dt>
+                    <dd>Wilson Lin (MIT License)</dd>
+                    <dt><a href="https://fusejs.io/" target="_blank">Fuse-js <span class="badge">v6.4.6</span></a></dt>
+                    <dd>Kiro Risk (Apache License 2.0)</dd>
+                    <dt><a href="https://momentjs.com/" target="_blank">Moment <span class="badge">v2.29.1</span></a></dt>
+                    <dd>Iskren Ivov Chernev (MIT License)</dd>
+                </dl>
 
-                <article>
-                    <p>Attraction</p>
-                    {{ inputRange('force', 'attraction.force', 'updateForces()', graph.config.attraction.force, -600, -50, 0.1) }}
-                    {{ inputRange('distance max', 'attraction.distance_max', 'updateForces()', graph.config.attraction.distance_max, 0, 800, 0.1) }}
-                    {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graph.config.attraction.verticale, 0, 1, 0.01) }}
-                    {{ inputRange('horizontale', 'attraction.horizontale', 'updateForces()', graph.config.attraction.horizontale, 0, 1, 0.01) }}
-                </article>
+                <ul>
+                    <li><a href="https://github.com/hyperotlet/cosma" target="_blank">Téléchargement et installation</a></li>
+                    <li><a href="https://hyperotlet.github.io/cosma/manuel-utilisation.html" target="_blank">Manuel d’utilisation</a></li>
+                </ul>
+            </main>
+        </article>
+    </main>
 
-                <article>
-                    <p>Position</p>
-                    {{ inputRange('x', 'position.x', 'updateForces()', graph.config.position.x, 0, 1, 0.05) }}
-                    {{ inputRange('y', 'position.y', 'updateForces()', graph.config.position.y, 0, 1, 0.05) }}
-                </article>
-
-                <article>
-                    <p>Texte</p>
-                    {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graph.config.text_size, 5, 15, 0.5) }}
-                </article>
-            </details>
-
-            <footer class="a-propos" onclick="openRecord('credits', false)">À propos</footer>
-        </aside>
-
-        {# right side reading board #}
-
-        <main id="record-container" class="fiche-container">
-            <button class="record-btn-close" onclick="closeRecord()">Fermer</button>
-
-            {% for record in records %}
-            <article id="{{ record.id }}" class="fiche">
-                <header>
-                    <h1>{{ record.title }}</h1>
-
-                    <div>
-                        <span>id :</span>
-                        <span>{{ record.id }}</span>
-                    </div>
-
-                    <div style="display:none;">
-                        <span>dernière édition :</span>
-                        <time class="fiche-date" datetime="{{ record.mtime }}">{{ record.mtime }}</time>
-                    </div>
-
-                    <div>
-                        <span>type :</span>
-                        <span>{{ record.type }}</span>
-                    </div>
-
-                    {% if record.tags %}
-                    <div>
-                        <span>mots-clés :</span>
-                        <span>{{ record.tags }}</span>
-                    </div>
-                    {% endif %}
-
-                    {% if record.radius.length !== 0 %}
-                    <div class="record-focus-container" title="Choisir le rayon du mode focus">
-                        <span>mode focus :</span>
-                        <span>
-                            {% for nodesIds in record.radius %}
-                            <button id="{{ record.id }}-{{ loop.index }}" class="radius-btn" data-focus="{{nodesIds}}"
-                                onclick="isolate(this.dataset.focus);view.focus = { fromRecordId:{{ record.id }}, level:{{ loop.index }} }">
-                                {{ loop.index }}</button>
-                            {% endfor %}
-                        </span>
-                    </div>
-                    {% endif %}
-                </header>
-
-                <main>{{ record.content | safe }}</main>
-
-                <footer class="list-content">
-                    {% if record.links.length !== 0 %}
-                    <details open="open">
-                        <summary class="menu-title">
-                            Liens <span class="badge">{{ record.links | length }}</span>
-                        </summary>
-
-                        <ul>
-                            {% for link in record.links %}
-                            <li onclick="openRecord({{ link.target.id }})" data-context="{{ link.context }}">
-                                <span class="type-point n_{{ link.target.type }}">⬤</span>
-                                <span>{{ link.target.title }}</span>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </details>
-                    {% endif %}
-
-                    {% if record.backlinks.length !== 0 %}
-                    <details open="open">
-                        <summary class="menu-title">
-                            Rétroliens <span class="badge">{{ record.backlinks | length }}</span>
-                        </summary>
-
-                        <ul>
-                            {% for backlink in record.backlinks %}
-                            <li onclick="openRecord({{ backlink.target.id }})" data-context="{{ backlink.context }}">
-                                <span class="type-point n_{{ backlink.target.type }}">⬤</span>
-                                <span>{{ backlink.target.title }}</span>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </details>
-                    {% endif %}
-                </footer>
-            </article>
-            {% endfor %}
-
-            {# Cosma's authors & contributors credits #}
-
-            <article id="credits" class="fiche">
-                <main>
-                    <h1>Cosma</h1>
-                    <p>Version 1.1.0 • Licence MIT</p>
-
-                    <ul>
-                        <li>Arthur Perret</li>
-                        <li>Guillaume Brioudes</li>
-                        <li>Olivier Le Deuff</li>
-                        <li>Clément Borel</li>
-                        <li>Programme ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a></li>
-                    </ul>
-
-                    <dl>
-                        <dt><a href="https://d3js.org/" target="_blank">D3 <span class="badge">v4.13.0</span></a></dt>
-                        <dd>Mike Bostock (BSD 3-Clause)</dd>
-                        <dt><a href="https://mozilla.github.io/nunjucks/" target="_blank">Nunjucks <span class="badge">v3.2.3</span></a></dt>
-                        <dd>James Long (BSD 2-Clause)</dd>
-                        <dt><a href="https://github.com/nodeca/js-yaml" target="_blank">Js-yaml <span class="badge">v3.14.0</span></a></dt>
-                        <dd>Vitaly Puzrin (MIT License)</dd>
-                        <dt><a href="https://github.com/dworthen/js-yaml-front-matter" target="_blank">Js-yaml-front-matter <span class="badge">v4.1.0</span></a></dt>
-                        <dd>Derek Worthen (MIT License)</dd>
-                        <dt><a href="https://github.com/markdown-it/markdown-it" target="_blank">Markdown-it <span class="badge">v12.0.2</span></a></dt>
-                        <dd>Vitaly Puzrin, Alex Kocharin (MIT License)</dd>
-                        <dt><a href="https://github.com/wilsonzlin/minify-html" target="_blank">Minify-html <span class="badge">v0.4.3</span></a></dt>
-                        <dd>Wilson Lin (MIT License)</dd>
-                        <dt><a href="https://fusejs.io/" target="_blank">Fuse-js <span class="badge">v6.4.6</span></a></dt>
-                        <dd>Kiro Risk (Apache License 2.0)</dd>
-                        <dt><a href="https://momentjs.com/" target="_blank">Moment <span class="badge">v2.29.1</span></a></dt>
-                        <dd>Iskren Ivov Chernev (MIT License)</dd>
-                    </dl>
-
-                    <ul>
-                        <li><a href="https://github.com/hyperotlet/cosma" target="_blank">Téléchargement et installation</a></li>
-                        <li><a href="https://hyperotlet.github.io/cosma/manuel-utilisation.html" target="_blank">Manuel d’utilisation</a></li>
-                    </ul>
-                </main>
-            </article>
-        </main>
-    </div>
-
-    {# Cosma graph #}
+    {# ========================================
+    Cosma graph
+    ========================================= #}
 
     <div class="graph-wrapper" style="background-color: {{ graph.config.background_color }}">
         <svg id="graph_canvas">
@@ -327,14 +336,14 @@
             </defs>
         </svg>
 
-        <div class="zoom-controls">
-            <div>
+        <div class="graph-controls">
+            <div class="graph-controls-zoom">
                 <button onclick="zoomLess()">-</button>
                 <button onclick="zoomMore()">+</button>
             </div>
             <button onclick="zoomReset()">Recentrer</button>
-            <button id="reset-isolate" onclick="resetNodes()">Annuler focus</button>
-            <button id="reset-highlight" onclick="unlightNodes();unactiveTagsButton()">Annuler surbrillance</button>
+            <button id="reset-isolate" style="display: none;" onclick="resetNodes()">Annuler focus</button>
+            <button id="reset-highlight" style="display: none;" onclick="unlightNodes();unactiveTagsButton()">Annuler surbrillance</button>
         </div>
     </div>
 

@@ -1,8 +1,9 @@
 const fs = require('fs')
-    , moment = require('moment')
     , yamlEditor = require('js-yaml');
 
-// Write config file if not exist
+/**
+ * Write config file if not exist
+ */
 
 const baseConfig = {
     files_origin: '',
@@ -33,11 +34,15 @@ if (!fs.existsSync('config.yml')){
     process.exit();
 }
 
-// Read config
+/**
+ * Read config
+ */
 
 const config = yamlEditor.safeLoad(fs.readFileSync('config.yml', 'utf8'));
 
-// Valid config values
+/**
+ * Valid config values
+ */
 
 let errors = [];
 
@@ -54,7 +59,9 @@ if (errors.length !== 0) {
     process.exit();
 }
 
-// Valid config paths
+/**
+ * Valid config paths
+ */
 
 if (!fs.existsSync(config.files_origin)) {
     console.error('\x1b[31m', 'Err.', '\x1b[0m', 'You must specify a valid folder path to your Markdown files database in config file.');
@@ -66,18 +73,11 @@ if (!fs.existsSync(config.export_target)) {
     process.exit();
 }
 
-// Add computed values to config
-
-// add the date of the process
-if (config['metas'] === undefined) { config['metas'] = {} }
-config.metas.date = moment().format('YYYY-MM-DD');
-// config lists
-config.record_types_list = Object.keys(config.record_types);
-config.link_types_list = Object.keys(config.link_types);
-
 exports.config = config;
 
-// Functions for modify config
+/**
+ * Functions for modify config
+ */
 
 /**
  * Change import folder path

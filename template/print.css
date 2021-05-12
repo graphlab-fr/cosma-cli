@@ -1,8 +1,24 @@
 @media print {
-	.wrapper {
-		height: unset;
+
+	/* ---
+	1 - Global
+	--- */
+
+	body {
 		overflow: unset;
 	}
+
+	p, tr, li {
+		orphans: 3;
+	}
+
+	a[href]:not([onclick]):after {
+		content: " (" attr(href) ")";
+	}
+
+	/* ---
+	2 - Containers
+	--- */
 
 	/* app containers */
     aside,
@@ -13,7 +29,11 @@
 		display: none !important;
 	}
 
-	.fiche-container {
+	/* ---
+	3 - Record main
+	--- */
+
+	main.record-container {
 		position: unset;
 		width: 100%;
 		height: unset;
@@ -21,19 +41,29 @@
 		box-shadow: unset;
 	}
 
-    .fiche-container header:before{ 
+    main.record-container header:before{ 
         content:url(img/image.jpg) ;
         position:relative; 
         left:-3px;
         top:10px;
-       }
+	}
 
-	.fiche-container footer {
+	/* ---
+	4 - Record footer
+	--- */
+
+	main.record-container footer {
 		break-before: page;
 	}
 
-	p {
-		orphans: 3;
+	main.record-container footer .record-links-context {
+		display: block;
+		position: unset;
+		box-shadow: unset;
+	}
+
+	main.record-container footer .record-links-id {
+		display: unset;
 	}
 
 	[data-context]::after {
@@ -42,9 +72,5 @@
 		border-radius: 2px;
 		padding: 0.8rem;
 		font-style: italic;
-	}
-
-	a[href]:not([onclick]):after {
-		content: " (" attr(href) ")";
 	}
 }

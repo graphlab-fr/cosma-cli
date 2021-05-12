@@ -3,6 +3,7 @@ const fs = require('fs')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
     , linksTools = require('./links')
+    , moment = require('moment')
     , config = require('./verifconfig').config;
 
 let types = {}
@@ -110,7 +111,10 @@ function cosmoscope(files, entities, path) {
         // normalize an index from all nodes, to manage them overall
         index: entities.nodes.map(function(node) {
             return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
-        })
+        }),
+
+        // creation date
+        date: moment().format('YYYY-MM-DD')
     });
 
     // minify the render, if 'true' from config file

@@ -116,7 +116,7 @@ document.onkeydown = (e) => {
 
             case ' ':
                 e.preventDefault();
-                document.querySelector('.head-load-bar').click();
+                document.querySelector('.load-bar').click();
                 return;
         }
     }
