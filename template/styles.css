@@ -130,11 +130,11 @@ a { color: inherit; }
 aside.menu {
 	position: relative;
 	z-index: 100;
-    overflow: auto;
-    height: 100vh;
-    width: 300px;
-    margin: 0;
-    padding: 0 20px 30px 20px;
+	overflow: auto;
+	height: 100vh;
+	width: 300px;
+	margin: 0;
+	padding: 0 20px 30px 20px;
 	background-color: white;
 	box-shadow: var(--shadow)
 }
@@ -207,13 +207,13 @@ main.record-container {
 	top: 0;
 	right: 0;
 	padding: 1rem 2rem;
-    width: 500px;
-    height: 100vh;
-    overflow: auto;
+	width: 500px;
+	height: 100vh;
+	overflow: auto;
 	background-color: white;
 	box-shadow: var(--shadow);
 	transition: transform .6s;
-    transition-timing-function: cubic-bezier(.02,1.18,0,.98);
+	transition-timing-function: cubic-bezier(.02,1.18,0,.98);
 }
 
 main.record-container:not(.active) {
@@ -335,7 +335,7 @@ main.record-container:not(.active) {
 	border-radius: 2px;
 	margin-top: 0.8rem;
 	position: absolute;
-    bottom: calc(100% + 10px);
+	bottom: calc(100% + 10px);
 	box-shadow: var(--shadow);
 }
 
@@ -385,12 +385,12 @@ marker {
 --- */
 
 .graph-controls {
-    position: absolute;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-    left: 20px;
-    bottom: 20px;
-    flex-wrap: wrap;
+	left: 20px;
+	bottom: 20px;
+	flex-wrap: wrap;
 }
 
 .graph-controls div {
