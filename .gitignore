@@ -5,3 +5,6 @@ package-lock.json
 /history
 config.yml
 custom.css
+cosmoscope.html
+template/colors.css
+template/graph-data.js
