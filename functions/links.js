@@ -1,3 +1,13 @@
+const mdIt = require('markdown-it')()
+    , mdItAttr = require('markdown-it-attrs');
+
+// markdown-it plugin for convertLinks()
+mdIt.use(mdItAttr, {
+    leftDelimiter: '{',
+    rightDelimiter: '}',
+    allowedAttributes: []
+})
+
 /**
  * Catch links from Mardown file content
  * @param {string} fileContent - Mardown file content
@@ -8,18 +18,18 @@
     let tLinks = {}, // temp link container
     links = []; // final link container
 
-    // get all paragraphs
+    // get all paragraphs from the file content
     const paraphs = fileContent.match(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/g);
 
     if (paraphs === null) { return []; }
 
     for (let i = 0; i < paraphs.length; i++) {
-        // get '***' from '[[***]]' (wikilinks) strings, for each paragraph
+        // get string '***' from '[[***]]' (wikilinks), for each paragraph
         let linksId = paraphs[i].match(/(?<=\[\[\s*).*?(?=\s*\]\])/gs);
         if (!linksId) { continue; }
 
         for (const linkId of linksId) {
-            // each linkId is put to 'tLinks' for get a list witout duplicated links
+            // each linkId is put to 'tLinks', for get a list witout duplicated links
             if (tLinks[linkId]) {
                 // if the linkId is already registered, we juste save one more paragraph number
                 tLinks[linkId].paraphs.push(i)
@@ -33,15 +43,23 @@
 
     for (const linkMetas in tLinks) {
         tLinks[linkMetas].context = [] // paraphs container
+
         for (let i = 0; i < paraphs.length; i++) {
+            // for each paraph number from the link
             if (tLinks[linkMetas].paraphs.indexOf(i) !== -1) {
-                // if the paraph number 'i' is saved for this link, it is put in paraphs container
-                tLinks[linkMetas].context.push(paraphs[i]);
+                let par = paraphs[i]; // Markdown paraph
+                par = mdIt.render(par); // HTML paraph
+                // find the link string into the paraph and <mark> it
+                par = par.replace('[[' + linkMetas + ']]', '<mark>[[' + linkMetas + ']]</mark>');
+
+                tLinks[linkMetas].context.push(par);
             }
         }
-        // paraphs array to context string
-        tLinks[linkMetas].context = tLinks[linkMetas].context.join(' ');
+
         delete tLinks[linkMetas].paraphs; // delete list of paraphs
+
+        // paraphs array to context string
+        tLinks[linkMetas].context = tLinks[linkMetas].context.join('');
         links.push(tLinks[linkMetas]); // put all link metas on final 'links' container
     }
 

@@ -323,16 +323,29 @@ main.record-container:not(.active) {
 	border-top: 1px solid black;
 }
 
-[data-context] { position: relative; }
-[data-context]:hover::before {
-	content: attr(data-context);
-    position: absolute;
+.record footer li {
+	position: relative;
+}
+
+.record footer .record-links-context {
+	display: none;
+	background: white;
+	border: 1px black solid;
+	padding: 0.8rem;
+	border-radius: 2px;
+	margin-top: 0.8rem;
+	position: absolute;
     bottom: calc(100% + 10px);
-    background: white;
-    border: 1px black solid;
-    border-radius: 2px;
-    padding: 0.8rem;
-    box-shadow: var(--shadow);
+	box-shadow: var(--shadow);
+}
+
+.record footer li:hover .record-links-context {
+	display: block;
+}
+
+.record footer .record-links-id {
+	font-family: var(--mono);
+	display: none;
 }
 
 /** 6 - Graph

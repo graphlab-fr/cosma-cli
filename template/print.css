@@ -56,6 +56,16 @@
 		break-before: page;
 	}
 
+	main.record-container footer .record-links-context {
+		display: block;
+		position: unset;
+		box-shadow: unset;
+	}
+
+	main.record-container footer .record-links-id {
+		display: unset;
+	}
+
 	[data-context]::after {
 		content: attr(data-context);
 		position: unset;
