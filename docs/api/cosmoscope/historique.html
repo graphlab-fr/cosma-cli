@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>record.js - Documentation</title>
+    <title>historique - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,77 +29,452 @@
 
 <div id="main">
     
-    <h1 class="page-title">record.js</h1>
+    <h1 class="page-title">historique</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Open the record reading panel &amp; show one
- * @param {array} id - Record/node id
- * @param {boolean} history - If history must be actualised, true by default
- */
+        <h2>
+        historique
+        </h2>
+        
+    
+</header>
 
-function openRecord(id, history = true) {
-    const recordContent = document.getElementById(id);
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Navigation history entries managment</div>
+        
 
-    if (!recordContent) { return; }
+        
 
-    if (view.openedRecordId !== undefined) {
-        // hide last record
-        document.getElementById(view.openedRecordId)
-            .style.display = null;
-    }
 
-    // open records container
-    window['record-container'].classList.add('active');
-    // adjust record view
-    window['record-container'].scrollTo({ top: 0 });
+<dl class="details">
 
-    // show record
-    recordContent.style.display = 'block';
+    
 
-    // reset nodes highlighting
-    unlightNodes();
-    highlightNodes([id]);
+    
 
-    view.openedRecordId = id;
+    
 
-    if (history) {
-        // page's &lt;title> become record's name
-        const recordTitle = recordContent.querySelector('h1').textContent;
-        historique.actualiser(id, recordTitle);
-    }
+    
 
-}
+    
 
-/**
- * Close the record reading panel &amp; the opended one
- */
+    
 
-function closeRecord() {
-    document.querySelector('#record-container').classList.remove('active');
-    document.getElementById(view.openedRecordId).style.display = null;
-    view.openedRecordId = undefined;
+    
 
-    unlightNodes();
-}
+    
 
-/**
- * Open a record at page load if his id follow a '#' as '#20200801210302'
- */
+    
 
-window.addEventListener("DOMContentLoaded", () => {
-    const hash = window.location.hash.substr(1);
-    openRecord(hash);
-});</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".actualiser"><span class="type-signature">(static) </span>actualiser<span class="signature">(recordId, recordTitle)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Add a new entry into history and change page title
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>recordId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                -
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recordTitle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                -
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".init"><span class="type-signature">(static) </span>init<span class="signature">(recordId, recordTitle, url)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Add first entry into history
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="main.js.html">main.js</a>, <a href="main.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>recordId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                -
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recordTitle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                -
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>string</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                File URL + #hash
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
