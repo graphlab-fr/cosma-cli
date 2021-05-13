@@ -1,5 +1,5 @@
-let filtersNames = Array.from(document.querySelectorAll('[data-filter]')).map(filter => filter.name)
-    , resetIsolateBtn = document.getElementById('reset-isolate'); // anti isolate() function btn
+let filtersNames = Array.from(document.querySelectorAll('[data-filter]'))
+    .map(filter => filter.name);
 
 /**
  * Toggle filter from his checkbox or manually
@@ -94,81 +94,9 @@ function getFiltedNodes() {
 }
 
 /**
- * Display some nodes, hide all others
- * turn on the 'focusMode'
- * @param {string} nodeIdsList - List of ids from nodes to keep displayed, separeted by comas
+ * Get nodes ids list from a string list
+ * @returns {array} - Ids list (integer value)
  */
-
-function isolate(nodeIdsList) {
-    nodeIdsList = parseIdsString(nodeIdsList);
-
-    view.focusMode = false; // for reset
-    resetIsolateBtn.style.display = 'block';
-
-    let idsToHide = [];
-
-    index = index.map(function(item) {
-        if (nodeIdsList.includes(item.id)) {
-            // if item comes from the nodeIdsList
-            item.isolated = true;
-        } else {
-            item.isolated = false;
-            idsToHide.push(item.id);
-        }
-        return item;
-    });
-    // display nodeIds if their are not filtered
-    let idsToDisplay = nodeIdsList
-        .filter(id => !getFiltedNodes().includes(id));
-
-    hideNodes(idsToHide);
-    view.focusMode = true;
-    displayNodes(idsToDisplay);
-}
-
-/**
- * Active Isolate function with information from the view
- * We search the data-focus value from a button, from a record
- * @param {number} recordId - Id of the target record
- * @param {number} focusLevel - Focus level = focus button number - 1
- */
-
-function isolateByView(recordId, focusLevel) {
-    const focusrecord = document.getElementById(recordId)
-        , focusButton = focusrecord.querySelectorAll('[data-focus]')[focusLevel - 1]
-
-    view.focus = {
-        fromRecordId: recordId,
-        level: focusLevel
-    }
-
-    isolate(focusButton.dataset.focus);
-}
-
-/**
- * Display nodes hidden by isolate(),
- * if their are not filtered
- */
-
-function resetNodes() {
-    view.focus = undefined;
-
-    const idsToDisplay = index
-        .filter(item => item.isolated === false && !getFiltedNodes().includes(item.id))
-        .map(item => item.id);
-
-    index = index.map(function(item) {
-        item.isolated = false;
-        return item;
-    });
-
-    view.focusMode = false;
-    displayNodes(idsToDisplay);
-
-    unactiveFromParent(document.getElementById('views-container'));
-
-    resetIsolateBtn.style.display = null;
-}
 
 function parseIdsString(idsString) {
     return idsString.split(',').map(id => Number(id));
