@@ -108,16 +108,22 @@ summary + button { margin: 1rem 0; }
 
 label {
 	cursor: pointer;
-	display: flex;
-	align-items: center;
+	font-family: var(--sans);
 }
 
 input { font-size: 1.3rem; }
 
 input[type="checkbox"] {
+	cursor: pointer;
 	width: 1.2rem;
 	height: 1.2rem;
 	margin: 0 0.8rem 0 0;
+}
+
+input[type="range"] {
+	cursor: pointer;
+	width: 100%;
+	margin-top: 0.3rem;
 }
 
 /* ---
@@ -158,6 +164,8 @@ aside.menu {
 /* ---
 - Logo
 --- */
+
+.logo { cursor: pointer; }
 
 @keyframes rotate-center {
 	0% { transform: rotate(0); }
@@ -200,7 +208,6 @@ aside.menu {
 	width: 7rem;
 	margin-left: 1rem;
 }
-.menu-controls input[type="range"] { width: 100%; }
 
 /* ---
 - Footer
@@ -250,9 +257,13 @@ main.record-container:not(.active) {
 	border-bottom: 1px solid black;
 }
 
-.record header div + div { margin-top: 0.8rem; }
+.record header div + div,
+.record-focus-container {
+	margin-top: 0.8rem;
+}
 
-.record header div span:first-of-type {
+.record header div span:first-of-type, 
+.record-focus-container > span {
 	font-size: 1.6rem;
 	font-family: var(--mono);
 	margin-right: 0.8rem;
@@ -260,7 +271,9 @@ main.record-container:not(.active) {
 
 .record-last-edit { display: none; }
 
-.record-focus-container button { margin: 0 0.2rem; }
+.record-focus-lever { display: none; }
+
+.record-focus-lever input { width: 80%; }
 
 /* ---
 - Record content

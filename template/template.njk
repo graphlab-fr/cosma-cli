@@ -145,12 +145,16 @@
 
             <ul class="menu-controls-list">
                 <li>
-                    <input type="checkbox" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
-                    <label for="param-links">Afficher les liens <span class="badge">{{ nblinks }}</span></label>
+                    <label>
+                        <input type="checkbox" checked onchange="linksDisplayToggle(this.checked)">
+                        Afficher les liens <span class="badge">{{ nblinks }}</span>
+                    </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
-                    <label for="param-label">Afficher les étiquettes</label>
+                    <label>
+                        <input type="checkbox" checked onchange="labelDisplayToggle(this.checked)">
+                        Afficher les étiquettes
+                    </label>
                 </li>
             </ul>
 
@@ -221,14 +225,21 @@
 
                 {% if record.radius.length !== 0 %}
                 <form class="record-focus-container">
-                    <span>mode focus : <output name="result">1</output></span>
-                    <span>
-                        <input type="range" min="1" max="{{ record.radius.length }}" value="1" name="range" step="1"
+                    <span>mode focus :
+                        <label>
+                            <input type="checkbox" name="checkbox" onchange="checkFocus(this, range, output, {{record.id}})">
+                            Activer le focus
+                        </label>
+                    </span>
+                    <div class="record-focus-lever">
+                        <input type="range" min="0" max="{{ record.radius.length }}" value="0" name="range" step="1"
                             {% for nodesIds in record.radius %}
                                 data-focus-{{ loop.index }} = "{{nodesIds}}";
                             {% endfor %}
-                        oninput="result.value = this.value;view.focus = { fromRecordId:{{ record.id }}, level:this.value };nodeFocusByDataset(this.dataset)"/>
-                    </span>
+                        oninput="rangeFocus(this, checkbox, output, {{record.id}})"/>
+
+                        <output name="output"></output>
+                    </div>
                 </form>
                 {% endif %}
             </header>
@@ -340,7 +351,6 @@
                 <button onclick="zoomMore()">+</button>
             </div>
             <button onclick="zoomReset()">Recentrer</button>
-            <button id="reset-isolate" style="display: none;" onclick="resetNodes()">Annuler focus</button>
             <button id="reset-highlight" style="display: none;" onclick="unlightNodes();unactiveTagsButton()">Annuler surbrillance</button>
         </div>
     </div>
@@ -361,6 +371,7 @@
         {% include "scripts/zoom.js" %}
         {% include "scripts/search.js" %}
         {% include "scripts/filter.js" %}
+        {% include "scripts/focus.js" %}
         {% include "scripts/nodes.js" %}
         {% include "scripts/index.js" %}
         {% include "scripts/record.js" %}
