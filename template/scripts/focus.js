@@ -23,7 +23,7 @@
     });
     // display nodeIds if their are not filtered
     let idsToDisplay = nodeIdsList
-        .filter(id => !getFiltedNodes().includes(id));
+        .filter(id => !getNodesHideByFilter().includes(id));
 
     hideNodes(idsToHide);
     view.focusMode = true;
@@ -150,7 +150,7 @@ function rangeFocus(range, checkbox, output, recordId) {
     view.focus = undefined;
 
     const idsToDisplay = index
-        .filter(item => item.isolated === false && !getFiltedNodes().includes(item.id))
+        .filter(item => item.isolated === false && !getNodesHideByFilter().includes(item.id))
         .map(item => item.id);
 
     index = index.map(function(item) {

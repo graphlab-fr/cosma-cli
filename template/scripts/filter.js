@@ -82,15 +82,17 @@ function getUnactiveFilterNames() {
 }
 
 /**
- * Get ids list from hiden (by filter) nodes
+ * Get nodes ids array hiden by filters
  * @returns {array} - Ids list (integer value)
  */
 
-function getFiltedNodes() {
-    let nodeIds = document.querySelectorAll('[data-filter][data-active="false"]');
-    return nodeIds = Array.from(nodeIds)
-        .map(filter => filter.dataset.filter.split(',')).flat()
+function getNodesHideByFilter() {
+    let filtersIds = Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === false)
+        .map(filterElt => filterElt.dataset.filter.split(',')).flat()
         .map(nodeId => Number(nodeId));
+
+    return filtersIds;
 }
 
 /**
