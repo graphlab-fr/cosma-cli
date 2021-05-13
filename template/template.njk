@@ -145,12 +145,16 @@
 
             <ul class="menu-controls-list">
                 <li>
-                    <input type="checkbox" id="param-links" checked onchange="linksDisplayToggle(this.checked)">
-                    <label for="param-links">Afficher les liens <span class="badge">{{ nblinks }}</span></label>
+                    <label>
+                        <input type="checkbox" checked onchange="linksDisplayToggle(this.checked)">
+                        Afficher les liens <span class="badge">{{ nblinks }}</span>
+                    </label>
                 </li>
                 <li>
-                    <input type="checkbox" id="param-label" checked onchange="labelDisplayToggle(this.checked)">
-                    <label for="param-label">Afficher les étiquettes</label>
+                    <label>
+                        <input type="checkbox" checked onchange="labelDisplayToggle(this.checked)">
+                        Afficher les étiquettes
+                    </label>
                 </li>
             </ul>
 
@@ -220,16 +224,23 @@
                 {% endif %}
 
                 {% if record.radius.length !== 0 %}
-                <div class="record-focus-container" title="Choisir le rayon du mode focus">
-                    <span>mode focus :</span>
-                    <span>
-                        {% for nodesIds in record.radius %}
-                        <button id="{{ record.id }}-{{ loop.index }}" class="radius-btn" data-focus="{{nodesIds}}"
-                            onclick="isolate(this.dataset.focus);view.focus = { fromRecordId:{{ record.id }}, level:{{ loop.index }} }">
-                            {{ loop.index }}</button>
-                        {% endfor %}
+                <form class="record-focus-container">
+                    <span>mode focus :
+                        <label>
+                            <input type="checkbox" name="checkbox" onchange="checkFocus(this, range, output, {{record.id}})">
+                            Activer le focus
+                        </label>
                     </span>
-                </div>
+                    <div class="record-focus-lever">
+                        <input type="range" min="0" max="{{ record.radius.length }}" value="0" name="range" step="1"
+                            {% for nodesIds in record.radius %}
+                                data-focus-{{ loop.index }} = "{{nodesIds}}";
+                            {% endfor %}
+                        oninput="rangeFocus(this, checkbox, output, {{record.id}})"/>
+
+                        <output name="output"></output>
+                    </div>
+                </form>
                 {% endif %}
             </header>
 
@@ -247,7 +258,6 @@
                         <li onclick="openRecord({{ link.target.id }})">
                             <span class="record-type-point n_{{ link.target.type }}">⬤</span>
                             <span>{{ link.target.title }}</span>
-                            <span class="record-links-id">[[{{ link.target.id }}]]</span>
                             <div class="record-links-context">{{ link.context | safe }}</div>
                         </li>
                         {% endfor %}
@@ -266,7 +276,6 @@
                         <li onclick="openRecord({{ backlink.target.id }})">
                             <span class="record-type-point n_{{ backlink.target.type }}">⬤</span>
                             <span>{{ backlink.target.title }}</span>
-                            <span class="record-links-id">[[{{ backlink.target.id }}]]</span>
                             <div class="record-links-context">{{ backlink.context | safe }}</div>
                         </li>
                         {% endfor %}
@@ -342,7 +351,6 @@
                 <button onclick="zoomMore()">+</button>
             </div>
             <button onclick="zoomReset()">Recentrer</button>
-            <button id="reset-isolate" style="display: none;" onclick="resetNodes()">Annuler focus</button>
             <button id="reset-highlight" style="display: none;" onclick="unlightNodes();unactiveTagsButton()">Annuler surbrillance</button>
         </div>
     </div>
@@ -363,6 +371,7 @@
         {% include "scripts/zoom.js" %}
         {% include "scripts/search.js" %}
         {% include "scripts/filter.js" %}
+        {% include "scripts/focus.js" %}
         {% include "scripts/nodes.js" %}
         {% include "scripts/index.js" %}
         {% include "scripts/record.js" %}

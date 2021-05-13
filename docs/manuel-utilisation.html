@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <meta name="author" content="Guillaume Brioudes https://myllaume.fr/" />
 <meta name="author" content="Arthur Perret https://www.arthurperret.fr/" />
-<meta name="dcterms.date" content="2021-05-03" />
+<meta name="dcterms.date" content="2021-04-28" />
 <title>Manuel d’utilisation de Cosma</title>
 
 <link rel="stylesheet" href="style.css" />
@@ -35,7 +35,10 @@
 </ul></li>
 <li><a href="#configuration"><span class="toc-section-number">4</span> Configuration</a>
 <ul>
-<li><a href="#parametres-necessaires"><span class="toc-section-number">4.1</span> Paramètres nécessaires</a></li>
+<li><a href="#parametres-necessaires"><span class="toc-section-number">4.1</span> Paramètres nécessaires</a>
+<ul>
+<li><a href="#parametres-du-graphe"><span class="toc-section-number">4.1.1</span> Paramètres du graphe</a></li>
+</ul></li>
 <li><a href="#parametres-facultatifs"><span class="toc-section-number">4.2</span> Paramètres facultatifs</a></li>
 <li><a href="#exemples-de-configuration"><span class="toc-section-number">4.3</span> Exemples de configuration</a></li>
 <li><a href="#commandes"><span class="toc-section-number">4.4</span> Commandes</a></li>
@@ -45,23 +48,29 @@
 <li><a href="#creer-des-fiches"><span class="toc-section-number">5.1</span> Créer des fiches</a></li>
 <li><a href="#creer-des-liens"><span class="toc-section-number">5.2</span> Créer des liens</a></li>
 <li><a href="#export"><span class="toc-section-number">5.3</span> Export</a></li>
+<li><a href="#historique"><span class="toc-section-number">5.4</span> Historique</a></li>
 </ul></li>
 <li><a href="#utilisation-du-cosmoscope"><span class="toc-section-number">6</span> Utilisation du cosmoscope</a>
 <ul>
-<li><a href="#graphe"><span class="toc-section-number">6.1</span> Graphe</a>
+<li><a href="#interface"><span class="toc-section-number">6.1</span> Interface</a></li>
+<li><a href="#menu-lateral-gauche"><span class="toc-section-number">6.2</span> Menu latéral gauche</a>
 <ul>
-<li><a href="#navigation"><span class="toc-section-number">6.1.1</span> Navigation</a></li>
+<li><a href="#moteur-de-recherche"><span class="toc-section-number">6.2.1</span> Moteur de recherche</a></li>
+<li><a href="#filtres"><span class="toc-section-number">6.2.2</span> Filtres</a></li>
+<li><a href="#mots-cles"><span class="toc-section-number">6.2.3</span> Mots-clés</a></li>
+<li><a href="#index"><span class="toc-section-number">6.2.4</span> Index</a></li>
+<li><a href="#vues"><span class="toc-section-number">6.2.5</span> Vues</a></li>
+<li><a href="#parametres-du-graphe-1"><span class="toc-section-number">6.2.6</span> Paramètres du graphe</a></li>
 </ul></li>
-<li><a href="#index"><span class="toc-section-number">6.2</span> Index</a></li>
-<li><a href="#moteur-de-recherche"><span class="toc-section-number">6.3</span> Moteur de recherche</a></li>
-<li><a href="#filtres"><span class="toc-section-number">6.4</span> Filtres</a></li>
-<li><a href="#mots-cles"><span class="toc-section-number">6.5</span> Mots-clés</a></li>
-<li><a href="#vues"><span class="toc-section-number">6.6</span> Vues</a></li>
-<li><a href="#parametres-du-graphe"><span class="toc-section-number">6.7</span> Paramètres du graphe</a></li>
-<li><a href="#fiches"><span class="toc-section-number">6.8</span> Fiches</a>
+<li><a href="#graphe"><span class="toc-section-number">6.3</span> Graphe</a>
 <ul>
-<li><a href="#liens"><span class="toc-section-number">6.8.1</span> Liens</a></li>
-<li><a href="#focus"><span class="toc-section-number">6.8.2</span> Focus</a></li>
+<li><a href="#navigation"><span class="toc-section-number">6.3.1</span> Navigation</a></li>
+<li><a href="#spacialisation"><span class="toc-section-number">6.3.2</span> Spacialisation</a></li>
+</ul></li>
+<li><a href="#fiches"><span class="toc-section-number">6.4</span> Fiches</a>
+<ul>
+<li><a href="#liens"><span class="toc-section-number">6.4.1</span> Liens</a></li>
+<li><a href="#focus"><span class="toc-section-number">6.4.2</span> Focus</a></li>
 </ul></li>
 </ul></li>
 <li><a href="#credits"><span class="toc-section-number">7</span> Crédits</a>
@@ -122,10 +131,9 @@
 <p>Séparer le traitement des données (cosmographe) de leur modélisation (cosmoscope) comme nous vous le proposons vous permet de créer votre propre visualisation à partir des données générées, mais aussi en modifiant le logiciel. Les code source a été intégré et <a href="#">documenté</a> à cette fin.</p>
 <h1 data-number="2" id="vocabulaire"><span class="header-section-number">2</span> Vocabulaire</h1>
 <ul>
-<li><strong>fiche</strong> : rendu d’un fichier Markdown intégré à Cosma.</li>
-<li><strong>index</strong> : liste de toutes les fiches intégrées à Cosma.</li>
-<li><strong>focus</strong> : limitation de la vue autour d’un nœud pour n’afficher que les nœuds envrionnants, à <a href="#focus">différentes échelles</a>.</li>
-<li><strong>vue</strong> : configuration d’affichage du graphe, en fonction des filtres et du focus.</li>
+<li>“<strong>fiche</strong>” : rendu d’un fichier Markdown intégré à Cosma.</li>
+<li>“<strong>focus</strong>” : limitation de la vue autour d’un nœud pour n’afficher que les nœuds envrionnants, à <a href="#focus">différentes échelles</a>.</li>
+<li>“<strong>vue</strong>” : configuration d’affichage du graphe, en fonction des filtres et du focus.</li>
 </ul>
 <h1 data-number="3" id="installation"><span class="header-section-number">3</span> Installation</h1>
 <h2 data-number="3.1" id="pre-requis"><span class="header-section-number">3.1</span> Pré-requis</h2>
@@ -144,7 +152,7 @@
 <span id="cb1-2"><a href="#cb1-2"></a><span class="bu">cd</span> cosma</span></code></pre></div>
 <h2 data-number="3.3" id="mise-en-route"><span class="header-section-number">3.3</span> Mise en route</h2>
 <p>Installer les dépendances nécessaires au bon fonctionnement de l’application avec la commande suivante. Le gestionnaire de dépendances NPM est installé en même temps que NodeJs.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">npm</span> i</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">npm</span> install --only=production</span></code></pre></div>
 <h1 data-number="4" id="configuration"><span class="header-section-number">4</span> Configuration</h1>
 <p>Le fichier de configuration est une liste de paramètres avec pour chacun une valeur ou une liste de sous-paramètres à renseigner. Le fichier tel qu’il est généré est un modèle des paramètres qui doivent obligatoirement être renseignées pour une configuration valide.</p>
 <p>Exécutez la commande suivante pour créer le fichier de configuration (<code>config.yml</code>) s’il n’existe pas déjà. Vous pouvez aussi le supprimer et utiliser cette commande pour réinitialiser le fichier.</p>
@@ -153,23 +161,17 @@
 <h2 data-number="4.1" id="parametres-necessaires"><span class="header-section-number">4.1</span> Paramètres nécessaires</h2>
 <p>La configuration doit contenir les paramètres suivants.</p>
 <dl>
-<dt><code>files_origin</code></dt>
-<dd>Chemin du répertoire contenant les fichiers Mardown à scanner.
-</dd>
+<dt><code>files_origin</code> Chemin du répertoire contenant les fichiers Mardown à scanner.</dt>
 <dd>Exemples : <code>./fiches/'</code>, <code>D:\repertoire\</code>
 </dd>
 <dd>Attention à terminer la chaîne par un slash ou un anti-slash.
 </dd>
-<dt><code>export_target</code></dt>
-<dd>Chemin vers le répertoire d’export du cosmoscope.
-</dd>
+<dt><code>export_target</code> Chemin vers le répertoire d’export du cosmoscope.</dt>
 <dd>Exemple : <code>./'</code>, <code>D:\repertoire\</code>
 </dd>
 <dd>Attention à terminer la chaîne par un slash ou un anti-slash.
 </dd>
-<dt><code>record_types</code></dt>
-<dd>Listes des types de fiches. Ils apparaissent dans la barre latérale de gauche.
-</dd>
+<dt><code>record_types</code> Listes des types de fiches. Ils apparaissent dans la barre latérale de gauche.</dt>
 <dd>Ils colorent les nœuds dans le graphe et permettent de les filtrer.
 </dd>
 <dd>Vous devez impérativement renseigner le type <code>undefined</code>.
@@ -181,9 +183,7 @@
   fiche de lecture: &#39;rgba(157, 62, 12, 0.7)&#39;
   concepts: &#39;hsl(14, 100%, 80%)&#39;</code></pre>
 </dd>
-<dt><code>link_types</code></dt>
-<dd>Listes des types de relations.
-</dd>
+<dt><code>link_types</code> Listes des types de relations.</dt>
 <dd>Ils modifient l’apparence des liens dans le graphe.
 </dd>
 <dd>Vous devez impérativement renseigner le type <code>undefined</code>.
@@ -199,37 +199,51 @@
     stroke: dash
     color: &#39;rgba(157, 62, 12, 0.7)&#39;</code></pre>
 </dd>
-<dt><code>graph_config</code></dt>
-<dd>Paramètres d’affichage du graphe.
+</dl>
+<h3 data-number="4.1.1" id="parametres-du-graphe"><span class="header-section-number">4.1.1</span> Paramètres du graphe</h3>
+<p>Les paramètres suivants peuvent être modifiés</p>
+<ul>
+<li>depuis le fichier de configuration. Les options sont indentées sous le paramètre <code>graph_config</code> comme dans l’exemple ci-dessous.</li>
+<li>de manière éphémère, depuis le volet “Paramètres de graphe” du menu ; les paramètres inscrits dans la configuration les remplacent au rechagement de la page.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">graph_config</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="at">  </span><span class="fu">background_color</span><span class="kw">:</span><span class="at"> white</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="at">  </span><span class="fu">highlight_color</span><span class="kw">:</span><span class="at"> red</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="at">  </span><span class="fu">text_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">7</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="at">  </span><span class="fu">position</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="at">    </span><span class="fu">x</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="at">    </span><span class="fu">y</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="at">  </span><span class="fu">attraction</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="at">    </span><span class="fu">force</span><span class="kw">:</span><span class="at"> </span><span class="dv">-150</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="at">    </span><span class="fu">distance_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">300</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="at">    </span><span class="fu">verticale</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.02</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="at">    </span><span class="fu">verticale</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="at">  </span><span class="fu">arrows</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<p>Nous vous conseillions de faire vos tests directement dans l’interface de Cosma avant de reporter les valeurs dans le fichier de configuration.</p>
+<dl>
+<dt><code>background_color</code> Couleur de fond du graphe.</dt>
+<dd>Exemple : <code>whitesmoke</code> ,<code>#ccc</code>, <code>rgb(57, 57, 57)</code>
 </dd>
-<dd><code>background_color</code> règle la couleur de fond affichée.
+<dt><code>highlight_color</code> Couleur de surbrillance des éléments du graphe selectionnés.</dt>
+<dd>Exemple : <code>red</code> ,<code>#0642ff</code>, <code>rgb(207, 52, 118)</code>
 </dd>
-<dd><code>highlight_color</code> règle la couleur de surbrillance des éléments du graphe selectionnés.
+<dt><code>text_size</code> règle la taille des titres des nœuds</dt>
+<dd>Valeur en pixels uniquement
 </dd>
-<dd><code>text_size</code> règle la taille des titres des nœuds, en pixels
+</dl>
+<p><code>position</code> Position horizontale (<code>x</code>) et verticale (<code>y</code>).</p>
+<dl>
+<dt><code>attraction</code> Attraction des nœuds</dt>
+<dd><code>force</code> : Puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Monter au delà de <code>-50</code> provoquera des collisions incessantes.
 </dd>
-<dd><code>position</code> règle les coordonnées du graphe horizontalement (<code>x</code>) et verticalement (<code>y</code>).
+<dd><code>distance_max</code> : Distance maximum entre les nœuds en vue de contenir leur relâchement dans une zone.
 </dd>
-<dd><code>attraction</code> règle la force qui sépare les nœuds globalement avec le sous-paramètre <code>force</code> et <code>distance_max</code>, mais aussi verticalement (<code>verticale</code>) et horizontalement (<code>horizontale</code>).
+<dd><code>verticale</code> : Compression de l’espace sur l’axe vertical.
 </dd>
-<dd><code>arrow</code> permet d’afficher (<code>true</code>) ou non (<code>false</code>) des flèches pour orienter le graphe.
+<dd><code>horizontale</code> : Compression de l’espace sur l’axe horizontal.
 </dd>
-<dd><p>Exemple</p>
-<pre><code>graph_config:
-  background_color: white
-  highlight_color: red
-  position:
-    x: 0.5
-    y: 0.5
-  attraction:
-    force: -50
-    min: 1
-    max: 500
-    verticale: 0.1
-    horizontale: 0.1
-  node:
-    size_coeff: 1
-  arrows: false</code></pre>
+<dt><code>arrow</code> Affichage des flèches pour orienter le graphe.</dt>
+<dd>Valeur : <code>true</code> ou <code>false</code>
 </dd>
 </dl>
 <h2 data-number="4.2" id="parametres-facultatifs"><span class="header-section-number">4.2</span> Paramètres facultatifs</h2>
@@ -318,41 +332,65 @@ tags:
 <div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">node</span> app modelize</span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="ex">node</span> app</span></code></pre></div>
 <p>Le fichier <code>cosmoscope.html</code> est exporté dans le répertoire défini dans la configuration. Il écrasera un fichier éponyme au même emplacement. Ce fichier est également copié dans le répertoire <code>/history</code>, dans un sous-répertoire portant la date du jour et avec les données modélisées au format JSON.</p>
+<h2 data-number="5.4" id="historique"><span class="header-section-number">5.4</span> Historique</h2>
+<p>Chaque fois que vous exportez un cosmoscope, il est sauvegardé dans un répertoire <code>history</code> à la racine de l’arborescence de Cosma. Ce répertoire contient un sous-répertoire pour chaque export effectué. Ils contiennent</p>
+<ul>
+<li>une copie du <code>cosmoscope.html</code></li>
+<li>un registre <code>error.log</code> des alertes enregistrées durant la prodécure</li>
+<li>un répertoire <code>data</code> contenant les fichiers
+<ul>
+<li><code>links.json</code> : liste des liens et de leurs métadonnées</li>
+<li><code>nodes.json</code> : liste des nœuds et de leurs métadonnées</li>
+</ul></li>
+</ul>
+<p>Vous pouvez réutiliser ces fichiers pour les intégrer à d’autres logiciels de visualisation.</p>
 <h1 data-number="6" id="utilisation-du-cosmoscope"><span class="header-section-number">6</span> Utilisation du cosmoscope</h1>
+<h2 data-number="6.1" id="interface"><span class="header-section-number">6.1</span> Interface</h2>
+<p>L’interface de Cosma est composée en trois colonnes :</p>
+<ul>
+<li><strong>“<em>Menu</em>” latéral gauche</strong> : il concentre tous les menus permettant d’agir sur l’affichage du graphe de manière <em>globale</em>.</li>
+<li><strong>“<em>Graphe</em>”</strong> : espace où s’étendent les nœuds et où l’utilisateur peut zoomer, se déplacer latéralement.</li>
+<li><strong>“<em>Fiche</em>” latérale droite</strong> : lecture des métadonnées, du contenu des fiches et outils de navigation graphiques <em>particuliers</em>.</li>
+</ul>
+<p><img src="https://i.imgur.com/FZiYK5Y.jpg" /></p>
 <!-- Description générale, portabilité -->
 <p>L’affichage n’est pas adapté pour les petits écrans, comme avec les mobiles et petite tablettes.</p>
-<h2 data-number="6.1" id="graphe"><span class="header-section-number">6.1</span> Graphe</h2>
-<p>Le graphe est l’ensemble de nœuds interreliés. Les nœuds correspondent aux fiches et leurs liaisons aux liens qu’elles intègrent. En dessous de chaque nœud on peut lire le titre de la fiche à laquelle il est lié.</p>
-<p>Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante. Un bouton <em>Annuler surbrillance</em> apparaitra en bas à gauche du graphe vous permettant de retirer l’effet.</p>
-<p>Avec un clic maintenu sur un nœud, vous pouvez le déplacer et ainsi <em>tirer</em> l’ensemble de son réseau.</p>
-<h3 data-number="6.1.1" id="navigation"><span class="header-section-number">6.1.1</span> Navigation</h3>
-<p>Vous pouvez zoomer dans le graphe grâce à la molette de votre souris ou bien avec le boutons dédiés, situés en bas à gauche du graphe. Au même endroit, le bouton <em>Recentrer</em> vous permet de retrouver votre point de vue original.</p>
-<!-- À compléter. Zoom etc. -->
-<h2 data-number="6.2" id="index"><span class="header-section-number">6.2</span> Index</h2>
-<p>Il s’agit de la liste des fiches sous forme d’un menu déroulant. Il est située dans le menu latéral gauche. Un badge à droite indique le nombre de fiche au total. Un bouton vous permet de trier l’affichage dans l’ordre alphabétique (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.</p>
-<p>L’index s’actualise avec l’affichage du graphe : les filtres et le focus agissent également sur l’index.</p>
-<h2 data-number="6.3" id="moteur-de-recherche"><span class="header-section-number">6.3</span> Moteur de recherche</h2>
+<h2 data-number="6.2" id="menu-lateral-gauche"><span class="header-section-number">6.2</span> Menu latéral gauche</h2>
+<h3 data-number="6.2.1" id="moteur-de-recherche"><span class="header-section-number">6.2.1</span> Moteur de recherche</h3>
 <p>C’est un champ de texte situé en haut du menu latéral gauche. Il vous suggère une liste de fiches dont le titre proche de votre saisie. Cette liste est établie en fonction des filtres et du focus actifs.</p>
 <!-- Préciser la bibliothèque sous-jacente ? -->
 <p>Cliquer sur une suggestion sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.</p>
-<h2 data-number="6.4" id="filtres"><span class="header-section-number">6.4</span> Filtres</h2>
+<h3 data-number="6.2.2" id="filtres"><span class="header-section-number">6.2.2</span> Filtres</h3>
 <p>C’est la liste des types de fiche, située en haut du menu latéral gauche. Pour qu’un filtre apparaisse dans le menu, il doit être enregistré dans votre configuration, mais aussi être le type désigné d’au moins une fiche. À la droite de chaque filtre, vous retrouvez le nombre de fiches qu’il affecte.</p>
 <p>Cliquer sur un filtre permet de masquer ou de réafficher les fiches du type correspondant dans le graphe, l’index et les suggestions du moteur de recherche.</p>
-<h2 data-number="6.5" id="mots-cles"><span class="header-section-number">6.5</span> Mots-clés</h2>
+<h3 data-number="6.2.3" id="mots-cles"><span class="header-section-number">6.2.3</span> Mots-clés</h3>
 <p>Cette liste dépend de tous les éléments que vous avez saisi dans les champs <code>tags</code> de vos fiches. Elle est située dans le menu latéral gauche. Séléctionner un mot-clé met en surbrillance dans le graphe toutes les fiches liées. Le nombre de fiches liées est affiché au droite du mot-clé.</p>
-<h2 data-number="6.6" id="vues"><span class="header-section-number">6.6</span> Vues</h2>
+<h3 data-number="6.2.4" id="index"><span class="header-section-number">6.2.4</span> Index</h3>
+<p>Il s’agit de la liste des fiches sous forme d’un menu déroulant. Il est située dans le menu latéral gauche. Un badge à droite indique le nombre de fiche au total. Un bouton vous permet de trier l’affichage dans l’ordre alphabétique (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.</p>
+<p>L’index s’actualise avec l’affichage du graphe : les filtres et le focus agissent également sur l’index.</p>
+<h3 data-number="6.2.5" id="vues"><span class="header-section-number">6.2.5</span> Vues</h3>
 <p>À tout moment, l’état de l’interface (fiche sélectionnée, filtres actifs, mode focus) peut être sauvegardé pour un accès rapide et partageable. Cliquer sur le bouton « Sauvegarder la vue » insère un code dans le presse-papier de l’utilisateur. Ce code (en base 64) peut être ajouté dans le fichier de configuration : ceci ajoute un bouton vers la vue en question dans les cosmoscopes générés ultérieurement.</p>
 <p>Exemple :</p>
 <pre><code>views:
   Une vue intéressante: eyJwb3MiOnsieCI6MCwieSI6MCwiem9vbSI6MX19</code></pre>
-<h2 data-number="6.7" id="parametres-du-graphe"><span class="header-section-number">6.7</span> Paramètres du graphe</h2>
+<h3 data-number="6.2.6" id="parametres-du-graphe-1"><span class="header-section-number">6.2.6</span> Paramètres du graphe</h3>
 <p>C’est la liste des différents outils de configuration visuelle du graphe. Il s’agit de définir différents paramètres dont les valeurs par défaut peuvent être modifiées dans le fichier de configuration (pour retrouver à chaque export la même configuration visuelle).</p>
 <ul>
 <li>les différentes forces simulées par l’algorithme de dessin du graphe,</li>
 <li>la position du graphe dans l’espace de la page,</li>
 <li>la taille du titre des nœuds.</li>
 </ul>
-<h2 data-number="6.8" id="fiches"><span class="header-section-number">6.8</span> Fiches</h2>
+<h2 data-number="6.3" id="graphe"><span class="header-section-number">6.3</span> Graphe</h2>
+<p>Le graphe est l’ensemble de nœuds interreliés. Les nœuds correspondent aux fiches et leurs liaisons aux liens qu’elles intègrent. En dessous de chaque nœud on peut lire le titre de la fiche à laquelle il est lié.</p>
+<p>Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante. Un bouton <em>Annuler surbrillance</em> apparaitra en bas à gauche du graphe vous permettant de retirer l’effet.</p>
+<p>Avec un clic maintenu sur un nœud, vous pouvez le déplacer et ainsi <em>tirer</em> l’ensemble de son réseau.</p>
+<h3 data-number="6.3.1" id="navigation"><span class="header-section-number">6.3.1</span> Navigation</h3>
+<p>Vous pouvez zoomer dans le graphe grâce à la molette de votre souris ou bien avec le boutons dédiés, situés en bas à gauche du graphe. Au même endroit, le bouton <em>Recentrer</em> vous permet de retrouver votre point de vue original.</p>
+<!-- À compléter. Zoom etc. -->
+<h3 data-number="6.3.2" id="spacialisation"><span class="header-section-number">6.3.2</span> Spacialisation</h3>
+<p>La gestion des nœuds dans l’espace peut être paramétré dans le fichier de configuration, mais peut aussi être actualisé en direct avec les paramètres disponibles dans le menu “Paramètres du graphe”.</p>
+<p>Cliquer sur le <em>Temoin de spacialisation</em> vous permet de forcer la relance de l’algorithme.</p>
+<h2 data-number="6.4" id="fiches"><span class="header-section-number">6.4</span> Fiches</h2>
 <p>Les fiches sont présentées dans un volet latéral qui permet de consulter leur contenu, de naviguer dans le graphe via les liens et de modifier son affichage.</p>
 <p>Séléctionner une fiche (depuis le graphe, l’index ou depuis un lien)</p>
 <ul>
@@ -360,10 +398,10 @@ tags:
 <li>enregistrer son identifiant dans l’adresse de la page (permettant de la retrouver dans l’historique du navigateur, de partager l’adresse en ligne ou encore de la mettre de côté en dupliquant l’onglet).</li>
 </ul>
 <p>Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud correspondant dans le graphe, sans changer l’adresse de la page.</p>
-<h3 data-number="6.8.1" id="liens"><span class="header-section-number">6.8.1</span> Liens</h3>
+<h3 data-number="6.4.1" id="liens"><span class="header-section-number">6.4.1</span> Liens</h3>
 <p>Le contenu de la fiche est suivi d’une liste des fiches vers lesquelles elle renvoie (liens sortants) et des fiches qui pointent vers elle (liens entrants ou rétroliens).</p>
 <p>Les liens que vous avez intégré à votre fichier texte apparaissent bleus, entre les mêmes crochets et soulignés. Vous pouvez ouvrir ces liens dans un nouvel onglet.</p>
-<h3 data-number="6.8.2" id="focus"><span class="header-section-number">6.8.2</span> Focus</h3>
+<h3 data-number="6.4.2" id="focus"><span class="header-section-number">6.4.2</span> Focus</h3>
 <p>Cliquer sur les différents niveaux de focus permet de modifier l’affichage du graphe pour isoler le nœud correspondant à la fiche. Le bouton <code>1</code> isole la fiche et ses connexions immédiates (distance = 1). Les boutons suivants étendent le rayon (<code>focus</code>) aux connexions situées à plusieurs liens de distance jusqu’au maximum permis par le paramètre <code>focus_max</code> du fichier de configuration.</p>
 <h1 data-number="7" id="credits"><span class="header-section-number">7</span> Crédits</h1>
 <h2 data-number="7.1" id="equipe"><span class="header-section-number">7.1</span> Équipe</h2>

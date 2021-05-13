@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/** 1 - Global
+/** Global
 ------------------------------------------------------------*/
 
 :root {
@@ -18,7 +18,7 @@
 
 * { box-sizing: border-box; }
 
-/** 2 - Page
+/** Page
 ------------------------------------------------------------*/
 
 body {
@@ -31,7 +31,7 @@ body {
 }
 
 /* ---
-2.1 - Containers
+- Containers
 --- */
 
 article { padding: 0.8rem 0; }
@@ -39,30 +39,30 @@ article + article:not(.record) {
 	border-top: 1px solid var(--light-gray);
 }
 
-/** 3 - Elements
+/** Elements
 ------------------------------------------------------------*/
 
 /* ---
-3.1 - Buttons
+- Buttons
 --- */
 
 button {
 	cursor: pointer;
 	margin: 0.5rem 0.2rem;
+	font-size: 1.3rem;
 }
 
 .btn {
 	background-color: transparent;
 	border: 1px solid var(--gray);
-	border-radius: 1px;
-	height: 23px;
+	border-radius: 2px;
 }
 .btn.active { border: 1px solid black; }
 
 [onclick] { cursor: pointer; }
 
 /* ---
-3.1 - Lists
+- Lists
 --- */
 
 details { padding: 0.6rem 0; }
@@ -103,7 +103,31 @@ summary + button { margin: 1rem 0; }
 }
 
 /* ---
-3.2 - Others
+- Inputs
+--- */
+
+label {
+	cursor: pointer;
+	font-family: var(--sans);
+}
+
+input { font-size: 1.3rem; }
+
+input[type="checkbox"] {
+	cursor: pointer;
+	width: 1.2rem;
+	height: 1.2rem;
+	margin: 0 0.8rem 0 0;
+}
+
+input[type="range"] {
+	cursor: pointer;
+	width: 100%;
+	margin-top: 0.3rem;
+}
+
+/* ---
+- Others
 --- */
 
 a { color: inherit; }
@@ -112,10 +136,8 @@ a { color: inherit; }
 	display: inline-block;
 	background-color: var(--light-gray);
 	border-radius: 1px;
-	padding: 0px 0.3rem;
-	min-width: 12px;
+	padding: 0 0.3rem;
 	font-size: 1rem;
-	height: 14px;
 	margin-left: 0.2rem;
 	text-align: center;
 	line-height: 1.5rem;
@@ -124,7 +146,7 @@ a { color: inherit; }
 	color: black;
 }
 
-/** 4 - Menu (left side board)
+/** Menu (left side board)
 ------------------------------------------------------------*/
 
 aside.menu {
@@ -132,7 +154,7 @@ aside.menu {
 	z-index: 100;
 	overflow: auto;
 	height: 100vh;
-	width: 300px;
+	width: 30rem;
 	margin: 0;
 	padding: 0 20px 30px 20px;
 	background-color: white;
@@ -140,8 +162,10 @@ aside.menu {
 }
 
 /* ---
-4.1 - Logo
+- Logo
 --- */
+
+.logo { cursor: pointer; }
 
 @keyframes rotate-center {
 	0% { transform: rotate(0); }
@@ -152,12 +176,12 @@ aside.menu {
 #cosma-roll.anim {animation: 2.2s linear infinite rotate-center;}
 
 /* ---
-4.2 - Spatialization load bar
+- Spatialization load bar
 --- */
 
 .load-bar {
 	height: .3em;
-	padding: 1px;
+	padding: 0.1rem;
 	display: flex;
 	margin: 1rem 0;
 	background-color: var(--light-gray);
@@ -168,7 +192,7 @@ aside.menu {
 }
 
 /* ---
-4.3 - Search input & list
+- Search input & list
 --- */
 
 .search-bar { width: 100%; margin: 0.8rem 0; }
@@ -177,17 +201,16 @@ aside.menu {
 #search-result-list li { cursor: pointer; }
 
 /* ---
-4.4 - Controls from graph params
+- Controls from graph params
 --- */
 
 .menu-controls input[type="number"] {
-	width: 70px;
+	width: 7rem;
 	margin-left: 1rem;
 }
-.menu-controls input[type="range"] { width: 100%; }
 
 /* ---
-4.5 - Footer
+- Footer
 --- */
 
 aside.menu footer {
@@ -198,7 +221,7 @@ aside.menu footer {
 	text-align: center;
 }
 
-/** 5 - Record container (right side board)
+/** Record container (right side board)
 ------------------------------------------------------------*/
 
 main.record-container {
@@ -207,7 +230,7 @@ main.record-container {
 	top: 0;
 	right: 0;
 	padding: 1rem 2rem;
-	width: 500px;
+	width: 50rem;
 	height: 100vh;
 	overflow: auto;
 	background-color: white;
@@ -224,7 +247,7 @@ main.record-container:not(.active) {
 .record { display: none; }
 
 /* ---
-5.1 - Record header
+- Record header
 --- */
 
 .record header {
@@ -234,14 +257,13 @@ main.record-container:not(.active) {
 	border-bottom: 1px solid black;
 }
 
-.record header div {
-	display: flex;
-	align-items: baseline;
+.record header div + div,
+.record-focus-container {
+	margin-top: 0.8rem;
 }
 
-.record header div + div { margin-top: 0.8rem; }
-
-.record header div span:first-of-type {
+.record header div span:first-of-type, 
+.record-focus-container > span {
 	font-size: 1.6rem;
 	font-family: var(--mono);
 	margin-right: 0.8rem;
@@ -249,8 +271,12 @@ main.record-container:not(.active) {
 
 .record-last-edit { display: none; }
 
+.record-focus-lever { display: none; }
+
+.record-focus-lever input { width: 80%; }
+
 /* ---
-5.2 - Record content
+- Record content
 --- */
 
 /* From Typesafe.css, by Bradley Taunt */
@@ -315,7 +341,7 @@ main.record-container:not(.active) {
 }
 
 /* ---
-5.3 - Record footer
+- Record footer
 --- */
 
 .record footer {
@@ -324,10 +350,11 @@ main.record-container:not(.active) {
 }
 
 .record footer li {
+	/* links & backlinks */
 	position: relative;
 }
 
-.record footer .record-links-context {
+.record footer li .record-links-context {
 	display: none;
 	background: white;
 	border: 1px black solid;
@@ -343,12 +370,21 @@ main.record-container:not(.active) {
 	display: block;
 }
 
-.record footer .record-links-id {
-	font-family: var(--mono);
-	display: none;
+.record footer li .record-links-context li::before {
+	content: '-';
+	position: relative;
+	left: -5px;
 }
 
-/** 6 - Graph
+.record footer li .record-links-context p {
+	margin: 0px;
+}
+
+.record footer li .record-links-context p + p {
+	margin-top: 0.8rem;
+}
+
+/** Graph
 ------------------------------------------------------------*/
 
 .graph-wrapper {
@@ -356,7 +392,7 @@ main.record-container:not(.active) {
 	top: 0;
 	right: 0;
 	height: 100vh;
-	width: calc(100vw - 300px);
+	width: calc(100vw - 30rem);
 }
 
 #graph_canvas {
@@ -365,7 +401,7 @@ main.record-container:not(.active) {
 }
 
 /* ---
-6.1 - Graph elements
+- Graph elements
 --- */
 
 /* nodes */
@@ -381,7 +417,7 @@ marker {
 }
 
 /* ---
-6.2 - Buttons
+- Buttons
 --- */
 
 .graph-controls {
@@ -402,7 +438,7 @@ marker {
 .graph-controls #reset-highlight { display: none; }
 
 
-/** 6 - Credits
+/** Credits
 ------------------------------------------------------------*/
 
 article#credits {

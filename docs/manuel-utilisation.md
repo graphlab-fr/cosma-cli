@@ -3,7 +3,7 @@ title: Manuel d’utilisation de Cosma
 author:
   - Guillaume Brioudes <https://myllaume.fr/>
   - Arthur Perret <https://www.arthurperret.fr/>
-date: 2021-05-03
+date: 2021-04-28
 lang: fr-FR
 description: Aide à l’utilisation et à la configuration de Cosma
 ---
@@ -70,10 +70,9 @@ Séparer le traitement des données (cosmographe) de leur modélisation (cosmosc
 
 # Vocabulaire
 
-- **fiche** : rendu d'un fichier Markdown intégré à Cosma.
-- **index** : liste de toutes les fiches intégrées à Cosma.
-- **focus** : limitation de la vue autour d'un nœud pour n'afficher que les  nœuds envrionnants, à [différentes échelles](#focus).
-- **vue** : configuration d'affichage du graphe, en fonction des filtres et du focus.
+- "**fiche**" : rendu d'un fichier Markdown intégré à Cosma.
+- "**focus**" : limitation de la vue autour d'un nœud pour n'afficher que les  nœuds envrionnants, à [différentes échelles](#focus).
+- "**vue**" : configuration d'affichage du graphe, en fonction des filtres et du focus.
 
 # Installation
 
@@ -103,7 +102,7 @@ cd cosma
 Installer les dépendances nécessaires au bon fonctionnement de l'application avec la commande suivante. Le gestionnaire de dépendances NPM est installé en même temps que NodeJs.
 
 ```bash
-npm i
+npm install --only=production
 ```
 
 # Configuration
@@ -122,18 +121,15 @@ Le fichier de configuration est au [format YAML](https://sweetohm.net/article/in
 
 La configuration doit contenir les paramètres suivants.
 
-`files_origin`
-: Chemin du répertoire contenant les fichiers Mardown à scanner.
+`files_origin` Chemin du répertoire contenant les fichiers Mardown à scanner.
 : Exemples : `./fiches/'`, `D:\repertoire\`
 : Attention à terminer la chaîne par un slash ou un anti-slash.
 
-`export_target`
-: Chemin vers le répertoire d’export du cosmoscope.
+`export_target` Chemin vers le répertoire d’export du cosmoscope.
 : Exemple : `./'`, `D:\repertoire\`
 : Attention à terminer la chaîne par un slash ou un anti-slash.
 
-`record_types`
-: Listes des types de fiches. Ils apparaissent dans la barre latérale de gauche.
+`record_types` Listes des types de fiches. Ils apparaissent dans la barre latérale de gauche.
 : Ils colorent les nœuds dans le graphe et permettent de les filtrer.
 : Vous devez impérativement renseigner le type `undefined`.
 : Exemple
@@ -144,8 +140,7 @@ La configuration doit contenir les paramètres suivants.
 		  fiche de lecture: 'rgba(157, 62, 12, 0.7)'
 		  concepts: 'hsl(14, 100%, 80%)'
 
-`link_types`
-: Listes des types de relations.
+`link_types` Listes des types de relations.
 : Ils modifient l'apparence des liens dans le graphe.
 : Vous devez impérativement renseigner le type `undefined`.
 : La couleur est spécifiée grâce au paramètre `color` tandis que la forme de la ligne dépend du paramètre `stroke` : La ligne peut être simple (`simple`), constituée de tirets (`dash`), pointillés (`dotted`) ou bien doublés (`double`).
@@ -159,32 +154,50 @@ La configuration doit contenir les paramètres suivants.
 		    stroke: dash
 			color: 'rgba(157, 62, 12, 0.7)'
 
-`graph_config`
-: Paramètres d'affichage du graphe.
-: `background_color` règle la couleur de fond affichée.
-: `highlight_color` règle la couleur de surbrillance des éléments du graphe selectionnés.
-: `text_size` règle la taille des titres des nœuds, en pixels
-: `position` règle les coordonnées du graphe horizontalement (`x`) et verticalement (`y`).
-: `attraction` règle la force qui sépare les nœuds globalement avec le sous-paramètre `force` et `distance_max`, mais aussi verticalement (`verticale`) et horizontalement (`horizontale`).
-: `arrow` permet d'afficher (`true`) ou non (`false`) des flèches pour orienter le graphe.
+### Paramètres du graphe
 
-: Exemple
+Les paramètres suivants peuvent être modifiés
 
-		graph_config:
-		  background_color: white
-		  highlight_color: red
-		  position:
-		    x: 0.5
-		    y: 0.5
-		  attraction:
-		    force: -50
-		    min: 1
-		    max: 500
-		    verticale: 0.1
-		    horizontale: 0.1
-		  node:
-		    size_coeff: 1
-		  arrows: false
+- depuis le fichier de configuration. Les options sont indentées sous le paramètre `graph_config` comme dans l'exemple ci-dessous.
+- de manière éphémère, depuis le volet "Paramètres de graphe" du menu ; les paramètres inscrits dans la configuration les remplacent au rechagement de la page.
+
+```yaml
+graph_config:
+  background_color: white
+  highlight_color: red
+  text_size: 7
+  position:
+    x: 0.5
+    y: 0.5
+  attraction:
+    force: -150
+    distance_max: 300
+    verticale: 0.02
+    verticale: 0
+  arrows: false
+```
+
+Nous vous conseillions de faire vos tests directement dans l'interface de Cosma avant de reporter les valeurs dans le fichier de configuration.
+
+`background_color` Couleur de fond du graphe.
+: Exemple : `whitesmoke` ,`#ccc`, `rgb(57, 57, 57)`
+
+`highlight_color` Couleur de surbrillance des éléments du graphe selectionnés.
+: Exemple : `red` ,`#0642ff `, `rgb(207, 52, 118)`
+
+`text_size` règle la taille des titres des nœuds
+: Valeur en pixels uniquement
+
+`position` Position horizontale (`x`) et verticale (`y`).
+
+`attraction` Attraction des nœuds
+: `force` : Puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Monter au delà de `-50` provoquera des collisions incessantes.
+: `distance_max` : Distance maximum entre les nœuds en vue de contenir leur relâchement dans une zone.
+: `verticale` : Compression de l'espace sur l'axe vertical.
+: `horizontale` : Compression de l'espace sur l'axe horizontal.
+
+`arrow` Affichage des flèches pour orienter le graphe.
+: Valeur : `true` ou `false`
 
 ## Paramètres facultatifs
 
@@ -312,11 +325,80 @@ node app
 
 Le fichier `cosmoscope.html` est exporté dans le répertoire défini dans la configuration. Il écrasera un fichier éponyme au même emplacement. Ce fichier est également copié dans le répertoire `/history`, dans un sous-répertoire portant la date du jour et avec les données modélisées au format JSON.
 
+## Historique
+
+Chaque fois que vous exportez un cosmoscope, il est sauvegardé dans un répertoire `history` à la racine de l'arborescence de Cosma. Ce répertoire contient un sous-répertoire pour chaque export effectué. Ils contiennent
+
+- une copie du `cosmoscope.html`
+- un registre `error.log` des alertes enregistrées durant la prodécure
+- un répertoire `data` contenant les fichiers
+    - `links.json` : liste des liens et de leurs métadonnées
+    - `nodes.json` : liste des nœuds et de leurs métadonnées
+
+Vous pouvez réutiliser ces fichiers pour les intégrer à d'autres logiciels de visualisation.
+
 # Utilisation du cosmoscope
+
+
+## Interface
+
+L'interface de Cosma est composée en trois colonnes :
+
+- **"*Menu*" latéral gauche** : il concentre tous les menus permettant d'agir sur l'affichage du graphe de manière *globale*.
+- **"*Graphe*"** : espace où s'étendent les nœuds et où l'utilisateur peut zoomer, se déplacer latéralement.
+- **"*Fiche*" latérale droite** : lecture des métadonnées, du contenu des fiches et outils de navigation graphiques *particuliers*.
+
+![](https://i.imgur.com/FZiYK5Y.jpg)
 
 <!-- Description générale, portabilité -->
 
 L'affichage n'est pas adapté pour les petits écrans, comme avec les mobiles et petite tablettes.
+
+
+## Menu latéral gauche
+
+### Moteur de recherche
+
+C'est un champ de texte situé en haut du menu latéral gauche. Il vous suggère une liste de fiches dont le titre proche de votre saisie. Cette liste est établie en fonction des filtres et du focus actifs.
+
+<!-- Préciser la bibliothèque sous-jacente ? -->
+
+Cliquer sur une suggestion sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
+
+### Filtres
+
+C'est la liste des types de fiche, située en haut du menu latéral gauche. Pour qu'un filtre apparaisse dans le menu, il doit être enregistré dans votre configuration, mais aussi être le type désigné d'au moins une fiche. À la droite de chaque filtre, vous retrouvez le nombre de fiches qu'il affecte.
+
+Cliquer sur un filtre permet de masquer ou de réafficher les fiches du type correspondant dans le graphe, l'index et les suggestions du moteur de recherche.
+
+### Mots-clés
+
+Cette liste dépend de tous les éléments que vous avez saisi dans les champs `tags` de vos fiches. Elle est située dans le menu latéral gauche. Séléctionner un mot-clé met en surbrillance dans le graphe toutes les fiches liées. Le nombre de fiches liées est affiché au droite du mot-clé.
+
+### Index
+
+Il s'agit de la liste des fiches sous forme d'un menu déroulant. Il est située dans le menu latéral gauche. Un badge à droite indique le nombre de fiche au total. Un bouton vous permet de trier l'affichage dans l'ordre alphabétique (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
+
+L'index s'actualise avec l'affichage du graphe : les filtres et le focus agissent également sur l'index.
+
+### Vues
+
+À tout moment, l'état de l'interface (fiche sélectionnée, filtres actifs, mode focus) peut être sauvegardé pour un accès rapide et partageable. Cliquer sur le bouton « Sauvegarder la vue » insère un code dans le presse-papier de l'utilisateur. Ce code (en base 64) peut être ajouté dans le fichier de configuration : ceci ajoute un bouton vers la vue en question dans les cosmoscopes générés ultérieurement.
+
+Exemple :
+
+```
+views:
+  Une vue intéressante: eyJwb3MiOnsieCI6MCwieSI6MCwiem9vbSI6MX19
+```
+
+### Paramètres du graphe
+
+C'est la liste des différents outils de configuration visuelle du graphe. Il s'agit de définir différents paramètres dont les valeurs par défaut peuvent être modifiées dans le fichier de configuration (pour retrouver à chaque export la même configuration visuelle).
+
+- les différentes forces simulées par l'algorithme de dessin du graphe,
+- la position du graphe dans l'espace de la page,
+- la taille du titre des nœuds.
 
 ## Graphe
 
@@ -332,48 +414,11 @@ Vous pouvez zoomer dans le graphe grâce à la molette de votre souris ou bien a
 
 <!-- À compléter. Zoom etc. -->
 
-## Index
+### Spacialisation
 
-Il s'agit de la liste des fiches sous forme d'un menu déroulant. Il est située dans le menu latéral gauche. Un badge à droite indique le nombre de fiche au total. Un bouton vous permet de trier l'affichage dans l'ordre alphabétique (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
+La gestion des nœuds dans l'espace peut être paramétré dans le fichier de configuration, mais peut aussi être actualisé en direct avec les paramètres disponibles dans le menu "Paramètres du graphe".
 
-L'index s'actualise avec l'affichage du graphe : les filtres et le focus agissent également sur l'index.
-
-## Moteur de recherche
-
-C'est un champ de texte situé en haut du menu latéral gauche. Il vous suggère une liste de fiches dont le titre proche de votre saisie. Cette liste est établie en fonction des filtres et du focus actifs.
-
-<!-- Préciser la bibliothèque sous-jacente ? -->
-
-Cliquer sur une suggestion sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
-
-## Filtres
-
-C'est la liste des types de fiche, située en haut du menu latéral gauche. Pour qu'un filtre apparaisse dans le menu, il doit être enregistré dans votre configuration, mais aussi être le type désigné d'au moins une fiche. À la droite de chaque filtre, vous retrouvez le nombre de fiches qu'il affecte.
-
-Cliquer sur un filtre permet de masquer ou de réafficher les fiches du type correspondant dans le graphe, l'index et les suggestions du moteur de recherche.
-
-## Mots-clés
-
-Cette liste dépend de tous les éléments que vous avez saisi dans les champs `tags` de vos fiches. Elle est située dans le menu latéral gauche. Séléctionner un mot-clé met en surbrillance dans le graphe toutes les fiches liées. Le nombre de fiches liées est affiché au droite du mot-clé.
-
-## Vues
-
-À tout moment, l'état de l'interface (fiche sélectionnée, filtres actifs, mode focus) peut être sauvegardé pour un accès rapide et partageable. Cliquer sur le bouton « Sauvegarder la vue » insère un code dans le presse-papier de l'utilisateur. Ce code (en base 64) peut être ajouté dans le fichier de configuration : ceci ajoute un bouton vers la vue en question dans les cosmoscopes générés ultérieurement.
-
-Exemple :
-
-```
-views:
-  Une vue intéressante: eyJwb3MiOnsieCI6MCwieSI6MCwiem9vbSI6MX19
-```
-
-## Paramètres du graphe
-
-C'est la liste des différents outils de configuration visuelle du graphe. Il s'agit de définir différents paramètres dont les valeurs par défaut peuvent être modifiées dans le fichier de configuration (pour retrouver à chaque export la même configuration visuelle).
-
-- les différentes forces simulées par l'algorithme de dessin du graphe,
-- la position du graphe dans l'espace de la page,
-- la taille du titre des nœuds.
+Cliquer sur le *Temoin de spacialisation* vous permet de forcer la relance de l'algorithme.
 
 ## Fiches
 
