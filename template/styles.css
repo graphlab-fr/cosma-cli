@@ -234,11 +234,6 @@ main.record-container:not(.active) {
 	border-bottom: 1px solid black;
 }
 
-.record header div {
-	display: flex;
-	align-items: baseline;
-}
-
 .record header div + div { margin-top: 0.8rem; }
 
 .record header div span:first-of-type {

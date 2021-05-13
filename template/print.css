@@ -1,12 +1,16 @@
 @media print {
 
 	/* ---
-	1 - Global
+	- Global
 	--- */
 
 	body {
 		overflow: unset;
 	}
+
+	/* ---
+	- Elements
+	--- */
 
 	p, tr, li {
 		orphans: 3;
@@ -17,39 +21,40 @@
 	}
 
 	/* ---
-	2 - Containers
+	- Page containers
 	--- */
 
-	/* app containers */
     aside,
-	.graph-wrapper,
-	/* record elements */
-	.record-focus-container,
-	.record-btn-close {
-		display: none !important;
+	.graph-wrapper {
+		display: none;
 	}
 
 	/* ---
-	3 - Record main
+	- Record header
+	--- */
+
+	.record-focus-container,
+	.record-btn-close {
+		display: none;
+	}
+
+	.record-last-edit {
+		display: inline-block;
+	}
+
+	/* ---
+	- Record main
 	--- */
 
 	main.record-container {
 		position: unset;
 		width: 100%;
-		height: unset;
 		overflow: unset;
 		box-shadow: unset;
 	}
 
-    main.record-container header:before{ 
-        content:url(img/image.jpg) ;
-        position:relative; 
-        left:-3px;
-        top:10px;
-	}
-
 	/* ---
-	4 - Record footer
+	- Record footer
 	--- */
 
 	main.record-container footer {
@@ -64,13 +69,5 @@
 
 	main.record-container footer .record-links-id {
 		display: unset;
-	}
-
-	[data-context]::after {
-		content: attr(data-context);
-		position: unset;
-		border-radius: 2px;
-		padding: 0.8rem;
-		font-style: italic;
 	}
 }
