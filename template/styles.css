@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/** 1 - Global
+/** Global
 ------------------------------------------------------------*/
 
 :root {
@@ -18,7 +18,7 @@
 
 * { box-sizing: border-box; }
 
-/** 2 - Page
+/** Page
 ------------------------------------------------------------*/
 
 body {
@@ -31,7 +31,7 @@ body {
 }
 
 /* ---
-2.1 - Containers
+- Containers
 --- */
 
 article { padding: 0.8rem 0; }
@@ -39,11 +39,11 @@ article + article:not(.record) {
 	border-top: 1px solid var(--light-gray);
 }
 
-/** 3 - Elements
+/** Elements
 ------------------------------------------------------------*/
 
 /* ---
-3.1 - Buttons
+- Buttons
 --- */
 
 button {
@@ -62,7 +62,7 @@ button {
 [onclick] { cursor: pointer; }
 
 /* ---
-3.1 - Lists
+- Lists
 --- */
 
 details { padding: 0.6rem 0; }
@@ -103,7 +103,7 @@ summary + button { margin: 1rem 0; }
 }
 
 /* ---
-3.2 - Others
+- Others
 --- */
 
 a { color: inherit; }
@@ -124,23 +124,23 @@ a { color: inherit; }
 	color: black;
 }
 
-/** 4 - Menu (left side board)
+/** Menu (left side board)
 ------------------------------------------------------------*/
 
 aside.menu {
 	position: relative;
 	z-index: 100;
-    overflow: auto;
-    height: 100vh;
-    width: 300px;
-    margin: 0;
-    padding: 0 20px 30px 20px;
+	overflow: auto;
+	height: 100vh;
+	width: 300px;
+	margin: 0;
+	padding: 0 20px 30px 20px;
 	background-color: white;
 	box-shadow: var(--shadow)
 }
 
 /* ---
-4.1 - Logo
+- Logo
 --- */
 
 @keyframes rotate-center {
@@ -152,7 +152,7 @@ aside.menu {
 #cosma-roll.anim {animation: 2.2s linear infinite rotate-center;}
 
 /* ---
-4.2 - Spatialization load bar
+- Spatialization load bar
 --- */
 
 .load-bar {
@@ -168,7 +168,7 @@ aside.menu {
 }
 
 /* ---
-4.3 - Search input & list
+- Search input & list
 --- */
 
 .search-bar { width: 100%; margin: 0.8rem 0; }
@@ -177,7 +177,7 @@ aside.menu {
 #search-result-list li { cursor: pointer; }
 
 /* ---
-4.4 - Controls from graph params
+- Controls from graph params
 --- */
 
 .menu-controls input[type="number"] {
@@ -187,7 +187,7 @@ aside.menu {
 .menu-controls input[type="range"] { width: 100%; }
 
 /* ---
-4.5 - Footer
+- Footer
 --- */
 
 aside.menu footer {
@@ -198,7 +198,7 @@ aside.menu footer {
 	text-align: center;
 }
 
-/** 5 - Record container (right side board)
+/** Record container (right side board)
 ------------------------------------------------------------*/
 
 main.record-container {
@@ -207,13 +207,13 @@ main.record-container {
 	top: 0;
 	right: 0;
 	padding: 1rem 2rem;
-    width: 500px;
-    height: 100vh;
-    overflow: auto;
+	width: 500px;
+	height: 100vh;
+	overflow: auto;
 	background-color: white;
 	box-shadow: var(--shadow);
 	transition: transform .6s;
-    transition-timing-function: cubic-bezier(.02,1.18,0,.98);
+	transition-timing-function: cubic-bezier(.02,1.18,0,.98);
 }
 
 main.record-container:not(.active) {
@@ -224,7 +224,7 @@ main.record-container:not(.active) {
 .record { display: none; }
 
 /* ---
-5.1 - Record header
+- Record header
 --- */
 
 .record header {
@@ -250,7 +250,7 @@ main.record-container:not(.active) {
 .record-last-edit { display: none; }
 
 /* ---
-5.2 - Record content
+- Record content
 --- */
 
 /* From Typesafe.css, by Bradley Taunt */
@@ -315,7 +315,7 @@ main.record-container:not(.active) {
 }
 
 /* ---
-5.3 - Record footer
+- Record footer
 --- */
 
 .record footer {
@@ -335,7 +335,7 @@ main.record-container:not(.active) {
 	border-radius: 2px;
 	margin-top: 0.8rem;
 	position: absolute;
-    bottom: calc(100% + 10px);
+	bottom: calc(100% + 10px);
 	box-shadow: var(--shadow);
 }
 
@@ -348,7 +348,7 @@ main.record-container:not(.active) {
 	display: none;
 }
 
-/** 6 - Graph
+/** Graph
 ------------------------------------------------------------*/
 
 .graph-wrapper {
@@ -365,7 +365,7 @@ main.record-container:not(.active) {
 }
 
 /* ---
-6.1 - Graph elements
+- Graph elements
 --- */
 
 /* nodes */
@@ -381,16 +381,16 @@ marker {
 }
 
 /* ---
-6.2 - Buttons
+- Buttons
 --- */
 
 .graph-controls {
-    position: absolute;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-    left: 20px;
-    bottom: 20px;
-    flex-wrap: wrap;
+	left: 20px;
+	bottom: 20px;
+	flex-wrap: wrap;
 }
 
 .graph-controls div {
@@ -402,7 +402,7 @@ marker {
 .graph-controls #reset-highlight { display: none; }
 
 
-/** 6 - Credits
+/** Credits
 ------------------------------------------------------------*/
 
 article#credits {
