@@ -49,13 +49,13 @@ article + article:not(.record) {
 button {
 	cursor: pointer;
 	margin: 0.5rem 0.2rem;
+	font-size: 1.3rem;
 }
 
 .btn {
 	background-color: transparent;
 	border: 1px solid var(--gray);
-	border-radius: 1px;
-	height: 23px;
+	border-radius: 2px;
 }
 .btn.active { border: 1px solid black; }
 
@@ -103,6 +103,24 @@ summary + button { margin: 1rem 0; }
 }
 
 /* ---
+- Inputs
+--- */
+
+label {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+
+input { font-size: 1.3rem; }
+
+input[type="checkbox"] {
+	width: 1.2rem;
+	height: 1.2rem;
+	margin: 0 0.8rem 0 0;
+}
+
+/* ---
 - Others
 --- */
 
@@ -112,10 +130,8 @@ a { color: inherit; }
 	display: inline-block;
 	background-color: var(--light-gray);
 	border-radius: 1px;
-	padding: 0px 0.3rem;
-	min-width: 12px;
+	padding: 0 0.3rem;
 	font-size: 1rem;
-	height: 14px;
 	margin-left: 0.2rem;
 	text-align: center;
 	line-height: 1.5rem;
@@ -132,7 +148,7 @@ aside.menu {
 	z-index: 100;
 	overflow: auto;
 	height: 100vh;
-	width: 300px;
+	width: 30rem;
 	margin: 0;
 	padding: 0 20px 30px 20px;
 	background-color: white;
@@ -157,7 +173,7 @@ aside.menu {
 
 .load-bar {
 	height: .3em;
-	padding: 1px;
+	padding: 0.1rem;
 	display: flex;
 	margin: 1rem 0;
 	background-color: var(--light-gray);
@@ -181,7 +197,7 @@ aside.menu {
 --- */
 
 .menu-controls input[type="number"] {
-	width: 70px;
+	width: 7rem;
 	margin-left: 1rem;
 }
 .menu-controls input[type="range"] { width: 100%; }
@@ -207,7 +223,7 @@ main.record-container {
 	top: 0;
 	right: 0;
 	padding: 1rem 2rem;
-	width: 500px;
+	width: 50rem;
 	height: 100vh;
 	overflow: auto;
 	background-color: white;
@@ -243,6 +259,8 @@ main.record-container:not(.active) {
 }
 
 .record-last-edit { display: none; }
+
+.record-focus-container button { margin: 0 0.2rem; }
 
 /* ---
 - Record content
@@ -361,7 +379,7 @@ main.record-container:not(.active) {
 	top: 0;
 	right: 0;
 	height: 100vh;
-	width: calc(100vw - 300px);
+	width: calc(100vw - 30rem);
 }
 
 #graph_canvas {

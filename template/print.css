@@ -4,6 +4,10 @@
 	- Global
 	--- */
 
+	:root {
+		font-size: 52.5%;
+	}
+
 	body {
 		overflow: unset;
 	}
