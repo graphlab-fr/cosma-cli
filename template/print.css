@@ -67,7 +67,7 @@
 		box-shadow: unset;
 	}
 
-	main.record-container footer .record-links-id {
-		display: unset;
+	main.record-container footer .record-links-context mark {
+		text-decoration: underline;
 	}
 }

@@ -319,10 +319,11 @@ main.record-container:not(.active) {
 }
 
 .record footer li {
+	/* links & backlinks */
 	position: relative;
 }
 
-.record footer .record-links-context {
+.record footer li .record-links-context {
 	display: none;
 	background: white;
 	border: 1px black solid;
@@ -338,9 +339,18 @@ main.record-container:not(.active) {
 	display: block;
 }
 
-.record footer .record-links-id {
-	font-family: var(--mono);
-	display: none;
+.record footer li .record-links-context li::before {
+	content: '-';
+	position: relative;
+	left: -5px;
+}
+
+.record footer li .record-links-context p {
+	margin: 0px;
+}
+
+.record footer li .record-links-context p + p {
+	margin-top: 0.8rem;
 }
 
 /** Graph

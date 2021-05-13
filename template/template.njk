@@ -247,7 +247,6 @@
                         <li onclick="openRecord({{ link.target.id }})">
                             <span class="record-type-point n_{{ link.target.type }}">⬤</span>
                             <span>{{ link.target.title }}</span>
-                            <span class="record-links-id">[[{{ link.target.id }}]]</span>
                             <div class="record-links-context">{{ link.context | safe }}</div>
                         </li>
                         {% endfor %}
@@ -266,7 +265,6 @@
                         <li onclick="openRecord({{ backlink.target.id }})">
                             <span class="record-type-point n_{{ backlink.target.type }}">⬤</span>
                             <span>{{ backlink.target.title }}</span>
-                            <span class="record-links-id">[[{{ backlink.target.id }}]]</span>
                             <div class="record-links-context">{{ backlink.context | safe }}</div>
                         </li>
                         {% endfor %}
