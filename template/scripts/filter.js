@@ -99,7 +99,7 @@ function getFiltedNodes() {
  * @param {string} nodeIdsList - List of ids from nodes to keep displayed, separeted by comas
  */
 
-function isolate(nodeIdsList) {
+function nodeFocus(nodeIdsList) {
     nodeIdsList = parseIdsString(nodeIdsList);
 
     view.focusMode = false; // for reset
@@ -133,16 +133,30 @@ function isolate(nodeIdsList) {
  * @param {number} focusLevel - Focus level = focus button number - 1
  */
 
-function isolateByView(recordId, focusLevel) {
-    const focusrecord = document.getElementById(recordId)
-        , focusButton = focusrecord.querySelectorAll('[data-focus]')[focusLevel - 1]
+function nodeFocusByView(recordId, focusLevel) {
+    const focusRecord = document.getElementById(recordId)
+        , focusOutput = focusRecord.querySelector('output')
+        , focusRange = focusRecord.querySelector('input[type="range"]');
 
     view.focus = {
         fromRecordId: recordId,
         level: focusLevel
     }
 
-    isolate(focusButton.dataset.focus);
+    focusOutput.value = focusLevel;
+    focusRange.value = focusLevel;
+
+    nodeFocusByDataset(focusRange.dataset);
+}
+
+function nodeFocusByDataset(focusDataset) {
+    let i = 1, data;
+    for (const dataset in focusDataset) {
+        if (i++ === Number(view.focus.level)) {
+            data = focusDataset[dataset]; break;
+        }
+    }
+    nodeFocus(data);
 }
 
 /**

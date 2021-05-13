@@ -220,16 +220,16 @@
                 {% endif %}
 
                 {% if record.radius.length !== 0 %}
-                <div class="record-focus-container" title="Choisir le rayon du mode focus">
-                    <span>mode focus :</span>
+                <form class="record-focus-container">
+                    <span>mode focus : <output name="result">1</output></span>
                     <span>
-                        {% for nodesIds in record.radius %}
-                        <button id="{{ record.id }}-{{ loop.index }}" class="radius-btn" data-focus="{{nodesIds}}"
-                            onclick="isolate(this.dataset.focus);view.focus = { fromRecordId:{{ record.id }}, level:{{ loop.index }} }">
-                            {{ loop.index }}</button>
-                        {% endfor %}
+                        <input type="range" min="1" max="{{ record.radius.length }}" value="1" name="range" step="1"
+                            {% for nodesIds in record.radius %}
+                                data-focus-{{ loop.index }} = "{{nodesIds}}";
+                            {% endfor %}
+                        oninput="result.value = this.value;view.focus = { fromRecordId:{{ record.id }}, level:this.value };nodeFocusByDataset(this.dataset)"/>
                     </span>
-                </div>
+                </form>
                 {% endif %}
             </header>
 

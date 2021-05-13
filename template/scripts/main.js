@@ -111,7 +111,7 @@ document.onkeydown = (e) => {
 
             case 'f':
                 e.preventDefault();
-                isolateByView(view.openedRecordId, 1);
+                nodeFocusByView(view.openedRecordId, 1);
                 return;
 
             case ' ':
