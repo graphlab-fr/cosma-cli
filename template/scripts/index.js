@@ -109,15 +109,3 @@ function displayFromIndex(nodesIds) {
 
     setCounter(document.getElementById('index-counter'), nodesIds.length);
 }
-
- function setCounter(counterElt, value) {
-    let counterNumber = counterElt.textContent.split('/', 2);
-
-    if (counterNumber.length === 1) { // if there is a '/' into counter text content
-        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[0]
-    } else if (Number(counterNumber[0]) + value === Number(counterNumber[1])) {
-        counterElt.textContent = counterNumber[1];
-    } else {
-        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
-    }
-}

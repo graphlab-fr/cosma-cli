@@ -178,6 +178,12 @@ function hideNodes(nodeIds) {
 
 function displayNodes(nodeIds) {
     const nodesToDisplayType = {};
+
+    function addAsDisplayType(itemType) {
+        if (!nodesToDisplayType[itemType]) { nodesToDisplayType[itemType] = 0; }
+        nodesToDisplayType[itemType] += 1;
+    }
+
     let nodesToDisplayIds = [];
 
     index = index.map(function(item) {
@@ -187,16 +193,12 @@ function displayNodes(nodeIds) {
                 if (item.isolated === true) { // … and part of the isolated ones
                     item.hidden = false;
                     nodesToDisplayIds.push(item.id);
-
-                    if (!nodesToDisplayType[item.type]) { nodesToDisplayType[item.type] = 0; }
-                    nodesToDisplayType[item.type] += 1;
+                    addAsDisplayType(item.type);
                 }
             } else {
                 item.hidden = false;
                 nodesToDisplayIds.push(item.id);
-
-                if (!nodesToDisplayType[item.type]) { nodesToDisplayType[item.type] = 0; }
-                    nodesToDisplayType[item.type] += 1;
+                addAsDisplayType(item.type);
             }
         }
         return item;

@@ -97,10 +97,15 @@ function getNodesHideByFilter() {
     return filtersIds;
 }
 
+/**
+ * For each type in list, find the counter and addition his value
+ * @param {object} types - List of types to change, with pos. or neg. number as value
+ */
+
 function setTypesConters(types) {
     for (const typeName in types) {
         const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
-        setCounter(filterLabel.querySelector('.badge'), types[typeName])
+        setCounter(filterLabel.querySelector('.badge'), types[typeName]);
     }
 }
 
