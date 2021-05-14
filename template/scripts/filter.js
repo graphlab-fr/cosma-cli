@@ -12,8 +12,10 @@ function filter(isChecked, nodeIdsList) {
 
     if (isChecked === true) {
         displayNodes(nodeIdsList);
+        setCounter(document.getElementById('types-counter'), 1)
     } else {
         hideNodes(nodeIdsList);
+        setCounter(document.getElementById('types-counter'), -1)
     }
 }
 

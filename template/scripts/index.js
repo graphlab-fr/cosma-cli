@@ -93,7 +93,7 @@ function hideFromIndex(nodesIds) {
             });
     }
 
-    setIndexCounter(-Math.abs(nodesIds.length));
+    setCounter(document.getElementById('index-counter'), -Math.abs(nodesIds.length));
 }
 
 /**
@@ -107,18 +107,17 @@ function displayFromIndex(nodesIds) {
             .style.display = null;
     }
 
-    setIndexCounter(nodesIds.length);
+    setCounter(document.getElementById('index-counter'), nodesIds.length);
 }
 
- function setIndexCounter(value) {
-    const counter = document.getElementById('index-counter');
-    let counterNumber = counter.textContent.split('/', 2);
+ function setCounter(counterElt, value) {
+    let counterNumber = counterElt.textContent.split('/', 2);
 
     if (counterNumber.length === 1) { // if there is a '/' into counter text content
-        counter.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[0]
+        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[0]
     } else if (Number(counterNumber[0]) + value === Number(counterNumber[1])) {
-        counter.textContent = counterNumber[1];
+        counterElt.textContent = counterNumber[1];
     } else {
-        counter.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
+        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
     }
 }
