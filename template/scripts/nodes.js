@@ -135,7 +135,8 @@ function getNodeNetwork(nodeIds) {
  */
 
 function hideNodes(nodeIds) {
-    let nodesToHide = index.filter(function(item) {
+    const nodesToHideType = {};
+    let nodesToHideIds = index.filter(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === false) {
             // return nodes are not yet hidden…
             if (view.focusMode) {
@@ -145,10 +146,17 @@ function hideNodes(nodeIds) {
             }
         }
         return false;
-    }).map(item => item.id);
+    }).map(function(item) {
+        if (!nodesToHideType[item.type]) { nodesToHideType[item.type] = 0; }
+        nodesToHideType[item.type] -= 1;
 
-    hideFromIndex(nodesToHide);
-    const elts = getNodeNetwork(nodesToHide);
+        return item.id;
+    });
+
+    setTypesConters(nodesToHideType);
+
+    hideFromIndex(nodesToHideIds);
+    const elts = getNodeNetwork(nodesToHideIds);
     if (elts.length === 0) { return; }
 
     for (const elt of elts) {
@@ -156,8 +164,8 @@ function hideNodes(nodeIds) {
     }
 
     index = index.map(function(item) {
-        if (nodesToHide.includes(item.id)) {
-            item.hidden = true; // for each nodesToHide
+        if (nodesToHideIds.includes(item.id)) {
+            item.hidden = true; // for each nodesToHideIds
         }
         return item;
     });
@@ -169,26 +177,35 @@ function hideNodes(nodeIds) {
  */
 
 function displayNodes(nodeIds) {
-    let nodesToDisplay = [];
+    const nodesToDisplayType = {};
+    let nodesToDisplayIds = [];
 
     index = index.map(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === true) {
-            // push on nodesToDisplay nodes are not yet displayed…
+            // push on nodesToDisplayIds nodes are not yet displayed…
             if (view.focusMode) {
                 if (item.isolated === true) { // … and part of the isolated ones
                     item.hidden = false;
-                    nodesToDisplay.push(item.id);
+                    nodesToDisplayIds.push(item.id);
+
+                    if (!nodesToDisplayType[item.type]) { nodesToDisplayType[item.type] = 0; }
+                    nodesToDisplayType[item.type] += 1;
                 }
             } else {
                 item.hidden = false;
-                nodesToDisplay.push(item.id);
+                nodesToDisplayIds.push(item.id);
+
+                if (!nodesToDisplayType[item.type]) { nodesToDisplayType[item.type] = 0; }
+                    nodesToDisplayType[item.type] += 1;
             }
         }
         return item;
     });
 
-    displayFromIndex(nodesToDisplay);
-    const elts = getNodeNetwork(nodesToDisplay);
+    setTypesConters(nodesToDisplayType);
+
+    displayFromIndex(nodesToDisplayIds);
+    const elts = getNodeNetwork(nodesToDisplayIds);
     if (elts.length === 0) { return; }
 
     for (const elt of elts) {

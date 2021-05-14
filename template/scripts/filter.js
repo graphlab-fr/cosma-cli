@@ -97,6 +97,13 @@ function getNodesHideByFilter() {
     return filtersIds;
 }
 
+function setTypesConters(types) {
+    for (const typeName in types) {
+        const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
+        setCounter(filterLabel.querySelector('.badge'), types[typeName])
+    }
+}
+
 /**
  * Get nodes ids list from a string list
  * @returns {array} - Ids list (integer value)
