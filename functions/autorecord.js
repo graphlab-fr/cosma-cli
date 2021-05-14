@@ -3,6 +3,8 @@ const fs = require('fs')
     , config = require('./verifconfig').config
     , yamlEditor = require('js-yaml');
 
+config.record_types_list = Object.keys(config.record_types);
+
 /**
  * Generate Mardown record
  * @param {string} title - Record title.
@@ -20,7 +22,7 @@ function genMdFile(title, type, tags) {
 
     if (!type) {
         type = ''
-    } else if (config.record_types_list.indexOf(type) === -1) {
+    } else if (!config.record_types_list.includes(type)) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown type. Add it to config.yml beforehand.');
     }
 
