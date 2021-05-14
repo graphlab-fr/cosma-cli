@@ -92,6 +92,8 @@ function hideFromIndex(nodesIds) {
                 elt.style.display = 'none';
             });
     }
+
+    setIndexCounter(-Math.abs(nodesIds.length));
 }
 
 /**
@@ -103,5 +105,20 @@ function displayFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
         indexContainer.querySelector('[data-index="' + indexItem + '"]')
             .style.display = null;
+    }
+
+    setIndexCounter(nodesIds.length);
+}
+
+ function setIndexCounter(value) {
+    const counter = document.getElementById('index-counter');
+    let counterNumber = counter.textContent.split('/', 2);
+
+    if (counterNumber.length === 1) { // if there is a '/' into counter text content
+        counter.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[0]
+    } else if (Number(counterNumber[0]) + value === Number(counterNumber[1])) {
+        counter.textContent = counterNumber[1];
+    } else {
+        counter.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
     }
 }
