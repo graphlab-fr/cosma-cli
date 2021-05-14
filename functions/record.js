@@ -1,6 +1,7 @@
-const fs = require('fs')
-    , config = require('./verifconfig').config
+const config = require('./verifconfig').config
     , readline = require('readline');
+
+config.record_types_list = Object.keys(config.record_types);
 
 // activate terminal questionnaire
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -22,7 +23,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
     
         metas.type = await new Promise((resolve, reject) => {
             rl.question('type (default = undefined) ? ', (answer) => {
-                if (answer !== '' && config.record_types_list.indexOf(answer) === -1) {
+                if (answer === '' || !config.record_types_list.includes(answer)) {
                     reject('Unknown type. Add it to config.yml beforehand.'); }
 
                 resolve(answer);
