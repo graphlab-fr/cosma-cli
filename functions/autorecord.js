@@ -10,6 +10,9 @@ const fs = require('fs')
  * @param {string} tags - Record tags, seperated by comas witout spaces.
  */
 
+config.record_types_list = Object.keys(config.record_types);
+config.link_types_list = Object.keys(config.link_types);
+
 function genMdFile(title, type, tags) {
 
     if (!title) {

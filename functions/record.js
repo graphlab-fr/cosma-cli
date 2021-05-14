@@ -5,6 +5,9 @@ const fs = require('fs')
 // activate terminal questionnaire
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
+config.record_types_list = Object.keys(config.record_types);
+config.link_types_list = Object.keys(config.link_types);
+
 (async () => {
     let metas = {};
 
