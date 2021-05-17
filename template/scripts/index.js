@@ -92,6 +92,8 @@ function hideFromIndex(nodesIds) {
                 elt.style.display = 'none';
             });
     }
+
+    setCounter(document.getElementById('index-counter'), -Math.abs(nodesIds.length));
 }
 
 /**
@@ -104,4 +106,6 @@ function displayFromIndex(nodesIds) {
         indexContainer.querySelector('[data-index="' + indexItem + '"]')
             .style.display = null;
     }
+
+    setCounter(document.getElementById('index-counter'), nodesIds.length);
 }

@@ -129,6 +129,24 @@ document.onkeydown = (e) => {
 };
 
 /**
+ * Change counter display
+ * @param {HTMLElement} counterElt - Elt with the original number
+ * @param {number} value - Number neg. or pos. addition to original number to get the new count
+ */
+
+ function setCounter(counterElt, value) {
+    let counterNumber = counterElt.textContent.split('/', 2);
+
+    if (counterNumber.length === 1) { // if there is a '/' into counter text content
+        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[0]
+    } else if (Number(counterNumber[0]) + value === Number(counterNumber[1])) {
+        counterElt.textContent = counterNumber[1];
+    } else {
+        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
+    }
+}
+
+/**
  * Cosma logo animation onclick
  */
 

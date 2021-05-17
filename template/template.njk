@@ -53,7 +53,7 @@
 
         <details class="menu-types" open="open">
             <summary class="menu-title">
-                Types <span class="badge">{{ types | length }}</span>
+                Types <span id="types-counter" class="badge">{{ types | length }}</span>
             </summary>
 
             <ul class="menu-types-list">
@@ -98,7 +98,7 @@
 
         <details class="menu-index" id="index" data-sort="record">
             <summary class="menu-title">
-                Index <span class="badge">{{ records | length }}</span>
+                Index <span id="index-counter" class="badge">{{ records | length }}</span>
             </summary>
 
             <button class="menu-index-btn sort-btn">A-Z</button>
