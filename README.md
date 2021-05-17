@@ -4,6 +4,8 @@ Cosma est un logiciel de visualisation de graphe documentaire. Il permet d’enr
 
 **Manuel d'utilisation et documentation pour développeurs :** https://hyperotlet.github.io/cosma/
 
+## Présentation rapide
+
 Cosma obéit à quatre grandes orientations :
 
 1. Les normes d'écriture utilisées sont interopérables (Markdown, YAML, liens wiki). Elles mettent en œuvre des techniques documentaires robustes et extensibles (identifiants uniques, catégorisation des nœuds, qualification des liens, mots-clés).
@@ -16,7 +18,7 @@ Le format des données utilisées par Cosma le rend compatible de manière privi
 
 Cosma est basé sur [NodeJS](https://nodejs.org/fr/) (version 12 ou supérieure). La configuration se fait via un fichier YAML. L'utilisation se fait en ligne de commande. Une interface graphique sera développée prochainement pour Windows. Un prototype d'interface graphique est [disponible pour macOS](https://github.com/hyperotlet/cosma-macos) ; c'est une preuve de concept qui nécessite d'être modifiée avec Xcode pour être adaptée à l'installation de chaque utilisateur.
 
-# Mémo : mise à jour de la documentation
+## Mémo : comment mettre à jour la documentation
 
 La documentation utilise les outils suivants :
 
