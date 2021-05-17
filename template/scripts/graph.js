@@ -100,6 +100,12 @@ function initializeDisplay() {
         .enter().append("g")
         .attr("data-node", (d) => d.id)
         .on('click', function(nodeMetas) {
+            if (pressedKeys['Control'] === true) {
+                var selec = new Selection(nodeMetas.label, nodeMetas.id);
+                selec.integrate();
+                return;
+            }
+
             openRecord(nodeMetas.id);
         })
 

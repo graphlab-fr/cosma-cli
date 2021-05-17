@@ -140,6 +140,14 @@
             {% endif %}
         </details>
 
+        <details class="menu-selection" open="open">
+            <summary class="menu-title">
+                Sélection <span class="badge"></span>
+            </summary>
+
+            <div></div>
+        </details>
+
         <details class="menu-controls">
             <summary class="menu-title">Paramètres du graphe</summary>
 
@@ -351,7 +359,6 @@
                 <button onclick="zoomMore()">+</button>
             </div>
             <button onclick="zoomReset()">Recentrer (R)</button>
-            <button id="reset-highlight" style="display: none;" onclick="unlightNodes();unactiveTagsButton()">Annuler surbrillance</button>
         </div>
     </div>
 
@@ -376,6 +383,7 @@
         {% include "scripts/index.js" %}
         {% include "scripts/record.js" %}
         {% include "scripts/view.js" %}
+        {% include "scripts/selection.js" %}
     </script>
 </body>
 

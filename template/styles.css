@@ -53,6 +53,18 @@ button {
 	font-size: 1.3rem;
 }
 
+button.close {
+	position: relative;
+    font-size: 0;
+    border: 0;
+    padding: 0;
+}
+button.close::after {
+	content: 'x';
+	position: absolute;
+	font-size: 1rem;
+}
+
 .btn {
 	background-color: transparent;
 	border: 1px solid var(--gray);
@@ -208,6 +220,32 @@ aside.menu {
 .menu-controls input[type="number"] {
 	width: 7rem;
 	margin-left: 1rem;
+}
+
+/* ---
+- Selections
+--- */
+
+.menu-selection:not(.active) { display: none; }
+
+.menu-selection fieldset { position: relative; }
+
+.menu-selection fieldset + fieldset { margin-top: 0.8rem; }
+
+.menu-selection fieldset button.close {
+	position: absolute;
+	top: 0px;
+	right: 20px;
+}
+
+.menu-selection fieldset div + div,
+.menu-selection fieldset label + label {
+	margin-top: 0.8rem;
+}
+
+.menu-selection fieldset label {
+	display: block;
+	margin-left: 0.8rem;
 }
 
 /* ---

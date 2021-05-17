@@ -7,6 +7,12 @@ const view = {
          */
         highlightedNodes: [],
         /**
+         * Map of selected nodes
+         * @type {array}
+         * @default
+         */
+        selectedNodes: [],
+        /**
          * If the focus mode is activated
          * @type {boolean}
          * @default
@@ -94,6 +100,8 @@ window.onpopstate = function(e) {
  * Keyboard shortcuts
  */
 
+const pressedKeys = {};
+
 document.onkeydown = (e) => {
 
     if (keyboardShortcutsAreWorking) {
@@ -125,8 +133,19 @@ document.onkeydown = (e) => {
         case 'Escape':
             closeRecord();
             return;
+        case 'Control':
+            pressedKeys[e.key] = true;
+            return;
     }
 };
+
+window.onkeyup = function(e) {
+    switch (e.key) {
+        case 'Control':
+            pressedKeys[e.key] = false;
+            return;
+    }
+}
 
 /**
  * Change counter display

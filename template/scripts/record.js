@@ -33,6 +33,11 @@ function openRecord(id, history = true) {
         // page's <title> become record's name
         const recordTitle = recordContent.querySelector('h1').textContent;
         historique.actualiser(id, recordTitle);
+        // add to Selection menu
+        Selection.clear();
+        var selec = new Selection(recordTitle, id);
+        selec.isHighlighted = true;
+        selec.integrate();
     }
 
 }

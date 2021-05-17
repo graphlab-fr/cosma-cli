@@ -1,7 +1,5 @@
-const resetHighlightBtn = document.getElementById('reset-highlight'); // anti highlightNodes() function btn
-
 /**
- * Apply highlightColor (from config) to somes nodes and their links
+ * Apply highlighting to somes nodes and their links
  * @param {array} nodeIds - List of nodes ids
  */
 
@@ -14,11 +12,28 @@ function highlightNodes(nodeIds) {
         elt.classList.add('highlight'); }
 
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
-    resetHighlightBtn.style.display = 'block';
 }
 
 /**
- * remove highlightColor (from config) from all highlighted nodes and their links
+ * Remove highlighting for one node and its links
+ * @param {number} nodeId - Id of the node
+ */
+
+function unlightNode(nodeId) {
+    if (view.highlightedNodes.length === 0) { return; }
+
+    let elts = getNodeNetwork([nodeId]);
+    if (elts.length === 0) { return; }
+
+    for (const elt of elts) {
+        elt.classList.remove('highlight'); }
+
+    view.highlightedNodes = view.highlightedNodes
+        .filter(highlightedNodeId => highlightedNodeId !== nodeId);
+}
+
+/**
+ * Remove highlighting from all highlighted nodes and their links
  */
 
 function unlightNodes() {
@@ -37,7 +52,6 @@ function unlightNodes() {
     }
 
     view.highlightedNodes = [];
-    resetHighlightBtn.style = null;
 }
 
 /**
