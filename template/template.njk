@@ -41,13 +41,13 @@
                 {% include "cosmalogo.svg" %}
             </div>
 
-            <div class="load-bar", onclick="updateForces()">
+            <div class="load-bar" onclick="updateForces()" title="Spatialisation (Espace)">
                 <div id="load-bar-value"></div>
             </div>
         </header>
 
         <section>
-            <input class="search-bar" id="search" placeholder="Rechercher…" autocomplete="off" role="search" />
+            <input class="search-bar" id="search" placeholder="Rechercher… (S)" autocomplete="off" role="search" />
             <ul id="search-result-list"></ul>
         </section>
 
@@ -194,7 +194,7 @@
     ========================================= #}
 
     <main id="record-container" class="record-container">
-        <button class="record-btn-close" onclick="closeRecord()">Fermer</button>
+        <button class="record-btn-close" onclick="closeRecord()">Fermer (Echap)</button>
 
         {% for record in records %}
         <article id="{{ record.id }}" class="record">
@@ -228,7 +228,7 @@
                     <span>mode focus :
                         <label>
                             <input type="checkbox" name="checkbox" onchange="checkFocus(this, range, output, {{record.id}})">
-                            Activer le focus
+                            Activer le focus (F)
                         </label>
                     </span>
                     <div class="record-focus-lever">
@@ -350,7 +350,7 @@
                 <button onclick="zoomLess()">-</button>
                 <button onclick="zoomMore()">+</button>
             </div>
-            <button onclick="zoomReset()">Recentrer</button>
+            <button onclick="zoomReset()">Recentrer (R)</button>
             <button id="reset-highlight" style="display: none;" onclick="unlightNodes();unactiveTagsButton()">Annuler surbrillance</button>
         </div>
     </div>
