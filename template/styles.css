@@ -12,6 +12,7 @@
 	--sans: sans-serif;
 	--serif: "Georgia", serif;
 	--mono: monospace;
+	--condensed: 'Arial Condensed';
 
 	font-size: 62.5%;
 }
@@ -407,8 +408,21 @@ main.record-container:not(.active) {
 /* nodes */
 circle, text { cursor: pointer; }
 circle:hover { stroke: yellow; }
+g.highlight circle {
+	stroke: var(--highlight);
+    fill: var(--highlight);
+}
+/* links */
+line.highlight { stroke: var(--highlight); }
 /* labels */
-text { fill: gray; }
+text {
+	font-family: var(--condensed);
+	fill: gray;
+}
+g.highlight text {
+	fill: var(--highlight);
+	filter: brightness(0.4);
+}
 /* arrows */
 marker {
 	/* set into config.yml file by 'undefined' link type */

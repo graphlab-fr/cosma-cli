@@ -10,7 +10,7 @@ const baseConfig = {
     export_target: '',
     focus_max: 2,
     record_types: { undefined: 'grey' },
-    link_types: { undefined: { stroke: 'simple', color: 'grey' } },
+    link_types: { undefined: { stroke: 'simple', color: 'rgb(225, 225, 225)' } },
     graph_config: {
         background_color: 'white',
         highlight_color: 'red',
