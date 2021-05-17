@@ -5,9 +5,10 @@ const selectionMenu = document.querySelector('.menu-selection')
 class Selection {
 
     constructor(title, id) {
-        this.id = id;
+        this.id = Number(id);
         this.title = title;
         this.isHighlighted = false;
+        this.focusLevel = false;
         this.container = document.createElement('fieldset');
         this.header = document.createElement('legend');
         this.highlightCheckbox = document.createElement('input');
@@ -46,6 +47,8 @@ class Selection {
             if (selectedNode.id === this.id) { return; }
         }
 
+        let nodeMetas = graph.nodes.find(i => i.id == this.id);
+
         this.header.textContent = this.title;
         this.container.appendChild(this.header);
 
@@ -76,11 +79,25 @@ class Selection {
             }
         });
 
-        // const focusLabel = document.createElement('label');
-        // focusLabel.textContent = 'Focus';
-        // focusLabel.appendChild(this.focusCheckbox);
-        // this.focusCheckbox.setAttribute('type', 'range');
-        // inputContainer.appendChild(focusLabel);
+        const focusLabel = document.createElement('label');
+        focusLabel.textContent = 'Focus';
+        focusLabel.appendChild(this.focusCheckbox);
+        this.focusCheckbox.setAttribute('type', 'range');
+        this.focusCheckbox.setAttribute('value', 1);
+        this.focusCheckbox.setAttribute('min', 1);
+        this.focusCheckbox.setAttribute('max', nodeMetas.focus.length);
+        inputContainer.appendChild(focusLabel);
+
+        this.focusCheckbox.addEventListener('change', () => {
+
+            if (this.focusCheckbox.value == 1) {
+                this.focusLevel = false;
+            } else {
+                this.focusLevel = this.focusCheckbox.value;
+            }
+
+            focusSelection();
+        });
 
         selectionList.appendChild(this.container);
         

@@ -230,26 +230,6 @@
                     <span>{{ record.tags }}</span>
                 </div>
                 {% endif %}
-
-                {% if record.radius.length !== 0 %}
-                <form class="record-focus-container">
-                    <span>mode focus :
-                        <label>
-                            <input type="checkbox" name="checkbox" onchange="checkFocus(this, range, output, {{record.id}})">
-                            Activer le focus (F)
-                        </label>
-                    </span>
-                    <div class="record-focus-lever">
-                        <input type="range" min="0" max="{{ record.radius.length }}" value="0" name="range" step="1"
-                            {% for nodesIds in record.radius %}
-                                data-focus-{{ loop.index }} = "{{nodesIds}}";
-                            {% endfor %}
-                        oninput="rangeFocus(this, checkbox, output, {{record.id}})"/>
-
-                        <output name="output"></output>
-                    </div>
-                </form>
-                {% endif %}
             </header>
 
             <main class="record-content">{{ record.content | safe }}</main>

@@ -78,8 +78,7 @@ function cosmoscope(files, entities, path) {
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content), // Mardown to HTML
                 links: file.links,
-                backlinks: file.backlinks,
-                radius: ((file.focusLevels === null) ? [] : levelsToRadius(file.focusLevels))
+                backlinks: file.backlinks
             }
         }).sort(function (a, b) { return a.title.localeCompare(b.title); }),
 
@@ -163,18 +162,4 @@ function registerTags(fileTagList, fileId) {
         // push the file id into associate object key
         tags[tag].push(fileId);
     }
-}
-
-/**
- * Combining levels down to get radius fields
- * @param {array} levels - Array contain one array per level
- * @returns {array} - Array contain radius fields
- */
-
-function levelsToRadius(levels) {
-    for (let i = 1; i < levels.length; i++) {
-        // take previous array and concat it with the actual
-        levels[i] = levels[i].concat(levels[i - 1]);
-    }
-    return levels = levels.slice(1); // ignore first level, uncombined
 }

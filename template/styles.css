@@ -296,23 +296,17 @@ main.record-container:not(.active) {
 	border-bottom: 1px solid black;
 }
 
-.record header div + div,
-.record-focus-container {
+.record header div + div {
 	margin-top: 0.8rem;
 }
 
-.record header div span:first-of-type, 
-.record-focus-container > span {
+.record header div span:first-of-type {
 	font-size: 1.6rem;
 	font-family: var(--mono);
 	margin-right: 0.8rem;
 }
 
 .record-last-edit { display: none; }
-
-.record-focus-lever { display: none; }
-
-.record-focus-lever input { width: 80%; }
 
 /* ---
 - Record content

@@ -5,7 +5,7 @@
  */
 
  function nodeFocus(nodeIdsList) {
-    nodeIdsList = parseIdsString(nodeIdsList);
+    // nodeIdsList = parseIdsString(nodeIdsList);
 
     view.focusMode = false; // for reset
 
@@ -162,4 +162,25 @@ function rangeFocus(range, checkbox, output, recordId) {
     displayNodes(idsToDisplay);
 
     unactiveFromParent(document.getElementById('views-container'));
+}
+
+function focusSelection() {
+    const selections = view.selectedNodes
+        .filter(select => select.focusLevel !== false);
+
+    if (selections.length === 0) { return resetFocus(); }
+
+    let toFocus = [];
+
+    for (const selec of selections) {
+        let selecLevels = graph.nodes.find(i => i.id == selec.id).focus;
+        selecLevels = selecLevels.slice(0, selec.focusLevel - 1)
+        selecLevels.push([selec.id]);
+        selecLevels = selecLevels.flat();
+        toFocus.push(selecLevels);
+    }
+
+    toFocus = toFocus.flat();
+
+    nodeFocus(toFocus);
 }

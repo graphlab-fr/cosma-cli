@@ -37,7 +37,6 @@
 	- Record header
 	--- */
 
-	.record-focus-container,
 	.record-btn-close {
 		display: none;
 	}
