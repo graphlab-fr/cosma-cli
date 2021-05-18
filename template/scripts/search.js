@@ -97,11 +97,11 @@ function keyboardResultNavigation(e) {
 }
 
 function activeOutline(elt) {
-    elt.style.outline = 'var(--cosma-blue) solid 1px';
+    elt.classList.add('outline');
 }
 
 function removeOutlineElt(elt) {
-    elt.style.outline = null;
+    elt.classList.remove('outline');
 }
 
 })();

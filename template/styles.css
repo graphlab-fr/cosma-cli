@@ -107,6 +107,10 @@ summary + button { margin: 1rem 0; }
 - Inputs
 --- */
 
+.outline, input:focus {
+	outline: var(--cosma-blue) solid 2px;
+}
+
 label {
 	cursor: pointer;
 	font-family: var(--sans);
