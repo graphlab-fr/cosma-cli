@@ -230,6 +230,8 @@ aside.menu {
 
 .menu-selection fieldset { position: relative; }
 
+.menu-selection fieldset legend { margin-bottom: 0.8rem; }
+
 .menu-selection fieldset + fieldset { margin-top: 0.8rem; }
 
 .menu-selection fieldset button.close {

@@ -2,6 +2,11 @@ const selectionMenu = document.querySelector('.menu-selection')
     , selectionList = selectionMenu.querySelector('div')
     , selectionCounter = selectionMenu.querySelector('.badge');
 
+/**
+ * Manage display of selected nodes
+ * A node is selected from openRecord() and at click on node
+ */
+
 class Selection {
 
     constructor(title, id) {
@@ -9,36 +14,62 @@ class Selection {
         this.title = title;
         this.isHighlighted = false;
         this.focusLevel = false;
+        // selection container into menu
         this.container = document.createElement('fieldset');
+        // selection title into menu
         this.header = document.createElement('legend');
         this.highlightCheckbox = document.createElement('input');
-        this.focusCheckbox = document.createElement('input');
+        this.focusRange = document.createElement('input');
     }
+
+    /**
+     * Empty selection lists, virtual and display
+     */
 
     static clear() {
         selectionList.innerHTML = '';
         view.selectedNodes = [];
+
+        Selection.count();
     }
 
-    static openMenu() {
+    /**
+     * Display selections list
+     */
+
+    static displayMenu() {
         selectionMenu.classList.add('active');
     }
 
-    static closeMenu() {
+    /**
+     * Hide selections list
+     */
+
+    static hideMenu() {
         selectionMenu.classList.remove('active');
     }
+    
+    /**
+     * Actualise number of selections
+     * If there is no selection : hide selection menu and cancel focus
+     */
 
-    static amountCounter() {
+    static count() {
         selectionCounter.textContent = view.selectedNodes.length;
 
         if (view.selectedNodes.length === 0) {
-            Selection.closeMenu();
+            Selection.hideMenu();
+            focusSelection();
         }
 
-        if (view.selectedNodes.length <= 1) {
-            Selection.openMenu();
+        if (view.selectedNodes.length === 1) {
+            Selection.displayMenu();
         }
     }
+
+    /**
+     * Add display into menu for the selection
+     */
 
     integrate() {
 
@@ -47,29 +78,40 @@ class Selection {
             if (selectedNode.id === this.id) { return; }
         }
 
-        let nodeMetas = graph.nodes.find(i => i.id == this.id);
+        /**
+         * HEADER
+         */
 
         this.header.textContent = this.title;
-        this.container.appendChild(this.header);
 
         const closeBtn = document.createElement('button');
         closeBtn.textContent = 'Fermer';
         closeBtn.classList.add('close');
-        this.container.appendChild(closeBtn);
 
         closeBtn.addEventListener('click', (e) => {
             this.delete();
         });
 
+        this.container.appendChild(this.header);
+        this.container.appendChild(closeBtn);
+
+        /**
+         * INPUTS
+         */
+
         const inputContainer = document.createElement('div');
-        this.container.appendChild(inputContainer);
+
+        /**
+         * highlight
+         */
 
         const highlightLabel = document.createElement('label');
         highlightLabel.textContent = 'Surbrillance';
-        highlightLabel.insertBefore(this.highlightCheckbox, highlightLabel.firstChild);
+        
         this.highlightCheckbox.setAttribute('type', 'checkbox');
         this.highlightCheckbox.checked = this.isHighlighted;
-        inputContainer.appendChild(highlightLabel);
+        
+        highlightLabel.insertBefore(this.highlightCheckbox, highlightLabel.firstChild);
 
         this.highlightCheckbox.addEventListener('change', () => {
             if (this.highlightCheckbox.checked) {
@@ -79,32 +121,62 @@ class Selection {
             }
         });
 
+        /**
+         * focus
+         */
+
+        // get levels of focus for the selection from node database
+        let selecLevels = graph.nodes.find(i => i.id == this.id).focus;
+
         const focusLabel = document.createElement('label');
         focusLabel.textContent = 'Focus';
-        focusLabel.appendChild(this.focusCheckbox);
-        this.focusCheckbox.setAttribute('type', 'range');
-        this.focusCheckbox.setAttribute('value', 1);
-        this.focusCheckbox.setAttribute('min', 1);
-        this.focusCheckbox.setAttribute('max', nodeMetas.focus.length);
-        inputContainer.appendChild(focusLabel);
+        
+        const focusBadge = document.createElement('span');
+        focusBadge.classList.add('badge');
+        focusBadge.textContent = '/' + selecLevels.length;
+        focusLabel.appendChild(focusBadge);
+        
+        const focusOutput = document.createElement('output');
+        focusOutput.textContent = 0;
 
-        this.focusCheckbox.addEventListener('change', () => {
+        this.focusRange.setAttribute('type', 'range');
+        this.focusRange.setAttribute('value', 0);
+        this.focusRange.setAttribute('min', 0);
+        this.focusRange.setAttribute('max', selecLevels.length);
 
-            if (this.focusCheckbox.value == 1) {
+        focusBadge.appendChild(focusOutput);
+        focusLabel.appendChild(this.focusRange);
+        focusBadge.insertBefore(focusOutput, focusBadge.firstChild);
+
+        this.focusRange.addEventListener('change', () => {
+
+            focusOutput.textContent = this.focusRange.value;
+
+            if (this.focusRange.value == 0) {
                 this.focusLevel = false;
             } else {
-                this.focusLevel = this.focusCheckbox.value;
+                this.focusLevel = this.focusRange.value;
             }
 
             focusSelection();
         });
 
-        selectionList.appendChild(this.container);
         
+        inputContainer.appendChild(focusLabel);
+        inputContainer.appendChild(highlightLabel);
+
+        this.container.appendChild(inputContainer);
+        selectionList.appendChild(this.container);
+
+        // keep object into global view
         view.selectedNodes.push(this);
 
-        Selection.amountCounter();
+        Selection.count();
     }
+
+    /**
+     * Remove display from menu for the selection
+     */
 
     delete() {
         this.container.remove();
@@ -114,7 +186,6 @@ class Selection {
         view.selectedNodes = view.selectedNodes
             .filter(selectedNode => selectedNode.id !== this.id);
 
-        Selection.amountCounter();
+        Selection.count();
     }
-    
 }

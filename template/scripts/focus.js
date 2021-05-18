@@ -164,6 +164,11 @@ function rangeFocus(range, checkbox, output, recordId) {
     unactiveFromParent(document.getElementById('views-container'));
 }
 
+/**
+ * Get selections, their focus level targeted and their focus levels ids
+ * for each selection set a focus from the level targeted
+ */
+
 function focusSelection() {
     const selections = view.selectedNodes
         .filter(select => select.focusLevel !== false);
@@ -173,14 +178,19 @@ function focusSelection() {
     let toFocus = [];
 
     for (const selec of selections) {
+        // get levels of focus for the selection from node database
         let selecLevels = graph.nodes.find(i => i.id == selec.id).focus;
-        selecLevels = selecLevels.slice(0, selec.focusLevel - 1)
+        // cut the array to keep the targeted level and others before
+        selecLevels = selecLevels.slice(0, selec.focusLevel);
+        // add the node id as a level
         selecLevels.push([selec.id]);
+        // merge all levels as one focus
         selecLevels = selecLevels.flat();
+        // stock the focus from the selection
         toFocus.push(selecLevels);
     }
 
-    toFocus = toFocus.flat();
+    toFocus = toFocus.flat(); // merge all selec focus as one final focus
 
     nodeFocus(toFocus);
 }
