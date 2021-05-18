@@ -91,6 +91,7 @@ function keyboardResultNavigation(e) {
         case 'Enter':
             e.preventDefault();
             openRecord(resultList[selectedResult].item.id);
+            searchInput.blur();
             break;
     }
 }
