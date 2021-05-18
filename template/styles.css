@@ -243,11 +243,7 @@ aside.menu {
 .menu-selection fieldset div + div,
 .menu-selection fieldset label + label {
 	margin-top: 0.8rem;
-}
-
-.menu-selection fieldset label {
-	display: block;
-	margin-left: 0.8rem;
+	display: inline-block;
 }
 
 /* ---
