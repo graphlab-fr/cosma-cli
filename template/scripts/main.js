@@ -113,7 +113,12 @@ window.onpopstate = function(e) {
 
             case 'f':
                 e.preventDefault();
-                nodeFocusByView(view.openedRecordId, 1);
+
+                if (focus.isActive) {
+                    focus.disable();
+                } else {
+                    focus.display();
+                }
                 return;
 
             case ' ':

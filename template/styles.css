@@ -412,7 +412,7 @@ main.record-container:not(.active) {
 /* nodes */
 circle, text { cursor: pointer; }
 circle:hover { stroke: yellow; }
-g.highlight circle {
+g.highlight circle, g.focus circle {
 	stroke: var(--highlight);
     fill: var(--highlight);
 }
@@ -442,14 +442,24 @@ marker {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	left: 20px;
-	bottom: 20px;
+	left: 30px;
+	bottom: 15px;
 	flex-wrap: wrap;
+	width: 16rem;
 }
 
-.graph-controls div {
+.graph-controls div.graph-controls-zoom {
 	display: flex;
 	justify-content: space-between;
+}
+
+.graph-controls-focus label {
+	display: inline-block;
+	margin: 0.8rem;
+}
+
+.graph-controls-focus input[type="range"]:not(.active) {
+	visibility: hidden;
 }
 
 .graph-controls #reset-isolate { display: none; }

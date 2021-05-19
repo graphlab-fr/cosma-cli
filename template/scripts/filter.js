@@ -1,6 +1,3 @@
-let filtersNames = Array.from(document.querySelectorAll('[data-filter]'))
-    .map(filter => filter.name);
-
 /**
  * Toggle filter from his checkbox or manually
  * @param {bool} isChecked - Checkbox boolean : checked or not
@@ -36,6 +33,9 @@ function filter(isChecked, nodeIdsList, input = undefined) {
  */
 
 function setFilters(filtersNamesToActivate) {
+    let filtersNames = Array.from(document.querySelectorAll('[data-filter]'))
+        .map(filter => filter.name);
+
     let filtersToUnactivate = filtersNames.filter(function(filterName) {
         if (filtersNamesToActivate.includes(filterName)) {
             return false; }
@@ -116,14 +116,7 @@ function setTypesConters(types) {
     for (const typeName in types) {
         const number = types[typeName];
         const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
-        const isMax = setCounter(filterLabel.querySelector('.badge'), number);
-        
-        
-        if (isMax) {
-            setCounter(document.getElementById('types-counter'), 1)
-        } else {
-            setCounter(document.getElementById('types-counter'), -1)
-        }
+        setCounter(filterLabel.querySelector('.badge'), number);
     }
 }
 

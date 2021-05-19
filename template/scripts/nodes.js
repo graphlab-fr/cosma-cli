@@ -1,5 +1,3 @@
-const resetHighlightBtn = document.getElementById('reset-highlight'); // anti highlightNodes() function btn
-
 /**
  * Apply highlightColor (from config) to somes nodes and their links
  * @param {array} nodeIds - List of nodes ids
@@ -14,7 +12,6 @@ function highlightNodes(nodeIds) {
         elt.classList.add('highlight'); }
 
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
-    resetHighlightBtn.style.display = 'block';
 }
 
 /**
@@ -37,7 +34,6 @@ function unlightNodes() {
     }
 
     view.highlightedNodes = [];
-    resetHighlightBtn.style = null;
 }
 
 /**
