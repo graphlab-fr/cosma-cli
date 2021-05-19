@@ -4,17 +4,11 @@
  * @param {string} nodeIdsList - List of node ids, separeted by comas
  */
 
-function filter(isChecked, nodeIdsList, input = undefined) {
+ function filter(isChecked, nodeIdsList, name = undefined) {
 
-    if (input !== undefined && pressedKeys.Alt) {
-
-        if (isChecked === false) {
-            setFilters(getUnactiveFilterNames());
-            input.checked = true; isChecked = true;
-        } else {
-            setFilters([input.name]);
-            isChecked = true;
-        }
+    if (name && pressedKeys.Alt) {
+        setFilters([name]);
+        return;
     }
 
     nodeIdsList = parseIdsString(nodeIdsList);
