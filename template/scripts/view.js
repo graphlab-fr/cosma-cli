@@ -50,6 +50,7 @@ function changeView(key) {
         setFilters(key.filters); }
     
     if (key.focus) {
-        nodeFocusByView(key.focus.fromRecordId, key.focus.level);
+        focus.init(key.focus.fromRecordId);
+        focus.set(key.focus.level);
     }
 }

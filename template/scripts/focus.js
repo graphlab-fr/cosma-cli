@@ -37,39 +37,39 @@ const focus = {
     focusedNodeId: undefined,
     focusedNode: undefined,
     levels: [],
-    display : function() {
-        // displaying
-        this.checkbox.checked = true;
-        this.range.classList.add('active');
-        this.range.value = 1;
+    init : function(focusedNodeId = view.openedRecordId) {
+        if (focusedNodeId === undefined) { return; }
+
+        this.focusedNodeId = Number(focusedNodeId);
+
+        this.display();
         // get infos about the focused node
-        focusedNodeId = Number(view.openedRecordId);
-        focusedNode = document.querySelector('[data-node="' + focusedNodeId + '"]');
-        focusedNode.classList.add('focus');
+        this.focusedNode = document.querySelector('[data-node="' + this.focusedNodeId + '"]');
+        this.focusedNode.classList.add('focus');
         // get focus levels and limit it
-        this.levels = graph.nodes.find(i => i.id === focusedNodeId).focus;
+        this.levels = graph.nodes.find(i => i.id === this.focusedNodeId).focus;
         this.range.setAttribute('max', this.levels.length)
         // launch use
         this.range.focus();
         this.set(1);
+    },
+    display: function() {
+        this.checkbox.checked = true;
+        this.range.classList.add('active');
+        this.range.value = 1;
     },
     hide : function() {
         // displaying
         this.checkbox.checked = false;
         this.range.classList.remove('active');
         this.range.value = 1;
-        // throw infos about the focuse
-        focusedNode.classList.remove('focus');
-        focusedNode = undefined;
-        focusedNodeId = undefined;
-        levels = [];
     },
     set: function(level) {
         this.isActive = true;
 
         // cut the levels array to keep the targeted level and others before
         level = this.levels.slice(0, level);
-        level.push([focusedNodeId]); // add the node id as a level
+        level.push([this.focusedNodeId]); // add the node id as a level
         level = level.flat(); // merge all levels as one focus
 
         nodeFocus(level);
@@ -79,12 +79,18 @@ const focus = {
 
         this.hide();
         resetFocus();
+
+        // throw infos about the focuse
+        focusedNode.classList.remove('focus');
+        focusedNode = undefined;
+        focusedNodeId = undefined;
+        levels = [];
     }
 }
 
 focus.checkbox.addEventListener('change', () => {
     if (focus.checkbox.checked == true) {
-        focus.display();
+        focus.init();
     } else {
         focus.disable();
     }

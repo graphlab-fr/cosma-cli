@@ -117,7 +117,7 @@ window.onpopstate = function(e) {
                 if (focus.isActive) {
                     focus.disable();
                 } else {
-                    focus.display();
+                    focus.init();
                 }
                 return;
 
