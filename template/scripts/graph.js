@@ -190,7 +190,7 @@ function initializeDisplay() {
  * Update elements position
  */
 
-function ticked() {
+ function ticked() {
     link.attr("x1", (d) => d.source.x)
         .attr("y1", (d) => d.source.y)
         .attr("x2", (d) => d.target.x)
@@ -202,5 +202,99 @@ function ticked() {
 
     d3.select('#load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }
+
+/**
+ * Get nodes and their links
+ * @param {array} nodeIds - List of nodes ids
+ * @returns {array} - DOM elts : nodes and their links
+ */
+
+function getNodeNetwork(nodeIds) {
+    const nodes = node.filter(function(node) {
+        if (nodeIds.includes(node.id)) {
+            return true;
+        }
+        return false
+    })
+
+    const links = link.filter(function(link) {
+        if (nodeIds.includes(link.source.id) || nodeIds.includes(link.target.id)) {
+            return true;
+        }
+        return false;
+    })
+
+    return {
+        nodes: nodes,
+        links: links
+    }
+}
+
+/**
+ * Display none nodes and their link
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function hideNodeNetwork(nodeIds) {
+    const ntw = getNodeNetwork(nodeIds);
+
+    ntw.nodes.style('display', 'none');
+    ntw.links.style('display', 'none');
+}
+
+window.hideNodeNetwork = hideNodeNetwork;
+
+/**
+ * Reset display nodes and their link
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function displayNodeNetwork(nodeIds) {
+    const ntw = getNodeNetwork(nodeIds);
+
+    ntw.nodes.style('display', null);
+    ntw.links.style('display', null);
+}
+
+window.displayNodeNetwork = displayNodeNetwork;
+
+/**
+ * Apply highlightColor (from config) to somes nodes and their links
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+function highlightNodes(nodeIds) {
+    const ntw = getNodeNetwork(nodeIds);
+
+    ntw.nodes.attr('class', 'highlight');
+    ntw.links.attr('class', 'highlight');
+
+    view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
+}
+
+window.highlightNodes = highlightNodes;
+
+/**
+ * remove highlightColor from all highlighted nodes and their links
+ */
+
+function unlightNodes() {
+    if (view.highlightedNodes.length === 0) { return; }
+
+    const ntw = getNodeNetwork(view.highlightedNodes);
+
+    ntw.nodes.attr('class', null);
+    ntw.links.attr('class', null);
+
+    if (view.activeTag !== undefined) {
+        // if there is an active tag, remove the highlight of its button
+        document.querySelectorAll('[data-tag="' + view.activeTag + '"]')
+            .forEach(button => { button.classList.remove('active'); });
+    }
+
+    view.highlightedNodes = [];
+}
+
+window.unlightNodes = unlightNodes;
 
 })();
