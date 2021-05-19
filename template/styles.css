@@ -411,7 +411,6 @@ main.record-container:not(.active) {
 
 /* nodes */
 circle, text { cursor: pointer; }
-circle:hover { stroke: yellow; }
 g.highlight circle, g.focus circle {
 	stroke: var(--highlight);
     fill: var(--highlight);

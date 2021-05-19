@@ -118,7 +118,28 @@ function initializeDisplay() {
                     if (!d3.event.active) simulation.alphaTarget(0.0001);
                     d.fx = null;
                     d.fy = null; })
-        );
+        )
+        .on('mouseover', function(nodeMetas) {
+            const nodesToModif = node.filter(function(node) {
+                if (node.id === nodeMetas.id) {
+                    return false;
+                }
+                return true;
+            })
+            const linksToModif = link.filter(function(link) {
+                if (link.source.id === nodeMetas.id || link.target.id === nodeMetas.id) {
+                    return false;
+                }
+                return true;
+            })
+
+            nodesToModif.style('opacity', '0.5');
+            linksToModif.style('stroke-opacity', '0.2');
+        })
+        .on('mouseout', function() {
+            node.style('opacity', 1)
+            link.style('stroke-opacity', 1);
+        })
 
     labels = node.append("text")
         .each(function(d) {

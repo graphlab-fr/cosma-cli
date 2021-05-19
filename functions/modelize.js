@@ -188,7 +188,9 @@ function registerNodes(file) {
         size: Number(size),
         outLink: Number(file.links.length),
         inLink: Number(file.backlinks.length),
-        focus: file.focusLevels
+        focus: file.focusLevels,
+        hidden: false,
+        isolated: false
     });
 }
 

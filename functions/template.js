@@ -107,11 +107,6 @@ function cosmoscope(files, entities, path) {
         // count links
         nblinks: entities.links.length,
 
-        // normalize an index from all nodes, to manage them overall
-        index: entities.nodes.map(function(node) {
-            return {id: node.id, title: node.label, type: node.type, hidden: false, isolated: false};
-        }),
-
         // creation date
         date: moment().format('YYYY-MM-DD')
     });

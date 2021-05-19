@@ -347,8 +347,8 @@
     {# Cosma data #}
 
     <script>
-        let index = {{ index | dump | safe }};
         const graph = {{ graph.data | safe }};
+        let index = graph.nodes;
         const graphProperties = {{ graph.config | dump | safe }};
     </script>
 

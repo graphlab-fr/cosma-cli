@@ -47,7 +47,7 @@ const focus = {
         this.focusedNode = document.querySelector('[data-node="' + this.focusedNodeId + '"]');
         this.focusedNode.classList.add('focus');
         // get focus levels and limit it
-        this.levels = graph.nodes.find(i => i.id === this.focusedNodeId).focus;
+        this.levels = index.find(i => i.id === this.focusedNodeId).focus;
         this.range.setAttribute('max', this.levels.length)
         // launch use
         this.range.focus();
