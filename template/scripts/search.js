@@ -20,7 +20,7 @@ searchInput.addEventListener('focus', () => {
     // initialize search engine with no hidden nodes
     fuse = new Fuse(index.filter(item => item.hidden === false), {
         includeScore: false,
-        keys: ['title']
+        keys: ['label']
     });
 
     searchInput.addEventListener('input', () => {
@@ -40,7 +40,7 @@ searchInput.addEventListener('focus', () => {
             resultElement.classList.add('search-result-item');
             resultElement.innerHTML =
             `<span class="record-type-point n_${result.item.type}">⬤</span>
-            <span>${result.item.title}</span>`;
+            <span>${result.item.label}</span>`;
             resultContainer.appendChild(resultElement);
 
             if (i === 0) { activeOutline(resultElement); }
