@@ -81,10 +81,10 @@ const focus = {
         resetFocus();
 
         // throw infos about the focuse
-        focusedNode.classList.remove('focus');
-        focusedNode = undefined;
-        focusedNodeId = undefined;
-        levels = [];
+        this.focusedNode.classList.remove('focus');
+        this.focusedNode = undefined;
+        this.focusedNodeId = undefined;
+        this.levels = [];
     }
 }
 
