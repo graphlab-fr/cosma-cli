@@ -5,6 +5,8 @@
  */
 
 function openRecord(id, history = true) {
+    id = Number(id);
+
     const recordContent = document.getElementById(id);
 
     if (!recordContent) { return; }

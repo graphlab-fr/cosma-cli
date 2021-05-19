@@ -187,7 +187,10 @@ function registerNodes(file) {
         type: String(file.metas.type),
         size: Number(size),
         outLink: Number(file.links.length),
-        inLink: Number(file.backlinks.length)
+        inLink: Number(file.backlinks.length),
+        focus: file.focusLevels,
+        hidden: false,
+        isolated: false
     });
 }
 
@@ -275,7 +278,7 @@ function getConnectionLevels(nodeId, maxLevel) {
         idsList = index.flat();
     }
 
-    return index;
+    return index.slice(1);
 }
 
 /**

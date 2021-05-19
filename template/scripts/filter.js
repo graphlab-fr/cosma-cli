@@ -1,32 +1,36 @@
-let filtersNames = Array.from(document.querySelectorAll('[data-filter]'))
-    .map(filter => filter.name);
-
 /**
  * Toggle filter from his checkbox or manually
  * @param {bool} isChecked - Checkbox boolean : checked or not
  * @param {string} nodeIdsList - List of node ids, separeted by comas
  */
 
-function filter(isChecked, nodeIdsList) {
+ function filter(isChecked, nodeIdsList, name = undefined) {
+
+    if (name && pressedKeys.Alt) {
+        setFilters([name]);
+        return;
+    }
+
     nodeIdsList = parseIdsString(nodeIdsList);
 
     if (isChecked === true) {
         displayNodes(nodeIdsList);
-        setCounter(document.getElementById('types-counter'), 1)
     } else {
         hideNodes(nodeIdsList);
-        setCounter(document.getElementById('types-counter'), -1)
     }
 }
 
 /**
  * Activate filters by their name and if their are not already activated
- * Unsactive others filters if their are not already unactivated
+ * Unactive others filters if their are not already unactivated
  * @param {array} filtersNamesToActivate - List of filter names
  */
 
 function setFilters(filtersNamesToActivate) {
-    filtersToUnactivate = filtersNames.filter(function(filterName) {
+    let filtersNames = Array.from(document.querySelectorAll('[data-filter]'))
+        .map(filter => filter.name);
+
+    let filtersToUnactivate = filtersNames.filter(function(filterName) {
         if (filtersNamesToActivate.includes(filterName)) {
             return false; }
         if (getUnactiveFilterNames().includes(filterName)) {
@@ -104,8 +108,9 @@ function getNodesHideByFilter() {
 
 function setTypesConters(types) {
     for (const typeName in types) {
+        const number = types[typeName];
         const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
-        setCounter(filterLabel.querySelector('.badge'), types[typeName]);
+        setCounter(filterLabel.querySelector('.badge'), number);
     }
 }
 

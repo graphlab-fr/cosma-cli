@@ -5,7 +5,7 @@
  */
 
  function nodeFocus(nodeIdsList) {
-    nodeIdsList = parseIdsString(nodeIdsList);
+    // nodeIdsList = parseIdsString(nodeIdsList);
 
     view.focusMode = false; // for reset
 
@@ -30,116 +30,78 @@
     displayNodes(idsToDisplay);
 }
 
-/**
- * Active nodeFocusByDataset() function with information from the view
- * We search the data-focus value from a button, from a record
- * @param {number} recordId - Id of the target record
- * @param {number} focusLevel - Focus level = focus button number - 1
- */
+const focus = {
+    checkbox: document.getElementById('focus-check'),
+    range: document.getElementById('focus-range'),
+    isActive: false,
+    focusedNodeId: undefined,
+    focusedNode: undefined,
+    levels: [],
+    init : function(focusedNodeId = view.openedRecordId) {
+        if (focusedNodeId === undefined) { return; }
 
-function nodeFocusByView(recordId, focusLevel) {
-    const focusRecord = document.getElementById(recordId)
-        , focusOutput = focusRecord.querySelector('output')
-        , focusCheck = focusRecord.querySelector('input[type="checkbox"]')
-        , focusRange = focusRecord.querySelector('input[type="range"]');
+        this.focusedNodeId = Number(focusedNodeId);
 
-    focusRange.value = focusLevel;
+        this.display();
+        // get infos about the focused node
+        this.focusedNode = document.querySelector('[data-node="' + this.focusedNodeId + '"]');
+        this.focusedNode.classList.add('focus');
+        // get focus levels and limit it
+        this.levels = index.find(i => i.id === this.focusedNodeId).focus;
+        this.range.setAttribute('max', this.levels.length)
+        // launch use
+        this.range.focus();
+        this.set(1);
+    },
+    display: function() {
+        this.checkbox.checked = true;
+        this.range.classList.add('active');
+        this.range.value = 1;
+    },
+    hide : function() {
+        // displaying
+        this.checkbox.checked = false;
+        this.range.classList.remove('active');
+        this.range.value = 1;
+    },
+    set: function(level) {
+        this.isActive = true;
 
-    setNodeFocus(focusCheck, focusRange, focusOutput, recordId);
+        // cut the levels array to keep the targeted level and others before
+        level = this.levels.slice(0, level);
+        level.push([this.focusedNodeId]); // add the node id as a level
+        level = level.flat(); // merge all levels as one focus
 
-    nodeFocusByDataset(focusRange.dataset);
-}
+        nodeFocus(level);
+    },
+    disable : function() {
+        this.isActive = false;
 
-/**
- * Extract string of nodes ids from a dataset list
- * The list is selected by its index, get by 'view.focus.level'
- * @param {DOMStringMap} focusDataset - All data-* from input range focus
- */
-
-function nodeFocusByDataset(focusDataset) {
-    let i = 1, data;
-    for (const dataset in focusDataset) {
-        if (i++ === Number(view.focus.level)) {
-            data = focusDataset[dataset]; break;
-        }
-    }
-    nodeFocus(data);
-}
-
-/**
- * Display the focus range and set the 'view.focus' value
- * for use nodeFocusByDataset() function
- * @param {HTMLElement} checkbox - From focus <form>
- * @param {HTMLElement} range - From focus <form>
- * @param {HTMLElement} output - From focus <form>
- * @param {HTMLElement} recordId - Id of record
- */
-
-function setNodeFocus(checkbox, range, output, recordId) {
-    checkbox.checked = true;
-    range.parentElement.style.display = 'unset';
-    range.focus();
-
-    output.value = range.value;
-
-    view.focus = {
-        fromRecordId: recordId,
-        level: Number(range.value)
-    }
-}
-
-/**
- * For each click on form focus checkbox
- * Check if its checked
- * If false : hide focus range and reset focus
- * Else : focus at first level
- * @param {HTMLElement} checkbox - From focus <form>
- * @param {HTMLElement} range - From focus <form>
- * @param {HTMLElement} output - From focus <form>
- * @param {HTMLElement} recordId - Id of record
- */
-
-function checkFocus(checkbox, range, output, recordId) {
-    if (checkbox.checked == false) {
-        range.value = 0;
-        output.value = range.value;
-        range.parentElement.style.display = 'none';
+        this.hide();
         resetFocus();
-        return;
+
+        // throw infos about the focuse
+        this.focusedNode.classList.remove('focus');
+        this.focusedNode = undefined;
+        this.focusedNodeId = undefined;
+        this.levels = [];
     }
-
-    range.value = 1;
-
-    setNodeFocus(checkbox, range, output, recordId);
-
-    nodeFocusByDataset(range.dataset);
 }
 
-/**
- * For each value change from the form focus range
- * Check the value
- * If 0 : hide focus range, uncheked checkbox and reset focus
- * Else : focus at value level
- * @param {HTMLElement} range - From focus <form>
- * @param {HTMLElement} checkbox - From focus <form>
- * @param {HTMLElement} output - From focus <form>
- * @param {HTMLElement} recordId - Id of record
- */
-
-function rangeFocus(range, checkbox, output, recordId) {
-    const level = range.value;
-    output.value = level;
-    if (level == 0) {
-        checkbox.checked = false;
-        range.parentElement.style.display = 'none';
-        resetFocus();
-        return;
+focus.checkbox.addEventListener('change', () => {
+    if (focus.checkbox.checked == true) {
+        focus.init();
+    } else {
+        focus.disable();
     }
+});
 
-    setNodeFocus(checkbox, range, output, recordId);
+focus.range.addEventListener('change', () => {
+    if (focus.range.value <= 1) {
+        focus.range.value = 1; }
 
-    nodeFocusByDataset(range.dataset);
-}
+    focus.set(focus.range.value);
+});
 
 /**
  * Display nodes hidden by nodeFocus(),
