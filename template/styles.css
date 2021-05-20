@@ -58,7 +58,7 @@ button {
 	border: 1px solid var(--gray);
 	border-radius: 2px;
 }
-.btn.active { border: 1px solid black; }
+.btn.active, .btn[data-active="true"] { border: 1px solid black; }
 
 [onclick] { cursor: pointer; }
 
@@ -423,6 +423,7 @@ text {
 	font-family: var(--condensed);
 	fill: gray;
 }
+text.highlight { fill: var(--highlight); }
 g.highlight text, g.hover text {
 	fill: black;
 }
@@ -447,9 +448,25 @@ marker {
 	width: 16rem;
 }
 
+.graph-controls::before {
+	content: '';
+	position: absolute;
+	backdrop-filter: blur(7px);
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.graph-controls button { margin: unset; }
+
+.graph-controls div { position: relative; }
+
+.graph-controls div + div { margin-top: 10px; }
+
 .graph-controls div.graph-controls-zoom {
 	display: flex;
 	justify-content: space-between;
+	position: relative;
 }
 
 .graph-controls-focus label {

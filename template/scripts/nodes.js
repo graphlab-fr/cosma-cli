@@ -75,31 +75,3 @@ function displayNodes(nodeIds) {
 
     displayNodeNetwork(nodesToDisplayIds);
 }
-
-/**
- * Toggle display/hide nodes links
- * @param {bool} isChecked - 'checked' value send by a checkbox input
- */
-
-function linksDisplayToggle(isChecked) {
-    const lines = document.querySelectorAll('line');
-    if (isChecked) {
-        lines.forEach(line => { line.style.display = null });
-    } else {
-        lines.forEach(line => { line.style.display = 'none' });
-    }
-}
-
-/**
- * Toggle display/hide nodes label
- * @param {bool} isChecked - 'checked' value send by a checkbox input
- */
-
-function labelDisplayToggle(isChecked) {
-    const texts = document.querySelectorAll('text');
-    if (isChecked) {
-        texts.forEach(text => { text.style.display = null });
-    } else {
-        texts.forEach(text => { text.style.display = 'none' });
-    }
-}

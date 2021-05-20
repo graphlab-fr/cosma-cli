@@ -335,4 +335,62 @@ function unlightNodes() {
 
 window.unlightNodes = unlightNodes;
 
+/**
+ * Toggle display/hide nodes links
+ * @param {bool} isChecked - 'checked' value send by a checkbox input
+ */
+
+function linksDisplayToggle(isChecked) {
+    if (isChecked) {
+        link.style('display', null);
+    } else {
+        link.style('display', 'none');
+    }
+}
+
+window.linksDisplayToggle = linksDisplayToggle;
+
+/**
+ * Toggle display/hide nodes label
+ * @param {bool} isChecked - 'checked' value send by a checkbox input
+ */
+
+function labelDisplayToggle(isChecked) {
+    if (isChecked) {
+        labels.style('display', null);
+    } else {
+        labels.style('display', 'none');
+    }
+}
+
+window.labelDisplayToggle = labelDisplayToggle;
+
+/**
+ * Add 'highlight' class to texts linked to nodes ids
+ * @param {array} nodeIds - List of node ids
+ */
+
+function labelHighlight(nodeIds) {
+    const labelsToHighlight = node
+        .filter(node => nodeIds.includes(node.id)).select('text');
+
+    labelsToHighlight.classed('highlight', true);
+}
+
+window.labelHighlight = labelHighlight;
+
+/**
+ * Remove 'highlight' class from texts linked to nodes ids
+ * @param {array} nodeIds - List of node ids
+ */
+
+function labelUnlight(nodeIds) {
+    const labelsToHighlight = node
+        .filter(node => nodeIds.includes(node.id)).select('text');
+
+    labelsToHighlight.classed('highlight', false);
+}
+
+window.labelUnlight = labelUnlight;
+
 })();

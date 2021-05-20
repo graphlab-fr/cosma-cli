@@ -73,14 +73,14 @@
         {% if tags.length !== 0 %}
         <details class="menu-tags" data-sort="tag">
             <summary class="menu-title">
-                Mots-clés <span class="badge">{{ tags | length }}</span>
+                Mots-clés <span id="tag-counter" class="badge">{{ tags | length }}</span>
             </summary>
 
             <button class="menu-tags-btn sort-btn">A-Z</button>
 
             <div class="menu-types-container sort-box active">
                 {% for tag in tags %}
-                <button class="btn" data-tag="{{ loop.index }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
+                <button class="btn" data-tag="{{ loop.index }}" data-active="false" onclick="tag(this)">
                     {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                 </button>
                 {% endfor %}
@@ -88,7 +88,7 @@
 
             <div class="menu-types-container sort-box">
                 {% for tag in tags | reverse %}
-                <button class="btn" data-tag="{{ loop.length - loop.index0 }}" onclick="unlightNodes();activeTagButton(this);highlightNodes([{{ tag.nodes | join(',') }}])">
+                <button class="btn" data-tag="{{ loop.length - loop.index0 }}" data-active="false" onclick="tag(this)">
                     {{ tag.name }} <span class="badge">{{ tag.nodes | length }}</span>
                 </button>
                 {% endfor %}
@@ -158,7 +158,7 @@
                 </li>
                 <li>
                     <label>
-                        <input type="checkbox" {{ "checked" if graphProperties.highlight_on_hover }}
+                        <input type="checkbox" {{ "checked" if graph.config.highlight_on_hover }}
                             onchange="graphProperties.highlight_on_hover = this.checked">
                         Surbrillance au survol
                     </label>
@@ -335,10 +335,9 @@
         <div class="graph-controls">
             <div class="graph-controls-zoom">
                 <button onclick="zoomLess()">-</button>
+                <button onclick="zoomReset()">Recentrer (R)</button>
                 <button onclick="zoomMore()">+</button>
             </div>
-
-            <button onclick="zoomReset()">Recentrer (R)</button>
 
             <div class="graph-controls-focus">
                 <label>
@@ -356,6 +355,7 @@
     <script>
         const graph = {{ graph.data | safe }};
         const graphProperties = {{ graph.config | dump | safe }};
+        const tagList = {{ tags | dump | safe }};
     </script>
 
     {# Cosma functions #}
@@ -368,6 +368,7 @@
         {% include "scripts/filter.js" %}
         {% include "scripts/focus.js" %}
         {% include "scripts/nodes.js" %}
+        {% include "scripts/tag.js" %}
         {% include "scripts/index.js" %}
         {% include "scripts/record.js" %}
         {% include "scripts/view.js" %}
