@@ -210,6 +210,15 @@ function initializeDisplay() {
  */
 
 function getNodeNetwork(nodeIds) {
+    // graph.nodes = index;
+
+    const diplayedNodes = graph.nodes.filter(function(item) {
+        if (item.hidden === true) {
+            return false; }
+
+        return item;
+    }).map(item => item.id);
+
     const nodes = node.filter(function(node) {
         if (nodeIds.includes(node.id)) {
             return true;
@@ -218,10 +227,13 @@ function getNodeNetwork(nodeIds) {
     })
 
     const links = link.filter(function(link) {
-        if (nodeIds.includes(link.source.id) || nodeIds.includes(link.target.id)) {
-            return true;
+        if (!nodeIds.includes(link.source.id) && !nodeIds.includes(link.target.id)) {
+            return false;
         }
-        return false;
+        if (!diplayedNodes.includes(link.source.id) || !diplayedNodes.includes(link.target.id)) {
+            return false;
+        }
+        return true;
     })
 
     return {
@@ -266,8 +278,8 @@ window.displayNodeNetwork = displayNodeNetwork;
 function highlightNodes(nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
-    ntw.nodes.attr('class', 'highlight');
-    ntw.links.attr('class', 'highlight');
+    ntw.nodes.classed('highlight', true);
+    ntw.links.classed('highlight', true);
 
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
 }
@@ -283,8 +295,8 @@ function unlightNodes() {
 
     const ntw = getNodeNetwork(view.highlightedNodes);
 
-    ntw.nodes.attr('class', null);
-    ntw.links.attr('class', null);
+    ntw.nodes.classed('highlight', false);
+    ntw.links.classed('highlight', false);
 
     if (view.activeTag !== undefined) {
         // if there is an active tag, remove the highlight of its button

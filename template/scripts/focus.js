@@ -11,7 +11,7 @@
 
     let idsToHide = [];
 
-    index = index.map(function(item) {
+    graph.nodes = graph.nodes.map(function(item) {
         if (nodeIdsList.includes(item.id)) {
             // if item comes from the nodeIdsList
             item.isolated = true;
@@ -47,7 +47,7 @@ const focus = {
         this.focusedNode = document.querySelector('[data-node="' + this.focusedNodeId + '"]');
         this.focusedNode.classList.add('focus');
         // get focus levels and limit it
-        this.levels = index.find(i => i.id === this.focusedNodeId).focus;
+        this.levels = graph.nodes.find(i => i.id === this.focusedNodeId).focus;
         this.range.setAttribute('max', this.levels.length)
         // launch use
         this.range.focus();
@@ -111,11 +111,11 @@ focus.range.addEventListener('change', () => {
  function resetFocus() {
     view.focus = undefined;
 
-    const idsToDisplay = index
+    const idsToDisplay = graph.nodes
         .filter(item => item.isolated === false && !getNodesHideByFilter().includes(item.id))
         .map(item => item.id);
 
-    index = index.map(function(item) {
+    graph.nodes = graph.nodes.map(function(item) {
         item.isolated = false;
         return item;
     });
