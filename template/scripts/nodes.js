@@ -5,7 +5,7 @@
 
 function hideNodes(nodeIds) {
     const nodesToHideType = {};
-    let nodesToHideIds = index.filter(function(item) {
+    let nodesToHideIds = graph.nodes.filter(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === false) {
             // return nodes are not yet hidden…
             if (view.focusMode) {
@@ -28,7 +28,7 @@ function hideNodes(nodeIds) {
 
     hideNodeNetwork(nodesToHideIds);
 
-    index = index.map(function(item) {
+    graph.nodes = graph.nodes.map(function(item) {
         if (nodesToHideIds.includes(item.id)) {
             item.hidden = true; // for each nodesToHideIds
         }
@@ -51,7 +51,7 @@ function displayNodes(nodeIds) {
 
     let nodesToDisplayIds = [];
 
-    index = index.map(function(item) {
+    graph.nodes = graph.nodes.map(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === true) {
             // push on nodesToDisplayIds nodes are not yet displayed…
             if (view.focusMode) {

@@ -18,7 +18,7 @@ searchInput.addEventListener('focus', () => {
     keyboardShortcutsAreWorking = false;
 
     // initialize search engine with no hidden nodes
-    fuse = new Fuse(index.filter(item => item.hidden === false), {
+    fuse = new Fuse(graph.nodes.filter(item => item.hidden === false), {
         includeScore: false,
         keys: ['label']
     });
