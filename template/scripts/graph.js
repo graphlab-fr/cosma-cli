@@ -355,7 +355,7 @@ window.linksDisplayToggle = linksDisplayToggle;
  * @param {bool} isChecked - 'checked' value send by a checkbox input
  */
 
- function labelDisplayToggle(isChecked) {
+function labelDisplayToggle(isChecked) {
     if (isChecked) {
         labels.style('display', null);
     } else {
@@ -364,5 +364,33 @@ window.linksDisplayToggle = linksDisplayToggle;
 }
 
 window.labelDisplayToggle = labelDisplayToggle;
+
+/**
+ * Add 'highlight' class to texts linked to nodes ids
+ * @param {array} nodeIds - List of node ids
+ */
+
+function labelHighlight(nodeIds) {
+    const labelsToHighlight = node
+        .filter(node => nodeIds.includes(node.id)).select('text');
+
+    labelsToHighlight.classed('highlight', true);
+}
+
+window.labelHighlight = labelHighlight;
+
+/**
+ * Remove 'highlight' class from texts linked to nodes ids
+ * @param {array} nodeIds - List of node ids
+ */
+
+function labelUnlight(nodeIds) {
+    const labelsToHighlight = node
+        .filter(node => nodeIds.includes(node.id)).select('text');
+
+    labelsToHighlight.classed('highlight', false);
+}
+
+window.labelUnlight = labelUnlight;
 
 })();

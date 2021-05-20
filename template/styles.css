@@ -58,7 +58,7 @@ button {
 	border: 1px solid var(--gray);
 	border-radius: 2px;
 }
-.btn.active { border: 1px solid black; }
+.btn.active, .btn[data-active="true"] { border: 1px solid black; }
 
 [onclick] { cursor: pointer; }
 
@@ -423,6 +423,7 @@ text {
 	font-family: var(--condensed);
 	fill: gray;
 }
+text.highlight { fill: var(--highlight); }
 g.highlight text, g.hover text {
 	fill: black;
 }

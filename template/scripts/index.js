@@ -30,20 +30,6 @@ const indexContainer = document.getElementById('index');
 })();
 
 /**
- * Highligth clicked tag button
- * @param {HTMLElement} button - clicked tag button
- */
-
- function activeTagButton(button) {
-    const tagName = button.dataset.tag;
-
-    document.querySelectorAll('[data-tag="' + tagName + '"]')
-        .forEach(button => { button.classList.add('active'); });
-
-    view.activeTag = tagName;
-}
-
-/**
  * Highligth clicked element and unlighligth the others from the same parent
  * @param {HTMLElement} child - clicked element
  */
@@ -70,14 +56,6 @@ function unactiveFromParent(parent) {
     if (activeElt) {
         activeElt.classList.remove('active');
     }
-}
-
-/**
- * Unlighligth all activated tag buttons from parent
- */
-
-function unactiveTagsButton() {
-    unactiveFromParent(document.getElementById('tags-container'));
 }
 
 /**
