@@ -120,25 +120,51 @@ function initializeDisplay() {
                     d.fy = null; })
         )
         .on('mouseover', function(nodeMetas) {
-            const nodesToModif = node.filter(function(node) {
-                if (node.id === nodeMetas.id) {
-                    return false;
-                }
-                return true;
-            })
+            if (!graphProperties.highlight_on_hover) { return; }
+
+            let nodesIdsHovered = [nodeMetas.id];
+
             const linksToModif = link.filter(function(link) {
                 if (link.source.id === nodeMetas.id || link.target.id === nodeMetas.id) {
+                    nodesIdsHovered.push(link.source.id, link.target.id);
                     return false;
                 }
                 return true;
             })
 
-            nodesToModif.style('opacity', '0.5');
-            linksToModif.style('stroke-opacity', '0.2');
+            const nodesToModif = node.filter(function(node) {
+                if (nodesIdsHovered.includes(node.id)) {
+                    return false;
+                }
+                return true;
+            })
+
+            const linksHovered = link.filter(function(link) {
+                if (link.source.id !== nodeMetas.id && link.target.id !== nodeMetas.id) {
+                    return false;
+                }
+                return true;
+            })
+
+            const nodesHovered = node.filter(function(node) {
+                if (!nodesIdsHovered.includes(node.id)) {
+                    return false;
+                }
+                return true;
+            })
+
+            nodesHovered.classed('hover', true);
+            linksHovered.classed('hover', true);
+            nodesToModif.classed('translucent', true);
+            linksToModif.classed('translucent', true);
         })
         .on('mouseout', function() {
-            node.style('opacity', 1)
-            link.style('stroke-opacity', 1);
+            if (!graphProperties.highlight_on_hover) { return; }
+
+            node.classed('hover', false);
+            node.classed('translucent', false);
+            link.classed('hover', false);
+            link.classed('translucent', false);
         })
 
     labels = node.append("text")

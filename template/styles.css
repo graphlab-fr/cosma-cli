@@ -12,7 +12,7 @@
 	--sans: sans-serif;
 	--serif: "Georgia", serif;
 	--mono: monospace;
-	--condensed: 'Arial Condensed';
+	--condensed: 'Arial Condensed', sans-serif;
 
 	font-size: 62.5%;
 }
@@ -411,20 +411,20 @@ main.record-container:not(.active) {
 
 /* nodes */
 circle, text { cursor: pointer; }
-g.highlight circle, g.focus circle {
+g.highlight circle, g.focus circle, g.hover circle {
 	stroke: var(--highlight);
-    fill: var(--highlight);
 }
+g.translucent circle { opacity: 0.5; }
 /* links */
-line.highlight { stroke: var(--highlight); }
+line.highlight, line.hover { stroke: var(--highlight); }
+line.translucent { stroke-opacity: 0.2; }
 /* labels */
 text {
 	font-family: var(--condensed);
 	fill: gray;
 }
-g.highlight text {
-	fill: var(--highlight);
-	filter: brightness(0.4);
+g.highlight text, g.hover text {
+	fill: black;
 }
 /* arrows */
 marker {
