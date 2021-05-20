@@ -38,7 +38,7 @@ const focus = {
     focusedNode: undefined,
     levels: [],
     init : function(focusedNodeId = view.openedRecordId) {
-        if (focusedNodeId === undefined) { return; }
+        if (focusedNodeId === undefined) { this.hide(); return; }
 
         this.focusedNodeId = Number(focusedNodeId);
 
