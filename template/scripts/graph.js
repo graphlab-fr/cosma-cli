@@ -335,4 +335,34 @@ function unlightNodes() {
 
 window.unlightNodes = unlightNodes;
 
+/**
+ * Toggle display/hide nodes links
+ * @param {bool} isChecked - 'checked' value send by a checkbox input
+ */
+
+function linksDisplayToggle(isChecked) {
+    if (isChecked) {
+        link.style('display', null);
+    } else {
+        link.style('display', 'none');
+    }
+}
+
+window.linksDisplayToggle = linksDisplayToggle;
+
+/**
+ * Toggle display/hide nodes label
+ * @param {bool} isChecked - 'checked' value send by a checkbox input
+ */
+
+ function labelDisplayToggle(isChecked) {
+    if (isChecked) {
+        labels.style('display', null);
+    } else {
+        labels.style('display', 'none');
+    }
+}
+
+window.labelDisplayToggle = labelDisplayToggle;
+
 })();
