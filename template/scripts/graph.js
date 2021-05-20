@@ -137,6 +137,13 @@ function initializeDisplay() {
                 return true;
             })
 
+            const linksHovered = link.filter(function(link) {
+                if (link.source.id !== nodeMetas.id && link.target.id !== nodeMetas.id) {
+                    return false;
+                }
+                return true;
+            })
+
             const nodesHovered = node.filter(function(node) {
                 if (!nodesIdsHovered.includes(node.id)) {
                     return false;
@@ -145,12 +152,14 @@ function initializeDisplay() {
             })
 
             nodesHovered.classed('hover', true);
+            linksHovered.classed('hover', true);
             nodesToModif.classed('translucent', true);
             linksToModif.classed('translucent', true);
         })
         .on('mouseout', function() {
             node.classed('hover', false);
             node.classed('translucent', false);
+            link.classed('hover', false);
             link.classed('translucent', false);
         })
 
