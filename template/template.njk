@@ -156,6 +156,13 @@
                         Afficher les étiquettes
                     </label>
                 </li>
+                <li>
+                    <label>
+                        <input type="checkbox" {{ "checked" if graphProperties.highlight_on_hover }}
+                            onchange="graphProperties.highlight_on_hover = this.checked">
+                        Surbrillance au survol
+                    </label>
+                </li>
             </ul>
 
             {% macro inputRange(name, graphParameter, fx, defaultValue, min, max, step) %}

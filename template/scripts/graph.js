@@ -120,6 +120,8 @@ function initializeDisplay() {
                     d.fy = null; })
         )
         .on('mouseover', function(nodeMetas) {
+            if (!graphProperties.highlight_on_hover) { return; }
+
             let nodesIdsHovered = [nodeMetas.id];
 
             const linksToModif = link.filter(function(link) {
@@ -157,6 +159,8 @@ function initializeDisplay() {
             linksToModif.classed('translucent', true);
         })
         .on('mouseout', function() {
+            if (!graphProperties.highlight_on_hover) { return; }
+
             node.classed('hover', false);
             node.classed('translucent', false);
             link.classed('hover', false);
