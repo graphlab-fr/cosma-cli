@@ -190,7 +190,8 @@ function registerNodes(file) {
         inLink: Number(file.backlinks.length),
         focus: file.focusLevels,
         hidden: false,
-        isolated: false
+        isolated: false,
+        highlighted: false
     });
 }
 

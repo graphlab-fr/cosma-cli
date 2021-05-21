@@ -65,13 +65,26 @@ function unactiveFromParent(parent) {
 
 function hideFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
-        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
-            .forEach(elt => {
-                elt.style.display = 'none';
-            });
-    }
+        const indexItems = indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+        indexItems.forEach(elt => {
+            elt.style.display = 'none';
+        });
 
-    setCounter(document.getElementById('index-counter'), -Math.abs(nodesIds.length));
+        iterateCounter(counters.index, -Math.abs(indexItems.length / 2));
+    }
+}
+
+/**
+ * Hide all items from the index list
+ */
+
+function hideAllFromIndex() {
+    indexContainer.querySelectorAll('[data-index]')
+        .forEach(elt => {
+            elt.style.display = 'none';
+        });
+
+    setCounter(counters.index, 0);
 }
 
 /**
@@ -81,9 +94,24 @@ function hideFromIndex(nodesIds) {
 
 function displayFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
-        indexContainer.querySelector('[data-index="' + indexItem + '"]')
-            .style.display = null;
-    }
+        const indexItems = indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+        indexItems.forEach(elt => {
+            elt.style.display = null;
+        });
 
-    setCounter(document.getElementById('index-counter'), nodesIds.length);
+        iterateCounter(counters.index, indexItems.length / 2);
+    }
+}
+
+/**
+ * Display all items from the index list
+ */
+
+ function displayAllFromIndex() {
+    const indexItems = indexContainer.querySelectorAll('[data-index]');
+    indexItems.forEach(elt => {
+        elt.style.display = null;
+    });
+    
+    setCounter(counters.index, indexItems.length / 2);
 }
