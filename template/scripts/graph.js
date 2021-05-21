@@ -1,6 +1,6 @@
 (function() {
 
-let link, node, cicles, labels
+let link, node, circles, labels
     , simulation = d3.forceSimulation()
     , width = +svg.node().getBoundingClientRect().width
     , height = +svg.node().getBoundingClientRect().height;
@@ -223,8 +223,11 @@ function initializeDisplay() {
         .attr("y2", (d) => d.target.y);
 
     node.attr("transform", function(d) {
-          return "translate(" + d.x + "," + d.y + ")";
-        })
+        d.x = Math.max(d.size, Math.min(width - d.size, d.x));
+        d.y = Math.max(d.size, Math.min(height - d.size, d.y));
+
+        return "translate(" + d.x + "," + d.y + ")";
+    })
 
     d3.select('#load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
 }

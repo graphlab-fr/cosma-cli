@@ -402,6 +402,7 @@ main.record-container:not(.active) {
 }
 
 #graph_canvas {
+	cursor: move;
 	width: 100%;
 	height: 100%;
 }
