@@ -143,7 +143,7 @@ window.onpopstate = function(e) {
     }
  };
  
- window.onkeyup = function(e) {
+window.onkeyup = function(e) {
     switch (e.key) {
         case 'Control':
             pressedKeys[e.key] = false;
@@ -153,7 +153,12 @@ window.onpopstate = function(e) {
             pressedKeys[e.key] = false;
             return;
     }
- }
+}
+
+const counters = {
+    index: document.getElementById('index-counter'),
+    tag: document.getElementById('tag-counter')
+}
 
 /**
  * Change counter display
@@ -162,7 +167,7 @@ window.onpopstate = function(e) {
  * @return {boolean} True if the counter number is max
  */
 
- function setCounter(counterElt, value) {
+function iterateCounter(counterElt, value) {
     let counterNumber = counterElt.textContent.split('/', 2);
 
     if (counterNumber.length === 1) { // if there is NOT a '/' into counter text content
@@ -176,6 +181,23 @@ window.onpopstate = function(e) {
     }
 
     counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
+    return false;
+}
+
+function setCounter(counterElt, value) {
+    let counterNumber = counterElt.textContent.split('/', 2);
+
+    if (counterNumber.length === 1) { // if there is NOT a '/' into counter text content
+        counterElt.textContent = value + '/' + counterNumber[0];
+        return false;
+    }
+
+    if (value === Number(counterNumber[1])) {
+        counterElt.textContent = counterNumber[1];
+        return true;
+    }
+
+    counterElt.textContent = value + '/' + counterNumber[1]
     return false;
 }
 

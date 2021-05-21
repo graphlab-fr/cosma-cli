@@ -110,7 +110,7 @@ function setTypesConters(types) {
     for (const typeName in types) {
         const number = types[typeName];
         const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
-        setCounter(filterLabel.querySelector('.badge'), number);
+        iterateCounter(filterLabel.querySelector('.badge'), number);
     }
 }
 

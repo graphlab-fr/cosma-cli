@@ -13,7 +13,7 @@ function tag(tagElt) {
         if (indexItemstoShow.length === 0) { displayAllFromIndex(); }
         else { displayFromIndex(indexItemstoShow); }
 
-        setCounter(document.getElementById('tag-counter'), 1);
+        iterateCounter(document.getElementById('tag-counter'), 1);
     } else {
         tagBtns.forEach(tagBtn => { tagBtn.dataset.active = true; });
         // hide all items from index, then show the highlighted ones
@@ -21,6 +21,9 @@ function tag(tagElt) {
         labelHighlight(nodeIds);
         displayFromIndex(graph.nodes.filter(node => node.highlighted === true).map(node => node.id));
 
-        setCounter(document.getElementById('tag-counter'), -1);
+        iterateCounter(document.getElementById('tag-counter'), -1);
     }
+    
+    setCounter(counters.tag
+        , document.querySelectorAll('[data-tag][data-active="true"]').length / 2);
 }

@@ -65,10 +65,12 @@ function unactiveFromParent(parent) {
 
 function hideFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
-        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
-            .forEach(elt => {
-                elt.style.display = 'none';
-            });
+        const indexItems = indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+        indexItems.forEach(elt => {
+            elt.style.display = 'none';
+        });
+
+        iterateCounter(counters.index, -Math.abs(indexItems.length / 2));
     }
 }
 
@@ -81,6 +83,8 @@ function hideAllFromIndex() {
         .forEach(elt => {
             elt.style.display = 'none';
         });
+
+    setCounter(counters.index, 0);
 }
 
 /**
@@ -90,10 +94,12 @@ function hideAllFromIndex() {
 
 function displayFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
-        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
-            .forEach(elt => {
-                elt.style.display = null;
-            });
+        const indexItems = indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+        indexItems.forEach(elt => {
+            elt.style.display = null;
+        });
+
+        iterateCounter(counters.index, indexItems.length / 2);
     }
 }
 
@@ -102,8 +108,10 @@ function displayFromIndex(nodesIds) {
  */
 
  function displayAllFromIndex() {
-    indexContainer.querySelectorAll('[data-index]')
-        .forEach(elt => {
-            elt.style.display = null;
-        });
+    const indexItems = indexContainer.querySelectorAll('[data-index]');
+    indexItems.forEach(elt => {
+        elt.style.display = null;
+    });
+    
+    setCounter(counters.index, indexItems.length / 2);
 }
