@@ -1,22 +1,35 @@
+let filterAltMode = false;
+
 /**
  * Toggle filter from his checkbox or manually
  * @param {bool} isChecked - Checkbox boolean : checked or not
  * @param {string} nodeIdsList - List of node ids, separeted by comas
+ * @param {HTMLElement} input - The filter elt from DOM
+ * @param {bool} fromElt - If fcuntion is activeted from the web page
  */
 
- function filter(isChecked, nodeIdsList, name = undefined) {
-
-    if (name && pressedKeys.Alt) {
-        setFilters([name]);
-        return;
-    }
+ function filter(isChecked, nodeIdsList, input, fromElt = false) {
 
     nodeIdsList = parseIdsString(nodeIdsList);
 
     if (isChecked === true) {
         displayNodes(nodeIdsList);
+        input.checked = true;
     } else {
         hideNodes(nodeIdsList);
+        input.checked = false;
+    }
+    
+    if (fromElt && pressedKeys.Alt) {
+        if (filterAltMode && isChecked == false) {
+            setFilters(getFilterNames()); // active all types
+            filterAltMode = false;
+            return;
+        }
+        setFilters([input.name]); // first time alt+click
+        filterAltMode = true; // active alt+click mode
+    } else {
+        filterAltMode = false; // after last time alt+click
     }
 }
 
@@ -50,16 +63,16 @@ function setFilters(filtersNamesToActivate) {
         let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
             , data = filterElt.dataset.filter;
 
-        filterElt.checked = false;
-        filter(false, data);
+        filter(false, data, filterElt);
+            // filterElt.checked = false;
     }
 
     for (const filterName of filtersNamesToActivate) {
         let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
             , data = filterElt.dataset.filter;
 
-        filterElt.checked = true;
-        filter(true, data);
+        filter(true, data, filterElt);
+            // filterElt.checked = true;
     }
 }
 

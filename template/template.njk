@@ -61,7 +61,7 @@
                 <li class="filter n_{{ type.name }}">
                     <label>
                         <input data-filter="{{ type.nodes | join(",") }}" name="{{ type.name }}"
-                            type="checkbox" checked onchange="filter(this.checked, this.dataset.filter, this.name)">
+                            type="checkbox" checked onchange="filter(this.checked, this.dataset.filter, this, true)">
                         {{ type.name }}
                         <span class="badge">{{ type.nodes | length }}</span>
                     </label>
