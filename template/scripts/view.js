@@ -35,10 +35,21 @@ function saveView() {
 
 /**
  * Update 'view' object values from a encoded base64 string
- * @param {string} key - base64 string contain an encoded image from the 'view' object
+ * @param {HTMLElement} viewBtn - The HTML button, container of the view data
  */
 
-function changeView(key) {
+function changeView(viewBtn) {
+    if (viewBtn.dataset.active === "true") {
+        viewBtn.dataset.active = false;
+        setFilters(getFilterNames());
+        focus.disable();
+        return;
+    }
+
+    viewBtn.dataset.active = true;
+
+    let key = viewBtn.dataset.view;
+    // base64 string contain an encoded image from the 'view' object
     key = decodeURIComponent(key);
     key = window.atob(key);
     key = JSON.parse(key);

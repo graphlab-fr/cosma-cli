@@ -132,7 +132,7 @@
             {% if views.length !== 0 %}
             <div class="menu-view-container" id="views-container">
                 {% for viewName, viewString in views %}
-                <button class="btn" onclick="activeFromParent(this);changeView('{{ viewString }}')">
+                <button class="btn" data-view="{{ viewString }}" data-active="false" onclick="changeView(this)">
                     {{ viewName }}
                 </button>
                 {% endfor %}

@@ -64,6 +64,16 @@ function setFilters(filtersNamesToActivate) {
 }
 
 /**
+ * Get all filters name
+ * @returns {array} - Filter names
+ */
+
+function getFilterNames() {
+    return filterElts = Array.from(document.querySelectorAll('[data-filter]'))
+        .map(filterElt => filterElt.name);
+}
+
+/**
  * Get active filters name
  * @returns {array} - Filter names
  */
