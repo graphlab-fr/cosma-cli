@@ -405,4 +405,19 @@ function labelUnlight(nodeIds) {
 
 window.labelUnlight = labelUnlight;
 
+/**
+ * Remove 'highlight' class from all texts
+ */
+
+function labelUnlightAll() {
+    graph.nodes = graph.nodes.map(function(node) {
+        node.highlighted = false;
+        return node;
+    });
+
+    labels.classed('highlight', false);
+}
+
+window.labelUnlightAll = labelUnlightAll;
+
 })();

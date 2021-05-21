@@ -1,29 +1,29 @@
+const primTagsContainer = document.querySelector('.menu-tags-container-prim');
+
 function tag(tagElt) {
-    const nodeIds = tagList[tagElt.dataset.tag - 1].nodes // 'tagList' is global var, set from template.njk
-        , isActive = tagElt.dataset.active
+    const isActive = tagElt.dataset.active
         // tag brothers from sort div's
         , tagBtns = document.querySelectorAll('[data-tag="' + tagElt.dataset.tag + '"]');
 
     if (isActive === 'true') {
         tagBtns.forEach(tagBtn => { tagBtn.dataset.active = false; });
-        // hide all items from index, then show the highlighted ones or all if there is any highlighted
-        hideAllFromIndex(graph.nodes.map(node => node.id));
-        labelUnlight(nodeIds);
-        let indexItemstoShow = graph.nodes.filter(node => node.highlighted === true).map(node => node.id);
-        if (indexItemstoShow.length === 0) { displayAllFromIndex(); }
-        else { displayFromIndex(indexItemstoShow); }
-
-        iterateCounter(document.getElementById('tag-counter'), 1);
     } else {
         tagBtns.forEach(tagBtn => { tagBtn.dataset.active = true; });
-        // hide all items from index, then show the highlighted ones
-        hideAllFromIndex(graph.nodes.map(node => node.id));
-        labelHighlight(nodeIds);
-        displayFromIndex(graph.nodes.filter(node => node.highlighted === true).map(node => node.id));
-
-        iterateCounter(document.getElementById('tag-counter'), -1);
     }
+
+    // get active tags and the linked nodes id
+    const activeTags = Array.from(primTagsContainer.querySelectorAll('[data-tag][data-active="true"]'));
+    let nodeIds = activeTags.map(function(activeTagBtn) {
+        return tagList[activeTagBtn.dataset.tag - 1].nodes; // 'tagList' is global var, set from template.njk
+    }).flat();
+
+    // delete duplicated elements
+    nodeIds = nodeIds.filter((item, index) => { return nodeIds.indexOf(item) === index });
+
+    labelUnlightAll();
+    if (nodeIds.length !== 0) { hideAllFromIndex(); }
+    else { displayAllFromIndex(); }
+    labelHighlight(nodeIds); displayFromIndex(nodeIds);
     
-    setCounter(counters.tag
-        , document.querySelectorAll('[data-tag][data-active="true"]').length / 2);
+    setCounter(counters.tag, activeTags.length);
 }
