@@ -208,6 +208,7 @@ function setCounter(counterElt, value) {
 (function (){
 const roll = document.getElementById('cosma-roll');
 roll.parentElement.addEventListener('click', () => {
-    roll.classList.toggle('anim');
+    roll.classList.add('anim');
+    roll.addEventListener('animationend', () => { roll.classList.remove('anim'); })
 });
 })();
