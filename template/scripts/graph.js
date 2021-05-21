@@ -374,6 +374,12 @@ function labelHighlight(nodeIds) {
     const labelsToHighlight = node
         .filter(node => nodeIds.includes(node.id)).select('text');
 
+    graph.nodes = graph.nodes.map(function(node) {
+        if (nodeIds.includes(node.id)) {
+            node.highlighted = true; }
+        return node;
+    });
+
     labelsToHighlight.classed('highlight', true);
 }
 
@@ -387,6 +393,12 @@ window.labelHighlight = labelHighlight;
 function labelUnlight(nodeIds) {
     const labelsToHighlight = node
         .filter(node => nodeIds.includes(node.id)).select('text');
+
+    graph.nodes = graph.nodes.map(function(node) {
+        if (nodeIds.includes(node.id)) {
+            node.highlighted = false; }
+        return node;
+    });
 
     labelsToHighlight.classed('highlight', false);
 }

@@ -70,8 +70,17 @@ function hideFromIndex(nodesIds) {
                 elt.style.display = 'none';
             });
     }
+}
 
-    setCounter(document.getElementById('index-counter'), -Math.abs(nodesIds.length));
+/**
+ * Hide all items from the index list
+ */
+
+function hideAllFromIndex() {
+    indexContainer.querySelectorAll('[data-index]')
+        .forEach(elt => {
+            elt.style.display = 'none';
+        });
 }
 
 /**
@@ -81,9 +90,20 @@ function hideFromIndex(nodesIds) {
 
 function displayFromIndex(nodesIds) {
     for (const indexItem of nodesIds) {
-        indexContainer.querySelector('[data-index="' + indexItem + '"]')
-            .style.display = null;
+        indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
+            .forEach(elt => {
+                elt.style.display = null;
+            });
     }
+}
 
-    setCounter(document.getElementById('index-counter'), nodesIds.length);
+/**
+ * Display all items from the index list
+ */
+
+ function displayAllFromIndex() {
+    indexContainer.querySelectorAll('[data-index]')
+        .forEach(elt => {
+            elt.style.display = null;
+        });
 }
