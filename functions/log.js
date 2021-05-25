@@ -47,6 +47,8 @@ function register(logs, path) {
     let content = moment().format('YYYY-MM-DD_HH-mm-ss');
     content += logs.join('');
 
+    if (!path) { return; }
+
     fs.writeFile(path + 'error.log', content, (err) => {
         if (err) { return console.error( 'Err. write error.log file : ' + err) }
     });

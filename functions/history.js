@@ -1,6 +1,12 @@
 const fs = require('fs')
     , moment = require('moment')
-    , time = moment().format('YYYY-MM-DD_HH-mm');
+    , time = moment().format('YYYY-MM-DD_HH-mm')
+    , config = require('./verifconfig').config;
+
+if (!config.history) {
+    exports.historyPath = false;
+    return;
+}
 
 // create history folder
 if (fs.existsSync('history') === false) {

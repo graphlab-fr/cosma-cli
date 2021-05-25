@@ -144,11 +144,13 @@ entities.links = entities.links.map(function(link) {
 // generate the Cosmoscope
 require('./template').cosmoscope(files, entities, savePath);
 
-// generate data files
-fs.writeFile(savePath + 'data/nodes.json', JSON.stringify(entities.nodes), (err) => {
-    if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write nodes.json file : ' + err) } });
-fs.writeFile(savePath + 'data/links.json', JSON.stringify(entities.links), (err) => {
-    if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write links.json file : ' + err) } });
+if (savePath) {
+    // generate data files
+    fs.writeFile(savePath + 'data/nodes.json', JSON.stringify(entities.nodes), (err) => {
+        if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write nodes.json file : ' + err) } });
+    fs.writeFile(savePath + 'data/links.json', JSON.stringify(entities.links), (err) => {
+        if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write links.json file : ' + err) } });
+}
 
 /**
  * Feed entities.edges object with link object

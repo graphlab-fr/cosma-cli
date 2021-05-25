@@ -212,6 +212,10 @@ Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 :   Désactivé par défaut. Permet d'importer les styles d'un fichier CSS personnalisé. Ce fichier `custom.css` doit être placé dans le répertoire `/template/`.
 :   Valeur : `true` ou `false`
 
+`history`
+:   Désactivé par défaut. Permet d'interrompre l'enregistrement datée d'une copie du cosmoscope et de ses donnnées à chaque export.
+:   Valeur : `true` ou `false`
+
 `metas`
 : Vide par défaut. Permet d'ajouter des métadonnées arbitraires dans l'entête du Cosmoscope.
 : Exemple

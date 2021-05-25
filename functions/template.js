@@ -117,13 +117,15 @@ function cosmoscope(files, entities, path) {
         htmlRender = minifyHtml.minify(htmlRender, minifyHtml.createConfiguration({ minifyJs: true, minifyCss: true }))
     }
 
-    fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
-        if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
-    });
-
     fs.writeFile(config.export_target + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for export folder
         if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
         console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${files.length} records)`)
+    });
+
+    if (!config.history) { return; }
+
+    fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
+        if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
     });
 }
 
