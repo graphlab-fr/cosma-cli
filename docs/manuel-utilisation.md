@@ -208,6 +208,10 @@ Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 :   Désactivé par défaut. Permet de réduire le poids du fichier cosmoscope exporté.
 :   Valeur : `true` ou `false`
 
+`custom_css`
+:   Désactivé par défaut. Permet d'importer les styles d'un fichier CSS personnalisé. Ce fichier `custom.css` doit être placé dans le répertoire `/template/`.
+:   Valeur : `true` ou `false`
+
 `metas`
 : Vide par défaut. Permet d'ajouter des métadonnées arbitraires dans l'entête du Cosmoscope.
 : Exemple
@@ -273,6 +277,12 @@ Ajouter des types valides :
 
 ```bash
 node app atype <nom> <couleur>
+```
+
+Créer le fichier de style personnalisé `custom.css` au répertoire `/template/` :
+
+```bash
+node app css
 ```
 
 Ajouter des vues :
@@ -353,6 +363,16 @@ L'interface de Cosma est composée en trois colonnes :
 <!-- Description générale, portabilité -->
 
 L'affichage n'est pas adapté pour les petits écrans, comme pour les mobiles et petites tablettes. La manipulation au doigt ne vous permet pas de profiter de certaines interactions comme l'affichage du réseau au survol.
+
+### CSS personnalisé
+
+Vous pouvez via la commande suivante créer un fichier de style. Il peut être désactivé dans la configuration sans que n'ayez besoin de le supprimer. Les règles que vous inscrirez dans ce fichier viendront remplacer les styles implémentés dans le cosmoscope, inscrites dans le fichier `/template/styles.css` et `/template/print.css` pour les styles à l'impression. Vous pouvez ainsi remplacer les variables pour modifier les couleurs, les typographies utilisées (elles doivent être installées sur votre ordinateur pour que vous puissiez les lire) ou réécrire les règles attachées aux selecteurs utilisés.
+
+```bash
+node app css
+```
+
+Vous pouvez vous baser sur le fichier `/template/template.njk` ou l'insepcteur de votre navigateur web pour repérer les parties de l'interface que vous souhaitez modifier.
 
 ## Menu latéral gauche
 

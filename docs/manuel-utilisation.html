@@ -52,7 +52,10 @@
 </ul></li>
 <li><a href="#utilisation-du-cosmoscope"><span class="toc-section-number">6</span> Utilisation du cosmoscope</a>
 <ul>
-<li><a href="#interface"><span class="toc-section-number">6.1</span> Interface</a></li>
+<li><a href="#interface"><span class="toc-section-number">6.1</span> Interface</a>
+<ul>
+<li><a href="#css-personnalise"><span class="toc-section-number">6.1.1</span> CSS personnalisé</a></li>
+</ul></li>
 <li><a href="#menu-lateral-gauche"><span class="toc-section-number">6.2</span> Menu latéral gauche</a>
 <ul>
 <li><a href="#moteur-de-recherche"><span class="toc-section-number">6.2.1</span> Moteur de recherche</a></li>
@@ -255,6 +258,11 @@
 </dd>
 <dd>Valeur : <code>true</code> ou <code>false</code>
 </dd>
+<dt><code>custom_css</code></dt>
+<dd>Désactivé par défaut. Permet d’importer les styles d’un fichier CSS personnalisé. Ce fichier <code>custom.css</code> doit être placé dans le répertoire <code>/template/</code>.
+</dd>
+<dd>Valeur : <code>true</code> ou <code>false</code>
+</dd>
 <dt><code>metas</code></dt>
 <dd>Vide par défaut. Permet d’ajouter des métadonnées arbitraires dans l’entête du Cosmoscope.
 </dd>
@@ -306,13 +314,15 @@
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="ex">node</span> app export <span class="op">&lt;</span>chemin<span class="op">&gt;</span></span></code></pre></div>
 <p>Ajouter des types valides :</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="ex">node</span> app atype <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>couleur<span class="op">&gt;</span></span></code></pre></div>
+<p>Créer le fichier de style personnalisé <code>custom.css</code> au répertoire <code>/template/</code> :</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">node</span> app css</span></code></pre></div>
 <p>Ajouter des vues :</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="ex">node</span> app aview <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>code<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">node</span> app aview <span class="op">&lt;</span>nom<span class="op">&gt;</span> <span class="op">&lt;</span>code<span class="op">&gt;</span></span></code></pre></div>
 <h1 data-number="5" id="utilisation-du-cosmographe"><span class="header-section-number">5</span> Utilisation du cosmographe</h1>
 <h2 data-number="5.1" id="creer-des-fiches"><span class="header-section-number">5.1</span> Créer des fiches</h2>
 <p>Pour créer une nouvelle fiche (une fois l’<a href="#">installation</a> et la <a href="#">configuration</a> effectuées) vous pouvez entrer l’une des deux commandes suivantes. Vous pouvez également créer un fichier Markdown par d’autres moyens, tant que vous respecter le modèle de fichier présenté plus bas.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="ex">node</span> app record</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">node</span> app autorecord <span class="op">&lt;</span>titre<span class="op">&gt;</span> <span class="op">&lt;</span>type<span class="op">&gt;</span> <span class="op">&lt;</span>mots-clés<span class="op">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="ex">node</span> app record</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">node</span> app autorecord <span class="op">&lt;</span>titre<span class="op">&gt;</span> <span class="op">&lt;</span>type<span class="op">&gt;</span> <span class="op">&lt;</span>mots-clés<span class="op">&gt;</span></span></code></pre></div>
 <p><code>&lt;type&gt;</code> doit correspondre à l’un des types définis dans la configuration. <code>&lt;mots-clés&gt;</code> est une liste de mots-clés séparés par des virgules (sans espaces).</p>
 <p>Ces commandes génèrent un fichier mardkdown (<code>.md</code>) avec le contenu suivant. En entête le YAML Front Matter (entre les deux <code>---</code>) contenant le title (<code>title</code>) de la fiche, son identifiant unique (<code>id</code>), son type (<code>type</code>) et ses mots-clés (<code>tags</code>). Après l’entête, vous pouvez librement inscrire votre contenu :</p>
 <pre><code>---
@@ -330,8 +340,8 @@ tags:
 <p>À l’intérieur des fiches, vous pouvez créer des liens avec l’identifiant de la fiche cible entre double crochets (ex : <code>[[20201209111625]]</code>). Vous pouvez également donner un type à ce lien selon la typologie dressée dans la configuration. Pour cela vous devez inscrire le nom du type dans le lien tel que <code>[[type:20201209111625]]</code>.</p>
 <h2 data-number="5.3" id="export"><span class="header-section-number">5.3</span> Export</h2>
 <p>Générer un cosmoscope avec l’une de ces commandes :</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="ex">node</span> app modelize</span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">node</span> app</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="ex">node</span> app modelize</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">node</span> app</span></code></pre></div>
 <p>Le fichier <code>cosmoscope.html</code> est exporté dans le répertoire défini dans la configuration. Il écrasera un fichier éponyme au même emplacement. Ce fichier est également copié dans le répertoire <code>/history</code>, dans un sous-répertoire portant la date du jour et avec les données modélisées au format JSON.</p>
 <h2 data-number="5.4" id="historique"><span class="header-section-number">5.4</span> Historique</h2>
 <p>Chaque fois que vous exportez un cosmoscope, il est sauvegardé dans un répertoire <code>history</code> à la racine de l’arborescence de Cosma. Ce répertoire contient un sous-répertoire pour chaque export effectué. Ils contiennent</p>
@@ -356,6 +366,10 @@ tags:
 <p><img src="https://i.imgur.com/FZiYK5Y.jpg" /></p>
 <!-- Description générale, portabilité -->
 <p>L’affichage n’est pas adapté pour les petits écrans, comme pour les mobiles et petites tablettes. La manipulation au doigt ne vous permet pas de profiter de certaines interactions comme l’affichage du réseau au survol.</p>
+<h3 data-number="6.1.1" id="css-personnalise"><span class="header-section-number">6.1.1</span> CSS personnalisé</h3>
+<p>Vous pouvez via la commande suivante créer un fichier de style. Il peut être désactivé dans la configuration sans que n’ayez besoin de le supprimer. Les règles que vous inscrirez dans ce fichier viendront remplacer les styles implémentés dans le cosmoscope, inscrites dans le fichier <code>/template/styles.css</code> et <code>/template/print.css</code> pour les styles à l’impression. Vous pouvez ainsi remplacer les variables pour modifier les couleurs, les typographies utilisées (elles doivent être installées sur votre ordinateur pour que vous puissiez les lire) ou réécrire les règles attachées aux selecteurs utilisés.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="ex">node</span> app css</span></code></pre></div>
+<p>Vous pouvez vous baser sur le fichier <code>/template/template.njk</code> ou l’insepcteur de votre navigateur web pour repérer les parties de l’interface que vous souhaitez modifier.</p>
 <h2 data-number="6.2" id="menu-lateral-gauche"><span class="header-section-number">6.2</span> Menu latéral gauche</h2>
 <h3 data-number="6.2.1" id="moteur-de-recherche"><span class="header-section-number">6.2.1</span> Moteur de recherche</h3>
 <p>C’est un champ de texte situé en haut du menu latéral gauche. Il vous suggère une liste de fiches dont le titre proche de votre saisie. Cette liste est établie en fonction des filtres et du focus actifs.</p>
