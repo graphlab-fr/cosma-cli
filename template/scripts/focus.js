@@ -42,14 +42,15 @@ const focus = {
 
         this.focusedNodeId = Number(focusedNodeId);
 
-        this.display();
         // get infos about the focused node
         this.focusedNode = document.querySelector('[data-node="' + this.focusedNodeId + '"]');
         this.focusedNode.classList.add('focus');
+        highlightNodes([focusedNodeId]);
         // get focus levels and limit it
         this.levels = graph.nodes.find(i => i.id === this.focusedNodeId).focus;
         this.range.setAttribute('max', this.levels.length)
         // launch use
+        this.display();
         this.range.focus();
         this.set(1);
     },
@@ -75,6 +76,8 @@ const focus = {
         nodeFocus(level);
     },
     disable : function() {
+        if (this.isActive === false) { return; }
+
         this.isActive = false;
 
         this.hide();
