@@ -3,7 +3,7 @@ title: Manuel d’utilisation de Cosma
 author:
   - Guillaume Brioudes <https://myllaume.fr/>
   - Arthur Perret <https://www.arthurperret.fr/>
-date: 2021-04-28
+date: 2021-05-25
 lang: fr-FR
 description: Aide à l’utilisation et à la configuration de Cosma
 ---
@@ -56,11 +56,11 @@ Le **cosmographe** est un logiciel basé sur NodeJS qui inclut deux fonctionnali
 
 <!-- Capture d'écran -->
 
-Le **cosmoscope** est un fichier HTML à ouvrir avec un navigateur web. Il contient une visualisation interactive sous forme de graphe du répertoire de documents analysé par le **cosmographe**. Il propose de nombreuses fonctionnalités autour de cette visualisation : index, moteur de recherche, filtres d'affichage, enregistrement de vues, paramétrage de l'algorithme de dessin, affichage des documents avec liste des liens et rétroliens, etc.
+Le **cosmoscope** est un fichier HTML à ouvrir avec un navigateur web. Il contient une visualisation interactive (sous forme de graphe) du répertoire de documents analysé par le **cosmographe**. Il propose de nombreuses fonctionnalités autour de cette visualisation : index, moteur de recherche, filtres d'affichage, enregistrement de vues, paramétrage de l'algorithme de dessin, affichage des documents avec liste des liens et rétroliens, etc.
 
 <!-- Capture d'écran -->
 
-Ce fichier HTML se suffit à lui-même : il contient à la fois les données et les outils, sans dépendance à d'autres logicielle. Par conséquent, vous pouvez partager un cosmoscope aussi facilement que n'importe quelle pièce jointe, l'utiliser hors connexion ou encore le déposer sur un serveur web pour le rendre public. Cosma stocke une copie de chaque cosmoscope généré dans un répertoire sur votre machine pour dresser un historique de vos export.
+Ce fichier HTML se suffit à lui-même : il contient à la fois les données et les outils, sans dépendance à d'autres logiciels. Par conséquent, vous pouvez partager un cosmoscope aussi facilement que n'importe quelle pièce jointe, l'utiliser hors connexion ou encore le déposer sur un serveur web pour le rendre public. Cosma stocke une copie de chaque cosmoscope généré dans un répertoire sur votre machine pour dresser un historique de vos exports.
 
 ## Modularité
 
@@ -71,6 +71,7 @@ Séparer le traitement des données (cosmographe) de leur modélisation (cosmosc
 # Vocabulaire
 
 - "**fiche**" : rendu d'un fichier Markdown intégré à Cosma.
+- "**étiquette**" : titre de la fiche placé sous le nœud correspondant.
 - "**focus**" : limitation de la vue autour d'un nœud pour n'afficher que les  nœuds envrionnants, à [différentes échelles](#focus).
 - "**vue**" : configuration d'affichage du graphe, en fonction des filtres et du focus.
 
@@ -99,7 +100,7 @@ cd cosma
 
 ## Mise en route
 
-Installer les dépendances nécessaires au bon fonctionnement de l'application avec la commande suivante. Le gestionnaire de dépendances NPM est installé en même temps que NodeJs.
+Installez les dépendances nécessaires au bon fonctionnement de l'application avec la commande suivante. Le gestionnaire de dépendances NPM est installé en même temps que NodeJs.
 
 ```bash
 npm install --only=production
@@ -234,7 +235,7 @@ Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 
 ## Exemples de configuration
 
-La configuration suivante permet de concentrer la visualisation sur le type des relations entre les nœuds. Les relations `undefined` sont poitillées tandis que les autres sont plus visibles. Nous vous proposons ci-dessous un typologie de relations type **thesaurus** avec des relations spécifique (`s`), génériques (`g`) et associées (`a`).
+La configuration suivante permet de concentrer la visualisation sur le type des relations entre les nœuds. Les relations `undefined` sont poitillées tandis que les autres sont plus lisibles. Nous vous proposons ci-dessous un typologie de relations type **thesaurus** avec des relations spécifique (`s`), génériques (`g`) et associées (`a`).
 
 ```yaml
 link_types:
@@ -254,7 +255,7 @@ link_types:
 
 ## Commandes
 
-Les commandes suivantes vous permettent d'agir rapidement sur la configuration.
+Les commandes suivantes vous permettent de modifier rapidement la configuration.
 
 Modifier le chemin vers les fichiers sources :
 
@@ -332,13 +333,12 @@ Chaque fois que vous exportez un cosmoscope, il est sauvegardé dans un réperto
 - une copie du `cosmoscope.html`
 - un registre `error.log` des alertes enregistrées durant la prodécure
 - un répertoire `data` contenant les fichiers
-    - `links.json` : liste des liens et de leurs métadonnées
-    - `nodes.json` : liste des nœuds et de leurs métadonnées
+  - `links.json` : liste des liens et de leurs métadonnées
+  - `nodes.json` : liste des nœuds et de leurs métadonnées
 
 Vous pouvez réutiliser ces fichiers pour les intégrer à d'autres logiciels de visualisation.
 
 # Utilisation du cosmoscope
-
 
 ## Interface
 
@@ -352,16 +352,13 @@ L'interface de Cosma est composée en trois colonnes :
 
 <!-- Description générale, portabilité -->
 
-L'affichage n'est pas adapté pour les petits écrans, comme avec les mobiles et petite tablettes.
-
+L'affichage n'est pas adapté pour les petits écrans, comme pour les mobiles et petites tablettes. La manipulation au doigt ne vous permet pas de profiter de certaines interactions comme l'affichage du réseau au survol.
 
 ## Menu latéral gauche
 
 ### Moteur de recherche
 
 C'est un champ de texte situé en haut du menu latéral gauche. Il vous suggère une liste de fiches dont le titre proche de votre saisie. Cette liste est établie en fonction des filtres et du focus actifs.
-
-<!-- Préciser la bibliothèque sous-jacente ? -->
 
 Cliquer sur une suggestion sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
 
@@ -373,17 +370,17 @@ Cliquer sur un filtre permet de masquer ou de réafficher les fiches du type cor
 
 ### Mots-clés
 
-Cette liste dépend de tous les éléments que vous avez saisi dans les champs `tags` de vos fiches. Elle est située dans le menu latéral gauche. Séléctionner un mot-clé met en surbrillance dans le graphe toutes les fiches liées. Le nombre de fiches liées est affiché au droite du mot-clé.
+Cette liste dépend de tous les éléments que vous avez saisi dans les champs `tags` de vos fichiers. Elle est située dans le menu latéral gauche. Le nombre de fiches liées est affiché au droite du mot-clé. Séléctionner un mot-clé met en surbrillance dans le graphe l'étiquette de toutes les fiches liées. Les entrées de l'index sont également triées pour être limitées à cette liste de fichées liées. Vous pouvez activer simultanément plusieurs mots-clés. Pour désactiver un mot-clé, cliquez à nouveau sur le bouton pour que sa bordure noire disparaisse.
 
 ### Index
 
-Il s'agit de la liste des fiches sous forme d'un menu déroulant. Il est située dans le menu latéral gauche. Un badge à droite indique le nombre de fiche au total. Un bouton vous permet de trier l'affichage dans l'ordre alphabétique (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
+Il s'agit de la liste de toutes les fiches sous forme d'un menu déroulant. Il est située dans le menu latéral gauche. Un badge à droite indique le nombre de fiche actuellement affichées dans l'index. Un bouton vous permet de trier l'affichage dans l'ordre alphabétique (de manière croissante ou décroissante). Cliquer sur un titre sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
 
-L'index s'actualise avec l'affichage du graphe : les filtres et le focus agissent également sur l'index.
+L'index s'actualise avec l'affichage du graphe : les filtres, les mots-clés et le focus limitent le nombre d'entrées apparaissant dans l'index.
 
 ### Vues
 
-À tout moment, l'état de l'interface (fiche sélectionnée, filtres actifs, mode focus) peut être sauvegardé pour un accès rapide et partageable. Cliquer sur le bouton « Sauvegarder la vue » insère un code dans le presse-papier de l'utilisateur. Ce code (en base 64) peut être ajouté dans le fichier de configuration : ceci ajoute un bouton vers la vue en question dans les cosmoscopes générés ultérieurement.
+À tout moment, l'état du graphe (fiche sélectionnée, filtres actifs, mode focus) peut être sauvegardé pour une restitution rapide et partageable. Cliquer sur le bouton « Sauvegarder la vue » insère un code dans le presse-papier de l'utilisateur. Ce code (en base 64) doit être ajouté à la suite d'un titre dédié dans le fichier de configuration, dans l'option `views`. Un bouton portant ce titre permet d'appliquer les paramètres activés à l'enregistrement et ainsi de retrouver les mêmes conditions de lecture. Pour désactiver une vue, cliquez à nouveau sur le bouton pour que sa bordure noire disparaisse.
 
 Exemple :
 
@@ -396,21 +393,27 @@ views:
 
 C'est la liste des différents outils de configuration visuelle du graphe. Il s'agit de définir différents paramètres dont les valeurs par défaut peuvent être modifiées dans le fichier de configuration (pour retrouver à chaque export la même configuration visuelle).
 
+- l'affichage dans le graphe
+  - des liens (avec une indication sur le nombre total des liens)
+  - des étiquettes
+- l'animation des nœuds au survol
 - les différentes forces simulées par l'algorithme de dessin du graphe,
 - la position du graphe dans l'espace de la page,
 - la taille du titre des nœuds.
 
 ## Graphe
 
-Le graphe est l'ensemble de nœuds interreliés. Les nœuds correspondent aux fiches et leurs liaisons aux liens qu'elles intègrent. En dessous de chaque nœud on peut lire le titre de la fiche à laquelle il est lié.
+Le graphe est l'ensemble de nœuds interreliés. Les nœuds correspondent aux fiches et leurs liaisons aux liens qu'elles intègrent. En dessous de chaque nœud se trouve l'étiquette, le titre de la fiche à laquelle est lié le nœud.
 
-Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante. Un bouton *Annuler surbrillance* apparaitra en bas à gauche du graphe vous permettant de retirer l'effet.
+Survoler un nœud le met temporairement en surbrillance, ainsi que ses connexions.
+
+Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante. Pour retirer la subrillance, il faut fermer la fiche, via le bouton « Fermer » en haut de la fiche.
 
 Avec un clic maintenu sur un nœud, vous pouvez le déplacer et ainsi *tirer* l'ensemble de son réseau.
 
 ### Navigation
 
-Vous pouvez zoomer dans le graphe grâce à la molette de votre souris ou bien avec le boutons dédiés, situés en bas à gauche du graphe. Au même endroit, le bouton *Recentrer* vous permet de retrouver votre point de vue original.
+Vous pouvez zoomer dans le graphe grâce à la molette de votre souris, en double cliquant sur le fond blanc ou bien avec le boutons dédiés, situés en bas à gauche du graphe. Au même endroit, le bouton *Recentrer* (raccourcis : touche R) vous permet de retrouver votre point de vue original.
 
 <!-- À compléter. Zoom etc. -->
 
@@ -418,13 +421,17 @@ Vous pouvez zoomer dans le graphe grâce à la molette de votre souris ou bien a
 
 La gestion des nœuds dans l'espace peut être paramétré dans le fichier de configuration, mais peut aussi être actualisé en direct avec les paramètres disponibles dans le menu "Paramètres du graphe".
 
-Cliquer sur le *Temoin de spacialisation* vous permet de forcer la relance de l'algorithme.
+Cliquer sur le *Temoin de spacialisation* ou sur le barre Esapce vous permet de relancer l'algorithme pour un réseau bien espacé.
+
+### Focus
+
+En dessous des commandes de zoom se trouve une case à cocher « Activer le focus ». Elle ne fonctionne que si vous avez une fiche ouverte. Le réseau éloigné du nœud lié à cette fiche va alors disparaître pour ne laisser voir que ses connexions immédiates (liens et rétroliens). Vous pouvez avec la manette étendre cette zone d'affichage (focus) aux connexions situées à plusieurs liens de distance jusqu'au maximum permis par le paramètre `focus_max` du fichier de configuration.
 
 ## Fiches
 
-Les fiches sont présentées dans un volet latéral qui permet de consulter leur contenu, de naviguer dans le graphe via les liens et de modifier son affichage.
+Les fiches sont présentées dans un volet latéral qui permet de consulter leur contenu et leur réseau.
 
-Séléctionner une fiche (depuis le graphe, l'index ou depuis un lien)
+Vous pouvez ouvrir une fiche en cliquant sur le nœud dédié, l'entrée de l'index ou bien via un lien interne. Ouvrir la fiche
 
 - affiche son contenu dans le volet,
 - enregistrer son identifiant dans l'adresse de la page (permettant de la retrouver dans l'historique du navigateur, de partager l'adresse en ligne ou encore de la mettre de côté en dupliquant l'onglet).
@@ -433,13 +440,9 @@ Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud 
 
 ### Liens
 
-Le contenu de la fiche est suivi d'une liste des fiches vers lesquelles elle renvoie (liens sortants) et des fiches qui pointent vers elle (liens entrants ou rétroliens).
+Les liens que vous avez intégré à votre fichier texte apparaissent bleus, entre les mêmes crochets et soulignés. Vous pouvez ouvrir ces liens dans un nouvel onglet via un clic droit. Si vous survolez un lien quelques secondes, vous pouvez lire le titre de la fiche vers laquelle il pointe.
 
-Les liens que vous avez intégré à votre fichier texte apparaissent bleus, entre les mêmes crochets et soulignés. Vous pouvez ouvrir ces liens dans un nouvel onglet.
-
-### Focus
-
-Cliquer sur les différents niveaux de focus permet de modifier l'affichage du graphe pour isoler le nœud correspondant à la fiche. Le bouton `1` isole la fiche et ses connexions immédiates (distance = 1). Les boutons suivants étendent le rayon (`focus`) aux connexions situées à plusieurs liens de distance jusqu'au maximum permis par le paramètre `focus_max` du fichier de configuration.
+Au bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (liens sortants, d'après les liens bleu inscrits au-dessus) et des fiches qui pointent vers elle (liens entrants ou rétroliens). Survoler ces liens vous permet de lire le paragraphe où ils sont intégrés depuis leur fiche respective.
 
 # Crédits
 
@@ -453,12 +456,6 @@ Cliquer sur les différents niveaux de focus permet de modifier l'affichage du g
 ## Bibliothèques utilisées
 
 Pour améliorer la maintenabilité et la lisibilité du code source, l’équipe de développement a recouru aux bibliothèques suivantes.
-
-<!-- liste des dépendances sur le modèle suivant :
-
-- [Nom](lien) version (licence) : description
-
--->
 
 - [D3](https://d3js.org/) v4.13.0 (BSD 3-Clause) : Génération du graphe
 - [Nunjucks](https://mozilla.github.io/nunjucks/) v3.2.3 (BSD 2-Clause) : Génération du template du Cosmoscope
