@@ -5,7 +5,6 @@
  */
 
 function openRecord(id, history = true) {
-    id = Number(id);
 
     const recordContent = document.getElementById(id);
 
@@ -24,6 +23,8 @@ function openRecord(id, history = true) {
 
     // show record
     recordContent.style.display = 'block';
+
+    id = Number(id);
 
     // reset nodes highlighting
     unlightNodes();
