@@ -12,7 +12,10 @@ function registerView() {
         filters: ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames)
     }
 
-    viewObj.focus = view.focus;
+    viewObj.focus = {
+        fromRecordId: focus.focusedNodeId,
+        level: focus.range.value
+    };
 
     let key = JSON.stringify(viewObj);
     key = window.btoa(key);
