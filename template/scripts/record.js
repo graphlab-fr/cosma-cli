@@ -5,7 +5,6 @@
  */
 
 function openRecord(id, history = true) {
-    id = Number(id);
 
     const recordContent = document.getElementById(id);
 
@@ -25,11 +24,12 @@ function openRecord(id, history = true) {
     // show record
     recordContent.style.display = 'block';
 
+    view.openedRecordId = id;
+    id = Number(id);
+
     // reset nodes highlighting
     unlightNodes();
     highlightNodes([id]);
-
-    view.openedRecordId = id;
 
     if (history) {
         // page's <title> become record's name

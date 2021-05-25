@@ -8,11 +8,16 @@ function registerView() {
     const activeFiltersNames = getActiveFilterNames();
 
     const viewObj = {
-        recordId: view.openedRecord,
+        recordId: view.openedRecordId,
         filters: ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames)
     }
 
-    viewObj.focus = view.focus;
+    if (focus.focusedNodeId) {
+        viewObj.focus = {
+            fromRecordId: focus.focusedNodeId,
+            level: focus.range.value
+        };
+    }
 
     let key = JSON.stringify(viewObj);
     key = window.btoa(key);
@@ -54,14 +59,18 @@ function changeView(viewBtn) {
     key = window.atob(key);
     key = JSON.parse(key);
 
-    if (key.recordId) {
-        openRecord(key.recordId, false); }
-
     if (key.filters) {
         setFilters(key.filters); }
     
     if (key.focus) {
+        // console.log(key.focus);
+        openRecord(key.focus.fromRecordId, false);
         focus.init(key.focus.fromRecordId);
         focus.set(key.focus.level);
+
+        return;
     }
+
+    if (key.recordId) {
+        openRecord(key.recordId, false); }
 }

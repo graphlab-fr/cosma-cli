@@ -13,12 +13,6 @@ const view = {
          */
         focusMode: false,
         /**
-         * Id from the current isolated node
-         * @type {array}
-         * @default
-         */
-        focus: undefined, 
-        /**
          * Id from the current diplayed record
          * @type {array}
          * @default
