@@ -17,8 +17,8 @@ function genMdFile(title, type, tags) {
     if (!title) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a record title.'); }
 
-    if (!type) {
-        type = ''
+    if (!type || type === 'undefined') {
+        type = 'undefined'
     } else if (!config.record_types_list.includes(type)) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown type. Add it to config.yml beforehand.');
     }
