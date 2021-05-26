@@ -3,16 +3,16 @@ title: Manuel d’utilisation de Cosma
 author:
   - Guillaume Brioudes <https://myllaume.fr/>
   - Arthur Perret <https://www.arthurperret.fr/>
-date: 2021-05-25
+date: 2021-05-26
 lang: fr-FR
 description: Aide à l’utilisation et à la configuration de Cosma
 ---
 
-Cosma est un logiciel de visualisation de graphe documentaire. Il permet de représenter des notes interreliées sous la forme d’un réseau interactif dans une interface web. Le logiciel est conçu pour fonctionner avec des fichiers texte en Markdown et s’adapte aussi bien à une petite collection (centaine de documents) qu’à une vaste documentation (jusqu'à plusieurs milliers de documents). Il permet de produire différents types de documents : carnets de notes, Zettelkasten, wikis.
+Cosma est un logiciel de visualisation de graphe documentaire. Il permet de représenter des notes interreliées sous la forme d’un réseau interactif dans une interface web. Le logiciel est conçu pour fonctionner avec des fichiers texte Markdown (`.md`) et s’adapte aussi bien à une petite collection (une centaine de documents) qu’à une vaste documentation (plusieurs milliers de documents). Il permet de produire différents types de répertoire : carnets de notes, Zettelkasten, wikis.
 
 Cosma est développé dans le cadre du programme de recherche ANR [HyperOtlet].
 
-Bienvenue sur le manuel d’utilisation de Cosma. C'est le guide complet pour exploiter tout le potentiel de l'interface de Cosma. Les personnes souhaitant modifier cette interface et le fonctionnement du logiciel seront également interessées par la [documentation de développement](#).
+Bienvenue sur le manuel d’utilisation de Cosma. C'est le guide complet pour exploiter tout le potentiel de l'interface de Cosma. Les personnes souhaitant modifier cette interface et le fonctionnement du logiciel seront également interessées par la [documentation de développement](./documentation-code.html).
 
 ::: sommaire
 #. [Présentation](#presentation)
@@ -29,7 +29,7 @@ Le logiciel repose sur trois principes : l'interopérabilité, la portabilité e
 
 ## Interopérabilité
 
-Cosma fonctionne avec un répertoire de fichiers au format texte. Vous gardez le contrôle total de cet espace. Les logiciels s'envolent mais les données restent. Utiliser ou désinstaller Cosma n'altérera pas vos fichiers. Ils restent à la disposition de votre explorateur, d'autres outils de gestion de fichiers (synchronisation *cloud*, versionnement Git) et d'édition de texte.
+Cosma fonctionne avec un répertoire de fichiers au format texte, rédigés en Markdown. Vous gardez le contrôle total de cet espace. Les logiciels s'envolent mais les données restent. Utiliser ou désinstaller Cosma n'altérera pas vos fichiers. Ils restent à la disposition de votre explorateur, d'autres outils de gestion de fichiers (synchronisation *cloud*, versionnement Git) et d'édition de texte.
 
 Installez Cosma, indiquez-lui où sont vos fichiers et continuez à travailler avec votre éditeur de texte favori. Cosma ne prescrit pas de logiciel d'écriture, mais son fonctionnement repose sur l'adoption simultanée de plusieurs normes d'écriture qui visent à accroître l'interopérabilité et la pérennité des données :
 
@@ -122,6 +122,8 @@ Le fichier de configuration est au [format YAML](https://sweetohm.net/article/in
 
 La configuration doit contenir les paramètres suivants.
 
+### Import et export
+
 `files_origin` Chemin du répertoire contenant les fichiers Mardown à scanner.
 : Exemples : `./fiches/'`, `D:\repertoire\`
 : Attention à terminer la chaîne par un slash ou un anti-slash.
@@ -129,6 +131,14 @@ La configuration doit contenir les paramètres suivants.
 `export_target` Chemin vers le répertoire d’export du cosmoscope.
 : Exemple : `./'`, `D:\repertoire\`
 : Attention à terminer la chaîne par un slash ou un anti-slash.
+
+### Nœuds et liens
+
+De ces paramètres dépendent l'affichage des nœuds et liens.
+
+::: important
+Par défaut, un type `undefined` est disposé pour proposer un affichage *par défaut* à vos entités. Il concerne tous les nœuds et liens dont le type n'est pas précisé ou bien ne correspondant à aucun type défini. Si vous retirez ces valeurs par défaut, les nœuds et liens concernés deviendront gris très clair.
+:::
 
 `record_types` Listes des types de fiches. Ils apparaissent dans la barre latérale de gauche.
 : Ils colorent les nœuds dans le graphe et permettent de les filtrer.
@@ -150,10 +160,10 @@ La configuration doit contenir les paramètres suivants.
 		link_types:
 		  undefined:
 		    stroke: simple
-			color: grey
+			  color: grey
 		  s:
 		    stroke: dash
-			color: 'rgba(157, 62, 12, 0.7)'
+			  color: 'rgba(157, 62, 12, 0.7)'
 
 ### Paramètres du graphe
 
@@ -297,39 +307,63 @@ node app aview <nom> <code>
 
 # Utilisation du cosmographe
 
-## Créer des fiches
+## Générer des fiches
 
-Pour créer une nouvelle fiche (une fois l'[installation](#) et la [configuration](#) effectuées) vous pouvez entrer l'une des deux commandes suivantes. Vous pouvez également créer un fichier Markdown par d'autres moyens, tant que vous respecter le modèle de fichier présenté plus bas.
+Pour générer une nouvelle fiche vous pouvez entrer l'une des deux commandes suivantes. Vous pouvez également créer un fichier Markdown (`.md`) par d'autres moyens, tant que vous respecter le modèle de fichier présenté plus bas.
 
 ```bash
 node app record
 node app autorecord <titre> <type> <mots-clés>
 ```
 
-`<type>` doit correspondre à l’un des types définis dans la configuration. `<mots-clés>` est une liste de mots-clés séparés par des virgules (sans espaces).
+- `<titre>` corredpond au titre de la fiche et au nom de fichier généré ;
+- `<type>` doit correspondre à l’un des types définis dans la configuration ;
+- `<mots-clés>` est une liste de mots-clés séparés par des virgules (sans espaces).
 
-Ces commandes génèrent un fichier mardkdown (`.md`) avec le contenu suivant. En entête le YAML Front Matter (entre les deux `---`) contenant le title (`title`) de la fiche, son identifiant unique (`id`), son type (`type`) et ses mots-clés (`tags`). Après l'entête, vous pouvez librement inscrire votre contenu :
+Ces commandes génèrent un fichier Markdown avec le contenu suivant.
+
+### Entête
+
+En entête, le *YAML Front Matter* (entre les deux séparations `---`) contient le titre (`title`) de la fiche, son identifiant unique (`id`), son type (`type`) et ses mots-clés (`tags`).
 
 ```
 ---
-title: Titre du document
-id: 20201209111625
-type: undefined
+title: La transclusion
+id: 20210427185546
+type: Technique
 tags:
-  - tag 1
-  - tag 2
+  - documentarisation
+  - programmation
 ---
 
 
 ```
 
-Ces différents champs sont libres, vous pouvez y renseigner ce que vous voulez et même ajouter des champs qui ne sont pas de cette liste. Par exemple un champ `description`. Les champs `type` et `tags` ne sont pas obligatoires. Une fiche ne peut être assignée qu'à un seul type, mais peut disposer d'autant de tags que vous souhaitez. Attention à bien entrer une série de chiffres unique comme l'identifiant. Par défaut, Cosma génère des identifiants à 14 chiffres par horodatage (année, mois, jour, heure, minute et seconde) sur le modèle de certains logiciels de prise de notes type Zettelkasten comme [The Archive](https://zettelkasten.de/the-archive/) ou [Zettlr](https://www.zettlr.com). Si le champ `type` n'est pas spécifié ou bien que sa valeur ne correspond à l'un des type enregistré dans la configuration sous la paramètre `record_types`, la valeur de la fiche sera `undefined`.
+Ces différents champs sont libres et respectent la [syntaxe du langage YAML](https://sweetohm.net/article/introduction-yaml.html). Vous pouvez y renseigner ce que vous voulez et même ajouter des champs qui ne sont pas de cette liste, tant que vous repectez la syntaxe du langage YAML. Par exemple un champ `description`. Les champs `type` et `tags` ne sont pas obligatoires.
 
-## Créer des liens
+L'**identifiant** doit une une série de chiffres unique par rapport à l'ensemble des fichiers Mardown du répertoire. Par défaut, Cosma génère des identifiants à 14 chiffres par horodatage (année, mois, jour, heure, minute et seconde concaténés) sur le modèle de certains logiciels de prise de notes type Zettelkasten comme [The Archive](https://zettelkasten.de/the-archive/) ou [Zettlr](https://www.zettlr.com). 
 
-À l'intérieur des fiches, vous pouvez créer des liens avec l'identifiant de la fiche cible entre double crochets (ex : `[[20201209111625]]`). Vous pouvez également donner un type à ce lien selon la typologie dressée dans la configuration. Pour cela vous devez inscrire le nom du type dans le lien tel que `[[type:20201209111625]]`.
+Une fiche ne peut être assignée qu'à un seul **type**. Si le champ `type` n'est pas spécifié ou bien que sa valeur ne correspond à l'un des type enregistré dans la configuration sous le paramètre `record_types`, le type de la fiche sera interprétée comme `undefined`. Il recevra alors les propriétés prévues dans la configuration pour le type `undefined`. 
 
-## Export
+Vous pouvez entrer autant de **mots-clés** que vous souhaitez. Vous devez respecter la syntaxe YAML et bien aligner vos tirets et entrées.
+
+### Corps
+
+Vous ne pouvez pas insérer d'images dans Cosma.
+
+Après l'entête, vous pouvez librement inscrire votre contenu avec la [syntaxe Markdown](https://blog.wax-o.com/2014/04/tutoriel-un-guide-pour-bien-commencer-avec-markdown/). Elle vous permet de mettre en forme votre texte (gras, italique, barré), de disposer des blocs sémantiques (paragraphes, niveaux de titre, citation, code, tableau) et des liens.
+
+Vous pouvez ajouter des attributs personnalisés (`.class`, `#id`, `data-`, `onclick` etc.) à vos blocs, entre accolades `{ }`. Avec le code ci-dessous, nous attribuons la classe `p_imp` à un paragraphe. Ainsi, vous pouvez styliser cet éléments avec le CSS personnalisé.
+
+```
+Lorem ipsum dolor sit amet, consectetur. { .p_imp }
+```
+
+## Inscrire des liens internes
+
+Dans le corps de vos fiches, vous pouvez créer des liens internes à votre base documentaire avec l'identifiant de la fiche cible entre double crochets (ex : `[[20201209111625]]`). Vous pouvez également donner un type à ce lien selon la typologie dressée dans la configuration. Pour cela vous devez inscrire le nom du type comme prefixe à l'identifiant tel que `[[type:20201209111625]]`.
+
+## Exporter un cosmoscope
 
 Générer un cosmoscope avec l'une de ces commandes :
 
@@ -340,27 +374,37 @@ node app
 
 Le fichier `cosmoscope.html` est exporté dans le répertoire défini dans la configuration. Il écrasera un fichier éponyme au même emplacement. Ce fichier est également copié dans le répertoire `/history`, dans un sous-répertoire portant la date du jour et avec les données modélisées au format JSON.
 
-## Historique
+### Mise en ligne
 
-Chaque fois que vous exportez un cosmoscope, il est sauvegardé dans un répertoire `history` à la racine de l'arborescence de Cosma. Ce répertoire contient un sous-répertoire pour chaque export effectué. Ils contiennent
+Le fichier `cosmoscope.html` peut être lu avec un navigateur web depuis votre ordinateur. Il peut aussi être mis en ligne, déposé sur un serveur web, comme une page web. Vous pourrez alors partager vos fiches avec le monde entier.
 
-- une copie du `cosmoscope.html`
-- un registre `error.log` des alertes enregistrées durant la prodécure
+Pour retrouver une fiche en particulier sur un cosmoscope en ligne, vous pouvez ajouter son identifiant précédé d'un croisillion `#` en fin d'adresse. L'adresse `https://domaine.fr/cosmoscope.html#20210427185546` permet d'accéder à la fiche identifiée `20210427185546`.
+
+Pour confondre le fichier cosmoscope avec la racine de votre domaine ou d'un répertoire, renommez le fichier `cosmoscope.html` en `index.html`. Vous pourrez accéder à cette même fiche avec l'adresse `https://domaine.fr/#20210427185546` ou `https://domaine.fr/cosmoscope/#20210427185546` si le fichier `index.html` se trouve dans un répertoire `cosmoscope`.
+
+## Historique d'export
+
+Chaque fois que vous exportez un cosmoscope, il est sauvegardé dans un répertoire `/history` à la racine de l'arborescence de Cosma. Ce répertoire contient un sous-répertoire daté (à la minute près) pour chaque export effectué. Ils contiennent
+
+- une copie du fichier `cosmoscope.html`
+- un registre `error.log` des alertes (erreurs et points d'attention) enregistrées durant la prodécure
 - un répertoire `data` contenant les fichiers
   - `links.json` : liste des liens et de leurs métadonnées
   - `nodes.json` : liste des nœuds et de leurs métadonnées
 
-Vous pouvez réutiliser ces fichiers pour les intégrer à d'autres logiciels de visualisation.
+Vous pouvez réutiliser ces fichiers pour les intégrer à d'autres logiciels de visualisation. Vous pouvez aussi consulter vos fiches et l'état de votre réseau dans le temps.
+
+Cette sauvegarde systématiue peut être interrompue via la configuration, avec le paramètre `history: false`.
 
 # Utilisation du cosmoscope
 
-## Interface
+## Interface du cosmoscope
 
 L'interface de Cosma est composée en trois colonnes :
 
-- **"*Menu*" latéral gauche** : il concentre tous les menus permettant d'agir sur l'affichage du graphe de manière *globale*.
-- **"*Graphe*"** : espace où s'étendent les nœuds et où l'utilisateur peut zoomer, se déplacer latéralement.
-- **"*Fiche*" latérale droite** : lecture des métadonnées, du contenu des fiches et outils de navigation graphiques *particuliers*.
+- **"*Menu*" latéral gauche** : il concentre tous les menus permettant d'agir sur l'affichage du graphe ou de retrouver une fiche de manière globale.
+- **"*Graphe*"** : espace où s'étendent les nœuds, leur étiquette, leurs liaisons, et au sein duquel l'utilisateur peut zoomer, se déplacer latéralement.
+- **"*Fiche*" latérale droite** : lecture des métadonnées, du contenu des fiches et de leur réseau direct.
 
 ![](https://i.imgur.com/FZiYK5Y.jpg)
 
@@ -368,23 +412,27 @@ L'interface de Cosma est composée en trois colonnes :
 
 L'affichage n'est pas adapté pour les petits écrans, comme pour les mobiles et petites tablettes. La manipulation au doigt ne vous permet pas de profiter de certaines interactions comme l'affichage du réseau au survol.
 
-### CSS personnalisé
+### Personnaliser l'interface
 
-Vous pouvez via la commande suivante créer un fichier de style. Il peut être désactivé dans la configuration sans que n'ayez besoin de le supprimer. Les règles que vous inscrirez dans ce fichier viendront remplacer les styles implémentés dans le cosmoscope, inscrites dans le fichier `/template/styles.css` et `/template/print.css` pour les styles à l'impression. Vous pouvez ainsi remplacer les variables pour modifier les couleurs, les typographies utilisées (elles doivent être installées sur votre ordinateur pour que vous puissiez les lire) ou réécrire les règles attachées aux selecteurs utilisés.
+Vous pouvez via la commande suivante créer un fichier de style.
 
 ```bash
 node app css
 ```
 
-Vous pouvez vous baser sur le fichier `/template/template.njk` ou l'insepcteur de votre navigateur web pour repérer les parties de l'interface que vous souhaitez modifier.
+Il peut être désactivé dans la configuration sans que ayez besoin de le supprimer. Les règles que vous inscrirez dans ce fichier viendront s'ajouter ou remplacer les styles préscrites au cosmoscope, inscrites dans le fichier `/template/styles.css` et `/template/print.css` pour les styles à l'impression. Vous pouvez ainsi réécrire les variables pour modifier les couleurs, les typographies utilisées (elles doivent être installées sur votre ordinateur pour que vous puissiez les lire) et réécrire les règles attachées aux selecteurs.
+
+Vous pouvez vous baser sur le fichier `/template/template.njk` ou l'inspecteur de votre navigateur web pour repérer les parties de l'interface que vous souhaitez modifier.
 
 ## Menu latéral gauche
 
 ### Moteur de recherche
 
-C'est un champ de texte situé en haut du menu latéral gauche. Il vous suggère une liste de fiches dont le titre proche de votre saisie. Cette liste est établie en fonction des filtres et du focus actifs.
+C'est un champ de texte situé en haut du menu latéral gauche. Pour y faire une entrée, vous pouvez cliquer dessous ou bien taper la touche S.
 
-Cliquer sur une suggestion sélectionne le nœud correspondant dans le graphe et ouvre la fiche correspondante.
+Au fur et à mesure de votre saisie, le moteur de recjerche suggère une liste de fiches dont le titre proche de votre entrée. Cette liste est établie en fonction des filtres et du focus actifs : les fiches n'apparaissant pas dans le graphe ne sont pas indexées.
+
+Cliquer sur une suggestion met en surbrillance le nœud et son réseau correspondant dans le graphe et ouvre la fiche correspondante. Vous pouvez également pendant votre saisie naviguer verticalement dans les résultats grâce aux flèches directionnelles de votre clavier. Un cadre vous indique la fiche pouvant être seléctionnée avec la touche Entrée.
 
 ### Filtres
 
@@ -435,13 +483,13 @@ Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre 
 
 Avec un clic maintenu sur un nœud, vous pouvez le déplacer et ainsi *tirer* l'ensemble de son réseau.
 
-### Navigation
+### Zoom et déplacement
 
 Vous pouvez zoomer dans le graphe grâce à la molette de votre souris, en double cliquant sur le fond blanc ou bien avec le boutons dédiés, situés en bas à gauche du graphe. Au même endroit, le bouton *Recentrer* (raccourcis : touche R) vous permet de retrouver votre point de vue original.
 
 <!-- À compléter. Zoom etc. -->
 
-### Spacialisation
+### Spacialisation des entités
 
 La gestion des nœuds dans l'espace peut être paramétré dans le fichier de configuration, mais peut aussi être actualisé en direct avec les paramètres disponibles dans le menu "Paramètres du graphe".
 
@@ -451,7 +499,7 @@ Cliquer sur le *Temoin de spacialisation* ou sur le barre Esapce vous permet de 
 
 En dessous des commandes de zoom se trouve une case à cocher « Activer le focus ». Elle ne fonctionne que si vous avez une fiche ouverte. Le réseau éloigné du nœud lié à cette fiche va alors disparaître pour ne laisser voir que ses connexions immédiates (liens et rétroliens). Vous pouvez avec la manette étendre cette zone d'affichage (focus) aux connexions situées à plusieurs liens de distance jusqu'au maximum permis par le paramètre `focus_max` du fichier de configuration.
 
-## Fiches
+## Lecture des fiches
 
 Les fiches sont présentées dans un volet latéral qui permet de consulter leur contenu et leur réseau.
 
