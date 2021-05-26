@@ -23,7 +23,8 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
     
         metas.type = await new Promise((resolve, reject) => {
             rl.question('type (default = undefined) ? ', (answer) => {
-                if (answer === '' || !config.record_types_list.includes(answer)) {
+                if (answer === '') { answer = 'undefined'; }
+                if (!config.record_types_list.includes(answer) && answer !== 'undefined') {
                     reject('Unknown type. Add it to config.yml beforehand.'); }
 
                 resolve(answer);

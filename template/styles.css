@@ -441,6 +441,9 @@ marker {
 	fill:var(--l_undefined);
 }
 
+.l_undefined { fill: var(--light-gray); stroke: var(--light-gray); }
+.n_undefined { fill: var(--light-gray); stroke: var(--light-gray); }
+
 /* ---
 - Buttons
 --- */
