@@ -93,14 +93,18 @@ summary + button { margin: 1rem 0; }
 }
 
 .list-content-container ul li {
+	display: flex;
+    align-items: baseline;
 	padding: 0.3rem 0 0.3rem 1rem;
-	list-style-position: inside;
+}
+
+.list-content-container ul li span:last-of-type:not(.badge) {
+	line-height: 1.5;
 }
 
 .record-type-point { /* colored dot before links */
 	font-size: 0.8em;
-	vertical-align: 15%;
-	padding-right: 0.2em;
+	padding-right: 0.8em;
 }
 
 /* ---
