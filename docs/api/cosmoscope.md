@@ -1,3 +1,5 @@
-# Documentation du Cosmoscope
+[↩︎ Revenir à la documentation](../../fr.html)
 
-Vous trouverez ci-contre l'ensemble des fonctions utilisées pour la génération du Cosmoscope.
+# API du cosmoscope
+
+Vous trouverez ci-contre l'ensemble des fonctions utilisées pour la génération du cosmoscope.

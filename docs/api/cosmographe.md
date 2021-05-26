@@ -1,6 +1,8 @@
-# Documentation du Cosmographe
+[↩︎ Revenir à la documentation](../../fr.html)
 
-Vous trouverez ci-contre l'ensemble des fonctions utilisées pour la génération du Cosmographe.
+# API du cosmographe
+
+Vous trouverez ci-contre l'ensemble des fonctions utilisées pour la génération du cosmographe.
 
 Ci-dessous un schéma des structures de contrôle.
 

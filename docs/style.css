@@ -30,7 +30,7 @@ nav, main { overflow: auto; }
 nav {
   width: 25%;
   overflow: auto;
-  margin: 2rem 1rem 0 1rem;
+  margin: 2rem 3rem 0 2rem;
 }
 nav ul {
   font-family: var(--sans);
@@ -73,20 +73,26 @@ h1,h2,h3,h4,h5,h6 {
 }
 h1 {
   font-size: 1.3em;
-  margin: 3rem 0 0.5rem 0;
+  margin: 3.5rem 0 0.5rem 0;
 }
 h2 {
   font-size: 1.2em;
-  margin: 2rem 0 0.3rem 0;
+  margin: 3rem 0 0.3rem 0;
 }
 h3 {
   font-size: 1em;
-  margin: 2rem 0 0 0;
+  margin: 2.5rem 0 0 0;
 }
 h1.title {
   font-size: 2em;
   text-align: center;
   margin: 1rem 0 2rem 0;
+}
+
+/* PARAGRAPHS */
+
+p {
+	margin: 1.5 rem 0;
 }
 
 /* LISTS */
@@ -99,8 +105,9 @@ dt {
   padding: 0 0.5rem 0 0;
 }
 dd {
-  margin: 0;
-  padding: 0 0 0.2rem 1rem;
+  padding: 0;
+  margin: 1rem 0 1rem 2rem;
+  line-height: 1.7;
 }
 
 /* LINKS */
@@ -143,6 +150,10 @@ figcaption {
   background: rgb(225, 225, 225);
   padding: 30px 10px 3px 10px;
   border-radius: 5px;
+  margin: 1.5rem 0;
+}
+.astuce p, .tip p {
+	font-size: 0.9rem;
 }
 .astuce::before,
 .tip::before,
@@ -168,7 +179,8 @@ code {
 }
 p code,
 ul code,
-ol code {
+ol code,
+dl code {
   background-color: var(--code-background-color);
   border: 1px solid var(--code-border-color);
   border-radius: 4px;
