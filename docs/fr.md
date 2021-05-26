@@ -7,21 +7,11 @@ date: 2021-05-26
 lang: fr-FR
 ---
 
----
-title: Documentation de Cosma
-author:
-  - Guillaume Brioudes <https://myllaume.fr/>
-  - Arthur Perret <https://www.arthurperret.fr/>
-date: 2021-05-26
-lang: fr-FR
----
-
 Cosma est un logiciel de visualisation de graphe documentaire. Il permet de représenter des notes interreliées sous la forme d’un réseau interactif dans une interface web. Le logiciel est conçu pour fonctionner avec des fichiers texte en Markdown et s’adapte aussi bien à une petite collection (centaine de documents) qu’à une vaste documentation (jusqu'à plusieurs milliers de documents).
 
 Cosma est développé dans le cadre du programme de recherche ANR [HyperOtlet](https://hyperotlet.hypotheses.org/).
 
 ::: sommaire
-#. [Présentation](#presentation)
 #. [Présentation](#presentation)
 #. [Installation](#installation)
 #. [Configuration](#configuration)
@@ -419,6 +409,8 @@ Le fichier `cosmoscope.html` peut être lu avec un navigateur web depuis votre o
 
 ## Description générale de l'interface
 
+![]()
+
 L'interface de Cosma est organisée en trois colonnes :
 
 Panneau latéral gauche (Menu)
@@ -430,7 +422,7 @@ Zone centrale (Graphe)
 Panneau latéral droit (Fiche)
 : Affiche les fiches (métadonnées et contenu) ainsi qu'une liste des liens sortants (Liens) et entrants (Rétroliens).
 
-![](https://i.imgur.com/FZiYK5Y.jpg)
+![interface de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
 
 La modification des paramètres du graphe (`graph_config`) permet d'adapter l'affichage à la taille de l'écran.
 
@@ -440,7 +432,7 @@ L'affichage est possible sur tous types d'écrans mais n'est pas adapté aux pet
 
 ## Personnalisation de l'interface
 
-L'interface du cosmoscope est conçue à partir des fichiers HTML et CSS présents dans le dossier `/template` du répertoire de Cosma.
+L'interface du cosmoscope est conçue à partir des fichiers Nunjucks (`.njk`) et CSS présents dans le dossier `/template` du répertoire de Cosma.
 
 L'interface peut être personnalisée via un fichier `custom.css` placé dans ce même dossier. Vous pouvez créer manuellement le fichier ou bien exécuter la commande suivante :
 
@@ -521,6 +513,8 @@ Vous pouvez zoomer dans le graphe à la souris, au pavé tactile, en double cliq
 ## Mode focus
 
 Le bouton Activer le focus (raccourci : touche `F`) situé en bas à gauche du graphe permet de restreindre l'affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l'interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.
+
+![Mode focus de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-focus-demo.png)
 
 Le curseur qui apparaît sous le bouton Activer le focus permet de faire varier la distance d'affichage, jusqu'au maximum permis par le paramètre `focus_max` dans la configuration.
 
