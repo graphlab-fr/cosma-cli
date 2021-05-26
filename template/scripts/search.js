@@ -69,9 +69,9 @@ function keyboardResultNavigation(e) {
                 return;
             }
 
-            removeOutlineElt(resultContainer.childNodes[selectedResult]);
+            removeOutlineElt();
             selectedResult--;
-            activeOutline(resultContainer.childNodes[selectedResult]);
+            activeOutline();
 
             break;
         case 'ArrowDown':
@@ -79,9 +79,9 @@ function keyboardResultNavigation(e) {
 
             if (selectedResult === maxResultNb - 1 || selectedResult === resultList.length - 1) { return; }
 
-            removeOutlineElt(resultContainer.childNodes[selectedResult]);
+            removeOutlineElt();
             selectedResult++;
-            activeOutline(resultContainer.childNodes[selectedResult]);
+            activeOutline();
 
             if (selectedResult === 1) {
                 searchInput.blur();
@@ -96,12 +96,14 @@ function keyboardResultNavigation(e) {
     }
 }
 
-function activeOutline(elt) {
-    elt.classList.add('outline');
+function activeOutline() {
+    resultContainer.childNodes[selectedResult]
+        .classList.add('outline');
 }
 
-function removeOutlineElt(elt) {
-    elt.classList.remove('outline');
+function removeOutlineElt() {
+    resultContainer.childNodes[selectedResult]
+        .classList.remove('outline');
 }
 
 })();
