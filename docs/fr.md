@@ -582,33 +582,120 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   ├── template.js         | intégration données, style et corps du COSMOSCOPE
 │   └── verifconfig.js      | validation et modification de la configuration
 ├── template/               | 
-│   ├── libs                | bibliothèques JavaScript
+│   ├── libs/               | bibliothèques JavaScript
 │   ├── scripts/            | fonctions du COSMOSCOPE
-│   │   ├── filter.js       | appliquer filtres et focus
+│   │   ├── filter.js       | appliquer filtres
+│   │   ├── focus.js        | appliquer focus
 │   │   ├── graph.js        | génération du graphe selon données et configuration
 │   │   ├── index.js        | contrôle des volets et boutons du menu gauche
 │   │   ├── main.js         | historique de navigation et les variables globales
 │   │   ├── nodes.js        | affichage et subrillance des nœuds
 │   │   ├── record.js       | ouvrir/fermer le volet latéral droit
 │   │   ├── search.js       | paramétrage moteur de recherche
+│   │   ├── tag.js          | appliquer tags
 │   │   ├── view.js         | enregistrer et appliquer une vue
 │   │   └── zoom.js         | paramétrer les déplacement (latéral, zoom) au sein du graphe
 │   ├── cosmalogo.svg       | logo du logiciel
 │   ├── template.njk        | structure du COSMOSCOPE
+│   ├── print.css           | styles d'impression du COSMOSCOPE
 │   └── styles.css          | styles du COSMOSCOPE
-├── app.js                  | adressage des commandes au terminal
+├── app.js                  | adressage des commandes du terminal
 └── package.json            | liste des dépendances NodeJs
 ```
 
-## Le cosmoscope
+## Fonctionnement du cosmographe
 
-Le cosmoscope est généré en trois temps, par trois fonctions implémentées dans le fichier `/functions/template.js`. Elles sont appelées au sein du fichier `/functions/modelize.js` d'où proviennent les intrants (données passées en paramètre).
+Il a trois utilisations possibles via le terminal. Ces différentes requêtes sont réceptionnées par `app.js` qui les renvoie :
 
-1. La fonction [`jsonData()`](https://hyperotlet.github.io/cosma/api/cosmographe/global.html#jsonData) pour créer le fichier `/template/graph-data.js` contenant les données de modélisation du graphe, sa configuration et l'index des fiches.
-2. La fonction [`colors`](https://hyperotlet.github.io/cosma/api/cosmographe/global.html#colors) pour créer le fichier `/template/colors.css` contenant les [variables CSS](https://developer.mozilla.org/fr/docs/Web/CSS/Using_CSS_custom_properties) et les règles associées selon la configuration des couleurs préscrite dans le fichier `config.yml` extraites.
-3. La fonction [`cosmoscope`](https://hyperotlet.github.io/cosma/api/cosmographe/global.html#cosmoscope) s'appuyant sur le fichier de construction `/template/template.njk` pour intégrer l'ensemble des données des deux premiers fichiers créés (il inclut `colors.css` et `graph-data.js`) ainsi que des fichiers analysés.
+- extraire et modéliser (`modelize.js`) puis intégrer (`template.js`) les données dans un cosmoscope ;
+- générer des fichiers Markdown formatés (`record.js` et `autorecord.js`) ;
+- modifier la configuration (`verifconfig.js`).
 
-Les données intégrées avec le fichier `graph-data.js` sont déterminantes pour l'ensemble des opérations du cosmoscope. Elles permettent d'abord de générer le graphe en étant affectées dans le fichier `/template/scripts/graph.js`. Elles permettent ensuite de coordonner les filtres et focus sur les nœuds.
+La configuration (le contenu du fichier `config.yml` devenu un objet JavaScript) est exportée de manière globale (depuis `verifconfig.js`). Elle peut être appelée comme ci-dessous.
+
+```javascript
+const config = require('./verifconfig').config;
+
+const folderToExport = config.export_target;
+```
+
+## Scanne des fichiers
+
+Depuis le fichier `modelize.js`, on extrait de chaque fichier Markdown les métadonnées (l'entête YAML) et le contenu (suivant l'entête YAML) (fichier `modelize.js`).
+
+1. fonction [`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent) : Le contenu est scanné une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
+2. fonction [`convertLinks()`](./api/cosmographe/global.html#convertLinks) : Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
+3. fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope) : Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
+
+Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y être remplacée.
+
+## Génération du cosmoscope
+
+Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Elle intancie le modèle Nunjucks `template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+
+Nunjucks importe par ailleurs dans son `<head>` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `<script>` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
+
+Le tout est enregistré dans un fichier `cosmoscope.html` (plus un fichier sauvegardé dans l'[historique](#export)).
+
+## Affichage du graphe
+
+La génération et l'animation du graphe reposent sur la bibliothèque [D3](https://d3js.org/). Elle perçoit ses données depuis l'objet global `graph`. Cet object est composé de deux tableaux.
+
+Le tableau **`graph.nodes`** contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d'affichage (voir la sérialisation par la fonction [`registerNodes()`](./api/cosmographe/global.html#registerNodes)). Cet état indiqué est actualisé à chaque modification d'affichage.
+
+La tableau **`graph.links`** contient toutes les données relatives aux liens (voir la sérialisation par la fonction [`registerLinks()`](./api/cosmographe/global.html#registerLinks)).
+
+Ces tableaux peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
+
+**[VisJs Network](https://github.com/visjs/vis-network)**
+
+Fichier `/functions/modelize.js`
+
+```javascript
+function registerLinks(file) {
+// ...
+  for (const link of file.links) {
+  // ...
+    entities.links.push({
+      // ...
+      from: Number(link.source.id),
+      to: Number(link.target.id),
+      // ...
+    });
+  }
+}
+```
+
+Fichier `/template/sripts/graph.js`
+
+```javascript
+const network = new vis.Network(
+  document.getElementById('network')
+  , data = {
+    nodes: new vis.DataSet(graph.nodes),
+    edges: new vis.DataSet(graph.links)
+  }
+  , {  } // options
+);
+```
+
+**[SigmaJs](https://github.com/jacomyal/sigma.js/)**
+
+```javascript
+const network = new sigma({
+  graph: {
+    nodes: graph.nodes,
+    edges: graph.links
+  },
+  container: 'network'
+});
+```
+
+## Paramètres du graphe
+
+Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injecté dans le modèle Nunjucks `template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
+
+Ce même object global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Il font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la biliothèque de visualisation D3.
 
 # Crédits
 

@@ -55,7 +55,8 @@ exports.colors = colors;
 
 /**
  * Templating & create the Cosmoscope.html file
- * @param {array} files - All files array
+ * @param {array} files - All files array, for gen. records
+ * @param {object} entities - Nodes and links, for gen graph
  * @param {string} path - History save path
  */
 

@@ -239,8 +239,6 @@ function initializeDisplay() {
  */
 
 function getNodeNetwork(nodeIds) {
-    // graph.nodes = index;
-
     const diplayedNodes = graph.nodes.filter(function(item) {
         if (item.hidden === true) {
             return false; }

@@ -200,6 +200,7 @@ function registerNodes(file) {
 /**
  * Find file metas by its id
  * @param {int} fileId - File after links & backlinks parsing
+ * @return {array} - List of metas
  */
 
 function findFileMeta(fileId) {

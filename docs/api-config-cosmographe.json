@@ -6,6 +6,8 @@
             "../functions/history.js",
             "../functions/links.js",
             "../functions/log.js",
+            "../functions/modelize.js",
+            "../functions/record.js",
             "../functions/template.js",
             "../functions/verifconfig.js"
         ]
