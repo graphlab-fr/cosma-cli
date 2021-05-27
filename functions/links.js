@@ -1,7 +1,7 @@
 const mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs');
 
-// markdown-it plugin for convertLinks()
+// markdown-it plugin
 mdIt.use(mdItAttr, {
     leftDelimiter: '{',
     rightDelimiter: '}',
@@ -70,9 +70,9 @@ exports.catchLinksFromContent = catchLinksFromContent;
 
 /**
  * Get node rank from number of links & backlinks
- * @param {int} backLinkNb - Number of backlinks
- * @param {int} linkNb - Number of links
- * @returns {int} - Rank
+ * @param {number} backLinkNb - Number of backlinks
+ * @param {number} linkNb - Number of links
+ * @returns {number} - Rank
  */
 
 function getRank(backLinkNb, linkNb) {
@@ -86,8 +86,8 @@ exports.getRank = getRank;
 
 /**
  * Add its type to the link & turn it to int value
- * @param {int} link - A link aim
- * @returns {int} - Objets : type & aim
+ * @param {number} link - The wikilink content, '***' from '[[***]]'
+ * @returns {object} - Object : type & target
  */
 
 function normalizeLink(link) {
@@ -95,6 +95,7 @@ function normalizeLink(link) {
     if (link.length === 2) {
         return {type: link[0], target: {id: Number(link[1])} };
     }
+    // default value
     return {type: 'undefined', target: {id: Number(link[0])} };
 }
 
@@ -111,13 +112,13 @@ function convertLinks(content, file) {
 
         link = normalizeLink(link).target.id;
 
-        if (link === NaN) { return extract; } // only return the '[[***]]' string
+        if (link === NaN) { return extract; } //if not a number, only return the '[[***]]' string
 
         const associatedMetas = file.links.find(function(i) {
             return i.target.id === link;
         });
 
-        if (associatedMetas === undefined) { return extract; } // only return the '[[***]]' string
+        if (associatedMetas === undefined) { return extract; } // if not metas, only return the '[[***]]' string
 
         link = associatedMetas;
         // return '[[***]]' string into a Mardown link with openRecord function & class
