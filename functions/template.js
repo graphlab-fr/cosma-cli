@@ -57,10 +57,10 @@ exports.colors = colors;
  * Templating & create the Cosmoscope.html file
  * @param {array} files - All files array, for gen. records
  * @param {object} entities - Nodes and links, for gen graph
- * @param {string} path - History save path
+ * @param {string} historyPath - History save path
  */
 
-function cosmoscope(files, entities, path) {
+function cosmoscope(files, entities, historyPath) {
 
     nunjucks.configure('template', { autoescape: true });
     let htmlRender = nunjucks.render('template.njk', {
@@ -123,9 +123,9 @@ function cosmoscope(files, entities, path) {
         console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${files.length} records)`)
     });
 
-    if (!config.history) { return; }
+    if (!historyPath) { return; }
 
-    fs.writeFile(path + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
+    fs.writeFile(historyPath + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
         if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
     });
 }

@@ -3,7 +3,7 @@ const fs = require('fs')
     , time = moment().format('YYYY-MM-DD_HH-mm')
     , config = require('./verifconfig').config;
 
-if (!config.history) {
+if (config.history === false) {
     exports.historyPath = false;
     return;
 }

@@ -4,7 +4,7 @@ const fs = require('fs')
     , path = require('path')
     , linksTools = require('./links')
     , logTools = require('./log')
-    , savePath = require('./history').historyPath
+    , historyPath = require('./history').historyPath
     , config = require('./verifconfig').config;
 
 config.record_types_list = Object.keys(config.record_types);
@@ -88,7 +88,7 @@ let fileIds = []
 delete fileIds;
 // save & show : errors & warnings
 logTools.show(logs);
-logTools.register(logs, savePath);
+logTools.register(logs, historyPath);
 delete logs;
 
 files = files.map(function(file) {
@@ -142,13 +142,13 @@ entities.links = entities.links.map(function(link) {
 });
 
 // generate the Cosmoscope
-require('./template').cosmoscope(files, entities, savePath);
+require('./template').cosmoscope(files, entities, historyPath);
 
-if (savePath) {
+if (historyPath) {
     // generate data files
-    fs.writeFile(savePath + 'data/nodes.json', JSON.stringify(entities.nodes), (err) => {
+    fs.writeFile(historyPath + 'data/nodes.json', JSON.stringify(entities.nodes), (err) => {
         if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write nodes.json file : ' + err) } });
-    fs.writeFile(savePath + 'data/links.json', JSON.stringify(entities.links), (err) => {
+    fs.writeFile(historyPath + 'data/links.json', JSON.stringify(entities.links), (err) => {
         if (err) {console.error('\x1b[31m', 'Err.', '\x1b[0m', 'write links.json file : ' + err) } });
 }
 

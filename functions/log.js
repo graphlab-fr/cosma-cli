@@ -35,10 +35,10 @@ exports.show = show;
 /**
  * Templating & create the logs file into history
  * @param {object} logs - Objets contain errors & warnings arrays
- * @param {string} path - Path for history folder
+ * @param {string} historyPath - Path for history folder
  */
 
-function register(logs, path) {
+function register(logs, historyPath) {
 
     logs.err = logs.err.map(err => '\n- Err : ' + err);
     logs.warn = logs.warn.map(warn => '\n- Warn : ' + warn);
@@ -47,9 +47,9 @@ function register(logs, path) {
     let content = moment().format('YYYY-MM-DD_HH-mm-ss');
     content += logs.join('');
 
-    if (!path) { return; }
+    if (!historyPath) { return; }
 
-    fs.writeFile(path + 'error.log', content, (err) => {
+    fs.writeFile(historyPath + 'error.log', content, (err) => {
         if (err) { return console.error( 'Err. write error.log file : ' + err) }
     });
 }
