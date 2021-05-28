@@ -88,7 +88,10 @@ window.onpopstate = function(e) {
  * Keyboard shortcuts
  */
 
- const pressedKeys = {};
+ const pressedKeys = {
+    Control: false,
+    Alt: false
+ };
 
  document.onkeydown = (e) => {
  

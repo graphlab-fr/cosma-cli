@@ -9,18 +9,17 @@ let searchInput = document.querySelector('#search');
 let resultContainer = document.querySelector('#search-result-list')
     , maxResultNb = 5
     , resultList = []
-    , selectedResult = 0
-    , fuse;
+    , selectedResult = 0;
 
 searchInput.value = ''; // reset at page loading
 
 searchInput.addEventListener('focus', () => {
-    keyboardShortcutsAreWorking = false;
+    keyboardShortcutsAreWorking = false; // unactive all letters shortcuts
 
     // initialize search engine with no hidden nodes
-    fuse = new Fuse(graph.nodes.filter(item => item.hidden === false), {
+    const fuse = new Fuse(graph.nodes.filter(item => item.hidden === false), {
         includeScore: false,
-        keys: ['label']
+        keys: ['label'] // search field from nodes metas
     });
 
     searchInput.addEventListener('input', () => {
@@ -50,6 +49,7 @@ searchInput.addEventListener('focus', () => {
         }
     });
 
+    // switch between results by arrows from keyboard. key Enter to validate
     document.addEventListener('keydown', keyboardResultNavigation)
 });
 
