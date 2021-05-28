@@ -9,7 +9,7 @@ const fs = require('fs')
 let types = {}
     , tags = {};
 
-// markdown-it plugin for convertLinks()
+// markdown-it plugin
 mdIt.use(mdItAttr, {
     leftDelimiter: '{',
     rightDelimiter: '}',
@@ -104,6 +104,9 @@ function cosmoscope(files, entities, historyPath) {
         
         // join metadatas from config file
         metas: config.metas,
+
+        // if focus mode is active
+        focusIsActive: !(config.focus_max <= 0),
 
         // count links
         nblinks: entities.links.length,

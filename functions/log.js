@@ -15,16 +15,14 @@ function show(logs) {
 
     if (errors.length <= 3) {
         for (const err of errors) {
-            console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
-        }
+            console.error('\x1b[31m', 'Err.', '\x1b[0m', err); }
     } else {
         console.error('\x1b[31m', 'Err.', '\x1b[0m', `${errors.length} errors are recorded`);
     }
 
     if (warnings.length <= 3) {
         for (const warn of warnings) {
-            console.error('\x1b[33m', 'Warn.', '\x1b[0m', warn);
-        }
+            console.error('\x1b[33m', 'Warn.', '\x1b[0m', warn); }
     } else {
         console.error('\x1b[33m', 'Warn.', '\x1b[0m', `${warnings.length} warnings are recorded`);
     }
@@ -40,14 +38,14 @@ exports.show = show;
 
 function register(logs, historyPath) {
 
+    if (!historyPath) { return; }
+
     logs.err = logs.err.map(err => '\n- Err : ' + err);
     logs.warn = logs.warn.map(warn => '\n- Warn : ' + warn);
     logs = logs.err.concat(logs.warn);
 
     let content = moment().format('YYYY-MM-DD_HH-mm-ss');
     content += logs.join('');
-
-    if (!historyPath) { return; }
 
     fs.writeFile(historyPath + 'error.log', content, (err) => {
         if (err) { return console.error( 'Err. write error.log file : ' + err) }

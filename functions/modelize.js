@@ -13,79 +13,82 @@ config.link_types_list = Object.keys(config.link_types);
 let fileIds = []
     , logs = { warn: [], err: [] }
     , entities = { nodes: [], links: [] }
-    , id = 0
-    , files = fs.readdirSync(config.files_origin, 'utf8') // files name list
-        .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
-        .map(function(file) { // file analysis
-            const mTime = fs.statSync(config.files_origin + file).mtime; // last modif date
-            const fileName = file;
+    , id = 0;
 
-            file = fs.readFileSync(config.files_origin + file, 'utf8')
-            // yamlfontmater extract = file metas
-            file = yamlFrontmatter.loadFront(file);
-            // file content extract
-            let content = file.__content;
-            delete file.__content;
-            let metas = file;
+let files = fs.readdirSync(config.files_origin, 'utf8') // files name list
+    .filter(fileName => path.extname(fileName) === '.md') // throw no .md file
+    .map(function(file) { // file analysis
+        const mTime = fs.statSync(config.files_origin + file).mtime; // last modif date
+        const fileName = file;
 
-            metas.mtime = moment(mTime).format('YYYY-MM-DD');
-            metas.fileName = fileName;
+        file = fs.readFileSync(config.files_origin + file, 'utf8')
+        // YAML Front Matter extract = file metas + file content
+        file = yamlFrontmatter.loadFront(file);
+        // file content extract
+        let content = file.__content;
+        delete file.__content;
+        // file metas extract
+        let metas = file;
 
-            return {
-                content: content,
-                metas: metas
-            }
-        })
-        .filter(function(file) { // throw files with bad metas
-            if (!file.metas.id || isNaN(file.metas.id) === true) {
-                logs.err.push(`File ${file.metas.fileName} throw out : no valid id`);
-                return false; }
+        metas.mtime = moment(mTime).format('YYYY-MM-DD');
+        metas.fileName = fileName;
 
-            if (!file.metas.title) {
-                logs.err.push(`File ${file.metas.fileName} throw out : no valid title`);
-                return false; }
+        return {
+            content: content,
+            metas: metas
+        }
+    })
+    .filter(function(file) { // throw files with bad metas
+        if (!file.metas.id || isNaN(file.metas.id) === true) {
+            logs.err.push(`File ${file.metas.fileName} throw out : no valid id`);
+            return false; }
 
-            if (fileIds.indexOf(file.metas.id) !== -1) {
-                logs.err.push(`File ${file.metas.fileName} uses an identifier common to another file`); }
+        if (!file.metas.title) {
+            logs.err.push(`File ${file.metas.fileName} throw out : no valid title`);
+            return false; }
 
-            fileIds.push(file.metas.id);
+        if (fileIds.includes(file.metas.id)) {
+            logs.err.push(`File ${file.metas.fileName} throw out : uses an identifier common to another file`); }
 
-            return true;
-        })
-        .map(function(file) { // normalize metas
-            // null or no registered types changed to "undefined"
-            if (file.metas.type === null || config.record_types_list.indexOf(file.metas.type) === -1) {
-                file.metas.type = 'undefined';
-                logs.warn.push(`Type of file ${file.metas.fileName} changed to undefined : no registered type`);
-            }
+        fileIds.push(file.metas.id);
 
-            file.metas.tags = file.metas.tags || [];
+        return true;
+    })
+    .map(function(file) { // normalize metas
+        // null or no registered types changed to "undefined"
+        if (file.metas.type === null || config.record_types_list.indexOf(file.metas.type) === -1) {
+            file.metas.type = 'undefined';
+            logs.warn.push(`Type of file ${file.metas.fileName} changed to undefined : no registered type`);
+        }
 
-            // analysis file content by regex : get links target id
-            file.links = linksTools.catchLinksFromContent(file.content)
-            // throw links from/to unknown file id
-                .filter(function(link) {
-                    if (fileIds.indexOf(link.target.id) === -1 || isNaN(link.target.id) !== false) {
-                        logs.warn.push(`The link "${link.target.id}" from file ${file.metas.fileName} has been ignored : no valid target`);
-                        return false;
-                    }
+        file.metas.tags = file.metas.tags || [];
 
-                    if (link.type !== 'undefined' && config.link_types_list.indexOf(link.type) === -1) {
-                        logs.warn.push(`The link "${link.target.id}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
-                    }
+        // analysis file content by regex : get links target id
+        file.links = linksTools.catchLinksFromContent(file.content)
+            .filter(function(link) {
+                // throw links that are not numbers or from/to an unknown file id
+                if (fileIds.includes(link.target.id) === false || isNaN(link.target.id) !== false) {
+                    logs.warn.push(`The link "${link.target.id}" from file ${file.metas.fileName} has been ignored : no valid target`);
+                    return false;
+                }
+                // change link type if is not registred into configuration. Exception for 'undefined' type
+                if (config.link_types_list.includes(link.type) === false && link.type !== 'undefined') {
+                    logs.warn.push(`The link "${link.target.id}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
+                }
 
-                    return true;
-                }).map(function(link) {
-                    link.source = { id: file.metas.id };
-                    return link
-                });
+                return true;
+            }).map(function(link) {
+                link.source = { id: file.metas.id };
+                return link
+            });
 
-            registerLinks(file);
+        registerLinks(file);
 
-            return file;
-        });
+        return file;
+    });
 
 delete fileIds;
+
 // save & show : errors & warnings
 logTools.show(logs);
 logTools.register(logs, historyPath);
@@ -130,7 +133,7 @@ files = files.map(function(file) {
             };
         });
 
-    file.focusLevels = ((config.focus_max === 0) ? null : getConnectionLevels(file.metas.id, config.focus_max));
+    file.focusLevels = ((config.focus_max <= 0) ? undefined : getConnectionLevels(file.metas.id, config.focus_max));
 
     registerNodes(file);
 
@@ -177,7 +180,7 @@ function registerLinks(file) {
 
 /**
  * Feed entities.nodes object with node object
- * @param {object} file - File after links & backlinks parsing
+ * @param {object} file - File after links & backlinks crop
  */
 
 function registerNodes(file) {
@@ -200,7 +203,7 @@ function registerNodes(file) {
 /**
  * Find file metas by its id
  * @param {int} fileId - File after links & backlinks parsing
- * @return {array} - List of metas
+ * @returns {array} - List of metas
  */
 
 function findFileMeta(fileId) {
@@ -210,9 +213,9 @@ function findFileMeta(fileId) {
 }
 
 /**
- * Get dash/dotted values according to the link type
+ * Get link stroke and color according to the type config
  * @param {string} linkType - Link type extract from his registration
- * @returns {object} - Dash/dotted values or null value
+ * @returns {object} - Shape and color paramters
  */
 
 function getLinkStyle(linkType) {
@@ -246,14 +249,15 @@ function getLinkStyle(linkType) {
 
 /**
  * Find nodes connected around a single one on several levels
- * @param {int} nodeId - File id
- * @returns {array} - Contain one array per connection level
+ * Get data 'focus mode'
+ * @param {number} nodeId - File id
+ * @returns {array} - Array of arrays : contain one array per connection level
  */
 
 function getConnectionLevels(nodeId, maxLevel) {
 
-    let index = [[nodeId]];
-    let idsList = [];
+    let index = [[nodeId]]; // add the node as first level
+    let idsList = []; // contains all handled node ids
 
     for (let i = 0 ; i < maxLevel ; i++) {
 
@@ -262,15 +266,15 @@ function getConnectionLevels(nodeId, maxLevel) {
         // searching connections for each nodes from the last registred level
         for (const target of index[index.length - 1]) {
             let result = getConnectedIds(target);
-            if (result === false) { continue; } // node have not connections
+            if (result === false) { continue; } // node have not connections, analyse next one
 
-            // throw ids already registered in an other level
-            result = result.filter(target => idsList.indexOf(target) === -1);
+            // throw ids already registered into an other level toavoid infinit loop
+            result = result.filter(target => idsList.includes(target) === false);
 
             level = level.concat(result);
         }
 
-        // stop : current level contain any connection
+        // stop : current level contain any connection. There is no more level
         if (level.length === 0) { break; }
 
         // ignore duplicated ids

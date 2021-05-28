@@ -339,6 +339,7 @@
                 <button onclick="zoomMore()">+</button>
             </div>
 
+            {% if focusIsActive %}
             <div class="graph-controls-focus">
                 <label>
                     <input id="focus-check" type="checkbox" name="checkbox">
@@ -347,6 +348,7 @@
 
                 <input id="focus-range" type="range" min="0" max="6" value="1" name="range" step="1" />
             </div>
+            {% endif %}
         </div>
     </div>
 

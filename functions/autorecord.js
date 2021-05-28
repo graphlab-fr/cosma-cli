@@ -18,7 +18,7 @@ function genMdFile(title, type, tags) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a record title.'); }
 
     if (!type || type === 'undefined') {
-        type = 'undefined'
+        type = 'undefined'; // default value
     } else if (!config.record_types_list.includes(type)) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown type. Add it to config.yml beforehand.');
     }
@@ -29,7 +29,7 @@ function genMdFile(title, type, tags) {
         tags = tags.split(",");
     }
 
-    // write yamlfrontmatter
+    // write YAML Front Matter
 
     let content = yamlEditor.safeDump({
         title: title,

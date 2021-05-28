@@ -11,17 +11,24 @@ mdIt.use(mdItAttr, {
 /**
  * Catch links from Mardown file content
  * @param {string} fileContent - Mardown file content
- * @returns {array} - Objets array : type & aim id of links
+ * @returns {array} - Objets array : links with type & target id
  */
 
  function catchLinksFromContent(fileContent) {
-    let tLinks = {}, // temp link container
+    let tempL = {}, // temp link container
     links = []; // final link container
 
-    // get all paragraphs from the file content
+    /**
+     * Get all paragraphs from the file content
+     */
+
     const paraphs = fileContent.match(/[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*/g);
 
     if (paraphs === null) { return []; }
+
+    /**
+     * Get all links from each paragraph
+     */
 
     for (let i = 0; i < paraphs.length; i++) {
         // get string '***' from '[[***]]' (wikilinks), for each paragraph
@@ -29,38 +36,41 @@ mdIt.use(mdItAttr, {
         if (!linksId) { continue; }
 
         for (const linkId of linksId) {
-            // each linkId is put to 'tLinks', for get a list witout duplicated links
-            if (tLinks[linkId]) {
+            // each linkId is put to 'tempL', for get a list witout duplicated links
+            if (tempL[linkId]) {
                 // if the linkId is already registered, we juste save one more paragraph number
-                tLinks[linkId].paraphs.push(i)
+                tempL[linkId].paraphs.push(i)
             } else {
                 // if the linkId is new, we register its type and a paragraph number
-                tLinks[linkId] = normalizeLink(linkId);
-                tLinks[linkId].paraphs = [i]
+                tempL[linkId] = normalizeLink(linkId);
+                tempL[linkId].paraphs = [i]
             }
         }
     }
 
-    for (const linkMetas in tLinks) {
-        tLinks[linkMetas].context = [] // paraphs container
+    /**
+     * Put context (original paragraph) into each link
+     */
+
+    for (const linkId in tempL) {
+        tempL[linkId].context = [];
 
         for (let i = 0; i < paraphs.length; i++) {
             // for each paraph number from the link
-            if (tLinks[linkMetas].paraphs.indexOf(i) !== -1) {
+            if (tempL[linkId].paraphs.includes(i)) {
                 let par = paraphs[i]; // Markdown paraph
                 par = mdIt.render(par); // HTML paraph
+
                 // find the link string into the paraph and <mark> it
-                par = par.replace('[[' + linkMetas + ']]', '<mark>[[' + linkMetas + ']]</mark>');
+                par = par.replace('[[' + linkId + ']]', '<mark>[[' + linkId + ']]</mark>');
 
-                tLinks[linkMetas].context.push(par);
+                tempL[linkId].context.push(par);
             }
-        }
-
-        delete tLinks[linkMetas].paraphs; // delete list of paraphs
+        } 
 
         // paraphs array to context string
-        tLinks[linkMetas].context = tLinks[linkMetas].context.join('');
-        links.push(tLinks[linkMetas]); // put all link metas on final 'links' container
+        tempL[linkId].context = tempL[linkId].context.join('');
+        links.push(tempL[linkId]); // put all link metas on final 'links' container
     }
 
     return links;
@@ -76,18 +86,20 @@ exports.catchLinksFromContent = catchLinksFromContent;
  */
 
 function getRank(backLinkNb, linkNb) {
-    let rank = 1;
-    rank += ~~(linkNb / 2);
-    rank += ~~(backLinkNb / 2);
+    let rank = 1 // original rank
+        , sizeDivisor = 2; // to subside rank
+
+    rank += Math.floor(linkNb / sizeDivisor);
+    rank += Math.floor(backLinkNb / sizeDivisor);
     return rank;
 }
 
 exports.getRank = getRank;
 
 /**
- * Add its type to the link & turn it to int value
- * @param {number} link - The wikilink content, '***' from '[[***]]'
- * @returns {object} - Object : type & target
+ * Add its type to a link & turn its target id to int value
+ * @param {string} link - The wikilink content, '***' from '[[***]]'
+ * @returns {object} - Object : link type & target
  */
 
 function normalizeLink(link) {
@@ -100,7 +112,8 @@ function normalizeLink(link) {
 }
 
 /**
- * Combining levels down to get radius fields
+ * Add Mardown attributes to valid links into file content
+ * Leave disabled links as simple text
  * @param {string} content - Mardown file content
  * @param {object} file - File after links parsing
  * @returns {string} - Mardown content with converted links
@@ -108,17 +121,18 @@ function normalizeLink(link) {
 
 function convertLinks(content, file) {
     return content.replace(/(\[\[\s*).*?(\]\])/g, function(extract) { // get '[[***]]' strings
-        let link = extract.slice(0, -2).slice(2); // extract link id, without '[[' & ']]' caracters
+        // extract link id, without '[[' & ']]' caracters
+        let link = extract.slice(0, -2).slice(2);
 
         link = normalizeLink(link).target.id;
 
-        if (link === NaN) { return extract; } //if not a number, only return the '[[***]]' string
+        if (link === NaN) { return extract; } // link is not a number
 
         const associatedMetas = file.links.find(function(i) {
-            return i.target.id === link;
-        });
+            return i.target.id === link; });
 
-        if (associatedMetas === undefined) { return extract; } // if not metas, only return the '[[***]]' string
+        // link is not registred into file metas
+        if (associatedMetas === undefined) { return extract; }
 
         link = associatedMetas;
         // return '[[***]]' string into a Mardown link with openRecord function & class
