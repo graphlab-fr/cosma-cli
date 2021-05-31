@@ -1,4 +1,45 @@
-const fs = require('fs')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>modelize.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addCustomCSS">addCustomCSS</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addRecordType">addRecordType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#addView">addView</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#baseConfig">baseConfig</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#catchLinksFromContent">catchLinksFromContent</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#colors">colors</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#config">config</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#convertLinks">convertLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#cosmoscope">cosmoscope</a></span></li><li class="nav-item"><span class="nav-item-type type-member">M</span><span class="nav-item-name"><a href="global.html#errors">errors</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#findFileMeta">findFileMeta</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#genMdFile">genMdFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getConnectedIds">getConnectedIds</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getConnectionLevels">getConnectionLevels</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getLinkStyle">getLinkStyle</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#getRank">getRank</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyExportPath">modifyExportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#modifyImportPath">modifyImportPath</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#normalizeLink">normalizeLink</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#register">register</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerLinks">registerLinks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerNodes">registerNodes</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerTags">registerTags</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#registerType">registerType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#show">show</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">modelize.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const fs = require('fs')
     , yamlFrontmatter = require('yaml-front-matter')
     , moment = require('moment')
     , path = require('path')
@@ -72,7 +113,7 @@ let files = fs.readdirSync(config.files_origin, 'utf8') // files name list
                     return false;
                 }
                 // change link type if is not registred into configuration. Exception for 'undefined' type
-                if (config.link_types_list.includes(link.type) === false && link.type !== 'undefined') {
+                if (config.link_types_list.includes(link.type) === false &amp;&amp; link.type !== 'undefined') {
                     logs.warn.push(`The link "${link.target.id}" type "${link.type}" from file ${file.metas.fileName} has been ignored : no registered type`);
                 }
 
@@ -87,7 +128,7 @@ let files = fs.readdirSync(config.files_origin, 'utf8') // files name list
         return file;
     });
 
-// save & show : errors & warnings
+// save &amp; show : errors &amp; warnings
 logTools.show(logs);
 logTools.register(logs, historyPath);
 
@@ -130,7 +171,7 @@ files = files.map(function(file) {
             };
         });
 
-    file.focusLevels = ((config.focus_max <= 0) ? undefined : getConnectionLevels(file.metas.id, config.focus_max));
+    file.focusLevels = ((config.focus_max &lt;= 0) ? undefined : getConnectionLevels(file.metas.id, config.focus_max));
 
     registerNodes(file);
 
@@ -177,7 +218,7 @@ function registerLinks(file) {
 
 /**
  * Feed entities.nodes object with node object
- * @param {object} file - File after links & backlinks crop
+ * @param {object} file - File after links &amp; backlinks crop
  */
 
 function registerNodes(file) {
@@ -199,7 +240,7 @@ function registerNodes(file) {
 
 /**
  * Find file metas by its id
- * @param {int} fileId - File after links & backlinks parsing
+ * @param {int} fileId - File after links &amp; backlinks parsing
  * @returns {array} - List of metas
  */
 
@@ -256,7 +297,7 @@ function getConnectionLevels(nodeId, maxLevel) {
     let index = [[nodeId]]; // add the node as first level
     let idsList = []; // contains all handled node ids
 
-    for (let i = 0 ; i < maxLevel ; i++) {
+    for (let i = 0 ; i &lt; maxLevel ; i++) {
 
         let level = [];
         
@@ -287,7 +328,7 @@ function getConnectionLevels(nodeId, maxLevel) {
 }
 
 /**
- * Get connected links & backlinks from a node
+ * Get connected links &amp; backlinks from a node
  * @param {int} nodeId - File id
  * @returns {array} - Links and backlinks ids list
  */
@@ -304,4 +345,22 @@ function getConnectedIds(nodeId) {
         return false; }
 
     return targets;
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon May 31 2021 10:09:41 GMT+0200 (GMT+02:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

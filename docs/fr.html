@@ -64,6 +64,7 @@
 <li><a href="#generation-du-cosmoscope"><span class="toc-section-number">6.5</span> Génération du cosmoscope</a></li>
 <li><a href="#affichage-du-graphe"><span class="toc-section-number">6.6</span> Affichage du graphe</a></li>
 <li><a href="#parametres-du-graphe-2"><span class="toc-section-number">6.7</span> Paramètres du graphe</a></li>
+<li><a href="#raccourcis-clavier"><span class="toc-section-number">6.8</span> Raccourcis clavier</a></li>
 </ul></li>
 <li><a href="#credits"><span class="toc-section-number">7</span> Crédits</a>
 <ul>
@@ -463,11 +464,13 @@ tags:
 <li>des index (mots-clés, titre de fiche, vues) ;</li>
 <li>les fiches.</li>
 </ul>
+<div class="important">
 <p>Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :</p>
 <ul>
 <li><a href="./api/cosmographe/index.html">Consulter l’API du cosmographe</a></li>
 <li><a href="./api/cosmoscope/index.html">Consulter l’API du cosmoscope</a></li>
 </ul>
+</div>
 <h2 data-number="6.2" id="arborescence"><span class="header-section-number">6.2</span> Arborescence</h2>
 <p>Vous trouverez ci-dessous une description complète de l’arborescence du logiciel. Vous pourrez ainsi distinguer les fichiers concernant le cosmographe et ceux du cosmoscope.</p>
 <pre><code>.
@@ -487,12 +490,14 @@ tags:
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
 │   ├── scripts/            | fonctions du COSMOSCOPE
+│   │   ├── counter.js      | actuliser les compteurs d&#39;entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
 │   │   ├── graph.js        | génération du graphe selon données et configuration
 │   │   ├── index.js        | contrôle des volets et boutons du menu gauche
+│   │   ├── keyboard.js     | affectation des raccourcis clavier
 │   │   ├── main.js         | historique de navigation et les variables globales
-│   │   ├── nodes.js        | affichage et subrillance des nœuds
+│   │   ├── nodes.js        | affichage des nœuds
 │   │   ├── record.js       | ouvrir/fermer le volet latéral droit
 │   │   ├── search.js       | paramétrage moteur de recherche
 │   │   ├── tag.js          | appliquer tags
@@ -566,6 +571,9 @@ tags:
 <h2 data-number="6.7" id="parametres-du-graphe-2"><span class="header-section-number">6.7</span> Paramètres du graphe</h2>
 <p>Les paramètres du graphe sont extraits de la partie <code>graph_config</code> du fichier de configuration <code>config.yml</code>. Elle est injecté dans le modèle Nunjucks <code>template.njk</code> via la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript <code>graphProperties</code>.</p>
 <p>Ce même object global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Il font ensuite appel à la fonction <a href="./api/cosmographe/global.html#updateForces"><code>updateForces()</code></a> pour relancer l’évaluation de ces paramètres par la biliothèque de visualisation D3.</p>
+<h2 data-number="6.8" id="raccourcis-clavier"><span class="header-section-number">6.8</span> Raccourcis clavier</h2>
+<p>L’ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier <code>/template/scripts/keyboard.js</code>. L’objet global <code>pressedKeys</code> contient la liste des touches surveillées pour modifier un comportement. D’autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l’objet global <code>pressedKeys</code>.</p>
+<p>Le booléen global <code>keyboardShortcutsAreWorking</code> défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu’écrire.</p>
 <h1 data-number="7" id="credits"><span class="header-section-number">7</span> Crédits</h1>
 <h2 data-number="7.1" id="equipe"><span class="header-section-number">7.1</span> Équipe</h2>
 <ul>
