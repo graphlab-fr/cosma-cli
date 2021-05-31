@@ -1,13 +1,11 @@
 /**
  * Display some nodes, hide all others
- * turn on the 'focusMode'
- * @param {string} nodeIdsList - List of ids from nodes to keep displayed, separeted by comas
+ * Turn on the 'focusMode'
+ * @param {string} nodeIdsList - List of ids from nodes to keep displayed
  */
 
  function nodeFocus(nodeIdsList) {
-    // nodeIdsList = parseIdsString(nodeIdsList);
-
-    view.focusMode = false; // for reset
+    view.focusMode = false; // for reset display
 
     let idsToHide = [];
 
@@ -21,14 +19,18 @@
         }
         return item;
     });
+
     // display nodeIds if their are not filtered
+    const filteredNodes = getNodesHideByFilter();
     let idsToDisplay = nodeIdsList
-        .filter(id => !getNodesHideByFilter().includes(id));
+        .filter(id => !filteredNodes.includes(id));
 
     hideNodes(idsToHide);
     view.focusMode = true;
     displayNodes(idsToDisplay);
 }
+
+/** @namespace */
 
 const focus = {
     checkbox: document.getElementById('focus-check'),
@@ -37,6 +39,11 @@ const focus = {
     focusedNodeId: undefined,
     focusedNode: undefined,
     levels: [],
+
+    /**
+     * Get focus levels from the active record and lauche first one
+     * @param {string | number} focusedNodeId - Id of the current activated record
+     */
     init : function(focusedNodeId = view.openedRecordId) {
         if (focusedNodeId === undefined) { this.hide(); return; }
 
@@ -51,20 +58,32 @@ const focus = {
         this.range.setAttribute('max', this.levels.length)
         // launch use
         this.display();
-        this.range.focus();
+        this.range.focus(); // to control range with keyboard arrows
         this.set(1);
     },
+
+    /**
+     * Reset and display and active focus inputs
+     */
     display: function() {
         this.checkbox.checked = true;
         this.range.classList.add('active');
         this.range.value = 1;
     },
+
+    /**
+     * Reset and hide focus inputs
+     */
     hide : function() {
-        // displaying
         this.checkbox.checked = false;
         this.range.classList.remove('active');
         this.range.value = 1;
     },
+
+    /**
+     * Lauch a focus level
+     * @param {number} level - Level number
+     */
     set: function(level) {
         this.isActive = true;
 
@@ -75,19 +94,23 @@ const focus = {
 
         nodeFocus(level);
     },
+
+    /**
+     * Unset focus parameters and focus
+     * @param {number} level - Level number
+     */
     disable : function() {
         if (this.isActive === false) { return; }
 
+        // throw infos about the focus
         this.isActive = false;
-
-        this.hide();
-        resetFocus();
-
-        // throw infos about the focuse
         this.focusedNode.classList.remove('focus');
         this.focusedNode = undefined;
         this.focusedNodeId = undefined;
         this.levels = [];
+
+        this.hide();
+        resetFocus();
     }
 }
 
@@ -114,8 +137,10 @@ focus.range.addEventListener('change', () => {
  function resetFocus() {
     view.focus = undefined;
 
+    const filteredNodes = getNodesHideByFilter();
+
     const idsToDisplay = graph.nodes
-        .filter(item => item.isolated === false && !getNodesHideByFilter().includes(item.id))
+        .filter(item => item.isolated === false && !filteredNodes.includes(item.id))
         .map(item => item.id);
 
     graph.nodes = graph.nodes.map(function(item) {
@@ -125,6 +150,4 @@ focus.range.addEventListener('change', () => {
 
     view.focusMode = false;
     displayNodes(idsToDisplay);
-
-    unactiveFromParent(document.getElementById('views-container'));
 }

@@ -22,7 +22,7 @@ function hideNodes(nodeIds) {
         return item.id;
     });
 
-    setTypesConters(nodesToHideType);
+    setTypesCounter(nodesToHideType);
 
     hideFromIndex(nodesToHideIds);
 
@@ -69,7 +69,7 @@ function displayNodes(nodeIds) {
         return item;
     });
 
-    setTypesConters(nodesToDisplayType);
+    setTypesCounter(nodesToDisplayType);
 
     displayFromIndex(nodesToDisplayIds);
 

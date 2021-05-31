@@ -1,11 +1,11 @@
 let filterAltMode = false;
 
 /**
- * Toggle filter from his checkbox or manually
+ * Toggle a filter from his checkbox
  * @param {bool} isChecked - Checkbox boolean : checked or not
- * @param {string} nodeIdsList - List of node ids, separeted by comas
- * @param {HTMLElement} input - The filter elt from DOM
- * @param {bool} fromElt - If fcuntion is activeted from the web page
+ * @param {string} nodeIdsList - List of nodes id to filter, separeted by comas
+ * @param {HTMLElement} input - The filter element from DOM
+ * @param {bool} fromElt - If function is activeted from a 'onchange' attribute
  */
 
  function filter(isChecked, nodeIdsList, input, fromElt = false) {
@@ -36,15 +36,15 @@ let filterAltMode = false;
 /**
  * Activate filters by their name and if their are not already activated
  * Unactive others filters if their are not already unactivated
- * @param {array} filtersNamesToActivate - List of filter names
+ * @param {array} filtersNameToActivate - List of filter names
  */
 
-function setFilters(filtersNamesToActivate) {
+function setFilters(filtersNameToActivate) {
     let filtersNames = Array.from(document.querySelectorAll('[data-filter]'))
         .map(filter => filter.name);
 
     let filtersToUnactivate = filtersNames.filter(function(filterName) {
-        if (filtersNamesToActivate.includes(filterName)) {
+        if (filtersNameToActivate.includes(filterName)) {
             return false; }
         if (getUnactiveFilterNames().includes(filterName)) {
             return false; }
@@ -52,7 +52,7 @@ function setFilters(filtersNamesToActivate) {
         return true;
     });
 
-    filtersNamesToActivate = filtersNamesToActivate.filter(function(filterName) {
+    filtersNameToActivate = filtersNameToActivate.filter(function(filterName) {
         if (getActiveFilterNames().includes(filterName)) {
             return false; }
 
@@ -64,21 +64,19 @@ function setFilters(filtersNamesToActivate) {
             , data = filterElt.dataset.filter;
 
         filter(false, data, filterElt);
-            // filterElt.checked = false;
     }
 
-    for (const filterName of filtersNamesToActivate) {
+    for (const filterName of filtersNameToActivate) {
         let filterElt = document.querySelector('[data-filter][name="' + filterName + '"]')
             , data = filterElt.dataset.filter;
 
         filter(true, data, filterElt);
-            // filterElt.checked = true;
     }
 }
 
 /**
- * Get all filters name
- * @returns {array} - Filter names
+ * Get all filters name from the page
+ * @returns {array} - Filter names list
  */
 
 function getFilterNames() {
@@ -88,7 +86,7 @@ function getFilterNames() {
 
 /**
  * Get active filters name
- * @returns {array} - Filter names
+ * @returns {array} - Filter names list
  */
 
 function getActiveFilterNames() {
@@ -100,7 +98,7 @@ function getActiveFilterNames() {
 
 /**
  * Get unactive filters name
- * @returns {array} - Filter names
+ * @returns {array} - Filter names list
  */
 
 function getUnactiveFilterNames() {
@@ -111,25 +109,24 @@ function getUnactiveFilterNames() {
 }
 
 /**
- * Get nodes ids array hiden by filters
- * @returns {array} - Ids list (integer value)
+ * Get nodes id hidden by filters into an array
+ * @returns {array} - Nodes id list
  */
 
 function getNodesHideByFilter() {
-    let filtersIds = Array.from(document.querySelectorAll('[data-filter]'))
-        .filter(filterElt => filterElt.checked === false)
-        .map(filterElt => filterElt.dataset.filter.split(',')).flat()
-        .map(nodeId => Number(nodeId));
+    const unactiveFilters = Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === false);
 
-    return filtersIds;
+    return filtersIds = unactiveFilters
+        .map(filterElt => parseIdsString(filterElt.dataset.filter)).flat();
 }
 
 /**
- * For each type in list, find the counter and addition his value
- * @param {object} types - List of types to change, with pos. or neg. number as value
+ * For each types in list, find the counter and addition his value
+ * @param {object} types - List of types to change with the value to add
  */
 
-function setTypesConters(types) {
+function setTypesCounter(types) {
     for (const typeName in types) {
         const number = types[typeName];
         const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
@@ -138,8 +135,8 @@ function setTypesConters(types) {
 }
 
 /**
- * Get nodes ids list from a string list
- * @returns {array} - Ids list (integer value)
+ * Get nodes id list (array of numbers) from a string
+ * @returns {array} - Ids array
  */
 
 function parseIdsString(idsString) {
