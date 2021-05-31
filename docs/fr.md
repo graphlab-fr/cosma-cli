@@ -557,10 +557,12 @@ Le **cosmoscope** est un fichier HTML exécuté sur navigateurs web, créé à p
 - des index (mots-clés, titre de fiche, vues) ;
 - les fiches.
 
+::: important
 Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :
 
 - [Consulter l'API du cosmographe](./api/cosmographe/index.html)
 - [Consulter l'API du cosmoscope](./api/cosmoscope/index.html)
+:::
 
 ## Arborescence
 
