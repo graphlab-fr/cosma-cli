@@ -1,11 +1,11 @@
 const indexContainer = document.getElementById('index');
 
 /**
- * Display/hide lists from a 'data-sort' container
- * and animate the arrow
+ * Switch between two lists from 'data-sort' containers
+ * Two lists : increasing and decreasing
  */
 
- (function () {
+(function () {
     const sortContainer = document.querySelectorAll('[data-sort]');
     for (const container of sortContainer) {
         const box = container.querySelectorAll('.sort-box')
@@ -28,35 +28,6 @@ const indexContainer = document.getElementById('index');
         });
     }
 })();
-
-/**
- * Highligth clicked element and unlighligth the others from the same parent
- * @param {HTMLElement} child - clicked element
- */
-
-function activeFromParent(child) {
-    const activeElt = child.parentNode.querySelector(child.tagName + '.active');
-
-    if (activeElt) {
-        activeElt.classList.remove('active')
-        activeElt.style.borderColor = null;
-    }
-
-    child.classList.add('active')
-}
-
-/**
- * Unlighligth all activated elements from parent
- * @param {HTMLElement} parent - parent of elements
- */
-
-function unactiveFromParent(parent) {
-    const activeElt = parent.querySelector('.active');
-
-    if (activeElt) {
-        activeElt.classList.remove('active');
-    }
-}
 
 /**
  * Hide items from the index list that correspond to the nodes ids

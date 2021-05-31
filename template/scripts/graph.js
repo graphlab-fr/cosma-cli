@@ -239,29 +239,19 @@ function initializeDisplay() {
  */
 
 function getNodeNetwork(nodeIds) {
-    const diplayedNodes = graph.nodes.filter(function(item) {
-        if (item.hidden === true) {
-            return false; }
+    const diplayedNodes = graph.nodes.filter(item => item.hidden === false)
+        .map(item => item.id);
 
-        return item;
-    }).map(item => item.id);
-
-    const nodes = node.filter(function(node) {
-        if (nodeIds.includes(node.id)) {
-            return true;
-        }
-        return false
-    })
+    const nodes = node.filter(node => nodeIds.includes(node.id));
 
     const links = link.filter(function(link) {
         if (!nodeIds.includes(link.source.id) && !nodeIds.includes(link.target.id)) {
-            return false;
-        }
+            return false; }
         if (!diplayedNodes.includes(link.source.id) || !diplayedNodes.includes(link.target.id)) {
-            return false;
-        }
+            return false; }
+
         return true;
-    })
+    });
 
     return {
         nodes: nodes,
@@ -324,12 +314,6 @@ function unlightNodes() {
 
     ntw.nodes.classed('highlight', false);
     ntw.links.classed('highlight', false);
-
-    if (view.activeTag !== undefined) {
-        // if there is an active tag, remove the highlight of its button
-        document.querySelectorAll('[data-tag="' + view.activeTag + '"]')
-            .forEach(button => { button.classList.remove('active'); });
-    }
 
     view.highlightedNodes = [];
 }

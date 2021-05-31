@@ -1,3 +1,5 @@
+const recordContainer = document.getElementById('record-container');
+
 /**
  * Open the record reading panel & show one
  * @param {array} id - Record/node id
@@ -17,9 +19,9 @@ function openRecord(id, history = true) {
     }
 
     // open records container
-    window['record-container'].classList.add('active');
+    recordContainer.classList.add('active');
     // adjust record view
-    window['record-container'].scrollTo({ top: 0 });
+    recordContainer.scrollTo({ top: 0 });
 
     // show record
     recordContent.style.display = 'block';
@@ -44,7 +46,7 @@ function openRecord(id, history = true) {
  */
 
 function closeRecord() {
-    document.querySelector('#record-container').classList.remove('active');
+    recordContainer.classList.remove('active');
     document.getElementById(view.openedRecordId).style.display = null;
     view.openedRecordId = undefined;
 
@@ -57,5 +59,5 @@ function closeRecord() {
 
 window.addEventListener("DOMContentLoaded", () => {
     const hash = window.location.hash.substr(1);
-    openRecord(hash);
+    if (hash) { openRecord(hash); }
 });

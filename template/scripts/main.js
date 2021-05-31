@@ -33,8 +33,6 @@ const view = {
     }
     , svg = d3.select("#graph_canvas");
 
-let keyboardShortcutsAreWorking = true
-
 /**
  * Navigation history entries managment
  * @namespace
@@ -83,120 +81,6 @@ window.onpopstate = function(e) {
 
     openRecord(recordId, false);
 };
-
-/**
- * Keyboard shortcuts
- */
-
- const pressedKeys = {
-    Control: false,
-    Alt: false
- };
-
- document.onkeydown = (e) => {
- 
-    if (keyboardShortcutsAreWorking) {
- 
-        switch (e.key) {
-            case 's':
-                e.preventDefault();
-                searchInput.focus();
-                return;
-
-            case 'r':
-                e.preventDefault();
-                zoomReset();
-                return;
-
-            case 'f':
-                e.preventDefault();
-
-                if (focus.isActive) {
-                    focus.disable();
-                } else {
-                    focus.init();
-                }
-                return;
-
-            case ' ':
-                e.preventDefault();
-                document.querySelector('.load-bar').click();
-                return;
-        }
-    }
- 
-    switch (e.key) {
-        case 'Escape':
-            closeRecord();
-            return;
-
-        case 'Control':
-            pressedKeys[e.key] = true;
-            return;
-
-        case 'Alt':
-            pressedKeys[e.key] = true;
-            return;
-    }
- };
- 
-window.onkeyup = function(e) {
-    switch (e.key) {
-        case 'Control':
-            pressedKeys[e.key] = false;
-            return;
-
-        case 'Alt':
-            pressedKeys[e.key] = false;
-            return;
-    }
-}
-
-const counters = {
-    index: document.getElementById('index-counter'),
-    tag: document.getElementById('tag-counter')
-}
-
-/**
- * Change counter display
- * @param {HTMLElement} counterElt - Elt with the original number
- * @param {number} value - Number neg. or pos. addition to original number to get the new count
- * @return {boolean} True if the counter number is max
- */
-
-function iterateCounter(counterElt, value) {
-    let counterNumber = counterElt.textContent.split('/', 2);
-
-    if (counterNumber.length === 1) { // if there is NOT a '/' into counter text content
-        counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[0];
-        return false;
-    }
-
-    if (Number(counterNumber[0]) + value === Number(counterNumber[1])) {
-        counterElt.textContent = counterNumber[1];
-        return true;
-    }
-
-    counterElt.textContent = (Number(counterNumber[0]) + value) + '/' + counterNumber[1]
-    return false;
-}
-
-function setCounter(counterElt, value) {
-    let counterNumber = counterElt.textContent.split('/', 2);
-
-    if (counterNumber.length === 1) { // if there is NOT a '/' into counter text content
-        counterElt.textContent = value + '/' + counterNumber[0];
-        return false;
-    }
-
-    if (value === Number(counterNumber[1])) {
-        counterElt.textContent = counterNumber[1];
-        return true;
-    }
-
-    counterElt.textContent = value + '/' + counterNumber[1]
-    return false;
-}
 
 /**
  * Cosma logo animation onclick

@@ -584,12 +584,14 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
 │   ├── scripts/            | fonctions du COSMOSCOPE
+│   │   ├── counter.js      | actuliser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
 │   │   ├── graph.js        | génération du graphe selon données et configuration
 │   │   ├── index.js        | contrôle des volets et boutons du menu gauche
+│   │   ├── keyboard.js     | affectation des raccourcis clavier
 │   │   ├── main.js         | historique de navigation et les variables globales
-│   │   ├── nodes.js        | affichage et subrillance des nœuds
+│   │   ├── nodes.js        | affichage des nœuds
 │   │   ├── record.js       | ouvrir/fermer le volet latéral droit
 │   │   ├── search.js       | paramétrage moteur de recherche
 │   │   ├── tag.js          | appliquer tags
@@ -699,7 +701,7 @@ Ce même object global est actualisé par les différents formulaires du menu «
 
 ## Raccourcis clavier
 
-L'ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier `/template/scripts/main.js`. L'objet global `pressedKeys` contient la liste des touches surveillées pour modifier un comportement. D'autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l'objet global `pressedKeys`.
+L'ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier `/template/scripts/keyboard.js`. L'objet global `pressedKeys` contient la liste des touches surveillées pour modifier un comportement. D'autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l'objet global `pressedKeys`.
 
 Le booléen global `keyboardShortcutsAreWorking` défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu'écrire.
 

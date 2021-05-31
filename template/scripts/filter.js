@@ -122,19 +122,6 @@ function getNodesHideByFilter() {
 }
 
 /**
- * For each types in list, find the counter and addition his value
- * @param {object} types - List of types to change with the value to add
- */
-
-function setTypesCounter(types) {
-    for (const typeName in types) {
-        const number = types[typeName];
-        const filterLabel = document.querySelector('[data-filter][name="' + typeName +'"]').parentElement;
-        iterateCounter(filterLabel.querySelector('.badge'), number);
-    }
-}
-
-/**
  * Get nodes id list (array of numbers) from a string
  * @returns {array} - Ids array
  */
