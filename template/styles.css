@@ -381,6 +381,7 @@ main.record-container:not(.active) {
 .record footer li {
 	/* links & backlinks */
 	position: relative;
+	flex-direction: column;
 }
 
 .record footer li .record-links-context {
