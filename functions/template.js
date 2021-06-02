@@ -65,6 +65,8 @@ function cosmoscope(files, entities, historyPath) {
     nunjucks.configure('template', { autoescape: true });
     let htmlRender = nunjucks.render('template.njk', {
 
+        publishMode: puslishModeIsActive(),
+
         // normalize files as records
         records: files.map(function (file) {
             file.content = linksTools.convertLinks(file.content, file);
@@ -163,4 +165,26 @@ function registerTags(fileTagList, fileId) {
         // push the file id into associate object key
         tags[tag].push(fileId);
     }
+}
+
+/**
+ * If the prompt command contains flag --publish or -p
+ * and the 'metas' from config is not undefined
+ * @returns {boolean}
+ */
+
+function puslishModeIsActive() {
+    const flag = process.argv[3];
+
+    if (flag === '--publish'
+        || flag === '-p') {
+
+        if (config.metas !== undefined) {
+            return true;
+        } else {
+            console.error('\x1b[33m', 'Publich mode off : no metas from config.', '\x1b[0m');
+            return false;
+        }
+    }
+    return false;
 }

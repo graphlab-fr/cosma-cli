@@ -175,6 +175,11 @@ aside.menu {
 --- */
 
 .logo { cursor: pointer; }
+.logo svg {
+	display: block;
+	margin: 0 auto;
+	max-width: 300px;
+}
 
 @keyframes rotate-center {
 	0% { transform: rotate(0deg); }
@@ -184,6 +189,16 @@ aside.menu {
 
 #cosma-roll {transform-origin : 96px 42px;}
 #cosma-roll.anim {animation: 3s cubic-bezier(0.2, -0.20, 0.8, 1) 1 rotate-center;}
+
+/* ---
+- User title
+--- */
+
+.title {
+	font-size: 3rem;
+	color: var(--cosma-blue-dark);
+	text-align: center;
+}
 
 /* ---
 - Spatialization load bar
@@ -224,11 +239,15 @@ aside.menu {
 --- */
 
 aside.menu footer {
-	width: 100%;
-	margin-top: 1rem;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: inherit;
+	padding: 0.8rem 0;
 	background-color: white;
 	font-family: var(--mono);
 	text-align: center;
+	border-top: solid 1px var(--gray);
 }
 
 /** Record container (right side board)

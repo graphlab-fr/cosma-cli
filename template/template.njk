@@ -37,9 +37,13 @@
     <aside class="menu list-content-container">
 
         <header role="banner">
-            <div class="logo">
+            {% if publishMode and metas.title %}
+            <h1 class="title">{{ metas.title }}</h1>
+            {% else %}
+            <div class="logo" title="Logo de Cosma">
                 {% include "cosmalogo.svg" %}
             </div>
+            {% endif %}
 
             <div class="load-bar" onclick="updateForces()" title="Spatialisation (Espace)">
                 <div id="load-bar-value"></div>
@@ -193,7 +197,9 @@
             </article>
         </details>
 
-        <footer class="menu-footer" onclick="openRecord('credits', false)">À propos</footer>
+        <footer class="menu-footer" onclick="openRecord('credits', false)">
+            {{ "Fabriqué avec Cosma – À propos" if publishMode else "À propos" }}
+        </footer>
     </aside>
 
     {# ========================================
@@ -276,8 +282,39 @@
         {# Cosma's authors & contributors credits #}
 
         <article id="credits" class="record">
+            {% if publishMode %}
+            <header>
+                {% if metas.title %}
+                <div>
+                    <span>titre :</span>
+                    <span>{{ metas.title }}</span>
+                </div>
+                {% endif %}
+
+                {% if metas.author %}
+                <div>
+                    <span>auteur(s) :</span>
+                    <span>{{ metas.author }}</span>
+                </div>
+                {% endif %}
+
+                {% if metas.description %}
+                <div>
+                    <p>{{ metas.description }}</p>
+                </div>
+                {% endif %}
+            </header>
+            {% endif %}
+
             <main>
+                {% if publishMode and metas %}
+                <div class="logo" title="Logo de Cosma">
+                    {% include "cosmalogo.svg" %}
+                </div>
+                {% else %}
                 <h1>Cosma</h1>
+                {% endif %}
+
                 <p>Version 1.1.0 • Licence MIT</p>
 
                 <ul>

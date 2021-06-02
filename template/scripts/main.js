@@ -87,9 +87,12 @@ window.onpopstate = function(e) {
  */
 
 (function (){
-const roll = document.getElementById('cosma-roll');
-roll.parentElement.addEventListener('click', () => {
-    roll.classList.add('anim');
-    roll.addEventListener('animationend', () => { roll.classList.remove('anim'); })
-});
+    const roll = document.getElementById('cosma-roll');
+
+    if (!roll) { return; }
+
+    roll.parentElement.addEventListener('click', () => {
+        roll.classList.add('anim');
+        roll.addEventListener('animationend', () => { roll.classList.remove('anim'); })
+    });
 })();
