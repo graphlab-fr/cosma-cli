@@ -195,7 +195,7 @@ aside.menu {
 --- */
 
 .title {
-	font-size: 3rem;
+	font-size: 2rem;
 	color: var(--cosma-blue-dark);
 	text-align: center;
 }
@@ -243,7 +243,7 @@ aside.menu footer {
 	bottom: 0px;
 	left: 0px;
 	width: inherit;
-	padding: 0.8rem 0;
+	padding: 0.8rem 0 0.8rem 0.8rem;
 	background-color: white;
 	font-family: var(--mono);
 	text-align: center;
@@ -531,4 +531,8 @@ article#credits dt {
 article#credits dd, article#credits li {
 	margin: 0;
 	padding: 0 0 0.5rem 0;
+}
+
+article#credits h1.metas-title {
+	font-size: 2rem;
 }

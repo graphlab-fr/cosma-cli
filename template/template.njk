@@ -282,31 +282,23 @@
         {# Cosma's authors & contributors credits #}
 
         <article id="credits" class="record">
-            {% if publishMode %}
-            <header>
-                {% if metas.title %}
-                <div>
-                    <span>titre :</span>
-                    <span>{{ metas.title }}</span>
-                </div>
-                {% endif %}
-
-                {% if metas.author %}
-                <div>
-                    <span>auteur(s) :</span>
-                    <span>{{ metas.author }}</span>
-                </div>
-                {% endif %}
-
-                {% if metas.description %}
-                <div>
-                    <p>{{ metas.description }}</p>
-                </div>
-                {% endif %}
-            </header>
-            {% endif %}
-
             <main>
+            		{% if publishMode %}
+                {% if metas.title %}
+								<h1 class="metas-title">{{ metas.title }}</h1>
+								{% endif %}
+
+								{% if metas.author %}
+								<p class="metas-author">{{ metas.author }}</p>
+								{% endif %}
+
+								{% if metas.description %}
+								<p class="metas-description">{{ metas.description }}</p>
+								{% endif %}
+								
+								<hr>
+                {% endif %}
+
                 {% if publishMode and metas %}
                 <div class="logo" title="Logo de Cosma">
                     {% include "cosmalogo.svg" %}
@@ -377,7 +369,7 @@
             <div class="graph-controls-focus">
                 <label>
                     <input id="focus-check" type="checkbox" name="checkbox">
-                    Activer le focus (F)
+                    Focus (F)
                 </label>
 
                 <input id="focus-range" type="range" min="0" max="6" value="1" name="range" step="1" />
