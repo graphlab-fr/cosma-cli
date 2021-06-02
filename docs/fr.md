@@ -222,7 +222,7 @@ Exemple :
 metas:
   title: Mon cosmoscope
   author: Prénom Nom
-  keywords:
+  keyword:
     - Zettelkasten
     - graphe documentaire
   description: "Répertoire de fiches en ligne"
@@ -392,7 +392,7 @@ node app
 
 <!-- Quelle différence entre les deux ? -->
 
-Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées `title`, `author` et `description` renseignées dans la [configuration (option `metas`)](#parametres-facultatifs). La métadonnée `title` vient aussi remplacer le logo en haut du menu gauche.
+Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées `title`, `author` et `description` renseignées dans la [configuration (option `metas`)](#parametres-facultatifs). Si elle est renseignée, la métadonnée `title` vient aussi remplacer le logo en haut du menu gauche.
 
 ```bash
 node app modelize --publish
@@ -416,8 +416,6 @@ Le fichier `cosmoscope.html` peut être lu avec un navigateur web depuis votre o
 `https://domaine.fr/cosmoscope.html#20210427185546`
 
 ## Description générale de l'interface
-
-![]()
 
 L'interface de Cosma est organisée en trois colonnes :
 

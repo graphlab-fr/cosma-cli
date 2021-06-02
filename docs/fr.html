@@ -254,7 +254,7 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">metas</span><span class="kw">:</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Mon cosmoscope</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="at">  </span><span class="fu">author</span><span class="kw">:</span><span class="at"> Prénom Nom</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="at">  </span><span class="fu">keywords</span><span class="kw">:</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="at">  </span><span class="fu">keyword</span><span class="kw">:</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a><span class="at">    </span><span class="kw">-</span><span class="at"> Zettelkasten</span></span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> graphe documentaire</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Répertoire de fiches en ligne&quot;</span></span>
@@ -353,7 +353,7 @@ tags:
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="ex">node</span> app modelize</span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="ex">node</span> app</span></code></pre></div>
 <!-- Quelle différence entre les deux ? -->
-<p>Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées <code>title</code>, <code>author</code> et <code>description</code> renseignées dans la <a href="#parametres-facultatifs">configuration (option <code>metas</code>)</a>. La métadonnée <code>title</code> vient aussi remplacer le logo en haut du menu gauche.</p>
+<p>Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées <code>title</code>, <code>author</code> et <code>description</code> renseignées dans la <a href="#parametres-facultatifs">configuration (option <code>metas</code>)</a>. Si elle est renseignée, la métadonnée <code>title</code> vient aussi remplacer le logo en haut du menu gauche.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="ex">node</span> app modelize --publish</span>
 <span id="cb23-2"><a href="#cb23-2"></a><span class="ex">node</span> app modelize -p</span></code></pre></div>
 <p>Le fichier <code>cosmoscope.html</code> est exporté dans le répertoire défini par <code>export_target</code> dans la configuration. Si le fichier existe déjà au même emplacement, il est écrasé.</p>
@@ -368,7 +368,6 @@ tags:
 <p>Le fichier <code>cosmoscope.html</code> peut être lu avec un navigateur web depuis votre ordinateur. Il peut aussi être mis en ligne, par exemple déposé sur un serveur web par un simple envoi FTP. Ceci permet éventuellement de le partager largement. Vous pouvez notamment envoyer un lien vers une fiche en particulier sur un cosmoscope en ligne, en ajoutant son identifiant précédé d’un croisillon <code>#</code> en fin d’URL. Exemple :</p>
 <p><code>https://domaine.fr/cosmoscope.html#20210427185546</code></p>
 <h2 data-number="5.1" id="description-generale-de-linterface"><span class="header-section-number">5.1</span> Description générale de l’interface</h2>
-<p><img src="" /></p>
 <p>L’interface de Cosma est organisée en trois colonnes :</p>
 <dl>
 <dt>Panneau latéral gauche (Menu)</dt>
