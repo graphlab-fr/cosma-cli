@@ -214,12 +214,13 @@ Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 <!-- Attention je crois qu'il est false par défaut, or ça devrait être l'inverse. -->
 
 `metas`
-: Liste de métadonnées ajoutées sous la forme de balises `meta` dans l'en-tête du fichier `cosmoscope.html`.
+: Liste de métadonnées ajoutées sous la forme de balises `meta` dans l'en-tête `<head>` du fichier `cosmoscope.html` et dans le volet « À propos ».
 
 Exemple :
 
 ```yaml
 metas:
+  title: Mon cosmoscope
   author: Prénom Nom
   keywords:
     - Zettelkasten
@@ -390,6 +391,13 @@ node app
 ```
 
 <!-- Quelle différence entre les deux ? -->
+
+Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées `title`, `author` et `description` renseignées dans la [configuration (option `metas`)](#parametres-facultatifs). La métadonnée `title` vient aussi remplacer le logo en haut du menu gauche.
+
+```bash
+node app modelize --publish
+node app modelize -p
+```
 
 Le fichier `cosmoscope.html` est exporté dans le répertoire défini par `export_target` dans la configuration. Si le fichier existe déjà au même emplacement, il est écrasé.
 
