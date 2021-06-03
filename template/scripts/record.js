@@ -15,7 +15,7 @@ function openRecord(id, history = true) {
     if (view.openedRecordId !== undefined) {
         // hide last record
         document.getElementById(view.openedRecordId)
-            .style.display = null;
+            .classList.remove('active');
     }
 
     // open records container
@@ -24,7 +24,7 @@ function openRecord(id, history = true) {
     recordContainer.scrollTo({ top: 0 });
 
     // show record
-    recordContent.style.display = 'block';
+    recordContent.classList.add('active')
 
     view.openedRecordId = id;
     id = Number(id);
@@ -47,7 +47,7 @@ function openRecord(id, history = true) {
 
 function closeRecord() {
     recordContainer.classList.remove('active');
-    document.getElementById(view.openedRecordId).style.display = null;
+    document.getElementById(view.openedRecordId).classList.remove('active');
     view.openedRecordId = undefined;
 
     unlightNodes();

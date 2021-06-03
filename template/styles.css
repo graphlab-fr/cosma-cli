@@ -273,7 +273,7 @@ main.record-container:not(.active) {
 	transform: translate(100%);
 }
 
-.record { display: none; }
+.record:not(.active) { display: none; }
 
 /* ---
 - Record header
