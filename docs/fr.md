@@ -63,7 +63,7 @@ git clone https://github.com/hyperotlet/cosma.git
 
 ## Installation des dépendances
 
-Le fonctionnement de Cosma repose sur d'autres programmes qualifiés de dépendances. Cosma utilise le gestionnaire de dépendances NPM qui est installé en même temps que NodeJs. Installez les dépendances nécessaires au bon fonctionnement de l'application avec la commande ci-dessous :
+Le fonctionnement de Cosma repose sur d'autres programmes qualifiés de dépendances. Cosma utilise le gestionnaire de dépendances NPM qui est installé en même temps que Node.js. Installez les dépendances nécessaires au bon fonctionnement de l'application avec la commande ci-dessous :
 
 ```bash
 npm install --only=production
@@ -92,7 +92,7 @@ node app
 La configuration doit contenir les paramètres suivants.
 
 `files_origin`
-: Chemin du répertoire contenant les fichiers Markdown à scanner. La syntaxe dépend du système d'exploitation.
+: Chemin du répertoire contenant les fichiers Markdown à lire. La syntaxe dépend du système d'exploitation.
 : Exemple : `/Users/user/Fiches/'`, `D:\repertoire\`
 
 `export_target`
@@ -610,7 +610,7 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   ├── print.css           | styles d'impression du COSMOSCOPE
 │   └── styles.css          | styles du COSMOSCOPE
 ├── app.js                  | adressage des commandes du terminal
-└── package.json            | liste des dépendances NodeJs
+└── package.json            | liste des dépendances Node.js
 ```
 
 ## Fonctionnement du cosmographe
