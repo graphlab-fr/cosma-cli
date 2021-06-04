@@ -544,6 +544,10 @@ Cette partie de la documentation s'adresse à des développeurs expérimentés e
 
 Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir l'ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.
 
+## Terminologie
+
+Le processus de modélisation de Cosma nous a inspiré une terminologie pour ses entités. Nous qualifions de « fiche » le rendu d'un fichier Markdown traité par Cosma. De par son contenu et ses relations avec tous les autres fichiers de l'arborescence, un fichier est enrichi de nombreuses informations réticulaires analysées par Cosma (quantité des liaisons et contextes, niveaux de focus). Dès lors, le fichier devient « fiche », prise dans un système de gestion de l'information, dans un processus de *records management*. D'où l'appellation « record », récurrente dans le code source.
+
 ## Architecture de Cosma
 
 Cosma est principalement implémenté en JavaScript. Le logiciel repose sur deux systèmes distincts, le cosmographe et le cosmoscope.
