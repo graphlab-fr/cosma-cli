@@ -546,7 +546,7 @@ Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir
 
 ## Terminologie
 
-Le processus de modélisation de Cosma nous a inspiré une terminologie pour ses entités. Nous qualifions de « fiche » le rendu d'un fichier Markdown traité par Cosma. De par son contenu et ses relations avec tous les autres fichiers de l'arborescence, un fichier est enrichi de nombreuses informations réticulaires analysées par Cosma (quantité des liaisons et contextes, niveaux de focus). Dès lors, le fichier devient « fiche », prise dans un système de gestion de l'information, dans un processus de *records management*. D'où l'appellation « record », récurrente dans le code source.
+Le processus de modélisation de Cosma nous a inspiré une terminologie pour ses entités. Nous qualifions de « fiche » le rendu d'un fichier Markdown traité par Cosma. De par son contenu et ses relations avec tous les autres fichiers de l'arborescence, un fichier est enrichi de nombreuses informations réticulaires analysées par Cosma (quantité des liaisons et contextes, niveaux de focus). Dès lors, le fichier devient « fiche », prise dans un système de gestion de l'information, dans un processus de [*records management*](https://fr.wikipedia.org/wiki/Records_management). D'où l'appellation « record », récurrente dans le code source.
 
 ## Architecture de Cosma
 
