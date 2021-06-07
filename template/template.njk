@@ -179,7 +179,7 @@
 
             <article class="menu-controls-container">
                 <p>Attraction</p>
-                {{ inputRange('force', 'attraction.force', 'updateForces()', graph.config.attraction.force, -600, -50, 0.1) }}
+                {{ inputRange('force', 'attraction.force', 'updateForces()', graph.config.attraction.force, 50, 600, 0.1) }}
                 {{ inputRange('distance max', 'attraction.distance_max', 'updateForces()', graph.config.attraction.distance_max, 0, 800, 0.1) }}
                 {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graph.config.attraction.verticale, 0, 1, 0.01) }}
                 {{ inputRange('horizontale', 'attraction.horizontale', 'updateForces()', graph.config.attraction.horizontale, 0, 1, 0.01) }}

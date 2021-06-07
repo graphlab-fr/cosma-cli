@@ -53,7 +53,8 @@ function updateForces() {
         .y(height * graphProperties.position.y);
 
     simulation.force("charge")
-        .strength(graphProperties.attraction.force)
+        // turn force value to negative number
+        .strength(-Math.abs(graphProperties.attraction.force))
         .distanceMax(graphProperties.attraction.distance_max);
 
     simulation.force("forceX")
