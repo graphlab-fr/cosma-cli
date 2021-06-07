@@ -107,17 +107,17 @@ function initializeDisplay() {
         .attr("r", (d) => d.size)
         .attr("class", (d) => "n_" + d.type)
         .call(d3.drag()
-                .on("start", function(d) {
-                    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                    d.fx = d.x;
-                    d.fy = d.y; })
-                .on("drag", function(d) {
-                    d.fx = d3.event.x;
-                    d.fy = d3.event.y; })
-                .on("end", function(d) {
-                    if (!d3.event.active) simulation.alphaTarget(0.0001);
-                    d.fx = null;
-                    d.fy = null; })
+            .on("start", function(d) {
+                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y; })
+            .on("drag", function(d) {
+                d.fx = d3.event.x;
+                d.fy = d3.event.y; })
+            .on("end", function(d) {
+                if (!d3.event.active) simulation.alphaTarget(0.0001);
+                d.fx = null;
+                d.fy = null; })
         )
         .on('mouseover', function(nodeMetas) {
             if (!graphProperties.highlight_on_hover) { return; }
@@ -175,14 +175,16 @@ function initializeDisplay() {
             let label = '';
 
             for (let i = 0; i < words.length; i++) {
+                // combine words and seperate them by a space caracter into label
                 label += words[i] + ' ';
 
+                // if label (words combination) is longer than max & not the single iteration
                 if (label.length < max && i !== words.length - 1) { continue; }
 
                 text.append("tspan")
                     .attr('x', 0)
                     .attr('dy', '1.2em')
-                    .text(label.slice(0, -1));
+                    .text(label.slice(0, -1)); // remove last space caracter
     
                 label = '';
             }
