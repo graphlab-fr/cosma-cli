@@ -10,7 +10,7 @@
 	--border-color: #d8d8d8;
 	--border-light-color: #f3f3f3;
 	--indicator-background-color: #f3f3f3;
-	--menu-background-color: white;
+	--lateral-background-color: white;
 	/* typography */
 	--sans: sans-serif;
 	--serif: "Georgia", serif;
@@ -171,7 +171,7 @@ aside.menu {
 	width: 30rem;
 	margin: 0;
 	padding: 0 20px 30px 20px;
-	background-color: var(--menu-background-color);
+	background-color: var(--lateral-background-color);
 	box-shadow: var(--shadow)
 }
 
@@ -249,7 +249,7 @@ aside.menu footer {
 	left: 0px;
 	width: inherit;
 	padding: 0.8rem 0 0.8rem 0.8rem;
-	background-color: var(--menu-background-color);
+	background-color: var(--lateral-background-color);
 	font-family: var(--mono);
 	text-align: center;
 	border-top: solid 1px var(--border-color);
@@ -267,7 +267,7 @@ main.record-container {
 	width: 50rem;
 	height: 100vh;
 	overflow: auto;
-	background-color: var(--menu-background-color);
+	background-color: var(--lateral-background-color);
 	box-shadow: var(--shadow);
 	transition: transform .6s;
 	transition-timing-function: cubic-bezier(.02,1.18,0,.98);
