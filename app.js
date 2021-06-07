@@ -1,26 +1,41 @@
 require('./functions/verifconfig');
 
-const args = process.argv.slice(2);
+const cmdEntries = process.argv.slice(2)
+    , requestName = cmdEntries[0]
+    , requestArgs = cmdEntries.slice(1);
 
-switch (args[0]) {
-    case 'modelize':
-        require('./functions/modelize');
-    break;
+switch (requestName) {
 
-    case 'record':
-        require('./functions/record');
-    break;
+    /** Actions
+    --------------------*/
 
-    case 'autorecord':
-        require('./functions/autorecord').genMdFile(args[1], args[2], args[3]);
-    break;
+    // config
+
+    case 'c': break;
+    case 'config': break;
+
+    // cosmoscope genetration
+
+    case 'm': require('./functions/modelize'); break;
+    case 'modelize': require('./functions/modelize'); break;
+
+    // add a record
+
+    case 'r': require('./functions/record'); break;
+    case 'record': require('./functions/record'); break;
+
+    case 'a': require('./functions/autorecord').genMdFile(requestArgs[0], requestArgs[1], requestArgs[2]); break;
+    case 'autorecord': require('./functions/autorecord').genMdFile(requestArgs[0], requestArgs[1], requestArgs[2]); break;
+
+    /** Configuration
+    --------------------*/
 
     case 'import':
-        require('./functions/verifconfig').modifyImportPath(args[1]);
+        require('./functions/verifconfig').modifyImportPath(requestArgs[0]);
     break;
 
     case 'export':
-        require('./functions/verifconfig').modifyExportPath(args[1]);
+        require('./functions/verifconfig').modifyExportPath(requestArgs[0]);
     break;
 
     case 'css':
@@ -28,18 +43,21 @@ switch (args[0]) {
     break;
 
     case 'atype':
-        require('./functions/verifconfig').addRecordType(args[1], args[2]);
+        require('./functions/verifconfig').addRecordType(requestArgs[0], requestArgs[1]);
     break;
 
     case 'aview':
-        require('./functions/verifconfig').addView(args[1], args[2]);
+        require('./functions/verifconfig').addView(requestArgs[0], requestArgs[1]);
     break;
+
+    /** Errors
+    --------------------*/
 
     case undefined:
         require('./functions/modelize');
     break;
 
     default:
-        console.log('Unknow command "' + args.join(' ') + '"');
+        console.log('Unknow command "' + requestArgs.join(' ') + '"');
     break;
 }
