@@ -4,17 +4,22 @@
 ------------------------------------------------------------*/
 
 :root {
+	/* colors */
 	--cosma-blue: #147899;
 	--cosma-blue-dark: #02385c;
-	--gray: #d8d8d8;
-	--light-gray: #f3f3f3;
-	--shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	--border-color: #d8d8d8;
+	--border-light-color: #f3f3f3;
+	--indicator-background-color: #f3f3f3;
+	--menu-background-color: white;
+	/* typography */
 	--sans: sans-serif;
 	--serif: "Georgia", serif;
 	--mono: monospace;
 	--condensed: 'Arial Condensed', sans-serif;
-
+	/* global size */
 	font-size: 62.5%;
+	/* others */
+	--shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 * { box-sizing: border-box; }
@@ -37,7 +42,7 @@ body {
 
 article { padding: 0.8rem 0; }
 article + article:not(.record) {
-	border-top: 1px solid var(--light-gray);
+	border-top: 1px solid var(--border-light-color);
 }
 
 /** Elements
@@ -55,7 +60,7 @@ button {
 
 .btn {
 	background-color: transparent;
-	border: 1px solid var(--gray);
+	border: 1px solid var(--border-color);
 	border-radius: 2px;
 }
 .btn.active, .btn[data-active="true"] { border: 1px solid black; }
@@ -69,7 +74,7 @@ button {
 details { padding: 0.6rem 0; }
 
 details:not(:first-of-type) {
-	border-top: 1px solid var(--gray);
+	border-top: 1px solid var(--border-color);
 }
 
 details[data-sort] .sort-box:not(.active) {
@@ -143,7 +148,7 @@ a { color: inherit; }
 
 .badge {
 	display: inline-block;
-	background-color: var(--light-gray);
+	background-color: var(--indicator-background-color);
 	border-radius: 1px;
 	padding: 0 0.3rem;
 	font-size: 1rem;
@@ -166,7 +171,7 @@ aside.menu {
 	width: 30rem;
 	margin: 0;
 	padding: 0 20px 30px 20px;
-	background-color: white;
+	background-color: var(--menu-background-color);
 	box-shadow: var(--shadow)
 }
 
@@ -209,7 +214,7 @@ aside.menu {
 	padding: 0.1rem;
 	display: flex;
 	margin: 1rem 0;
-	background-color: var(--light-gray);
+	background-color: var(--indicator-background-color);
 }
 .load-bar #load-bar-value {
 	background-color: var(--cosma-blue);
@@ -244,10 +249,10 @@ aside.menu footer {
 	left: 0px;
 	width: inherit;
 	padding: 0.8rem 0 0.8rem 0.8rem;
-	background-color: white;
+	background-color: var(--menu-background-color);
 	font-family: var(--mono);
 	text-align: center;
-	border-top: solid 1px var(--gray);
+	border-top: solid 1px var(--border-color);
 }
 
 /** Record container (right side board)
@@ -262,7 +267,7 @@ main.record-container {
 	width: 50rem;
 	height: 100vh;
 	overflow: auto;
-	background-color: white;
+	background-color: var(--menu-background-color);
 	box-shadow: var(--shadow);
 	transition: transform .6s;
 	transition-timing-function: cubic-bezier(.02,1.18,0,.98);
@@ -348,7 +353,7 @@ main.record-container:not(.active) {
 .record main pre code { padding-left: 1rem; }
 
 .record main blockquote {
-	border-left: 5px solid var(--gray);
+	border-left: 5px solid var(--border-color);
 	margin: 0;
 	padding-left: 1rem;
 }
@@ -359,11 +364,11 @@ main.record-container:not(.active) {
 	text-align: left;
 	width: 100%;
 }
-.record main tr { border-bottom: 1px solid var(--gray); }
+.record main tr { border-bottom: 1px solid var(--border-color); }
 .record main th, .record main td { padding: 0.5rem; }
 
 .record main hr {
-	background: var(--gray);
+	background: var(--border-color);
 	border: 0;
 	height: 1px;
 	margin: 2rem 0;
@@ -460,8 +465,8 @@ marker {
 	fill:var(--l_undefined);
 }
 
-.l_undefined { fill: var(--light-gray); stroke: var(--light-gray); }
-.n_undefined { fill: var(--light-gray); stroke: var(--light-gray); }
+.l_undefined { fill: var(--border-light-color); stroke: var(--border-light-color); }
+.n_undefined { fill: var(--border-light-color); stroke: var(--border-light-color); }
 
 /* ---
 - Buttons

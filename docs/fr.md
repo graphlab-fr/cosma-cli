@@ -85,8 +85,6 @@ Exécutez la commande suivante pour créer le fichier de configuration (`config.
 node app
 ```
 
-<!-- Renommer la commande `node app config` ? -->
-
 ## Paramètres nécessaires
 
 La configuration doit contenir les paramètres suivants.
@@ -191,9 +189,9 @@ graph_config:
 `attraction`
 : Paramètres de la simulation de forces entre les nœuds.
 : `force` : puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Les valeurs supérieures à `-50` tendent à provoquer des collisions incessantes.
-: `distance_max` : distance maximum entre les nœuds. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable.
-: `verticale` : force d'attraction vers l'axe vertical. Une valeur de `0` signifie que ce paramètre est désactivée.
-: `horizontale` : force d'attraction vers l'axe horizontal. Une valeur de `0` signifie que ce paramètre est désactivée.
+: `distance_max` : distance maximum entre les nœuds. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable. Permet de rapprocher les îlots de nœuds.
+: `verticale` : force d'attraction vers l'axe vertical. Une valeur de `0` signifie que ce paramètre est désactivée. Permet de ramener au centre les nœuds orphelins.
+: `horizontale` : force d'attraction vers l'axe horizontal. Une valeur de `0` signifie que ce paramètre est désactivée. Permet de ramener au centre les nœuds orphelins.
 
 `arrows`
 : Affichage des flèches. Permet d'obtenir un graphe orienté ou non orienté. Valeur booléenne : `true` ou `false`.
@@ -210,8 +208,6 @@ Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 
 `history`
 : Exporte une copie du cosmoscope et de ses données dans un sous-dossier horodaté du dossier `history`. Valeur : `true` ou `false`. Activé par défaut.
-
-<!-- Attention je crois qu'il est false par défaut, or ça devrait être l'inverse. -->
 
 `metas`
 : Liste de métadonnées ajoutées sous la forme de balises `meta` dans l'en-tête `<head>` du fichier `cosmoscope.html` et dans le volet « À propos ».
@@ -305,8 +301,6 @@ tags:
 ---
 ```
 
-<!-- L'indentation des mots-clés est-elle utile ? -->
-
 L'en-tête YAML est délimité par deux séries de trois tirets seuls sur une ligne (`---`). Cosma reconnaît et utilise les quatre champs suivants :
 
 `title`
@@ -390,8 +384,6 @@ node app modelize
 node app
 ```
 
-<!-- Quelle différence entre les deux ? -->
-
 Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées `title`, `author` et `description` renseignées dans la [configuration (option `metas`)](#parametres-facultatifs). Si elle est renseignée, la métadonnée `title` vient aussi remplacer le logo en haut du menu gauche.
 
 ```bash
@@ -448,9 +440,18 @@ node app css
 
 Le paramètre `custom_css` de la configuration permet d'activer ou désactiver la prise en compte de ce fichier sans avoir à le supprimer.
 
-Les déclarations CSS ajoutées dans `custom.css` remplacent celles présentes dans `/template/styles.css` et `/template/print.css` (pour les styles à l'impression). Elles s'appliquent au fichier `/template/template.njk`. Consultez ces fichiers ou utilisez l'inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d'interface auxquels elles s'appliquent.
+Les déclarations CSS ajoutées dans `/template/custom.css` remplacent celles présentes dans `/template/styles.css` et `/template/print.css` (pour les styles à l'impression). Elles s'appliquent au fichier `/template/template.njk`. Consultez ces fichiers ou utilisez l'inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d'interface auxquels elles s'appliquent.
 
-<!-- Exemple -->
+Le code ci-dessous placé dans `/template/custom.css` vous permettra de remplacer les typographies utilisées dans l'ensemble de l'interface. D'autres variables permettent de remplacer la couleur, les ombres et tailles des éléments de l'interface.
+
+```css
+:root {
+  --sans: "IBM Plex Serif", sans-serif;
+  --serif: "IBM Plex Serif", serif;
+  --mono: "IBM Plex Mono", monospace;
+  --condensed: 'IBM Plex Sans Condensed', sans-serif;
+}
+```
 
 ## Moteur de recherche
 
