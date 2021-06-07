@@ -55,23 +55,7 @@
 <li><a href="#focus-mode"><span class="toc-section-number">5.10</span> Focus mode</a></li>
 <li><a href="#records"><span class="toc-section-number">5.11</span> Records</a></li>
 </ul></li>
-<li><a href="#development"><span class="toc-section-number">6</span> Development</a>
-<ul>
-<li><a href="#architecture-de-cosma"><span class="toc-section-number">6.1</span> Architecture de Cosma</a></li>
-<li><a href="#arborescence"><span class="toc-section-number">6.2</span> Arborescence</a></li>
-<li><a href="#fonctionnement-du-cosmographe"><span class="toc-section-number">6.3</span> Fonctionnement du cosmographe</a></li>
-<li><a href="#scanne-des-fichiers"><span class="toc-section-number">6.4</span> Scanne des fichiers</a></li>
-<li><a href="#generation-du-cosmoscope"><span class="toc-section-number">6.5</span> Génération du cosmoscope</a></li>
-<li><a href="#affichage-du-graphe"><span class="toc-section-number">6.6</span> Affichage du graphe</a></li>
-<li><a href="#parametres-du-graphe"><span class="toc-section-number">6.7</span> Paramètres du graphe</a></li>
-<li><a href="#raccourcis-clavier"><span class="toc-section-number">6.8</span> Raccourcis clavier</a></li>
-</ul></li>
-<li><a href="#credits"><span class="toc-section-number">7</span> Crédits</a>
-<ul>
-<li><a href="#equipe"><span class="toc-section-number">7.1</span> Équipe</a></li>
-<li><a href="#bibliotheques-utilisees"><span class="toc-section-number">7.2</span> Bibliothèques utilisées</a></li>
-<li><a href="#historique-du-projet"><span class="toc-section-number">7.3</span> Historique du projet</a></li>
-</ul></li>
+<li><a href="#development"><span class="toc-section-number">6</span> Development</a></li>
 </ul>
 </nav>
 
@@ -432,44 +416,51 @@ tags:
 <p>The links in the body of the records are clickable. You can open these links in a new tab by right-clicking them. The title of the link (displayed in a tooltip after 1-2 seconds of hovering) is that of the corresponding record.</p>
 <p>At the bottom of the record is a list of the records to which it refers (outgoing links), as well as the records that points to it (incoming links or backlinks). Links and backlinks are contextualised: when hovering over them, a tooltip is displayed showing the paragraph in which the link is located in the corresponding record.</p>
 <h1 data-number="6" id="development"><span class="header-section-number">6</span> Development</h1>
-<p>Cette partie de la documentation s’adresse à des développeurs expérimentés en JavaScript. Elle vous présente l’arborescence et les concepts sur lesquels reposent les <em>deux parties</em> formant Cosma, le cosmographe et le cosmoscope.</p>
-<p>Nous vous recommandons vivement de lire le manuel d’utilisation pour bien saisir l’ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.</p>
-<h2 data-number="6.1" id="architecture-de-cosma"><span class="header-section-number">6.1</span> Architecture de Cosma</h2>
-<p>Cosma est principalement implémenté en JavaScript. Le logiciel repose sur deux systèmes distincts, le cosmographe et le cosmoscope.</p>
-<p>Le <strong>cosmographe</strong> repose sur l’environnement Node.js. Une série de scripts permettent de :</p>
-<ul>
-<li>vérifier et actualiser le fichier de configuration ;</li>
-<li>générer des fichiers Markdown et leur entête ;</li>
-<li>scanner un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens <em>wiki</em>) afin de générer :
-<ul>
-<li>des fichiers JSON ;</li>
-<li>le cosmoscope (ses données et variables CSS).</li>
-</ul></li>
-</ul>
-<p>Le <strong>cosmoscope</strong> est un fichier HTML exécuté sur navigateurs web, créé à partir d’un <em>template</em> <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> (<code>template.njk</code>). Il intègre :</p>
-<ul>
-<li>les métadonnées web et styles issus de la configuration ;</li>
-<li>les scripts et bibliothèques JavaScript ;</li>
-<li>des index (mots-clés, titre de fiche, vues) ;</li>
-<li>les fiches.</li>
-</ul>
-<div class="important">
-<p>Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :</p>
-<ul>
-<li><a href="./api/cosmographe/index.html">Consulter l’API du cosmographe</a></li>
-<li><a href="./api/cosmoscope/index.html">Consulter l’API du cosmoscope</a></li>
-</ul>
-</div>
-<h2 data-number="6.2" id="arborescence"><span class="header-section-number">6.2</span> Arborescence</h2>
-<p>Vous trouverez ci-dessous une description complète de l’arborescence du logiciel. Vous pourrez ainsi distinguer les fichiers concernant le cosmographe et ceux du cosmoscope.</p>
-<pre><code>.
+<p>(translation in progress)</p>
+<!-- 
+Cette partie de la documentation s'adresse à des développeurs expérimentés en JavaScript. Elle vous présente l'arborescence et les concepts sur lesquels reposent les *deux parties* formant Cosma, le cosmographe et le cosmoscope.
+
+Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir l'ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.
+
+## Architecture de Cosma
+
+Cosma est principalement implémenté en JavaScript. Le logiciel repose sur deux systèmes distincts, le cosmographe et le cosmoscope.
+
+Le **cosmographe** repose sur l'environnement Node.js. Une série de scripts permettent de :
+
+- vérifier et actualiser le fichier de configuration ;
+- générer des fichiers Markdown et leur entête ;
+- scanner un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens *wiki*) afin de générer :
+    - des fichiers JSON ;
+    - le cosmoscope (ses données et variables CSS).
+
+Le **cosmoscope** est un fichier HTML exécuté sur navigateurs web, créé à partir d'un *template* [Nunjucks](https://mozilla.github.io/nunjucks/) (`template.njk`). Il intègre :
+
+- les métadonnées web et styles issus de la configuration ;
+- les scripts et bibliothèques JavaScript ;
+- des index (mots-clés, titre de fiche, vues) ;
+- les fiches.
+
+::: important
+Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :
+
+- [Consulter l'API du cosmographe](./api/cosmographe/index.html)
+- [Consulter l'API du cosmoscope](./api/cosmoscope/index.html)
+:::
+
+## Arborescence
+
+Vous trouverez ci-dessous une description complète de l'arborescence du logiciel. Vous pourrez ainsi distinguer les fichiers concernant le cosmographe et ceux du cosmoscope.
+
+```
+.
 ├── docs/                   | répertoire de la documentation
 │   ├── api/                | répertoire des index des API
-│   │   └── [x].md          | introduction à l&#39;index [x] de l&#39;API
-│   └── api-config-[x].json | config. de l&#39;index [x] de l&#39;API
+│   │   └── [x].md          | introduction à l'index [x] de l'API
+│   └── api-config-[x].json | config. de l'index [x] de l'API
 ├── functions/              | fonctions du COSMOGRAPHE
 │   ├── autorecord.js       | création de fichiers Markdown formatés
-│   ├── history.js          | création répertoires de l&#39;historique des exports
+│   ├── history.js          | création répertoires de l'historique des exports
 │   ├── links.js            | analyse des liens wiki et de leurs attributs
 │   ├── log.js              | affichage des alertes et création des registres
 │   ├── modelize.js         | analyse des fichiers Markdown et création modèle de données
@@ -479,7 +470,7 @@ tags:
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
 │   ├── scripts/            | fonctions du COSMOSCOPE
-│   │   ├── counter.js      | actuliser les compteurs d&#39;entités
+│   │   ├── counter.js      | actuliser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
 │   │   ├── graph.js        | génération du graphe selon données et configuration
@@ -494,108 +485,147 @@ tags:
 │   │   └── zoom.js         | paramétrer les déplacement (latéral, zoom) au sein du graphe
 │   ├── cosmalogo.svg       | logo du logiciel
 │   ├── template.njk        | structure du COSMOSCOPE
-│   ├── print.css           | styles d&#39;impression du COSMOSCOPE
+│   ├── print.css           | styles d'impression du COSMOSCOPE
 │   └── styles.css          | styles du COSMOSCOPE
 ├── app.js                  | adressage des commandes du terminal
-└── package.json            | liste des dépendances NodeJs</code></pre>
-<h2 data-number="6.3" id="fonctionnement-du-cosmographe"><span class="header-section-number">6.3</span> Fonctionnement du cosmographe</h2>
-<p>Il a trois utilisations possibles via le terminal. Ces différentes requêtes sont réceptionnées par <code>app.js</code> qui les renvoie :</p>
-<ul>
-<li>extraire et modéliser (<code>modelize.js</code>) puis intégrer (<code>template.js</code>) les données dans un cosmoscope ;</li>
-<li>générer des fichiers Markdown formatés (<code>record.js</code> et <code>autorecord.js</code>) ;</li>
-<li>modifier la configuration (<code>verifconfig.js</code>).</li>
-</ul>
-<p>La configuration (le contenu du fichier <code>config.yml</code> devenu un objet JavaScript) est exportée de manière globale (depuis <code>verifconfig.js</code>). Elle peut être appelée comme ci-dessous.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> config <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;./verifconfig&#39;</span>)<span class="op">.</span><span class="at">config</span><span class="op">;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> folderToExport <span class="op">=</span> config<span class="op">.</span><span class="at">export_target</span><span class="op">;</span></span></code></pre></div>
-<h2 data-number="6.4" id="scanne-des-fichiers"><span class="header-section-number">6.4</span> Scanne des fichiers</h2>
-<p>Depuis le fichier <code>modelize.js</code>, on extrait de chaque fichier Markdown les métadonnées (l’entête YAML) et le contenu (suivant l’entête YAML) (fichier <code>modelize.js</code>).</p>
-<ol type="1">
-<li>fonction <a href="./api/cosmographe/global.html#catchLinksFromContent"><code>catchLinksFromContent()</code></a> : Le contenu est scanné une première fois par une série d’expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les <em>wikilinks</em> contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.</li>
-<li>fonction <a href="./api/cosmographe/global.html#convertLinks"><code>convertLinks()</code></a> : Le contenu du fichier est ensuite transformé pour y transformer les <em>wikilinks</em> en liens Markdown</li>
-<li>fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a> : Le contenu du fichier est intégralement transpilé du Markdown à l’HTML.</li>
-</ol>
-<p>Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y être remplacée.</p>
-<h2 data-number="6.5" id="generation-du-cosmoscope"><span class="header-section-number">6.5</span> Génération du cosmoscope</h2>
-<p>Le cosmoscope est généré grâce à la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Elle intancie le modèle Nunjucks <code>template.njk</code> et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction <a href="./api/cosmographe/global.html#colors"><code>colors()</code></a>).</p>
-<p>Nunjucks importe par ailleurs dans son <code>&lt;head&gt;</code> les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises <code>&lt;script&gt;</code> en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.</p>
-<p>Le tout est enregistré dans un fichier <code>cosmoscope.html</code> (plus un fichier sauvegardé dans l’<a href="#export">historique</a>).</p>
-<h2 data-number="6.6" id="affichage-du-graphe"><span class="header-section-number">6.6</span> Affichage du graphe</h2>
-<p>La génération et l’animation du graphe reposent sur la bibliothèque <a href="https://d3js.org/">D3</a>. Elle perçoit ses données depuis l’objet global <code>graph</code>. Cet object est composé de deux tableaux.</p>
-<p>Le tableau <strong><code>graph.nodes</code></strong> contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d’affichage (voir la sérialisation par la fonction <a href="./api/cosmographe/global.html#registerNodes"><code>registerNodes()</code></a>). Cet état indiqué est actualisé à chaque modification d’affichage.</p>
-<p>La tableau <strong><code>graph.links</code></strong> contient toutes les données relatives aux liens (voir la sérialisation par la fonction <a href="./api/cosmographe/global.html#registerLinks"><code>registerLinks()</code></a>).</p>
-<p>Ces tableaux peuvent être injectés dans d’autres bibliothèques JavaScript de génération de graphe.</p>
-<p><strong><a href="https://github.com/visjs/vis-network">VisJs Network</a></strong></p>
-<p>Fichier <code>/functions/modelize.js</code></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">registerLinks</span>(file) {</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> link <span class="kw">of</span> file<span class="op">.</span><span class="at">links</span>) {</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    entities<span class="op">.</span><span class="at">links</span><span class="op">.</span><span class="fu">push</span>({</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">from</span><span class="op">:</span> <span class="bu">Number</span>(link<span class="op">.</span><span class="at">source</span><span class="op">.</span><span class="at">id</span>)<span class="op">,</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">to</span><span class="op">:</span> <span class="bu">Number</span>(link<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">id</span>)<span class="op">,</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Fichier <code>/template/sripts/graph.js</code></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">Network</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;network&#39;</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">,</span> data <span class="op">=</span> {</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nodes</span><span class="op">:</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">DataSet</span>(graph<span class="op">.</span><span class="at">nodes</span>)<span class="op">,</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">edges</span><span class="op">:</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">DataSet</span>(graph<span class="op">.</span><span class="at">links</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">,</span> {  } <span class="co">// options</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
-<p><strong><a href="https://github.com/jacomyal/sigma.js/">SigmaJs</a></strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> <span class="fu">sigma</span>({</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">graph</span><span class="op">:</span> {</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nodes</span><span class="op">:</span> graph<span class="op">.</span><span class="at">nodes</span><span class="op">,</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">edges</span><span class="op">:</span> graph<span class="op">.</span><span class="at">links</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">container</span><span class="op">:</span> <span class="st">&#39;network&#39;</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<h2 data-number="6.7" id="parametres-du-graphe"><span class="header-section-number">6.7</span> Paramètres du graphe</h2>
-<p>Les paramètres du graphe sont extraits de la partie <code>graph_config</code> du fichier de configuration <code>config.yml</code>. Elle est injecté dans le modèle Nunjucks <code>template.njk</code> via la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript <code>graphProperties</code>.</p>
-<p>Ce même object global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Il font ensuite appel à la fonction <a href="./api/cosmographe/global.html#updateForces"><code>updateForces()</code></a> pour relancer l’évaluation de ces paramètres par la biliothèque de visualisation D3.</p>
-<h2 data-number="6.8" id="raccourcis-clavier"><span class="header-section-number">6.8</span> Raccourcis clavier</h2>
-<p>L’ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier <code>/template/scripts/keyboard.js</code>. L’objet global <code>pressedKeys</code> contient la liste des touches surveillées pour modifier un comportement. D’autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l’objet global <code>pressedKeys</code>.</p>
-<p>Le booléen global <code>keyboardShortcutsAreWorking</code> défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu’écrire.</p>
-<h1 data-number="7" id="credits"><span class="header-section-number">7</span> Crédits</h1>
-<h2 data-number="7.1" id="equipe"><span class="header-section-number">7.1</span> Équipe</h2>
-<ul>
-<li><a href="https://www.arthurperret.fr/">Arthur Perret</a> (porteur du projet)</li>
-<li><a href="https://myllaume.fr/">Guillaume Brioudes</a> (développeur)</li>
-<li><a href="https://mica.u-bordeaux-montaigne.fr/borel-clement/">Clément Borel</a> (chercheur)</li>
-<li><a href="http://www.guidedesegares.info/">Olivier Le Deuff</a> (chercheur)</li>
-</ul>
-<h2 data-number="7.2" id="bibliotheques-utilisees"><span class="header-section-number">7.2</span> Bibliothèques utilisées</h2>
-<p>Pour améliorer la maintenabilité et la lisibilité du code source, l’équipe de développement a recouru aux bibliothèques suivantes.</p>
-<ul>
-<li><a href="https://d3js.org/">D3.js</a> v4.13.0 (BSD 3-Clause) : Génération du graphe</li>
-<li><a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> v3.2.3 (BSD 2-Clause) : Génération du template du Cosmoscope</li>
-<li><a href="https://github.com/nodeca/js-yaml">Js-yaml</a> v3.14.0 (MIT License) : Lecture du fichier de configuration et écriture des YAML Front Matter</li>
-<li><a href="https://github.com/dworthen/js-yaml-front-matter">Js-yaml-front-matter</a> v4.1.0 (MIT License) : Lecture des YAML Front Matter des fichiers Markdown</li>
-<li><a href="https://github.com/markdown-it/markdown-it">Markdown-it</a> v12.0.2 (MIT License) : Conversion Markdown → HTML</li>
-<li><a href="https://www.npmjs.com/package/markdown-it-attrs">Markdown-it-attrs</a> v4.0.0 (MIT License) : Traitement des hyperliens Markdown au sein des fiches</li>
-<li><a href="https://github.com/wilsonzlin/minify-html">Minify-html</a> v0.4.3 (MIT License) : Allègement du Cosmoscope</li>
-<li><a href="https://fusejs.io/">Fuse.js</a> v6.4.6 (Apache License 2.0) : Moteur de recherche</li>
-<li><a href="https://momentjs.com/">Moment</a> v2.29.1 (MIT License) : Gestion de l’horodatage</li>
-</ul>
-<h2 data-number="7.3" id="historique-du-projet"><span class="header-section-number">7.3</span> Historique du projet</h2>
-<dl>
-<dt>Août 2020</dt>
-<dd>Prototypage d’un « Lexicographe » avec l’interface de l’<a href="https://github.com/hyperotlet/otletosphere">Otletosphère</a>.
-</dd>
-<dt>Décembre 2020</dt>
-<dd>Début du développement de Cosma avec un nouveau cahier des charges.
-</dd>
-<dt>Avril 2021</dt>
-<dd>Finalisation de la première version de Cosma.
-</dd>
-</dl>
+└── package.json            | liste des dépendances NodeJs
+```
+
+## Fonctionnement du cosmographe
+
+Il a trois utilisations possibles via le terminal. Ces différentes requêtes sont réceptionnées par `app.js` qui les renvoie :
+
+- extraire et modéliser (`modelize.js`) puis intégrer (`template.js`) les données dans un cosmoscope ;
+- générer des fichiers Markdown formatés (`record.js` et `autorecord.js`) ;
+- modifier la configuration (`verifconfig.js`).
+
+La configuration (le contenu du fichier `config.yml` devenu un objet JavaScript) est exportée de manière globale (depuis `verifconfig.js`). Elle peut être appelée comme ci-dessous.
+
+```javascript
+const config = require('./verifconfig').config;
+
+const folderToExport = config.export_target;
+```
+
+## Scanne des fichiers
+
+Depuis le fichier `modelize.js`, on extrait de chaque fichier Markdown les métadonnées (l'entête YAML) et le contenu (suivant l'entête YAML) (fichier `modelize.js`).
+
+1. fonction [`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent) : Le contenu est scanné une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
+2. fonction [`convertLinks()`](./api/cosmographe/global.html#convertLinks) : Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
+3. fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope) : Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
+
+Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y être remplacée.
+
+## Génération du cosmoscope
+
+Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Elle intancie le modèle Nunjucks `template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+
+Nunjucks importe par ailleurs dans son `<head>` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `<script>` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
+
+Le tout est enregistré dans un fichier `cosmoscope.html` (plus un fichier sauvegardé dans l'[historique](#export)).
+
+## Affichage du graphe
+
+La génération et l'animation du graphe reposent sur la bibliothèque [D3](https://d3js.org/). Elle perçoit ses données depuis l'objet global `graph`. Cet object est composé de deux tableaux.
+
+Le tableau **`graph.nodes`** contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d'affichage (voir la sérialisation par la fonction [`registerNodes()`](./api/cosmographe/global.html#registerNodes)). Cet état indiqué est actualisé à chaque modification d'affichage.
+
+La tableau **`graph.links`** contient toutes les données relatives aux liens (voir la sérialisation par la fonction [`registerLinks()`](./api/cosmographe/global.html#registerLinks)).
+
+Ces tableaux peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
+
+**[VisJs Network](https://github.com/visjs/vis-network)**
+
+Fichier `/functions/modelize.js`
+
+```javascript
+function registerLinks(file) {
+// ...
+  for (const link of file.links) {
+  // ...
+    entities.links.push({
+      // ...
+      from: Number(link.source.id),
+      to: Number(link.target.id),
+      // ...
+    });
+  }
+}
+```
+
+Fichier `/template/sripts/graph.js`
+
+```javascript
+const network = new vis.Network(
+  document.getElementById('network')
+  , data = {
+    nodes: new vis.DataSet(graph.nodes),
+    edges: new vis.DataSet(graph.links)
+  }
+  , {  } // options
+);
+```
+
+**[SigmaJs](https://github.com/jacomyal/sigma.js/)**
+
+```javascript
+const network = new sigma({
+  graph: {
+    nodes: graph.nodes,
+    edges: graph.links
+  },
+  container: 'network'
+});
+```
+
+## Paramètres du graphe
+
+Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injecté dans le modèle Nunjucks `template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
+
+Ce même object global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Il font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la biliothèque de visualisation D3.
+
+## Raccourcis clavier
+
+L'ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier `/template/scripts/keyboard.js`. L'objet global `pressedKeys` contient la liste des touches surveillées pour modifier un comportement. D'autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l'objet global `pressedKeys`.
+
+Le booléen global `keyboardShortcutsAreWorking` défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu'écrire.
+
+# Crédits
+
+## Équipe
+
+- [Arthur Perret](https://www.arthurperret.fr/) (porteur du projet)
+- [Guillaume Brioudes](https://myllaume.fr/) (développeur)
+- [Clément Borel](https://mica.u-bordeaux-montaigne.fr/borel-clement/) (chercheur)
+- [Olivier Le Deuff](http://www.guidedesegares.info/) (chercheur)
+
+## Bibliothèques utilisées
+
+Pour améliorer la maintenabilité et la lisibilité du code source, l’équipe de développement a recouru aux bibliothèques suivantes.
+
+- [D3.js](https://d3js.org/) v4.13.0 (BSD 3-Clause) : Génération du graphe
+- [Nunjucks](https://mozilla.github.io/nunjucks/) v3.2.3 (BSD 2-Clause) : Génération du template du Cosmoscope
+- [Js-yaml](https://github.com/nodeca/js-yaml) v3.14.0 (MIT License) : Lecture du fichier de configuration et écriture des YAML Front Matter
+- [Js-yaml-front-matter](https://github.com/dworthen/js-yaml-front-matter) v4.1.0 (MIT License) : Lecture des YAML Front Matter des fichiers Markdown
+- [Markdown-it](https://github.com/markdown-it/markdown-it) v12.0.2 (MIT License) : Conversion Markdown → HTML
+- [Markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs) v4.0.0  (MIT License) : Traitement des hyperliens Markdown au sein des fiches
+- [Minify-html](https://github.com/wilsonzlin/minify-html) v0.4.3 (MIT License) : Allègement du Cosmoscope
+- [Fuse.js](https://fusejs.io/) v6.4.6 (Apache License 2.0) : Moteur de recherche
+- [Moment](https://momentjs.com/) v2.29.1 (MIT License) : Gestion de l'horodatage
+
+## Historique du projet
+
+Août 2020
+: Prototypage d'un « Lexicographe » avec l'interface de l'[Otletosphère](https://github.com/hyperotlet/otletosphere).
+
+Décembre 2020
+: Début du développement de Cosma avec un nouveau cahier des charges.
+
+Avril 2021
+: Finalisation de la première version de Cosma.
+
+ -->
 </article>
 </main>
 

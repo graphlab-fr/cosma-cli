@@ -153,7 +153,7 @@ link_types:
 
 ## Paramètres du graphe
 
-Les paramètres suivants définissent la valeur par défaut des paramètres du graphe. La plupart de ces paramètres peuvent être modifiés en direct dans l'interface du cosmoscope. Vous pouvez tester différentes valeurs avant de les reporter dans le fichier `config.yml` ; les valeurs définies dans le fichier sont rétablies à chaque rechargement du cosmoscope.
+Les paramètres suivants définissent la valeur par défaut des paramètres du graphe. La plupart de ces paramètres peuvent être modifiés en direct dans l'interface du cosmoscope (voir [Graphe](#graphe) plus bas). Vous pouvez tester différentes valeurs avant de les reporter dans le fichier `config.yml` ; les valeurs définies dans le fichier sont rétablies à chaque rechargement du cosmoscope.
 
 ```yaml
 graph_config:
@@ -422,9 +422,35 @@ Panneau latéral droit (Fiche)
 
 ![interface de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
 
-## Affichage du graphe
+## Graphe
 
-La modification des paramètres du graphe (`graph_config`) permet d'adapter l'affichage du graphe (espace entre les entités et répartition dans l'espace. Nous vous conseillons de tester les paramètres suivants pour utiliser l'interface de Cosma en plein écran suivant la taille de votre affichage.
+Le graphe située dans la zone centrale de l'interface affiche des nœuds étiquetés et interreliés. Chaque nœud correspond à une fiche ; l'étiquette correspond au titre de la fiche. Les liens correspondent aux liens établis entre les fiches via leur identifiant entre doubles crochets.
+
+Survoler un nœud le met temporairement en surbrillance, ainsi que ses connexions. Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante.
+
+Vous pouvez zoomer dans le graphe à la souris, au pavé tactile, en double cliquant sur le fond du graphe ou bien avec les boutons dédiés situés en bas à gauche. Le bouton Recentrer (raccourci : touche `R`) réinitialise le zoom.
+
+Les nœuds sont organisés dans l'espace par un algorithme de simulation de forces. Une barre colorée sous le logo Cosma témoigne de l'état de la simulation. Cliquez dessus (raccourci : touche `Espace`) pour lancer un cycle de simulation supplémentaire.
+
+::: astuce
+Quelques pressions sur la touche `Espace` permettent de « déplier » progressivement un graphe emmêlé.
+:::
+
+Le graphe n'est pas figé, les nœuds peuvent donc être déplacés par cliquer-glisser. Ils restent soumis en permanence à la simulation, donc il n'est pas possible de les disposer manuellement de manière arbitraire.
+
+L'affichage du graphe peut être modifié de manière temporaire via les contrôles placés sous Paramètres du graphe dans le panneau latéral gauche :
+
+- affichage des liens ;
+- affichage des étiquettes ;
+- animation des nœuds au survol ;
+- forces simulées par l'algorithme de dessin du graphe ;
+- position du graphe dans l'espace ;
+- taille des étiquettes.
+
+Pour modifier l'affichage de manière permanente, modifiez les valeurs par défaut des paramètres correspondants sous `graph_config` dans `config.yml` (voir [Paramètres du graphe](#parametres-du-graphe) plus haut).
+
+::: astuce
+Modifiez `force` et `distance_max` pour adapter l'affichage à la résolution et la taille de votre écran. Le tableau ci-dessous suggère des intervalles pour ces deux paramètres :
 
 | Taille écran (pouces) | `force`           | `distance_max`   |
 |-----------------------|-------------------|------------------|
@@ -433,34 +459,32 @@ La modification des paramètres du graphe (`graph_config`) permet d'adapter l'af
 | 25-35                 | moins de -400     | plus de 600      |
 | plus de 35            | -600              | 800              |
 
-Les nœuds orphelins et îlots auront tendance à rester dans la périphérie de votre écran. Vous pouvez compenser cela avec les paramètres `verticale` et `horizontale`. Ils vous permettent de recentrer les nœuds en fonction de l'inclinaison de votre écran.
+Modifiez `verticale` et `horizontale` pour appliquer une force centripète vers l'axe correspondant. Ceci permet notamment de ramener les îlots et nœuds isolés plus près du centre.
+:::
 
-L'affichage est possible sur tous types d'écrans mais n'est pas adapté aux petits écrans (téléphones, petites tablettes). L'intéraction tactile ne vous permet pas d'utiliser les fonctionnalités de visualisation au survol.
+L'affichage est possible sur tous types d'écrans mais n'est pas optimisé pour les terminaux mobiles : le tactile ne donne pas accès à certaines interactions comme le survol, et les petits écrans restreignent l'utilité du graphe.
 
-## Personnalisation de l'interface
+## Fiches
 
-L'interface du cosmoscope est conçue à partir des fichiers Nunjucks (`.njk`) et CSS présents dans le dossier `/template` du répertoire de Cosma.
+Les fiches peuvent êtres ouvertes en cliquant sur un nœud, une entrée de l'index, une suggestion du moteur de recherche, ou un lien dans le corps d'une fiche. Ouvrir une fiche affiche son contenu dans le panneau latéral droit. Cela met aussi à jour l'URL de la page avec l'identifiant de la fiche : ceci permet de naviguer entre les fiches visitées via les fonctionnalités Précédent / Suivant du navigateur, mais aussi de les retrouver dans l'historique ou encore d'obtenir un lien direct vers la fiche.
 
-L'interface peut être personnalisée via un fichier `custom.css` placé dans ce même dossier. Vous pouvez créer manuellement le fichier ou bien exécuter la commande suivante :
+Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud correspondant dans le graphe.
 
-```bash
-node app css
-```
+Les liens présents dans les fiches sont cliquables. Vous pouvez ouvrir ces liens dans un nouvel onglet via un clic droit. Le titre du lien (affiché en infobulle après 1-2 secondes de survol) est celui de la fiche correspondante.
 
-Le paramètre `custom_css` de la configuration permet d'activer ou désactiver la prise en compte de ce fichier sans avoir à le supprimer.
+En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (liens sortants), ainsi que des fiches qui pointent vers elles (liens entrants ou rétroliens). Les liens et rétroliens sont contextualisés : au survol, une infobulle s'affiche, montrant le paragraphe dans lequel ce lien se trouve dans la fiche correspondante.
 
-Les déclarations CSS ajoutées dans `/template/custom.css` remplacent celles présentes dans `/template/styles.css` et `/template/print.css` (pour les styles à l'impression). Elles s'appliquent au fichier `/template/template.njk`. Consultez ces fichiers ou utilisez l'inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d'interface auxquels elles s'appliquent.
+## Mode focus
 
-Le code ci-dessous placé dans `/template/custom.css` vous permettra de remplacer les typographies utilisées dans l'ensemble de l'interface. D'autres variables permettent de remplacer la couleur, les ombres et tailles des éléments de l'interface.
+Le bouton Activer le focus (raccourci : touche `F`) situé en bas à gauche du graphe permet de restreindre l'affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l'interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.
 
-```css
-:root {
-  --sans: "IBM Plex Serif", sans-serif;
-  --serif: "IBM Plex Serif", serif;
-  --mono: "IBM Plex Mono", monospace;
-  --condensed: 'IBM Plex Sans Condensed', sans-serif;
-}
-```
+![Mode focus de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-focus-demo.png)
+
+Le curseur qui apparaît sous le bouton Activer le focus permet de faire varier la distance d'affichage, jusqu'au maximum permis par le paramètre `focus_max` dans la configuration.
+
+::: astuce
+Le curseur du niveau de focus est contrôlable via les flèches du clavier. Vous pouvez enchaîner les raccourcis : `F` pour activer le focus, puis les flèches pour augmenter le niveau de focus.
+:::
 
 ## Moteur de recherche
 
@@ -497,56 +521,30 @@ views:
 
 Ceci ajoute un bouton éponyme dans la section Vues du panneau latéral gauche. Cliquer sur ce bouton applique tous les paramètres qui étaient actifs au moment de l'enregistrement de la vue. Cliquer à nouveau sur le bouton rétablit l'affichage normal.
 
-## Paramètres du graphe
+## Personnalisation de l'interface
 
-Les contrôles situés dans cette section du panneau latéral gauche permettent de modifier l'affichage du graphe :
+L'interface du cosmoscope est conçue à partir des fichiers Nunjucks (`.njk`) et CSS présents dans le dossier `/template` du répertoire de Cosma.
 
-- affichage des liens ;
-- affichage des étiquettes ;
-- animation des nœuds au survol ;
-- forces simulées par l'algorithme de dessin du graphe ;
-- position du graphe dans l'espace ;
-- taille du titre des nœuds.
+L'interface peut être personnalisée via un fichier `custom.css` placé dans ce même dossier. Vous pouvez créer manuellement le fichier ou bien exécuter la commande suivante :
 
-Les modifications sont effacées à chaque nouveau chargement de la page. Pour les rendre permanentes, modifiez les valeurs par défaut définies sous `graph_config` dans la configuration.
+```bash
+node app css
+```
 
-## Graphe
+Le paramètre `custom_css` de la configuration permet d'activer ou désactiver la prise en compte de ce fichier sans avoir à le supprimer.
 
-Le graphe située dans la zone centrale de l'interface affiche des nœuds étiquetés et interreliés. Chaque nœud correspond à une fiche ; l'étiquette correspond au titre de la fiche. Les liens correspondent aux liens établis entre les fiches via leur identifiant entre doubles crochets.
+Les déclarations CSS ajoutées dans `/template/custom.css` remplacent celles présentes dans `/template/styles.css` et `/template/print.css` (pour les styles à l'impression). Elles s'appliquent au fichier `/template/template.njk`. Consultez ces fichiers ou utilisez l'inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d'interface auxquels elles s'appliquent.
 
-Les nœuds sont organisés dans l'espace par un algorithme de simulation de forces. Une barre colorée sous le logo Cosma témoigne de l'état de la simulation. Cliquez dessus (raccourci : touche `Espace`) pour relancer la simulation.
+Le code ci-dessous placé dans `/template/custom.css` vous permettra de remplacer les typographies utilisées dans l'ensemble de l'interface. D'autres variables permettent de remplacer la couleur, les ombres et tailles des éléments de l'interface.
 
-::: astuce
-Quelques pressions sur la touche `Espace` permettent de « déplier » progressivement les graphes les plus emmêlés.
-:::
-
-Les paramètres de la simulation sont accessibles via le panneau latéral gauche ; leur valeur par défaut peut être modifiée dans le fichier `config.yml`. Le graphe n'est pas figé, les nœuds peuvent donc être déplacés par cliquer-glisser. Mais ils restent soumis en permanence à la simulation de forces, donc il n'est pas possible de les disposer manuellement de manière arbitraire.
-
-Survoler un nœud le met temporairement en surbrillance, ainsi que ses connexions. Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante.
-
-Vous pouvez zoomer dans le graphe à la souris, au pavé tactile, en double cliquant sur le fond du graphe ou bien avec les boutons dédiés situés en bas à gauche. Le bouton Recentrer (raccourci : touche `R`) réinitialise le zoom.
-
-## Mode focus
-
-Le bouton Activer le focus (raccourci : touche `F`) situé en bas à gauche du graphe permet de restreindre l'affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l'interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.
-
-![Mode focus de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-focus-demo.png)
-
-Le curseur qui apparaît sous le bouton Activer le focus permet de faire varier la distance d'affichage, jusqu'au maximum permis par le paramètre `focus_max` dans la configuration.
-
-::: astuce
-Le curseur du niveau de focus est contrôlable via les flèches du clavier. Vous pouvez enchaîner les raccourcis : `F` pour activer le focus, puis les flèches pour augmenter le niveau de focus.
-:::
-
-## Fiches
-
-Les fiches peuvent êtres ouvertes en cliquant sur un nœud, une entrée de l'index, une suggestion du moteur de recherche, ou un lien dans le corps d'une fiche. Ouvrir une fiche affiche son contenu dans le panneau latéral droit. Cela met aussi à jour l'URL de la page avec l'identifiant de la fiche : ceci permet de naviguer entre les fiches visitées via les fonctionnalités Précédent / Suivant du navigateur, mais aussi de les retrouver dans l'historique ou encore d'obtenir un lien direct vers la fiche.
-
-Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud correspondant dans le graphe.
-
-Les liens présents dans les fiches sont cliquables. Vous pouvez ouvrir ces liens dans un nouvel onglet via un clic droit. Le titre du lien (affiché en infobulle après 1-2 secondes de survol) est celui de la fiche correspondante.
-
-En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (liens sortants), ainsi que des fiches qui pointent vers elles (liens entrants ou rétroliens). Les liens et rétroliens sont contextualisés : au survol, une infobulle s'affiche, montrant le paragraphe dans lequel ce lien se trouve dans la fiche correspondante.
+```css
+:root {
+  --sans: "IBM Plex Serif", sans-serif;
+  --serif: "IBM Plex Serif", serif;
+  --mono: "IBM Plex Mono", monospace;
+  --condensed: 'IBM Plex Sans Condensed', sans-serif;
+}
+```
 
 # Développement
 
@@ -566,7 +564,7 @@ Le **cosmographe** repose sur l'environnement Node.js. Une série de scripts per
 
 - vérifier et actualiser le fichier de configuration ;
 - générer des fichiers Markdown et leur entête ;
-- scanner un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens *wiki*) afin de générer :
+- lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens *wiki*) afin de générer :
 	- des fichiers JSON ;
 	- le cosmoscope (ses données et variables CSS).
 
@@ -643,11 +641,11 @@ const config = require('./verifconfig').config;
 const folderToExport = config.export_target;
 ```
 
-## Scanne des fichiers
+## Lecture des fichiers
 
 Depuis le fichier `modelize.js`, on extrait de chaque fichier Markdown les métadonnées (l'entête YAML) et le contenu (suivant l'entête YAML) (fichier `modelize.js`).
 
-1. fonction [`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent) : Le contenu est scanné une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
+1. fonction [`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent) : Le contenu est lu une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
 2. fonction [`convertLinks()`](./api/cosmographe/global.html#convertLinks) : Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
 3. fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope) : Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
 

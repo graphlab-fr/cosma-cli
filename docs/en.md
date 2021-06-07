@@ -523,6 +523,9 @@ At the bottom of the record is a list of the records to which it refers (outgoin
 
 # Development
 
+(translation in progress)
+
+<!-- 
 Cette partie de la documentation s'adresse à des développeurs expérimentés en JavaScript. Elle vous présente l'arborescence et les concepts sur lesquels reposent les *deux parties* formant Cosma, le cosmographe et le cosmoscope.
 
 Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir l'ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.
@@ -730,3 +733,4 @@ Décembre 2020
 Avril 2021
 : Finalisation de la première version de Cosma.
 
+ -->

@@ -191,7 +191,8 @@ code {
 p code,
 ul code,
 ol code,
-dl code {
+dl code,
+table code {
   background-color: var(--code-background-color);
   border: 1px solid var(--code-border-color);
   border-radius: 4px;
