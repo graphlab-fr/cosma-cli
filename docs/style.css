@@ -95,6 +95,17 @@ p {
 	margin: 1.5 rem 0;
 }
 
+/* TABLES */
+
+table {
+	border-collapse: collapse;
+	margin: 2rem 0;
+	text-align: left;
+	width: 100%;
+}
+tr { border-bottom: 1px solid gray; }
+th, td { padding: 0.5rem; }
+
 /* LISTS */
 
 ul, ol { padding-left: 1.1rem; }
