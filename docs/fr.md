@@ -168,7 +168,7 @@ graph_config:
     force: -50
     distance_max: 800
     verticale: 0
-    verticale: 0
+    horizontale: 0
   arrows: false
 ```
 
@@ -189,9 +189,9 @@ graph_config:
 `attraction`
 : Paramètres de la simulation de forces entre les nœuds.
 : `force` : puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Les valeurs supérieures à `-50` tendent à provoquer des collisions incessantes.
-: `distance_max` : distance maximum entre les nœuds. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable. Permet de rapprocher les îlots de nœuds.
-: `verticale` : force d'attraction vers l'axe vertical. Une valeur de `0` signifie que ce paramètre est désactivée. Permet de ramener au centre les nœuds orphelins.
-: `horizontale` : force d'attraction vers l'axe horizontal. Une valeur de `0` signifie que ce paramètre est désactivée. Permet de ramener au centre les nœuds orphelins.
+: `distance_max` : distance maximum entre les nœuds et îlots. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable.
+: `verticale` : force d'attraction vers l'axe vertical. Une valeur de `0` signifie que ce paramètre est désactivée.
+: `horizontale` : force d'attraction vers l'axe horizontal. Une valeur de `0` signifie que ce paramètre est désactivée.
 
 `arrows`
 : Affichage des flèches. Permet d'obtenir un graphe orienté ou non orienté. Valeur booléenne : `true` ou `false`.
@@ -422,11 +422,20 @@ Panneau latéral droit (Fiche)
 
 ![interface de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
 
-La modification des paramètres du graphe (`graph_config`) permet d'adapter l'affichage à la taille de l'écran.
+## Affichage du graphe
 
-<!-- Tableau taille écran / paramètres graphe -->
+La modification des paramètres du graphe (`graph_config`) permet d'adapter l'affichage du graphe (espace entre les entités et répartition dans l'espace. Nous vous conseillons de tester les paramètres suivants pour utiliser l'interface de Cosma en plein écran suivant la taille de votre affichage.
 
-L'affichage est possible sur tous types d'écrans mais n'est pas adapté aux petits écrans (téléphones, petites tablettes).
+| Taille écran (pouces) | `force`           | `distance_max`   |
+|-----------------------|-------------------|------------------|
+| moins de 15           | entre -100 à -200 | moins de 300     |
+| 15-25                 | entre -300 à -400 | entre 300 et 600 |
+| 25-35                 | moins de -400     | plus de 600      |
+| plus de 35            | -600              | 800              |
+
+Les nœuds orphelins et îlots auront tendance à rester dans la périphérie de votre écran. Vous pouvez compenser cela avec les paramètres `verticale` et `horizontale`. Ils vous permettent de recentrer les nœuds en fonction de l'inclinaison de votre écran.
+
+L'affichage est possible sur tous types d'écrans mais n'est pas adapté aux petits écrans (téléphones, petites tablettes). L'intéraction tactile ne vous permet pas d'utiliser les fonctionnalités de visualisation au survol.
 
 ## Personnalisation de l'interface
 
