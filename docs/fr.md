@@ -57,7 +57,7 @@ Le cosmoscope n'est pas compatible avec Internet Explorer.
 
 Téléchargez le dépôt git de Cosma en saisissant les commandes ci-dessous dans un terminal, ou en cliquant sur le lien suivant : <https://github.com/hyperotlet/cosma/archive/master.zip>
 
-```bash
+```
 git clone https://github.com/hyperotlet/cosma.git
 ```
 
@@ -65,7 +65,7 @@ git clone https://github.com/hyperotlet/cosma.git
 
 Le fonctionnement de Cosma repose sur d'autres programmes qualifiés de dépendances. Cosma utilise le gestionnaire de dépendances NPM qui est installé en même temps que Node.js. Installez les dépendances nécessaires au bon fonctionnement de l'application avec la commande ci-dessous :
 
-```bash
+```
 npm install --only=production
 ```
 
@@ -81,7 +81,7 @@ Pour une introduction à YAML, [cliquez ici](https://sweetohm.net/article/introd
 
 Exécutez la commande suivante pour créer le fichier de configuration (`config.yml`) s'il n'existe pas déjà. Vous pouvez aussi le supprimer et utiliser cette commande pour réinitialiser le fichier. Le fichier généré par cette commande est un modèle des paramètres qui doivent obligatoirement être renseignés pour une configuration valide.
 
-```bash
+```
 node app
 ```
 
@@ -243,33 +243,39 @@ views:
 
 Les commandes suivantes vous permettent de modifier rapidement la configuration.
 
+Générer un fichier de configuration modèle :
+
+```
+node app config
+```
+
 Modifier le chemin vers les fichiers sources :
 
-```bash
+```
 node app import <chemin>
 ```
 
 Modifier le chemin d'export du cosmoscope :
 
-```bash
+```
 node app export <chemin>
 ```
 
 Ajouter des types valides :
 
-```bash
+```
 node app atype <nom> <couleur>
 ```
 
 Créer le fichier de style personnalisé `custom.css` dans le répertoire `/template` :
 
-```bash
+```
 node app css
 ```
 
 Ajouter des vues :
 
-```bash
+```
 node app aview <nom> <code>
 ```
 
@@ -341,13 +347,13 @@ Le rendu des fichiers Markdown sous forme de fiche HTML dans le cosmoscope est l
 
 Vous pouvez créer un fichier Markdown conforme pour Cosma à la main ou bien en utilisant la ligne de commande. Deux options sont proposées. La première est une commande qui déclenche une saisie guidée en plusieurs étapes :
 
-```bash
+```
 node app record
 ```
 
 La seconde est un *one-liner* qui permet de créer une fiche en une seule saisie :
 
-```bash
+```
 node app autorecord <titre> <type> <mots-clés>
 ```
 
@@ -379,14 +385,14 @@ Le concept B dérive du [[générique:20201209111625]] concept A.
 
 Pour créer le fichier `cosmoscope.html`, utilisez l'une de ces commandes :
 
-```bash
+```
 node app modelize
 node app
 ```
 
 Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées `title`, `author` et `description` renseignées dans la [configuration (option `metas`)](#parametres-facultatifs). Si elle est renseignée, la métadonnée `title` vient aussi remplacer le logo en haut du menu gauche.
 
-```bash
+```
 node app modelize --publish
 node app modelize -p
 ```
@@ -527,7 +533,7 @@ L'interface du cosmoscope est conçue à partir des fichiers Nunjucks (`.njk`) e
 
 L'interface peut être personnalisée via un fichier `custom.css` placé dans ce même dossier. Vous pouvez créer manuellement le fichier ou bien exécuter la commande suivante :
 
-```bash
+```
 node app css
 ```
 
@@ -535,7 +541,7 @@ Le paramètre `custom_css` de la configuration permet d'activer ou désactiver l
 
 Les déclarations CSS ajoutées dans `/template/custom.css` remplacent celles présentes dans `/template/styles.css` et `/template/print.css` (pour les styles à l'impression). Elles s'appliquent au fichier `/template/template.njk`. Consultez ces fichiers ou utilisez l'inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d'interface auxquels elles s'appliquent.
 
-Le code ci-dessous placé dans `/template/custom.css` vous permettra de remplacer les typographies utilisées dans l'ensemble de l'interface. D'autres variables permettent de remplacer la couleur, les ombres et tailles des éléments de l'interface.
+Dans l'exemple ci-dessous, le fichier `custom.css` contient des déclarations qui modifient les polices utilisées dans le cosmoscope :
 
 ```css
 :root {
@@ -554,7 +560,7 @@ Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir
 
 ## Terminologie
 
-Le processus de modélisation de Cosma nous a inspiré une terminologie pour ses entités. Nous qualifions de « fiche » le rendu d'un fichier Markdown traité par Cosma. De par son contenu et ses relations avec tous les autres fichiers de l'arborescence, un fichier est enrichi de nombreuses informations réticulaires analysées par Cosma (quantité des liaisons et contextes, niveaux de focus). Dès lors, le fichier devient « fiche », prise dans un système de gestion de l'information, dans un processus de [*records management*](https://fr.wikipedia.org/wiki/Records_management). D'où l'appellation « record », récurrente dans le code source.
+Les fichiers Markdown interprétés par Cosma sont qualifiés ici de « fiches » plutôt que de « notes », en référence à la tradition de la fiche érudite et à l'histoire de la documentation. L'acception documentaire de « fiche » n'a pas de traduction directe en anglais (sinon *index card*). En revanche, elle est conceptuellement proche du mot « *record* » issu du [*records management*](https://fr.wikipedia.org/wiki/Records_management). Le code de Cosma emploie donc le mot record pour désigner une fiche.
 
 ## Architecture de Cosma
 
