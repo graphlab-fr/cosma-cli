@@ -1,3 +1,9 @@
+/**
+ * @file Create a formated Markdown file.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const fs = require('fs')
     , moment = require('moment')
     , config = require('./verifconfig').config

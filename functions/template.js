@@ -1,3 +1,9 @@
+/**
+ * @file Generate graph styles from config & cosmoscope from modelling.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const fs = require('fs')
     , nunjucks = require('nunjucks')
     , mdIt = require('markdown-it')()
@@ -14,44 +20,7 @@ mdIt.use(mdItAttr, {
     leftDelimiter: '{',
     rightDelimiter: '}',
     allowedAttributes: []
-})
-
-/**
- * Templating & create stylesheet with types from config
- */
-
-function colors() {
-    // get types from config
-
-    const replacementColor = 'grey';
-    let types;
-
-    const typesRecord = Object.keys(config.record_types)
-        .map(function(key) { return {prefix: 'n_', name: key, color: config.record_types[key] || replacementColor}; });
-
-    const typesLinks = Object.keys(config.link_types)
-        .map(function(key) { return {prefix: 'l_', name: key, color: config.link_types[key].color || replacementColor}; });
-
-    types = typesRecord.concat(typesLinks);
-
-    // map the CSS syntax
-
-    let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.prefix}${type.name}); fill:var(--${type.prefix}${type.name}); stroke:var(--${type.prefix}${type.name});}`)
-
-    // add specifics parametered colors from config
-    types.push({prefix: '', name: 'highlight', color: config.graph_config.highlight_color});
-
-    let globalsStyles = types.map(type => `--${type.prefix}${type.name}: ${type.color};`)
-
-    globalsStyles = globalsStyles.join('\n'); // array to sting…
-    colorsStyles = colorsStyles.join('\n'); // …by line breaks
-
-    globalsStyles = ':root {\n' + globalsStyles + '\n}';
-
-    return '\n' + globalsStyles + '\n\n' + colorsStyles;
-}
-
-exports.colors = colors;
+});
 
 /**
  * Templating & create the Cosmoscope.html file
@@ -187,4 +156,39 @@ function puslishModeIsActive() {
         }
     }
     return false;
+}
+
+/**
+ * Templating & create stylesheet with types from config
+ */
+
+ function colors() {
+    // get types from config
+
+    const replacementColor = 'grey';
+    let types;
+
+    const typesRecord = Object.keys(config.record_types)
+        .map(function(key) { return {prefix: 'n_', name: key, color: config.record_types[key] || replacementColor}; });
+
+    const typesLinks = Object.keys(config.link_types)
+        .map(function(key) { return {prefix: 'l_', name: key, color: config.link_types[key].color || replacementColor}; });
+
+    types = typesRecord.concat(typesLinks);
+
+    // map the CSS syntax
+
+    let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.prefix}${type.name}); fill:var(--${type.prefix}${type.name}); stroke:var(--${type.prefix}${type.name});}`)
+
+    // add specifics parametered colors from config
+    types.push({prefix: '', name: 'highlight', color: config.graph_config.highlight_color});
+
+    let globalsStyles = types.map(type => `--${type.prefix}${type.name}: ${type.color};`)
+
+    globalsStyles = globalsStyles.join('\n'); // array to sting…
+    colorsStyles = colorsStyles.join('\n'); // …by line breaks
+
+    globalsStyles = ':root {\n' + globalsStyles + '\n}';
+
+    return '\n' + globalsStyles + '\n\n' + colorsStyles;
 }

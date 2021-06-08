@@ -1,3 +1,9 @@
+/**
+ * @file Generate or check the config file. Contains function to modif the config file.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const fs = require('fs')
     , yamlEditor = require('js-yaml');
 

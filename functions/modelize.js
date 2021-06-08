@@ -1,3 +1,9 @@
+/**
+ * @file Analyse all Markdown files and serialize them for a graph modelling & records entries.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const fs = require('fs')
     , yamlFrontmatter = require('yaml-front-matter')
     , moment = require('moment')
@@ -181,7 +187,7 @@ function registerLinks(file) {
  */
 
 function registerNodes(file) {
-    const size = linksTools.getRank(file.links.length, file.backlinks.length);
+    const size = getRank(file.links.length, file.backlinks.length);
 
     entities.nodes.push({
         id: Number(file.metas.id),
@@ -304,4 +310,20 @@ function getConnectedIds(nodeId) {
         return false; }
 
     return targets;
+}
+
+/**
+ * Get node rank from number of links & backlinks
+ * @param {number} backLinkNb - Number of backlinks
+ * @param {number} linkNb - Number of links
+ * @returns {number} - Rank
+ */
+
+function getRank(backLinkNb, linkNb) {
+    let rank = 1 // original rank
+        , sizeDivisor = 2; // to subside rank
+
+    rank += Math.floor(linkNb / sizeDivisor);
+    rank += Math.floor(backLinkNb / sizeDivisor);
+    return rank;
 }

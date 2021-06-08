@@ -2,6 +2,7 @@
     "source": {
         "include": [
             "./api/cosmographe.md",
+            "../app.js",
             "../functions/autorecord.js",
             "../functions/history.js",
             "../functions/links.js",

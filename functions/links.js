@@ -1,3 +1,9 @@
+/**
+ * @file Functions to analyse wiki links from Markdown content.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs');
 
@@ -77,24 +83,6 @@ mdIt.use(mdItAttr, {
 }
 
 exports.catchLinksFromContent = catchLinksFromContent;
-
-/**
- * Get node rank from number of links & backlinks
- * @param {number} backLinkNb - Number of backlinks
- * @param {number} linkNb - Number of links
- * @returns {number} - Rank
- */
-
-function getRank(backLinkNb, linkNb) {
-    let rank = 1 // original rank
-        , sizeDivisor = 2; // to subside rank
-
-    rank += Math.floor(linkNb / sizeDivisor);
-    rank += Math.floor(backLinkNb / sizeDivisor);
-    return rank;
-}
-
-exports.getRank = getRank;
 
 /**
  * Add its type to a link & turn its target id to int value

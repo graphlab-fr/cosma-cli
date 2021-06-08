@@ -250,6 +250,7 @@ Générer un fichier de configuration modèle :
 
 ```
 node app config
+node app c
 ```
 
 Modifier le chemin vers les fichiers sources :
@@ -352,12 +353,14 @@ Vous pouvez créer un fichier Markdown conforme pour Cosma à la main ou bien en
 
 ```
 node app record
+node app r
 ```
 
 La seconde est un *one-liner* qui permet de créer une fiche en une seule saisie :
 
 ```
 node app autorecord <titre> <type> <mots-clés>
+node app a <titre> <type> <mots-clés>
 ```
 
 - `<titre>` correspond au titre de la fiche, qui est aussi le nom du fichier généré ;
@@ -390,7 +393,7 @@ Pour créer le fichier `cosmoscope.html`, utilisez l'une de ces commandes :
 
 ```
 node app modelize
-node app
+node app m
 ```
 
 Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande suivante. Elle permet de nommer, présenter et signer votre export depuis le menu « À propos » (accessible depuis le bouton, au pied du menu de gauche). Elle y intègre les métadonnées `title`, `author` et `description` renseignées dans la [configuration (option `metas`)](#parametres-facultatifs). Si elle est renseignée, la métadonnée `title` vient aussi remplacer le logo en haut du menu gauche.

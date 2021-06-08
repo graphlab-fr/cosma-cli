@@ -1,3 +1,9 @@
+/**
+ * @file If 'history' option from config is true, create folders for save the export.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const fs = require('fs')
     , moment = require('moment')
     , time = moment().format('YYYY-MM-DD_HH-mm')

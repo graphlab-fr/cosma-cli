@@ -1,3 +1,9 @@
+/**
+ * @file Terminal form to ask user about record title, type & tags to create the formated Markdown file.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const config = require('./verifconfig').config
     , readline = require('readline');
 

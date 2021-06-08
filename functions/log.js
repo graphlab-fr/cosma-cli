@@ -1,3 +1,9 @@
+/**
+ * @file Display and write errors & warnings from 'modelize.js'.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const fs = require('fs')
     , moment = require('moment');
 

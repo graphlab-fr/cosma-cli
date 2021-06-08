@@ -1,20 +1,31 @@
+/**
+ * @file Addressing of terminal commands.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 require('./functions/verifconfig');
 
+/**
+ * command sample :
+ * node app <command name> <argument1 argument2 …>
+ */
+
 const cmdEntries = process.argv.slice(2)
-    , requestName = cmdEntries[0]
-    , requestArgs = cmdEntries.slice(1);
+    , requestName = cmdEntries[0] // = "command name"
+    , requestArgs = cmdEntries.slice(1); // = ["argument1", "argument2", …]
 
 switch (requestName) {
 
     /** Actions
     --------------------*/
 
-    // config
+    // config generation
 
-    case 'c': break;
+    case 'c': break; // shortcut
     case 'config': break;
 
-    // cosmoscope genetration
+    // cosmoscope generation
 
     case 'm': require('./functions/modelize'); break;
     case 'modelize': require('./functions/modelize'); break;
