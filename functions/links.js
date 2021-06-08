@@ -20,7 +20,7 @@ mdIt.use(mdItAttr, {
  * @returns {array} - Objets array : links with type & target id
  */
 
- function catchLinksFromContent(fileContent) {
+function catchLinksFromContent(fileContent) {
     let tempL = {}, // temp link container
     links = []; // final link container
 

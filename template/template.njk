@@ -237,7 +237,15 @@
                 {% endif %}
             </header>
 
-            <main class="record-content">{{ record.content | safe }}</main>
+            <main class="record-content">
+                {{ record.content | safe }}
+
+                <section class="bibliography">
+                    <hr/>
+                    <h1>Bibliographie</h1>
+                    {{ record.bibliography | safe }}
+                <section>
+            </main>
 
             <footer class="list-content-container">
                 {% if record.links.length !== 0 %}

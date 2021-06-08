@@ -9,6 +9,7 @@ const fs = require('fs')
     , mdIt = require('markdown-it')()
     , mdItAttr = require('markdown-it-attrs')
     , linksTools = require('./links')
+    , quoteTools = require('./quote')
     , moment = require('moment')
     , config = require('./verifconfig').config;
 
@@ -39,6 +40,7 @@ function cosmoscope(files, entities, historyPath) {
         // normalize files as records
         records: files.map(function (file) {
             file.content = linksTools.convertLinks(file.content, file);
+            file = quoteTools.catchConvertQuoteKeys(file);
             registerType(file.metas.type, file.metas.id);
             registerTags(file.metas.tags, file.metas.id);
 
@@ -49,6 +51,7 @@ function cosmoscope(files, entities, historyPath) {
                 tags: file.metas.tags.join(', '), // array to string
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content), // Mardown to HTML
+                bibliography: quoteTools.genBibliography(file.quoteRefs),
                 links: file.links,
                 backlinks: file.backlinks
             }
