@@ -180,6 +180,9 @@ graph_config:
 : Couleur de surbrillance des éléments mis en sélection.
 : Exemple : `red` ,`#0642ff `, `rgb(207, 52, 118)`
 
+`highlight_on_hover`
+: Survoler un nœud le met temporairement en surbrillance, ainsi que ses connexions. Valeur : `true` ou `false`.
+
 `text_size`
 : Taille des étiquettes des nœuds. L'unité implicite est le pixel. La valeur minimale est `5` ; la valeur maximale est `15`.
 
@@ -432,9 +435,9 @@ Panneau latéral droit (Fiche)
 
 Le graphe située dans la zone centrale de l'interface affiche des nœuds étiquetés et interreliés. Chaque nœud correspond à une fiche ; l'étiquette correspond au titre de la fiche. Les liens correspondent aux liens établis entre les fiches via leur identifiant entre doubles crochets.
 
-Survoler un nœud le met temporairement en surbrillance, ainsi que ses connexions. Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante.
+Si le [paramètre `highlight_on_hover` est activé](#parametres-du-graphe), survoler un nœud le met temporairement en **surbrillance**, ainsi que ses connexions. Cliquer sur un nœud le met en surbrillance, ainsi que ses connexions, et ouvre la fiche correspondante.
 
-Vous pouvez zoomer dans le graphe à la souris, au pavé tactile, en double cliquant sur le fond du graphe ou bien avec les boutons dédiés situés en bas à gauche. Le bouton Recentrer (raccourci : touche `R`) réinitialise le zoom.
+Vous pouvez **zoomer** dans le graphe à la souris, au pavé tactile, en double cliquant sur le fond du graphe ou bien avec les boutons dédiés situés en bas à gauche. Le bouton Recentrer (raccourci : touche `R`) réinitialise le zoom.
 
 Les nœuds sont organisés dans l'espace par un algorithme de simulation de forces. Une barre colorée sous le logo Cosma témoigne de l'état de la simulation. Cliquez dessus (raccourci : touche `Espace`) pour lancer un cycle de simulation supplémentaire.
 
@@ -460,10 +463,10 @@ Modifiez `force` et `distance_max` pour adapter l'affichage à la résolution et
 
 | Taille écran (pouces) | `force`           | `distance_max`   |
 |-----------------------|-------------------|------------------|
-| moins de 15           | entre -100 à -200 | moins de 300     |
-| 15-25                 | entre -300 à -400 | entre 300 et 600 |
-| 25-35                 | moins de -400     | plus de 600      |
-| plus de 35            | -600              | 800              |
+| moins de 15           | entre 100 à 200 | moins de 300     |
+| 15-25                 | entre 300 à 400 | entre 300 et 600 |
+| 25-35                 | moins de 400     | plus de 600      |
+| plus de 35            | 600              | 800              |
 
 Modifiez `verticale` et `horizontale` pour appliquer une force centripète vers l'axe correspondant. Ceci permet notamment de ramener les îlots et nœuds isolés plus près du centre.
 :::
