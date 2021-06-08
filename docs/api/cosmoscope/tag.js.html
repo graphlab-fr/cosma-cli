@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>view.js - Documentation</title>
+    <title>tag.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">view.js</h1>
+    <h1 class="page-title">tag.js</h1>
     
 
     
@@ -40,86 +40,39 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file Manage the view saving &amp; loading.
+ * @file Activate/disable tag buttons.
  * @author Guillaume Brioudes
  * @copyright MIT License ANR HyperOtlet
  */
 
-/**
- * Take 'view' object values &amp; encode them on base64
- * (no ACSII caracters are allowed)
- * @returns {string} - base64 string
- */
+const primTagsContainer = document.querySelector('.menu-tags-container-prim');
 
-function registerView() {
-    const activeFiltersNames = getActiveFilterNames();
+function tag(tagElt) {
+    const isActive = tagElt.dataset.active
+        // tag brothers from sort div's
+        , tagBtns = document.querySelectorAll('[data-tag="' + tagElt.dataset.tag + '"]');
 
-    const viewObj = {
-        recordId: view.openedRecordId,
-        filters: ((activeFiltersNames.length === 0) ? undefined : activeFiltersNames)
+    if (isActive === 'true') {
+        tagBtns.forEach(tagBtn => { tagBtn.dataset.active = false; });
+    } else {
+        tagBtns.forEach(tagBtn => { tagBtn.dataset.active = true; });
     }
 
-    if (focus.focusedNodeId) {
-        viewObj.focus = {
-            fromRecordId: focus.focusedNodeId,
-            level: focus.range.value
-        };
-    }
+    // get active tags and the linked nodes id
+    const activeTags = Array.from(primTagsContainer.querySelectorAll('[data-tag][data-active="true"]'));
+    let nodeIds = activeTags.map(function(activeTagBtn) {
+        return tagList[activeTagBtn.dataset.tag - 1].nodes; // 'tagList' is global var, set from template.njk
+    }).flat();
 
-    let key = JSON.stringify(viewObj);
-    key = window.btoa(key);
-    key = encodeURIComponent(key);
-    return key;
-}
+    // delete duplicated elements
+    nodeIds = nodeIds.filter((item, index) => { return nodeIds.indexOf(item) === index });
 
-/**
- * Copy registerView() output on clipboard
- */
-
-function saveView() {
-    const tempInput = document.createElement('input');
-    document.body.appendChild(tempInput);
-    tempInput.value = registerView();
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-}
-
-/**
- * Update 'view' object values from a encoded base64 string
- * @param {HTMLElement} viewBtn - The HTML button, container of the view data
- */
-
-function changeView(viewBtn) {
-    if (viewBtn.dataset.active === "true") {
-        viewBtn.dataset.active = false;
-        setFilters(getFilterNames());
-        focus.disable();
-        return;
-    }
-
-    viewBtn.dataset.active = true;
-
-    let key = viewBtn.dataset.view;
-    // base64 string contain an encoded image from the 'view' object
-    key = decodeURIComponent(key);
-    key = window.atob(key);
-    key = JSON.parse(key);
-
-    if (key.filters) {
-        setFilters(key.filters); }
+    labelUnlightAll();
+    if (nodeIds.length !== 0) { hideAllFromIndex(); }
+    else { displayAllFromIndex(); }
+    labelHighlight(nodeIds); displayFromIndex(nodeIds);
     
-    if (key.focus) {
-        // console.log(key.focus);
-        openRecord(key.focus.fromRecordId, false);
-        focus.init(key.focus.fromRecordId);
-        focus.set(key.focus.level);
-
-        return;
-    }
-
-    if (key.recordId) {
-        openRecord(key.recordId, false); }
+    setCounter(counters.tag, activeTags.length);
 }</code></pre>
         </article>
     </section>
