@@ -1,4 +1,10 @@
 /**
+ * @file Activate/disable focus on a node and focus controls.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
+/**
  * Display some nodes, hide all others
  * Turn on the 'focusMode'
  * @param {string} nodeIdsList - List of ids from nodes to keep displayed

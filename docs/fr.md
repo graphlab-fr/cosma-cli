@@ -620,9 +620,10 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
 │   │   ├── graph.js        | génération du graphe selon données et configuration
+│   │   ├── history.js      | historique de navigation entre les fiches
 │   │   ├── index.js        | contrôle des volets et boutons du menu gauche
 │   │   ├── keyboard.js     | affectation des raccourcis clavier
-│   │   ├── main.js         | historique de navigation et les variables globales
+│   │   ├── main.js         | variables globales et animation logo
 │   │   ├── nodes.js        | affichage des nœuds
 │   │   ├── record.js       | ouvrir/fermer le volet latéral droit
 │   │   ├── search.js       | paramétrage moteur de recherche

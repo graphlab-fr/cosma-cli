@@ -1,3 +1,9 @@
+/**
+ * @file Counters elts and functions to change values.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const counters = {
     index: document.getElementById('index-counter'),
     tag: document.getElementById('tag-counter')

@@ -1,3 +1,9 @@
+/**
+ * @file Generate nodes, labels & links for graph. Highlight, hide & display nodes & links. Set mouse events.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 (function() {
 
 let link, node, circles, labels

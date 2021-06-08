@@ -5,6 +5,7 @@
             "../template/scripts/filter.js",
             "../template/scripts/focus.js",
             "../template/scripts/graph.js",
+            "../template/scripts/history.js",
             "../template/scripts/index.js",
             "../template/scripts/main.js",
             "../template/scripts/nodes.js",

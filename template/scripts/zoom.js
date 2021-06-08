@@ -1,3 +1,9 @@
+/**
+ * @file Controls & apply zoom from graph.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 (function () {
 
     const zoomInterval = 0.3 // interval between two (de)zoom

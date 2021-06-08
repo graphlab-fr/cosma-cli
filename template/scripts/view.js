@@ -1,4 +1,10 @@
 /**
+ * @file Manage the view saving & loading.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
+/**
  * Take 'view' object values & encode them on base64
  * (no ACSII caracters are allowed)
  * @returns {string} - base64 string

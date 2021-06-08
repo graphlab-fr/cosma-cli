@@ -1,3 +1,9 @@
+/**
+ * @file Select filters elts and activate them by the ids them contain.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 let filterAltMode = false;
 
 /**
@@ -8,7 +14,7 @@ let filterAltMode = false;
  * @param {bool} fromElt - If function is activeted from a 'onchange' attribute
  */
 
- function filter(isChecked, nodeIdsList, input, fromElt = false) {
+function filter(isChecked, nodeIdsList, input, fromElt = false) {
 
     nodeIdsList = parseIdsString(nodeIdsList);
 

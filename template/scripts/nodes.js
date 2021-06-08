@@ -1,4 +1,10 @@
 /**
+ * @file Filter nodes id that can be displayed or hidden and then update graph, index & counters.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
+/**
  * Hide some nodes & their links, by their id
  * @param {array} nodeIds - List of nodes ids
  */

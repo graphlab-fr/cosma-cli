@@ -1,3 +1,9 @@
+/**
+ * @file Set keyboard shortcuts. Global var if keyboard shortcuts are activated and which ones.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 let keyboardShortcutsAreWorking = true;
 
 /**

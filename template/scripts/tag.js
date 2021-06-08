@@ -1,3 +1,9 @@
+/**
+ * @file Activate/disable tag buttons.
+ * @author Guillaume Brioudes
+ * @copyright MIT License ANR HyperOtlet
+ */
+
 const primTagsContainer = document.querySelector('.menu-tags-container-prim');
 
 function tag(tagElt) {
