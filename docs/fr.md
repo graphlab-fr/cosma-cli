@@ -662,11 +662,11 @@ Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y �
 
 ## Génération du cosmoscope
 
-Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Elle intancie le modèle Nunjucks `template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Elle intancie le modèle Nunjucks `/template/template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
 
 Nunjucks importe par ailleurs dans son `<head>` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `<script>` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
 
-Le tout est enregistré dans un fichier `cosmoscope.html` (plus un fichier sauvegardé dans l'[historique](#export)).
+Le tout est enregistré dans un fichier `cosmoscope.html` et est [exporté](#export).
 
 ## Affichage du graphe
 
@@ -678,7 +678,7 @@ La tableau **`graph.links`** contient toutes les données relatives aux liens (v
 
 Ces tableaux peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
 
-**[VisJs Network](https://github.com/visjs/vis-network)**
+**[VisJs Network](https://github.com/visjs/vis-network)** [[Exemple de code](https://github.com/visjs/vis-network#example)]
 
 Fichier `/functions/modelize.js`
 
@@ -697,7 +697,7 @@ function registerLinks(file) {
 }
 ```
 
-Fichier `/template/sripts/graph.js`
+Fichier `/template/scripts/graph.js`
 
 ```javascript
 const network = new vis.Network(
@@ -710,7 +710,7 @@ const network = new vis.Network(
 );
 ```
 
-**[SigmaJs](https://github.com/jacomyal/sigma.js/)**
+**[SigmaJs](https://github.com/jacomyal/sigma.js/)**  [[Exemple de code](https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70)]
 
 ```javascript
 const network = new sigma({
@@ -724,9 +724,9 @@ const network = new sigma({
 
 ## Paramètres du graphe
 
-Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injecté dans le modèle Nunjucks `template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
+Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injecté dans le modèle Nunjucks `/template/template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
 
-Ce même object global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Il font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la biliothèque de visualisation D3.
+Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la biliothèque de visualisation D3.
 
 ## Raccourcis clavier
 
