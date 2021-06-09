@@ -461,7 +461,7 @@ node app modelize -p</code></pre>
 <ul>
 <li>vérifier et actualiser le fichier de configuration ;</li>
 <li>générer des fichiers Markdown et leur entête ;</li>
-<li>lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens <em>wiki</em>) afin de générer :
+<li>lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens style wiki) afin de générer :
 <ul>
 <li>des fichiers JSON ;</li>
 <li>le cosmoscope (ses données et variables CSS).</li>
@@ -481,18 +481,18 @@ node app modelize -p</code></pre>
 │   ├── api/                | répertoire des index des API
 │   │   └── [x].md          | introduction à l&#39;index [x] de l&#39;API
 │   └── api-config-[x].json | config. de l&#39;index [x] de l&#39;API
-├── functions/              | fonctions du COSMOGRAPHE
+├── functions/              | fonctions du cosmographe
 │   ├── autorecord.js       | création de fichiers Markdown formatés
 │   ├── history.js          | création répertoires de l&#39;historique des exports
 │   ├── links.js            | analyse des liens wiki et de leurs attributs
 │   ├── log.js              | affichage des alertes et création des registres
 │   ├── modelize.js         | analyse des fichiers Markdown et création modèle de données
 │   ├── record.js           | formulaire du terminal pour création des fichiers Md
-│   ├── template.js         | intégration données, style et corps du COSMOSCOPE
+│   ├── template.js         | intégration données, style et corps du cosmoscope
 │   └── verifconfig.js      | validation et modification de la configuration
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
-│   ├── scripts/            | fonctions du COSMOSCOPE
+│   ├── scripts/            | fonctions du cosmoscope
 │   │   ├── counter.js      | actuliser les compteurs d&#39;entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
@@ -508,9 +508,9 @@ node app modelize -p</code></pre>
 │   │   ├── view.js         | enregistrer et appliquer une vue
 │   │   └── zoom.js         | paramétrer les déplacement (latéral, zoom) au sein du graphe
 │   ├── cosmalogo.svg       | logo du logiciel
-│   ├── template.njk        | structure du COSMOSCOPE
-│   ├── print.css           | styles d&#39;impression du COSMOSCOPE
-│   └── styles.css          | styles du COSMOSCOPE
+│   ├── template.njk        | structure du cosmoscope
+│   ├── print.css           | styles d&#39;impression du cosmoscope
+│   └── styles.css          | styles du cosmoscope
 ├── app.js                  | adressage des commandes du terminal
 └── package.json            | liste des dépendances Node.js</code></pre>
 <h2 data-number="6.4" id="index-des-fonctions"><span class="header-section-number">6.4</span> Index des fonctions</h2>

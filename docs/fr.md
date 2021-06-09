@@ -565,7 +565,7 @@ Le **cosmographe** repose sur l'environnement Node.js. Une série de scripts per
 
 - vérifier et actualiser le fichier de configuration ;
 - générer des fichiers Markdown et leur entête ;
-- lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens *wiki*) afin de générer :
+- lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens style wiki) afin de générer :
 	- des fichiers JSON ;
 	- le cosmoscope (ses données et variables CSS).
 
@@ -586,18 +586,18 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   ├── api/                | répertoire des index des API
 │   │   └── [x].md          | introduction à l'index [x] de l'API
 │   └── api-config-[x].json | config. de l'index [x] de l'API
-├── functions/              | fonctions du COSMOGRAPHE
+├── functions/              | fonctions du cosmographe
 │   ├── autorecord.js       | création de fichiers Markdown formatés
 │   ├── history.js          | création répertoires de l'historique des exports
 │   ├── links.js            | analyse des liens wiki et de leurs attributs
 │   ├── log.js              | affichage des alertes et création des registres
 │   ├── modelize.js         | analyse des fichiers Markdown et création modèle de données
 │   ├── record.js           | formulaire du terminal pour création des fichiers Md
-│   ├── template.js         | intégration données, style et corps du COSMOSCOPE
+│   ├── template.js         | intégration données, style et corps du cosmoscope
 │   └── verifconfig.js      | validation et modification de la configuration
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
-│   ├── scripts/            | fonctions du COSMOSCOPE
+│   ├── scripts/            | fonctions du cosmoscope
 │   │   ├── counter.js      | actuliser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
@@ -613,9 +613,9 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   │   ├── view.js         | enregistrer et appliquer une vue
 │   │   └── zoom.js         | paramétrer les déplacement (latéral, zoom) au sein du graphe
 │   ├── cosmalogo.svg       | logo du logiciel
-│   ├── template.njk        | structure du COSMOSCOPE
-│   ├── print.css           | styles d'impression du COSMOSCOPE
-│   └── styles.css          | styles du COSMOSCOPE
+│   ├── template.njk        | structure du cosmoscope
+│   ├── print.css           | styles d'impression du cosmoscope
+│   └── styles.css          | styles du cosmoscope
 ├── app.js                  | adressage des commandes du terminal
 └── package.json            | liste des dépendances Node.js
 ```
