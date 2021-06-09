@@ -551,15 +551,15 @@ Dans l'exemple ci-dessous, le fichier `custom.css` contient des déclarations qu
 
 # Développement
 
-Cette partie de la documentation s'adresse à des développeurs expérimentés en JavaScript. Elle vous présente l'arborescence et les concepts sur lesquels reposent les *deux parties* formant Cosma, le cosmographe et le cosmoscope.
+Cette partie de la documentation s'adresse à des développeurs expérimentés en JavaScript. Elle présente l'arborescence et les concepts sur lesquels reposent les deux parties formant Cosma, le **cosmographe** et le **cosmoscope**.
 
-Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir l'ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.
+Nous vous recommandons vivement de lire le reste de la documentation pour bien saisir l'ensemble des usages en jeu dans le code source présenté ci-dessous.
 
 ## Terminologie
 
 Les fichiers Markdown interprétés par Cosma sont qualifiés ici de « fiches » plutôt que de « notes », en référence à la tradition de la fiche érudite et à l'histoire de la documentation. L'acception documentaire de « fiche » n'a pas de traduction directe en anglais (sinon *index card*). En revanche, elle est conceptuellement proche du mot « *record* » issu du [*records management*](https://fr.wikipedia.org/wiki/Records_management). Le code de Cosma emploie donc le mot record pour désigner une fiche.
 
-## Architecture de Cosma
+## Description générale de l'architecture
 
 Cosma est principalement implémenté en JavaScript. Le logiciel repose sur deux systèmes distincts, le cosmographe et le cosmoscope.
 
@@ -577,13 +577,6 @@ Le **cosmoscope** est un fichier HTML exécuté sur navigateurs web, créé à p
 - les scripts et bibliothèques JavaScript ;
 - des index (mots-clés, titre de fiche, vues) ;
 - les fiches.
-
-::: important
-Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :
-
-- [Consulter l'API du cosmographe](./api/cosmographe/index.html)
-- [Consulter l'API du cosmoscope](./api/cosmoscope/index.html)
-:::
 
 ## Arborescence
 
@@ -629,6 +622,13 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 └── package.json            | liste des dépendances Node.js
 ```
 
+## Index des fonctions
+
+Cliquez sur les liens ci-dessous pour consulter la liste des fonctions utilisées par le cosmographe et le cosmoscope :
+
+- [Consulter l'API du cosmographe](./api/cosmographe/index.html)
+- [Consulter l'API du cosmoscope](./api/cosmoscope/index.html)
+
 ## Fonctionnement du cosmographe
 
 Il a trois utilisations possibles via le terminal. Ces différentes requêtes sont réceptionnées par `app.js` qui les renvoie :
@@ -649,33 +649,44 @@ const folderToExport = config.export_target;
 
 Depuis le fichier `modelize.js`, on extrait de chaque fichier Markdown les métadonnées (l'entête YAML) et le contenu (suivant l'entête YAML) (fichier `modelize.js`).
 
-1. fonction [`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent) : Le contenu est lu une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
-2. fonction [`convertLinks()`](./api/cosmographe/global.html#convertLinks) : Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
-3. fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope) : Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
+[`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent)
+: Le contenu est lu une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
 
-Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y être remplacée.
+[`convertLinks()`](./api/cosmographe/global.html#convertLinks)
+: Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
+
+[`cosmoscope()`](./api/cosmographe/global.html#cosmoscope)
+: Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
+
+La première et la troisième fonction font appel à la bibliothèque markdown-it. Elle peut être remplacée.
 
 ## Génération du cosmoscope
 
-Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Elle intancie le modèle Nunjucks `/template/template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope).
 
-Nunjucks importe par ailleurs dans son `<head>` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `<script>` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
+Celle-ci instancie le modèle Nunjucks `/template/template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+
+Nunjucks importe par ailleurs dans son `head` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `script` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
 
 Le tout est enregistré dans un fichier `cosmoscope.html` et est [exporté](#export).
 
 ## Affichage du graphe
 
-La génération et l'animation du graphe reposent sur la bibliothèque [D3](https://d3js.org/). Elle perçoit ses données depuis l'objet global `graph`. Cet object est composé de deux tableaux.
+La génération et l'animation du graphe reposent sur la bibliothèque [D3.js](https://d3js.org/). Celle-ci perçoit ses données depuis l'objet global `graph`. Cet object est composé de deux tableaux.
 
-Le tableau **`graph.nodes`** contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d'affichage (voir la sérialisation par la fonction [`registerNodes()`](./api/cosmographe/global.html#registerNodes)). Cet état indiqué est actualisé à chaque modification d'affichage.
+`graph.nodes`
+: Ce tableau contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d'affichage (voir la sérialisation par la fonction [`registerNodes()`](./api/cosmographe/global.html#registerNodes)). Cet état indiqué est actualisé à chaque modification d'affichage.
 
-La tableau **`graph.links`** contient toutes les données relatives aux liens (voir la sérialisation par la fonction [`registerLinks()`](./api/cosmographe/global.html#registerLinks)).
+`graph.links`
+: Ce tableau contient toutes les données relatives aux liens (voir la sérialisation par la fonction [`registerLinks()`](./api/cosmographe/global.html#registerLinks)).
 
-Ces tableaux peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
+## Affichage via d'autres bibliothèques
 
-**[VisJs Network](https://github.com/visjs/vis-network)** [[Exemple de code](https://github.com/visjs/vis-network#example)]
+Les tableaux présentés dans la section précédente peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
 
-Fichier `/functions/modelize.js`
+**Exemple 1 :** Vis.js Network ([dépôt](https://github.com/visjs/vis-network), [exemple](https://github.com/visjs/vis-network#example)).
+
+Extrait du fichier `/functions/modelize.js` :
 
 ```javascript
 function registerLinks(file) {
@@ -692,7 +703,7 @@ function registerLinks(file) {
 }
 ```
 
-Fichier `/template/scripts/graph.js`
+Extrait du fichier `/template/scripts/graph.js`
 
 ```javascript
 const network = new vis.Network(
@@ -705,7 +716,7 @@ const network = new vis.Network(
 );
 ```
 
-**[SigmaJs](https://github.com/jacomyal/sigma.js/)**  [[Exemple de code](https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70)]
+**Exemple 2 :** Sigma.js ([dépôt](https://github.com/jacomyal/sigma.js/), [exemple](https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70)).
 
 ```javascript
 const network = new sigma({
@@ -719,15 +730,15 @@ const network = new sigma({
 
 ## Paramètres du graphe
 
-Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injecté dans le modèle Nunjucks `/template/template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
+Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injectée dans le modèle Nunjucks `/template/template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle, elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
 
-Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la biliothèque de visualisation D3.
+Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la bibliothèque de visualisation D3.js.
 
 ## Raccourcis clavier
 
 L'ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier `/template/scripts/keyboard.js`. L'objet global `pressedKeys` contient la liste des touches surveillées pour modifier un comportement. D'autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l'objet global `pressedKeys`.
 
-Le booléen global `keyboardShortcutsAreWorking` défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu'écrire.
+Le booléen global `keyboardShortcutsAreWorking` définit si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu'écrire.
 
 # Crédits
 
