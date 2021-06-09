@@ -57,14 +57,16 @@
 <li><a href="#developpement"><span class="toc-section-number">6</span> Développement</a>
 <ul>
 <li><a href="#terminologie"><span class="toc-section-number">6.1</span> Terminologie</a></li>
-<li><a href="#architecture-de-cosma"><span class="toc-section-number">6.2</span> Architecture de Cosma</a></li>
+<li><a href="#description-generale-de-larchitecture"><span class="toc-section-number">6.2</span> Description générale de l’architecture</a></li>
 <li><a href="#arborescence"><span class="toc-section-number">6.3</span> Arborescence</a></li>
-<li><a href="#fonctionnement-du-cosmographe"><span class="toc-section-number">6.4</span> Fonctionnement du cosmographe</a></li>
-<li><a href="#lecture-des-fichiers"><span class="toc-section-number">6.5</span> Lecture des fichiers</a></li>
-<li><a href="#generation-du-cosmoscope"><span class="toc-section-number">6.6</span> Génération du cosmoscope</a></li>
-<li><a href="#affichage-du-graphe"><span class="toc-section-number">6.7</span> Affichage du graphe</a></li>
-<li><a href="#parametres-du-graphe-1"><span class="toc-section-number">6.8</span> Paramètres du graphe</a></li>
-<li><a href="#raccourcis-clavier"><span class="toc-section-number">6.9</span> Raccourcis clavier</a></li>
+<li><a href="#index-des-fonctions"><span class="toc-section-number">6.4</span> Index des fonctions</a></li>
+<li><a href="#fonctionnement-du-cosmographe"><span class="toc-section-number">6.5</span> Fonctionnement du cosmographe</a></li>
+<li><a href="#lecture-des-fichiers"><span class="toc-section-number">6.6</span> Lecture des fichiers</a></li>
+<li><a href="#generation-du-cosmoscope"><span class="toc-section-number">6.7</span> Génération du cosmoscope</a></li>
+<li><a href="#affichage-du-graphe"><span class="toc-section-number">6.8</span> Affichage du graphe</a></li>
+<li><a href="#affichage-via-dautres-bibliotheques"><span class="toc-section-number">6.9</span> Affichage via d’autres bibliothèques</a></li>
+<li><a href="#parametres-du-graphe-1"><span class="toc-section-number">6.10</span> Paramètres du graphe</a></li>
+<li><a href="#raccourcis-clavier"><span class="toc-section-number">6.11</span> Raccourcis clavier</a></li>
 </ul></li>
 <li><a href="#credits"><span class="toc-section-number">7</span> Crédits</a>
 <ul>
@@ -454,11 +456,11 @@ node app modelize -p</code></pre>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--condensed</span>: <span class="st">&#39;IBM Plex Sans Condensed&#39;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <h1 data-number="6" id="developpement"><span class="header-section-number">6</span> Développement</h1>
-<p>Cette partie de la documentation s’adresse à des développeurs expérimentés en JavaScript. Elle vous présente l’arborescence et les concepts sur lesquels reposent les <em>deux parties</em> formant Cosma, le cosmographe et le cosmoscope.</p>
-<p>Nous vous recommandons vivement de lire le manuel d’utilisation pour bien saisir l’ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.</p>
+<p>Cette partie de la documentation s’adresse à des développeurs expérimentés en JavaScript. Elle présente l’arborescence et les concepts sur lesquels reposent les deux parties formant Cosma, le <strong>cosmographe</strong> et le <strong>cosmoscope</strong>.</p>
+<p>Nous vous recommandons vivement de lire le reste de la documentation pour bien saisir l’ensemble des usages en jeu dans le code source présenté ci-dessous.</p>
 <h2 data-number="6.1" id="terminologie"><span class="header-section-number">6.1</span> Terminologie</h2>
 <p>Les fichiers Markdown interprétés par Cosma sont qualifiés ici de « fiches » plutôt que de « notes », en référence à la tradition de la fiche érudite et à l’histoire de la documentation. L’acception documentaire de « fiche » n’a pas de traduction directe en anglais (sinon <em>index card</em>). En revanche, elle est conceptuellement proche du mot « <em>record</em> » issu du <a href="https://fr.wikipedia.org/wiki/Records_management"><em>records management</em></a>. Le code de Cosma emploie donc le mot record pour désigner une fiche.</p>
-<h2 data-number="6.2" id="architecture-de-cosma"><span class="header-section-number">6.2</span> Architecture de Cosma</h2>
+<h2 data-number="6.2" id="description-generale-de-larchitecture"><span class="header-section-number">6.2</span> Description générale de l’architecture</h2>
 <p>Cosma est principalement implémenté en JavaScript. Le logiciel repose sur deux systèmes distincts, le cosmographe et le cosmoscope.</p>
 <p>Le <strong>cosmographe</strong> repose sur l’environnement Node.js. Une série de scripts permettent de :</p>
 <ul>
@@ -477,13 +479,6 @@ node app modelize -p</code></pre>
 <li>des index (mots-clés, titre de fiche, vues) ;</li>
 <li>les fiches.</li>
 </ul>
-<div class="important">
-<p>Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :</p>
-<ul>
-<li><a href="./api/cosmographe/index.html">Consulter l’API du cosmographe</a></li>
-<li><a href="./api/cosmoscope/index.html">Consulter l’API du cosmoscope</a></li>
-</ul>
-</div>
 <h2 data-number="6.3" id="arborescence"><span class="header-section-number">6.3</span> Arborescence</h2>
 <p>Vous trouverez ci-dessous une description complète de l’arborescence du logiciel. Vous pourrez ainsi distinguer les fichiers concernant le cosmographe et ceux du cosmoscope.</p>
 <pre><code>.
@@ -523,7 +518,13 @@ node app modelize -p</code></pre>
 │   └── styles.css          | styles du COSMOSCOPE
 ├── app.js                  | adressage des commandes du terminal
 └── package.json            | liste des dépendances Node.js</code></pre>
-<h2 data-number="6.4" id="fonctionnement-du-cosmographe"><span class="header-section-number">6.4</span> Fonctionnement du cosmographe</h2>
+<h2 data-number="6.4" id="index-des-fonctions"><span class="header-section-number">6.4</span> Index des fonctions</h2>
+<p>Cliquez sur les liens ci-dessous pour consulter la liste des fonctions utilisées par le cosmographe et le cosmoscope :</p>
+<ul>
+<li><a href="./api/cosmographe/index.html">Consulter l’API du cosmographe</a></li>
+<li><a href="./api/cosmoscope/index.html">Consulter l’API du cosmoscope</a></li>
+</ul>
+<h2 data-number="6.5" id="fonctionnement-du-cosmographe"><span class="header-section-number">6.5</span> Fonctionnement du cosmographe</h2>
 <p>Il a trois utilisations possibles via le terminal. Ces différentes requêtes sont réceptionnées par <code>app.js</code> qui les renvoie :</p>
 <ul>
 <li>extraire et modéliser (<code>modelize.js</code>) puis intégrer (<code>template.js</code>) les données dans un cosmoscope ;</li>
@@ -534,25 +535,39 @@ node app modelize -p</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> config <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;./verifconfig&#39;</span>)<span class="op">.</span><span class="at">config</span><span class="op">;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> folderToExport <span class="op">=</span> config<span class="op">.</span><span class="at">export_target</span><span class="op">;</span></span></code></pre></div>
-<h2 data-number="6.5" id="lecture-des-fichiers"><span class="header-section-number">6.5</span> Lecture des fichiers</h2>
+<h2 data-number="6.6" id="lecture-des-fichiers"><span class="header-section-number">6.6</span> Lecture des fichiers</h2>
 <p>Depuis le fichier <code>modelize.js</code>, on extrait de chaque fichier Markdown les métadonnées (l’entête YAML) et le contenu (suivant l’entête YAML) (fichier <code>modelize.js</code>).</p>
-<ol type="1">
-<li>fonction <a href="./api/cosmographe/global.html#catchLinksFromContent"><code>catchLinksFromContent()</code></a> : Le contenu est lu une première fois par une série d’expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les <em>wikilinks</em> contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.</li>
-<li>fonction <a href="./api/cosmographe/global.html#convertLinks"><code>convertLinks()</code></a> : Le contenu du fichier est ensuite transformé pour y transformer les <em>wikilinks</em> en liens Markdown</li>
-<li>fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a> : Le contenu du fichier est intégralement transpilé du Markdown à l’HTML.</li>
-</ol>
-<p>Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y être remplacée.</p>
-<h2 data-number="6.6" id="generation-du-cosmoscope"><span class="header-section-number">6.6</span> Génération du cosmoscope</h2>
-<p>Le cosmoscope est généré grâce à la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Elle intancie le modèle Nunjucks <code>/template/template.njk</code> et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction <a href="./api/cosmographe/global.html#colors"><code>colors()</code></a>).</p>
-<p>Nunjucks importe par ailleurs dans son <code>&lt;head&gt;</code> les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises <code>&lt;script&gt;</code> en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.</p>
+<dl>
+<dt><a href="./api/cosmographe/global.html#catchLinksFromContent"><code>catchLinksFromContent()</code></a></dt>
+<dd>Le contenu est lu une première fois par une série d’expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les <em>wikilinks</em> contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
+</dd>
+<dt><a href="./api/cosmographe/global.html#convertLinks"><code>convertLinks()</code></a></dt>
+<dd>Le contenu du fichier est ensuite transformé pour y transformer les <em>wikilinks</em> en liens Markdown
+</dd>
+<dt><a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a></dt>
+<dd>Le contenu du fichier est intégralement transpilé du Markdown à l’HTML.
+</dd>
+</dl>
+<p>La première et la troisième fonction font appel à la bibliothèque markdown-it. Elle peut être remplacée.</p>
+<h2 data-number="6.7" id="generation-du-cosmoscope"><span class="header-section-number">6.7</span> Génération du cosmoscope</h2>
+<p>Le cosmoscope est généré grâce à la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>.</p>
+<p>Celle-ci instancie le modèle Nunjucks <code>/template/template.njk</code> et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction <a href="./api/cosmographe/global.html#colors"><code>colors()</code></a>).</p>
+<p>Nunjucks importe par ailleurs dans son <code>head</code> les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises <code>script</code> en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.</p>
 <p>Le tout est enregistré dans un fichier <code>cosmoscope.html</code> et est <a href="#export">exporté</a>.</p>
-<h2 data-number="6.7" id="affichage-du-graphe"><span class="header-section-number">6.7</span> Affichage du graphe</h2>
-<p>La génération et l’animation du graphe reposent sur la bibliothèque <a href="https://d3js.org/">D3</a>. Elle perçoit ses données depuis l’objet global <code>graph</code>. Cet object est composé de deux tableaux.</p>
-<p>Le tableau <strong><code>graph.nodes</code></strong> contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d’affichage (voir la sérialisation par la fonction <a href="./api/cosmographe/global.html#registerNodes"><code>registerNodes()</code></a>). Cet état indiqué est actualisé à chaque modification d’affichage.</p>
-<p>La tableau <strong><code>graph.links</code></strong> contient toutes les données relatives aux liens (voir la sérialisation par la fonction <a href="./api/cosmographe/global.html#registerLinks"><code>registerLinks()</code></a>).</p>
-<p>Ces tableaux peuvent être injectés dans d’autres bibliothèques JavaScript de génération de graphe.</p>
-<p><strong><a href="https://github.com/visjs/vis-network">VisJs Network</a></strong> [<a href="https://github.com/visjs/vis-network#example">Exemple de code</a>]</p>
-<p>Fichier <code>/functions/modelize.js</code></p>
+<h2 data-number="6.8" id="affichage-du-graphe"><span class="header-section-number">6.8</span> Affichage du graphe</h2>
+<p>La génération et l’animation du graphe reposent sur la bibliothèque <a href="https://d3js.org/">D3.js</a>. Celle-ci perçoit ses données depuis l’objet global <code>graph</code>. Cet object est composé de deux tableaux.</p>
+<dl>
+<dt><code>graph.nodes</code></dt>
+<dd>Ce tableau contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d’affichage (voir la sérialisation par la fonction <a href="./api/cosmographe/global.html#registerNodes"><code>registerNodes()</code></a>). Cet état indiqué est actualisé à chaque modification d’affichage.
+</dd>
+<dt><code>graph.links</code></dt>
+<dd>Ce tableau contient toutes les données relatives aux liens (voir la sérialisation par la fonction <a href="./api/cosmographe/global.html#registerLinks"><code>registerLinks()</code></a>).
+</dd>
+</dl>
+<h2 data-number="6.9" id="affichage-via-dautres-bibliotheques"><span class="header-section-number">6.9</span> Affichage via d’autres bibliothèques</h2>
+<p>Les tableaux présentés dans la section précédente peuvent être injectés dans d’autres bibliothèques JavaScript de génération de graphe.</p>
+<p><strong>Exemple 1 :</strong> Vis.js Network (<a href="https://github.com/visjs/vis-network">dépôt</a>, <a href="https://github.com/visjs/vis-network#example">exemple</a>).</p>
+<p>Extrait du fichier <code>/functions/modelize.js</code> :</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">registerLinks</span>(file) {</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> link <span class="kw">of</span> file<span class="op">.</span><span class="at">links</span>) {</span>
@@ -565,7 +580,7 @@ node app modelize -p</code></pre>
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Fichier <code>/template/scripts/graph.js</code></p>
+<p>Extrait du fichier <code>/template/scripts/graph.js</code></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">Network</span>(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;network&#39;</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">,</span> data <span class="op">=</span> {</span>
@@ -574,7 +589,7 @@ node app modelize -p</code></pre>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">,</span> {  } <span class="co">// options</span></span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
-<p><strong><a href="https://github.com/jacomyal/sigma.js/">SigmaJs</a></strong> [<a href="https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70">Exemple de code</a>]</p>
+<p><strong>Exemple 2 :</strong> Sigma.js (<a href="https://github.com/jacomyal/sigma.js/">dépôt</a>, <a href="https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70">exemple</a>).</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> <span class="fu">sigma</span>({</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">graph</span><span class="op">:</span> {</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nodes</span><span class="op">:</span> graph<span class="op">.</span><span class="at">nodes</span><span class="op">,</span></span>
@@ -582,12 +597,12 @@ node app modelize -p</code></pre>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">container</span><span class="op">:</span> <span class="st">&#39;network&#39;</span></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<h2 data-number="6.8" id="parametres-du-graphe-1"><span class="header-section-number">6.8</span> Paramètres du graphe</h2>
-<p>Les paramètres du graphe sont extraits de la partie <code>graph_config</code> du fichier de configuration <code>config.yml</code>. Elle est injecté dans le modèle Nunjucks <code>/template/template.njk</code> via la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript <code>graphProperties</code>.</p>
-<p>Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction <a href="./api/cosmographe/global.html#updateForces"><code>updateForces()</code></a> pour relancer l’évaluation de ces paramètres par la biliothèque de visualisation D3.</p>
-<h2 data-number="6.9" id="raccourcis-clavier"><span class="header-section-number">6.9</span> Raccourcis clavier</h2>
+<h2 data-number="6.10" id="parametres-du-graphe-1"><span class="header-section-number">6.10</span> Paramètres du graphe</h2>
+<p>Les paramètres du graphe sont extraits de la partie <code>graph_config</code> du fichier de configuration <code>config.yml</code>. Elle est injectée dans le modèle Nunjucks <code>/template/template.njk</code> via la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Dans le modèle, elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript <code>graphProperties</code>.</p>
+<p>Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction <a href="./api/cosmographe/global.html#updateForces"><code>updateForces()</code></a> pour relancer l’évaluation de ces paramètres par la bibliothèque de visualisation D3.js.</p>
+<h2 data-number="6.11" id="raccourcis-clavier"><span class="header-section-number">6.11</span> Raccourcis clavier</h2>
 <p>L’ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier <code>/template/scripts/keyboard.js</code>. L’objet global <code>pressedKeys</code> contient la liste des touches surveillées pour modifier un comportement. D’autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l’objet global <code>pressedKeys</code>.</p>
-<p>Le booléen global <code>keyboardShortcutsAreWorking</code> défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu’écrire.</p>
+<p>Le booléen global <code>keyboardShortcutsAreWorking</code> définit si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu’écrire.</p>
 <h1 data-number="7" id="credits"><span class="header-section-number">7</span> Crédits</h1>
 <h2 data-number="7.1" id="equipe"><span class="header-section-number">7.1</span> Équipe</h2>
 <ul>
