@@ -191,8 +191,8 @@ graph_config:
 
 `attraction`
 : Paramètres de la simulation de forces entre les nœuds.
-: `force` : puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Une valeur inférieure à `50` tend à provoquer des collisions incessantes.
-: `distance_max` : distance maximum entre les nœuds et îlots. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable. La valeur de `distance_max` indique également la valeur maximale effective de `force`. Par exemple, si `distance_max: 500`, alors augmenter `force` au-delà de 500 n'aura pas d'incidence.
+: `force` : puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Les valeurs supérieures à `-50` tendent à provoquer des collisions incessantes.
+: `distance_max` : distance maximum entre les nœuds et îlots. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable.
 : `verticale` : force d'attraction vers l'axe vertical. Une valeur de `0` signifie que ce paramètre est désactivée.
 : `horizontale` : force d'attraction vers l'axe horizontal. Une valeur de `0` signifie que ce paramètre est désactivée.
 
@@ -462,7 +462,16 @@ L'affichage du graphe peut être modifié de manière temporaire via les contrô
 Pour modifier l'affichage de manière permanente, modifiez les valeurs par défaut des paramètres correspondants sous `graph_config` dans `config.yml` (voir [Paramètres du graphe](#parametres-du-graphe) plus haut).
 
 ::: astuce
-Modifiez `force` et `distance_max` pour adapter l'affichage à la résolution et la taille de votre écran. Modifiez `verticale` et `horizontale` pour appliquer une force centripète vers l'axe correspondant, ce qui permet notamment de ramener les îlots et nœuds isolés plus près du centre.
+Modifiez `force` et `distance_max` pour adapter l'affichage à la résolution et la taille de votre écran. Le tableau ci-dessous suggère des intervalles pour ces deux paramètres :
+
+| Taille écran (pouces) | `force`           | `distance_max`   |
+|-----------------------|-------------------|------------------|
+| moins de 15           | entre 100 à 200 | moins de 300     |
+| 15-25                 | entre 300 à 400 | entre 300 et 600 |
+| 25-35                 | moins de 400     | plus de 600      |
+| plus de 35            | 600              | 800              |
+
+Modifiez `verticale` et `horizontale` pour appliquer une force centripète vers l'axe correspondant. Ceci permet notamment de ramener les îlots et nœuds isolés plus près du centre.
 :::
 
 L'affichage est possible sur tous types d'écrans mais n'est pas optimisé pour les terminaux mobiles : le tactile ne donne pas accès à certaines interactions comme le survol, et les petits écrans restreignent l'utilité du graphe.
