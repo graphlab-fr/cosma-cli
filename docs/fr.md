@@ -432,7 +432,7 @@ Zone centrale (Graphe)
 Panneau latéral droit (Fiche)
 : Affiche les fiches (métadonnées et contenu) ainsi qu'une liste des liens sortants (Liens) et entrants (Rétroliens).
 
-![interface de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
+[![Interface de Cosma (cliquez sur l'image pour l'afficher en grand)](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
 
 ## Graphe
 
@@ -480,8 +480,6 @@ En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (
 ## Mode focus
 
 Le bouton Activer le focus (raccourci : touche `F`) situé en bas à gauche du graphe permet de restreindre l'affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l'interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.
-
-![Mode focus de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-focus-demo.png)
 
 Le curseur qui apparaît sous le bouton Activer le focus permet de faire varier la distance d'affichage, jusqu'au maximum permis par le paramètre `focus_max` dans la configuration.
 
