@@ -12,3 +12,7 @@ template/graph-data.js
 *.woff
 *.ttf
 *-webfont.svg
+
+/docs/api
+/docs/en.html
+/docs/fr.html
