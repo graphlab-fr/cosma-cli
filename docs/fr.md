@@ -82,7 +82,8 @@ Pour une introduction à YAML, [cliquez ici](https://sweetohm.net/article/introd
 Exécutez la commande suivante pour créer le fichier de configuration (`config.yml`) s'il n'existe pas déjà. Vous pouvez aussi le supprimer et utiliser cette commande pour réinitialiser le fichier. Le fichier généré par cette commande est un modèle des paramètres qui doivent obligatoirement être renseignés pour une configuration valide.
 
 ```
-node app
+node app config
+node app c
 ```
 
 ## Paramètres nécessaires
@@ -90,7 +91,7 @@ node app
 La configuration doit contenir les paramètres suivants.
 
 `files_origin`
-: Chemin du répertoire contenant les fichiers Markdown à lire. La syntaxe dépend du système d'exploitation.
+: Chemin du répertoire contenant les fichiers Markdown à lire.
 : Exemple : `/Users/user/Fiches/'`, `D:\repertoire\`
 
 `export_target`
@@ -400,7 +401,7 @@ Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande
 
 ```
 node app modelize --publish
-node app modelize -p
+node app m -p
 ```
 
 Le fichier `cosmoscope.html` est exporté dans le répertoire défini par `export_target` dans la configuration. Si le fichier existe déjà au même emplacement, il est écrasé.
