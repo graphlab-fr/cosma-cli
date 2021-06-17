@@ -1,5 +1,5 @@
 /**
- * @file Replace quote markup and generate bibliography.
+ * @file Replace quote markups and generate bibliography.
  * @author Guillaume Brioudes
  * @copyright MIT License ANR HyperOtlet
  */
@@ -9,8 +9,11 @@ const fs = require('fs')
     , Citr = require('@zettlr/citr')
     , config = require('./verifconfig').config;
 
-let bib = fs.readFileSync(config.bib_origin, 'utf-8');
-bib = JSON.parse(bib);
+let library = false; // if no path to JSON library file, no functions
+if (config.bib_origin) {    
+    library = fs.readFileSync(config.bib_origin, 'utf-8');
+    library = JSON.parse(library);
+}
 
 function catchQuoteKeys(file) {
     let extractions = Citr.util.extractCitations(file.content)
@@ -36,6 +39,8 @@ function convertQuoteKeys(fileContent, fileQuoteKeys) {
     const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
     var citeproc = getCSL(quoteIds);
+    if (citeproc === false) { return fileContent; }
+
     citeproc.updateItems(quoteIds);
 
     const citations = Object.values(fileQuoteKeys).map(function(key, i) {
@@ -50,7 +55,6 @@ function convertQuoteKeys(fileContent, fileQuoteKeys) {
         const key = Object.keys(fileQuoteKeys)[i]
 
         const citMark = citeproc.processCitationCluster(cit[0], [], [])[1][0][1];
-        console.log(citMark, Object.keys(fileQuoteKeys)[i]);
 
         fileContent = fileContent.replace(key, citMark);
     }
@@ -64,6 +68,7 @@ function genBibliography(fileQuoteKeys) {
     const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
     var citeproc = getCSL(quoteIds);
+    if (citeproc === false) { return false; }
 
     citeproc.updateItems(quoteIds);
     return citeproc.makeBibliography()[1].join('\n');
@@ -73,16 +78,31 @@ exports.genBibliography = genBibliography;
 
 function getCSL(fileQuotesIds) {
 
+    if (library === false) { return false; }
+
+    let xmlLocal, cslStyle;
+
+    try {
+        // local definition file (translation of the linking terms of the quote)
+        xmlLocal = fs.readFileSync('./template/citeproc/locales.xml', 'utf-8');
+    } catch (error) {
+        console.error('\x1b[33m', 'Warn.', '\x1b[0m', 'File /template/citeproc/locales.xml is missing: no quoting.');
+        return false;
+    }
+
+    try {
+        // style for quoting (order and metadata of the citation)
+        cslStyle = fs.readFileSync('./template/citeproc/styles.csl', 'utf-8');
+    } catch (error) {
+        console.error('\x1b[33m', 'Warn.', '\x1b[0m', 'File /template/citeproc/styles.csl is missing: no quoting.');
+        return false;
+    }
+
     const fileQuoteRefs = {};
 
     for (const id of fileQuotesIds) {
-        fileQuoteRefs[id] = bib.find(bib => bib.id === id);
+        fileQuoteRefs[id] = library.find(library => library.id === id);
     }
-
-    // locale definition file (translation of the linking terms of the quote)
-    const xmlLocal = fs.readFileSync('./template/quotation/locales-fr-FR.xml', 'utf-8');
-    // style for quoting (order and metadata of the citation)
-    const cslStyle = fs.readFileSync('./template/quotation/iso690-author-date-fr.csl', 'utf-8');
 
     return new CSL.Engine({
         retrieveLocale: () => {
