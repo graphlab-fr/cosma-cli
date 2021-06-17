@@ -39,9 +39,9 @@ function cosmoscope(files, entities, historyPath) {
 
         // normalize files as records
         records: files.map(function (file) {
-            file.quoteRefs = quoteTools.catchQuoteKeys(file);
+            file.quoteKeys = quoteTools.catchQuoteKeys(file);
             file.content = linksTools.convertLinks(file.content, file);
-            file.content = quoteTools.convertQuoteKeys(file.content, file.quoteRefs);
+            file.content = quoteTools.convertQuoteKeys(file.content, file.quoteKeys);
             registerType(file.metas.type, file.metas.id);
             registerTags(file.metas.tags, file.metas.id);
 
@@ -52,7 +52,7 @@ function cosmoscope(files, entities, historyPath) {
                 tags: file.metas.tags.join(', '), // array to string
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content), // Mardown to HTML
-                bibliography: quoteTools.genBibliography(file.quoteRefs),
+                bibliography: quoteTools.genBibliography(file.quoteKeys),
                 links: file.links,
                 backlinks: file.backlinks
             }

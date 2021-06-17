@@ -12,55 +12,47 @@ const fs = require('fs')
 let bib = fs.readFileSync(config.bib_origin, 'utf-8');
 bib = JSON.parse(bib);
 
-let citations = [];
-
 function catchQuoteKeys(file) {
     let extractions = Citr.util.extractCitations(file.content)
         , quotesFromText = []
-        , quoteRefs = {};
-
-    // get all quotes
+        , quoteKeys = {};
 
     for (let i = 0; i < extractions.length; i++) {
         const extraction = extractions[i];
 
         // there could be several quotes from one key
         const quotes = Citr.parseSingle(extraction);
-        console.log(extraction);
         quotesFromText.push(...quotes);
 
-        citations.push([
-            {
-                citationItems: quotes,
-                properties: { noteIndex: i + 1 }
-            }
-        ])
+        quoteKeys[extraction] = quotes;
     }
 
-    // for each quote : get the references from the library
-
-    for (let q of quotesFromText) {
-        quoteRefs[q.id] = bib.find(bib => bib.id === q.id);
-    }
-
-    return quoteRefs;
+    return quoteKeys;
 }
 
 exports.catchQuoteKeys = catchQuoteKeys;
 
-function convertQuoteKeys(fileContent, fileQuoteRefs) {
-    const quoteIds = Object.keys(fileQuoteRefs);
+function convertQuoteKeys(fileContent, fileQuoteKeys) {
+    const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
-    var citeproc = getCSL(fileQuoteRefs);
+    var citeproc = getCSL(quoteIds);
     citeproc.updateItems(quoteIds);
 
-    console.log(JSON.stringify(citations, null, 2));
+    const citations = Object.values(fileQuoteKeys).map(function(key, i) {
+        return [{
+            citationItems: key,
+            properties: { noteIndex: i + 1 }
+        }];
+    });
 
     for (let i = 0; i < citations.length; i++) {
         const cit = citations[i];
+        const key = Object.keys(fileQuoteKeys)[i]
 
         const citMark = citeproc.processCitationCluster(cit[0], [], [])[1][0][1];
-        console.log(citMark);
+        console.log(citMark, Object.keys(fileQuoteKeys)[i]);
+
+        fileContent = fileContent.replace(key, citMark);
     }
 
     return fileContent;
@@ -68,10 +60,10 @@ function convertQuoteKeys(fileContent, fileQuoteRefs) {
 
 exports.convertQuoteKeys = convertQuoteKeys;
 
-function genBibliography(fileQuoteRefs) {
-    const quoteIds = Object.keys(fileQuoteRefs);
+function genBibliography(fileQuoteKeys) {
+    const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
-    var citeproc = getCSL(fileQuoteRefs);
+    var citeproc = getCSL(quoteIds);
 
     citeproc.updateItems(quoteIds);
     return citeproc.makeBibliography()[1].join('\n');
@@ -79,7 +71,14 @@ function genBibliography(fileQuoteRefs) {
 
 exports.genBibliography = genBibliography;
 
-function getCSL(fileQuoteRefs) {
+function getCSL(fileQuotesIds) {
+
+    const fileQuoteRefs = {};
+
+    for (const id of fileQuotesIds) {
+        fileQuoteRefs[id] = bib.find(bib => bib.id === id);
+    }
+
     // locale definition file (translation of the linking terms of the quote)
     const xmlLocal = fs.readFileSync('./template/quotation/locales-fr-FR.xml', 'utf-8');
     // style for quoting (order and metadata of the citation)
@@ -94,4 +93,18 @@ function getCSL(fileQuoteRefs) {
             return fileQuoteRefs[id];
         }
     }, cslStyle);
+}
+
+function getCitationsFromKey(quoteKeys) {
+    return Object.values(quoteKeys)
+        .map(function(key) {
+            let ids = [];
+
+            for (const cit of key) {
+                ids.push(cit.id);
+            }
+
+            return ids;
+        })
+        .flat();
 }
