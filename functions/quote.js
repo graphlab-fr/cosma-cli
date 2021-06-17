@@ -15,8 +15,14 @@ if (config.bib_origin) {
     library = JSON.parse(library);
 }
 
-function catchQuoteKeys(file) {
-    let extractions = Citr.util.extractCitations(file.content)
+/**
+ * Get all quoting keys from a file
+ * @param {string} fileContent - Markdown content
+ * @return {object} - All quoting keys and for each the linked ids & attributes
+ */
+
+function catchQuoteKeys(fileContent) {
+    let extractions = Citr.util.extractCitations(fileContent)
         , quotesFromText = []
         , quoteKeys = {};
 
@@ -34,6 +40,13 @@ function catchQuoteKeys(file) {
 }
 
 exports.catchQuoteKeys = catchQuoteKeys;
+
+/**
+ * Replace each quoting key from the file content by a short quote from library
+ * @param {string} fileContent - Markdown content
+ * @param {object} fileQuoteKeys - All quoting keys and for each the linked ids & attributes
+ * @return {string} - File content with the short quotes
+ */
 
 function convertQuoteKeys(fileContent, fileQuoteKeys) {
     const quoteIds = getCitationsFromKey(fileQuoteKeys);
@@ -64,6 +77,12 @@ function convertQuoteKeys(fileContent, fileQuoteKeys) {
 
 exports.convertQuoteKeys = convertQuoteKeys;
 
+/**
+ * Get the bibliography for a file for each contained quote & from the library
+ * @param {object} fileQuoteKeys - All quoting keys and for each the linked ids & attributes
+ * @return {string} - Bibliography HTML
+ */
+
 function genBibliography(fileQuoteKeys) {
     const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
@@ -75,6 +94,12 @@ function genBibliography(fileQuoteKeys) {
 }
 
 exports.genBibliography = genBibliography;
+
+/**
+ * Get 'citeproc' engine, from library and config files (XML, CSL)
+ * @param {object} fileQuotesIds - All quoting keys, without their attributes
+ * @return {string} - Bibliography HTML
+ */
 
 function getCSL(fileQuotesIds) {
 
@@ -114,6 +139,12 @@ function getCSL(fileQuotesIds) {
         }
     }, cslStyle);
 }
+
+/**
+ * From all quoting keys get linked ids & attributes 
+ * @param {object} quoteKeys - All quoting keys and for each the linked ids & attributes
+ * @return {string} - List of keys linked ids & attributes
+ */
 
 function getCitationsFromKey(quoteKeys) {
     return Object.values(quoteKeys)
