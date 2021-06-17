@@ -12,3 +12,4 @@ template/graph-data.js
 *.woff
 *.ttf
 *-webfont.svg
+references.json
