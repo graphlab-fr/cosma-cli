@@ -39,8 +39,9 @@ function cosmoscope(files, entities, historyPath) {
 
         // normalize files as records
         records: files.map(function (file) {
+            file.quoteRefs = quoteTools.catchQuoteKeys(file);
             file.content = linksTools.convertLinks(file.content, file);
-            file = quoteTools.catchConvertQuoteKeys(file);
+            file.content = quoteTools.convertQuoteKeys(file.content, file.quoteRefs);
             registerType(file.metas.type, file.metas.id);
             registerTags(file.metas.tags, file.metas.id);
 
