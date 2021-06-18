@@ -16,6 +16,30 @@ if (config.bib_origin) {
 }
 
 /**
+ * Check the 'citeproc' mode can be on
+ * @return {bool}
+ */
+
+function citeprocModeIsActive() {
+    const flag = process.argv[3];
+
+    if (flag !== '--citeproc'
+        && flag !== '-c')
+    {
+        return false;
+    }
+
+    if (config.bib_origin !== undefined && fs.existsSync(config.bib_origin)) {
+        return true;
+    }
+
+    console.error('\x1b[33m', 'Citeproc mode off : no library from config.', '\x1b[0m');
+    return false;
+}
+
+exports.citeprocModeIsActive = citeprocModeIsActive;
+
+/**
  * Get all quoting keys from a file
  * @param {string} fileContent - Markdown content
  * @return {object} - All quoting keys and for each the linked ids & attributes

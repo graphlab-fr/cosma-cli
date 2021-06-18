@@ -32,15 +32,24 @@ mdIt.use(mdItAttr, {
 
 function cosmoscope(files, entities, historyPath) {
 
+    let citeprocMode = quoteTools.citeprocModeIsActive()
+        , publishMode = puslishModeIsActive();
+
     nunjucks.configure('template', { autoescape: true });
     let htmlRender = nunjucks.render('template.njk', {
 
-        publishMode: puslishModeIsActive(),
+        publishMode: publishMode,
 
         // normalize files as records
         records: files.map(function (file) {
             file.content = linksTools.convertLinks(file.content, file);
-            file.content = quoteTools.convertQuoteKeys(file.content, file.quoteKeys);
+
+            let bibliography = false;
+            if (citeprocMode === true) {
+                file.content = quoteTools.convertQuoteKeys(file.content, file.quoteKeys);
+                bibliography = quoteTools.genBibliography(file.quoteKeys);
+            }
+
             registerType(file.metas.type, file.metas.id);
             registerTags(file.metas.tags, file.metas.id);
 
@@ -51,7 +60,7 @@ function cosmoscope(files, entities, historyPath) {
                 tags: file.metas.tags.join(', '), // array to string
                 mtime: file.metas.mtime,
                 content: mdIt.render(file.content), // Mardown to HTML
-                bibliography: quoteTools.genBibliography(file.quoteKeys),
+                bibliography: bibliography,
                 links: file.links,
                 backlinks: file.backlinks
             }
@@ -148,16 +157,17 @@ function registerTags(fileTagList, fileId) {
 function puslishModeIsActive() {
     const flag = process.argv[3];
 
-    if (flag === '--publish'
-        || flag === '-p') {
-
-        if (config.metas !== undefined) {
-            return true;
-        } else {
-            console.error('\x1b[33m', 'Publich mode off : no metas from config.', '\x1b[0m');
-            return false;
-        }
+    if (flag !== '--publish'
+        && flag !== '-p')
+    {
+        return false;
     }
+
+    if (config.metas !== undefined) {
+        return true;
+    }
+
+    console.error('\x1b[33m', 'Publish mode off : no metas from config.', '\x1b[0m');
     return false;
 }
 

@@ -70,12 +70,14 @@ let files = fs.readdirSync(config.files_origin, 'utf8') // files name list
 
         file.metas.tags = file.metas.tags || [];
 
-        // extract quoting key from file content as '[@perretFonctionDocumentairePreuve2020, 22]'
-        const quoteExtraction = quoteTools.catchQuoteKeys(file.content);
-        file.quoteKeys = quoteExtraction.quoteKeys; // quoting keys and their content
-        quoteExtraction.undefinedLibraryIds.forEach(id => { // errors processing
-            logs.warn.push(`Quote key "${id}" written on file ${file.metas.fileName} is undefined from the CSL library`);
-        });
+        if (quoteTools.citeprocModeIsActive()) {
+            // extract quoting key from file content as '[@perretFonctionDocumentairePreuve2020, 22]'
+            const quoteExtraction = quoteTools.catchQuoteKeys(file.content);
+            file.quoteKeys = quoteExtraction.quoteKeys; // quoting keys and their content
+            quoteExtraction.undefinedLibraryIds.forEach(id => { // errors processing
+                logs.warn.push(`Quote key "${id}" written on file ${file.metas.fileName} is undefined from the CSL library`);
+            });
+        }
 
         // analysis file content by regex : get links target id
         file.links = linksTools.catchLinksFromContent(file.content)
