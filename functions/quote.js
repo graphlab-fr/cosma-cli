@@ -23,20 +23,32 @@ if (config.bib_origin) {
 
 function catchQuoteKeys(fileContent) {
     let extractions = Citr.util.extractCitations(fileContent)
-        , quotesFromText = []
-        , quoteKeys = {};
+        , quoteKeys = {}
+        , libraryIds = library.map(function(item) {
+            return item.id;
+        })
+        , undefinedLibraryIds = [];
 
+    quoteExtraction:
     for (let i = 0; i < extractions.length; i++) {
         const extraction = extractions[i];
 
-        // there could be several quotes from one key
         const quotes = Citr.parseSingle(extraction);
-        quotesFromText.push(...quotes);
+        // there could be several quotes from one key
+        for (const q of quotes) {
+            if (libraryIds.includes(q.id) === false) {
+                undefinedLibraryIds.push(q.id)
+                continue quoteExtraction;
+            }
+        }
 
         quoteKeys[extraction] = quotes;
     }
 
-    return quoteKeys;
+    return {
+        quoteKeys: quoteKeys,
+        undefinedLibraryIds: undefinedLibraryIds
+    };
 }
 
 exports.catchQuoteKeys = catchQuoteKeys;
