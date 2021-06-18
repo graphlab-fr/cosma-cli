@@ -8,6 +8,7 @@
             "../functions/links.js",
             "../functions/log.js",
             "../functions/modelize.js",
+            "../functions/quote.js",
             "../functions/record.js",
             "../functions/template.js",
             "../functions/verifconfig.js"

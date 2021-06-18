@@ -795,6 +795,7 @@ To improve the maintainability and readability of the source code, the developme
 - [Js-yaml-front-matter](https://github.com/dworthen/js-yaml-front-matter) v4.1.0 (MIT License) : parsing record metadata.
 - [Markdown-it](https://github.com/markdown-it/markdown-it) v12.0.2 (MIT License) : Markdown to HTML conversion.
 - [Markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs) v4.0.0  (MIT License) : processing hyperlinks within records.
+- [Citeproc-js](https://github.com/Juris-M/citeproc-js) v2.4.59 (CPAL et AGPL) : Conversion of citation keys
 - [Minify-html](https://github.com/wilsonzlin/minify-html) v0.4.3 (MIT License) : reducing the weight of the cosmoscope file.
 - [Fuse.js](https://fusejs.io/) v6.4.6 (Apache License 2.0) : search engine.
 - [Moment](https://momentjs.com/) v2.29.1 (MIT License) : time stamping.
