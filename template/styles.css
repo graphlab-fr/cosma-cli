@@ -375,6 +375,14 @@ main.record-container:not(.active) {
 }
 
 /* ---
+- Record bibliography
+--- */
+
+.record .bibliography div + div {
+	margin-top: 1rem;
+}
+
+/* ---
 - Record footer
 --- */
 

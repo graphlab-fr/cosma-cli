@@ -61,7 +61,7 @@ switch (requestName) {
         require('./functions/verifconfig').addView(requestArgs[0], requestArgs[1]);
     break;
 
-    /** Errors
+    /** Defaults
     --------------------*/
 
     case undefined:
@@ -69,6 +69,6 @@ switch (requestName) {
     break;
 
     default:
-        console.log('Unknow command "' + requestArgs.join(' ') + '"');
+        console.log('Unknow command "' + requestName + '"');
     break;
 }
