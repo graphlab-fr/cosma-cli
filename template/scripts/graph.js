@@ -126,7 +126,7 @@ function initializeDisplay() {
                 d.fx = null;
                 d.fy = null; })
         )
-        .on('mouseover', function(nodeMetas) {
+        .on('mouseenter', function(nodeMetas) {
             if (!graphProperties.highlight_on_hover) { return; }
 
             let nodesIdsHovered = [nodeMetas.id];

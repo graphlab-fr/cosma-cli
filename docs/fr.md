@@ -82,7 +82,8 @@ Pour une introduction à YAML, [cliquez ici](https://sweetohm.net/article/introd
 Exécutez la commande suivante pour créer le fichier de configuration (`config.yml`) s'il n'existe pas déjà. Vous pouvez aussi le supprimer et utiliser cette commande pour réinitialiser le fichier. Le fichier généré par cette commande est un modèle des paramètres qui doivent obligatoirement être renseignés pour une configuration valide.
 
 ```
-node app
+node app config
+node app c
 ```
 
 ## Paramètres nécessaires
@@ -90,7 +91,7 @@ node app
 La configuration doit contenir les paramètres suivants.
 
 `files_origin`
-: Chemin du répertoire contenant les fichiers Markdown à lire. La syntaxe dépend du système d'exploitation.
+: Chemin du répertoire contenant les fichiers Markdown à lire.
 : Exemple : `/Users/user/Fiches/'`, `D:\repertoire\`
 
 `export_target`
@@ -191,8 +192,8 @@ graph_config:
 
 `attraction`
 : Paramètres de la simulation de forces entre les nœuds.
-: `force` : puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Les valeurs supérieures à `-50` tendent à provoquer des collisions incessantes.
-: `distance_max` : distance maximum entre les nœuds et îlots. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable.
+: `force` : puissance globale. Plus elle est faible, plus les liens entre les nœuds sont relâchés. Une valeur inférieure à `50` tend à provoquer des collisions incessantes.
+: `distance_max` : distance maximum entre les nœuds et îlots. Au-delà de `1000`, ce paramètre n'a pas d'effet mesurable. La valeur de `distance_max` indique également la valeur maximale effective de `force`. Par exemple, si `distance_max: 500`, alors augmenter `force` au-delà de 500 n'aura pas d'incidence.
 : `verticale` : force d'attraction vers l'axe vertical. Une valeur de `0` signifie que ce paramètre est désactivée.
 : `horizontale` : force d'attraction vers l'axe horizontal. Une valeur de `0` signifie que ce paramètre est désactivée.
 
@@ -400,7 +401,7 @@ Vous pouvez aussi obtenir une version publication du cosmoscope avec la commande
 
 ```
 node app modelize --publish
-node app modelize -p
+node app m -p
 ```
 
 Le fichier `cosmoscope.html` est exporté dans le répertoire défini par `export_target` dans la configuration. Si le fichier existe déjà au même emplacement, il est écrasé.
@@ -432,7 +433,7 @@ Zone centrale (Graphe)
 Panneau latéral droit (Fiche)
 : Affiche les fiches (métadonnées et contenu) ainsi qu'une liste des liens sortants (Liens) et entrants (Rétroliens).
 
-![interface de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
+[![Interface de Cosma (cliquez sur l'image pour l'afficher en grand)](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)](https://hyperotlet.huma-num.fr/cosma/img/cosma-interface-schema.png)
 
 ## Graphe
 
@@ -462,16 +463,7 @@ L'affichage du graphe peut être modifié de manière temporaire via les contrô
 Pour modifier l'affichage de manière permanente, modifiez les valeurs par défaut des paramètres correspondants sous `graph_config` dans `config.yml` (voir [Paramètres du graphe](#parametres-du-graphe) plus haut).
 
 ::: astuce
-Modifiez `force` et `distance_max` pour adapter l'affichage à la résolution et la taille de votre écran. Le tableau ci-dessous suggère des intervalles pour ces deux paramètres :
-
-| Taille écran (pouces) | `force`           | `distance_max`   |
-|-----------------------|-------------------|------------------|
-| moins de 15           | entre 100 à 200 | moins de 300     |
-| 15-25                 | entre 300 à 400 | entre 300 et 600 |
-| 25-35                 | moins de 400     | plus de 600      |
-| plus de 35            | 600              | 800              |
-
-Modifiez `verticale` et `horizontale` pour appliquer une force centripète vers l'axe correspondant. Ceci permet notamment de ramener les îlots et nœuds isolés plus près du centre.
+Modifiez `force` et `distance_max` pour adapter l'affichage à la résolution et la taille de votre écran. Modifiez `verticale` et `horizontale` pour appliquer une force centripète vers l'axe correspondant, ce qui permet notamment de ramener les îlots et nœuds isolés plus près du centre.
 :::
 
 L'affichage est possible sur tous types d'écrans mais n'est pas optimisé pour les terminaux mobiles : le tactile ne donne pas accès à certaines interactions comme le survol, et les petits écrans restreignent l'utilité du graphe.
@@ -489,8 +481,6 @@ En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (
 ## Mode focus
 
 Le bouton Activer le focus (raccourci : touche `F`) situé en bas à gauche du graphe permet de restreindre l'affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l'interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.
-
-![Mode focus de Cosma](https://hyperotlet.huma-num.fr/cosma/img/cosma-focus-demo.png)
 
 Le curseur qui apparaît sous le bouton Activer le focus permet de faire varier la distance d'affichage, jusqu'au maximum permis par le paramètre `focus_max` dans la configuration.
 
@@ -560,15 +550,15 @@ Dans l'exemple ci-dessous, le fichier `custom.css` contient des déclarations qu
 
 # Développement
 
-Cette partie de la documentation s'adresse à des développeurs expérimentés en JavaScript. Elle vous présente l'arborescence et les concepts sur lesquels reposent les *deux parties* formant Cosma, le cosmographe et le cosmoscope.
+Cette partie de la documentation s'adresse à des développeurs expérimentés en JavaScript. Elle présente l'arborescence et les concepts sur lesquels reposent les deux parties formant Cosma, le **cosmographe** et le **cosmoscope**.
 
-Nous vous recommandons vivement de lire le manuel d'utilisation pour bien saisir l'ensemble des usages en jeu dans le code source qui va vous être présenté ci-dessous.
+Nous vous recommandons vivement de lire le reste de la documentation pour bien saisir l'ensemble des usages en jeu dans le code source présenté ci-dessous.
 
 ## Terminologie
 
 Les fichiers Markdown interprétés par Cosma sont qualifiés ici de « fiches » plutôt que de « notes », en référence à la tradition de la fiche érudite et à l'histoire de la documentation. L'acception documentaire de « fiche » n'a pas de traduction directe en anglais (sinon *index card*). En revanche, elle est conceptuellement proche du mot « *record* » issu du [*records management*](https://fr.wikipedia.org/wiki/Records_management). Le code de Cosma emploie donc le mot record pour désigner une fiche.
 
-## Architecture de Cosma
+## Description générale de l'architecture
 
 Cosma est principalement implémenté en JavaScript. Le logiciel repose sur deux systèmes distincts, le cosmographe et le cosmoscope.
 
@@ -576,7 +566,7 @@ Le **cosmographe** repose sur l'environnement Node.js. Une série de scripts per
 
 - vérifier et actualiser le fichier de configuration ;
 - générer des fichiers Markdown et leur entête ;
-- lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens *wiki*) afin de générer :
+- lire un répertoire pour en extraire les fichiers Markdown et analyser leur contenu (Markdown, métadonnées YAML et liens style wiki) afin de générer :
 	- des fichiers JSON ;
 	- le cosmoscope (ses données et variables CSS).
 
@@ -586,13 +576,6 @@ Le **cosmoscope** est un fichier HTML exécuté sur navigateurs web, créé à p
 - les scripts et bibliothèques JavaScript ;
 - des index (mots-clés, titre de fiche, vues) ;
 - les fiches.
-
-::: important
-Les liens ci-dessous présentent la liste exhaustive des fonctions de ces deux systèmes au sein du code source de Cosma :
-
-- [Consulter l'API du cosmographe](./api/cosmographe/index.html)
-- [Consulter l'API du cosmoscope](./api/cosmoscope/index.html)
-:::
 
 ## Arborescence
 
@@ -604,18 +587,18 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   ├── api/                | répertoire des index des API
 │   │   └── [x].md          | introduction à l'index [x] de l'API
 │   └── api-config-[x].json | config. de l'index [x] de l'API
-├── functions/              | fonctions du COSMOGRAPHE
+├── functions/              | fonctions du cosmographe
 │   ├── autorecord.js       | création de fichiers Markdown formatés
 │   ├── history.js          | création répertoires de l'historique des exports
 │   ├── links.js            | analyse des liens wiki et de leurs attributs
 │   ├── log.js              | affichage des alertes et création des registres
 │   ├── modelize.js         | analyse des fichiers Markdown et création modèle de données
 │   ├── record.js           | formulaire du terminal pour création des fichiers Md
-│   ├── template.js         | intégration données, style et corps du COSMOSCOPE
+│   ├── template.js         | intégration données, style et corps du cosmoscope
 │   └── verifconfig.js      | validation et modification de la configuration
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
-│   ├── scripts/            | fonctions du COSMOSCOPE
+│   ├── scripts/            | fonctions du cosmoscope
 │   │   ├── counter.js      | actuliser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
@@ -631,12 +614,19 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   │   ├── view.js         | enregistrer et appliquer une vue
 │   │   └── zoom.js         | paramétrer les déplacement (latéral, zoom) au sein du graphe
 │   ├── cosmalogo.svg       | logo du logiciel
-│   ├── template.njk        | structure du COSMOSCOPE
-│   ├── print.css           | styles d'impression du COSMOSCOPE
-│   └── styles.css          | styles du COSMOSCOPE
+│   ├── template.njk        | structure du cosmoscope
+│   ├── print.css           | styles d'impression du cosmoscope
+│   └── styles.css          | styles du cosmoscope
 ├── app.js                  | adressage des commandes du terminal
 └── package.json            | liste des dépendances Node.js
 ```
+
+## Index des fonctions
+
+Cliquez sur les liens ci-dessous pour consulter la liste des fonctions utilisées par le cosmographe et le cosmoscope :
+
+- [Consulter l'API du cosmographe](./api/cosmographe/index.html)
+- [Consulter l'API du cosmoscope](./api/cosmoscope/index.html)
 
 ## Fonctionnement du cosmographe
 
@@ -658,33 +648,44 @@ const folderToExport = config.export_target;
 
 Depuis le fichier `modelize.js`, on extrait de chaque fichier Markdown les métadonnées (l'entête YAML) et le contenu (suivant l'entête YAML) (fichier `modelize.js`).
 
-1. fonction [`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent) : Le contenu est lu une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
-2. fonction [`convertLinks()`](./api/cosmographe/global.html#convertLinks) : Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
-3. fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope) : Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
+[`catchLinksFromContent()`](./api/cosmographe/global.html#catchLinksFromContent)
+: Le contenu est lu une première fois par une série d'expressions régulières pour en extraire les paragraphes, et pour chaque paragraphe les *wikilinks* contenus. Le paragraphe devient le contexte de ses liens et est transpilé en HTML.
 
-Les fonctions 1 et 3 font appelle à la bibliothèque Markdown-it. Elle peut y être remplacée.
+[`convertLinks()`](./api/cosmographe/global.html#convertLinks)
+: Le contenu du fichier est ensuite transformé pour y transformer les *wikilinks* en liens Markdown
+
+[`cosmoscope()`](./api/cosmographe/global.html#cosmoscope)
+: Le contenu du fichier est intégralement transpilé du Markdown à l'HTML.
+
+La première et la troisième fonction font appel à la bibliothèque markdown-it. Elle peut être remplacée.
 
 ## Génération du cosmoscope
 
-Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Elle intancie le modèle Nunjucks `/template/template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+Le cosmoscope est généré grâce à la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope).
 
-Nunjucks importe par ailleurs dans son `<head>` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `<script>` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
+Celle-ci instancie le modèle Nunjucks `/template/template.njk` et y injecte les données relatives à la configuration, aux fiches et aux entités du graphe ainsi que leurs styles (sérialisés par la fonction [`colors()`](./api/cosmographe/global.html#colors)).
+
+Nunjucks importe par ailleurs dans son `head` les fichiers de style CSS et les bibliothèques JavaScript ainsi que les fonctions JavaScript dans des balises `script` en fin de document. Les données relatives aux fiches et à la configuration sont intégrées via des boucles et autres structures de contrôle de Nunjucks.
 
 Le tout est enregistré dans un fichier `cosmoscope.html` et est [exporté](#export).
 
 ## Affichage du graphe
 
-La génération et l'animation du graphe reposent sur la bibliothèque [D3](https://d3js.org/). Elle perçoit ses données depuis l'objet global `graph`. Cet object est composé de deux tableaux.
+La génération et l'animation du graphe reposent sur la bibliothèque [D3.js](https://d3js.org/). Celle-ci perçoit ses données depuis l'objet global `graph`. Cet object est composé de deux tableaux.
 
-Le tableau **`graph.nodes`** contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d'affichage (voir la sérialisation par la fonction [`registerNodes()`](./api/cosmographe/global.html#registerNodes)). Cet état indiqué est actualisé à chaque modification d'affichage.
+`graph.nodes`
+: Ce tableau contient toutes les données relatives aux nœuds, y compris une série de booléens permettant de connaître leur état d'affichage (voir la sérialisation par la fonction [`registerNodes()`](./api/cosmographe/global.html#registerNodes)). Cet état indiqué est actualisé à chaque modification d'affichage.
 
-La tableau **`graph.links`** contient toutes les données relatives aux liens (voir la sérialisation par la fonction [`registerLinks()`](./api/cosmographe/global.html#registerLinks)).
+`graph.links`
+: Ce tableau contient toutes les données relatives aux liens (voir la sérialisation par la fonction [`registerLinks()`](./api/cosmographe/global.html#registerLinks)).
 
-Ces tableaux peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
+## Affichage via d'autres bibliothèques
 
-**[VisJs Network](https://github.com/visjs/vis-network)** [[Exemple de code](https://github.com/visjs/vis-network#example)]
+Les tableaux présentés dans la section précédente peuvent être injectés dans d'autres bibliothèques JavaScript de génération de graphe.
 
-Fichier `/functions/modelize.js`
+**Exemple 1 :** Vis.js Network ([dépôt](https://github.com/visjs/vis-network), [exemple](https://github.com/visjs/vis-network#example)).
+
+Extrait du fichier `/functions/modelize.js` :
 
 ```javascript
 function registerLinks(file) {
@@ -701,7 +702,7 @@ function registerLinks(file) {
 }
 ```
 
-Fichier `/template/scripts/graph.js`
+Extrait du fichier `/template/scripts/graph.js`
 
 ```javascript
 const network = new vis.Network(
@@ -714,7 +715,7 @@ const network = new vis.Network(
 );
 ```
 
-**[SigmaJs](https://github.com/jacomyal/sigma.js/)**  [[Exemple de code](https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70)]
+**Exemple 2 :** Sigma.js ([dépôt](https://github.com/jacomyal/sigma.js/), [exemple](https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70)).
 
 ```javascript
 const network = new sigma({
@@ -728,15 +729,15 @@ const network = new sigma({
 
 ## Paramètres du graphe
 
-Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injecté dans le modèle Nunjucks `/template/template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
+Les paramètres du graphe sont extraits de la partie `graph_config` du fichier de configuration `config.yml`. Elle est injectée dans le modèle Nunjucks `/template/template.njk` via la fonction [`cosmoscope()`](./api/cosmographe/global.html#cosmoscope). Dans le modèle, elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript `graphProperties`.
 
-Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la biliothèque de visualisation D3.
+Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction [`updateForces()`](./api/cosmographe/global.html#updateForces) pour relancer l'évaluation de ces paramètres par la bibliothèque de visualisation D3.js.
 
 ## Raccourcis clavier
 
 L'ensemble des raccourcis clavier du cosmoscope sont implémentés dans le fichier `/template/scripts/keyboard.js`. L'objet global `pressedKeys` contient la liste des touches surveillées pour modifier un comportement. D'autres touches (des lettres) sont listées pour appeler certaines fonctions et ne sont pas ajoutées à l'objet global `pressedKeys`.
 
-Le booléen global `keyboardShortcutsAreWorking` défini si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu'écrire.
+Le booléen global `keyboardShortcutsAreWorking` définit si les raccourcis peuvent être utilisés ou non. Lors de la saisie dans un champ, il ne faut pas que les lettres servent à autre chose qu'écrire.
 
 # Crédits
 

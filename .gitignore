@@ -8,8 +8,13 @@ custom.css
 cosmoscope.html
 template/colors.css
 template/graph-data.js
+
+references.json
+
+docs/api/*
+docs/en.html
+docs/fr.html
 *.eot
 *.woff
 *.ttf
 *-webfont.svg
-references.json

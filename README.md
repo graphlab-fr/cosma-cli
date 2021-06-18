@@ -2,7 +2,7 @@
 
 Cosma est un logiciel de visualisation de graphe documentaire. Il permet d’enregistrer et lire des fiches interreliées sous la forme d’un réseau interactif dans un navigateur web.
 
-**Manuel d'utilisation et documentation pour développeurs :** https://hyperotlet.github.io/cosma/
+**Documentation :** https://hyperotlet.github.io/cosma/
 
 ## Présentation rapide
 
