@@ -10,8 +10,8 @@ const fs = require('fs')
     , config = require('./verifconfig').config;
 
 let library = false; // if no path to JSON library file, no functions
-if (config.bib_origin) {    
-    library = fs.readFileSync(config.bib_origin, 'utf-8');
+if (config.library_origin) {    
+    library = fs.readFileSync(config.library_origin, 'utf-8');
     library = JSON.parse(library);
 }
 
@@ -29,7 +29,7 @@ function citeprocModeIsActive() {
         return false;
     }
 
-    if (config.bib_origin !== undefined && fs.existsSync(config.bib_origin)) {
+    if (config.library_origin !== undefined && fs.existsSync(config.library_origin)) {
         return true;
     }
 

@@ -200,6 +200,9 @@ graph_config:
 
 You can add the following parameters to the configuration file:
 
+`library_origin`
+: Path to the JSON CSL file containing the list of bibliographic references. Enables the [bibliography of records](#bibliography).
+
 `minify`
 : Reduces the size of the `cosmoscope.html` file, at the expense of the readability of the source code. Value: `true` or `false`. Disabled by default.
 
@@ -382,6 +385,44 @@ Example:
 ```
 Concept B derives from [[generic:20201209111625]] concept A.
 ```
+
+## Bibliography
+
+You can integrate citation keys into your records. They can be recorded with the bibliographic reference software [Zotero](https://www.zotero.org/) and then exported with a unique identifier into a JSON CSL file thanks to its extension [Better BibTeX](https://retorque.re/zotero-better-bibtex/). This identifier can then be wrote in your records (in the style of Pandoc software), between square brackets as below.
+
+```
+According to [@ledeuffTempsHumanitesDigitales2014, 22; @perretFonctionDocumentairePreuve2020].
+```
+
+You must target into the configuration the JSON CSL file exported with Zotero.
+
+```
+library_origin: 'D:\documents\ma_bibliotheque.json'
+```
+
+The following commands are used to generate a cosmoscope using Cosma's built-in Citeproc converter
+
+```
+node app modelize --citeproc
+node app modelize -c
+```
+
+Each citation key is then replaced by a short reference and an entry in the bibliography.
+
+```
+According to (Le Deuff 2014, p. 22; Perret 2020).
+
+Bibliographie
+-------------
+
+LE DEUFF, Olivier, 2014. Le temps de humanités digitales. FYP. ISBN 978-2-36405-155-5.
+
+PERRET, Arthur, 2020. Fonction documentaire de preuve et données numériques. Arthurperret.fr [en ligne]. 9 septembre 2020. [Consulté le 14 septembre 2020]. Disponible à l’adresse : https://www.arthurperret.fr/fonction-documentaire-preuve-donnees-numeriques.html
+```
+
+You can change the citation style (default: ISO690-author-date-fr) by replacing the `/template/citeproc/styles.csl` file. Download a new style from the [Zotero database](https://www.zotero.org/styles).
+
+You can change the translation of the keywords of the bibliographic record (default: French) by replacing the file `/template/citeproc/locales.xml`. Download a new translation from the [CSL database](https://github.com/citation-style-language/locales/tree/6b0cb4689127a69852f48608b6d1a879900f418b).
 
 ## Exporting
 

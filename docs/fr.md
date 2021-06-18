@@ -69,8 +69,6 @@ Le fonctionnement de Cosma repose sur d'autres programmes qualifiés de dépenda
 npm install --only=production
 ```
 
-
-
 # Configuration
 
 Cosma utilise un fichier de configuration au format [YAML](http://yaml.org). C'est une liste hiérarchisée de paramètres dont les valeurs modifient le comportement du logiciel.
@@ -203,6 +201,9 @@ graph_config:
 ## Paramètres facultatifs
 
 Vous pouvez ajouter au fichier de configuration les paramètres suivants :
+
+`library_origin`
+: Chemin vers le fichier JSON CSL contenant la liste des références bibliographiques. Permet d'activer la [bibliographie des fiches](#bibliographie).
 
 `minify`
 : Réduit le poids du fichier `cosmoscope.html`, au détriment de la lisibilité du code source. Valeur : `true` ou `false`. Désactivé par défaut.
@@ -387,6 +388,44 @@ Exemple :
 ```
 Le concept B dérive du [[générique:20201209111625]] concept A.
 ```
+
+## Bibliographie
+
+Vous pouvez intégrer des clés de citation au sein de vos fiches. Elles peuvent être enregistrées avec le logiciel de références bibliographiques [Zotero](https://www.zotero.org/) puis exportées avec un identifiant unique dans un fichier JSON CSL grâce à son extension [Better BibTeX](https://retorque.re/zotero-better-bibtex/). Cet identifiant peut ensuite être inséré dans vos fiches (dans le style du logiciel Pandoc), entre crochets tel que ci-dessous.
+
+```
+D'après les références [@ledeuffTempsHumanitesDigitales2014, 22; @perretFonctionDocumentairePreuve2020].
+```
+
+Vous devez cibler au sein de la configuration le fichier JSON CSL exporté avec Zotero.
+
+```
+library_origin: 'D:\documents\ma_bibliotheque.json'
+```
+
+Les commandes suivantes permettent de générer un cosmoscope en utilisant le convertisseur Citeproc intégré à Cosma. 
+
+```
+node app modelize --citeproc
+node app modelize -c
+```
+
+Chaque clé de citation est alors remplacée par une courte référence et une entrée dans la bibliographie.
+
+```
+D'après les références (Le Deuff 2014, p. 22; Perret 2020).
+
+Bibliographie
+-------------
+
+LE DEUFF, Olivier, 2014. Le temps de humanités digitales. FYP. ISBN 978-2-36405-155-5.
+
+PERRET, Arthur, 2020. Fonction documentaire de preuve et données numériques. Arthurperret.fr [en ligne]. 9 septembre 2020. [Consulté le 14 septembre 2020]. Disponible à l’adresse : https://www.arthurperret.fr/fonction-documentaire-preuve-donnees-numeriques.html
+```
+
+Vous pouvez modifier le style de citation (par défaut : ISO690-author-date-fr) en remplaçant le fichier `/template/citeproc/styles.csl`. Téléchargez un nouveau style depuis la [base de données de Zotero](https://www.zotero.org/styles).
+
+Vous pouvez modifier la traduction des mots-clés de la notice bibliographique (par défaut : français) en remplaçant le fichier `/template/citeproc/locales.xml`. Téléchargez une nouvelle traduction depuis la [base de donnée CSL](https://github.com/citation-style-language/locales/tree/6b0cb4689127a69852f48608b6d1a879900f418b).
 
 ## Export
 
