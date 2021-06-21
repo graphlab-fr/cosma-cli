@@ -442,13 +442,23 @@ node app m -p
 
 The `cosmoscope.html` file is exported to the directory defined by `export_target` in the configuration. If the file already exists in the same location, it is overwritten.
 
-If the `history` parameter is set to `true`, a time-stamped subdirectory is also created in the `/history` directory with the following contents:
+If the `history` parameter is set to `true`, a time-stamped subdirectory (according to the export date, to the second) is also created in the `/history` directory with the following contents:
 
 - a copy of the `cosmoscope.html` file ;
-- an `error.log` file listing any errors which may have occurred during the export process;
 - a `data` directory containing the `links.json` and `nodes.json` files, respectively the list of links and nodes, with their respective metadata.
 
 This export facilitates data sharing and reuse in other visualisation software.
+
+## Alerts and errors
+
+During the process of parsing your Markdown files, system conflicts may occur (without interrupting the export process). There are two types of notifications:
+
+- some data must be replaced (unrecognised type, link without target...), you will receive a **warning*;
+- some information prevents the processing of a file (lack of a title, non-unique identifier...), then you receive an **error*.
+
+Alerts can be ignored. You must correct all errors to make the cosmoscope complete with your library.
+
+Alerts (in yellow) and errors (in red) are displayed in the console. If there are more than 5 notifications per type, only their number is announced. You can read them in an `error.log` file. If there are any notifications, they are saved in a subdirectory with a time stamp (according to the export date, to the second) in the `history` directory.
 
 # Using the cosmoscope
 

@@ -445,13 +445,23 @@ node app m -p
 
 Le fichier `cosmoscope.html` est exporté dans le répertoire défini par `export_target` dans la configuration. Si le fichier existe déjà au même emplacement, il est écrasé.
 
-Si le paramètre `history` a pour valeur `true`, un sous-répertoire horodaté est également créé dans le répertoire `/history` avec les contenus suivants :
+Si le paramètre `history` a pour valeur `true`, un sous-répertoire horodaté (selon la date d'export, à la seconde près) est également créé dans le répertoire `/history` avec les contenus suivants :
 
 - une copie du fichier `cosmoscope.html` ;
-- un rapport `error.log` sur les erreurs éventuellement survenues durant le processus d'export ;
 - un répertoire `data` contenant les fichiers `links.json` et `nodes.json`, respectivement la liste des liens et des nœuds, avec leurs métadonnées respectives.
 
 Cet export facilite le partage des données et leur réutilisation dans d'autres logiciels de visualisation.
+
+## Alertes et erreurs
+
+Durant le processus d'analyse de vos fichiers Markdown, il se peut que des conflits avec le système surviennent (sans interrompre le processus d'export). Il y a alors deux types de notification :
+
+- certaines données doivent être remplacées (type non reconnu, lien sans cible…), vous recevez alors une **alerte** (*warning*) ;
+- certaines informations empêchent le traitement d'un fichier (manque d'un titre, identifiant non unique…), vous recevez alors une **erreur** (*error*).
+
+Les alertes peuvent être ignorées. Vous devez corriger toutes les erreurs pour que le cosmoscope soit complet par rapport à votre bibliothèque.
+
+Les alertes (en jaune) et erreurs (en rouge) sont affichées dans la console. Au-delà de 5 notifications par type, seul leur nombre est annoncé. Vous pouvez les lire dans un fichier `error.log`. Le cas échéant, il est enregistré dans un sous-répertoire horodaté (selon la date d'export, à la seconde près), dans le répertoire `history`.
 
 # Utilisation du cosmoscope
 
