@@ -1,32 +1,38 @@
 /**
- * @file If 'history' option from config is true, create folders for save the export.
+ * @file Create folders for save the export.
  * @author Guillaume Brioudes
  * @copyright MIT License ANR HyperOtlet
  */
 
 const fs = require('fs')
-    , moment = require('moment')
-    , time = moment().format('YYYY-MM-DD_HH-mm')
-    , config = require('./verifconfig').config;
+    , time = require('./time');
 
-if (config.history === false) {
-    exports.historyPath = false;
-    return;
+/**
+ * Create history folder for current process
+ */
+
+function createFolder() {
+    if (fs.existsSync('history') === false) {
+        fs.mkdirSync('history') }
+
+        // create time folder
+        if (fs.existsSync('history/' + time) === false) {
+            fs.mkdirSync('history/' + time) }
 }
 
-// create history folder
-if (fs.existsSync('history') === false) {
-    fs.mkdirSync('history') }
+exports.createFolder = createFolder;
 
-    // create time folder
-    if (fs.existsSync('history/' + time) === false) {
-        fs.mkdirSync('history/' + time) }
+/**
+ * Create data (JSON files) history folder for current process
+ */
 
-        // create data folder
-        if (fs.existsSync('history/' + time + '/data') === false) {
-            fs.mkdirSync('history/' + time + '/data') }
+function createFolderData() {
 
-// history path during the generation process
-const historyPath = 'history/' + time + '/';
+    createFolder();
 
-exports.historyPath = historyPath;
+    // create data folder
+    if (fs.existsSync('history/' + time + '/data') === false) {
+        fs.mkdirSync('history/' + time + '/data') }
+}
+
+exports.createFolderData = createFolderData;

@@ -5,7 +5,8 @@
  */
 
 const fs = require('fs')
-    , moment = require('moment');
+    , historyPath = require('./history')
+    , time = require('./time');
 
 /**
  * Show errors & warnings into terminal (limited lines)
@@ -39,21 +40,21 @@ exports.show = show;
 /**
  * Templating & create the logs file into history
  * @param {object} logs - Objets contain errors & warnings arrays
- * @param {string} historyPath - Path for history folder
  */
 
-function register(logs, historyPath) {
+function register(logs) {
 
-    if (!historyPath) { return; }
+    if (logs.err.length === 0 && logs.warn.length === 0) { return; }
 
     logs.err = logs.err.map(err => '\n- Err : ' + err);
     logs.warn = logs.warn.map(warn => '\n- Warn : ' + warn);
     logs = logs.err.concat(logs.warn);
 
-    let content = moment().format('YYYY-MM-DD_HH-mm-ss');
+    let content = time;
     content += logs.join('');
 
-    fs.writeFile(historyPath + 'error.log', content, (err) => {
+    historyPath.createFolder();
+    fs.writeFile(`history/${time}/error.log`, content, (err) => {
         if (err) { return console.error( 'Err. write error.log file : ' + err) }
     });
 }

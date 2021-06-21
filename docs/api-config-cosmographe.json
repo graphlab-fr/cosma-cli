@@ -11,6 +11,7 @@
             "../functions/quote.js",
             "../functions/record.js",
             "../functions/template.js",
+            "../functions/time.js",
             "../functions/verifconfig.js"
         ]
     },

@@ -10,7 +10,8 @@ const fs = require('fs')
     , mdItAttr = require('markdown-it-attrs')
     , linksTools = require('./links')
     , quoteTools = require('./quote')
-    , moment = require('moment')
+    , time = require('./time')
+    , historyPath = require('./history')
     , config = require('./verifconfig').config;
 
 let types = {}
@@ -27,10 +28,9 @@ mdIt.use(mdItAttr, {
  * Templating & create the Cosmoscope.html file
  * @param {array} files - All files array, for gen. records
  * @param {object} entities - Nodes and links, for gen graph
- * @param {string} historyPath - History save path
  */
 
-function cosmoscope(files, entities, historyPath) {
+function cosmoscope(files, entities) {
 
     let citeprocMode = quoteTools.citeprocModeIsActive()
         , publishMode = puslishModeIsActive();
@@ -95,7 +95,7 @@ function cosmoscope(files, entities, historyPath) {
         nblinks: entities.links.length,
 
         // creation date
-        date: moment().format('YYYY-MM-DD')
+        date: time
     });
 
     // minify the render, if 'true' from config file
@@ -109,9 +109,10 @@ function cosmoscope(files, entities, historyPath) {
         console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${files.length} records)`)
     });
 
-    if (!historyPath) { return; }
+    if (config.history === false) { return; }
 
-    fs.writeFile(historyPath + 'cosmoscope.html', htmlRender, (err) => { // Cosmoscope file for history
+    historyPath.createFolder();
+    fs.writeFile(`history/${time}/cosmoscope.html`, htmlRender, (err) => { // Cosmoscope file for history
         if (err) {console.error('Err.', '\x1b[0m', 'save Cosmoscope into history : ' + err)}
     });
 }
