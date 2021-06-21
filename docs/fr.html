@@ -41,6 +41,7 @@
 <li><a href="#creer-des-liens"><span class="toc-section-number">4.3</span> Créer des liens</a></li>
 <li><a href="#bibliographie"><span class="toc-section-number">4.4</span> Bibliographie</a></li>
 <li><a href="#export"><span class="toc-section-number">4.5</span> Export</a></li>
+<li><a href="#alertes-et-erreurs"><span class="toc-section-number">4.6</span> Alertes et erreurs</a></li>
 </ul></li>
 <li><a href="#utilisation-du-cosmoscope"><span class="toc-section-number">5</span> Utilisation du cosmoscope</a>
 <ul>
@@ -151,57 +152,57 @@ node app c</code></pre>
 </dd>
 </dl>
 <p>Exemple :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">record_types</span><span class="kw">:</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;#546de5&#39;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="at">  </span><span class="fu">très important</span><span class="kw">:</span><span class="at"> red</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="at">  </span><span class="fu">fiche de lecture</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="at">  </span><span class="fu">concept</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;hsl(14, 100%, 80%)&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">record_types</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;#546de5&#39;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">très important</span><span class="kw">:</span><span class="at"> red</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fiche de lecture</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">concept</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;hsl(14, 100%, 80%)&#39;</span></span></code></pre></div>
 <dl>
 <dt><code>link_types</code></dt>
 <dd>Liste des types de relations. Chaque type est défini par un paramètre <code>nom</code> dont la valeur est une liste de deux paramètres, lesquels affectent la représentation des liens dans le graphe : <code>stroke</code> correspond à la forme du trait et <code>color</code> à sa couleur. La valeur de <code>stroke</code> peut être <code>simple</code> (trait continu simple), <code>double</code> (trait continu double), <code>dash</code> (tirets) ou <code>dotted</code> (pointillés). Les couleurs sont déclarées comme en HTML, de la même manière que pour les types de fiches.
 </dd>
 </dl>
 <p>Exemple :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">link_types</span><span class="kw">:</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> grey</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="at">  </span><span class="fu">spécial</span><span class="kw">:</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dash</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">link_types</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> grey</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">spécial</span><span class="kw">:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dash</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span></code></pre></div>
 <div class="important">
 <p>Le type par défaut <code>undefined</code> doit obligatoirement être défini, que ce soit pour les types de fiches ou pour les types de liens.</p>
 </div>
 <p>La configuration des relations a une incidence sur leur lisibilité au sein du graphe. Dans l’exemple suivant, l’utilisateur a défini trois types de liens qualifiés à la manière d’un thésaurus (spécifique <code>s</code>, générique <code>g</code> et associé <code>a</code>). Les paramètres sont définis de manière à renforcer la visibilité des liens qualifiés : les liens non qualifiés (<code>undefined</code>) sont en pointillés (<code>dotted</code>) gris (<code>grey</code>), tandis que les liens qualifiés sont plus lisibles, grâce à des traits plus marqués et une couleur plus vive.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">link_types</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dotted</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> grey</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="at">  </span><span class="fu">s</span><span class="kw">:</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="at">  </span><span class="fu">g</span><span class="kw">:</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="at">  </span><span class="fu">a</span><span class="kw">:</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dash</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">link_types</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">undefined</span><span class="kw">:</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dotted</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> grey</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">s</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">g</span><span class="kw">:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> simple</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">a</span><span class="kw">:</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">stroke</span><span class="kw">:</span><span class="at"> dash</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">color</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;rgba(157, 62, 12, 0.7)&#39;</span></span></code></pre></div>
 <h2 data-number="3.2" id="parametres-du-graphe"><span class="header-section-number">3.2</span> Paramètres du graphe</h2>
 <p>Les paramètres suivants définissent la valeur par défaut des paramètres du graphe. La plupart de ces paramètres peuvent être modifiés en direct dans l’interface du cosmoscope (voir <a href="#graphe">Graphe</a> plus bas). Vous pouvez tester différentes valeurs avant de les reporter dans le fichier <code>config.yml</code> ; les valeurs définies dans le fichier sont rétablies à chaque rechargement du cosmoscope.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">graph_config</span><span class="kw">:</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="at">  </span><span class="fu">background_color</span><span class="kw">:</span><span class="at"> white</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="at">  </span><span class="fu">highlight_color</span><span class="kw">:</span><span class="at"> red</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="at">  </span><span class="fu">highlight_on_hover</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="at">  </span><span class="fu">text_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">9</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="at">  </span><span class="fu">position</span><span class="kw">:</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="at">    </span><span class="fu">x</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="at">    </span><span class="fu">y</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="at">  </span><span class="fu">attraction</span><span class="kw">:</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="at">    </span><span class="fu">force</span><span class="kw">:</span><span class="at"> </span><span class="dv">-50</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="at">    </span><span class="fu">distance_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">800</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="at">    </span><span class="fu">verticale</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="at">    </span><span class="fu">horizontale</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="at">  </span><span class="fu">arrows</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">graph_config</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">background_color</span><span class="kw">:</span><span class="at"> white</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">highlight_color</span><span class="kw">:</span><span class="at"> red</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">highlight_on_hover</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">text_size</span><span class="kw">:</span><span class="at"> </span><span class="dv">9</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">position</span><span class="kw">:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">x</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">y</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.5</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">attraction</span><span class="kw">:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">force</span><span class="kw">:</span><span class="at"> </span><span class="dv">-50</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">distance_max</span><span class="kw">:</span><span class="at"> </span><span class="dv">800</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">verticale</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">horizontale</span><span class="kw">:</span><span class="at"> </span><span class="dv">0</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">arrows</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div>
 <dl>
 <dt><code>background_color</code></dt>
 <dd>Couleur de fond du graphe.
@@ -257,14 +258,14 @@ node app c</code></pre>
 </dd>
 </dl>
 <p>Exemple :</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">metas</span><span class="kw">:</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Mon cosmoscope</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="at">  </span><span class="fu">author</span><span class="kw">:</span><span class="at"> Prénom Nom</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="at">  </span><span class="fu">keyword</span><span class="kw">:</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="at">    </span><span class="kw">-</span><span class="at"> Zettelkasten</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> graphe documentaire</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Répertoire de fiches en ligne&quot;</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://domaine.fr/cosmoscope.html</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metas</span><span class="kw">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> Mon cosmoscope</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">author</span><span class="kw">:</span><span class="at"> Prénom Nom</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keyword</span><span class="kw">:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> Zettelkasten</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> graphe documentaire</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Répertoire de fiches en ligne&quot;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://domaine.fr/cosmoscope.html</span></span></code></pre></div>
 <dl>
 <dt><code>focus_max</code></dt>
 <dd>Valeur maximale du focus. La valeur doit un entier supérieur ou égal à <code>0</code>.
@@ -274,9 +275,9 @@ node app c</code></pre>
 </dd>
 </dl>
 <p>Exemple :</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">views</span><span class="kw">:</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="at">  </span><span class="fu">Graphe</span><span class="kw">:</span><span class="at"> eyJmaWx0ZXJzIjpbImNvbmNlcHQiXX0%3D</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="at">  </span><span class="fu">Graphe (focus 2)</span><span class="kw">:</span><span class="at"> eyJyZWNvcmRJZCI6MjAyMTAyMjExNDQ0NTF9</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">views</span><span class="kw">:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">Graphe</span><span class="kw">:</span><span class="at"> eyJmaWx0ZXJzIjpbImNvbmNlcHQiXX0%3D</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">Graphe (focus 2)</span><span class="kw">:</span><span class="at"> eyJyZWNvcmRJZCI6MjAyMTAyMjExNDQ0NTF9</span></span></code></pre></div>
 <h2 data-number="3.4" id="modifier-la-configuration-en-ligne-de-commande"><span class="header-section-number">3.4</span> Modifier la configuration en ligne de commande</h2>
 <p>Les commandes suivantes vous permettent de modifier rapidement la configuration.</p>
 <p>Générer un fichier de configuration modèle :</p>
@@ -328,11 +329,11 @@ tags:
 </dd>
 </dl>
 <p>Conformément à la spécification YAML, la liste des mots-clés peut être inscrite en mode <em>block</em> :</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">tags</span><span class="kw">:</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">-</span><span class="at"> mot-clé 1</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">-</span><span class="at"> mot-clé 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tags</span><span class="kw">:</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> mot-clé 1</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> mot-clé 2</span></span></code></pre></div>
 <p>Ou bien en mode <em>flow</em> :</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">tags</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">mot-clé</span><span class="dv"> 1</span><span class="kw">,</span><span class="at"> mot-clé</span><span class="dv"> 2</span><span class="kw">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tags</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">mot-clé</span><span class="dv"> 1</span><span class="kw">,</span><span class="at"> mot-clé</span><span class="dv"> 2</span><span class="kw">]</span></span></code></pre></div>
 <p>Vous pouvez ajouter des champs supplémentaires de manière arbitraire, par exemple un champ <code>description</code>.</p>
 <p>Après l’entête, vous pouvez librement inscrire votre contenu.</p>
 <div class="important">
@@ -385,13 +386,20 @@ node app m</code></pre>
 <pre><code>node app modelize --publish
 node app m -p</code></pre>
 <p>Le fichier <code>cosmoscope.html</code> est exporté dans le répertoire défini par <code>export_target</code> dans la configuration. Si le fichier existe déjà au même emplacement, il est écrasé.</p>
-<p>Si le paramètre <code>history</code> a pour valeur <code>true</code>, un sous-répertoire horodaté est également créé dans le répertoire <code>/history</code> avec les contenus suivants :</p>
+<p>Si le paramètre <code>history</code> a pour valeur <code>true</code>, un sous-répertoire horodaté (selon la date d’export, à la seconde près) est également créé dans le répertoire <code>/history</code> avec les contenus suivants :</p>
 <ul>
 <li>une copie du fichier <code>cosmoscope.html</code> ;</li>
-<li>un rapport <code>error.log</code> sur les erreurs éventuellement survenues durant le processus d’export ;</li>
 <li>un répertoire <code>data</code> contenant les fichiers <code>links.json</code> et <code>nodes.json</code>, respectivement la liste des liens et des nœuds, avec leurs métadonnées respectives.</li>
 </ul>
 <p>Cet export facilite le partage des données et leur réutilisation dans d’autres logiciels de visualisation.</p>
+<h2 data-number="4.6" id="alertes-et-erreurs"><span class="header-section-number">4.6</span> Alertes et erreurs</h2>
+<p>Durant le processus d’analyse de vos fichiers Markdown, il se peut que des conflits avec le système surviennent (sans interrompre le processus d’export). Il y a alors deux types de notification :</p>
+<ul>
+<li>certaines données doivent être remplacées (type non reconnu, lien sans cible…), vous recevez alors une <strong>alerte</strong> (<em>warning</em>) ;</li>
+<li>certaines informations empêchent le traitement d’un fichier (manque d’un titre, identifiant non unique…), vous recevez alors une <strong>erreur</strong> (<em>error</em>).</li>
+</ul>
+<p>Les alertes peuvent être ignorées. Vous devez corriger toutes les erreurs pour que le cosmoscope soit complet par rapport à votre bibliothèque.</p>
+<p>Les alertes (en jaune) et erreurs (en rouge) sont affichées dans la console. Au-delà de 5 notifications par type, seul leur nombre est annoncé. Vous pouvez les lire dans un fichier <code>error.log</code>. Le cas échéant, il est enregistré dans un sous-répertoire horodaté (selon la date d’export, à la seconde près), dans le répertoire <code>history</code>.</p>
 <h1 data-number="5" id="utilisation-du-cosmoscope"><span class="header-section-number">5</span> Utilisation du cosmoscope</h1>
 <p>Le fichier <code>cosmoscope.html</code> peut être lu avec un navigateur web depuis votre ordinateur. Il peut aussi être mis en ligne, par exemple déposé sur un serveur web par un simple envoi FTP. Ceci permet éventuellement de le partager largement. Vous pouvez notamment envoyer un lien vers une fiche en particulier sur un cosmoscope en ligne, en ajoutant son identifiant précédé d’un croisillon <code>#</code> en fin d’URL. Exemple :</p>
 <p><code>https://domaine.fr/cosmoscope.html#20210427185546</code></p>
@@ -468,12 +476,12 @@ node app m -p</code></pre>
 <p>Le paramètre <code>custom_css</code> de la configuration permet d’activer ou désactiver la prise en compte de ce fichier sans avoir à le supprimer.</p>
 <p>Les déclarations CSS ajoutées dans <code>/template/custom.css</code> remplacent celles présentes dans <code>/template/styles.css</code> et <code>/template/print.css</code> (pour les styles à l’impression). Elles s’appliquent au fichier <code>/template/template.njk</code>. Consultez ces fichiers ou utilisez l’inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d’interface auxquels elles s’appliquent.</p>
 <p>Dans l’exemple ci-dessous, le fichier <code>custom.css</code> contient des déclarations qui modifient les polices utilisées dans le cosmoscope :</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb31-1"><a href="#cb31-1"></a><span class="in">:root</span> {</span>
-<span id="cb31-2"><a href="#cb31-2"></a>  <span class="va">--sans</span>: <span class="st">&quot;IBM Plex Serif&quot;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="va">--serif</span>: <span class="st">&quot;IBM Plex Serif&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="va">--mono</span>: <span class="st">&quot;IBM Plex Mono&quot;</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="va">--condensed</span>: <span class="st">&#39;IBM Plex Sans Condensed&#39;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--sans</span>: <span class="st">&quot;IBM Plex Serif&quot;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--serif</span>: <span class="st">&quot;IBM Plex Serif&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--mono</span>: <span class="st">&quot;IBM Plex Mono&quot;</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--condensed</span>: <span class="st">&#39;IBM Plex Sans Condensed&#39;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <h1 data-number="6" id="developpement"><span class="header-section-number">6</span> Développement</h1>
 <p>Cette partie de la documentation s’adresse à des développeurs expérimentés en JavaScript. Elle présente l’arborescence et les concepts sur lesquels reposent les deux parties formant Cosma, le <strong>cosmographe</strong> et le <strong>cosmoscope</strong>.</p>
 <p>Nous vous recommandons vivement de lire le reste de la documentation pour bien saisir l’ensemble des usages en jeu dans le code source présenté ci-dessous.</p>
@@ -551,9 +559,9 @@ node app m -p</code></pre>
 <li>modifier la configuration (<code>verifconfig.js</code>).</li>
 </ul>
 <p>La configuration (le contenu du fichier <code>config.yml</code> devenu un objet JavaScript) est exportée de manière globale (depuis <code>verifconfig.js</code>). Elle peut être appelée comme ci-dessous.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">const</span> config <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;./verifconfig&#39;</span>)<span class="op">.</span><span class="at">config</span><span class="op">;</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="kw">const</span> folderToExport <span class="op">=</span> config<span class="op">.</span><span class="at">export_target</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> config <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;./verifconfig&#39;</span>)<span class="op">.</span><span class="at">config</span><span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> folderToExport <span class="op">=</span> config<span class="op">.</span><span class="at">export_target</span><span class="op">;</span></span></code></pre></div>
 <h2 data-number="6.6" id="lecture-des-fichiers"><span class="header-section-number">6.6</span> Lecture des fichiers</h2>
 <p>Depuis le fichier <code>modelize.js</code>, on extrait de chaque fichier Markdown les métadonnées (l’entête YAML) et le contenu (suivant l’entête YAML) (fichier <code>modelize.js</code>).</p>
 <dl>
@@ -587,35 +595,35 @@ node app m -p</code></pre>
 <p>Les tableaux présentés dans la section précédente peuvent être injectés dans d’autres bibliothèques JavaScript de génération de graphe.</p>
 <p><strong>Exemple 1 :</strong> Vis.js Network (<a href="https://github.com/visjs/vis-network">dépôt</a>, <a href="https://github.com/visjs/vis-network#example">exemple</a>).</p>
 <p>Extrait du fichier <code>/functions/modelize.js</code> :</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">function</span> <span class="fu">registerLinks</span>(file) {</span>
-<span id="cb34-2"><a href="#cb34-2"></a><span class="co">// ...</span></span>
-<span id="cb34-3"><a href="#cb34-3"></a>  <span class="cf">for</span> (<span class="kw">const</span> link <span class="kw">of</span> file<span class="op">.</span><span class="at">links</span>) {</span>
-<span id="cb34-4"><a href="#cb34-4"></a>  <span class="co">// ...</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>    entities<span class="op">.</span><span class="at">links</span><span class="op">.</span><span class="fu">push</span>({</span>
-<span id="cb34-6"><a href="#cb34-6"></a>      <span class="co">// ...</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a>      <span class="dt">from</span><span class="op">:</span> <span class="bu">Number</span>(link<span class="op">.</span><span class="at">source</span><span class="op">.</span><span class="at">id</span>)<span class="op">,</span></span>
-<span id="cb34-8"><a href="#cb34-8"></a>      <span class="dt">to</span><span class="op">:</span> <span class="bu">Number</span>(link<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">id</span>)<span class="op">,</span></span>
-<span id="cb34-9"><a href="#cb34-9"></a>      <span class="co">// ...</span></span>
-<span id="cb34-10"><a href="#cb34-10"></a>    })<span class="op">;</span></span>
-<span id="cb34-11"><a href="#cb34-11"></a>  }</span>
-<span id="cb34-12"><a href="#cb34-12"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">registerLinks</span>(file) {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> link <span class="kw">of</span> file<span class="op">.</span><span class="at">links</span>) {</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    entities<span class="op">.</span><span class="at">links</span><span class="op">.</span><span class="fu">push</span>({</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">from</span><span class="op">:</span> <span class="bu">Number</span>(link<span class="op">.</span><span class="at">source</span><span class="op">.</span><span class="at">id</span>)<span class="op">,</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">to</span><span class="op">:</span> <span class="bu">Number</span>(link<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">id</span>)<span class="op">,</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Extrait du fichier <code>/template/scripts/graph.js</code></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">Network</span>(</span>
-<span id="cb35-2"><a href="#cb35-2"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;network&#39;</span>)</span>
-<span id="cb35-3"><a href="#cb35-3"></a>  <span class="op">,</span> data <span class="op">=</span> {</span>
-<span id="cb35-4"><a href="#cb35-4"></a>    <span class="dt">nodes</span><span class="op">:</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">DataSet</span>(graph<span class="op">.</span><span class="at">nodes</span>)<span class="op">,</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a>    <span class="dt">edges</span><span class="op">:</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">DataSet</span>(graph<span class="op">.</span><span class="at">links</span>)</span>
-<span id="cb35-6"><a href="#cb35-6"></a>  }</span>
-<span id="cb35-7"><a href="#cb35-7"></a>  <span class="op">,</span> {  } <span class="co">// options</span></span>
-<span id="cb35-8"><a href="#cb35-8"></a>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">Network</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&#39;network&#39;</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">,</span> data <span class="op">=</span> {</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nodes</span><span class="op">:</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">DataSet</span>(graph<span class="op">.</span><span class="at">nodes</span>)<span class="op">,</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">edges</span><span class="op">:</span> <span class="kw">new</span> vis<span class="op">.</span><span class="fu">DataSet</span>(graph<span class="op">.</span><span class="at">links</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">,</span> {  } <span class="co">// options</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
 <p><strong>Exemple 2 :</strong> Sigma.js (<a href="https://github.com/jacomyal/sigma.js/">dépôt</a>, <a href="https://github.com/jacomyal/sigma.js/blob/master/examples/basic.html#L70">exemple</a>).</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> sigma({</span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="dt">graph</span><span class="op">:</span> {</span>
-<span id="cb36-3"><a href="#cb36-3"></a>    <span class="dt">nodes</span><span class="op">:</span> graph<span class="op">.</span><span class="at">nodes</span><span class="op">,</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>    <span class="dt">edges</span><span class="op">:</span> graph<span class="op">.</span><span class="at">links</span></span>
-<span id="cb36-5"><a href="#cb36-5"></a>  }<span class="op">,</span></span>
-<span id="cb36-6"><a href="#cb36-6"></a>  <span class="dt">container</span><span class="op">:</span> <span class="st">&#39;network&#39;</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>})<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> network <span class="op">=</span> <span class="kw">new</span> <span class="fu">sigma</span>({</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">graph</span><span class="op">:</span> {</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nodes</span><span class="op">:</span> graph<span class="op">.</span><span class="at">nodes</span><span class="op">,</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">edges</span><span class="op">:</span> graph<span class="op">.</span><span class="at">links</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">container</span><span class="op">:</span> <span class="st">&#39;network&#39;</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 <h2 data-number="6.10" id="parametres-du-graphe-1"><span class="header-section-number">6.10</span> Paramètres du graphe</h2>
 <p>Les paramètres du graphe sont extraits de la partie <code>graph_config</code> du fichier de configuration <code>config.yml</code>. Elle est injectée dans le modèle Nunjucks <code>/template/template.njk</code> via la fonction <a href="./api/cosmographe/global.html#cosmoscope"><code>cosmoscope()</code></a>. Dans le modèle, elle est à la fois utilisée comme valeur par défaut des formulaires du menu « Paramètres du graphe » et implémentée comme objet global JavaScript <code>graphProperties</code>.</p>
 <p>Ce même objet global est actualisé par les différents formulaires du menu « Paramètres du graphe ». Ils font ensuite appel à la fonction <a href="./api/cosmographe/global.html#updateForces"><code>updateForces()</code></a> pour relancer l’évaluation de ces paramètres par la bibliothèque de visualisation D3.js.</p>
