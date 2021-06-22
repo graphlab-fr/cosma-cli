@@ -9,10 +9,19 @@ const fs = require('fs')
     , Citr = require('@zettlr/citr')
     , config = require('./verifconfig').config;
 
-let library = false; // if no path to JSON library file, no functions
-if (config.library_origin) {    
-    library = fs.readFileSync(config.library_origin, 'utf-8');
-    library = JSON.parse(library);
+let library = false // if no path to JSON library file
+    , citeproc;
+
+if (config.library_origin) {
+    library = {};
+
+    let library_array = fs.readFileSync(config.library_origin, 'utf-8');
+    library_array = JSON.parse(library_array);
+
+    for (const item of library_array) {
+        library[item.id] = item; }
+
+    citeproc = getCSL();
 }
 
 /**
@@ -48,9 +57,7 @@ exports.citeprocModeIsActive = citeprocModeIsActive;
 function catchQuoteKeys(fileContent) {
     let extractions = Citr.util.extractCitations(fileContent)
         , quoteKeys = {}
-        , libraryIds = library.map(function(item) {
-            return item.id;
-        })
+        , libraryIds = Object.keys(library)
         , undefinedLibraryIds = [];
 
     quoteExtraction:
@@ -87,9 +94,7 @@ exports.catchQuoteKeys = catchQuoteKeys;
 function convertQuoteKeys(fileContent, fileQuoteKeys) {
     const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
-    var citeproc = getCSL(quoteIds);
     if (citeproc === false) { return fileContent; }
-
     citeproc.updateItems(quoteIds);
 
     const citations = Object.values(fileQuoteKeys).map(function(key, i) {
@@ -122,10 +127,9 @@ exports.convertQuoteKeys = convertQuoteKeys;
 function genBibliography(fileQuoteKeys) {
     const quoteIds = getCitationsFromKey(fileQuoteKeys);
 
-    var citeproc = getCSL(quoteIds);
     if (citeproc === false) { return false; }
-
     citeproc.updateItems(quoteIds);
+
     return citeproc.makeBibliography()[1].join('\n');
 }
 
@@ -137,7 +141,7 @@ exports.genBibliography = genBibliography;
  * @return {string} - Bibliography HTML
  */
 
-function getCSL(fileQuotesIds) {
+function getCSL() {
 
     if (library === false) { return false; }
 
@@ -159,19 +163,13 @@ function getCSL(fileQuotesIds) {
         return false;
     }
 
-    const fileQuoteRefs = {};
-
-    for (const id of fileQuotesIds) {
-        fileQuoteRefs[id] = library.find(library => library.id === id);
-    }
-
     return new CSL.Engine({
         retrieveLocale: () => {
             return xmlLocal;
         },
         retrieveItem: (id) => {
             // find the quote item : CSL-JSON object
-            return fileQuoteRefs[id];
+            return library[id];
         }
     }, cslStyle);
 }
