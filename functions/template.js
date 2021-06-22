@@ -88,6 +88,9 @@ function cosmoscope(files, entities) {
         // join metadatas from config file
         metas: config.metas,
 
+        // get the reference for each quote from records
+        usedCitationReferences: quoteTools.getUsedCitationReferences(),
+
         // if focus mode is active
         focusIsActive: !(config.focus_max <= 0),
 

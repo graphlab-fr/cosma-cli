@@ -67,7 +67,10 @@ function catchQuoteKeys(fileContent) {
         const quotes = Citr.parseSingle(extraction);
         // there could be several quotes from one key
         for (const q of quotes) {
+            library[q.id].used = true;
+
             if (libraryIds.includes(q.id) === false) {
+                // if the quote id is not defined from library
                 undefinedLibraryIds.push(q.id)
                 continue quoteExtraction;
             }
@@ -137,7 +140,6 @@ exports.genBibliography = genBibliography;
 
 /**
  * Get 'citeproc' engine, from library and config files (XML, CSL)
- * @param {object} fileQuotesIds - All quoting keys, without their attributes
  * @return {string} - Bibliography HTML
  */
 
@@ -193,3 +195,20 @@ function getCitationsFromKey(quoteKeys) {
         })
         .flat();
 }
+
+/**
+ * Get all metas for each quoted reference from all records
+ * @return {array} - Array of objects (references)
+ */
+
+function getUsedCitationReferences() {
+    if (citeprocModeIsActive() === false) { return false; }
+
+    const refs = Object.values(library).filter(item => item.used === true);
+
+    if (refs.length === 0) { return false; }
+
+    return refs;
+}
+
+exports.getUsedCitationReferences = getUsedCitationReferences;

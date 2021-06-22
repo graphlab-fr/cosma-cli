@@ -410,7 +410,7 @@ node app modelize --citeproc
 node app modelize -c
 ```
 
-Chaque clé de citation est alors remplacée par une courte référence et une entrée dans la bibliographie.
+Chaque clé de citation est alors remplacée par une courte référence et une entrée dans la bibliographie. Toutes les données de toutes les références citées sont enregistrée dans le cosmoscope sous forme de données JSON, au sein de la balise `<code id="used-citation-references">`.
 
 ```
 D'après les références (Le Deuff 2014, p. 22; Perret 2020).

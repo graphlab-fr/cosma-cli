@@ -407,7 +407,7 @@ node app modelize --citeproc
 node app modelize -c
 ```
 
-Each citation key is then replaced by a short reference and an entry in the bibliography.
+Each citation key is then replaced by a short reference and an entry in the bibliography. All data from all cited references is stored in the cosmoscope as JSON data, into `<code id="used-citation-references">` tag.
 
 ```
 According to (Le Deuff 2014, p. 22; Perret 2020).

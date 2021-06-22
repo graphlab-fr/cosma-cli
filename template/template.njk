@@ -390,6 +390,12 @@
 
     {# Cosma data #}
 
+    {% if usedCitationReferences %}
+    <code id="used-citation-references" style="display: none;">
+        {{ usedCitationReferences | dump | safe }};
+    </code>
+    {% endif %}
+
     <script>
         const graph = {{ graph.data | safe }};
         const graphProperties = {{ graph.config | dump | safe }};
