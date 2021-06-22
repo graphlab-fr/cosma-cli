@@ -255,6 +255,11 @@ aside.menu footer {
 	border-top: solid 1px var(--border-color);
 }
 
+.bibliography-open {
+	position: absolute;
+	top: -100%;
+}
+
 /** Record container (right side board)
 ------------------------------------------------------------*/
 

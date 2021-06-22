@@ -197,8 +197,16 @@
             </article>
         </details>
 
-        <footer class="menu-footer" onclick="openRecord('credits', false)">
-            {{ "Fabriqué avec Cosma – À propos" if publishMode else "À propos" }}
+        <footer class="menu-footer">
+            <span onclick="openRecord('credits', false)">
+                {{ "Fabriqué avec Cosma – À propos" if publishMode else "À propos" }}
+            </span>
+
+            {% if usedCitationReferences %}
+            <div onclick="openRecord('citation-references', false)" class="bibliography-open">
+                📚
+            </div>
+            {% endif %}
         </footer>
     </aside>
 
@@ -293,20 +301,20 @@
 
         <article id="credits" class="record">
             <main>
-            		{% if publishMode %}
-                {% if metas.title %}
-								<h1 class="metas-title">{{ metas.title }}</h1>
-								{% endif %}
+                {% if publishMode %}
+                    {% if metas.title %}
+                    <h1 class="metas-title">{{ metas.title }}</h1>
+                    {% endif %}
 
-								{% if metas.author %}
-								<p class="metas-author">{{ metas.author }}</p>
-								{% endif %}
+                    {% if metas.author %}
+                    <p class="metas-author">{{ metas.author }}</p>
+                    {% endif %}
 
-								{% if metas.description %}
-								<p class="metas-description">{{ metas.description }}</p>
-								{% endif %}
-								
-								<hr>
+                    {% if metas.description %}
+                    <p class="metas-description">{{ metas.description }}</p>
+                    {% endif %}
+                    
+                    <hr>
                 {% endif %}
 
                 {% if publishMode and metas %}
@@ -349,6 +357,15 @@
                 </dl>
             </main>
         </article>
+
+        {% if usedCitationReferences %}
+        <article id="citation-references" class="record">
+            <button>Télécharger</button>
+
+            <code>{{ usedCitationReferences | dump | safe }}</code>
+        </article>
+        {% endif %}
+
     </main>
 
     {# ========================================
@@ -390,12 +407,6 @@
 
     {# Cosma data #}
 
-    {% if usedCitationReferences %}
-    <code id="used-citation-references" style="display: none;">
-        {{ usedCitationReferences | dump | safe }};
-    </code>
-    {% endif %}
-
     <script>
         const graph = {{ graph.data | safe }};
         const graphProperties = {{ graph.config | dump | safe }};
@@ -419,6 +430,7 @@
         {% include "scripts/view.js" %}
         {% include "scripts/keyboard.js" %}
         {% include "scripts/counter.js" %}
+        {% include "scripts/dowload.js" %}
     </script>
 </body>
 
