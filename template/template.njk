@@ -203,7 +203,8 @@
             </span>
 
             {% if usedCitationReferences %}
-            <div onclick="openRecord('citation-references', false)" class="bibliography-open">
+            <div onclick="openRecord('citation-references', false)"
+                class="bibliography-open" title="Source des bibliographies">
                 📚
             </div>
             {% endif %}
@@ -360,6 +361,11 @@
 
         {% if usedCitationReferences %}
         <article id="citation-references" class="record">
+            <h1>Source des bibliographies</h1>
+
+            <p>Copiez ci-dessous le fichier CSL JSON contenant l’ensemble des références
+                bibliographiques citées dans ce cosmoscope.</p>
+
             <button>Télécharger</button>
 
             <code>{{ usedCitationReferences | dump | safe }}</code>
