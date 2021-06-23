@@ -146,10 +146,7 @@ input[type="range"] {
 
 a { color: inherit; }
 
-code {
-	display: block;
-	font-family: var(--mono);
-}
+code { font-family: var(--mono); }
 
 .badge {
 	display: inline-block;
@@ -565,5 +562,6 @@ article#credits h1.metas-title {
 }
 
 #citation-references code {
+	display: block;
 	word-wrap: break-word;
 }
