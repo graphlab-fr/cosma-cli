@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="generator" content="https://github.com/hyperotlet/cosma">
-    {% for meta, value in metas %}
+    {% for meta, value in metadata %}
     <meta name="{{ meta }}" content="{{ value }}">
     {% endfor %}
     <meta name="date" content="{{ date }}">
@@ -37,8 +37,8 @@
     <aside class="menu list-content-container">
 
         <header role="banner">
-            {% if publishMode and metas.title %}
-            <h1 class="title">{{ metas.title }}</h1>
+            {% if publishMode and metadata.title %}
+            <h1 class="title">{{ metadata.title }}</h1>
             {% else %}
             <div class="logo" title="Logo de Cosma">
                 {% include "cosmalogo.svg" %}
@@ -303,22 +303,22 @@
         <article id="credits" class="record">
             <main>
                 {% if publishMode %}
-                    {% if metas.title %}
-                    <h1 class="metas-title">{{ metas.title }}</h1>
+                    {% if metadata.title %}
+                    <h1 class="metas-title">{{ metadata.title }}</h1>
                     {% endif %}
 
-                    {% if metas.author %}
-                    <p class="metas-author">{{ metas.author }}</p>
+                    {% if metadata.author %}
+                    <p class="metas-author">{{ metadata.author }}</p>
                     {% endif %}
 
-                    {% if metas.description %}
-                    <p class="metas-description">{{ metas.description }}</p>
+                    {% if metadata.description %}
+                    <p class="metas-description">{{ metadata.description }}</p>
                     {% endif %}
                     
                     <hr>
                 {% endif %}
 
-                {% if publishMode and metas %}
+                {% if publishMode and metadata %}
                 <div class="logo" title="Logo de Cosma">
                     {% include "cosmalogo.svg" %}
                 </div>

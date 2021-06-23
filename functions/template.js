@@ -86,7 +86,7 @@ function cosmoscope(files, entities) {
         customCss: config.custom_css,
         
         // join metadatas from config file
-        metas: config.metas,
+        metadata: config.metadata,
 
         // get the reference for each quote from records
         usedCitationReferences: quoteTools.getUsedCitationReferences(),
@@ -167,11 +167,11 @@ function puslishModeIsActive() {
         return false;
     }
 
-    if (config.metas !== undefined) {
+    if (config.metadata !== undefined) {
         return true;
     }
 
-    console.error('\x1b[33m', 'Publish mode off : no metas from config.', '\x1b[0m');
+    console.error('\x1b[33m', 'Publish mode off : no metadata from config.', '\x1b[0m');
     return false;
 }
 

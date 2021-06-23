@@ -13,21 +13,25 @@ let library = false // if no path to JSON library file
     , citeproc
     , xmlLocal = './template/citeproc/locales.xml';
 
-if (config.bibliography && config.csl
-    && fs.existsSync(config.bibliography) && fs.existsSync(config.csl)
-    && fs.existsSync(xmlLocal))
-{
-    library = {};
+const flag = process.argv[3]; // terminal request argument
 
-    let library_array = fs.readFileSync(config.bibliography, 'utf-8');
-    library_array = JSON.parse(library_array);
-
-    for (const item of library_array) {
-        library[item.id] = item; }
-
-    citeproc = getCSL();
-} else {
-    console.error('\x1b[33m', 'Citeproc off : no library and/or CSL file from config.', '\x1b[0m');
+if (flag === '--citeproc' && flag === '-c') {
+    if (config.bibliography && config.csl
+        && fs.existsSync(config.bibliography) && fs.existsSync(config.csl)
+        && fs.existsSync(xmlLocal))
+    {
+        library = {};
+    
+        let library_array = fs.readFileSync(config.bibliography, 'utf-8');
+        library_array = JSON.parse(library_array);
+    
+        for (const item of library_array) {
+            library[item.id] = item; }
+    
+        citeproc = getCSL();
+    } else {
+        console.error('\x1b[33m', 'Citeproc off : no library and/or CSL file from config.', '\x1b[0m');
+    }
 }
 
 /**
@@ -36,12 +40,6 @@ if (config.bibliography && config.csl
  */
 
 function citeprocModeIsActive() {
-    const flag = process.argv[3];
-
-    if (flag !== '--citeproc' && flag !== '-c') {
-        return false;
-    }
-
     if (library === false) {
         return false;
     }
