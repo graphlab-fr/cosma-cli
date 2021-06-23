@@ -54,6 +54,7 @@ const focus = {
         if (focusedNodeId === undefined) { this.hide(); return; }
 
         this.focusedNodeId = Number(focusedNodeId);
+        zoomToNode(this.focusedNodeId);
 
         // get infos about the focused node
         this.focusedNode = document.querySelector('[data-node="' + this.focusedNodeId + '"]');

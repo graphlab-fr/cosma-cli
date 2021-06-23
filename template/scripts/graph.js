@@ -269,6 +269,39 @@ function getNodeNetwork(nodeIds) {
 }
 
 /**
+ * Zoom to a node from its coordinates
+ * @param {number} nodeId
+ */
+
+function zoomToNode(nodeId) {
+    const nodeToZoomMetas = node.filter(node => node.id === nodeId).datum()
+        , zoom = 2
+        , svgSize = svg.node().getBBox()
+        , recordWidth = recordContainer.offsetWidth;
+
+    let x = nodeToZoomMetas.x
+        , y = nodeToZoomMetas.y
+
+    // coordonates to put the node at the graph top-left corner
+    x = width / 2 - zoom * x;
+    y = height / 2 - zoom * y;
+
+    // add px to put the node to the graph center
+    x += (svgSize.width - recordWidth) / 2;
+    y += svgSize.height / 2;
+
+    view.position = {
+        zoom: zoom,
+        x: x,
+        y: y
+    };
+
+    translate();
+}
+
+window.zoomToNode = zoomToNode;
+
+/**
  * Display none nodes and their link
  * @param {array} nodeIds - List of nodes ids
  */
