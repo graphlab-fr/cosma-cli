@@ -77,7 +77,7 @@ function cosmoscope(files, entities) {
 
         // normalize graph data & configuration 
         graph: {
-            config: config.graph_config,
+            config: config.graph,
             data: JSON.stringify({nodes: entities.nodes, links: entities.links})
         },
 
@@ -198,7 +198,7 @@ function puslishModeIsActive() {
     let colorsStyles = types.map(type => `.${type.prefix}${type.name} {color:var(--${type.prefix}${type.name}); fill:var(--${type.prefix}${type.name}); stroke:var(--${type.prefix}${type.name});}`)
 
     // add specifics parametered colors from config
-    types.push({prefix: '', name: 'highlight', color: config.graph_config.highlight_color});
+    types.push({prefix: '', name: 'highlight', color: config.graph.highlight_color});
 
     let globalsStyles = types.map(type => `--${type.prefix}${type.name}: ${type.color};`)
 

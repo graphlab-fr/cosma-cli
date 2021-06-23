@@ -17,7 +17,7 @@ const baseConfig = {
     focus_max: 2,
     record_types: { undefined: 'grey' },
     link_types: { undefined: { stroke: 'simple', color: 'rgb(225, 225, 225)' } },
-    graph_config: {
+    graph: {
         background_color: 'white',
         highlight_color: 'red',
         highlight_on_hover: true,
@@ -25,7 +25,7 @@ const baseConfig = {
         position: { x: 5, y: 5 },
         attraction: { force: -50, distance_max: 250, verticale: 0, horizontale: 0 },
         arrows: false
-      }
+    }
 };
 
 if (!fs.existsSync('config.yml')){
