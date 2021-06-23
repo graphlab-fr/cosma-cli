@@ -15,7 +15,7 @@ let library = false // if no path to JSON library file
 
 const flag = process.argv[3]; // terminal request argument
 
-if (flag === '--citeproc' && flag === '-c') {
+if (flag === '--citeproc' || flag === '-c') {
     if (config.bibliography && config.csl
         && fs.existsSync(config.bibliography) && fs.existsSync(config.csl)
         && fs.existsSync(xmlLocal))
