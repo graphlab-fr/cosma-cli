@@ -368,7 +368,7 @@
 
             <button>Télécharger</button>
 
-            <code>{{ usedCitationReferences | dump | safe }}</code>
+            <code>{{ usedCitationReferences | dump | escape }}</code>
         </article>
         {% endif %}
 
