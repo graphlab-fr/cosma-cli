@@ -10,18 +10,24 @@ const fs = require('fs')
     , config = require('./verifconfig').config;
 
 let library = false // if no path to JSON library file
-    , citeproc;
+    , citeproc
+    , xmlLocal = './template/citeproc/locales.xml';
 
-if (config.library_origin) {
+if (config.bibliography && config.csl
+    && fs.existsSync(config.bibliography) && fs.existsSync(config.csl)
+    && fs.existsSync(xmlLocal))
+{
     library = {};
 
-    let library_array = fs.readFileSync(config.library_origin, 'utf-8');
+    let library_array = fs.readFileSync(config.bibliography, 'utf-8');
     library_array = JSON.parse(library_array);
 
     for (const item of library_array) {
         library[item.id] = item; }
 
     citeproc = getCSL();
+} else {
+    console.error('\x1b[33m', 'Citeproc off : no library and/or CSL file from config.', '\x1b[0m');
 }
 
 /**
@@ -32,18 +38,15 @@ if (config.library_origin) {
 function citeprocModeIsActive() {
     const flag = process.argv[3];
 
-    if (flag !== '--citeproc'
-        && flag !== '-c')
-    {
+    if (flag !== '--citeproc' && flag !== '-c') {
         return false;
     }
 
-    if (config.library_origin !== undefined && fs.existsSync(config.library_origin)) {
-        return true;
+    if (library === false) {
+        return false;
     }
 
-    console.error('\x1b[33m', 'Citeproc mode off : no library from config.', '\x1b[0m');
-    return false;
+    return true;
 }
 
 exports.citeprocModeIsActive = citeprocModeIsActive;
@@ -147,23 +150,8 @@ function getCSL() {
 
     if (library === false) { return false; }
 
-    let xmlLocal, cslStyle;
-
-    try {
-        // local definition file (translation of the linking terms of the quote)
-        xmlLocal = fs.readFileSync('./template/citeproc/locales.xml', 'utf-8');
-    } catch (error) {
-        console.error('\x1b[33m', 'Warn.', '\x1b[0m', 'File /template/citeproc/locales.xml is missing: no quoting.');
-        return false;
-    }
-
-    try {
-        // style for quoting (order and metadata of the citation)
-        cslStyle = fs.readFileSync('./template/citeproc/styles.csl', 'utf-8');
-    } catch (error) {
-        console.error('\x1b[33m', 'Warn.', '\x1b[0m', 'File /template/citeproc/styles.csl is missing: no quoting.');
-        return false;
-    }
+    xmlLocal = fs.readFileSync(xmlLocal, 'utf-8')
+        , cslStyle = fs.readFileSync(config.csl, 'utf-8');
 
     return new CSL.Engine({
         retrieveLocale: () => {
