@@ -146,6 +146,11 @@ input[type="range"] {
 
 a { color: inherit; }
 
+code {
+	display: block;
+	font-family: var(--mono);
+}
+
 .badge {
 	display: inline-block;
 	background-color: var(--indicator-background-color);
@@ -255,6 +260,11 @@ aside.menu footer {
 	border-top: solid 1px var(--border-color);
 }
 
+.bibliography-open {
+	position: absolute;
+	top: -100%;
+}
+
 /** Record container (right side board)
 ------------------------------------------------------------*/
 
@@ -345,12 +355,9 @@ main.record-container:not(.active) {
 }
 
 .record main pre {
-	overflow:auto;
+	overflow: auto;
 	font-size: 90%;
-	white-space: pre-wrap;
 }
-.record main code { display: inline-block; }
-.record main pre code { padding-left: 1rem; }
 
 .record main blockquote {
 	border-left: 5px solid var(--border-color);
@@ -548,4 +555,15 @@ article#credits dd, article#credits li {
 
 article#credits h1.metas-title {
 	font-size: 2rem;
+}
+
+/** Bibliography references
+------------------------------------------------------------*/
+
+#citation-references button {
+	margin-bottom: 2rem;
+}
+
+#citation-references code {
+	word-wrap: break-word;
 }
