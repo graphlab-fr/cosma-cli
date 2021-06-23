@@ -186,21 +186,17 @@ function getCitationsFromKey(quoteKeys) {
 
 /**
  * Get all metas for each quoted reference from all records
- * @return {string} - Stringify JSON that contains the references
+ * @return {array} - Array of objects (references)
  */
 
 function getUsedCitationReferences() {
     if (citeprocModeIsActive() === false) { return false; }
 
-    const refs = Object.values(library)
-        .filter(item => item.used === true)
-        .map(function (item) {
-            return JSON.stringify(item);
-        });
+    const refs = Object.values(library).filter(item => item.used === true);
 
     if (refs.length === 0) { return false; }
 
-    return '[' + refs.join(',') + ']';
+    return refs;
 }
 
 exports.getUsedCitationReferences = getUsedCitationReferences;
