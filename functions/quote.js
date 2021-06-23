@@ -207,7 +207,6 @@ function getUsedCitationReferences() {
     const refs = Object.values(library)
         .filter(item => item.used === true)
         .map(function (item) {
-            console.log(JSON.stringify(item));
             return JSON.stringify(item);
         });
 
