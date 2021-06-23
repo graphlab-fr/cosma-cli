@@ -200,8 +200,11 @@ graph_config:
 
 You can add the following parameters to the configuration file:
 
-`library_origin`
-: Path to the JSON CSL file containing the list of bibliographic references. Enables the [bibliography of records](#bibliography).
+`bibliography`
+: Path to the file (JSON CSL) `.json` containing the list of bibliographic references. Enables the [bibliography of records](#bibliography).
+
+`csl`
+: Path to the style file (CSL) `.csl` containing the citation styles. Enables the [bibliography of records](#bibliography).
 
 `minify`
 : Reduces the size of the `cosmoscope.html` file, at the expense of the readability of the source code. Value: `true` or `false`. Disabled by default.
@@ -394,10 +397,11 @@ You can integrate citation keys into your records. They can be recorded with the
 According to [@ledeuffTempsHumanitesDigitales2014, 22; @perretFonctionDocumentairePreuve2020].
 ```
 
-You must target into the configuration the JSON CSL file exported with Zotero.
+You must target from the configuration the JSON CSL file exported with Zotero and the citation system.
 
 ```
-library_origin: 'D:\documents\ma_bibliotheque.json'
+bibliography: 'D:\documents\my_library.json'
+csl: 'D:\documents\y_style.csl'
 ```
 
 The following commands are used to generate a cosmoscope using Cosma's built-in Citeproc converter

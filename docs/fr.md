@@ -202,8 +202,11 @@ graph_config:
 
 Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 
-`library_origin`
-: Chemin vers le fichier JSON CSL contenant la liste des références bibliographiques. Permet d'activer la [bibliographie des fiches](#bibliographie).
+`bibliography`
+: Chemin vers le fichier (JSON CSL) `.json` contenant la liste des références bibliographiques. Permet d'activer la [bibliographie des fiches](#bibliographie).
+
+`csl`
+: Chemin vers le fichier de style (CSL) `.csl` contenant les styles de citation. Permet d'activer la [bibliographie des fiches](#bibliographie).
 
 `minify`
 : Réduit le poids du fichier `cosmoscope.html`, au détriment de la lisibilité du code source. Valeur : `true` ou `false`. Désactivé par défaut.
@@ -397,10 +400,11 @@ Vous pouvez intégrer des clés de citation au sein de vos fiches. Elles peuvent
 D'après les références [@ledeuffTempsHumanitesDigitales2014, 22; @perretFonctionDocumentairePreuve2020].
 ```
 
-Vous devez cibler au sein de la configuration le fichier JSON CSL exporté avec Zotero.
+Vous devez cibler au sein de la configuration le fichier JSON CSL exporté avec Zotero, ainsi que le syle des citations.
 
 ```
-library_origin: 'D:\documents\ma_bibliotheque.json'
+bibliography: 'D:\documents\ma_bibliotheque.json'
+csl: 'D:\documents\mon_style.csl'
 ```
 
 Les commandes suivantes permettent de générer un cosmoscope en utilisant le convertisseur Citeproc intégré à Cosma. 
@@ -648,7 +652,7 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
 │   ├── scripts/            | fonctions du cosmoscope
-│   │   ├── counter.js      | actuliser les compteurs d'entités
+│   │   ├── counter.js      | actualiser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
 │   │   ├── graph.js        | génération du graphe selon données et configuration
