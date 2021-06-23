@@ -198,16 +198,16 @@
         </details>
 
         <footer class="menu-footer">
+            {% if usedCitationReferences %}
+            <span onclick="openRecord('citation-references', false)"
+                class="bibliography-open" title="Données bibliographiques">
+                Données
+            </span> — 
+            {% endif %}
+
             <span onclick="openRecord('credits', false)">
                 {{ "Fabriqué avec Cosma – À propos" if publishMode else "À propos" }}
             </span>
-
-            {% if usedCitationReferences %}
-            <div onclick="openRecord('citation-references', false)"
-                class="bibliography-open" title="Source des bibliographies">
-                📚
-            </div>
-            {% endif %}
         </footer>
     </aside>
 
@@ -361,10 +361,9 @@
 
         {% if usedCitationReferences %}
         <article id="citation-references" class="record">
-            <h1>Source des bibliographies</h1>
+            <h1>Données bibliographiques</h1>
 
-            <p>Copiez ci-dessous le fichier CSL JSON contenant l’ensemble des références
-                bibliographiques citées dans ce cosmoscope.</p>
+            <p>Les données CSL JSON ci-dessous correspondent aux références citées dans ce cosmoscope.</p>
 
             <button>Télécharger</button>
 
