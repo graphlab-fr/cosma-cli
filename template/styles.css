@@ -146,6 +146,11 @@ input[type="range"] {
 
 a { color: inherit; }
 
+code {
+	display: block;
+	font-family: var(--mono);
+}
+
 .badge {
 	display: inline-block;
 	background-color: var(--indicator-background-color);
@@ -350,12 +355,9 @@ main.record-container:not(.active) {
 }
 
 .record main pre {
-	overflow:auto;
+	overflow: auto;
 	font-size: 90%;
-	white-space: pre-wrap;
 }
-.record main code { display: inline-block; }
-.record main pre code { padding-left: 1rem; }
 
 .record main blockquote {
 	border-left: 5px solid var(--border-color);
