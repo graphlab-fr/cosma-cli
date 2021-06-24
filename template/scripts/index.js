@@ -36,6 +36,40 @@ const indexContainer = document.getElementById('index');
 })();
 
 /**
+ * Fixed <summary> at top of the screen when you scroll into its <details> parent
+ */
+
+(function() {
+    const detailsElts = document.querySelectorAll('.menu details')
+        , summaryElts = document.querySelectorAll('.menu summary')
+        , menu = document.querySelector('.menu');
+
+    for (let i = 0; i < summaryElts.length; i++) {
+        summaryElts[i].addEventListener('click', () => {
+            summaryElts[i].classList.remove('fixed'); })
+    }
+
+    menu.addEventListener("scroll", (e) => {
+
+        for (let i = 0; i < detailsElts.length; i++) {
+            const detailElt = detailsElts[i];
+
+            if (detailElt.open === false) { continue; }
+
+            const distanceFromScreen = detailElt.getBoundingClientRect()
+                , fromTop = distanceFromScreen.top
+                , fromBottom = distanceFromScreen.bottom;
+
+            if (fromTop <= 0 && fromBottom > 0) {
+                summaryElts[i].classList.add('fixed');
+            } else {
+                summaryElts[i].classList.remove('fixed');
+            }
+        }
+    }); 
+})();
+
+/**
  * Hide items from the index list that correspond to the nodes ids
  * @param {array} nodeIds - List of nodes ids
  */
