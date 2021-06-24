@@ -276,7 +276,6 @@ function getNodeNetwork(nodeIds) {
 function zoomToNode(nodeId) {
     const nodeToZoomMetas = node.filter(node => node.id === nodeId).datum()
         , zoom = 2
-        , svgSize = svg.node().getBBox()
         , recordWidth = recordContainer.offsetWidth;
 
     let x = nodeToZoomMetas.x
@@ -287,8 +286,8 @@ function zoomToNode(nodeId) {
     y = height / 2 - zoom * y;
 
     // add px to put the node to the graph center
-    x += (svgSize.width - recordWidth) / 2;
-    y += svgSize.height / 2;
+    x += (window.innerWidth - recordWidth) / 2;
+    y += window.innerHeight / 2;
 
     view.position = {
         zoom: zoom,
