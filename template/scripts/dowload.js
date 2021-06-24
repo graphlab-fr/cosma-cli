@@ -10,10 +10,7 @@
 
 (function() {
     const bibliographyContainer = document.getElementById('citation-references')
-
-    if (!bibliographyContainer) { return; }
-
-    const btn = bibliographyContainer.querySelector('button')
+        , btn = bibliographyContainer.querySelector('button')
         , code = bibliographyContainer.querySelector('code');
 
     btn.addEventListener('click', () => {

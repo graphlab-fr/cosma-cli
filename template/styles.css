@@ -84,17 +84,9 @@ details[data-sort] .sort-box:not(.active) {
 details>summary {
 	cursor: pointer;
 	font-family: var(--sans);
-	padding: 1rem 0;
+	margin: 1rem 0;
 	font-weight: bold;
 	outline: none;
-	width: calc(300px - 40px);
-}
-
-summary.fixed {
-	position: fixed;
-	top: 0px;
-	left: 20px;
-	background-color: var(--lateral-background-color);
 }
 
 summary + button { margin: 1rem 0; }
@@ -149,16 +141,12 @@ input[type="range"] {
 }
 
 /* ---
-- Texts
+- Others
 --- */
 
 a { color: inherit; }
 
 code { font-family: var(--mono); }
-
-/* ---
-- Tips
---- */
 
 .badge {
 	display: inline-block;
@@ -187,6 +175,12 @@ aside.menu {
 	padding: 0 20px 30px 20px;
 	background-color: var(--lateral-background-color);
 	box-shadow: var(--shadow)
+}
+
+.menu-tags-container,
+.menu-index-list {
+	max-height: 60vh;
+	overflow: scroll;
 }
 
 /* ---
