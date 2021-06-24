@@ -177,12 +177,6 @@ aside.menu {
 	box-shadow: var(--shadow)
 }
 
-.menu-tags-container,
-.menu-index-list {
-	max-height: 60vh;
-	overflow: scroll;
-}
-
 /* ---
 - Logo
 --- */
