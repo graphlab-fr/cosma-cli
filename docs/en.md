@@ -156,7 +156,7 @@ link_types:
 The following parameters define the default value of the graph parameters. Most of these parameters can be changed live in the cosmoscope interface, where you can test different values before setting them in the `config.yml` file: the values set there are restored each time the cosmoscope is reloaded.
 
 ```yaml
-graph_config:
+graph:
   background_color: white
   highlight_color: red
   highlight_on_hover: true
@@ -215,13 +215,13 @@ You can add the following parameters to the configuration file:
 `history`
 : Exports a copy of the cosmoscope and its data to a time-stamped sub-folder of the `history` folder. Value: `true` or `false`. Enabled by default.
 
-`metas`
+`metadata`
 : List of metadata to be used as `meta` tags in the header of the` cosmoscope.html` file. You may use any metadata. When using the `--publish` / `-p` flag on the `modelize` command, some metadata will also be displayed in the interface if they exist: the title replaces the logo at the top of the menu pane; title, author, date and description are displayed in the About pane.
 
 Example:
 
 ```yaml
-metas:
+metadata:
   author: Firstname Lastname
   keywords:
     - Zettelkasten

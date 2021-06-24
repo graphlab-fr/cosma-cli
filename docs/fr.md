@@ -155,7 +155,7 @@ link_types:
 Les paramètres suivants définissent la valeur par défaut des paramètres du graphe. La plupart de ces paramètres peuvent être modifiés en direct dans l'interface du cosmoscope (voir [Graphe](#graphe) plus bas). Vous pouvez tester différentes valeurs avant de les reporter dans le fichier `config.yml` ; les valeurs définies dans le fichier sont rétablies à chaque rechargement du cosmoscope.
 
 ```yaml
-graph_config:
+graph:
   background_color: white
   highlight_color: red
   highlight_on_hover: true
@@ -217,13 +217,13 @@ Vous pouvez ajouter au fichier de configuration les paramètres suivants :
 `history`
 : Exporte une copie du cosmoscope et de ses données dans un sous-dossier horodaté du dossier `history`. Valeur : `true` ou `false`. Activé par défaut.
 
-`metas`
+`metadata`
 : Liste de métadonnées ajoutées sous la forme de balises `meta` dans l'en-tête `<head>` du fichier `cosmoscope.html` et dans le volet « À propos ».
 
 Exemple :
 
 ```yaml
-metas:
+metadata:
   title: Mon cosmoscope
   author: Prénom Nom
   keyword:
