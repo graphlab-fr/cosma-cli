@@ -141,12 +141,16 @@ input[type="range"] {
 }
 
 /* ---
-- Others
+- Texts
 --- */
 
 a { color: inherit; }
 
 code { font-family: var(--mono); }
+
+/* ---
+- Tips
+--- */
 
 .badge {
 	display: inline-block;
@@ -160,6 +164,49 @@ code { font-family: var(--mono); }
 	white-space: nowrap;
 	font-family: var(--mono);
 	color: black;
+}
+
+[data-help] {
+	cursor: pointer;
+	position: relative;
+	font-weight: normal;
+	color: white;
+	margin: 0 1rem;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+}
+
+p [data-help] {
+	margin: unset;
+}
+
+[data-help]::after {
+	content: '?';
+	position: absolute;
+	background-color: var(--cosma-blue);
+	border-radius: 50%;
+	width: 18px;
+	text-align: center;
+}
+
+[data-help]:hover::before {
+	background-color: black;
+	content: attr(data-help);
+	position: absolute;
+	display: block;
+	bottom: 22px;
+	left: -90px;
+	width: 200px;
+	background-color: var(--cosma-blue-dark);
+	border-radius: 2px;
+	padding: 0.8rem;
+	box-shadow: var(--shadow);
+}
+
+[data-help].help-bottom:hover::before {
+	bottom: unset;
+	top: 22px;
 }
 
 /** Menu (left side board)
@@ -240,6 +287,8 @@ aside.menu {
 	width: 7rem;
 	margin-left: 1rem;
 }
+
+.menu-controls-title { font-weight: bold; }
 
 /* ---
 - Footer

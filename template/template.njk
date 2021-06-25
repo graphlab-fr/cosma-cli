@@ -178,7 +178,11 @@
             {% endmacro %}
 
             <article class="menu-controls-container">
-                <p>Attraction</p>
+                <p class="menu-controls-title">
+                    Attraction
+                    <span data-help="Contrôlez la répartition des nœuds dans l’espace, la force de répulsion,
+                        la distance maximum sur laquelle ils se déploient et la pression sur les axes verticaux et horizontaux."></span>
+                </p>
                 {{ inputRange('force', 'attraction.force', 'updateForces()', graph.config.attraction.force, 50, 600, 0.1) }}
                 {{ inputRange('distance max', 'attraction.distance_max', 'updateForces()', graph.config.attraction.distance_max, 0, 800, 0.1) }}
                 {{ inputRange('verticale', 'attraction.verticale', 'updateForces()', graph.config.attraction.verticale, 0, 1, 0.01) }}
@@ -186,13 +190,13 @@
             </article>
 
             <article class="menu-controls-container">
-                <p>Position</p>
+                <p class="menu-controls-title">Position</p>
                 {{ inputRange('x', 'position.x', 'updateForces()', graph.config.position.x, 0, 1, 0.05) }}
                 {{ inputRange('y', 'position.y', 'updateForces()', graph.config.position.y, 0, 1, 0.05) }}
             </article>
 
             <article class="menu-controls-container">
-                <p>Texte</p>
+                <p class="menu-controls-title">Texte</p>
                 {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graph.config.text_size, 5, 15, 0.5) }}
             </article>
         </details>
@@ -363,7 +367,11 @@
         <article id="citation-references" class="record">
             <h1>Données bibliographiques</h1>
 
-            <p>Les données CSL JSON ci-dessous correspondent aux références citées dans ce cosmoscope.</p>
+            <p>
+                Les données CSL JSON
+                <span class="help-bottom" data-help="Données JSON dédiées aux références bibliographiques (auteur, titre, date…) générées via le plugin Zotero Better BibTeX."></span>
+                ci-dessous correspondent aux références citées dans ce cosmoscope.
+            </p>
 
             <button>Télécharger</button>
 
