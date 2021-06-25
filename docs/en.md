@@ -446,6 +446,13 @@ node app modelize --publish
 node app m -p
 ```
 
+You can combine the different export options as follows:
+
+```
+node app modelize --publish --citeproc
+node app m -p -c
+```
+
 The `cosmoscope.html` file is exported to the directory defined by `export_target` in the configuration. If the file already exists in the same location, it is overwritten.
 
 If the `history` parameter is set to `true`, a time-stamped subdirectory (according to the export date, to the second) is also created in the `/history` directory with the following contents:
