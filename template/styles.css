@@ -598,6 +598,23 @@ article#credits h1.metas-title {
 	font-size: 2rem;
 }
 
+/** Help
+------------------------------------------------------------*/
+
+#help td:first-child {
+	font-weight: bold;
+	text-align: right;
+}
+
+#help td {
+	vertical-align: top;
+}
+
+#help tr {
+	border-top: 1px solid var(--border-color);
+	border-bottom: 1px solid var(--border-color);
+}
+
 /** Bibliography references
 ------------------------------------------------------------*/
 
@@ -608,4 +625,6 @@ article#credits h1.metas-title {
 #citation-references code {
 	display: block;
 	word-wrap: break-word;
+	font-size: 1.2rem;
 }
+

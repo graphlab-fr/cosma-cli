@@ -209,6 +209,10 @@
             </span> — 
             {% endif %}
 
+            <span onclick="openRecord('help', false)">
+                Aide
+            </span> —
+
             <span onclick="openRecord('credits', false)">
                 {{ "Fabriqué avec Cosma – À propos" if publishMode else "À propos" }}
             </span>
@@ -301,6 +305,47 @@
             </footer>
         </article>
         {% endfor %}
+        
+        {# Help #}
+        
+        <article id="help" class="record">
+            <main>
+                <h1>Aide</h1>
+                
+                <p><a href="https://hyperotlet.github.io/cosma/fr.html#utilisation-du-cosmoscope" target="_blank">Cliquez ici pour accéder à la documentation de Cosma</a></p>
+                
+                <h2>Raccourcis</h2>
+                
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Espace</td>
+                                <td>Réactiver l'algorithme de dessin du graphe</td>
+                            </tr>
+                            <tr>
+                                <td>S</td>
+                                <td>Déplacer le curseur dans le champ Recherche</td>
+                            </tr>
+                            <tr>
+                                <td>Alt + clic</td>
+                                <td>(sur un type de fiche) Désélectionner les autres types</td>
+                            </tr>
+                            <tr>
+                                <td>R</td>
+                                <td>Réinitialiser le zoom</td>
+                            </tr>
+                            <tr>
+                                <td>F</td>
+                                <td>Passer en mode Focus</td>
+                            </tr>
+                            <tr>
+                                <td>Echap</td>
+                                <td>Fermer la fiche</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </main>
+        </article>
 
         {# Cosma's authors & contributors credits #}
 
@@ -340,8 +385,6 @@
                     <li>Programme ANR <a href="https://hyperotlet.hypotheses.org/">HyperOtlet</a></li>
                 </ul>
 
-                <p><a href="https://hyperotlet.github.io/cosma/" target="_blank">Accéder à la documentation</a></p>
-
                 <dl>
                     <dt><a href="https://d3js.org/" target="_blank">D3 <span class="badge">v4.13.0</span></a></dt>
                     <dd>Mike Bostock (BSD 3-Clause)</dd>
@@ -365,17 +408,17 @@
 
         {% if usedCitationReferences %}
         <article id="citation-references" class="record">
-            <h1>Données bibliographiques</h1>
-
-            <p>
-                Les données CSL JSON
-                <span class="help-bottom" data-help="Citation Style Language exprimé en JSON. Format reconnu notamment par Zotero, Mendeley et Papers."></span>
-                ci-dessous correspondent aux références citées dans ce cosmoscope.
-            </p>
-
-            <button>Télécharger</button>
-
-            <code>{{ usedCitationReferences | dump | escape }}</code>
+            <main>
+                <h1>Données bibliographiques</h1>
+    
+                <p>
+                    Les données ci-dessous correspondent aux références citées dans ce cosmoscope. Elles sont en Citation Style Language, exprimé en JSON. Ce format est reconnu notamment par Zotero, Mendeley et Papers. Cliquez sur le bouton ci-dessous pour télécharger les données.
+                </p>
+    
+                <button>Télécharger</button>
+    
+                <code>{{ usedCitationReferences | dump | escape }}</code>
+            </main>
         </article>
         {% endif %}
 
