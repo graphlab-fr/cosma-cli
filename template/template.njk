@@ -435,7 +435,10 @@
         {% include "scripts/view.js" %}
         {% include "scripts/keyboard.js" %}
         {% include "scripts/counter.js" %}
-        {% include "scripts/dowload.js" %}
+
+        {% if usedCitationReferences %}
+            {% include "scripts/bibliography.js" %}
+        {% endif %}
     </script>
 </body>
 
