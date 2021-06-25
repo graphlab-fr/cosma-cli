@@ -411,7 +411,7 @@ node app modelize --citeproc
 node app modelize -c
 ```
 
-Each citation key is then replaced by a short reference and an entry in the bibliography. All data from all cited references is stored in the cosmoscope as JSON data, into `<code id="used-citation-references">` tag.
+Each citation key is then replaced by a short reference and an entry in the bibliography (placed at the bottom of the cards).
 
 ```
 According to (Le Deuff 2014, p. 22; Perret 2020).
@@ -427,6 +427,8 @@ PERRET, Arthur, 2020. Fonction documentaire de preuve et données numériques. A
 You can change the citation style (default: ISO690-author-date-fr) by replacing the `/template/citeproc/styles.csl` file. Download a new style from the [Zotero database](https://www.zotero.org/styles).
 
 You can change the translation of the keywords of the bibliographic record (default: French) by replacing the file `/template/citeproc/locales.xml`. Download a new translation from the [CSL database](https://github.com/citation-style-language/locales/tree/6b0cb4689127a69852f48608b6d1a879900f418b).
+
+All data for all cited references is stored in the cosmoscope as JSON data, into the `<article id="citation-references">` record. You can find and download this data by clicking on the 'Data' link at the bottom of the left side menu.
 
 ## Exporting
 
@@ -650,6 +652,7 @@ Below you will find a complete description of the software's tree structure, all
 ├── template/               | 
 │   ├── libs/               | JavaScript libraries
 │   ├── scripts/            | cosmoscope functions
+│   │   ├── bibliography.js | download bibliographic data
 │   │   ├── counter.js      | activate entity counters
 │   │   ├── filter.js       | apply filters
 │   │   ├── focus.js        | apply focus

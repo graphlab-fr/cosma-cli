@@ -414,7 +414,7 @@ node app modelize --citeproc
 node app modelize -c
 ```
 
-Chaque clé de citation est alors remplacée par une courte référence et une entrée dans la bibliographie. Toutes les données de toutes les références citées sont enregistrée dans le cosmoscope sous forme de données JSON, au sein de la balise `<code id="used-citation-references">`.
+Chaque clé de citation est alors remplacée par une courte référence et une entrée dans la bibliographie (placée au bas des fiches).
 
 ```
 D'après les références (Le Deuff 2014, p. 22; Perret 2020).
@@ -430,6 +430,8 @@ PERRET, Arthur, 2020. Fonction documentaire de preuve et données numériques. A
 Vous pouvez modifier le style de citation (par défaut : ISO690-author-date-fr) en remplaçant le fichier `/template/citeproc/styles.csl`. Téléchargez un nouveau style depuis la [base de données de Zotero](https://www.zotero.org/styles).
 
 Vous pouvez modifier la traduction des mots-clés de la notice bibliographique (par défaut : français) en remplaçant le fichier `/template/citeproc/locales.xml`. Téléchargez une nouvelle traduction depuis la [base de donnée CSL](https://github.com/citation-style-language/locales/tree/6b0cb4689127a69852f48608b6d1a879900f418b).
+
+Toutes les données de toutes les références citées sont enregistrée dans le cosmoscope sous forme de données JSON, au sein de la fiche `<article id="citation-references">`. Vous pouvez retrouver et télécharger ces données en cliquant sur le lien « Données », au bas du menu.
 
 ## Export
 
@@ -652,6 +654,7 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 ├── template/               | 
 │   ├── libs/               | bibliothèques JavaScript
 │   ├── scripts/            | fonctions du cosmoscope
+│   │   ├── bibliography.js | téléchargement des données bibliographiques
 │   │   ├── counter.js      | actualiser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
