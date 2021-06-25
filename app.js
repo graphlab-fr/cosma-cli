@@ -11,11 +11,16 @@ require('./functions/verifconfig');
  * node app <command name> <argument1 argument2 …>
  */
 
-const cmdEntries = process.argv.slice(2)
-    , requestName = cmdEntries[0] // = "command name"
-    , requestArgs = cmdEntries.slice(1); // = ["argument1", "argument2", …]
+const cmdEntries = process.argv.slice(2);
 
-switch (requestName) {
+process.argv = {
+    requestName: cmdEntries[0], // = "command name"
+    requestArgs: cmdEntries.slice(1) // = ["argument1", "argument2", …]
+}
+
+const arg = process.argv.requestArgs;
+
+switch (process.argv.requestName) {
 
     /** Actions
     --------------------*/
@@ -35,18 +40,18 @@ switch (requestName) {
     case 'r': require('./functions/record'); break;
     case 'record': require('./functions/record'); break;
 
-    case 'a': require('./functions/autorecord').genMdFile(requestArgs[0], requestArgs[1], requestArgs[2]); break;
-    case 'autorecord': require('./functions/autorecord').genMdFile(requestArgs[0], requestArgs[1], requestArgs[2]); break;
+    case 'a': require('./functions/autorecord').genMdFile(arg[0], arg[1], arg[2]); break;
+    case 'autorecord': require('./functions/autorecord').genMdFile(arg[0], arg[1], arg[2]); break;
 
     /** Configuration
     --------------------*/
 
     case 'import':
-        require('./functions/verifconfig').modifyImportPath(requestArgs[0]);
+        require('./functions/verifconfig').modifyImportPath(arg[0]);
     break;
 
     case 'export':
-        require('./functions/verifconfig').modifyExportPath(requestArgs[0]);
+        require('./functions/verifconfig').modifyExportPath(arg[0]);
     break;
 
     case 'css':
@@ -54,11 +59,11 @@ switch (requestName) {
     break;
 
     case 'atype':
-        require('./functions/verifconfig').addRecordType(requestArgs[0], requestArgs[1]);
+        require('./functions/verifconfig').addRecordType(arg[0], arg[1]);
     break;
 
     case 'aview':
-        require('./functions/verifconfig').addView(requestArgs[0], requestArgs[1]);
+        require('./functions/verifconfig').addView(arg[0], arg[1]);
     break;
 
     /** Defaults

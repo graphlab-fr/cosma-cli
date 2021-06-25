@@ -13,9 +13,9 @@ let library = false // if no path to JSON library file
     , citeproc
     , xmlLocal = './template/citeproc/locales.xml';
 
-const flag = process.argv[3]; // terminal request argument
-
-if (flag === '--citeproc' || flag === '-c') {
+if (process.argv.requestArgs.includes('--citeproc')
+    || process.argv.requestArgs.includes('-c'))
+{
     if (config.bibliography && config.csl
         && fs.existsSync(config.bibliography) && fs.existsSync(config.csl)
         && fs.existsSync(xmlLocal))
