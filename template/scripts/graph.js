@@ -139,7 +139,7 @@ elts.circles = elts.nodes.append("circle")
 
         let nodesIdsHovered = [nodeMetas.id];
 
-        const linksToModif = link.filter(function(link) {
+        const linksToModif = elts.links.filter(function(link) {
             if (link.source.id === nodeMetas.id || link.target.id === nodeMetas.id) {
                 nodesIdsHovered.push(link.source.id, link.target.id);
                 return false;
@@ -147,21 +147,21 @@ elts.circles = elts.nodes.append("circle")
             return true;
         })
 
-        const nodesToModif = node.filter(function(node) {
+        const nodesToModif = elts.nodes.filter(function(node) {
             if (nodesIdsHovered.includes(node.id)) {
                 return false;
             }
             return true;
         })
 
-        const linksHovered = link.filter(function(link) {
+        const linksHovered = elts.links.filter(function(link) {
             if (link.source.id !== nodeMetas.id && link.target.id !== nodeMetas.id) {
                 return false;
             }
             return true;
         })
 
-        const nodesHovered = node.filter(function(node) {
+        const nodesHovered = elts.nodes.filter(function(node) {
             if (!nodesIdsHovered.includes(node.id)) {
                 return false;
             }
@@ -176,10 +176,10 @@ elts.circles = elts.nodes.append("circle")
     .on('mouseout', function() {
         if (!graphProperties.highlight_on_hover) { return; }
 
-        node.classed('hover', false);
-        node.classed('translucent', false);
-        link.classed('hover', false);
-        link.classed('translucent', false);
+        elts.nodes.classed('hover', false);
+        elts.nodes.classed('translucent', false);
+        elts.links.classed('hover', false);
+        elts.links.classed('translucent', false);
     });
 
 elts.labels = elts.nodes.append("text")
@@ -217,12 +217,14 @@ elts.labels = elts.nodes.append("text")
  */
 
 function getNodeNetwork(nodeIds) {
-    const diplayedNodes = data.nodes.filter(item => item.hidden === false)
+    const diplayedNodes = elts.nodes
+        .filter(item => item.hidden === false)
+        .data()
         .map(item => item.id);
 
-    const nodes = node.filter(node => nodeIds.includes(node.id));
+    const nodes = elts.nodes.filter(node => nodeIds.includes(node.id));
 
-    const links = link.filter(function(link) {
+    const links = elts.links.filter(function(link) {
         if (!nodeIds.includes(link.source.id) && !nodeIds.includes(link.target.id)) {
             return false; }
         if (!diplayedNodes.includes(link.source.id) || !diplayedNodes.includes(link.target.id)) {
@@ -243,7 +245,7 @@ function getNodeNetwork(nodeIds) {
  */
 
 function zoomToNode(nodeId) {
-    const nodeToZoomMetas = node.filter(node => node.id === nodeId).datum()
+    const nodeToZoomMetas = elts.nodes.filter(node => node.id === nodeId).datum()
         , zoom = 2
         , recordWidth = recordContainer.offsetWidth;
 
@@ -337,9 +339,9 @@ window.unlightNodes = unlightNodes;
 
 function linksDisplayToggle(isChecked) {
     if (isChecked) {
-        link.style('display', null);
+        elts.links.style('display', null);
     } else {
-        link.style('display', 'none');
+        elts.links.style('display', 'none');
     }
 }
 
@@ -352,9 +354,9 @@ window.linksDisplayToggle = linksDisplayToggle;
 
 function labelDisplayToggle(isChecked) {
     if (isChecked) {
-        labels.style('display', null);
+        elts.labels.style('display', null);
     } else {
-        labels.style('display', 'none');
+        elts.labels.style('display', 'none');
     }
 }
 
@@ -366,7 +368,7 @@ window.labelDisplayToggle = labelDisplayToggle;
  */
 
 function labelHighlight(nodeIds) {
-    const labelsToHighlight = node
+    const labelsToHighlight = elts.nodes
         .filter(node => nodeIds.includes(node.id)).select('text');
 
     data.nodes = data.nodes.map(function(node) {
@@ -386,7 +388,7 @@ window.labelHighlight = labelHighlight;
  */
 
 function labelUnlight(nodeIds) {
-    const labelsToHighlight = node
+    const labelsToHighlight = elts.nodes
         .filter(node => nodeIds.includes(node.id)).select('text');
 
     data.nodes = data.nodes.map(function(node) {
@@ -410,7 +412,7 @@ function labelUnlightAll() {
         return node;
     });
 
-    labels.classed('highlight', false);
+    elts.labels.classed('highlight', false);
 }
 
 window.labelUnlightAll = labelUnlightAll;
