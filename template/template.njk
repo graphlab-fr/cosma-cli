@@ -206,16 +206,16 @@
             <span onclick="openRecord('citation-references', false)"
                 class="bibliography-open" title="Données bibliographiques">
                 Données
-            </span> — 
+            </span>
             {% endif %}
 
             <span onclick="openRecord('help', false)">
                 Aide
-            </span> —
-
-            <span onclick="openRecord('credits', false)">
-                {{ "Fabriqué avec Cosma – À propos" if publishMode else "À propos" }}
             </span>
+
+            <div class="about" onclick="openRecord('credits', false)">
+                {{ "Fabriqué avec Cosma - À propos" if publishMode else "À propos" }}
+            </div>
         </footer>
     </aside>
 

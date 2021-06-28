@@ -157,12 +157,12 @@ function registerTags(fileTagList, fileId) {
  * and the 'metas' from config is not undefined
  * @returns {boolean}
  */
-console.log(process.argv.requestArgs);
+
 function puslishModeIsActive() {
-    if (process.argv.requestArgs.includes('--publish')
-        || process.argv.requestArgs.includes('-p'))
+    if (!process.argv.requestArgs.includes('--publish')
+        && !process.argv.requestArgs.includes('-p'))
     {
-        return true;
+        return false;
     }
 
     if (config.metadata !== undefined) {
