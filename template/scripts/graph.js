@@ -1,5 +1,5 @@
 /**
- * @file Generate nodes, labels & links for graph. Highlight, hide & display nodes & links. Set mouse events.
+ * @file Generate nodes, labels & links for graph. Highlight, hide & display nodes & links. Set mouse graph events.
  * @author Guillaume Brioudes
  * @copyright MIT License ANR HyperOtlet
  */
@@ -31,7 +31,7 @@ const simulation = d3.forceSimulation(data.nodes)
     .force("forceX", d3.forceX())
     .force("forceY", d3.forceY());
 
-function updateForces() {
+window.updateForces = function () {
     // get each force by name and update the properties
 
     simulation.force("charge")
@@ -58,8 +58,6 @@ function updateForces() {
 }
 
 updateForces();
-
-window.updateForces = updateForces;
 
 simulation
     .on("tick", function() {
@@ -210,6 +208,9 @@ elts.labels = elts.nodes.append("text")
     .attr('dominant-baseline', 'middle')
     .attr('text-anchor', 'middle');
 
+/** Functions
+------------------------------------------------------------*/
+
 /**
  * Get nodes and their links
  * @param {array} nodeIds - List of nodes ids
@@ -240,11 +241,93 @@ function getNodeNetwork(nodeIds) {
 }
 
 /**
+ * Hide some nodes & their links, by their id
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+window.hideNodes = function (nodeIds) {
+    let nodesToHideIds
+        , data = elts.nodes.data();
+
+    nodesToHideIds = elts.nodes.filter(function(item) {
+        if (nodeIds.includes(item.id) && item.hidden === false) {
+            return true;
+        }
+    });
+
+    if (view.focusMode) {
+        nodesToHideIds = nodesToHideIds.filter(function(item) {
+            if (item.isolated === true) {
+                return true;
+            }
+        })
+    }
+
+    nodesToHideIds = nodesToHideIds
+        .data()
+        .map(node => node.id);
+
+    hideNodeNetwork(nodesToHideIds);
+    hideFromIndex(nodesToHideIds);
+
+    elts.nodes.data(
+        data.map(function(node) {
+            if (nodesToHideIds.includes(node.id)) {
+                node.hidden = true;
+            }
+
+            return node;
+        })
+    );
+}
+
+/**
+ * Display some nodes & their links, by their id
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+window.displayNodes = function (nodeIds) {
+    let nodesToDisplayIds
+        , data = elts.nodes.data();
+
+    nodesToDisplayIds = elts.nodes.filter(function(item) {
+        if (nodeIds.includes(item.id) && item.hidden === true) {
+            return true;
+        }
+    });
+
+    if (view.focusMode) {
+        nodesToDisplayIds = nodesToDisplayIds.filter(function(item) {
+            if (item.isolated === true) {
+                return true;
+            }
+        })
+    }
+
+    nodesToDisplayIds = nodesToDisplayIds
+        .data()
+        .map(node => node.id);
+
+    elts.nodes.data(
+        data.map(function(node) {
+            if (nodesToDisplayIds.includes(node.id)) {
+                node.hidden = false;
+            }
+
+            return node;
+        })
+    );
+
+    displayNodeNetwork(nodesToDisplayIds);
+    displayFromIndex(nodesToDisplayIds);
+}
+
+/**
  * Zoom to a node from its coordinates
  * @param {number} nodeId
  */
 
-function zoomToNode(nodeId) {
+window.zoomToNode = function (nodeId) {
     const nodeToZoomMetas = elts.nodes.filter(node => node.id === nodeId).datum()
         , zoom = 2
         , recordWidth = recordContainer.offsetWidth;
@@ -269,42 +352,36 @@ function zoomToNode(nodeId) {
     translate();
 }
 
-window.zoomToNode = zoomToNode;
-
 /**
  * Display none nodes and their link
  * @param {array} nodeIds - List of nodes ids
  */
 
-function hideNodeNetwork(nodeIds) {
+window.hideNodeNetwork = function (nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
     ntw.nodes.style('display', 'none');
     ntw.links.style('display', 'none');
 }
 
-window.hideNodeNetwork = hideNodeNetwork;
-
 /**
  * Reset display nodes and their link
  * @param {array} nodeIds - List of nodes ids
  */
 
-function displayNodeNetwork(nodeIds) {
+window.displayNodeNetwork = function (nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
     ntw.nodes.style('display', null);
     ntw.links.style('display', null);
 }
 
-window.displayNodeNetwork = displayNodeNetwork;
-
 /**
  * Apply highlightColor (from config) to somes nodes and their links
  * @param {array} nodeIds - List of nodes ids
  */
 
-function highlightNodes(nodeIds) {
+window.highlightNodes = function (nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
     ntw.nodes.classed('highlight', true);
@@ -313,13 +390,11 @@ function highlightNodes(nodeIds) {
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
 }
 
-window.highlightNodes = highlightNodes;
-
 /**
  * remove highlightColor from all highlighted nodes and their links
  */
 
-function unlightNodes() {
+window.unlightNodes = function() {
     if (view.highlightedNodes.length === 0) { return; }
 
     const ntw = getNodeNetwork(view.highlightedNodes);
@@ -330,14 +405,12 @@ function unlightNodes() {
     view.highlightedNodes = [];
 }
 
-window.unlightNodes = unlightNodes;
-
 /**
  * Toggle display/hide nodes links
  * @param {bool} isChecked - 'checked' value send by a checkbox input
  */
 
-function linksDisplayToggle(isChecked) {
+window.linksDisplayToggle = function (isChecked) {
     if (isChecked) {
         elts.links.style('display', null);
     } else {
@@ -345,14 +418,12 @@ function linksDisplayToggle(isChecked) {
     }
 }
 
-window.linksDisplayToggle = linksDisplayToggle;
-
 /**
  * Toggle display/hide nodes label
  * @param {bool} isChecked - 'checked' value send by a checkbox input
  */
 
-function labelDisplayToggle(isChecked) {
+window.labelDisplayToggle = function (isChecked) {
     if (isChecked) {
         elts.labels.style('display', null);
     } else {
@@ -360,14 +431,12 @@ function labelDisplayToggle(isChecked) {
     }
 }
 
-window.labelDisplayToggle = labelDisplayToggle;
-
 /**
  * Add 'highlight' class to texts linked to nodes ids
  * @param {array} nodeIds - List of node ids
  */
 
-function labelHighlight(nodeIds) {
+window.labelHighlight = function (nodeIds) {
     const labelsToHighlight = elts.nodes
         .filter(node => nodeIds.includes(node.id)).select('text');
 
@@ -380,14 +449,12 @@ function labelHighlight(nodeIds) {
     labelsToHighlight.classed('highlight', true);
 }
 
-window.labelHighlight = labelHighlight;
-
 /**
  * Remove 'highlight' class from texts linked to nodes ids
  * @param {array} nodeIds - List of node ids
  */
 
-function labelUnlight(nodeIds) {
+window.labelUnlight = function (nodeIds) {
     const labelsToHighlight = elts.nodes
         .filter(node => nodeIds.includes(node.id)).select('text');
 
@@ -400,13 +467,11 @@ function labelUnlight(nodeIds) {
     labelsToHighlight.classed('highlight', false);
 }
 
-window.labelUnlight = labelUnlight;
-
 /**
  * Remove 'highlight' class from all texts
  */
 
-function labelUnlightAll() {
+window.labelUnlightAll = function () {
     data.nodes = data.nodes.map(function(node) {
         node.highlighted = false;
         return node;
@@ -414,7 +479,5 @@ function labelUnlightAll() {
 
     elts.labels.classed('highlight', false);
 }
-
-window.labelUnlightAll = labelUnlightAll;
 
 })();
