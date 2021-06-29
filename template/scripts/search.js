@@ -19,7 +19,7 @@ searchInput.addEventListener('focus', () => {
     keyboardShortcutsAreWorking = false; // unactive all letters shortcuts
 
     // initialize search engine with no hidden nodes
-    const fuse = new Fuse(graph.nodes.filter(item => item.hidden === false), {
+    const fuse = new Fuse(data.nodes.filter(item => item.hidden === false), {
         includeScore: false,
         keys: ['label'] // search field from nodes metas
     });
