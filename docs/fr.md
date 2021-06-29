@@ -505,6 +505,10 @@ Si le [paramètre `highlight_on_hover` est activé](#parametres-du-graphe), surv
 
 Vous pouvez **zoomer** dans le graphe à la souris, au pavé tactile, en double cliquant sur le fond du graphe ou bien avec les boutons dédiés situés en bas à gauche. Le bouton Recentrer (raccourci : touche `R`) réinitialise le zoom.
 
+::: astuce
+Le raccourcis clavier (sur la touche) `C` vous permet de zoomer sur le nœud sélectionné.
+:::
+
 Les nœuds sont organisés dans l'espace par un algorithme de simulation de forces. Une barre colorée sous le logo Cosma témoigne de l'état de la simulation. Cliquez dessus (raccourci : touche `Espace`) pour lancer un cycle de simulation supplémentaire.
 
 ::: astuce
@@ -543,6 +547,8 @@ En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (
 ## Mode focus
 
 Le bouton Activer le focus (raccourci : touche `F`) situé en bas à gauche du graphe permet de restreindre l'affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l'interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.
+
+Une fois le mode focus activé, vous zoomez automatiquement sur le nœud sélectionné.
 
 Le curseur qui apparaît sous le bouton Activer le focus permet de faire varier la distance d'affichage, jusqu'au maximum permis par le paramètre `focus_max` dans la configuration.
 

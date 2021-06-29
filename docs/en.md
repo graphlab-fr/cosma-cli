@@ -502,6 +502,10 @@ If `highlight_on_hover` is set to `true`, hovering over a node temporarily highl
 
 You can zoom into the graph with a mouse or touchpad, by double-clicking on the graph background or with the dedicated buttons at the bottom left. The Refocus button (shortcut: `R` key) resets the zoom.
 
+::: tip
+The keyboard shortcut (on the key) `C` allows you to zoom in on the selected node.
+:::
+
 The nodes' positions are set by a force-based layout algorithm. A coloured bar under the Cosma logo indicates the status of the simulation. Click on it (shortcut: `Space` key) to restart the simulation.
 
 ::: tip
@@ -541,6 +545,8 @@ At the bottom of the record is a list of the records to which it refers (outgoin
 ## Focus mode
 
 The Focus button (shortcut: `F` key) at the bottom left of the graph allows you to restrict the display to the selected record and its direct connections. Focus mode only works if you have selected a record.
+
+At the focus mode activation, you automatically zoom in on the selected node.
 
 The slider under the Focus button allows you to increase and decrease the focus' range, i.e. the distance up to which connections are displayed. The maximum range is defined by the value of the `focus_max` parameter in the configuration.
 

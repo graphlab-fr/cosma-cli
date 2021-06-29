@@ -32,6 +32,12 @@ document.onkeydown = (e) => {
                 zoomReset();
                 return;
 
+            case 'c':
+                e.preventDefault();
+                if (view.openedRecordId !== undefined && Number(view.openedRecordId) !== NaN) {
+                    zoomToNode(Number(view.openedRecordId)); }
+                return;
+
             case 'f':
                 e.preventDefault();
 
