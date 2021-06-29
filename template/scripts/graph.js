@@ -31,6 +31,10 @@ const simulation = d3.forceSimulation(data.nodes)
     .force("forceX", d3.forceX())
     .force("forceY", d3.forceY());
 
+simulation.force("center")
+    .x(width * 0.5)
+    .y(height * 0.5);
+
 window.updateForces = function () {
     // get each force by name and update the properties
 
@@ -39,19 +43,11 @@ window.updateForces = function () {
         .strength(-Math.abs(graphProperties.attraction.force))
         .distanceMax(graphProperties.attraction.distance_max);
 
-    simulation.force("center")
-        .x(width * graphProperties.position.x)
-        .y(height * graphProperties.position.y);
-
     simulation.force("forceX")
         .strength(graphProperties.attraction.horizontale)
 
     simulation.force("forceY")
         .strength(graphProperties.attraction.verticale)
-
-    simulation.force("link")
-        .id((d) => d.id)
-        .links(data.links);
 
     // restarts the simulation
     simulation.alpha(1).restart();
@@ -447,6 +443,14 @@ window.labelHighlight = function (nodeIds) {
     });
 
     labelsToHighlight.classed('highlight', true);
+}
+
+/**
+ * Change the font size of graph labels
+ */
+
+window.updateFontsize = function () {
+    elts.labels.attr('font-size', graphProperties.text_size);
 }
 
 /**

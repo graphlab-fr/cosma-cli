@@ -22,7 +22,6 @@ const baseConfig = {
         highlight_color: 'red',
         highlight_on_hover: true,
         text_size: 10,
-        position: { x: 5, y: 5 },
         attraction: { force: -50, distance_max: 250, verticale: 0, horizontale: 0 },
         arrows: false
     }

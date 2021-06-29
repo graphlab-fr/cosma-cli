@@ -190,14 +190,8 @@
             </article>
 
             <article class="menu-controls-container">
-                <p class="menu-controls-title">Position</p>
-                {{ inputRange('x', 'position.x', 'updateForces()', graph.config.position.x, 0, 1, 0.05) }}
-                {{ inputRange('y', 'position.y', 'updateForces()', graph.config.position.y, 0, 1, 0.05) }}
-            </article>
-
-            <article class="menu-controls-container">
                 <p class="menu-controls-title">Texte</p>
-                {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graph.config.text_size, 5, 15, 0.5) }}
+                {{ inputRange('taille', 'text_size', 'updateFontsize()', graph.config.text_size, 5, 15, 0.5) }}
             </article>
         </details>
 
