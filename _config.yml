@@ -1,0 +1,50 @@
+files_origin: 'D:\nuage\Boite a fiche\'
+# files_origin: 'D:\telechargements\fiche_test2\'
+# files_origin: 'D:\telechargements\test_citation\'
+export_target: 'D:\telechargements\'
+# bibliography: 'D:\telechargements\test_citation\bib.json'
+# csl: './template/citeproc/styles.csl'
+minify: false
+custom_css: true
+history: false
+metadata:
+  title: Myllaume wiki
+  author: Guillaume Brioudes
+  keywords:
+    - architecture logicielle
+    - processus de développement
+    - documentation numérique et graphique
+  description: >-
+    Fiches sur le développement logiciel dans le domaine de la gestion de la
+    connaissance
+  url: 'https://dev.myllaume.fr/cosmoscope.html'
+focus_max: 1
+record_types:
+  undefined: grey
+  documentation: '#714eb3'
+  architecture: '#5286da'
+  programmation: '#6dbb5b'
+  inscription: '#ebe051'
+  processus: '#f98d52'
+  modélisation: '#e14e65'
+link_types:
+  undefined:
+    stroke: simple
+    color: 'rgb(225, 225, 225)'
+graph:
+  background_color: white
+  highlight_color: '#c0392b'
+  highlight_on_hover: true
+  text_size: 7
+  position:
+    x: 0.5
+    'y': 0.5
+  attraction:
+    force: 380
+    distance_max: 500
+    verticale: 0.1
+    horizontale: 0
+  arrows: false
+views:
+  test: >-
+    eyJyZWNvcmRJZCI6MjAyMDA2MjIxNjQ2MDgsImZpbHRlcnMiOlsiYXJjaGl0ZWN0dXJlIiwicHJvZ3JhbW1hdGlvbiIsImluc2NyaXB0aW9uIiwicHJvY2Vzc3VzIiwidW5kZWZpbmVkIiwibW9k6Wxpc2F0aW9uIl19

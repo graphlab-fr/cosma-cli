@@ -190,14 +190,8 @@
             </article>
 
             <article class="menu-controls-container">
-                <p class="menu-controls-title">Position</p>
-                {{ inputRange('x', 'position.x', 'updateForces()', graph.config.position.x, 0, 1, 0.05) }}
-                {{ inputRange('y', 'position.y', 'updateForces()', graph.config.position.y, 0, 1, 0.05) }}
-            </article>
-
-            <article class="menu-controls-container">
                 <p class="menu-controls-title">Texte</p>
-                {{ inputRange('taille', 'text_size', 'updateGraphTextSize()', graph.config.text_size, 5, 15, 0.5) }}
+                {{ inputRange('taille', 'text_size', 'updateFontsize()', graph.config.text_size, 5, 15, 0.5) }}
             </article>
         </details>
 
@@ -433,7 +427,7 @@
     ========================================= #}
 
     <div class="graph-wrapper" style="background-color: {{ graph.config.background_color }}">
-        <svg id="graph_canvas">
+        <svg id="graph-canvas">
             <defs>
                 <marker id="arrow" viewBox="0 0 10 10" refX="22" refY="5" markerUnits="strokeWidth" markerWidth="7" markerHeight="7" orient="auto">
                     <path d="M 0 0 L 10 5 L 0 10 z"></path>
@@ -468,7 +462,7 @@
     {# Cosma data #}
 
     <script>
-        const graph = {{ graph.data | safe }};
+        const data = {{ graph.data | safe }};
         const graphProperties = {{ graph.config | dump | safe }};
         const tagList = {{ tags | dump | safe }};
     </script>
@@ -483,7 +477,6 @@
         {% include "scripts/search.js" %}
         {% include "scripts/filter.js" %}
         {% include "scripts/focus.js" %}
-        {% include "scripts/nodes.js" %}
         {% include "scripts/tag.js" %}
         {% include "scripts/index.js" %}
         {% include "scripts/record.js" %}

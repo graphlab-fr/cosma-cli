@@ -487,12 +487,27 @@ main.record-container:not(.active) {
 	right: 0;
 	height: 100vh;
 	width: calc(100vw - 30rem);
+
+	/* display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100vh;
+	width: calc(100vw - 30rem);
+	padding-bottom: 100%;
+	vertical-align: top;
+	overflow: hidden; */
 }
 
-#graph_canvas {
+#graph-canvas {
 	cursor: move;
 	width: 100%;
 	height: 100%;
+
+	/* display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0; */
 }
 
 /* ---

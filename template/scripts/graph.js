@@ -1,62 +1,42 @@
 /**
- * @file Generate nodes, labels & links for graph. Highlight, hide & display nodes & links. Set mouse events.
+ * @file Generate nodes, labels & links for graph. Highlight, hide & display nodes & links. Set mouse graph events.
  * @author Guillaume Brioudes
  * @copyright MIT License ANR HyperOtlet
  */
 
 (function() {
 
-let link, node, circles, labels
-    , simulation = d3.forceSimulation()
-    , width = +svg.node().getBoundingClientRect().width
-    , height = +svg.node().getBoundingClientRect().height;
+/** Graph space
+------------------------------------------------------------*/
 
-d3.select(window).on("resize", function () {
-    width = +svg.node().getBoundingClientRect().width;
-    height = +svg.node().getBoundingClientRect().height;
-    updateForces();
-});
+window.svg = d3.select("#graph-canvas");
 
-initializeDisplay();
-initializeSimulation();
+let svgSize = svg.node().getBoundingClientRect();
 
-/**
- * Set up the simulation and event to update locations after each tick
- */
+const width = svgSize.width;
+const height = svgSize.height;
 
-function initializeSimulation() {
-    simulation.nodes(graph.nodes);
-    initializeForces();
-    simulation.on("tick", ticked);
-}
+svg
+    .attr("viewBox", [0, 0, width, height])
+    .attr("preserveAspectRatio", "xMinYMin meet");
 
-/**
- * Set the forces to the simulation
- */
+/** Force simulation
+------------------------------------------------------------*/
 
-function initializeForces() {
-    // add forces and associate each with a name
-    simulation
-        .force("link", d3.forceLink())
-        .force("charge", d3.forceManyBody())
-        .force("collide", d3.forceCollide())
-        .force("center", d3.forceCenter())
-        .force("forceX", d3.forceX())
-        .force("forceY", d3.forceY());
-    // apply properties to each of the forces
-    updateForces();
-}
+const simulation = d3.forceSimulation(data.nodes)
+    .force("link", d3.forceLink(data.links).id(d => d.id))
+    .force("charge", d3.forceManyBody())
+    // .force("collide", d3.forceCollide())
+    .force("center", d3.forceCenter())
+    .force("forceX", d3.forceX())
+    .force("forceY", d3.forceY());
 
-/**
- * Update the forces to the simulation
- */
+simulation.force("center")
+    .x(width * 0.5)
+    .y(height * 0.5);
 
-function updateForces() {
+window.updateForces = function () {
     // get each force by name and update the properties
-
-    simulation.force("center")
-        .x(width * graphProperties.position.x)
-        .y(height * graphProperties.position.y);
 
     simulation.force("charge")
         // turn force value to negative number
@@ -69,177 +49,163 @@ function updateForces() {
     simulation.force("forceY")
         .strength(graphProperties.attraction.verticale)
 
-    simulation.force("link")
-        .id((d) => d.id)
-        .links(graph.links);
-
     // restarts the simulation
     simulation.alpha(1).restart();
 }
 
-window.updateForces = updateForces;
+updateForces();
 
-function updateGraphTextSize() {
-    node.selectAll("text")
-        .attr('font-size', graphProperties.text_size);
-}
+simulation
+    .on("tick", function() {
+        elts.links
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
 
-window.updateGraphTextSize = updateGraphTextSize;
-
-/**
- * Initialize visualisation
- */
-
-function initializeDisplay() {
-
-    // set the data and properties of link lines
-    link = svg.append("g")
-        .attr("class", "links")
-        .selectAll("line")
-        .data(graph.links)
-        .enter().append("line");
-
-    // set the data and properties of node circles
-    node = svg.append("g")
-        .attr("class", "nodes")
-        .selectAll("g")
-        .data(graph.nodes)
-        .enter().append("g")
-        .attr("data-node", (d) => d.id)
-        .on('click', function(nodeMetas) {
-            openRecord(nodeMetas.id);
-        })
-
-    circles = node.append("circle")
-        .attr("r", (d) => d.size)
-        .attr("class", (d) => "n_" + d.type)
-        .call(d3.drag()
-            .on("start", function(d) {
-                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                d.fx = d.x;
-                d.fy = d.y; })
-            .on("drag", function(d) {
-                d.fx = d3.event.x;
-                d.fy = d3.event.y; })
-            .on("end", function(d) {
-                if (!d3.event.active) simulation.alphaTarget(0.0001);
-                d.fx = null;
-                d.fy = null; })
-        )
-        .on('mouseenter', function(nodeMetas) {
-            if (!graphProperties.highlight_on_hover) { return; }
-
-            let nodesIdsHovered = [nodeMetas.id];
-
-            const linksToModif = link.filter(function(link) {
-                if (link.source.id === nodeMetas.id || link.target.id === nodeMetas.id) {
-                    nodesIdsHovered.push(link.source.id, link.target.id);
-                    return false;
-                }
-                return true;
-            })
-
-            const nodesToModif = node.filter(function(node) {
-                if (nodesIdsHovered.includes(node.id)) {
-                    return false;
-                }
-                return true;
-            })
-
-            const linksHovered = link.filter(function(link) {
-                if (link.source.id !== nodeMetas.id && link.target.id !== nodeMetas.id) {
-                    return false;
-                }
-                return true;
-            })
-
-            const nodesHovered = node.filter(function(node) {
-                if (!nodesIdsHovered.includes(node.id)) {
-                    return false;
-                }
-                return true;
-            })
-
-            nodesHovered.classed('hover', true);
-            linksHovered.classed('hover', true);
-            nodesToModif.classed('translucent', true);
-            linksToModif.classed('translucent', true);
-        })
-        .on('mouseout', function() {
-            if (!graphProperties.highlight_on_hover) { return; }
-
-            node.classed('hover', false);
-            node.classed('translucent', false);
-            link.classed('hover', false);
-            link.classed('translucent', false);
-        })
-
-    labels = node.append("text")
-        .each(function(d) {
-            const words = d.label.split(' ')
-                , max = 25
-                , text = d3.select(this);
-            let label = '';
-
-            for (let i = 0; i < words.length; i++) {
-                // combine words and seperate them by a space caracter into label
-                label += words[i] + ' ';
-
-                // if label (words combination) is longer than max & not the single iteration
-                if (label.length < max && i !== words.length - 1) { continue; }
-
-                text.append("tspan")
-                    .attr('x', 0)
-                    .attr('dy', '1.2em')
-                    .text(label.slice(0, -1)); // remove last space caracter
+        elts.nodes.attr("transform", function(d) {
+            d.x = Math.max(d.size, Math.min(width - d.size, d.x));
+            d.y = Math.max(d.size, Math.min(height - d.size, d.y));
     
-                label = '';
-            }
-        })
-        .attr('font-size', graphProperties.text_size)
-        .attr('x', 0)
-        .attr('y', (d) => d.size)
-        .attr('dominant-baseline', 'middle')
-        .attr('text-anchor', 'middle');
-
-    link.attr("class", (d) => 'l_' + d.type)
-        .attr("data-source", (d) => d.source)
-        .attr("data-target", (d) => d.target)
-        .attr("stroke-dasharray", function(d) {
-            if (d.shape.stroke === 'dash' || d.shape.stroke === 'dotted') {
-                return d.shape.dashInterval }
-            return false;
-        })
-        .attr("filter", function(d) {
-            if (d.shape.stroke === 'double') {
-                return 'url(#double)' }
-            return false;
+            return "translate(" + d.x + "," + d.y + ")";
         });
 
-    if (graphProperties.arrows === true) {
-        link.attr("marker-end", 'url(#arrow)');
-    }
-}
+        d3.select('#load-bar-value')
+            .style('flex-basis', (simulation.alpha() * 100) + '%');
+    });
 
-/**
- * Update elements position
- */
+/** Elements
+------------------------------------------------------------*/
 
- function ticked() {
-    link.attr("x1", (d) => d.source.x)
-        .attr("y1", (d) => d.source.y)
-        .attr("x2", (d) => d.target.x)
-        .attr("y2", (d) => d.target.y);
+const elts = {};
 
-    node.attr("transform", function(d) {
-        d.x = Math.max(d.size, Math.min(width - d.size, d.x));
-        d.y = Math.max(d.size, Math.min(height - d.size, d.y));
-
-        return "translate(" + d.x + "," + d.y + ")";
+elts.links = svg.append("g")
+    .selectAll("line")
+    .data(data.links)
+    .enter().append("line")
+    .attr("class", (d) => 'l_' + d.type)
+    .attr("title", (d) => d.title)
+    .attr("data-source", (d) => d.source)
+    .attr("data-target", (d) => d.target)
+    .attr("stroke-dasharray", function(d) {
+        if (d.shape.stroke === 'dash' || d.shape.stroke === 'dotted') {
+            return d.shape.dashInterval }
+        return false;
     })
+    .attr("filter", function(d) {
+        if (d.shape.stroke === 'double') {
+            return 'url(#double)' }
+        return false;
+    });
 
-    d3.select('#load-bar-value').style('flex-basis', (simulation.alpha() * 100) + '%');
+if (graphProperties.arrows === true) {
+    elts.links
+        .attr("marker-end", 'url(#arrow)');
 }
+
+elts.nodes = svg.append("g")
+    .selectAll("g")
+    .data(data.nodes)
+    .enter().append("g")
+    .attr("data-node", (d) => d.id)
+    .on('click', function(d) {
+        openRecord(d.id);
+    });
+
+elts.circles = elts.nodes.append("circle")
+    .attr("r", (d) => d.size)
+    .attr("class", (d) => "n_" + d.type)
+    .call(d3.drag()
+        .on("start", function(d) {
+            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y; })
+        .on("drag", function(d) {
+            d.fx = d3.event.x;
+            d.fy = d3.event.y; })
+        .on("end", function(d) {
+            if (!d3.event.active) simulation.alphaTarget(0.0001);
+            d.fx = null;
+            d.fy = null; })
+        )
+    .on('mouseenter', function(nodeMetas) {
+        if (!graphProperties.highlight_on_hover) { return; }
+
+        let nodesIdsHovered = [nodeMetas.id];
+
+        const linksToModif = elts.links.filter(function(link) {
+            if (link.source.id === nodeMetas.id || link.target.id === nodeMetas.id) {
+                nodesIdsHovered.push(link.source.id, link.target.id);
+                return false;
+            }
+            return true;
+        })
+
+        const nodesToModif = elts.nodes.filter(function(node) {
+            if (nodesIdsHovered.includes(node.id)) {
+                return false;
+            }
+            return true;
+        })
+
+        const linksHovered = elts.links.filter(function(link) {
+            if (link.source.id !== nodeMetas.id && link.target.id !== nodeMetas.id) {
+                return false;
+            }
+            return true;
+        })
+
+        const nodesHovered = elts.nodes.filter(function(node) {
+            if (!nodesIdsHovered.includes(node.id)) {
+                return false;
+            }
+            return true;
+        })
+
+        nodesHovered.classed('hover', true);
+        linksHovered.classed('hover', true);
+        nodesToModif.classed('translucent', true);
+        linksToModif.classed('translucent', true);
+    })
+    .on('mouseout', function() {
+        if (!graphProperties.highlight_on_hover) { return; }
+
+        elts.nodes.classed('hover', false);
+        elts.nodes.classed('translucent', false);
+        elts.links.classed('hover', false);
+        elts.links.classed('translucent', false);
+    });
+
+elts.labels = elts.nodes.append("text")
+    .each(function(d) {
+        const words = d.label.split(' ')
+            , max = 25
+            , text = d3.select(this);
+        let label = '';
+
+        for (let i = 0; i < words.length; i++) {
+            // combine words and seperate them by a space caracter into label
+            label += words[i] + ' ';
+
+            // if label (words combination) is longer than max & not the single iteration
+            if (label.length < max && i !== words.length - 1) { continue; }
+
+            text.append("tspan")
+                .attr('x', 0)
+                .attr('dy', '1.2em')
+                .text(label.slice(0, -1)); // remove last space caracter
+
+            label = '';
+        }
+    })
+    .attr('font-size', graphProperties.text_size)
+    .attr('x', 0)
+    .attr('y', (d) => d.size)
+    .attr('dominant-baseline', 'middle')
+    .attr('text-anchor', 'middle');
+
+/** Functions
+------------------------------------------------------------*/
 
 /**
  * Get nodes and their links
@@ -248,12 +214,14 @@ function initializeDisplay() {
  */
 
 function getNodeNetwork(nodeIds) {
-    const diplayedNodes = graph.nodes.filter(item => item.hidden === false)
+    const diplayedNodes = elts.nodes
+        .filter(item => item.hidden === false)
+        .data()
         .map(item => item.id);
 
-    const nodes = node.filter(node => nodeIds.includes(node.id));
+    const nodes = elts.nodes.filter(node => nodeIds.includes(node.id));
 
-    const links = link.filter(function(link) {
+    const links = elts.links.filter(function(link) {
         if (!nodeIds.includes(link.source.id) && !nodeIds.includes(link.target.id)) {
             return false; }
         if (!diplayedNodes.includes(link.source.id) || !diplayedNodes.includes(link.target.id)) {
@@ -269,12 +237,94 @@ function getNodeNetwork(nodeIds) {
 }
 
 /**
+ * Hide some nodes & their links, by their id
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+window.hideNodes = function (nodeIds) {
+    let nodesToHideIds
+        , data = elts.nodes.data();
+
+    nodesToHideIds = elts.nodes.filter(function(item) {
+        if (nodeIds.includes(item.id) && item.hidden === false) {
+            return true;
+        }
+    });
+
+    if (view.focusMode) {
+        nodesToHideIds = nodesToHideIds.filter(function(item) {
+            if (item.isolated === true) {
+                return true;
+            }
+        })
+    }
+
+    nodesToHideIds = nodesToHideIds
+        .data()
+        .map(node => node.id);
+
+    hideNodeNetwork(nodesToHideIds);
+    hideFromIndex(nodesToHideIds);
+
+    elts.nodes.data(
+        data.map(function(node) {
+            if (nodesToHideIds.includes(node.id)) {
+                node.hidden = true;
+            }
+
+            return node;
+        })
+    );
+}
+
+/**
+ * Display some nodes & their links, by their id
+ * @param {array} nodeIds - List of nodes ids
+ */
+
+window.displayNodes = function (nodeIds) {
+    let nodesToDisplayIds
+        , data = elts.nodes.data();
+
+    nodesToDisplayIds = elts.nodes.filter(function(item) {
+        if (nodeIds.includes(item.id) && item.hidden === true) {
+            return true;
+        }
+    });
+
+    if (view.focusMode) {
+        nodesToDisplayIds = nodesToDisplayIds.filter(function(item) {
+            if (item.isolated === true) {
+                return true;
+            }
+        })
+    }
+
+    nodesToDisplayIds = nodesToDisplayIds
+        .data()
+        .map(node => node.id);
+
+    elts.nodes.data(
+        data.map(function(node) {
+            if (nodesToDisplayIds.includes(node.id)) {
+                node.hidden = false;
+            }
+
+            return node;
+        })
+    );
+
+    displayNodeNetwork(nodesToDisplayIds);
+    displayFromIndex(nodesToDisplayIds);
+}
+
+/**
  * Zoom to a node from its coordinates
  * @param {number} nodeId
  */
 
-function zoomToNode(nodeId) {
-    const nodeToZoomMetas = node.filter(node => node.id === nodeId).datum()
+window.zoomToNode = function (nodeId) {
+    const nodeToZoomMetas = elts.nodes.filter(node => node.id === nodeId).datum()
         , zoom = 2
         , recordWidth = recordContainer.offsetWidth;
 
@@ -298,42 +348,36 @@ function zoomToNode(nodeId) {
     translate();
 }
 
-window.zoomToNode = zoomToNode;
-
 /**
  * Display none nodes and their link
  * @param {array} nodeIds - List of nodes ids
  */
 
-function hideNodeNetwork(nodeIds) {
+window.hideNodeNetwork = function (nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
     ntw.nodes.style('display', 'none');
     ntw.links.style('display', 'none');
 }
 
-window.hideNodeNetwork = hideNodeNetwork;
-
 /**
  * Reset display nodes and their link
  * @param {array} nodeIds - List of nodes ids
  */
 
-function displayNodeNetwork(nodeIds) {
+window.displayNodeNetwork = function (nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
     ntw.nodes.style('display', null);
     ntw.links.style('display', null);
 }
 
-window.displayNodeNetwork = displayNodeNetwork;
-
 /**
  * Apply highlightColor (from config) to somes nodes and their links
  * @param {array} nodeIds - List of nodes ids
  */
 
-function highlightNodes(nodeIds) {
+window.highlightNodes = function (nodeIds) {
     const ntw = getNodeNetwork(nodeIds);
 
     ntw.nodes.classed('highlight', true);
@@ -342,13 +386,11 @@ function highlightNodes(nodeIds) {
     view.highlightedNodes = view.highlightedNodes.concat(nodeIds);
 }
 
-window.highlightNodes = highlightNodes;
-
 /**
  * remove highlightColor from all highlighted nodes and their links
  */
 
-function unlightNodes() {
+window.unlightNodes = function() {
     if (view.highlightedNodes.length === 0) { return; }
 
     const ntw = getNodeNetwork(view.highlightedNodes);
@@ -359,48 +401,42 @@ function unlightNodes() {
     view.highlightedNodes = [];
 }
 
-window.unlightNodes = unlightNodes;
-
 /**
  * Toggle display/hide nodes links
  * @param {bool} isChecked - 'checked' value send by a checkbox input
  */
 
-function linksDisplayToggle(isChecked) {
+window.linksDisplayToggle = function (isChecked) {
     if (isChecked) {
-        link.style('display', null);
+        elts.links.style('display', null);
     } else {
-        link.style('display', 'none');
+        elts.links.style('display', 'none');
     }
 }
-
-window.linksDisplayToggle = linksDisplayToggle;
 
 /**
  * Toggle display/hide nodes label
  * @param {bool} isChecked - 'checked' value send by a checkbox input
  */
 
-function labelDisplayToggle(isChecked) {
+window.labelDisplayToggle = function (isChecked) {
     if (isChecked) {
-        labels.style('display', null);
+        elts.labels.style('display', null);
     } else {
-        labels.style('display', 'none');
+        elts.labels.style('display', 'none');
     }
 }
-
-window.labelDisplayToggle = labelDisplayToggle;
 
 /**
  * Add 'highlight' class to texts linked to nodes ids
  * @param {array} nodeIds - List of node ids
  */
 
-function labelHighlight(nodeIds) {
-    const labelsToHighlight = node
+window.labelHighlight = function (nodeIds) {
+    const labelsToHighlight = elts.nodes
         .filter(node => nodeIds.includes(node.id)).select('text');
 
-    graph.nodes = graph.nodes.map(function(node) {
+    data.nodes = data.nodes.map(function(node) {
         if (nodeIds.includes(node.id)) {
             node.highlighted = true; }
         return node;
@@ -409,18 +445,24 @@ function labelHighlight(nodeIds) {
     labelsToHighlight.classed('highlight', true);
 }
 
-window.labelHighlight = labelHighlight;
+/**
+ * Change the font size of graph labels
+ */
+
+window.updateFontsize = function () {
+    elts.labels.attr('font-size', graphProperties.text_size);
+}
 
 /**
  * Remove 'highlight' class from texts linked to nodes ids
  * @param {array} nodeIds - List of node ids
  */
 
-function labelUnlight(nodeIds) {
-    const labelsToHighlight = node
+window.labelUnlight = function (nodeIds) {
+    const labelsToHighlight = elts.nodes
         .filter(node => nodeIds.includes(node.id)).select('text');
 
-    graph.nodes = graph.nodes.map(function(node) {
+    data.nodes = data.nodes.map(function(node) {
         if (nodeIds.includes(node.id)) {
             node.highlighted = false; }
         return node;
@@ -429,21 +471,17 @@ function labelUnlight(nodeIds) {
     labelsToHighlight.classed('highlight', false);
 }
 
-window.labelUnlight = labelUnlight;
-
 /**
  * Remove 'highlight' class from all texts
  */
 
-function labelUnlightAll() {
-    graph.nodes = graph.nodes.map(function(node) {
+window.labelUnlightAll = function () {
+    data.nodes = data.nodes.map(function(node) {
         node.highlighted = false;
         return node;
     });
 
-    labels.classed('highlight', false);
+    elts.labels.classed('highlight', false);
 }
-
-window.labelUnlightAll = labelUnlightAll;
 
 })();

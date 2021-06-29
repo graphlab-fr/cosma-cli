@@ -2,13 +2,14 @@
     "source": {
         "include": [
             "./api/cosmoscope.md",
+            "../template/scripts/bibliography.js",
+            "../template/scripts/counter.js",
             "../template/scripts/filter.js",
             "../template/scripts/focus.js",
             "../template/scripts/graph.js",
             "../template/scripts/history.js",
             "../template/scripts/index.js",
             "../template/scripts/main.js",
-            "../template/scripts/nodes.js",
             "../template/scripts/record.js",
             "../template/scripts/search.js",
             "../template/scripts/tag.js",

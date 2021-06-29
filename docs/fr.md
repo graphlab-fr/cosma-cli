@@ -160,9 +160,6 @@ graph:
   highlight_color: red
   highlight_on_hover: true
   text_size: 9
-  position:
-    x: 0.5
-    y: 0.5
   attraction:
     force: -50
     distance_max: 800
@@ -184,9 +181,6 @@ graph:
 
 `text_size`
 : Taille des étiquettes des nœuds. L'unité implicite est le pixel. La valeur minimale est `5` ; la valeur maximale est `15`.
-
-`position`
-: Position horizontale (`x`) et verticale (`y`) du centre du graphe. La valeur doit être comprise entre 0 (tout à gauche) et 1 (tout à droite).
 
 `attraction`
 : Paramètres de la simulation de forces entre les nœuds.
@@ -671,12 +665,11 @@ Vous trouverez ci-dessous une description complète de l'arborescence du logicie
 │   │   ├── counter.js      | actualiser les compteurs d'entités
 │   │   ├── filter.js       | appliquer filtres
 │   │   ├── focus.js        | appliquer focus
-│   │   ├── graph.js        | génération du graphe selon données et configuration
+│   │   ├── graph.js        | affichage du graphe et intéractions
 │   │   ├── history.js      | historique de navigation entre les fiches
 │   │   ├── index.js        | contrôle des volets et boutons du menu gauche
 │   │   ├── keyboard.js     | affectation des raccourcis clavier
 │   │   ├── main.js         | variables globales et animation logo
-│   │   ├── nodes.js        | affichage des nœuds
 │   │   ├── record.js       | ouvrir/fermer le volet latéral droit
 │   │   ├── search.js       | paramétrage moteur de recherche
 │   │   ├── tag.js          | appliquer tags

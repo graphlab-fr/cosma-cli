@@ -161,14 +161,11 @@ graph:
   highlight_color: red
   highlight_on_hover: true
   text_size: 9
-  position:
-    x: 0.5
-    y: 0.5
   attraction:
     force: -50
     distance_max: 800
     verticale: 0
-    verticale: 0
+    horizontale: 0
   arrows: false
 ```
 
@@ -182,9 +179,6 @@ graph:
 
 `text_size`
 : Size of node labels. The implicit unit is pixels. The minimum value is `5`; the maximum value is `15`.
-
-`position`
-: Horizontal (`x`) and vertical (`y`) position of the graph centre. The value must be between 0 (far left) and 1 (far right).
 
 `attraction`
 : Parameters of the simulation of forces between nodes.
@@ -669,12 +663,11 @@ Below you will find a complete description of the software's tree structure, all
 │   │   ├── counter.js      | activate entity counters
 │   │   ├── filter.js       | apply filters
 │   │   ├── focus.js        | apply focus
-│   │   ├── graph.js        | graph generation according to data and configuration
+│   │   ├── graph.js        | graph displaying and interactions
 │   │   ├── history.js      | history of navigation between sheets
 │   │   ├── index.js        | control of the left menu panes and buttons
 │   │   ├── keyboard.js     | assignment of keyboard shortcuts
 │   │   ├── main.js         | global variables and logo animation
-│   │   ├── nodes.js        | display of nodes
 │   │   ├── record.js       | opening/closing the right side panel
 │   │   ├── search.js       | search engine settings
 │   │   ├── tag.js          | apply tags
