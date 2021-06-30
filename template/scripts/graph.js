@@ -6,7 +6,17 @@
 
 (function() {
 
-/** Graph space
+/** Data serialization
+------------------------------------------------------------*/
+
+data.nodes = data.nodes.map(function (node) {
+    node.hidden = false;
+    node.isolated = false;
+    node.highlighted = false;
+    return node;
+});
+
+/** Box sizing
 ------------------------------------------------------------*/
 
 window.svg = d3.select("#graph-canvas");
@@ -26,7 +36,6 @@ svg
 const simulation = d3.forceSimulation(data.nodes)
     .force("link", d3.forceLink(data.links).id(d => d.id))
     .force("charge", d3.forceManyBody())
-    // .force("collide", d3.forceCollide())
     .force("center", d3.forceCenter())
     .force("forceX", d3.forceX())
     .force("forceY", d3.forceY());
@@ -242,10 +251,9 @@ function getNodeNetwork(nodeIds) {
  */
 
 window.hideNodes = function (nodeIds) {
-    let nodesToHideIds
-        , data = elts.nodes.data();
+    let nodesToHideIds;
 
-    nodesToHideIds = elts.nodes.filter(function(item) {
+    nodesToHideIds = data.nodes.filter(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === false) {
             return true;
         }
@@ -260,20 +268,20 @@ window.hideNodes = function (nodeIds) {
     }
 
     nodesToHideIds = nodesToHideIds
-        .data()
         .map(node => node.id);
 
     hideNodeNetwork(nodesToHideIds);
     hideFromIndex(nodesToHideIds);
 
     elts.nodes.data(
-        data.map(function(node) {
-            if (nodesToHideIds.includes(node.id)) {
-                node.hidden = true;
-            }
+        elts.nodes
+            .data()
+            .map(function(node) {
+                if (nodesToHideIds.includes(node.id)) {
+                    node.hidden = true; }
 
-            return node;
-        })
+                return node;
+            })
     );
 }
 
@@ -283,10 +291,9 @@ window.hideNodes = function (nodeIds) {
  */
 
 window.displayNodes = function (nodeIds) {
-    let nodesToDisplayIds
-        , data = elts.nodes.data();
+    let nodesToDisplayIds;
 
-    nodesToDisplayIds = elts.nodes.filter(function(item) {
+    nodesToDisplayIds = data.nodes.filter(function(item) {
         if (nodeIds.includes(item.id) && item.hidden === true) {
             return true;
         }
@@ -301,17 +308,17 @@ window.displayNodes = function (nodeIds) {
     }
 
     nodesToDisplayIds = nodesToDisplayIds
-        .data()
         .map(node => node.id);
 
     elts.nodes.data(
-        data.map(function(node) {
-            if (nodesToDisplayIds.includes(node.id)) {
-                node.hidden = false;
-            }
+        elts.nodes
+            .data()
+            .map(function(node) {
+                if (nodesToDisplayIds.includes(node.id)) {
+                    node.hidden = false; }
 
-            return node;
-        })
+                return node;
+            })
     );
 
     displayNodeNetwork(nodesToDisplayIds);
