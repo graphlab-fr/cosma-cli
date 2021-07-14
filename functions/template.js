@@ -59,7 +59,7 @@ function cosmoscope(files, entities) {
                 type: file.metas.type,
                 tags: file.metas.tags.join(', '), // array to string
                 mtime: file.metas.mtime,
-                content: mdIt.render(file.content), // Mardown to HTML
+                content: mdIt.render(file.content), // Markdown to HTML
                 bibliography: bibliography,
                 links: file.links,
                 backlinks: file.backlinks

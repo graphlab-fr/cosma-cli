@@ -15,8 +15,8 @@ mdIt.use(mdItAttr, {
 })
 
 /**
- * Catch links from Mardown file content
- * @param {string} fileContent - Mardown file content
+ * Catch links from Markdown file content
+ * @param {string} fileContent - Markdown file content
  * @returns {array} - Objets array : links with type & target id
  */
 
@@ -100,11 +100,11 @@ function normalizeLink(link) {
 }
 
 /**
- * Add Mardown attributes to valid links into file content
+ * Add Markdown attributes to valid links into file content
  * Leave disabled links as simple text
- * @param {string} content - Mardown file content
+ * @param {string} content - Markdown file content
  * @param {object} file - File after links parsing
- * @returns {string} - Mardown content with converted links
+ * @returns {string} - Markdown content with converted links
  */
 
 function convertLinks(content, file) {
@@ -123,7 +123,7 @@ function convertLinks(content, file) {
         if (associatedMetas === undefined) { return extract; }
 
         link = associatedMetas;
-        // return '[[***]]' string into a Mardown link with openRecord function & class
+        // return '[[***]]' string into a Markdown link with openRecord function & class
         return `[${extract}](#${link.target.id}){title="${link.target.title}" onclick=openRecord(${link.target.id}) .record-link}`;        
     });
 }
