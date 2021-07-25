@@ -55,10 +55,10 @@ Le cosmoscope n'est pas compatible avec Internet Explorer.
 
 ## Téléchargement
 
-Téléchargez le dépôt git de Cosma en saisissant les commandes ci-dessous dans un terminal, ou en cliquant sur le lien suivant : <https://github.com/hyperotlet/cosma/archive/master.zip>
+Téléchargez le dépôt git de Cosma en saisissant les commandes ci-dessous dans un terminal, ou en cliquant sur le lien suivant : <https://github.com/graphlab-fr/cosma/archive/master.zip>
 
 ```
-git clone https://github.com/hyperotlet/cosma.git
+git clone https://github.com/graphlab-fr/cosma.git
 ```
 
 ## Installation des dépendances
