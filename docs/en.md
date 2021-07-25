@@ -55,10 +55,10 @@ The cosmoscope is not compatible with Internet Explorer.
 
 ## Downloading Cosma
 
-Download the Cosma git repository by typing the command below in a terminal, or by clicking on the following link: <https://github.com/hyperotlet/cosma/archive/master.zip>
+Download the Cosma git repository by typing the command below in a terminal, or by clicking on the following link: <https://github.com/graphlab-fr/cosma/archive/master.zip>
 
 ```
-git clone https://github.com/hyperotlet/cosma.git
+git clone https://github.com/graphlab-fr/cosma.git
 ```
 
 ## Installing the dependencies
@@ -832,4 +832,4 @@ Décembre 2020
 : Cosma has a name, a logo and specifications for development.
 
 Avril 2021
-: Cosma v1.0 is released [on GitHub](https://github.com/hyperotlet/cosma/releases/tag/v1.0.0) and archived [on Zenodo](https://zenodo.org/record/4744309).
+: Cosma v1.0 is released [on GitHub](https://github.com/graphlab-fr/cosma/releases/tag/v1.0.0) and archived [on Zenodo](https://zenodo.org/record/4744309).
