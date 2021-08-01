@@ -470,7 +470,7 @@ main.record-container:not(.active) {
 	left: -5px;
 }
 
-.record footer li .record-links-context p {
+.record footer li .record-links-context p, .record footer li .record-links-context blockquote {
 	margin: 0px;
 }
 
