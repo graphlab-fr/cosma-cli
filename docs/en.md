@@ -230,6 +230,9 @@ metadata:
 `views`
 : List of views appearing in the cosmoscope Views section. Each view is defined by a `name: value` pair, where `name` is the name of the view and `value` is a string generated via the Save current view button.
 
+`link_symbol`
+: Define one or more characters to replace the hyperlink text (target file identifier) in the records.
+
 Example:
 
 ```yaml
@@ -533,6 +536,10 @@ Records can be opened by clicking on a node, an index entry, a search engine sug
 Clicking on the “Close” button closes the pane and deselects the corresponding node in the graph.
 
 The links in the body of the records are clickable. You can open these links in a new tab by right-clicking them. The title of the link (displayed in a tooltip after 1-2 seconds of hovering) is that of the corresponding record.
+
+::: tip
+You can replace the text in links with one or more characters from the configuration. The `link_symbol` option allows you to replace all identifiers in the links with a symbol or text such as `☞`.
+:::
 
 At the bottom of the record is a list of the records to which it refers (outgoing links), as well as the records that points to it (incoming links or backlinks). Links and backlinks are contextualised: when hovering over them, a tooltip is displayed showing the paragraph in which the link is located in the corresponding record.
 

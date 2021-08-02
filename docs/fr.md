@@ -233,6 +233,9 @@ metadata:
 `views`
 : Liste des vues apparaissant dans la section Vues du cosmoscope. Chaque vue est définie par une paire `nom: valeur` dans laquelle `nom` correspond au nom de la vue et `valeur` correspond à une chaîne de caractères générée via le bouton Sauvegarder la vue actuelle du cosmoscope.
 
+`link_symbol`
+: Définir un ou plusieurs caractères venant remplacer dans les fiches le texte des hyperliens (identifiant de la fichier cible).
+
 Exemple :
 
 ```yaml
@@ -535,6 +538,10 @@ Les fiches peuvent êtres ouvertes en cliquant sur un nœud, une entrée de l'in
 Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud correspondant dans le graphe.
 
 Les liens présents dans les fiches sont cliquables. Vous pouvez ouvrir ces liens dans un nouvel onglet via un clic droit. Le titre du lien (affiché en infobulle après 1-2 secondes de survol) est celui de la fiche correspondante.
+
+::: astuce
+Vous pouvez remplacer depuis la configuration le texte contenu dans les liens par un ou plusieurs caractères. L'option `link_symbol` vous permet de remplacer tout les identifiants contenu dans les liens par un symbole ou un texte comme par exemple `☞`.
+:::
 
 En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (liens sortants), ainsi que des fiches qui pointent vers elles (liens entrants ou rétroliens). Les liens et rétroliens sont contextualisés : au survol, une infobulle s'affiche, montrant le paragraphe dans lequel ce lien se trouve dans la fiche correspondante.
 

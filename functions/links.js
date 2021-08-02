@@ -5,7 +5,8 @@
  */
 
 const mdIt = require('markdown-it')()
-    , mdItAttr = require('markdown-it-attrs');
+    , mdItAttr = require('markdown-it-attrs')
+    , config = require('./verifconfig').config;
 
 // markdown-it plugin
 mdIt.use(mdItAttr, {
@@ -123,8 +124,14 @@ function convertLinks(content, file) {
         if (associatedMetas === undefined) { return extract; }
 
         link = associatedMetas;
+
+        if (config.link_symbol) {
+            // the string from config replace all links string (link id)
+            extract = config.link_symbol;
+        }
+
         // return '[[***]]' string into a Markdown link with openRecord function & class
-        return `[${extract}](#${link.target.id}){title="${link.target.title}" onclick=openRecord(${link.target.id}) .record-link}`;        
+        return `[${extract}](#${link.target.id}){title="${link.target.title}" onclick=openRecord(${link.target.id}) .record-link}`;
     });
 }
 
