@@ -41,7 +41,7 @@ Et quatrièmement, Cosma est un logiciel qui se veut modulaire, interopérable e
 
 ## Pré-requis
 
-Installez [Node.js](https://nodejs.org/fr/download/) version 12 ou supérieure.
+Installez [Node.js](https://nodejs.org/fr/download/) version 15 ou supérieure.
 
 Utiliser le cosmoscope nécessite un navigateur web. Vous pouvez utiliser les navigateurs suivants, dans la version indiquée ou supérieure :
 

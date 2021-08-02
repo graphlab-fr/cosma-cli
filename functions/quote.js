@@ -117,7 +117,7 @@ function convertQuoteKeys(fileContent, fileQuoteKeys) {
 
         const citMark = citeproc.processCitationCluster(cit[0], [], [])[1][0][1];
 
-        fileContent = fileContent.replace(key, citMark);
+        fileContent = fileContent.replaceAll(key, citMark);
     }
 
     return fileContent;

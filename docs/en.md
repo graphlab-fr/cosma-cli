@@ -41,7 +41,7 @@ And fourthly, Cosma is modular, interoperable and portable, but above all free s
 
 ## Pre-requisites
 
-Install [Node.js](https://nodejs.org/fr/download/) version 12 or higher.
+Install [Node.js](https://nodejs.org/fr/download/) version 15 or higher.
 
 Using the cosmoscope requires a web browser. You can use the following browsers, in the version mentioned or higher:
 
