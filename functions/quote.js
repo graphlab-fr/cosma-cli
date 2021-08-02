@@ -69,7 +69,7 @@ function catchQuoteKeys(fileContent) {
         // there could be several quotes from one key
         for (const q of quotes) {
 
-            if (!library[q.id]) { continue; }
+            if (!library[q.id]) { continue quoteExtraction; }
 
             library[q.id].used = true;
 
