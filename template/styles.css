@@ -460,6 +460,10 @@ main.record-container:not(.active) {
 	box-shadow: var(--shadow);
 }
 
+.record footer li .record-links-context li {
+	display: block;
+}
+
 .record footer li:hover .record-links-context {
 	display: block;
 }
