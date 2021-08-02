@@ -58,7 +58,6 @@ exports.citeprocModeIsActive = citeprocModeIsActive;
 function catchQuoteKeys(fileContent) {
     let extractions = Citr.util.extractCitations(fileContent)
         , quoteKeys = {}
-        , libraryIds = Object.keys(library)
         , undefinedLibraryIds = [];
 
     quoteExtraction:
@@ -69,15 +68,13 @@ function catchQuoteKeys(fileContent) {
         // there could be several quotes from one key
         for (const q of quotes) {
 
-            if (!library[q.id]) { continue quoteExtraction; }
-
-            library[q.id].used = true;
-
-            if (libraryIds.includes(q.id) === false) {
+            if (!library[q.id]) {
                 // if the quote id is not defined from library
                 undefinedLibraryIds.push(q.id)
                 continue quoteExtraction;
             }
+
+            library[q.id].used = true;
         }
 
         quoteKeys[extraction] = quotes;
