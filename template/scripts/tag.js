@@ -47,4 +47,6 @@ function unactiveAllTags() {
     activeTags.forEach(tagBtn => { tagBtn.dataset.active = false; });
 
     labelUnlightAll();
+
+    setCounter(counters.tag, 0);
 }

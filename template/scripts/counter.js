@@ -41,11 +41,6 @@ function setCounter(counterElt, value) {
         return false;
     }
 
-    if (value === Number(counterNumber[1])) {
-        counterElt.textContent = counterNumber[1];
-        return true;
-    }
-
     counterElt.textContent = value + '/' + counterNumber[1]
     return false;
 }
