@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="generator" content="https://github.com/hyperotlet/cosma">
+    <meta name="generator" content="https://cosma.graphlab.fr/">
     {% for meta, value in metadata %}
     <meta name="{{ meta }}" content="{{ value }}">
     {% endfor %}
@@ -249,7 +249,11 @@
             </header>
 
             <main class="record-content">
-                {{ record.content | safe }}
+                {% if linkSymbol %}
+                    {{ record.content | replace(r/(\[\[\s*).*?(\]\])/g, linkSymbol) | safe }}
+                {% else %}
+                    {{ record.content | safe }}
+                {% endif %}
 
                 {% if record.bibliography %}
                 <section class="bibliography">
@@ -272,7 +276,13 @@
                         <li onclick="openRecord({{ link.target.id }})">
                             <span class="record-type-point n_{{ link.target.type }}">⬤</span>
                             <span>{{ link.target.title }}</span>
-                            <div class="record-links-context">{{ link.context | safe }}</div>
+                            <div class="record-links-context">
+                                {% if linkSymbol %}
+                                    {{ link.context | replace(r/(\[\[\s*).*?(\]\])/g, linkSymbol) | safe }}
+                                {% else %}
+                                    {{ link.context | safe }}
+                                {% endif %}
+                            </div>
                         </li>
                         {% endfor %}
                     </ul>
@@ -290,7 +300,13 @@
                         <li onclick="openRecord({{ backlink.target.id }})">
                             <span class="record-type-point n_{{ backlink.target.type }}">⬤</span>
                             <span>{{ backlink.target.title }}</span>
-                            <div class="record-links-context">{{ backlink.context | safe }}</div>
+                            <div class="record-links-context">
+                                {% if linkSymbol %}
+                                    {{ backlink.context | replace(r/(\[\[\s*).*?(\]\])/g, linkSymbol) | safe }}
+                                {% else %}
+                                    {{ backlink.context | safe }}
+                                {% endif %}
+                            </div>
                         </li>
                         {% endfor %}
                     </ul>
