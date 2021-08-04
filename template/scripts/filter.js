@@ -114,6 +114,14 @@ function getUnactiveFilterNames() {
     return filterElts.map(filterElt => filterElt.name);
 }
 
+function activeAllFilters() {
+    Array.from(document.querySelectorAll('[data-filter]'))
+        .filter(filterElt => filterElt.checked === false)
+        .forEach(filterElt => {
+            filter(true, filterElt.dataset.filter, filterElt);
+        });
+}
+
 /**
  * Get nodes id hidden by filters into an array
  * @returns {array} - Nodes id list

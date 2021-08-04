@@ -182,6 +182,13 @@ right_panel:
         effect:
           fr: Réinitialiser le zoom
           en: Reset zoom
+      alt_r:
+        key:
+          fr: Alt + R
+          en: Alt + R
+        effect:
+          fr: Réinitialiser tous les paramètres visuels
+          en: Reset all visual settings
       c:
         key:
           fr: C

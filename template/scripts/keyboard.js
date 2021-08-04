@@ -30,6 +30,11 @@ document.onkeydown = (e) => {
             case 'r':
                 e.preventDefault();
                 zoomReset();
+
+                if (pressedKeys.Alt) {
+                    resetView();
+                }
+
                 return;
 
             case 'c':
@@ -67,6 +72,10 @@ document.onkeydown = (e) => {
         case 'Alt':
             pressedKeys[e.key] = true;
             return;
+
+        case 'Shift':
+            pressedKeys[e.key] = true;
+            return;
     }
  };
  
@@ -77,6 +86,10 @@ window.onkeyup = function(e) {
             return;
 
         case 'Alt':
+            pressedKeys[e.key] = false;
+            return;
+
+        case 'Shift':
             pressedKeys[e.key] = false;
             return;
     }

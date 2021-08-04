@@ -38,6 +38,15 @@ const view = {
         position: {x: 0, y: 0, zoom: 1}
     };
 
+function resetView() {
+    if (view.openedRecordId) { closeRecord(); }
+    zoomReset();
+    activeAllFilters();
+    if (focus.isActive) { focus.disable(); }
+    unactiveAllTags();
+    displayAllFromIndex();
+}
+
 /**
  * Cosma logo animation onclick
  */

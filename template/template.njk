@@ -345,6 +345,10 @@
                                 <td>Réinitialiser le zoom</td>
                             </tr>
                             <tr>
+                                <td>Alt + R</td>
+                                <td>Réinitialiser tous les paramètres visuels</td>
+                            </tr>
+                            <tr>
                                 <td>C</td>
                                 <td>Zoomer sur le nœud de la fiche active</td>
                             </tr>
@@ -460,6 +464,10 @@
                 <button onclick="zoomLess()">-</button>
                 <button onclick="zoomReset()">Recentrer (R)</button>
                 <button onclick="zoomMore()">+</button>
+            </div>
+
+            <div class="graph-controls-viewreset">
+                <button onclick="resetView()">Réinitialiser (Alt + R)</button>
             </div>
 
             {% if focusIsActive %}

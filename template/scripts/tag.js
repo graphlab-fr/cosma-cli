@@ -6,6 +6,11 @@
 
 const primTagsContainer = document.querySelector('.menu-tags-container-prim');
 
+/**
+ * Update the index with clicked tags
+ * @param {HTMLElement} tagElt - Clicked tag button
+ */
+
 function tag(tagElt) {
     const isActive = tagElt.dataset.active
         // tag brothers from sort div's
@@ -17,7 +22,6 @@ function tag(tagElt) {
         tagBtns.forEach(tagBtn => { tagBtn.dataset.active = true; });
     }
 
-    // get active tags and the linked nodes id
     const activeTags = Array.from(primTagsContainer.querySelectorAll('[data-tag][data-active="true"]'));
     let nodeIds = activeTags.map(function(activeTagBtn) {
         return tagList[activeTagBtn.dataset.tag - 1].nodes; // 'tagList' is global var, set from template.njk
@@ -32,4 +36,15 @@ function tag(tagElt) {
     labelHighlight(nodeIds); displayFromIndex(nodeIds);
     
     setCounter(counters.tag, activeTags.length);
+}
+
+/**
+ * Unactive all tags buttons
+ */
+
+function unactiveAllTags() {
+    const activeTags = Array.from(primTagsContainer.querySelectorAll('[data-tag][data-active="true"]'));
+    activeTags.forEach(tagBtn => { tagBtn.dataset.active = false; });
+
+    labelUnlightAll();
 }
