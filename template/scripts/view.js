@@ -51,11 +51,14 @@ function saveView() {
 
 function changeView(viewBtn) {
     if (viewBtn.dataset.active === "true") {
+        // if click on a current active view button to unactivate it
         viewBtn.dataset.active = false;
-        setFilters(getFilterNames());
-        focus.disable();
+        resetView();
         return;
     }
+
+    // if click on another view buttonto activate it
+    unactiveLastView();
 
     viewBtn.dataset.active = true;
 
@@ -79,4 +82,18 @@ function changeView(viewBtn) {
 
     if (key.recordId) {
         openRecord(key.recordId, false); }
+}
+
+/**
+ * Remove the border of the last activated view button
+ * and its effect
+ */
+
+function unactiveLastView() {
+    const lastBtn = document.querySelector('[data-view][data-active="true"]');
+
+    if (!lastBtn) { return; }
+
+    lastBtn.dataset.active = false;
+    resetView();
 }

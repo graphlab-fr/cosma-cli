@@ -45,6 +45,7 @@ function resetView() {
     if (focus.isActive) { focus.disable(); }
     unactiveAllTags();
     displayAllFromIndex();
+    unactiveLastView();
 }
 
 /**
