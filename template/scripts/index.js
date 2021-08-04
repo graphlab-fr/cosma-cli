@@ -46,9 +46,9 @@ function hideFromIndex(nodesIds) {
         indexItems.forEach(elt => {
             elt.style.display = 'none';
         });
-
-        iterateCounter(counters.index, -Math.abs(indexItems.length / 2));
     }
+
+    iterateCounter(counters.index, -Math.abs(nodesIds.length));
 }
 
 /**
@@ -70,14 +70,21 @@ function hideAllFromIndex() {
  */
 
 function displayFromIndex(nodesIds) {
+
+    nodesIds = nodesIds.filter(function(nodeId) {
+        // hidden nodes can not be displayed
+        const nodeIsHidden = data.nodes.find(i => i.id === nodeId).hidden;
+        if (nodeIsHidden === false) { return true; }
+    })
+
     for (const indexItem of nodesIds) {
         const indexItems = indexContainer.querySelectorAll('[data-index="' + indexItem + '"]')
         indexItems.forEach(elt => {
             elt.style.display = null;
         });
-
-        iterateCounter(counters.index, indexItems.length / 2);
     }
+
+    iterateCounter(counters.index, nodesIds.length);
 }
 
 /**
