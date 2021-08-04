@@ -125,11 +125,6 @@ function convertLinks(content, file) {
 
         link = associatedMetas;
 
-        if (config.link_symbol) {
-            // the string from config replace all links string (link id)
-            extract = config.link_symbol;
-        }
-
         // return '[[***]]' string into a Markdown link with openRecord function & class
         return `[${extract}](#${link.target.id}){title="${link.target.title}" onclick=openRecord(${link.target.id}) .record-link}`;
     });

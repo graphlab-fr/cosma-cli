@@ -85,8 +85,9 @@ function cosmoscope(files, entities) {
         colors: colors(),
         customCss: config.custom_css,
         
-        // join metadatas from config file
+        // join options from config file
         metadata: config.metadata,
+        linkSymbol: config.link_symbol,
 
         // get the reference for each quote from records
         usedCitationReferences: quoteTools.getUsedCitationReferences(),
