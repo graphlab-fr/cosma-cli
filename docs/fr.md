@@ -610,12 +610,16 @@ Dans l'exemple ci-dessous, le fichier `custom.css` contient des déclarations qu
 
 ```css
 :root {
-  --sans: "IBM Plex Serif", sans-serif;
+  --sans: "IBM Plex Sans", sans-serif;
   --serif: "IBM Plex Serif", serif;
   --mono: "IBM Plex Mono", monospace;
-  --condensed: 'IBM Plex Sans Condensed', sans-serif;
+  --condensed: 'Avenir Next Condensed', sans-serif;
 }
 ```
+
+::: astuce
+Si vous voulez essayer le principe des styles personnalisés, [cliquez ici](https://gist.github.com/infologie/f5ad15eca68ae23ad465307d475043c7) pour récupérer une feuille de style proposée par Arthur Perret, pensée pour les polices IBM Plex et Avenir.
+:::
 
 # Développement
 

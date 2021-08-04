@@ -105,7 +105,7 @@
 <p>Et quatrièmement, Cosma est un logiciel qui se veut modulaire, interopérable et portable mais surtout libre : le code est public, son développement est documenté, il est accessible et réutilisable gratuitement sous licence MIT. Le travail peut ainsi être évalué, archivé et continué par d’autres.</p>
 <h1 data-number="2" id="installation"><span class="header-section-number">2</span> Installation</h1>
 <h2 data-number="2.1" id="pre-requis"><span class="header-section-number">2.1</span> Pré-requis</h2>
-<p>Installez <a href="https://nodejs.org/fr/download/">Node.js</a> version 12 ou supérieure.</p>
+<p>Installez <a href="https://nodejs.org/fr/download/">Node.js</a> version 15 ou supérieure.</p>
 <p>Utiliser le cosmoscope nécessite un navigateur web. Vous pouvez utiliser les navigateurs suivants, dans la version indiquée ou supérieure :</p>
 <ul>
 <li>Chrome (v.69)</li>
@@ -269,6 +269,9 @@ node app c</code></pre>
 </dd>
 <dt><code>views</code></dt>
 <dd>Liste des vues apparaissant dans la section Vues du cosmoscope. Chaque vue est définie par une paire <code>nom: valeur</code> dans laquelle <code>nom</code> correspond au nom de la vue et <code>valeur</code> correspond à une chaîne de caractères générée via le bouton Sauvegarder la vue actuelle du cosmoscope.
+</dd>
+<dt><code>link_symbol</code></dt>
+<dd>Définir un ou plusieurs caractères venant remplacer dans les fiches le texte des hyperliens (identifiant de la fichier cible).
 </dd>
 </dl>
 <p>Exemple :</p>
@@ -449,6 +452,9 @@ node app m -p -c</code></pre>
 <p>Les fiches peuvent êtres ouvertes en cliquant sur un nœud, une entrée de l’index, une suggestion du moteur de recherche, ou un lien dans le corps d’une fiche. Ouvrir une fiche affiche son contenu dans le panneau latéral droit. Cela met aussi à jour l’URL de la page avec l’identifiant de la fiche : ceci permet de naviguer entre les fiches visitées via les fonctionnalités Précédent / Suivant du navigateur, mais aussi de les retrouver dans l’historique ou encore d’obtenir un lien direct vers la fiche.</p>
 <p>Cliquer sur le bouton « Fermer » referme le volet et désélectionne le nœud correspondant dans le graphe.</p>
 <p>Les liens présents dans les fiches sont cliquables. Vous pouvez ouvrir ces liens dans un nouvel onglet via un clic droit. Le titre du lien (affiché en infobulle après 1-2 secondes de survol) est celui de la fiche correspondante.</p>
+<div class="astuce">
+<p>Vous pouvez remplacer depuis la configuration le texte contenu dans les liens par un ou plusieurs caractères. L’option <code>link_symbol</code> vous permet de remplacer tout les identifiants contenu dans les liens par un symbole ou un texte comme par exemple <code>☞</code>.</p>
+</div>
 <p>En bas de la fiche se trouve une liste des fiches vers lesquelles elle renvoie (liens sortants), ainsi que des fiches qui pointent vers elles (liens entrants ou rétroliens). Les liens et rétroliens sont contextualisés : au survol, une infobulle s’affiche, montrant le paragraphe dans lequel ce lien se trouve dans la fiche correspondante.</p>
 <h2 data-number="5.4" id="mode-focus"><span class="header-section-number">5.4</span> Mode focus</h2>
 <p>Le bouton Activer le focus (raccourci : touche <code>F</code>) situé en bas à gauche du graphe permet de restreindre l’affichage au nœud sélectionné : en mode focus, seules les connexions directes à la fiche sélectionnée sont affichées dans l’interface. Le mode focus ne fonctionne que si vous avez sélectionné une fiche.</p>
@@ -483,11 +489,14 @@ node app m -p -c</code></pre>
 <p>Les déclarations CSS ajoutées dans <code>/template/custom.css</code> remplacent celles présentes dans <code>/template/styles.css</code> et <code>/template/print.css</code> (pour les styles à l’impression). Elles s’appliquent au fichier <code>/template/template.njk</code>. Consultez ces fichiers ou utilisez l’inspecteur de votre navigateur web pour connaître les sélecteurs à utiliser pour telle ou telle déclaration. Les feuilles de style du cosmoscope utilisent notamment des variables CSS pour définir les couleurs et les polices utilisées. Vous pouvez redéfinir uniquement ces variables pour modifier tous les éléments d’interface auxquels elles s’appliquent.</p>
 <p>Dans l’exemple ci-dessous, le fichier <code>custom.css</code> contient des déclarations qui modifient les polices utilisées dans le cosmoscope :</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--sans</span>: <span class="st">&quot;IBM Plex Serif&quot;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--sans</span>: <span class="st">&quot;IBM Plex Sans&quot;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--serif</span>: <span class="st">&quot;IBM Plex Serif&quot;</span><span class="op">,</span> <span class="dv">serif</span><span class="op">;</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--mono</span>: <span class="st">&quot;IBM Plex Mono&quot;</span><span class="op">,</span> <span class="dv">monospace</span><span class="op">;</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--condensed</span>: <span class="st">&#39;IBM Plex Sans Condensed&#39;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--condensed</span>: <span class="st">&#39;Avenir Next Condensed&#39;</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="astuce">
+<p>Si vous voulez essayer le principe des styles personnalisés, <a href="https://gist.github.com/infologie/f5ad15eca68ae23ad465307d475043c7">cliquez ici</a> pour récupérer une feuille de style proposée par Arthur Perret, pensée pour les polices IBM Plex et Avenir.</p>
+</div>
 <h1 data-number="6" id="developpement"><span class="header-section-number">6</span> Développement</h1>
 <p>Cette partie de la documentation s’adresse à des développeurs expérimentés en JavaScript. Elle présente l’arborescence et les concepts sur lesquels reposent les deux parties formant Cosma, le <strong>cosmographe</strong> et le <strong>cosmoscope</strong>.</p>
 <p>Nous vous recommandons vivement de lire le reste de la documentation pour bien saisir l’ensemble des usages en jeu dans le code source présenté ci-dessous.</p>

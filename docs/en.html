@@ -105,7 +105,7 @@
 <p>And fourthly, Cosma is modular, interoperable and portable, but above all free software. The code is public, documented, and it is accessible and reusable free of charge under the MIT license. Our work can thus be evaluated, archived and continued by others.</p>
 <h1 data-number="2" id="installing"><span class="header-section-number">2</span> Installing</h1>
 <h2 data-number="2.1" id="pre-requisites"><span class="header-section-number">2.1</span> Pre-requisites</h2>
-<p>Install <a href="https://nodejs.org/fr/download/">Node.js</a> version 12 or higher.</p>
+<p>Install <a href="https://nodejs.org/fr/download/">Node.js</a> version 15 or higher.</p>
 <p>Using the cosmoscope requires a web browser. You can use the following browsers, in the version mentioned or higher:</p>
 <ul>
 <li>Chrome (v.69)</li>
@@ -265,6 +265,9 @@ node app c</code></pre>
 </dd>
 <dt><code>views</code></dt>
 <dd>List of views appearing in the cosmoscope Views section. Each view is defined by a <code>name: value</code> pair, where <code>name</code> is the name of the view and <code>value</code> is a string generated via the Save current view button.
+</dd>
+<dt><code>link_symbol</code></dt>
+<dd>Define one or more characters to replace the hyperlink text (target file identifier) in the records.
 </dd>
 </dl>
 <p>Example:</p>
@@ -445,6 +448,9 @@ node app m -p -c</code></pre>
 <p>Records can be opened by clicking on a node, an index entry, a search engine suggestion, or a link in the body of another record. Opening a record displays its contents in the right-hand side panel. This also updates the URL of the page with the record ID: this allows you to navigate between the records you have visited via the browser’s Previous / Next functions, but also you browser’s history, and to link directly to a record.</p>
 <p>Clicking on the “Close” button closes the pane and deselects the corresponding node in the graph.</p>
 <p>The links in the body of the records are clickable. You can open these links in a new tab by right-clicking them. The title of the link (displayed in a tooltip after 1-2 seconds of hovering) is that of the corresponding record.</p>
+<div class="tip">
+<p>You can replace the text in links with one or more characters from the configuration. The <code>link_symbol</code> option allows you to replace all identifiers in the links with a symbol or text such as <code>☞</code>.</p>
+</div>
 <p>At the bottom of the record is a list of the records to which it refers (outgoing links), as well as the records that points to it (incoming links or backlinks). Links and backlinks are contextualised: when hovering over them, a tooltip is displayed showing the paragraph in which the link is located in the corresponding record.</p>
 <h2 data-number="5.4" id="focus-mode"><span class="header-section-number">5.4</span> Focus mode</h2>
 <p>The Focus button (shortcut: <code>F</code> key) at the bottom left of the graph allows you to restrict the display to the selected record and its direct connections. Focus mode only works if you have selected a record.</p>
