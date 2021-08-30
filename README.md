@@ -2,7 +2,7 @@
 
 Cosma est un logiciel de visualisation de graphe documentaire. Il permet d’enregistrer et lire des fiches interreliées sous la forme d’un réseau interactif dans un navigateur web.
 
-**Documentation :** https://hyperotlet.github.io/cosma/
+Ce dépôt contient la première version de Cosma, exécutable en ligne de commande. Elle n'est plus développée ni maintenue. La documentation reste disponible : https://hyperotlet.github.io/cosma/
 
 ## Présentation rapide
 
@@ -17,18 +17,3 @@ Il permet de produire différents types de documents : carnets de notes, Zettel
 Le format des données utilisées par Cosma le rend compatible de manière privilégiée avec certains logiciels comme [Zettlr](https://zettlr.com) et l'extension [Foam](https://foambubble.github.io/foam/) pour les éditeurs Visual Studio Code et VSCodium.
 
 Cosma est basé sur [NodeJS](https://nodejs.org/fr/) (version 15 ou supérieure). La configuration se fait via un fichier YAML. L'utilisation se fait en ligne de commande. Une interface graphique sera développée prochainement pour Windows. Un prototype d'interface graphique est [disponible pour macOS](https://github.com/hyperotlet/cosma-macos) ; c'est une preuve de concept qui nécessite d'être modifiée avec Xcode pour être adaptée à l'installation de chaque utilisateur.
-
-## Mémo : comment mettre à jour la documentation
-
-La documentation utilise les outils suivants :
-
-- [Pandoc](https://pandoc.org/)
-- [GitHub Pages Import](https://github.com/c-w/ghp-import)
-
-Elle peut être mise à jour via les commandes suivantes :
-
-```
-npm install --dev
-npm run doc-gen
-npm run doc-upload
-```
