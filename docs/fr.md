@@ -1,11 +1,19 @@
 ---
-title: Documentation de Cosma
+title: Cosma alpha – Documentation
 author:
   - Guillaume Brioudes <https://myllaume.fr/>
   - Arthur Perret <https://www.arthurperret.fr/>
-date: 2021-05-26
+date: 2021-08-31
 lang: fr-FR
 ---
+
+::: important
+Ceci est la documentation de la première version de Cosma, développée durant l'année 2020-2021. C'est un logiciel qui s'utilise en ligne de commande et requiert Node.js version 15 ou supérieure. Nous avons publié Cosma en mai 2021 et fait quelques mises à jour jusqu'en juillet.
+
+En août 2021, nous avons fait évoluer Cosma et développé une application à interface graphique. La première version a été rétroactivement qualifiée d'alpha. Elle n'est plus développée ni maintenue. Toutes les itérations de l'alpha sont archivées sur Zenodo.
+
+Visitez [le site dédié à Cosma](https://cosma.graphlab.fr) pour plus d'informations.
+:::
 
 Cosma est un logiciel de visualisation de graphe documentaire. Il permet de représenter des notes interreliées sous la forme d’un réseau interactif dans une interface web. Le logiciel est conçu pour fonctionner avec des fichiers texte en Markdown et s’adapte aussi bien à une petite collection (centaine de documents) qu’à une vaste documentation (jusqu'à plusieurs milliers de documents).
 
