@@ -1,55 +1,45 @@
-/**
- * @file Create a formated Markdown file.
- * @author Guillaume Brioudes
- * @copyright MIT License ANR HyperOtlet
- */
+const readline = require('readline');
 
-const fs = require('fs')
-    , moment = require('moment')
-    , config = require('./verifconfig').config
-    , yamlEditor = require('js-yaml');
-
-config.record_types_list = Object.keys(config.record_types);
+const Record = require('../template/models/record');
 
 /**
- * Generate Markdown record
- * @param {string} title - Record title.
- * @param {string} type - Record type.
- * @param {string} tags - Record tags, seperated by comas witout spaces.
+ * @param {*} rl - readline module
  */
 
-function genMdFile(title, type, tags) {
+module.exports = function (title = '', type = [], tags = '', rl = null) {
+    const record = new Record(title, type, tags);
 
-    if (!title) {
-        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Enter a record title.'); }
+    const result = record.save();
 
-    if (!type || type === 'undefined') {
-        type = 'undefined'; // default value
-    } else if (!config.record_types_list.includes(type)) {
-        return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown type. Add it to config.yml beforehand.');
+    switch (result) {
+        case true:
+            console.log('\x1b[32m', 'record saved', '\x1b[0m', `: ${record.title}.md`);
+            rl.close();
+            break;
+
+        case false:
+            console.error('\x1b[31m', 'Err.', '\x1b[0m');
+            rl.close();
+            break;
+
+        case 'overwriting':
+            const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+
+            (async () => {
+                new Promise((resolve, reject) => {
+                    rl.question(`Do you want to overwrite '${record.title}.md' ? (y) `, (answer) => {
+                        if (answer === 'y') { record.save(true); }
+                        rl.close();
+                    })
+                })
+            })();
+
+            break;
+
+        default:
+            console.error('\x1b[31m', 'Err.', '\x1b[0m', result.join(' '));
+            rl.close();
+            break;
     }
 
-    if (!tags) {
-        tags = '';
-    } else {
-        tags = tags.split(",");
-    }
-
-    // write YAML Front Matter
-
-    let content = yamlEditor.safeDump({
-        title: title,
-        id: Number(moment().format('YYYYMMDDHHmmss')),
-        type: type,
-        tags: tags
-    });
-
-    content = '---\n' + content + '---\n\n';
-
-    fs.writeFile(config.files_origin + title + '.md', content, (err) => {
-        if (err) { return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'register record file : ' + err) }
-        console.log('\x1b[32m', 'record saved', '\x1b[0m', `: ${title}.md`)
-    });
 }
-
-exports.genMdFile = genMdFile;

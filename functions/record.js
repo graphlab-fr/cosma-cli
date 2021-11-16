@@ -5,7 +5,7 @@
  */
 
 const config = require('./verifconfig').config
-    , readline = require('readline');
+const readline = require('readline');
 
 config.record_types_list = Object.keys(config.record_types);
 
@@ -41,10 +41,9 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
             rl.question('tags (facultative, between comas, no space) ? ', (answer) => { resolve(answer); })
         })
     
-        require('./autorecord').genMdFile(metas.title, metas.type, metas.tags);
+        require('./autorecord')(metas.title, metas.type, metas.tags, rl);
     } catch(err) {
         console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
+        rl.close();
     }
-    
-    rl.close()
 })()

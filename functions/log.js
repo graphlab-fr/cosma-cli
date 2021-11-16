@@ -9,54 +9,31 @@ const fs = require('fs')
     , time = require('./time');
 
 /**
- * Show errors & warnings into terminal (limited lines)
- * @param {object} logs - Objets contain errors & warnings arrays
+ * Show report on console and history directory
+ * @param {object} graphReport - report prop. from Graph class
  */
 
-function show(logs) {
+module.exports = function (graphReport) {
 
-    const errors = logs.err;
-    const warnings = logs.warn;
+    let msg = []
+        , file = [];
 
-    // if array contain more than 3 errors/warnings : do not list, just note the number of elements
+    for (const reportSection in graphReport) {
+        if (graphReport[reportSection].length === 0) { continue; }
 
-    if (errors.length <= 3) {
-        for (const err of errors) {
-            console.error('\x1b[31m', 'Err.', '\x1b[0m', err); }
-    } else {
-        console.error('\x1b[31m', 'Err.', '\x1b[0m', `${errors.length} errors are recorded`);
+        msg.push(`${reportSection} (${graphReport[reportSection].length})`);
+
+        file = file.concat(graphReport[reportSection]);
     }
 
-    if (warnings.length <= 3) {
-        for (const warn of warnings) {
-            console.error('\x1b[33m', 'Warn.', '\x1b[0m', warn); }
-    } else {
-        console.error('\x1b[33m', 'Warn.', '\x1b[0m', `${warnings.length} warnings are recorded`);
-    }
-}
-
-exports.show = show;
-
-/**
- * Templating & create the logs file into history
- * @param {object} logs - Objets contain errors & warnings arrays
- */
-
-function register(logs) {
-
-    if (logs.err.length === 0 && logs.warn.length === 0) { return; }
-
-    logs.err = logs.err.map(err => '\n- Err : ' + err);
-    logs.warn = logs.warn.map(warn => '\n- Warn : ' + warn);
-    logs = logs.err.concat(logs.warn);
-
-    let content = time;
-    content += logs.join('');
+    file = file.map(msg => `\n- ${msg}`);
+    file.unshift(`${time}\n`);
+    file = file.join('');
 
     historyPath.createFolder();
-    fs.writeFile(`history/${time}/error.log`, content, (err) => {
+    fs.writeFile(`history/${time}/error.log`, file, (err) => {
         if (err) { return console.error( 'Err. write error.log file : ' + err) }
     });
-}
 
-exports.register = register;
+    console.error('\x1b[33m', 'Warn.', '\x1b[0m', msg.join(', '));
+}

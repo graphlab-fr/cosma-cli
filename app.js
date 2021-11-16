@@ -32,16 +32,16 @@ switch (process.argv.requestName) {
 
     // cosmoscope generation
 
-    case 'm': require('./functions/modelize'); break;
-    case 'modelize': require('./functions/modelize'); break;
+    case 'm': require('./functions/modelize')(); break;
+    case 'modelize': require('./functions/modelize')(); break;
 
     // add a record
 
     case 'r': require('./functions/record'); break;
     case 'record': require('./functions/record'); break;
-
-    case 'a': require('./functions/autorecord').genMdFile(arg[0], arg[1], arg[2]); break;
-    case 'autorecord': require('./functions/autorecord').genMdFile(arg[0], arg[1], arg[2]); break;
+        
+    case 'a': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
+    case 'autorecord': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
 
     /** Configuration
     --------------------*/
