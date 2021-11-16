@@ -1,12 +1,6 @@
-const readline = require('readline');
-
 const Record = require('../template/models/record');
 
-/**
- * @param {*} rl - readline module
- */
-
-module.exports = function (title = '', type = [], tags = '', rl = null) {
+module.exports = function (title = '', type = [], tags = '') {
     const record = new Record(title, type, tags);
 
     const result = record.save();
@@ -14,16 +8,15 @@ module.exports = function (title = '', type = [], tags = '', rl = null) {
     switch (result) {
         case true:
             console.log('\x1b[32m', 'record saved', '\x1b[0m', `: ${record.title}.md`);
-            rl.close();
             break;
 
         case false:
             console.error('\x1b[31m', 'Err.', '\x1b[0m');
-            rl.close();
             break;
 
         case 'overwriting':
-            const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+            const readline = require('readline')
+                , rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
             (async () => {
                 new Promise((resolve, reject) => {
@@ -38,7 +31,6 @@ module.exports = function (title = '', type = [], tags = '', rl = null) {
 
         default:
             console.error('\x1b[31m', 'Err.', '\x1b[0m', result.join(' '));
-            rl.close();
             break;
     }
 

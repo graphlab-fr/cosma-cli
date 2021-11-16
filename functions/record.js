@@ -40,10 +40,11 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         metas.tags = await new Promise((resolve, reject) => {
             rl.question('tags (facultative, between comas, no space) ? ', (answer) => { resolve(answer); })
         })
+
+        rl.close();
     
-        require('./autorecord')(metas.title, metas.type, metas.tags, rl);
+        require('./autorecord')(metas.title, metas.type, metas.tags);
     } catch(err) {
         console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
-        rl.close();
     }
 })()
