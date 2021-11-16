@@ -1,7 +1,9 @@
-const Record = require('../template/models/record');
+const Record = require('../cosma-core/models/record');
+
+const config = require('./verifconfig').config;
 
 module.exports = function (title = '', type = [], tags = '') {
-    const record = new Record(title, type, tags);
+    const record = new Record(title, type, tags, config);
 
     const result = record.save();
 

@@ -1,16 +1,16 @@
 const fs = require('fs')
     , historyPath = require('../functions/history');
 
-const Graph = require('../template/models/graph')
-    , Template = require('../template/models/template');
+const Graph = require('../cosma-core/models/graph')
+    , Template = require('../cosma-core/models/template');
 
-module.exports = function (graphParams = []) {
+module.exports = function (graphParams = ['publish']) {
 
     const config = require('../functions/verifconfig').config
         , time = require('../functions/time');
 
-    const graph = new Graph(graphParams)
-        , template = new Template(graph);
+    const graph = new Graph(graphParams, config)
+        , template = new Template(graph, config);
 
     require('./log')(graph.reportToSentences());
 
