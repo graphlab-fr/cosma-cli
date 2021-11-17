@@ -1,7 +1,7 @@
 /**
  * @file Display and write errors & warnings from 'modelize.js'.
  * @author Guillaume Brioudes
- * @copyright MIT License ANR HyperOtlet
+ * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
 const fs = require('fs')

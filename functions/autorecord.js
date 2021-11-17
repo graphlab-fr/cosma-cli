@@ -1,3 +1,9 @@
+/**
+ * @file Create record Mardown file from fields
+ * @author Guillaume Brioudes
+ * @copyright GNU GPL 3.0 ANR HyperOtlet
+ */
+
 const Record = require('../cosma-core/models/record');
 
 const config = require('./verifconfig').config;

@@ -1,7 +1,7 @@
 /**
  * @file Export time (year, month, day, hour, minutes, seconds) for the current process.
  * @author Guillaume Brioudes
- * @copyright MIT License ANR HyperOtlet
+ * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
 const moment = require('moment')

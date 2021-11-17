@@ -1,7 +1,7 @@
 /**
  * @file Addressing of terminal commands.
  * @author Guillaume Brioudes
- * @copyright MIT License ANR HyperOtlet
+ * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
 require('./functions/verifconfig');

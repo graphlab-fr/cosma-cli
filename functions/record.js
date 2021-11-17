@@ -1,7 +1,7 @@
 /**
  * @file Terminal form to ask user about record title, type & tags to create the formated Markdown file.
  * @author Guillaume Brioudes
- * @copyright MIT License ANR HyperOtlet
+ * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
 const config = require('./verifconfig').config
