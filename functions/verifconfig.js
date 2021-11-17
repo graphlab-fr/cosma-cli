@@ -24,7 +24,8 @@ const baseConfig = {
         text_size: 10,
         attraction: { force: -50, distance_max: 250, verticale: 0, horizontale: 0 },
         arrows: false
-    }
+    },
+    lang: 'fr'
 };
 
 if (!fs.existsSync('config.yml')){
@@ -56,6 +57,12 @@ for (const prop in baseConfig) {
     if (config[prop] === undefined || config[prop] === null || config[prop] === '') {
         errors.push(prop);
     }
+}
+
+const validLang = ['fr', 'en'];
+if (validLang.includes(config.lang) === false) {
+    console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Unknown langage. Reset to french.');
+    config.lang = 'fr';
 }
 
 if (errors.length !== 0) {
