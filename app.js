@@ -32,8 +32,8 @@ switch (process.argv.requestName) {
 
     // cosmoscope generation
 
-    case 'm': require('./functions/modelize')(); break;
-    case 'modelize': require('./functions/modelize')(); break;
+    case 'm': require('./functions/modelize')(arg); break;
+    case 'modelize': require('./functions/modelize')(arg); break;
 
     // add a record
 
