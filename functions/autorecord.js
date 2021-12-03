@@ -8,7 +8,7 @@ const Record = require('../cosma-core/models/record');
 
 const config = require('./verifconfig').config;
 
-module.exports = function (title = '', type = [], tags = '') {
+module.exports = function (title = '', type = 'undefined', tags = '') {
     const record = new Record(title, type, tags, config);
 
     const result = record.save();
@@ -28,7 +28,7 @@ module.exports = function (title = '', type = [], tags = '') {
 
             (async () => {
                 new Promise((resolve, reject) => {
-                    rl.question(`Do you want to overwrite '${record.title}.md' ? (y) `, (answer) => {
+                    rl.question(`Do you want to overwrite '${record.title}.md' ? (y/n) `, (answer) => {
                         if (answer === 'y') { record.save(true); }
                         rl.close();
                     })
