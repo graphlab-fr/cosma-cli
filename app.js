@@ -4,8 +4,6 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-require('./functions/verifconfig');
-
 /**
  * command sample :
  * node app <command name> <argument1 argument2 …>
@@ -19,6 +17,8 @@ process.argv = {
 }
 
 const arg = process.argv.requestArgs;
+
+require('./functions/verifconfig'); // config generation & verif
 
 switch (process.argv.requestName) {
 
@@ -42,29 +42,6 @@ switch (process.argv.requestName) {
         
     case 'a': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
     case 'autorecord': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
-
-    /** Configuration
-    --------------------*/
-
-    case 'import':
-        require('./functions/verifconfig').modifyImportPath(arg[0]);
-    break;
-
-    case 'export':
-        require('./functions/verifconfig').modifyExportPath(arg[0]);
-    break;
-
-    case 'css':
-        require('./functions/verifconfig').addCustomCSS();
-    break;
-
-    case 'atype':
-        require('./functions/verifconfig').addRecordType(arg[0], arg[1]);
-    break;
-
-    case 'aview':
-        require('./functions/verifconfig').addView(arg[0], arg[1]);
-    break;
 
     /** Defaults
     --------------------*/

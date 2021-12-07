@@ -6,14 +6,13 @@ const Graph = require('../cosma-core/models/graph')
 
 module.exports = function (graphParams) {
 
-    graphParams = graphParams
-        .filter(parm => ['-c', '--citeproc'].includes(parm))
-        .map(parm => 'citeproc');
-
-    graphParams.push('publish');
-
     const config = require('../functions/verifconfig').config
         , time = require('../functions/time');
+
+    if (config['citeproc'] && config['citeproc'] === true) {
+        graphParams.push('citeproc'); }
+
+    graphParams.push('publish');
 
     const graph = new Graph(graphParams, config)
         , template = new Template(graph, config);
