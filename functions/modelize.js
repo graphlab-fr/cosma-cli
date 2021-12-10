@@ -14,8 +14,8 @@ module.exports = function (graphParams) {
 
     graphParams.push('publish');
 
-    const graph = new Graph(graphParams, config)
-        , template = new Template(graph, config);
+    const graph = new Graph(graphParams)
+        , template = new Template(graph);
 
     require('./log')(graph.reportToSentences());
 
