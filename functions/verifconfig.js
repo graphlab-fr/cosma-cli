@@ -8,6 +8,7 @@ const validArgs = {
     files_origin: [ '--files_origin', '-f' ],
     export_target: [ '--export_target', '-e' ],
     citeproc: [ '--citeproc', '-c' ],
+    load_css_custom: [ '--load_css_custom', '-css' ],
     lang: [ '--lang', '-l' ],
     history: [ '--history', '-h' ]
 }

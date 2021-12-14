@@ -2,17 +2,30 @@ const fs = require('fs')
     , historyPath = require('../functions/history');
 
 const Graph = require('../cosma-core/models/graph')
+    , Config = require('../cosma-core/models/config')
     , Template = require('../cosma-core/models/template');
 
 module.exports = function (graphParams) {
+    const configG = new Config();
 
     const config = require('../functions/verifconfig').config
         , time = require('../functions/time');
 
-    if (config['citeproc'] && config['citeproc'] === true) {
-        graphParams.push('citeproc'); }
-
     graphParams.push('publish');
+
+    if (config['citeproc'] && config['citeproc'] === true) {
+        graphParams.push('citeproc');
+
+        if (configG.canCiteproc() === false) {
+            console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Can not process quotes : undefined parameters'); }
+    }
+
+    if (config['load_css_custom'] && config['load_css_custom'] === true) {
+        graphParams.push('css_custom');
+
+        if (configG.canCssCustom() === false) {
+            console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Can not process custom css : undefined parameters'); }
+    }
 
     const graph = new Graph(graphParams)
         , template = new Template(graph);
