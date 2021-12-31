@@ -6,10 +6,8 @@
 
 const Record = require('../cosma-core/models/record');
 
-const config = require('./verifconfig').config;
-
 module.exports = function (title = '', type = 'undefined', tags = '') {
-    const record = new Record(title, type, tags, config);
+    const record = new Record(title, type, tags);
 
     const result = record.save();
 

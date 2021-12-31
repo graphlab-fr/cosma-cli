@@ -30,7 +30,7 @@ module.exports = function (graphParams) {
     const graph = new Graph(graphParams)
         , template = new Template(graph);
 
-    require('./log')(graph.reportToSentences());
+    require('./log')(graph.report);
 
     if (graph.errors.length > 0) {
         console.error('\x1b[31m', 'Err.', '\x1b[0m', graph.errors.join(', ')); }
