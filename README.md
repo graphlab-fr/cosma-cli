@@ -1,18 +1,15 @@
-# Cosma [![DOI](https://zenodo.org/badge/308555323.svg)](https://zenodo.org/badge/latestdoi/308555323)
+# Cosma CLI [![DOI](https://zenodo.org/badge/308555323.svg)](https://zenodo.org/badge/latestdoi/308555323)
 
-Cosma est un logiciel de visualisation de graphe documentaire. Il permet d’enregistrer et lire des fiches interreliées sous la forme d’un réseau interactif dans un navigateur web.
+**Cosma** is a document graph visualization tool. It modelizes interlinked Markdown files and renders them as an interactive network in a web interface.
 
-Ce dépôt contient la première version de Cosma, développée durant l'année 2020-2021. C'est un logiciel qui s'utilise en ligne de commande et requiert [NodeJS](https://nodejs.org/fr/) version 15 ou supérieure. Nous avons publié Cosma en mai 2021 et fait quelques mises à jour jusqu'en juillet. En août 2021, nous avons fait évoluer Cosma et développé une application à interface graphique. La première version a été rétroactivement qualifiée d'alpha. Elle n'est plus développée ni maintenue. Toutes les itérations de l'alpha sont archivées sur Zenodo.
+Visit <https://cosma.graphlab.fr/en/about/> to learn more about the project.
 
-Visitez [le site dédié à Cosma](https://cosma.graphlab.fr) pour plus d'informations.
+This is the command-line interface (CLI) version of Cosma. It requires [NodeJS](https://nodejs.org/fr/) v16 or higher.
 
-## Présentation rapide
+## Documentation
 
-Cosma obéit à quatre grandes orientations :
+User and developer documentation for Cosma CLI will be published progressively in 2022 at <https://cosma.graphlab.fr/docs>.
 
-1. Les normes d'écriture utilisées sont interopérables (Markdown, YAML, liens wiki). Elles mettent en œuvre des techniques documentaires robustes et extensibles (identifiants uniques, catégorisation des nœuds, qualification des liens, mots-clés).
-2. Le degré de contrôle utilisateur est élevé. Cosma fonctionne avec tout logiciel d'écriture et s'appuie sur la gestion de fichiers native des systèmes d'exploitation. L'interface de visualisation est largement personnalisable (algorithme de dessin de réseau, couleurs des nœuds, tracé des liens, raccourcis).
-3. Le développement est open source, documenté et repose sur des technologies interopérables. Le travail sur le code peut ainsi être évalué, archivé et continué par d'autres.
-4. La visualisation produite avec Cosma est conçue pour être partagée et réutilisée : il s'agit d'une publication web autonome (fichier HTML unique) qui contient la représentation graphique, son interface et les données (JSON). Cette portabilité vise à accroître la visibilité et l'impact du travail à court, moyen et long terme.
+## History
 
-Le format des données utilisées par Cosma le rend compatible de manière privilégiée avec certains logiciels comme [Zettlr](https://zettlr.com) et l'extension [Foam](https://foambubble.github.io/foam/) pour les éditeurs Visual Studio Code et VSCodium.
+The first version of Cosma was a CLI prototype developed during late 2020 and early 2021. We then worked on a GUI version with Electron, and in the process much of the code was changed. After publishing the GUI version as Cosma 1.0, we came back to the CLI prototype and worked on integrating all the changes. As a result, Cosma is available again as a CLI tool.
