@@ -1,37 +1,37 @@
 {
-  "name": "graph-data-generator",
-  "version": "1.0.0",
-  "description": "",
+  "name": "cosma-cli",
+  "version": "1.0.1",
+  "description": "Cosma is a document graph visualization tool. It modelizes interlinked Markdown files and renders them as an interactive network in a web interface.",
+  "homepage": "https://cosma.graphlab.fr/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/graphlab-fr/cosma-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/graphlab-fr/cosma-cli/issues"
+  },
   "main": "app.js",
   "scripts": {
     "doc-gen": "cd docs && sh pandoc-build.sh && ../node_modules/.bin/jsdoc -c api-config-cosmographe.json && ../node_modules/.bin/jsdoc -c api-config-cosmoscope.json",
     "doc-upload": "ghp-import -p docs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hyperotlet/graph-data-generator.git"
-  },
-  "keywords": [
-    "graph",
-    "data",
-    "JSON"
+  "contributors": [
+    "Arthur Perret",
+    "Guillaume Brioudes",
+    "Olivier Le Deuff",
+    "Clément Borel"
   ],
-  "author": "Guillaume Brioudes <https://myllaume.fr/>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hyperotlet/graph-data-generator/issues"
-  },
-  "homepage": "https://github.com/hyperotlet/graph-data-generator#readme",
+  "license": "GNU GPL 3.0",
   "dependencies": {
-    "@minify-html/js": "^0.4.3",
-    "citeproc": "^2.4.59",
     "@zettlr/citr": "^1.2.2",
-    "js-yaml": "^3.14.0",
-    "markdown-it": "^12.0.2",
-    "markdown-it-attrs": "^4.0.0",
+    "citeproc": "^2.4.62",
+    "js-yaml": "^4.1.0",
+    "markdown-it": "^12.3.0",
+    "markdown-it-attrs": "^4.1.3",
     "moment": "^2.29.1",
     "nunjucks": "^3.2.3",
-    "yaml-front-matter": "^4.1.0"
+    "slugify": "^1.6.5",
+    "yaml-front-matter": "^4.1.1"
   },
   "devDependencies": {
     "jsdoc": "^3.6.7",
