@@ -21,7 +21,7 @@
     "Olivier Le Deuff",
     "Clément Borel"
   ],
-  "license": "GNU GPL 3.0",
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "@zettlr/citr": "^1.2.2",
     "citeproc": "^2.4.62",
