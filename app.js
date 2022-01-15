@@ -43,8 +43,8 @@ switch (process.argv.requestName) {
     case 'a': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
     case 'autorecord': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
         
-    case 'json': require('./functions/jsondata')(arg[0]); break;
-    case 'jsondata': require('./functions/jsondata')(arg[0]); break;
+    case 'b': require('./functions/batch')(arg[0]); break;
+    case 'batchrecord': require('./functions/batch')(arg[0]); break;
 
     /** Defaults
     --------------------*/
@@ -54,6 +54,6 @@ switch (process.argv.requestName) {
     break;
 
     default:
-        console.log('Unknow command "' + requestName + '"');
+        console.log('Unknow command "' + process.argv.requestName + '"');
     break;
 }
