@@ -42,6 +42,9 @@ switch (process.argv.requestName) {
         
     case 'a': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
     case 'autorecord': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
+        
+    case 'json': require('./functions/jsondata')(arg[0]); break;
+    case 'jsondata': require('./functions/jsondata')(arg[0]); break;
 
     /** Defaults
     --------------------*/
