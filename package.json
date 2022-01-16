@@ -15,8 +15,7 @@
     "cosma": "app.js"
   },
   "scripts": {
-    "doc-gen": "cd docs && sh pandoc-build.sh && ../node_modules/.bin/jsdoc -c api-config-cosmographe.json && ../node_modules/.bin/jsdoc -c api-config-cosmoscope.json",
-    "doc-upload": "ghp-import -p docs"
+    "doc": "open docs/index.html"
   },
   "contributors": [
     "Arthur Perret",
