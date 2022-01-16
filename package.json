@@ -1,16 +1,19 @@
 {
-  "name": "cosma-cli",
+  "name": "@graphlab-fr/cosma",
   "version": "1.0.1",
   "description": "Cosma is a document graph visualization tool. It modelizes interlinked Markdown files and renders them as an interactive network in a web interface.",
   "homepage": "https://cosma.graphlab.fr/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/graphlab-fr/cosma-cli.git"
+    "url": "git+https://github.com/graphlab-fr/cosma-cli.git"
   },
   "bugs": {
     "url": "https://github.com/graphlab-fr/cosma-cli/issues"
   },
   "main": "app.js",
+  "bin": {
+    "cosma": "app.js"
+  },
   "scripts": {
     "doc-gen": "cd docs && sh pandoc-build.sh && ../node_modules/.bin/jsdoc -c api-config-cosmographe.json && ../node_modules/.bin/jsdoc -c api-config-cosmoscope.json",
     "doc-upload": "ghp-import -p docs"
@@ -33,8 +36,10 @@
     "slugify": "^1.6.5",
     "yaml-front-matter": "^4.1.1"
   },
-  "devDependencies": {
-    "jsdoc": "^3.6.7",
-    "minami": "^1.2.3"
-  }
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": ""
 }

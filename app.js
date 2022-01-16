@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * @file Addressing of terminal commands.
  * @author Guillaume Brioudes
