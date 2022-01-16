@@ -15,6 +15,7 @@
     "cosma": "app.js"
   },
   "scripts": {
+    "modules": "git submodule foreach git pull origin master",
     "doc": "open docs/index.html"
   },
   "contributors": [
