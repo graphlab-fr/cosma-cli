@@ -1,9 +1,9 @@
 const fs = require('fs')
     , historyPath = require('../functions/history');
 
-const Graph = require('../cosma-core/models/graph')
-    , Config = require('../cosma-core/models/config')
-    , Template = require('../cosma-core/models/template');
+const Graph = require('../core/models/graph')
+    , Config = require('../core/models/config')
+    , Template = require('../core/models/template');
 
 module.exports = function (graphParams) {
     const configG = new Config();

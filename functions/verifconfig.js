@@ -48,7 +48,7 @@ const args = process.argv.requestArgs
         }
     });
 
-const Config = require('../cosma-core/models/config');
+const Config = require('../core/models/config');
 
 const config = new Config(newConfig);
 

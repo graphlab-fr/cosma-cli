@@ -8,7 +8,7 @@ const fs = require('fs')
     , historyPath = require('./history')
     , time = require('./time');
 
-const Graph = require('../cosma-core/models/graph');
+const Graph = require('../core/models/graph');
 
 /**
  * Show report on console and history directory

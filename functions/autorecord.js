@@ -4,7 +4,7 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-const Record = require('../cosma-core/models/record');
+const Record = require('../core/models/record');
 
 module.exports = function (title = '', type = 'undefined', tags = '') {
     const record = new Record(title, type, tags);

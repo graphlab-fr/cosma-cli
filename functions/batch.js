@@ -7,7 +7,7 @@
 const fs = require('fs')
     , path = require('path');
 
-const Record = require('../cosma-core/models/record');
+const Record = require('../core/models/record');
 
 module.exports = function (filePath) {
     if (fs.existsSync(filePath) === false) {
