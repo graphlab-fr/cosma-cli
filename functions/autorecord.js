@@ -17,7 +17,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
             break;
 
         case false:
-            console.error('\x1b[31m', 'Err.', '\x1b[0m');
+            console.error('\x1b[31m', 'Err.', '\x1b[0m', record.writeReport());
             break;
 
         case 'overwriting':

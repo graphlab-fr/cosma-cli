@@ -31,7 +31,7 @@ program
 
 program
     .command('record')
-    .action((title, type, tags) => {
+    .action(() => {
         require('./functions/record');
     })
 
@@ -40,10 +40,15 @@ program
     .argument('<title>', 'Title and file name of record')
     .argument('[type]', 'Type of record. "undefined" by default')
     .argument('[tags]', 'Tags of record.')
-    .option('-c, --citeproc', 'Add quotation')
-    .action((title, type, tags, options) => {
-        console.log(title, type, tags);
-        console.log(options);
+    .action((title, type, tags) => {
+        require('./functions/autorecord')(title, type, tags);
+    })
+
+program
+    .command('batch')
+    .argument('<file>', 'File path to data file')
+    .action((file) => {
+        require('./functions/batch')(file);
     })
 
 program.parse();
