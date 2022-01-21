@@ -6,56 +6,44 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-/**
- * command sample :
- * node app <command name> <argument1 argument2 …>
- */
+const commander = require('commander')
+    , program = new commander.Command()
+    , { version } = require('./package.json');
 
-const cmdEntries = process.argv.slice(2);
+program.version(version);
 
-process.argv = {
-    requestName: cmdEntries[0], // = "command name"
-    requestArgs: cmdEntries.slice(1) // = ["argument1", "argument2", …]
-}
+program
+    .command('config')
+    .action((title, type, tags, options) => {
+        const Config = require('./core/models/config');
+        new Config();
+    })
 
-const arg = process.argv.requestArgs;
+program
+    .command('modelize')
+    .argument('[params]', 'Parameters for generate graph')
+    .option('-c, --citeproc', 'Add quotation')
+    .option('-css, --custom_css', 'Add cumstom CSS')
+    .option('--sample', "Get Cosma's example cosmoscope")
+    .action((params, options) => {
+        require('./functions/modelize')(options);
+    })
 
-require('./functions/verifconfig'); // config generation & verif
+program
+    .command('record')
+    .action((title, type, tags) => {
+        require('./functions/record');
+    })
 
-switch (process.argv.requestName) {
+program
+    .command('autorecord')
+    .argument('<title>', 'Title and file name of record')
+    .argument('[type]', 'Type of record. "undefined" by default')
+    .argument('[tags]', 'Tags of record.')
+    .option('-c, --citeproc', 'Add quotation')
+    .action((title, type, tags, options) => {
+        console.log(title, type, tags);
+        console.log(options);
+    })
 
-    /** Actions
-    --------------------*/
-
-    // config generation
-
-    case 'c': break; // shortcut
-    case 'config': break;
-
-    // cosmoscope generation
-
-    case 'm': require('./functions/modelize')(arg); break;
-    case 'modelize': require('./functions/modelize')(arg); break;
-
-    // add a record
-
-    case 'r': require('./functions/record'); break;
-    case 'record': require('./functions/record'); break;
-        
-    case 'a': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
-    case 'autorecord': require('./functions/autorecord')(arg[0], arg[1], arg[2]); break;
-        
-    case 'b': require('./functions/batch')(arg[0]); break;
-    case 'batchrecord': require('./functions/batch')(arg[0]); break;
-
-    /** Defaults
-    --------------------*/
-
-    case undefined:
-        require('./functions/modelize');
-    break;
-
-    default:
-        console.log('Unknow command "' + process.argv.requestName + '"');
-    break;
-}
+program.parse();
