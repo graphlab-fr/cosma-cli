@@ -13,9 +13,23 @@ const commander = require('commander')
 program.version(version);
 
 program
+    .name("cosma")
+    .usage("[command] [options]")
+    .addHelpText('after',
+`
+Example call:
+  $ cosma modelize --citeproc --custom-css --sample
+  $ cosma autorecord "My record" "concpet" "tags 1,tag 2"
+  $ cosma batch ~/Documents/data.json
+
+For more information:
+  $ cosma [command] --help`
+)
+
+program
     .command('config')
     .description('Generate the configuration file.')
-    .action((title, type, tags, options) => {
+    .action(() => {
         const Config = require('./core/models/config');
         new Config();
     })
@@ -23,11 +37,10 @@ program
 program
     .command('modelize')
     .description('Generate a cosmoscope.')
-    .argument('[params]', 'Parameters for generate graph')
     .option('--citeproc', 'Process citations.')
     .option('--custom-css', 'Apply custom CSS.')
     .option('--sample', "Generate a sample cosmoscope.")
-    .action((params, options) => {
+    .action((options) => {
         require('./functions/modelize')(options);
     })
 
@@ -42,11 +55,12 @@ program
     .command('autorecord')
     .description('Create a record (one-liner mode).')
     .argument('<title>', '(mandatory) Record title.')
-    .argument('<type>', 'Record type (default: undefined).')
+    .argument('[type]', 'Record type (default: undefined).')
     .argument('[tags]', 'List of comma-separated tags.')
     .action((title, type, tags) => {
         require('./functions/autorecord')(title, type, tags);
     })
+    .showHelpAfterError('("autorecord --help" for additional information)')
 
 program
     .command('batch')
@@ -55,5 +69,6 @@ program
     .action((file) => {
         require('./functions/batch')(file);
     })
+    .showHelpAfterError('("batch --help" for additional information)')
 
 program.parse();
