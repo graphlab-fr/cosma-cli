@@ -22,36 +22,36 @@ program
 
 program
     .command('modelize')
-    .description('Generate a cosmocope (visualisation file).')
+    .description('Generate a cosmoscope.')
     .argument('[params]', 'Parameters for generate graph')
-    .option('-c, --citeproc', 'Add quotation')
-    .option('-css, --custom_css', 'Add cumstom CSS')
-    .option('--sample', "Get Cosma's example cosmoscope")
+    .option('--citeproc', 'Process citations.')
+    .option('--custom-css', 'Apply custom CSS.')
+    .option('--sample', "Generate a sample cosmoscope.")
     .action((params, options) => {
         require('./functions/modelize')(options);
     })
 
 program
     .command('record')
-    .description('Generate a record file by a form.')
+    .description('Create a record (form mode).')
     .action(() => {
         require('./functions/record');
     })
 
 program
     .command('autorecord')
-    .description('Generate a record by a oneliner command.')
-    .argument('<title>', 'Title and file name of record')
-    .argument('[type]', 'Type of record. "undefined" by default')
-    .argument('[tags]', 'Tags of record.')
+    .description('Create a record (one-liner mode).')
+    .argument('<title>', '(mandatory) Record title.')
+    .argument('<type>', 'Record type (default: undefined).')
+    .argument('[tags]', 'List of comma-separated tags.')
     .action((title, type, tags) => {
         require('./functions/autorecord')(title, type, tags);
     })
 
 program
     .command('batch')
-    .description('Generate several records from a data file.')
-    .argument('<file>', 'File path to data file')
+    .description('Create records (batch mode).')
+    .argument('<file>', 'List of records to be created (path to JSON data file).')
     .action((file) => {
         require('./functions/batch')(file);
     })
