@@ -5,29 +5,21 @@ const Graph = require('../core/models/graph')
     , Config = require('../core/models/config')
     , Template = require('../core/models/template');
 
-module.exports = function (graphParams) {
-    const configG = new Config();
+module.exports = function (options) {
+    const time = require('../functions/time');
 
-    const config = require('../functions/verifconfig').config
-        , time = require('../functions/time');
+    const config = new Config();
 
-    graphParams.push('publish');
+    options['publish'] = true
+    options['citeproc'] = (!!options['citeproc'] && config.canCiteproc());
+    options['custom_css'] = (!!options['customCss'] && config.canCssCustom());
 
-    if (config['citeproc'] && config['citeproc'] === true) {
-        graphParams.push('citeproc');
+    options = Object.keys(options)
+        .map((key) => { return { name: key, value: options[key] } })
+        .filter(option => option.value === true)
+        .map(option => option.name)
 
-        if (configG.canCiteproc() === false) {
-            console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Can not process quotes : undefined parameters'); }
-    }
-
-    if (config['load_css_custom'] && config['load_css_custom'] === true) {
-        graphParams.push('css_custom');
-
-        if (configG.canCssCustom() === false) {
-            console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Can not process custom css : undefined parameters'); }
-    }
-
-    const graph = new Graph(graphParams)
+    const graph = new Graph(options)
         , template = new Template(graph);
 
     require('./log')(graph.report);
@@ -35,12 +27,12 @@ module.exports = function (graphParams) {
     if (graph.errors.length > 0) {
         console.error('\x1b[31m', 'Err.', '\x1b[0m', graph.errors.join(', ')); }
 
-    fs.writeFile(config.export_target + 'cosmoscope.html', template.html, (err) => { // Cosmoscope file for export folder
+    fs.writeFile(config.opts.export_target + 'cosmoscope.html', template.html, (err) => { // Cosmoscope file for export folder
         if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
         console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${graph.files.length} records)`)
     });
 
-    if (config.history === false) { return; }
+    if (config.opts.history === false) { return; }
 
     historyPath.createFolder();
     fs.writeFile(`history/${time}/cosmoscope.html`, template.html, (err) => { // Cosmoscope file for history

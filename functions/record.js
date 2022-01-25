@@ -4,7 +4,8 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-const config = require('./verifconfig').config
+const Config = require('../core/models/config')
+    , config = Config.get()
 const readline = require('readline');
 
 config.record_types_list = Object.keys(config.record_types);
