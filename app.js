@@ -28,6 +28,7 @@ For more information:
 
 program
     .command('config')
+    .alias('c')
     .description('Generate the configuration file.')
     .action(() => {
         const Config = require('./core/models/config');
@@ -36,9 +37,10 @@ program
 
 program
     .command('modelize')
+    .alias('m')
     .description('Generate a cosmoscope.')
-    .option('--citeproc', 'Process citations.')
-    .option('--custom-css', 'Apply custom CSS.')
+    .option('-c, --citeproc', 'Process citations.')
+    .option('-css, --custom-css', 'Apply custom CSS.')
     .option('--sample', "Generate a sample cosmoscope.")
     .action((options) => {
         require('./functions/modelize')(options);
@@ -46,6 +48,7 @@ program
 
 program
     .command('record')
+    .alias('r')
     .description('Create a record (form mode).')
     .action(() => {
         require('./functions/record');
@@ -53,6 +56,7 @@ program
 
 program
     .command('autorecord')
+    .alias('a')
     .description('Create a record (one-liner mode).')
     .argument('<title>', '(mandatory) Record title.')
     .argument('[type]', 'Record type (default: undefined).')
@@ -64,11 +68,14 @@ program
 
 program
     .command('batch')
+    .alias('b')
     .description('Create records (batch mode).')
     .argument('<file>', 'List of records to be created (path to JSON data file).')
     .action((file) => {
         require('./functions/batch')(file);
     })
     .showHelpAfterError('("batch --help" for additional information)')
+
+program.showSuggestionAfterError();
 
 program.parse();
