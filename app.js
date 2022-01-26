@@ -19,7 +19,7 @@ program
 `
 Example call:
   $ cosma modelize --citeproc --custom-css --sample
-  $ cosma autorecord "My record" "concpet" "tags 1,tag 2"
+  $ cosma autorecord "My record" "concept" "tag 1,tag 2"
   $ cosma batch ~/Documents/data.json
 
 For more information:
