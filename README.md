@@ -1,4 +1,4 @@
-# Cosma CLI [![DOI](https://zenodo.org/badge/308555323.svg)](https://zenodo.org/badge/latestdoi/308555323)
+# Cosma CLI [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5920616.svg)](https://doi.org/10.5281/zenodo.5920616)
 
 **Cosma** is a document graph visualization tool. It modelizes interlinked Markdown files and renders them as an interactive network in a web interface.
 
