@@ -12,7 +12,7 @@ module.exports = function (options) {
 
     options['publish'] = true
     options['citeproc'] = (!!options['citeproc'] && config.canCiteproc());
-    options['custom_css'] = (!!options['customCss'] && config.canCssCustom());
+    options['css_custom'] = (!!options['customCss'] && config.canCssCustom());
 
     options = Object.keys(options)
         .map((key) => { return { name: key, value: options[key] } })
