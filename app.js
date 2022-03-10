@@ -39,6 +39,7 @@ program
     .command('modelize')
     .alias('m')
     .description('Generate a cosmoscope.')
+    .option('--config <path>', 'Set config file.')
     .option('-c, --citeproc', 'Process citations.')
     .option('-css, --custom-css', 'Apply custom CSS.')
     .option('--sample', "Generate a sample cosmoscope.")
