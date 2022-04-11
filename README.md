@@ -6,6 +6,15 @@ Visit <https://cosma.graphlab.fr/en/about/> to learn more about the project.
 
 This is the command-line interface (CLI) version of Cosma. It requires [NodeJS](https://nodejs.org/fr/) v16 or higher.
 
+Run these commands to clone and edit the repository :
+
+```bash
+git clone --recurse-submodules https://github.com/graphlab-fr/cosma-cli cosma-cli
+cd cosma-cli
+npm i
+node app modelize # cmd 'cosma modelize' -> 'node app modelize'
+```
+
 ## Documentation
 
 User and developer documentation for Cosma CLI will be published progressively in 2022 at <https://cosma.graphlab.fr/docs>.
