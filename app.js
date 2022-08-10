@@ -77,6 +77,21 @@ program
     })
     .showHelpAfterError('("batch --help" for additional information)')
 
+program
+    .command('opensphere')
+    .description('Create an Opensphère.')
+    .argument('<nodes_file>', 'List of nodes (path to the CSV file contains columns).')
+    .argument('<links_file>', 'List of links (path to the CSV file contains columns).')
+    .action((nodes_file, links_file) => {
+        require('./functions/opensphere')(nodes_file, links_file);
+    })
+    .showHelpAfterError('("opensphere --help" for additional information)')
+    .addHelpText('after',
+`
+Example call:
+  $ cosma opensphere "/home/user/documents/nodes.csv" "/home/user/documents/links.csv"`
+)
+
 program.showSuggestionAfterError();
 
 program.parse();
