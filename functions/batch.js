@@ -5,7 +5,8 @@
  */
 
 const fs = require('fs')
-    , path = require('path');
+    , path = require('path')
+    , { parse } = require("csv-parse/sync");
 
 const Record = require('../core/models/record');
 
@@ -23,6 +24,17 @@ module.exports = function (filePath) {
                     data = JSON.parse(data);
                 } catch (error) {
                     return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'JSON data file is invalid.');
+                }
+                break;
+
+            case '.csv':
+                try {
+                    data = parse(data, {
+                        columns: true,
+                        skip_empty_lines: true
+                    });
+                } catch (error) {
+                    return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'CSV data file is invalid.');
                 }
                 break;
 
