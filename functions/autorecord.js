@@ -7,9 +7,9 @@
 const Record = require('../core/models/record');
 
 module.exports = function (title = '', type = 'undefined', tags = '') {
-    const record = new Record(title, type, tags);
+    const record = new Record(undefined, title, type, tags);
 
-    const result = record.save();
+    const result = record.saveAsFile();
 
     switch (result) {
         case true:
@@ -27,7 +27,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
             (async () => {
                 new Promise((resolve, reject) => {
                     rl.question(`Do you want to overwrite '${record.title}.md' ? (y/n) `, (answer) => {
-                        if (answer === 'y') { record.save(true); }
+                        if (answer === 'y') { record.saveAsFile(true); }
                         rl.close();
                     })
                 })

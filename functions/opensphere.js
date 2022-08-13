@@ -8,7 +8,8 @@ const fs = require('fs')
     , path = require('path')
     , { parse } = require("csv-parse/sync");
 
-const Opensphere = require('../core/models/opensphere');
+const Opensphere = require('../core/models/opensphere')
+    , Template = require('../core/models/template');
 
 module.exports = function(recordsFilePath, linksFilePath) {
     if (fs.existsSync(recordsFilePath) === false) {
@@ -22,8 +23,13 @@ module.exports = function(recordsFilePath, linksFilePath) {
     const linksFileContent = fs.readFileSync(linksFilePath, 'utf-8');
     const linksData = parse(linksFileContent, { columns: true, skip_empty_lines: true });
     
-    const records = Opensphere.formatArrayRecords(recordsData);
     const links = Opensphere.formatArrayLinks(linksData);
-    const opensphere = new Opensphere(records, links);
-    // console.log(opensphere.config);
+    const records = Opensphere.formatArrayRecords(recordsData, links);
+    const opensphere = new Opensphere(records, links, undefined);
+    const { html } = new Template(opensphere);
+
+    fs.writeFile('./cosmoscope.html', html, (err) => { // Cosmoscope file for export folder
+        if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
+        // console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${graph.files.length} records)`)
+    });
 }
