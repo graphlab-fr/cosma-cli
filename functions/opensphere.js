@@ -5,7 +5,6 @@
  */
 
 const fs = require('fs')
-    , path = require('path')
     , { parse } = require("csv-parse/sync");
 
 const Opensphere = require('../core/models/opensphere')
