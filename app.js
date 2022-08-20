@@ -18,7 +18,7 @@ program
     .addHelpText('after',
 `
 Example call:
-  $ cosma modelize --citeproc --custom-css --sample
+  $ cosma modelize --citeproc --custom-css
   $ cosma autorecord "My record" "concept" "tag 1,tag 2"
   $ cosma batch ~/Documents/data.json
 
@@ -43,6 +43,7 @@ program
     .option('-c, --citeproc', 'Process citations.')
     .option('-css, --custom-css', 'Apply custom CSS.')
     .option('--sample', "Generate a sample cosmoscope.")
+    .option('--fake', "Generate a fake cosmoscope.")
     .action((options) => {
         require('./functions/modelize')(options);
     })
