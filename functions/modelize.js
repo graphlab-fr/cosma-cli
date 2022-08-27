@@ -35,33 +35,15 @@ module.exports = function ({config: configPath, ...options}) {
     const {
         files_origin: filesPath,
         export_target: exportPath,
-        csl: cslFilePath,
-        bibliography: bibFilePath,
-        csl_locale: cslLocalFilePath,
         history
     } = config.opts;
     const files = Cosmocope.getFromPathFiles(filesPath);
-    const records = Cosmocope.getRecordsFromFiles(files, config.opts);
+    const records = Cosmocope.getRecordsFromFiles(files, config.opts);    
     const graph = new Cosmocope(records, config.opts, optionsGraph);
 
     require('./log')(graph.report);
 
-    let bibliography;
-    if (optionsTemplate.includes('citeproc')) {
-        try {
-            bibliography = new Bibliography(
-                JSON.parse(fs.readFileSync(bibFilePath, 'utf-8')),
-                fs.readFileSync(cslFilePath, 'utf-8'),
-                fs.readFileSync(cslLocalFilePath, 'utf-8'),
-                records
-            );
-        } catch (error) {
-            bibliography = undefined;
-            console.error('\x1b[31m', 'Err.', '\x1b[0m', 'read bibliography file : ' + error);
-        }
-    }
-
-    const { html } = new Template(graph, bibliography, optionsTemplate);
+    const { html } = new Template(graph, optionsTemplate);
 
     fs.writeFile(exportPath + 'cosmoscope.html', html, (err) => { // Cosmoscope file for export folder
         if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}

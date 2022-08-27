@@ -83,8 +83,9 @@ program
     .description('Create an Opensphère.')
     .argument('<nodes_file>', 'List of nodes (path to the CSV file contains columns).')
     .argument('<links_file>', 'List of links (path to the CSV file contains columns).')
-    .action((nodes_file, links_file) => {
-        require('./functions/opensphere')(nodes_file, links_file);
+    .option('-c, --citeproc', 'Process citations.')
+    .action((nodes_file, links_file, options) => {
+        require('./functions/opensphere')(nodes_file, links_file, options);
     })
     .showHelpAfterError('("opensphere --help" for additional information)')
     .addHelpText('after',

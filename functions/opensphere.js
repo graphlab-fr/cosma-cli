@@ -11,7 +11,7 @@ const Opensphere = require('../core/models/opensphere')
     , Template = require('../core/models/template')
     , Config = require('../core/models/config');
 
-module.exports = function(recordsFilePath, linksFilePath) {
+module.exports = function(recordsFilePath, linksFilePath, options) {
     if (fs.existsSync(recordsFilePath) === false) {
         return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'CSV file (records data) does not exist.'); }
     if (fs.existsSync(linksFilePath) === false) {
@@ -32,11 +32,19 @@ module.exports = function(recordsFilePath, linksFilePath) {
     const {
         export_target: exportPath
     } = config.opts;
+
+    options['citeproc'] = (!!options['citeproc'] && config.canCiteproc());
+    options = Object.entries(options)
+        .map(([name, value]) => { return { name, value } })
+        .filter(({ value }) => value === true);
+    const optionsTemplate = options
+        .filter(({ name }) => Template.validParams.has(name))
+        .map(({ name }) => name);
     
     const links = Opensphere.formatArrayLinks(linksData);
     const records = Opensphere.formatArrayRecords(recordsData, links);
     const opensphere = new Opensphere(records);
-    const { html } = new Template(opensphere);
+    const { html } = new Template(opensphere, optionsTemplate);
 
     fs.writeFile(exportPath + 'opensphere.html', html, (err) => { // Opensphere file for export folder
         if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
