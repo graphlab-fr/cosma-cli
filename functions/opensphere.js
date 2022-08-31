@@ -42,7 +42,7 @@ module.exports = function(recordsFilePath, linksFilePath, options) {
         .map(({ name }) => name);
     
     const links = Opensphere.formatArrayLinks(linksData);
-    const records = Opensphere.formatArrayRecords(recordsData, links);
+    const records = Opensphere.formatArrayRecords(recordsData, links, config);
     const opensphere = new Opensphere(records);
     const { html } = new Template(opensphere, optionsTemplate);
 

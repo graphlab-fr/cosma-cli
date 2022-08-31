@@ -1,1 +1,0 @@
-node app opensphere "/Users/guillaumebrioudes/Downloads/opensphere_test_nodes.csv" "/Users/guillaumebrioudes/Downloads/opensphere_test_links.csv"
