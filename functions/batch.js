@@ -8,7 +8,8 @@ const fs = require('fs')
     , path = require('path')
     , { parse } = require("csv-parse/sync");
 
-const Record = require('../core/models/record');
+const Cosmocope = require('../core/models/cosmoscope')
+    , Record = require('../core/models/record');
 
 module.exports = function (filePath) {
     if (fs.existsSync(filePath) === false) {
@@ -32,7 +33,7 @@ module.exports = function (filePath) {
                     data = parse(data, {
                         columns: true,
                         skip_empty_lines: true
-                    });
+                    }).map(line => Record.getFormatedDataFromCsvLine(line));
                 } catch (error) {
                     return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'CSV data file is invalid.');
                 }
@@ -42,12 +43,8 @@ module.exports = function (filePath) {
                     return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Data file is not supported.');
         }
 
-        for (const item in data) {
-            if (data[item].title === undefined) {
-                return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Data schema is invalid'); }
-        }
-
-        const result = Record.massSave(data);
+        const index = Cosmocope.getIndexToMassSave();
+        const result = Record.massSave(data, index);
 
         if (result !== true) {
             return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Data file invalid items : ', result.join(',')); }
