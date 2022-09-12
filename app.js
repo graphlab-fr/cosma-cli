@@ -45,7 +45,7 @@ program
     .option('--sample', "Generate a sample cosmoscope.")
     .option('--fake', "Generate a fake cosmoscope.")
     .action((options) => {
-        require('./functions/modelize')(options);
+        require('./controllers/modelize')(options);
     })
 
 program
@@ -53,7 +53,7 @@ program
     .alias('r')
     .description('Create a record (form mode).')
     .action(() => {
-        require('./functions/record');
+        require('./controllers/record');
     })
 
 program
@@ -64,7 +64,7 @@ program
     .argument('[type]', 'Record type (default: undefined).')
     .argument('[tags]', 'List of comma-separated tags.')
     .action((title, type, tags) => {
-        require('./functions/autorecord')(title, type, tags);
+        require('./controllers/autorecord')(title, type, tags);
     })
     .showHelpAfterError('("autorecord --help" for additional information)')
 
@@ -74,25 +74,9 @@ program
     .description('Create records (batch mode).')
     .argument('<file>', 'List of records to be created (path to JSON data file).')
     .action((file) => {
-        require('./functions/batch')(file);
+        require('./controllers/batch')(file);
     })
     .showHelpAfterError('("batch --help" for additional information)')
-
-program
-    .command('opensphere')
-    .description('Create an Opensphère.')
-    .argument('<nodes_file>', 'List of nodes (path to the CSV file contains columns).')
-    .argument('<links_file>', 'List of links (path to the CSV file contains columns).')
-    .option('-c, --citeproc', 'Process citations.')
-    .action((nodes_file, links_file, options) => {
-        require('./functions/modelizeCsv.js')(nodes_file, links_file, options);
-    })
-    .showHelpAfterError('("opensphere --help" for additional information)')
-    .addHelpText('after',
-`
-Example call:
-  $ cosma opensphere "/home/user/documents/nodes.csv" "/home/user/documents/links.csv"`
-)
 
 program.showSuggestionAfterError();
 

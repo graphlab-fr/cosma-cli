@@ -2,12 +2,13 @@ const fs = require('fs')
     , historyPath = require('../functions/history');
 
 const Graph = require('../core/models/graph')
-    , Cosmocope = require('../core/models/cosmoscope')
-    , Bibliography = require('../core/models/bibliography')
+    , Cosmoscope = require('../core/models/cosmoscope')
+    , Link = require('../core/models/link')
+    , Record = require('../core/models/record')
     , Config = require('../core/models/config')
     , Template = require('../core/models/template');
 
-module.exports = function ({config: configPath, ...options}) {
+module.exports = async function ({config: configPath, ...options}) {
     const time = require('../functions/time');
 
     const configCustom = Config.get(configPath);
@@ -33,13 +34,41 @@ module.exports = function ({config: configPath, ...options}) {
     }
 
     const {
+        select_origin: originType,
         files_origin: filesPath,
+        nodes_origin: nodesPath,
+        links_origin: linksPath,
         export_target: exportPath,
         history
     } = config.opts;
-    const files = Cosmocope.getFromPathFiles(filesPath);
-    const records = Cosmocope.getRecordsFromFiles(files, config.opts);    
-    const graph = new Cosmocope(records, config.opts, optionsGraph);
+
+    switch (originType) {
+        case 'directory':
+            if (config.canModelizeFromDirectory() === false) {
+                return console.error('Err.', '\x1b[0m', 'Can not modelize from directory with this config.')
+            }
+            break;
+        case 'csv':
+            if (config.canModelizeFromCsvFiles() === false) {
+                return console.error('Err.', '\x1b[0m', 'Can not modelize from csv files with this config.')
+            }
+            break;
+    }
+
+    let records;
+    switch (originType) {
+        case 'directory':
+            const files = Cosmoscope.getFromPathFiles(filesPath);
+            records = Cosmoscope.getRecordsFromFiles(files, config.opts);    
+            break;
+        case 'csv':
+            let [formatedRecords, formatedLinks] = await Cosmoscope.getFromPathCsv(nodesPath, linksPath);
+            const links = Link.formatedDatasetToLinks(formatedLinks);
+            records = Record.formatedDatasetToRecords(formatedRecords, links, config);
+            break;
+    }
+
+    const graph = new Cosmoscope(records, config.opts, []);
 
     require('./log')(graph.report);
 
