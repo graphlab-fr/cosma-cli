@@ -44,12 +44,12 @@ module.exports = function (filePath) {
         }
 
         const index = Cosmoscope.getIndexToMassSave();
-        const result = Record.massSave(data, index);
-
-        if (result === true) {
-            return console.log('\x1b[34m', 'Records generated', '\x1b[0m', `(${data.length})`)
-        } else {
-            return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Data file invalid items : ', result.join(','));
-        }
+        Record.massSave(data, index)
+            .then(() => {
+                return console.log('\x1b[34m', 'Records generated', '\x1b[0m', `(${data.length})`)
+            })
+            .catch((err) => {
+                return console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
+            });
     })
 }
