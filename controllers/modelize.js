@@ -1,5 +1,5 @@
 const fs = require('fs')
-    , historyPath = require('../functions/history');
+    , historyPath = require('./history');
 
 const Graph = require('../core/models/graph')
     , Cosmoscope = require('../core/models/cosmoscope')
@@ -9,7 +9,7 @@ const Graph = require('../core/models/graph')
     , Template = require('../core/models/template');
 
 module.exports = async function ({config: configPath, ...options}) {
-    const time = require('../functions/time');
+    const time = require('./time');
 
     const configCustom = Config.get(configPath);
     let config = new Config(configCustom);
