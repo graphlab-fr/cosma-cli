@@ -8,7 +8,7 @@ const fs = require('fs')
     , path = require('path')
     , { parse } = require("csv-parse/sync");
 
-const Cosmocope = require('../core/models/cosmoscope')
+const Cosmoscope = require('../core/models/cosmoscope')
     , Record = require('../core/models/record');
 
 module.exports = function (filePath) {
@@ -43,7 +43,7 @@ module.exports = function (filePath) {
                     return console.error('\x1b[31m', 'Err.', '\x1b[0m', 'Data file is not supported.');
         }
 
-        const index = Cosmocope.getIndexToMassSave();
+        const index = Cosmoscope.getIndexToMassSave();
         const result = Record.massSave(data, index);
 
         if (result === true) {

@@ -12,7 +12,7 @@ module.exports = async function ({config: configPath, ...options}) {
     const time = require('./time');
 
     const configCustom = Config.get(configPath);
-    let config = new Config(configCustom);
+    const config = new Config(configCustom);
 
     options['publish'] = true;
     options['citeproc'] = (!!options['citeproc'] && config.canCiteproc());
