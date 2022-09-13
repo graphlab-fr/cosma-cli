@@ -70,7 +70,7 @@ module.exports = async function ({config: configPath, ...options}) {
 
     const graph = new Cosmoscope(records, config.opts, []);
 
-    require('./log')(graph.report);
+    // require('./log')(graph.report);
 
     const { html } = new Template(graph, optionsTemplate);
 
