@@ -58,7 +58,7 @@ module.exports = async function ({config: configPath, ...options}) {
     let records;
     switch (originType) {
         case 'directory':
-            const files = Cosmoscope.getFromPathFiles(filesPath);
+            const files = Cosmoscope.getFromPathFiles(filesPath, config.opts);
             records = Cosmoscope.getRecordsFromFiles(files, config.opts);    
             break;
         case 'csv':
