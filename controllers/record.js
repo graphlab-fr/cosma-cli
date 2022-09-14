@@ -4,16 +4,16 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-const Config = require('../core/models/config')
-    , config = Config.get()
+const Config = require('../core/models/config');
 const readline = require('readline');
-
-config.record_types_list = Object.keys(config.record_types);
 
 // activate terminal questionnaire
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 (async () => {
+    const config = new Config();
+    const recordTypesList = config.getTypesRecords();
+
     let metas = {};
 
     // questions :
@@ -31,7 +31,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         metas.type = await new Promise((resolve, reject) => {
             rl.question('type (default = undefined) ? ', (answer) => {
                 if (answer === '') { answer = 'undefined'; }
-                if (!config.record_types_list.includes(answer) && answer !== 'undefined') {
+                if (recordTypesList.has(answer) === false && answer !== 'undefined') {
                     reject('Unknown type. Add it to config.yml beforehand.'); }
 
                 resolve(answer);
