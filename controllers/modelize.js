@@ -1,4 +1,5 @@
 const fs = require('fs')
+    , path = require('path')
     , historyPath = require('./history');
 
 const Graph = require('../core/models/graph')
@@ -37,10 +38,15 @@ module.exports = async function ({config: configPath, ...options}) {
     const {
         select_origin: originType,
         files_origin: filesPath,
-        nodes_origin: nodesPath,
-        links_origin: linksPath,
+        nodes_online: nodesUrl,
+        links_online: linksUrl,
         export_target: exportPath,
         history
+    } = config.opts;
+
+    let {
+        nodes_origin: nodesPath,
+        links_origin: linksPath
     } = config.opts;
 
     switch (originType) {
@@ -54,6 +60,13 @@ module.exports = async function ({config: configPath, ...options}) {
                 return console.error('Err.', '\x1b[0m', 'Can not modelize from csv files with this config.')
             }
             break;
+        case 'online':
+            try {
+                await config.canModelizeFromOnline();
+            } catch (err) {
+                return console.error('Err.', '\x1b[0m', 'Can not modelize from online csv files with this config.')
+            }
+            break;
     }
 
     let records;
@@ -62,6 +75,13 @@ module.exports = async function ({config: configPath, ...options}) {
             const files = Cosmoscope.getFromPathFiles(filesPath, config.opts);
             records = Cosmoscope.getRecordsFromFiles(files, config.opts);    
             break;
+        case 'online':
+            const { downloadFile } = require('../core/utils/misc');
+            const { tmpdir } = require('os');
+            nodesPath = path.join(tmpdir(), 'cosma-nodes.csv');
+            linksPath = path.join(tmpdir(), 'cosma-links.csv');
+            await downloadFile(nodesUrl, nodesPath);
+            await downloadFile(linksUrl, linksPath);
         case 'csv':
             let [formatedRecords, formatedLinks] = await Cosmoscope.getFromPathCsv(nodesPath, linksPath);
             const links = Link.formatedDatasetToLinks(formatedLinks);
