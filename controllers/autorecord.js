@@ -4,7 +4,8 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-const readline = require('readline');
+const readline = require('readline')
+    , path = require('path');
 
 const Record = require('../core/models/record');
 
@@ -26,7 +27,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
                                 await record.saveAsFile(true);
                                 logRecordIsSaved();
                             } catch (err) {
-                                console.error('\x1b[31m', 'Err.', '\x1b[0m', err.message);
+                                console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
                             }
                         }
                         rl.close();
@@ -41,6 +42,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         });
 
     function logRecordIsSaved() {
-        console.log('\x1b[32m', 'record saved', '\x1b[0m', `: ${record.title}.md`);
+        const { dir: fileDir, base: fileName } = path.parse(record.path);
+        console.log(['\x1b[32m', 'Record saved', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
     }
 }

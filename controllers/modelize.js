@@ -69,6 +69,8 @@ module.exports = async function ({config: configPath, ...options}) {
             break;
     }
 
+    console.log(`Cosmoscope templating (source : \x1b[1m${originType}\x1b[0m ; parameters : \x1b[1m${[...optionsGraph, ...optionsTemplate].join(', ')}\x1b[0m)`);
+
     let records;
     switch (originType) {
         case 'directory':
@@ -78,10 +80,13 @@ module.exports = async function ({config: configPath, ...options}) {
         case 'online':
             const { downloadFile } = require('../core/utils/misc');
             const { tmpdir } = require('os');
-            nodesPath = path.join(tmpdir(), 'cosma-nodes.csv');
-            linksPath = path.join(tmpdir(), 'cosma-links.csv');
+            const tempDir = tmpdir();
+            nodesPath = path.join(tempDir, 'cosma-nodes.csv');
+            linksPath = path.join(tempDir, 'cosma-links.csv');
             await downloadFile(nodesUrl, nodesPath);
+            console.log('- Nodes file downloaded');
             await downloadFile(linksUrl, linksPath);
+            console.log('- Links file downloaded');
         case 'csv':
             let [formatedRecords, formatedLinks] = await Cosmoscope.getFromPathCsv(nodesPath, linksPath);
             const links = Link.formatedDatasetToLinks(formatedLinks);
@@ -94,22 +99,23 @@ module.exports = async function ({config: configPath, ...options}) {
     const { html } = new Template(graph, optionsTemplate);
 
     fs.writeFile(exportPath + 'cosmoscope.html', html, (err) => { // Cosmoscope file for export folder
-        if (err) {return console.error('Err.', '\x1b[0m', 'write Cosmoscope file : ' + err)}
+        if (err) {return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'write Cosmoscope file : ' + err)}
+        console.log(['\x1b[34m', 'Cosmoscope generated', '\x1b[0m'].join(''), `(${graph.records.length} records)`);
         const reportMessage = Report.getAsMessage();
         if (reportMessage) {
             console.log(reportMessage);
         }
-        console.log('\x1b[34m', 'Cosmoscope generated', '\x1b[0m', `(${graph.records.length} records)`);
-    });
 
-    if (history === false) { return; }
-
-    historyPath.createFolder();
-    fs.writeFile(`history/${time}/report.html`, Report.getAsHtmlFile(config), (err) => {
-        if (err) { console.error('\x1b[31m', 'Err.', '\x1b[0m', 'can not save report into history : ' + err); }
-    });
-
-    fs.writeFile(`history/${time}/cosmoscope.html`, html, (err) => { // Cosmoscope file for history
-        if (err) { console.error('\x1b[31m', 'Err.', '\x1b[0m', 'can not save Cosmoscope into history : ' + err); }
+        if (history === false) { return; }
+    
+        historyPath.createFolder();
+        fs.writeFile(`history/${time}/report.html`, Report.getAsHtmlFile(config), (err) => {
+            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not save report into history : ' + err); }
+            console.log(['\x1b[2m', path.join(__dirname, `../history/${time}/report.html`), '\x1b[0m'].join(''));
+        });
+    
+        fs.writeFile(`history/${time}/cosmoscope.html`, html, (err) => { // Cosmoscope file for history
+            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not save Cosmoscope into history : ' + err); }
+        });
     });
 }

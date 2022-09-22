@@ -20,7 +20,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
     
     try {
         metas.title = await new Promise((resolve, reject) => {
-            rl.question('title (obligatory) ? ', (answer) => {
+            rl.question(`${['\x1b[1m', 'title', '\x1b[0m'].join('')} (obligatory) ? `, (answer) => {
                 if (answer === '') {
                     reject('Title is obligatory'); }
 
@@ -29,7 +29,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         })
     
         metas.type = await new Promise((resolve, reject) => {
-            rl.question('type (default = undefined) ? ', (answer) => {
+            rl.question(`${['\x1b[1m', 'type', '\x1b[0m'].join('')} (default = undefined) ? `, (answer) => {
                 if (answer === '') { answer = 'undefined'; }
                 if (recordTypesList.has(answer) === false && answer !== 'undefined') {
                     reject('Unknown type. Add it to config.yml beforehand.'); }
@@ -39,13 +39,14 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
         })
     
         metas.tags = await new Promise((resolve, reject) => {
-            rl.question('tags (facultative, between comas, no space) ? ', (answer) => { resolve(answer); })
+            rl.question(`${['\x1b[1m', 'tags', '\x1b[0m'].join('')} (facultative, between comas, no space) ? `, (answer) => { resolve(answer); })
         })
 
         rl.close();
     
         require('./autorecord')(metas.title, metas.type, metas.tags);
     } catch(err) {
-        console.error('\x1b[31m', 'Err.', '\x1b[0m', err);
+        console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err);
+        rl.close();
     }
 })()

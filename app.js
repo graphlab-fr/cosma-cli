@@ -10,6 +10,8 @@ const commander = require('commander')
     , program = new commander.Command()
     , { version } = require('./package.json');
 
+const Config = require('./core/models/config');
+
 program.version(version);
 
 program
@@ -31,8 +33,16 @@ program
     .alias('c')
     .description('Generate the configuration file.')
     .action(() => {
-        const Config = require('./core/models/config');
+        const fs = require('fs'), path = require('path');
+        const configFilePath = Config.getFilePath();
+        if (fs.existsSync(configFilePath)) {
+            console.log('Config file already exists')
+            return;
+        }
         new Config();
+        const { dir: fileDir, base: fileName } = path.parse(configFilePath);
+        console.log(['\x1b[32m', 'Config file created', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
+        process.exit();
     })
 
 program
@@ -78,6 +88,13 @@ program
     })
     .showHelpAfterError('("batch --help" for additional information)')
 
-program.showSuggestionAfterError();
 
+const { name: projectName } = new Config().opts;
+if (projectName) {
+    console.log(`[Cosma v.${version}]`, ['\x1b[4m', projectName, '\x1b[0m'].join(''), ['\x1b[2m', Config.getFilePath(), '\x1b[0m'].join(''));
+} else {
+    console.log(`[Cosma v.${version}]`, ['\x1b[2m', Config.getFilePath(), '\x1b[0m'].join(''));
+}
+
+program.showSuggestionAfterError();
 program.parse();
