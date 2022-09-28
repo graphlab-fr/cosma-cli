@@ -7,14 +7,18 @@
 const Config = require('../core/models/config');
 const readline = require('readline');
 
-// activate terminal questionnaire
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-
 (async () => {
     const config = new Config();
-    const recordTypesList = config.getTypesRecords();
+    if (config.canSaveRecords() === false) {
+        console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not make a record file : files_origin option is not set into config.yml');
+        return;
+    }
 
+    const recordTypesList = config.getTypesRecords();
     let metas = {};
+
+    // activate terminal questionnaire
+    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
     // questions :
     

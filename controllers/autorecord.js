@@ -7,11 +7,17 @@
 const readline = require('readline')
     , path = require('path');
 
-const Record = require('../core/models/record');
+const Record = require('../core/models/record')
+    , Config = require('../core/models/config');
 
 module.exports = function (title = '', type = 'undefined', tags = '') {
-    const record = new Record(undefined, title, type, tags);
+    const config = new Config();
+    if (config.canSaveRecords() === false) {
+        console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not make a record file : files_origin option is not set into config.yml');
+        return;
+    }
 
+    const record = new Record(undefined, title, type, tags);
     record.saveAsFile()
         .then(() => {
             logRecordIsSaved();
@@ -33,10 +39,11 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
                         rl.close();
                     })
                     return;
+                case 'no dir':
                 case 'fs error':
                 case 'report':
                 default:
-                    console.error('\x1b[31m', 'Err.', '\x1b[0m', message);
+                    console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), message);
                     return;
             }
         });
