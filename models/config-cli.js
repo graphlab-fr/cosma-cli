@@ -4,10 +4,10 @@ const path = require('path')
 const Config = require('../core/models/config');
 
 const envPaths = require('env-paths');
-const { config: envPathConfigDir } = envPaths('cosma-cli', { suffix: '' });
+const { data: envPathDataDir } = envPaths('cosma', { suffix: '' });
 
 module.exports = class ConfigCli extends Config {
-    static pathConfigDir = envPathConfigDir
+    static pathConfigDir = envPathDataDir
     /**
      * Get the config file path
      * @returns {string}

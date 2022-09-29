@@ -50,18 +50,11 @@ For more information:
 program
     .command('config')
     .alias('c')
-    .description('Generate the configuration file.')
-    .action(() => {
-        const fs = require('fs'), path = require('path');
-        const configFilePath = Config.getFilePath();
-        if (fs.existsSync(configFilePath)) {
-            console.log('Config file already exists');
-            return;
-        }
-        new Config();
-        const { dir: fileDir, base: fileName } = path.parse(configFilePath);
-        console.log(['\x1b[32m', 'Config file created', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
-        process.exit();
+    .description('Generate configuration files.')
+    .argument('[title]', 'Configuration name.')
+    .option('-g --global', 'Set config file.')
+    .action((title, options) => {
+        require('./controllers/config')(title, options);
     })
 
 program
