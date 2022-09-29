@@ -6,7 +6,7 @@ const Graph = require('../core/models/graph')
     , Cosmoscope = require('../core/models/cosmoscope')
     , Link = require('../core/models/link')
     , Record = require('../core/models/record')
-    , Config = require('../core/models/config')
+    , Config = require('../models/config-cli')
     , Template = require('../core/models/template')
     , Report = require('../core/models/report');
 
@@ -69,6 +69,7 @@ module.exports = async function ({config: configPath, ...options}) {
             break;
     }
 
+    console.log(config.getConfigConsolMessage());
     console.log(`Cosmoscope templating (source : \x1b[1m${originType}\x1b[0m ; parameters : \x1b[1m${[...optionsGraph, ...optionsTemplate].join(', ')}\x1b[0m)`);
 
     let records;

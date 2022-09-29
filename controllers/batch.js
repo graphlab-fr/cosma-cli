@@ -10,9 +10,12 @@ const fs = require('fs')
 
 const Cosmoscope = require('../core/models/cosmoscope')
     , Record = require('../core/models/record')
-    , Config = require('../core/models/config');
+    , Config = require('../models/config-cli');
 
 module.exports = function (filePath) {
+    const config = new Config();
+    console.log(config.getConfigConsolMessage());
+
     if (fs.existsSync(filePath) === false) {
         return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Data file do not exist.'); }
 
@@ -44,10 +47,10 @@ module.exports = function (filePath) {
                     return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Data file is not supported.');
         }
 
-        const index = Cosmoscope.getIndexToMassSave();
-        Record.massSave(data, index)
+        const { files_origin } = config.opts;
+        const index = Cosmoscope.getIndexToMassSave(files_origin);
+        Record.massSave(data, index, config.opts)
             .then(() => {
-                const { files_origin } = new Config().opts;
                 return console.log(['\x1b[32m', 'Records generated', '\x1b[0m'].join(''), `(${data.length})`, ['\x1b[2m', files_origin, '\x1b[0m'].join(''))
             })
             .catch((err) => {

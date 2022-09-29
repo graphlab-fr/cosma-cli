@@ -4,7 +4,7 @@
  * @copyright GNU GPL 3.0 ANR HyperOtlet
  */
 
-const Config = require('../core/models/config');
+const Config = require('../models/config-cli');
 const readline = require('readline');
 
 (async () => {

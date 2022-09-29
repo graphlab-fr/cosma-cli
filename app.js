@@ -8,15 +8,34 @@
 
 const commander = require('commander')
     , program = new commander.Command()
-    , { version } = require('./package.json');
+    , { version, description } = require('./package.json');
 
-const Config = require('./core/models/config');
+const Config = require('./models/config-cli');
 
 program.version(version);
 
 program
     .name("cosma")
+    .description(description)
     .usage("[command] [options]")
+    .option('--create-user-data-dir', 'Set config file.')
+    .action(({ createUserDataDir }) => {
+        if (createUserDataDir !== true) {
+            program.help(); // return full manual if no valid option is input
+            return;
+        }
+        const fs = require('fs');
+        if (fs.existsSync(Config.pathConfigDir)) {
+            console.log('Cosma user data directory already exists');
+        } else {
+            fs.mkdir(Config.pathConfigDir, (err) => {
+                if (err) {
+                    console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not make Cosma user data directory : ' + err);
+                }
+                console.log(['\x1b[32m', 'Cosma user data directory was made', '\x1b[0m'].join(''), `${['\x1b[2m', Config.pathConfigDir, '\x1b[0m'].join('')}`);
+            })
+        }
+    })
     .addHelpText('after',
 `
 Example call:
@@ -36,7 +55,7 @@ program
         const fs = require('fs'), path = require('path');
         const configFilePath = Config.getFilePath();
         if (fs.existsSync(configFilePath)) {
-            console.log('Config file already exists')
+            console.log('Config file already exists');
             return;
         }
         new Config();
@@ -63,6 +82,7 @@ program
     .alias('r')
     .description('Create a record (form mode).')
     .action(() => {
+        console.log(new Config().getConfigConsolMessage());
         require('./controllers/record');
     })
 
@@ -74,6 +94,7 @@ program
     .argument('[type]', 'Record type (default: undefined).')
     .argument('[tags]', 'List of comma-separated tags.')
     .action((title, type, tags) => {
+        console.log(new Config().getConfigConsolMessage());
         require('./controllers/autorecord')(title, type, tags);
     })
     .showHelpAfterError('("autorecord --help" for additional information)')
@@ -87,14 +108,6 @@ program
         require('./controllers/batch')(file);
     })
     .showHelpAfterError('("batch --help" for additional information)')
-
-
-const { name: projectName } = new Config().opts;
-if (projectName) {
-    console.log(`[Cosma v.${version}]`, ['\x1b[4m', projectName, '\x1b[0m'].join(''), ['\x1b[2m', Config.getFilePath(), '\x1b[0m'].join(''));
-} else {
-    console.log(`[Cosma v.${version}]`, ['\x1b[2m', Config.getFilePath(), '\x1b[0m'].join(''));
-}
 
 program.showSuggestionAfterError();
 program.parse();

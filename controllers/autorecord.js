@@ -8,7 +8,7 @@ const readline = require('readline')
     , path = require('path');
 
 const Record = require('../core/models/record')
-    , Config = require('../core/models/config');
+    , Config = require('../models/config-cli');
 
 module.exports = function (title = '', type = 'undefined', tags = '') {
     const config = new Config();
@@ -17,7 +17,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         return;
     }
 
-    const record = new Record(undefined, title, type, tags);
+    const record = new Record(undefined, title, type, tags, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, config.opts);
     record.saveAsFile()
         .then(() => {
             logRecordIsSaved();
@@ -49,6 +49,9 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         });
 
     function logRecordIsSaved() {
+        if (record.type.includes(type) === false) {
+            console.log(['\x1b[33m', 'Warn.', '\x1b[0m'].join(''), `type "${type}" is unset from the config and has been replaced by "undefined"`);
+        }
         const { dir: fileDir, base: fileName } = path.parse(record.path);
         console.log(['\x1b[32m', 'Record saved', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
     }
