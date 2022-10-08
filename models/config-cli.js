@@ -55,6 +55,16 @@ module.exports = class ConfigCli extends Config {
         return Config.get(configFilePath);
     }
 
+    /**
+     * Get config options from the default config file
+     * @return {object} Config option or base config (Config.base) if errors
+     * @throws {ErrorConfig} Will throw an error if config file can not be read or parse
+     */
+    
+    static getDefaultConfig() {
+        return Config.get(ConfigCli.getDefaultConfigFilePath());
+    }
+
     constructor(opts = {}) {
         const configFilePath = ConfigCli.getConfigFilePath();
         let configFromFile = Config.get(configFilePath);
