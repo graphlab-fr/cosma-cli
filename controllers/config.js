@@ -9,7 +9,7 @@ module.exports = function(title, { global: isGlobal }) {
     let configFilePath;
     if (isGlobal) {
         const configFileDirPath = ConfigCli.pathConfigDir;
-        configFilePath = path.join(configFileDirPath, `${title || 'config'}.yml`);
+        configFilePath = path.join(configFileDirPath, `${title || 'defaults'}.yml`);
     } else {
         const configFileDirPath = process.env.PWD;
         configFilePath = path.join(configFileDirPath, `config.yml`);
