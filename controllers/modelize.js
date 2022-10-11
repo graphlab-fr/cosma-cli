@@ -49,27 +49,28 @@ module.exports = async function ({config: configPath, ...options}) {
         links_origin: linksPath
     } = config.opts;
 
+    console.log(config.getConfigConsolMessage());
+
     switch (originType) {
         case 'directory':
             if (config.canModelizeFromDirectory() === false) {
-                return console.error('Err.', '\x1b[0m', 'Can not modelize from directory with this config.')
+                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not modelize from directory with this config.')
             }
             break;
         case 'csv':
             if (config.canModelizeFromCsvFiles() === false) {
-                return console.error('Err.', '\x1b[0m', 'Can not modelize from csv files with this config.')
+                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not modelize from csv files with this config.')
             }
             break;
         case 'online':
             try {
                 await config.canModelizeFromOnline();
             } catch (err) {
-                return console.error('Err.', '\x1b[0m', 'Can not modelize from online csv files with this config.')
+                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not modelize from online csv files with this config.')
             }
             break;
     }
 
-    console.log(config.getConfigConsolMessage());
     console.log(`Cosmoscope templating (source : \x1b[1m${originType}\x1b[0m ; parameters : \x1b[1m${[...optionsGraph, ...optionsTemplate].join(', ')}\x1b[0m)`);
 
     let records;
