@@ -6,14 +6,28 @@ const ConfigCli = require('../models/config-cli'),
     Config = require('../core/models/config');
 
 module.exports = function(title, { global: isGlobal }) {
+    if (fs.existsSync(ConfigCli.pathConfigFile.fromInstallationDir) === false) {
+        const isOk = new Config(undefined, ConfigCli.pathConfigFile.fromInstallationDir).save();
+        if (isOk === false) { log(isOk); }
+    }
+    if (isGlobal && fs.existsSync(ConfigCli.pathConfigDir) === false) {
+        return console.log(
+            ['\x1b[33m', 'Warn.', '\x1b[0m'].join(''),
+            "Please make a user data directory with command",
+            ['\x1b[1m', 'cosma --create-user-data-dir', '\x1b[0m'].join(''),
+            "before make a global config file."
+        );
+    }
+    if (ConfigCli.pathConfigFile.fromExecutionDir === ConfigCli.pathConfigFile.fromConfigDir) {
+        isGlobal = true;
+    }
+
     const isGlobalDefaultConfig = isGlobal && !title;
     let configFilePath, opts = Object.assign({}, ConfigCli.getDefaultConfig(), { name: title || '' });
     if (isGlobal) {
-        const configFileDirPath = ConfigCli.pathConfigDir;
-        configFilePath = path.join(configFileDirPath, `${title || 'defaults'}.yml`);
+        configFilePath = path.join(ConfigCli.pathConfigDir, `${title || 'defaults'}.yml`);
     } else {
-        const configFileDirPath = process.env.PWD;
-        configFilePath = path.join(configFileDirPath, `config.yml`);
+        configFilePath = ConfigCli.pathConfigFile.fromExecutionDir;
     }
     const { dir: configFileDir, base: configFileName } = path.parse(configFilePath);
 

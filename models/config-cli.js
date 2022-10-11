@@ -4,10 +4,15 @@ const path = require('path')
 const Config = require('../core/models/config');
 
 const envPaths = require('env-paths');
-const { data: envPathDataDir } = envPaths('cosma', { suffix: '' });
+const { data: envPathDataDir } = envPaths('cosma-cli', { suffix: '' });
 
 module.exports = class ConfigCli extends Config {
     static pathConfigDir = envPathDataDir;
+    static pathConfigFile = {
+        fromConfigDir: path.join(ConfigCli.pathConfigDir, 'defaults.yml'),
+        fromInstallationDir: path.join(__dirname, '../', 'defaults.yml'),
+        fromExecutionDir: path.join(process.env.PWD, 'config.yml')
+    }
 
     /**
      * Get the config file path that contains defaults options value
@@ -16,13 +21,10 @@ module.exports = class ConfigCli extends Config {
      */
 
     static getDefaultConfigFilePath() {
-        if (fs.existsSync(ConfigCli.pathConfigDir)) {
-            const configFileInConfigDir = path.join(ConfigCli.pathConfigDir, 'defaults.yml');
-            return configFileInConfigDir;
+        if (fs.existsSync(ConfigCli.pathConfigFile.fromConfigDir)) {
+            return ConfigCli.pathConfigFile.fromConfigDir;
         }
-        
-        const configFileInInstallationDir = path.join(__dirname, '../../', 'defaults.yml');
-        return configFileInInstallationDir;
+        return ConfigCli.pathConfigFile.fromInstallationDir;
     }
 
     /**
@@ -33,11 +35,9 @@ module.exports = class ConfigCli extends Config {
      */
 
     static getConfigFilePath () {
-        const configFileInExecutionDir = path.join(process.env.PWD, 'config.yml');
-        if (fs.existsSync(configFileInExecutionDir)) {
+        if (fs.existsSync(ConfigCli.pathConfigFile.fromExecutionDir)) {
             return configFileInExecutionDir;
         }
-
         return ConfigCli.getDefaultConfigFilePath();
     }
 
