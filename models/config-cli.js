@@ -74,9 +74,13 @@ module.exports = class ConfigCli extends Config {
 
     getConfigConsolMessage() {
         const { version } = require('../package.json');
+        let name = this.opts['name'] || null;
+        if (this.path === ConfigCli.getDefaultConfigFilePath()) {
+            name = 'Default';
+        }
         const messageSections = [
             `[Cosma v.${version}]`,
-            (this.opts['name'] ? ['\x1b[4m', this.opts['name'], '\x1b[0m'].join('') : null),
+            ['\x1b[4m', name, '\x1b[0m'].join(''),
             ['\x1b[2m', this.path, '\x1b[0m'].join('')
         ];
         return messageSections.join(' ');
