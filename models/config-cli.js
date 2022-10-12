@@ -1,5 +1,6 @@
 const path = require('path')
-    , fs = require('fs');
+    , fs = require('fs')
+    , slugify = require('slugify');
 
 const Config = require('../core/models/config');
 
@@ -12,6 +13,24 @@ module.exports = class ConfigCli extends Config {
         fromConfigDir: path.join(ConfigCli.pathConfigDir, 'defaults.yml'),
         fromInstallationDir: path.join(__dirname, '../', 'defaults.yml'),
         fromExecutionDir: path.join(process.env.PWD, 'config.yml')
+    }
+
+    /**
+     * @param {string} fileName 
+     * @returns {string}
+     * @exemple
+     * ```
+     * ConfigCli.getSlugConfigFileName('mÿ Config') // => 'my-config.yml'
+     * ```
+     */
+
+    static getSlugConfigFileName(fileName) {
+        const slugName = slugify(fileName, {
+            replacement: '-',
+            lower: true,
+            remove: /[&*+=~'"!?:@#$%^(){}\[\]\\/]/g,
+        });
+        return slugName + '.yml';
     }
 
     /**

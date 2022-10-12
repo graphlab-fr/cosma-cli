@@ -23,9 +23,12 @@ module.exports = function(title, { global: isGlobal }) {
     }
 
     const isGlobalDefaultConfig = isGlobal && !title;
+
+    title &&= ConfigCli.getSlugConfigFileName(title);
+
     let configFilePath, opts = Object.assign({}, ConfigCli.getDefaultConfig(), { name: title || '' });
     if (isGlobal) {
-        configFilePath = path.join(ConfigCli.pathConfigDir, `${title || 'defaults'}.yml`);
+        configFilePath = path.join(ConfigCli.pathConfigDir, `${title || 'defaults.yml'}`);
     } else {
         configFilePath = ConfigCli.pathConfigFile.fromExecutionDir;
     }
