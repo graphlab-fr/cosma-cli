@@ -1,3 +1,16 @@
+/**
+ * @file Configuration administration for CLI interface
+ * @author Guillaume Brioudes <https://myllaume.fr/>
+ * @copyright GNU GPL 3.0 ANR HyperOtlet
+ */
+
+/**
+ * @typedef FilesList
+ * @type {object}
+ * @property {string} fileName 
+ * @property {string} filePath 
+ */
+
 const path = require('path')
     , fs = require('fs')
     , slugify = require('slugify');
@@ -13,6 +26,29 @@ module.exports = class ConfigCli extends Config {
         fromConfigDir: path.join(ConfigCli.pathConfigDir, 'defaults.yml'),
         fromInstallationDir: path.join(__dirname, '../', 'defaults.yml'),
         fromExecutionDir: path.join(process.env.PWD, 'config.yml')
+    }
+
+    static currentUsedConfigFileName = 'default.yml';
+
+    /**
+     * 
+     * @param {string} inputFileName 
+     * @returns 
+     * @throws {Error} If invalid string in parameter or nowhere config file
+     */
+
+    static setCurrentUsedConfigFileName(inputFileName) {
+        if (!inputFileName || typeof inputFileName !== 'string') {
+            throw new Error('The targeted config file name is invalid.');
+        }
+        inputFileName = path.extname(inputFileName) === '.yml' ? inputFileName : `${inputFileName}.yml`;
+        const list = ConfigCli.getConfigFileListFromConfigDir();
+        const target = list.find(({ fileName }) => fileName === inputFileName);
+        if (target) {
+            ConfigCli.currentUsedConfigFileName = target.fileName;
+        } else {
+            throw new Error('The targeted config file name does not exist.');
+        }
     }
 
     /**
@@ -47,6 +83,27 @@ module.exports = class ConfigCli extends Config {
     }
 
     /**
+     * Get list of config files from user data directory
+     * @returns {FilesList[]}
+     * @throws {Error} If user data directory does not exist or FS error
+     */
+
+    static getConfigFileListFromConfigDir() {
+        if (fs.existsSync(ConfigCli.pathConfigDir) === false) {
+            throw new Error('Cosma user data directory does not exist.');
+        }
+        let files;
+        try {
+            files = fs.readdirSync(ConfigCli.pathConfigDir, 'utf-8');
+        } catch (error) {
+            throw new Error('Can not list config files from user data directory.');
+        }
+        return files
+            .filter((fileName) => path.extname(fileName) === '.yml')
+            .map((fileName) => ({ fileName, filePath: path.join(ConfigCli.pathConfigDir, fileName) }));
+    }
+
+    /**
      * Get the config file path that contains options
      * from current dir (if there is a config.yml file) or defaults dir
      * @returns {string}
@@ -54,8 +111,11 @@ module.exports = class ConfigCli extends Config {
      */
 
     static getConfigFilePath () {
+        if (ConfigCli.currentUsedConfigFileName !== 'default.yml') {
+            return path.join(ConfigCli.pathConfigDir, ConfigCli.currentUsedConfigFileName);
+        }
         if (fs.existsSync(ConfigCli.pathConfigFile.fromExecutionDir)) {
-            return configFileInExecutionDir;
+            return ConfigCli.pathConfigFile.fromExecutionDir;
         }
         return ConfigCli.getDefaultConfigFilePath();
     }

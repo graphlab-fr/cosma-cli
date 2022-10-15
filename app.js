@@ -19,21 +19,20 @@ program
     .description(description)
     .usage("[command] [options]")
     .option('--create-user-data-dir', 'Set config file.')
-    .action(({ createUserDataDir }) => {
-        if (createUserDataDir !== true) {
-            program.help(); // return full manual if no valid option is input
-            return;
-        }
-        const fs = require('fs');
-        if (fs.existsSync(Config.pathConfigDir)) {
-            console.log('Cosma user data directory already exists');
+    .option('-ls --list-projects', 'Get config files list.')
+    .option('--use', 'Use config file from list.')
+    .action(({ createUserDataDir, listProjects }) => {
+        if (createUserDataDir) {
+            require('./controllers/user-data-dir')();
+        } else if (listProjects) {
+            try {
+                const list = Config.getConfigFileListFromConfigDir();
+                console.table(list);
+            } catch (err) {
+                console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
+            }
         } else {
-            fs.mkdir(Config.pathConfigDir, (err) => {
-                if (err) {
-                    console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not make Cosma user data directory : ' + err);
-                }
-                console.log(['\x1b[32m', 'Cosma user data directory was made', '\x1b[0m'].join(''), `${['\x1b[2m', Config.pathConfigDir, '\x1b[0m'].join('')}`);
-            })
+            program.help(); // return full manual if no valid option is input
         }
     })
     .addHelpText('after',
@@ -61,20 +60,35 @@ program
     .command('modelize')
     .alias('m')
     .description('Generate a cosmoscope.')
-    .option('--config <path>', 'Set config file.')
+    .option('-c, --config <name>', 'Set config file.')
     .option('-c, --citeproc', 'Process citations.')
     .option('-css, --custom-css', 'Apply custom CSS.')
     .option('--sample', "Generate a sample cosmoscope.")
     .option('--fake', "Generate a fake cosmoscope.")
-    .action((options) => {
-        require('./controllers/modelize')(options);
+    .action(({ config: configName, ...rest }) => {
+        if (configName) {
+            try {
+                Config.setCurrentUsedConfigFileName(configName);
+            } catch (err) {
+                console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
+            }
+        }
+        require('./controllers/modelize')(rest);
     })
 
 program
     .command('record')
     .alias('r')
     .description('Create a record (form mode).')
-    .action(() => {
+    .option('-c, --config <name>', 'Set config file.')
+    .action(({ config: configName }) => {
+        if (configName) {
+            try {
+                Config.setCurrentUsedConfigFileName(configName);
+            } catch (err) {
+                console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
+            }
+        }
         console.log(new Config().getConfigConsolMessage());
         require('./controllers/record');
     })
@@ -86,7 +100,15 @@ program
     .argument('<title>', '(mandatory) Record title.')
     .argument('[type]', 'Record type (default: undefined).')
     .argument('[tags]', 'List of comma-separated tags.')
-    .action((title, type, tags) => {
+    .option('-c, --config <name>', 'Set config file.')
+    .action((title, type, tags, { config: configName }) => {
+        if (configName) {
+            try {
+                Config.setCurrentUsedConfigFileName(configName);
+            } catch (err) {
+                console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
+            }
+        }
         console.log(new Config().getConfigConsolMessage());
         require('./controllers/autorecord')(title, type, tags);
     })
@@ -96,9 +118,18 @@ program
     .command('batch')
     .alias('b')
     .description('Create records (batch mode).')
+    .argument('[used-config]', 'Configuration name.')
     .argument('<file>', 'List of records to be created (path to JSON data file).')
-    .action((file) => {
-        require('./controllers/batch')(file);
+    .option('-c, --config <name>', 'Set config file.')
+    .action((filePath, { config: configName }) => {
+        if (configName) {
+            try {
+                Config.setCurrentUsedConfigFileName(configName);
+            } catch (err) {
+                console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
+            }
+        }
+        require('./controllers/batch')(filePath);
     })
     .showHelpAfterError('("batch --help" for additional information)')
 

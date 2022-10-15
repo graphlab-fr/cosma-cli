@@ -31,4 +31,11 @@ describe('ConfigCli', () => {
             expect(slugifyName).equal('to-to.yml');
         });
     })
+
+    describe('current used config file', () => {
+        it('should not be set for invalid value (empty strings, arrays…)', () => {
+            expect(() => Config.setCurrentUsedConfigFileName('')).to.throw(Error);
+            expect(() => Config.setCurrentUsedConfigFileName(['file.yml'])).to.throw(Error);
+        });
+    })
 })
