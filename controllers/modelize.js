@@ -10,10 +10,9 @@ const Graph = require('../core/models/graph')
     , Template = require('../core/models/template')
     , Report = require('../core/models/report');
 
-module.exports = async function ({options}) {
+module.exports = async function (options) {
     const time = require('./time');
 
-    // const configCustom = Config.get(configPath);
     const config = new Config();
 
     options['publish'] = true;
