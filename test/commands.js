@@ -9,12 +9,23 @@ const commander = require('commander');
 // https://javascript.plainenglish.io/how-to-test-a-node-js-command-line-tool-2735ea7dc041
 
 describe.only('Commands', () => {
-    it('should', (done) => {
-        const spyCommander = sinon.spy(commander, 'Command');
-        exec(`node ${bin.cosma}`, (error, stdout, stderr) => {
-            if (error) { done(error); }
-            sinon.assert.calledOnce(spyCommander);
-            done();
+    const commands = [
+        // 'modelize',
+        // 'modelize --citeproc',
+        // 'modelize --custom-css',
+        // 'record',
+        'autorecord',
+    ];
+
+    commands.forEach((cmd) => {
+        cmd = `node ${bin.cosma} ${cmd}`;
+        it(`should exec command "${cmd}"`, (done) => {
+            exec(cmd, (error, stdout, stderr) => {
+                if (error) { done(error); }
+                console.log(stdout, stderr);
+                done();
+            })
         })
     })
+
 })
