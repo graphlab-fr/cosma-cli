@@ -19,8 +19,7 @@ program
     .description(description)
     .usage("[command] [options]")
     .option('--create-user-data-dir', 'Set config file.')
-    .option('-ls --list-projects', 'Get config files list.')
-    .option('--use', 'Use config file from list.')
+    .option('-lp --list-projects', 'Get config files list.')
     .action(({ createUserDataDir, listProjects }) => {
         if (createUserDataDir) {
             require('./controllers/user-data-dir')();
@@ -61,7 +60,7 @@ program
     .alias('m')
     .description('Generate a cosmoscope.')
     .option('-c, --config <name>', 'Set config file.')
-    .option('-c, --citeproc', 'Process citations.')
+    .option('--citeproc', 'Process citations.')
     .option('-css, --custom-css', 'Apply custom CSS.')
     .option('--sample', "Generate a sample cosmoscope.")
     .option('--fake', "Generate a fake cosmoscope.")
