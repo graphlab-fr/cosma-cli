@@ -12,10 +12,10 @@ module.exports = function(title, { global: isGlobal }) {
     }
     if (isGlobal && fs.existsSync(ConfigCli.pathConfigDir) === false) {
         return console.log(
-            ['\x1b[33m', 'Warn.', '\x1b[0m'].join(''),
-            "Please make a user data directory with command",
+            ['\x1b[31m', 'Err.', '\x1b[0m'].join(''),
+            "To create global configuration files, first create a user data directory by running",
             ['\x1b[1m', 'cosma --create-user-data-dir', '\x1b[0m'].join(''),
-            "before make a global config file."
+            "."
         );
     }
     if (ConfigCli.pathConfigFile.fromExecutionDir === ConfigCli.pathConfigFile.fromConfigDir) {
@@ -52,9 +52,9 @@ module.exports = function(title, { global: isGlobal }) {
     
     function log(isOk) {
         if (isOk) {
-            console.log(['\x1b[32m', 'Config file created', '\x1b[0m'].join(''), `: ${['\x1b[2m', configFileDir, '/', '\x1b[0m', configFileName].join('')}`);
+            console.log(['\x1b[32m', 'Configuration file created', '\x1b[0m'].join(''), `: ${['\x1b[2m', configFileDir, '/', '\x1b[0m', configFileName].join('')}`);
         } else {
-            console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not save config file');
+            console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'could not save configuration file');
         }
     }
 }

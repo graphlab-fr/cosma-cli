@@ -17,11 +17,11 @@ module.exports = function (filePath) {
     console.log(config.getConfigConsolMessage());
 
     if (fs.existsSync(filePath) === false) {
-        return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Data file do not exist.'); }
+        return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Data file does not exist.'); }
 
     fs.readFile(filePath, 'utf-8', (err, data) => {
         if (err) {
-            return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not read data file.'); }
+            return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Cannot read data file.'); }
 
         switch (path.extname(filePath)) {
             case '.json':
@@ -44,14 +44,14 @@ module.exports = function (filePath) {
                 break;
 
                 default:
-                    return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Data file is not supported.');
+                    return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Data file format unrecognized. Supported file extensions: .json, .csv.');
         }
 
         const { files_origin } = config.opts;
         const index = Cosmoscope.getIndexToMassSave(files_origin);
         Record.massSave(data, index, config.opts)
             .then(() => {
-                return console.log(['\x1b[32m', 'Records generated', '\x1b[0m'].join(''), `(${data.length})`, ['\x1b[2m', files_origin, '\x1b[0m'].join(''))
+                return console.log(['\x1b[32m', 'Records created', '\x1b[0m'].join(''), `(${data.length})`, ['\x1b[2m', files_origin, '\x1b[0m'].join(''))
             })
             .catch((err) => {
                 return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err);

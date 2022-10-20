@@ -13,7 +13,7 @@ const Record = require('../core/models/record')
 module.exports = function (title = '', type = 'undefined', tags = '') {
     const config = new Config();
     if (config.canSaveRecords() === false) {
-        console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not make a record file : files_origin option is not set into config.yml');
+        console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Unable to create record: missing value for files_origin in the configuration file');
         return;
     }
 
@@ -50,9 +50,9 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
 
     function logRecordIsSaved() {
         if (record.type.includes(type) === false) {
-            console.log(['\x1b[33m', 'Warn.', '\x1b[0m'].join(''), `type "${type}" is unset from the config and has been replaced by "undefined"`);
+            console.log(['\x1b[33m', 'Warn.', '\x1b[0m'].join(''), `type "${type}" is not set in the configuration, was treated as "undefined"`);
         }
         const { dir: fileDir, base: fileName } = path.parse(record.path);
-        console.log(['\x1b[32m', 'Record saved', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
+        console.log(['\x1b[32m', 'Record created', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
     }
 }

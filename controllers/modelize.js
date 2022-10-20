@@ -53,24 +53,24 @@ module.exports = async function (options) {
     switch (originType) {
         case 'directory':
             if (config.canModelizeFromDirectory() === false) {
-                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not modelize from directory with this config.')
+                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Cannot modelize from directory with this config.')
             }
             break;
         case 'csv':
             if (config.canModelizeFromCsvFiles() === false) {
-                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not modelize from csv files with this config.')
+                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Cannot modelize from csv files with this config.')
             }
             break;
         case 'online':
             try {
                 await config.canModelizeFromOnline();
             } catch (err) {
-                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Can not modelize from online csv files with this config.')
+                return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Cannot modelize from online csv files with this config.')
             }
             break;
     }
 
-    console.log(`Cosmoscope templating (source : \x1b[1m${originType}\x1b[0m ; parameters : \x1b[1m${[...optionsGraph, ...optionsTemplate].join(', ')}\x1b[0m)`);
+    console.log(`Building cosmoscope… (source type: \x1b[1m${originType}\x1b[0m; settings: \x1b[1m${[...optionsGraph, ...optionsTemplate].join(', ')}\x1b[0m)`);
 
     let records;
     switch (originType) {
@@ -100,7 +100,7 @@ module.exports = async function (options) {
     const { html } = new Template(graph, optionsTemplate);
 
     fs.writeFile(exportPath + 'cosmoscope.html', html, (err) => { // Cosmoscope file for export folder
-        if (err) {return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'write Cosmoscope file : ' + err)}
+        if (err) {return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'write Cosmoscope file: ' + err)}
         console.log(['\x1b[34m', 'Cosmoscope generated', '\x1b[0m'].join(''), `(${graph.records.length} records)`);
         const reportMessage = Report.getAsMessage();
         if (reportMessage) {
@@ -111,12 +111,12 @@ module.exports = async function (options) {
     
         historyPath.createFolder();
         fs.writeFile(`history/${time}/report.html`, Report.getAsHtmlFile(config), (err) => {
-            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not save report into history : ' + err); }
+            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save report in history folder: ' + err); }
             console.log(['\x1b[2m', path.join(__dirname, `../history/${time}/report.html`), '\x1b[0m'].join(''));
         });
     
         fs.writeFile(`history/${time}/cosmoscope.html`, html, (err) => { // Cosmoscope file for history
-            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'can not save Cosmoscope into history : ' + err); }
+            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save Cosmoscope in history folder: ' + err); }
         });
     });
 }

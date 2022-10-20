@@ -18,8 +18,8 @@ program
     .name("cosma")
     .description(description)
     .usage("[command] [options]")
-    .option('--create-user-data-dir', 'Set config file.')
-    .option('-lp --list-projects', 'Get config files list.')
+    .option('--create-user-data-dir', 'Create user data directory.')
+    .option('-l, --list-projects', 'Display the names of projects (configuration files) saved in user data directory.')
     .action(({ createUserDataDir, listProjects }) => {
         if (createUserDataDir) {
             require('./controllers/user-data-dir')();
@@ -37,20 +37,20 @@ program
     .addHelpText('after',
 `
 Example call:
-  $ cosma modelize --citeproc --custom-css
-  $ cosma autorecord "My record" "concept" "tag 1,tag 2"
-  $ cosma batch ~/Documents/data.json
+  cosma modelize --citeproc --custom-css
+  cosma autorecord "My record" "concept" "tag 1,tag 2"
+  cosma batch ~/Documents/data.json
 
-For more information:
-  $ cosma [command] --help`
+Display command-specific help:
+  cosma [command] --help`
 )
 
 program
     .command('config')
     .alias('c')
-    .description('Generate configuration files.')
-    .argument('[title]', 'Configuration name.')
-    .option('-g --global', 'Set config file.')
+    .description('Create a configuration file in the current directory.')
+    .argument('[name]', 'Configuration name.')
+    .option('-g, --global', 'Create the file in the user data directory.')
     .action((title, options) => {
         require('./controllers/config')(title, options);
     })
@@ -58,12 +58,12 @@ program
 program
     .command('modelize')
     .alias('m')
-    .description('Generate a cosmoscope.')
-    .option('-c, --config <name>', 'Set config file.')
+    .description('Create a cosmoscope.')
+    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
     .option('--citeproc', 'Process citations.')
-    .option('-css, --custom-css', 'Apply custom CSS.')
-    .option('--sample', "Generate a sample cosmoscope.")
-    .option('--fake', "Generate a fake cosmoscope.")
+    .option('--custom-css', 'Apply custom CSS.')
+    .option('--sample', 'Create a sample cosmoscope.')
+    .option('--fake', 'Create a fake cosmoscope for testing purposes.')
     .action(({ config: configName, ...rest }) => {
         if (configName) {
             try {
@@ -78,8 +78,8 @@ program
 program
     .command('record')
     .alias('r')
-    .description('Create a record (form mode).')
-    .option('-c, --config <name>', 'Set config file.')
+    .description('Create a record. You will be prompted for a record title (mandatory), record type and list of comma-separated tags.')
+    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
     .action(({ config: configName }) => {
         if (configName) {
             try {
@@ -97,9 +97,9 @@ program
     .alias('a')
     .description('Create a record (one-liner mode).')
     .argument('<title>', '(mandatory) Record title.')
-    .argument('[type]', 'Record type (default: undefined).')
+    .argument('[type]', 'Record type (default value if skipped: undefined).')
     .argument('[tags]', 'List of comma-separated tags.')
-    .option('-c, --config <name>', 'Set config file.')
+    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
     .action((title, type, tags, { config: configName }) => {
         if (configName) {
             try {
@@ -117,9 +117,8 @@ program
     .command('batch')
     .alias('b')
     .description('Create records (batch mode).')
-    .argument('[used-config]', 'Configuration name.')
-    .argument('<file>', 'List of records to be created (path to JSON data file).')
-    .option('-c, --config <name>', 'Set config file.')
+    .argument('<file>', 'Path to a JSON file containing a list of records to be created.')
+    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
     .action((filePath, { config: configName }) => {
         if (configName) {
             try {
