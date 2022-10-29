@@ -17,12 +17,26 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         return;
     }
 
-    if (config.getTypesLinks().has(type) === false) {
-        console.log(['\x1b[33m', 'Warn.', '\x1b[0m'].join(''), `type "${type}" is not set in the configuration, will treated as "undefined"`);
+    type = type.split(',').map(t => t.trim());
+    tags = tags.split(',').map(t => t.trim());
+
+    const unknowedTypes = [];
+    for (const t of type) {
+        if (config.getTypesLinks().has(type)) {
+            continue;
+        }
         config.opts.record_types = { // add unknown type to the config for generate file
             ...config.opts.record_types,
-            [type]: config.opts.record_types.undefined
+            [t]: config.opts.record_types.undefined
         };
+        unknowedTypes.push(t);
+    }
+    if (unknowedTypes.length > 0) {
+        console.log(
+            ['\x1b[33m', 'Warn.', '\x1b[0m'].join(''),
+            (unknowedTypes.length === 1 ? `type "${unknowedTypes[0]}" is` : `types "${unknowedTypes.join('","')}" are`),
+            `not set in the configuration, will treated as "undefined"`
+        );
     }
 
     const record = new Record(undefined, title, type, tags, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, config.opts);
