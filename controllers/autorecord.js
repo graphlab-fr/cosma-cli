@@ -35,7 +35,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         console.log(
             ['\x1b[33m', 'Warn.', '\x1b[0m'].join(''),
             (unknowedTypes.length === 1 ? `type "${unknowedTypes[0]}" is` : `types "${unknowedTypes.join('","')}" are`),
-            `not set in the configuration, will treated as "undefined"`
+            `not set in the configuration, will treat as "undefined"`
         );
     }
 
