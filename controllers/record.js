@@ -32,7 +32,7 @@ const readline = require('readline');
         })
     
         metas.type = await new Promise((resolve, reject) => {
-            rl.question(`${['\x1b[1m', 'type', '\x1b[0m'].join('')} (optional; if left blank, will be set as "undefined"): `, (answer) => {
+            rl.question(`${['\x1b[1m', 'type', '\x1b[0m'].join('')} (optional; enter as comma-separated values; if left blank, will be set as "undefined"): `, (answer) => {
                 if (answer === '') { answer = 'undefined'; }
 
                 resolve(answer);
@@ -40,7 +40,7 @@ const readline = require('readline');
         })
     
         metas.tags = await new Promise((resolve, reject) => {
-            rl.question(`${['\x1b[1m', 'tags', '\x1b[0m'].join('')} (optional; enter tags as comma-separated values): `, (answer) => { resolve(answer); })
+            rl.question(`${['\x1b[1m', 'tags', '\x1b[0m'].join('')} (optional; enter as comma-separated values): `, (answer) => { resolve(answer); })
         })
 
         rl.close();
