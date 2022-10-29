@@ -25,8 +25,9 @@ program
             require('./controllers/user-data-dir')();
         } else if (listProjects) {
             try {
-                const list = Config.getConfigFileListFromConfigDir();
-                console.table(list);
+                const list = Config.getConfigFileListFromConfigDir()
+                    .map(({ fileName }) => fileName);
+                console.log(list.join('\n'));
             } catch (err) {
                 console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
             }
