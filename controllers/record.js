@@ -14,7 +14,6 @@ const readline = require('readline');
         return;
     }
 
-    const recordTypesList = config.getTypesRecords();
     let metas = {};
 
     // activate terminal questionnaire
@@ -35,8 +34,6 @@ const readline = require('readline');
         metas.type = await new Promise((resolve, reject) => {
             rl.question(`${['\x1b[1m', 'type', '\x1b[0m'].join('')} (optional; if left blank, will be set as "undefined"): `, (answer) => {
                 if (answer === '') { answer = 'undefined'; }
-                if (recordTypesList.has(answer) === false && answer !== 'undefined') {
-                    reject('Unknown type. Add it to the configuration file beforehand.'); }
 
                 resolve(answer);
             })
