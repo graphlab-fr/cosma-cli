@@ -17,6 +17,14 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         return;
     }
 
+    if (config.getTypesLinks().has(type) === false) {
+        console.log(['\x1b[33m', 'Warn.', '\x1b[0m'].join(''), `type "${type}" is not set in the configuration, will treated as "undefined"`);
+        config.opts.record_types = { // add unknown type to the config for generate file
+            ...config.opts.record_types,
+            [type]: config.opts.record_types.undefined
+        };
+    }
+
     const record = new Record(undefined, title, type, tags, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, config.opts);
     record.saveAsFile()
         .then(() => {
@@ -49,9 +57,6 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         });
 
     function logRecordIsSaved() {
-        if (record.type.includes(type) === false) {
-            console.log(['\x1b[33m', 'Warn.', '\x1b[0m'].join(''), `type "${type}" is not set in the configuration, was treated as "undefined"`);
-        }
         const { dir: fileDir, base: fileName } = path.parse(record.path);
         console.log(['\x1b[32m', 'Record created', '\x1b[0m'].join(''), `: ${['\x1b[2m', fileDir, '/', '\x1b[0m', fileName].join('')}`);
     }
