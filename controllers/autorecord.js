@@ -16,13 +16,14 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
         console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'Unable to create record: missing value for files_origin in the configuration file');
         return;
     }
-
+    
     type = type.split(',').map(t => t.trim());
     tags = tags.split(',').map(t => t.trim());
-
+    
+    const knownTypes = config.getTypesRecords();
     const unknowedTypes = [];
     for (const t of type) {
-        if (config.getTypesLinks().has(type)) {
+        if (knownTypes.has(t)) {
             continue;
         }
         config.opts.record_types = { // add unknown type to the config for generate file
