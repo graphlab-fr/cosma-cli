@@ -8,7 +8,7 @@ const Graph = require('../core/models/graph')
     , Record = require('../core/models/record')
     , Config = require('../models/config-cli')
     , Template = require('../core/models/template')
-    , Report = require('../core/models/report');
+    , Report = require('../models/report-cli');
 
 module.exports = async function (options) {
     const time = require('./time');
@@ -102,21 +102,23 @@ module.exports = async function (options) {
     fs.writeFile(exportPath + 'cosmoscope.html', html, (err) => { // Cosmoscope file for export folder
         if (err) {return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'write Cosmoscope file: ' + err)}
         console.log(['\x1b[34m', 'Cosmoscope generated', '\x1b[0m'].join(''), `(${graph.records.length} records)`);
-        const reportMessage = Report.getAsMessage();
-        if (reportMessage) {
-            console.log(reportMessage);
-        }
 
         if (history === false) { return; }
     
         historyPath.createFolder();
-        fs.writeFile(`history/${time}/report.html`, Report.getAsHtmlFile(config), (err) => {
-            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save report in history folder: ' + err); }
-            console.log(['\x1b[2m', path.join(__dirname, `../history/${time}/report.html`), '\x1b[0m'].join(''));
-        });
-    
         fs.writeFile(`history/${time}/cosmoscope.html`, html, (err) => { // Cosmoscope file for history
             if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save Cosmoscope in history folder: ' + err); }
         });
     });
+
+    if (Report.isItEmpty() === false) {
+        try {
+            await Report.makeDir();
+            const pathSaveReport = await Report.save();
+            console.log(['\x1b[2m', pathSaveReport, '\x1b[0m'].join(''));
+            console.log(Report.getAsMessage());
+        } catch (err) {
+            console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save report in history folder: ' + err);
+        }
+    }
 }
