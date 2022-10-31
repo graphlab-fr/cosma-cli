@@ -153,7 +153,7 @@ module.exports = class ConfigCli extends Config {
 
     getConfigConsolMessage() {
         const { version } = require('../package.json');
-        let name = this.opts['name'] || null;
+        let name = this.opts['title'] || 'untitled project';
         if (this.path === ConfigCli.getDefaultConfigFilePath()) {
             name = 'Default';
         }
