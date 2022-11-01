@@ -21,7 +21,7 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
     tags = tags.split(',').map(t => t.trim());
     
     const knownTypes = config.getTypesRecords();
-    const unknowedTypes = [];
+    const unknownTypes = [];
     for (const t of type) {
         if (knownTypes.has(t)) {
             continue;
@@ -30,12 +30,12 @@ module.exports = function (title = '', type = 'undefined', tags = '') {
             ...config.opts.record_types,
             [t]: config.opts.record_types.undefined
         };
-        unknowedTypes.push(t);
+        unknownTypes.push(t);
     }
-    if (unknowedTypes.length > 0) {
+    if (unknownTypes.length > 0) {
         console.log(
             ['\x1b[33m', 'Warn.', '\x1b[0m'].join(''),
-            (unknowedTypes.length === 1 ? `type "${unknowedTypes[0]}" is` : `types "${unknowedTypes.join('","')}" are`),
+            (unknownTypes.length === 1 ? `type "${unknownTypes[0]}" is` : `types "${unknownTypes.join('","')}" are`),
             `not set in the configuration, will treat as "undefined"`
         );
     }
