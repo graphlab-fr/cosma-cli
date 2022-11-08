@@ -60,15 +60,15 @@ program
     .command('modelize')
     .alias('m')
     .description('Create a cosmoscope.')
-    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
+    .option('-p, --project <name>', 'Use the configuration file for project <name> from the user data directory.')
     .option('--citeproc', 'Process citations.')
     .option('--custom-css', 'Apply custom CSS.')
     .option('--sample', 'Create a sample cosmoscope.')
     .option('--fake', 'Create a fake cosmoscope for testing purposes.')
-    .action(({ config: configName, ...rest }) => {
-        if (configName) {
+    .action(({ project: configFileName, ...rest }) => {
+        if (configFileName) {
             try {
-                Config.setCurrentUsedConfigFileName(configName);
+                Config.setCurrentUsedConfigFileName(configFileName);
             } catch (err) {
                 console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
             }
@@ -80,11 +80,11 @@ program
     .command('record')
     .alias('r')
     .description('Create a record. You will be prompted for a record title (mandatory), record type and list of comma-separated tags.')
-    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
-    .action(({ config: configName }) => {
-        if (configName) {
+    .option('-p, --project <name>', 'Use the configuration file for project <name> from the user data directory.')
+    .action(({ project: configFileName }) => {
+        if (configFileName) {
             try {
-                Config.setCurrentUsedConfigFileName(configName);
+                Config.setCurrentUsedConfigFileName(configFileName);
             } catch (err) {
                 console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
             }
@@ -100,11 +100,11 @@ program
     .argument('<title>', '(mandatory) Record title.')
     .argument('[type]', 'Record type (default value if skipped: undefined).')
     .argument('[tags]', 'List of comma-separated tags.')
-    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
-    .action((title, type, tags, { config: configName }) => {
-        if (configName) {
+    .option('-p, --project <name>', 'Use the configuration file for project <name> from the user data directory.')
+    .action((title, type, tags, { project: configFileName }) => {
+        if (configFileName) {
             try {
-                Config.setCurrentUsedConfigFileName(configName);
+                Config.setCurrentUsedConfigFileName(configFileName);
             } catch (err) {
                 console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
             }
@@ -119,11 +119,11 @@ program
     .alias('b')
     .description('Create records (batch mode).')
     .argument('<file>', 'Path to a JSON file containing a list of records to be created.')
-    .option('-c, --config <name>', 'Use the configuration file for project <name> from the user data directory.')
-    .action((filePath, { config: configName }) => {
-        if (configName) {
+    .option('-p, --project <name>', 'Use the configuration file for project <name> from the user data directory.')
+    .action((filePath, { project: configFileName }) => {
+        if (configFileName) {
             try {
-                Config.setCurrentUsedConfigFileName(configName);
+                Config.setCurrentUsedConfigFileName(configFileName);
             } catch (err) {
                 console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), err.message);
             }
