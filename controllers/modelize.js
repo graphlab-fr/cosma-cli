@@ -70,7 +70,7 @@ module.exports = async function (options) {
             break;
     }
 
-    console.log(`Building cosmoscope… (source type: \x1b[1m${originType}\x1b[0m; settings: \x1b[1m${[...optionsGraph, ...optionsTemplate].join(', ')}\x1b[0m)`);
+    console.log(getModelizeMessage(optionsGraph, optionsTemplate, originType));
 
     let records;
     switch (originType) {
@@ -121,4 +121,18 @@ module.exports = async function (options) {
             console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save report in history folder: ' + err);
         }
     }
+}
+
+/**
+ * @param {string[]} optionsGraph 
+ * @param {string[]} optionsTemplate 
+ * @param {string} originType 
+ */
+
+function getModelizeMessage(optionsGraph, optionsTemplate, originType) {
+    const settings = [...optionsGraph, ...optionsTemplate]
+        .filter(setting => setting !== 'publish');
+
+    const msgSetting = settings.length === 0 ? '' : `; settings: \x1b[1m${settings.join(', ')}\x1b[0m`;
+    return `Building cosmoscope… (source type: \x1b[1m${originType}\x1b[0m${msgSetting})`;
 }
