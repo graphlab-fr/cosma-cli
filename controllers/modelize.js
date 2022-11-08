@@ -13,7 +13,7 @@ const Graph = require('../core/models/graph')
 module.exports = async function (options) {
     const time = require('./time');
 
-    const config = new Config();
+    let config = new Config();
 
     options['publish'] = true;
     options['citeproc'] = (!!options['citeproc'] && config.canCiteproc());
