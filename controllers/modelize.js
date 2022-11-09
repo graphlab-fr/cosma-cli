@@ -1,6 +1,6 @@
 const fs = require('fs')
     , path = require('path')
-    , historyPath = require('./history');
+    , getHistorySavePath = require('./history');
 
 const Graph = require('../core/models/graph')
     , Cosmoscope = require('../core/models/cosmoscope')
@@ -11,8 +11,6 @@ const Graph = require('../core/models/graph')
     , Report = require('../models/report-cli');
 
 module.exports = async function (options) {
-    const time = require('./time');
-
     let config = new Config();
 
     options['publish'] = true;
@@ -102,14 +100,17 @@ module.exports = async function (options) {
     fs.writeFile(exportPath + 'cosmoscope.html', html, (err) => { // Cosmoscope file for export folder
         if (err) {return console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'write Cosmoscope file: ' + err)}
         console.log(['\x1b[34m', 'Cosmoscope generated', '\x1b[0m'].join(''), `(${graph.records.length} records)`);
-
-        if (history === false) { return; }
-    
-        historyPath.createFolder();
-        fs.writeFile(`history/${time}/cosmoscope.html`, html, (err) => { // Cosmoscope file for history
-            if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save Cosmoscope in history folder: ' + err); }
-        });
     });
+
+    if (history) {
+        const [projectName,] = Config.currentUsedConfigFileName.split('.', 2);
+        getHistorySavePath(projectName)
+            .then((filePath) => {
+                fs.writeFile(filePath, html, (err) => {
+                    if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save Cosmoscope in history folder: ' + err); }
+                });
+            });
+    }
 
     if (Report.isItEmpty() === false) {
         try {
