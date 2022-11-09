@@ -115,8 +115,8 @@ module.exports = async function (options) {
         try {
             await Report.makeDir();
             const pathSaveReport = await Report.save();
-            console.log(['\x1b[2m', pathSaveReport, '\x1b[0m'].join(''));
             console.log(Report.getAsMessage());
+            console.log(['\x1b[2m', pathSaveReport, '\x1b[0m'].join(''));
         } catch (err) {
             console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save report in history folder: ' + err);
         }
