@@ -13,7 +13,7 @@ const envPaths = require('env-paths');
 const { data: envPathDataDir } = envPaths('cosma-cli', { suffix: '' });
 
 module.exports = class ReportCli extends Report {
-    static pathDir = path.join(envPathDataDir, 'reports');
+    static pathDir = path.join(envPathDataDir, 'logs');
 
     /**
      * @returns {Promise<string>}
