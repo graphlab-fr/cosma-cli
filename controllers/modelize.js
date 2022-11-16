@@ -118,7 +118,7 @@ module.exports = async function (options) {
             console.log(['\x1b[2m', pathSaveReport, '\x1b[0m'].join(''));
             console.log(Report.getAsMessage());
         } catch (err) {
-            console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save report in history folder: ' + err);
+            console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save log file in history folder: ' + err);
         }
     }
 }
