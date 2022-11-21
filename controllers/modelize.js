@@ -104,7 +104,8 @@ module.exports = async function (options) {
 
     if (history) {
         const [projectName,] = Config.currentUsedConfigFileName.split('.', 2);
-        getHistorySavePath(projectName)
+        const projectScope = Config.currentScope;
+        getHistorySavePath(projectName, projectScope)
             .then((filePath) => {
                 fs.writeFile(filePath, html, (err) => {
                     if (err) { console.error(['\x1b[31m', 'Err.', '\x1b[0m'].join(''), 'cannot save Cosmoscope in history folder: ' + err); }
