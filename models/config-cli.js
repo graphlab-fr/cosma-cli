@@ -30,6 +30,9 @@ module.exports = class ConfigCli extends Config {
 
     static currentUsedConfigFileName = 'default.yml';
 
+    /** @type {'global'|'local'} */
+    static currentScope = 'global';
+
     /**
      * 
      * @param {string} inputFileName 
@@ -115,6 +118,7 @@ module.exports = class ConfigCli extends Config {
             return path.join(ConfigCli.pathConfigDir, ConfigCli.currentUsedConfigFileName);
         }
         if (fs.existsSync(ConfigCli.pathConfigFile.fromExecutionDir)) {
+            ConfigCli.currentScope = 'local';
             return ConfigCli.pathConfigFile.fromExecutionDir;
         }
         return ConfigCli.getDefaultConfigFilePath();
