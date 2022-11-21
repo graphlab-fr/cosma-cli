@@ -24,7 +24,9 @@ module.exports = function(title, { global: isGlobal }) {
 
     const isGlobalDefaultConfig = isGlobal && !title;
 
-    title &&= ConfigCli.getSlugConfigFileName(title);
+    if (title) {
+        title = ConfigCli.getSlugConfigFileName(title);
+    }
 
     let configFilePath, opts = Object.assign({}, ConfigCli.getDefaultConfig(), { name: title || '' });
     if (isGlobal) {
