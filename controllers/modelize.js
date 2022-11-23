@@ -116,7 +116,7 @@ module.exports = async function (options) {
     if (Report.isItEmpty() === false) {
         try {
             await Report.makeDir();
-            const pathSaveReport = await Report.save();
+            const pathSaveReport = await Report.save(config.opts.title);
             console.log(Report.getAsMessage());
             console.log(['\x1b[2m', pathSaveReport, '\x1b[0m'].join(''));
         } catch (err) {

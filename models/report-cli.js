@@ -16,16 +16,17 @@ module.exports = class ReportCli extends Report {
     static pathDir = path.join(envPathDataDir, 'logs');
 
     /**
+     * @param {string} projectTitle
      * @returns {Promise<string>}
      */
 
-    static save() {
+    static save(projectTitle) {
         return new Promise((resolve, reject) => {
             if (fs.existsSync(ReportCli.pathDir) === false) {
                 reject('Can not save report: dir does not exist');
             }
             const pathSave = path.join(ReportCli.pathDir, `${ReportCli.generateTimestamp()}.html`);
-            fs.writeFile(pathSave, Report.getAsHtmlFile(), (err) => {
+            fs.writeFile(pathSave, Report.getAsHtmlFile(projectTitle), (err) => {
                 if (err) { reject(err.message); }
                 resolve(pathSave);
             })
