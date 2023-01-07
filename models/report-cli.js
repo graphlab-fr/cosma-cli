@@ -10,10 +10,10 @@ const path = require('path')
 const Report = require('../core/models/report');
 
 const envPaths = require('env-paths');
-const { data: envPathDataDir } = envPaths('cosma-cli', { suffix: '' });
+const { log: envPathLogDir } = envPaths('cosma-cli', { suffix: '' });
 
 module.exports = class ReportCli extends Report {
-    static pathDir = path.join(envPathDataDir, 'logs');
+    static pathDir = path.join(envPathLogDir, 'logs');
 
     /**
      * @param {string} projectTitle
@@ -38,7 +38,7 @@ module.exports = class ReportCli extends Report {
             if (fs.existsSync(ReportCli.pathDir)) {
                 resolve();
             }
-            fs.mkdir(ReportCli.pathDir, (err => {
+            fs.mkdir(ReportCli.pathDir, { recursive: true }, (err => {
                 if (err) { reject(err.message); }
                 resolve();
             }))
