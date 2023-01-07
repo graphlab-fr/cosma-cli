@@ -25,7 +25,7 @@ module.exports = class ConfigCli extends Config {
     static pathConfigFile = {
         fromConfigDir: path.join(ConfigCli.pathConfigDir, 'defaults.yml'),
         fromInstallationDir: path.join(__dirname, '../', 'defaults.yml'),
-        fromExecutionDir: path.join(process.env.PWD, 'config.yml')
+        fromExecutionDir: path.join(process.cwd(), 'config.yml')
     }
 
     static currentUsedConfigFileName = 'default.yml';
