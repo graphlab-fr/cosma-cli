@@ -4,7 +4,7 @@
 
 Visit <https://cosma.graphlab.fr/en/about/> to learn more about the project.
 
-This is the command-line interface (CLI) version of Cosma. It requires [NodeJS](https://nodejs.org/fr/) v16 or higher.
+This is the command-line interface (CLI) version of Cosma. It requires [NodeJS](https://nodejs.org/fr/) v12 or higher.
 
 Run these commands to clone and edit the repository :
 
