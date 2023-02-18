@@ -134,3 +134,25 @@ program
 
 program.showSuggestionAfterError();
 program.parse();
+
+process.on('uncaughtException', ({ message, details = 'No details.', code, isOperational, stack }) => {
+    if (!code || typeof isOperational !== 'boolean') {
+        // unknow error, throw out from error system
+        return console.error(
+            ["\x1b[31m", "Err.", "\x1b[0m"].join(""),
+            '\n',
+            ["\x1b[2m", stack, "\x1b[0m"].join(""),
+        );
+    }
+
+    console.error(
+        ["\x1b[31m", "Err.", "\x1b[0m"].join(""),
+        ["\x1b[2m", "[", code, "]", "\x1b[0m"].join(""),
+        message, '\n',
+        ["\x1b[2m", details, "\x1b[0m"].join(""),
+    );
+
+    if (isOperational === false) {
+        process.exit(1);
+    }
+})

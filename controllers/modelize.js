@@ -87,7 +87,7 @@ module.exports = async function (options) {
             await downloadFile(linksUrl, linksPath);
             console.log('- Links file downloaded');
         case 'csv':
-            let [formatedRecords, formatedLinks] = await Cosmoscope.getFromPathCsv(nodesPath, linksPath);
+            const [formatedRecords, formatedLinks] = await Cosmoscope.getFromPathCsv(nodesPath, linksPath);
             const links = Link.formatedDatasetToLinks(formatedLinks);
             records = Record.formatedDatasetToRecords(formatedRecords, links, config);
             break;
