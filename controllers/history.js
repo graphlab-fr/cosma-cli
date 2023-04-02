@@ -10,6 +10,8 @@ const fs = require('fs')
 const envPaths = require('env-paths');
 const { data } = envPaths('cosma-cli', { suffix: '' });
 
+const { getTimestampTuple } = require('../core/utils/misc');
+
 /**
  * Get path to store cosmscope file in history
  * @param {string} projectName
@@ -29,7 +31,7 @@ module.exports = async function(projectName, projectScope) {
         default:
             throw new Error('Unknown project scope');
     }
-    const pathFile = path.join(pathDir, `${getTimestamp()}.html`);
+    const pathFile = path.join(pathDir, `${getTimestampTuple().join()}.html`);
 
     return new Promise(async (resolve, reject) => {
         if (fs.existsSync(pathDir) === false) {
@@ -40,15 +42,4 @@ module.exports = async function(projectName, projectScope) {
         }
         resolve(pathFile);
     });
-}
-
-function getTimestamp() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear().toString().padStart(4, "0");
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const day = currentDate.getDate().toString().padStart(2, "0");
-    const hour = currentDate.getHours().toString().padStart(2, "0");
-    const minute = currentDate.getMinutes().toString().padStart(2, "0");
-    const second = currentDate.getSeconds().toString().padStart(2, "0");
-    return [year, month, day, hour, minute, second].join('');
 }
