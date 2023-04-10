@@ -31,7 +31,7 @@ module.exports = async function(projectName, projectScope) {
         default:
             throw new Error('Unknown project scope');
     }
-    const pathFile = path.join(pathDir, `${getTimestampTuple().join()}.html`);
+    const pathFile = path.join(pathDir, `${getTimestampTuple().join('')}.html`);
 
     return new Promise(async (resolve, reject) => {
         if (fs.existsSync(pathDir) === false) {
